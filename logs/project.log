@@ -16,3 +16,4 @@
 [TEST] DEV13 delivered: test plan, invariants map, security analysis, CI schema & expanded workflow. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [PSM] DEV14 delivered: PSM spec and shared rate-limits spec. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [TOKEN] DEV15 delivered: Token + Access-Control specs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[OPS] DEV16 delivered: deployment/environments specs, release process, secrets handling, emergency playbooks. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

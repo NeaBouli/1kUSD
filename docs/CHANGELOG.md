@@ -46,3 +46,6 @@
 ## 2025-10-12 — DEV15 (Token & Access Control Specs)
 - Added `contracts/specs/TOKEN_SPEC.md` (mint/burn gates, permit, pause interop)
 - Added `contracts/specs/ACCESS_CONTROL_SPEC.md` (roles, governance wiring, enforcement)
+## 2025-10-12 — DEV16 (Deployment & Environments Specs)
+- Added ops specs: DEPLOYMENT_ENVIRONMENTS, RELEASE_PROCESS, SECRETS_HANDLING, EMERGENCY_PLAYBOOKS
+- Added placeholder address registries under ops/config/
