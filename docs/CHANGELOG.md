@@ -6,3 +6,6 @@
 - Added `CODEOWNERS` (placeholder)
 - Added `.editorconfig`
 - Added `SECURITY.md` (private reporting via GitHub Advisories)
+## 2025-10-12 — DEV3 (CI/CD)
+- Replaced `.github/workflows/ci.yml` with a functional minimal pipeline (bootstrap/lint/test/reports placeholders)
+- Added `reports/README.md`
