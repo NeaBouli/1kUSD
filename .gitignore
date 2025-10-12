@@ -1,0 +1,12 @@
+# Node/JS (Hardhat/Foundry toolchains may add more later)
+node_modules/
+dist/
+coverage/
+.cache/
+.env
+.env.*
+.DS_Store
+
+# Logs & reports
+logs/*.tmp
+reports/*.tmp

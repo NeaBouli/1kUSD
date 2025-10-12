@@ -1,0 +1,10 @@
+name: CI (skeleton)
+on:
+  push: { branches: [ main, master ] }
+  pull_request: {}
+jobs:
+  placeholder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "CI skeleton — to be implemented by Dev3 (lint, test, fuzz, build)"
