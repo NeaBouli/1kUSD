@@ -7,3 +7,4 @@
 [IFACE] DEV4 delivered: on-chain events, RPC spec, indexer spec. (UTC: 2025-10-12T20:18:50Z)
 [SPEC] DEV5 delivered: PSM spec and protocol invariants. (UTC: 2025-10-12T20:20:26Z)
 [SAFETY] DEV6 delivered: Safety-Automata spec and Governance hooks. (UTC: 2025-10-12T20:22:14Z)
+[VAULT] DEV7 delivered: CollateralVault spec and Proof-of-Reserves spec. (UTC: 2025-10-12T20:24:02Z)

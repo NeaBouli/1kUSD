@@ -19,3 +19,6 @@
 ## 2025-10-12 — DEV6 (Safety & Governance Hooks Specs)
 - Added `contracts/specs/SAFETY_AUTOMATA_SPEC.md` (policies, state machine, guards, guardian sunset)
 - Added `contracts/specs/GOVERNANCE_HOOKS_SPEC.md` (DAO/Timelock executor, parameter flows)
+## 2025-10-12 — DEV7 (Vault & PoR Specs)
+- Added `contracts/specs/COLLATERAL_VAULT_SPEC.md` (ingress/egress, caps, decimals, errors, events)
+- Added `contracts/specs/PROOF_OF_RESERVES_SPEC.md` (views, reconciliation, finality, telemetry)
