@@ -37,3 +37,6 @@
 - Added common error taxonomy, event decoding, and tx build flows
 ## 2025-10-12 — DEV12 (Reference dApp/Explorer Specs)
 - Added reference app specs: REF_DAPP_SPEC, UX_FLOWS, API_CONTRACTS, ACCESSIBILITY_I18N
+## 2025-10-12 — DEV13 (Testplan & CI Extensions)
+- Added test specs: TESTPLAN, FORMAL_INVARIANTS_MAP, SECURITY_ANALYSIS
+- Added CI reports schema and expanded CI skeleton with artifacts

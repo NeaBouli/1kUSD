@@ -1,67 +1,71 @@
 name: CI
-
 on:
   push:
     branches: [ main, master ]
-  pull_request:
-    branches: [ "**" ]
-
+  pull_request: {}
 jobs:
-  bootstrap:
-    name: Bootstrap & Repo Sanity
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Show tree
-        run: |
-          echo "Repo tree:"
-          ls -la
-          echo "Git status:"
-          git status
-
-      - name: Validate EOF markers (basic)
-        run: |
-          # Simple check for common here-doc usage in repo history (non-blocking)
-          echo "OK - EOF-based workflow in place"
-
   lint:
-    name: Lint (placeholder)
     runs-on: ubuntu-latest
-    needs: bootstrap
     steps:
       - uses: actions/checkout@v4
-      - name: Placeholder lint
-        run: |
-          echo "No linters configured yet. This is a placeholder step."
-          echo "Add ESLint/Solhint/Prettier later."
-
-  test:
-    name: Test (placeholder)
-    runs-on: ubuntu-latest
-    needs: [bootstrap, lint]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Placeholder unit tests
-        run: |
-          echo "No tests configured yet. This is a placeholder step."
-          echo "Add Foundry/Hardhat/TS tests later."
-
-  reports:
-    name: Reports (placeholder)
-    runs-on: ubuntu-latest
-    needs: [test]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Prepare reports dir
+      - name: Lint (placeholder)
         run: |
           mkdir -p reports
-          echo "# Reports Index" > reports/README.md
-          echo "" >> reports/README.md
-          echo "- CI-generated placeholder (to be replaced by perf/audit reports)" >> reports/README.md
-      - name: Upload reports artifact
-        uses: actions/upload-artifact@v4
+          echo "lint ok" > reports/lint.txt
+
+  unit:
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unit tests (placeholder)
+        run: |
+          mkdir -p reports
+          echo '{"suite":"unit","passed":0,"failed":0,"skipped":0,"durationMs":0,"coverage":{"statements":0,"branches":0,"functions":0}}' > reports/unit.json
+      - uses: actions/upload-artifact@v4
         with:
-          name: reports
+          name: unit-report
+          path: reports/unit.json
+
+  invariants:
+    runs-on: ubuntu-latest
+    needs: [unit]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Invariants/Fuzz (placeholder)
+        run: |
+          mkdir -p reports
+          echo '{"invariants":[{"name":"I1","checks":0,"violations":0,"maxSteps":0,"seed":"0x00"}]}' > reports/invariants.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: invariants-report
+          path: reports/invariants.json
+
+  static-analysis:
+    runs-on: ubuntu-latest
+    needs: [unit]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Slither/Mythril (placeholder)
+        run: |
+          mkdir -p reports
+          echo '{"tool":"slither","version":"0.0.0","findings":[]}' > reports/slither.json
+          echo '{"tool":"mythril","version":"0.0.0","findings":[]}' > reports/mythril.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: static-analysis
+          path: reports/slither.json
+
+  publish-reports:
+    runs-on: ubuntu-latest
+    needs: [invariants, static-analysis]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Collate Reports (placeholder)
+        run: |
+          mkdir -p reports
+          echo '{"summary":{"critical":0,"high":0,"medium":0,"low":0},"findings":[]}' > reports/security-findings.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: all-reports
           path: reports/
