@@ -4,3 +4,4 @@
 [DOCS] DEV1 delivered: Whitepaper DE+EN and CHANGELOG entry. (UTC: 2025-10-12T20:05:56Z)
 [GOV] DEV2 delivered: CONTRIBUTING, CODEOWNERS, .editorconfig, SECURITY. (UTC: 2025-10-12T20:12:43Z)
 [CI] DEV3 delivered: minimal CI pipeline and reports/README.md. (UTC: 2025-10-12T20:13:38Z)
+[IFACE] DEV4 delivered: on-chain events, RPC spec, indexer spec. (UTC: 2025-10-12T20:18:50Z)

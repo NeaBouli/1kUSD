@@ -9,3 +9,7 @@
 ## 2025-10-12 — DEV3 (CI/CD)
 - Replaced `.github/workflows/ci.yml` with a functional minimal pipeline (bootstrap/lint/test/reports placeholders)
 - Added `reports/README.md`
+## 2025-10-12 — DEV4 (Interfaces/Specs)
+- Added `interfaces/ONCHAIN_EVENTS.md` (event catalog for all modules)
+- Added `interfaces/RPC_API.md` (public JSON-RPC/WebSocket spec)
+- Added `interfaces/INDEXER_API.md` (REST/GraphQL read-only spec)
