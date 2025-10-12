@@ -16,3 +16,6 @@
 ## 2025-10-12 — DEV5 (PSM Spec & Invariants)
 - Added `contracts/specs/PSM_SPEC.md` (parameters, fees, caps, rate limits, guards, state machine)
 - Added `contracts/specs/INVARIANTS.md` (system-wide invariants & safety properties)
+## 2025-10-12 — DEV6 (Safety & Governance Hooks Specs)
+- Added `contracts/specs/SAFETY_AUTOMATA_SPEC.md` (policies, state machine, guards, guardian sunset)
+- Added `contracts/specs/GOVERNANCE_HOOKS_SPEC.md` (DAO/Timelock executor, parameter flows)
