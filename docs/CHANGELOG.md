@@ -32,3 +32,6 @@
 - Added `contracts/specs/DAO_TIMELOCK_SPEC.md` (roles, lifecycle, delays)
 - Added `contracts/specs/TREASURY_SPEC.md` (fee accounting, spend path via Vault)
 - Added `contracts/specs/PARAMETER_REGISTRY_SPEC.md` (canonical parameter map & events)
+## 2025-10-12 — DEV11 (Client/SDK Specs)
+- Added TS/Go/Rust/Python SDK specs under `clients/specs/`
+- Added common error taxonomy, event decoding, and tx build flows
