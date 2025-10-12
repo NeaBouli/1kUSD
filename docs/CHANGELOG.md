@@ -43,3 +43,6 @@
 ## 2025-10-12 — DEV14 (PSM Specs)
 - Added `contracts/specs/PSM_SPEC.md` (swap flows, fees, guards, events, errors)
 - Added `contracts/specs/RATE_LIMITS_SPEC.md` (sliding window model shared by modules)
+## 2025-10-12 — DEV15 (Token & Access Control Specs)
+- Added `contracts/specs/TOKEN_SPEC.md` (mint/burn gates, permit, pause interop)
+- Added `contracts/specs/ACCESS_CONTROL_SPEC.md` (roles, governance wiring, enforcement)

@@ -15,3 +15,4 @@
 [APP] DEV12 delivered: Reference dApp/Explorer specs (UX flows, API contracts, A11y/i18n). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [TEST] DEV13 delivered: test plan, invariants map, security analysis, CI schema & expanded workflow. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [PSM] DEV14 delivered: PSM spec and shared rate-limits spec. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[TOKEN] DEV15 delivered: Token + Access-Control specs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
