@@ -49,3 +49,5 @@
 ## 2025-10-12 — DEV16 (Deployment & Environments Specs)
 - Added ops specs: DEPLOYMENT_ENVIRONMENTS, RELEASE_PROCESS, SECRETS_HANDLING, EMERGENCY_PLAYBOOKS
 - Added placeholder address registries under ops/config/
+## 2025-10-12 — DEV17 (Indexer & Data Model Specs)
+- Added indexer specs: ENTITY_MODEL, INGESTION_PIPELINE, API_SPEC, SCHEMA
