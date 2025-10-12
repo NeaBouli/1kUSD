@@ -40,3 +40,6 @@
 ## 2025-10-12 — DEV13 (Testplan & CI Extensions)
 - Added test specs: TESTPLAN, FORMAL_INVARIANTS_MAP, SECURITY_ANALYSIS
 - Added CI reports schema and expanded CI skeleton with artifacts
+## 2025-10-12 — DEV14 (PSM Specs)
+- Added `contracts/specs/PSM_SPEC.md` (swap flows, fees, guards, events, errors)
+- Added `contracts/specs/RATE_LIMITS_SPEC.md` (sliding window model shared by modules)
