@@ -10,3 +10,4 @@
 [VAULT] DEV7 delivered: CollateralVault spec and Proof-of-Reserves spec. (UTC: 2025-10-12T20:24:02Z)
 [ORACLE] DEV8 delivered: OracleAggregator spec and Price Feeds adapter spec. (UTC: 2025-10-12T20:25:11Z)
 [CONVERT] DEV9 delivered: AutoConverter and Routing Adapters specs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[GOV-TREASURY] DEV10 delivered: DAO/Timelock, Treasury, Parameter Registry specs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

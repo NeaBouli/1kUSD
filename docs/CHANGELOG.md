@@ -28,3 +28,7 @@
 ## 2025-10-12 — DEV9 (AutoConverter & Routing Specs)
 - Added `contracts/specs/AUTOCONVERTER_SPEC.md` (routing, slippage, oracle sanity, safety)
 - Added `contracts/specs/ROUTING_ADAPTERS_SPEC.md` (adapter interface & safety requirements)
+## 2025-10-12 — DEV10 (DAO/Timelock & Treasury & Params Specs)
+- Added `contracts/specs/DAO_TIMELOCK_SPEC.md` (roles, lifecycle, delays)
+- Added `contracts/specs/TREASURY_SPEC.md` (fee accounting, spend path via Vault)
+- Added `contracts/specs/PARAMETER_REGISTRY_SPEC.md` (canonical parameter map & events)
