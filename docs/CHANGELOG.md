@@ -35,3 +35,5 @@
 ## 2025-10-12 — DEV11 (Client/SDK Specs)
 - Added TS/Go/Rust/Python SDK specs under `clients/specs/`
 - Added common error taxonomy, event decoding, and tx build flows
+## 2025-10-12 — DEV12 (Reference dApp/Explorer Specs)
+- Added reference app specs: REF_DAPP_SPEC, UX_FLOWS, API_CONTRACTS, ACCESSIBILITY_I18N

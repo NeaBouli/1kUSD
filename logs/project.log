@@ -12,3 +12,4 @@
 [CONVERT] DEV9 delivered: AutoConverter and Routing Adapters specs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [GOV-TREASURY] DEV10 delivered: DAO/Timelock, Treasury, Parameter Registry specs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SDK] DEV11 delivered: TS/Go/Rust/Python SDK specs + common errors, event decoding, tx flows. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[APP] DEV12 delivered: Reference dApp/Explorer specs (UX flows, API contracts, A11y/i18n). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
