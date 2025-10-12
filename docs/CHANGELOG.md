@@ -13,3 +13,6 @@
 - Added `interfaces/ONCHAIN_EVENTS.md` (event catalog for all modules)
 - Added `interfaces/RPC_API.md` (public JSON-RPC/WebSocket spec)
 - Added `interfaces/INDEXER_API.md` (REST/GraphQL read-only spec)
+## 2025-10-12 — DEV5 (PSM Spec & Invariants)
+- Added `contracts/specs/PSM_SPEC.md` (parameters, fees, caps, rate limits, guards, state machine)
+- Added `contracts/specs/INVARIANTS.md` (system-wide invariants & safety properties)
