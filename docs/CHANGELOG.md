@@ -25,3 +25,6 @@
 ## 2025-10-12 — DEV8 (Oracle & Feeds Specs)
 - Added `contracts/specs/ORACLE_AGGREGATOR_SPEC.md` (aggregation, guards, finality)
 - Added `contracts/specs/PRICE_FEEDS_SPEC.md` (adapter requirements for Chainlink/Pyth/DEX-TWAP)
+## 2025-10-12 — DEV9 (AutoConverter & Routing Specs)
+- Added `contracts/specs/AUTOCONVERTER_SPEC.md` (routing, slippage, oracle sanity, safety)
+- Added `contracts/specs/ROUTING_ADAPTERS_SPEC.md` (adapter interface & safety requirements)
