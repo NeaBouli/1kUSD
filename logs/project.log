@@ -8,3 +8,4 @@
 [SPEC] DEV5 delivered: PSM spec and protocol invariants. (UTC: 2025-10-12T20:20:26Z)
 [SAFETY] DEV6 delivered: Safety-Automata spec and Governance hooks. (UTC: 2025-10-12T20:22:14Z)
 [VAULT] DEV7 delivered: CollateralVault spec and Proof-of-Reserves spec. (UTC: 2025-10-12T20:24:02Z)
+[ORACLE] DEV8 delivered: OracleAggregator spec and Price Feeds adapter spec. (UTC: 2025-10-12T20:25:11Z)

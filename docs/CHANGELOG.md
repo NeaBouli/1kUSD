@@ -22,3 +22,6 @@
 ## 2025-10-12 — DEV7 (Vault & PoR Specs)
 - Added `contracts/specs/COLLATERAL_VAULT_SPEC.md` (ingress/egress, caps, decimals, errors, events)
 - Added `contracts/specs/PROOF_OF_RESERVES_SPEC.md` (views, reconciliation, finality, telemetry)
+## 2025-10-12 — DEV8 (Oracle & Feeds Specs)
+- Added `contracts/specs/ORACLE_AGGREGATOR_SPEC.md` (aggregation, guards, finality)
+- Added `contracts/specs/PRICE_FEEDS_SPEC.md` (adapter requirements for Chainlink/Pyth/DEX-TWAP)
