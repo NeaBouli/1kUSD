@@ -2,3 +2,4 @@
 [DOCS] Repository language switched to EN; whitepaper split into DE & EN placeholders; architecture/API specs stubs updated — (UTC: 2025-10-12T20:00:45Z)
 [DOCS] EN repo normalization: resolved README/LICENSE conflicts (ours), created EN docs index, architecture & API specs; split whitepaper placeholders (DE/EN). (UTC: 2025-10-12T20:04:04Z)
 [DOCS] DEV1 delivered: Whitepaper DE+EN and CHANGELOG entry. (UTC: 2025-10-12T20:05:56Z)
+[GOV] DEV2 delivered: CONTRIBUTING, CODEOWNERS, .editorconfig, SECURITY. (UTC: 2025-10-12T20:12:43Z)
