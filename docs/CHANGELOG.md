@@ -86,3 +86,6 @@
 - Added Foundry skeleton (`foundry/foundry.toml`, script stub, remappings)
 - Added Hardhat skeleton (package.json, tsconfig.json, hardhat.config.ts, .npmrc)
 - Added BUILD_TOOLING.md and placeholder CI build workflow
+## 2025-10-12 — DEV31 (Coding Kickoff: Token minimal)
+- Implemented minimal OneKUSD token: ERC-20 core, gated mint/burn, pause affects only mint/burn, admin roles (to be Timelock later), custom errors
+- Excludes permit (EIP-2612) for now, per TOKEN_SPEC optional
