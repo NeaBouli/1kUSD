@@ -23,3 +23,4 @@
 [INTEGRATIONS] DEV20 delivered: wallets/payments, bridges/CEX listings, partner APIs adapters. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [PERF] DEV21 delivered: gas policy, fee accounting, and rounding rules specs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [BRIDGING] DEV22 delivered: roadmap, bridge options, compat layer + cutover protocol. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[LEGAL] DEV23 delivered: informational legal stance, jurisdictions checklist, user disclosures. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

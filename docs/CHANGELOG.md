@@ -63,3 +63,5 @@
 - Added MATH_ROUNDING_RULES (mulDiv, floor policy, quoting)
 ## 2025-10-12 — DEV22 (Bridging/Migration Roadmap)
 - Added bridging specs: MIGRATION_ROADMAP, BRIDGE_ARCH_OPTIONS, COMPAT_LAYER_SPEC
+## 2025-10-12 — DEV23 (Legal/Compliance Notes)
+- Added informational legal docs: LEGAL_STANCE, JURISDICTIONS_CHECKLIST, DISCLOSURES
