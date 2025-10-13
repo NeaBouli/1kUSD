@@ -1,0 +1,8 @@
+{
+  "ignorePatterns": [
+    { "pattern": "^https?://(localhost|127\\.0\\.0\\.1)" }
+  ],
+  "httpHeaders": [
+    { "urls": ["https://github.com/"], "headers": { "User-Agent": "1kUSD-docs-linkcheck" } }
+  ]
+}

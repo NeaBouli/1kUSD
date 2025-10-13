@@ -30,3 +30,8 @@ Phase 1 targets EVM deployment, with forward compatibility for Kasplex and (even
 
 ## License
 AGPL-3.0 (see `LICENSE`)
+
+---
+
+### Documentation Index
+For a complete, continuously updated specification map, see: `docs/INDEX.md`

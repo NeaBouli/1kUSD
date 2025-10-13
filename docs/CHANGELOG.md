@@ -75,3 +75,7 @@
 - Added contest docs: CONTEST_SCOPE, RULES, FINDINGS_TEMPLATE, PAYOUT_MAP
 ## 2025-10-12 — DEV27 (Release v0 Meta-Checklist & Freeze Gates)
 - Added release specs: RELEASE_CANDIDATE_CRITERIA, FREEZE_GATES_CHECKLIST, SIGNOFFS_EVIDENCE
+## 2025-10-12 — DEV28 (Spec Consistency)
+- Added central docs/INDEX.md with cross-links
+- Appended README pointer to INDEX.md
+- Added placeholder link-check workflow and config
