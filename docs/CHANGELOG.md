@@ -51,3 +51,5 @@
 - Added placeholder address registries under ops/config/
 ## 2025-10-12 — DEV17 (Indexer & Data Model Specs)
 - Added indexer specs: ENTITY_MODEL, INGESTION_PIPELINE, API_SPEC, SCHEMA
+## 2025-10-12 — DEV18 (Threat Modeling & Risk Register)
+- Added security specs: THREAT_MODEL, RISK_REGISTER, ATTACK_TREES, MITIGATIONS_MAP
