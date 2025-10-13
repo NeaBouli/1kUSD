@@ -24,3 +24,4 @@
 [PERF] DEV21 delivered: gas policy, fee accounting, and rounding rules specs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [BRIDGING] DEV22 delivered: roadmap, bridge options, compat layer + cutover protocol. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [LEGAL] DEV23 delivered: informational legal stance, jurisdictions checklist, user disclosures. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[DAPP] DEV24 delivered: minimal swap UI spec, components wiring, status/health mapping. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

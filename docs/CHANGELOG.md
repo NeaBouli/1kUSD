@@ -65,3 +65,5 @@
 - Added bridging specs: MIGRATION_ROADMAP, BRIDGE_ARCH_OPTIONS, COMPAT_LAYER_SPEC
 ## 2025-10-12 — DEV23 (Legal/Compliance Notes)
 - Added informational legal docs: LEGAL_STANCE, JURISDICTIONS_CHECKLIST, DISCLOSURES
+## 2025-10-12 — DEV24 (Reference dApp Specs)
+- Added dApp specs: REFERENCE_DAPP_UX, COMPONENTS_SPEC, STATUS_API_WIRING
