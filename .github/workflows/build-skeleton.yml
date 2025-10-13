@@ -1,0 +1,22 @@
+name: Build (skeleton)
+on:
+  pull_request:
+    paths:
+      - "contracts/**"
+      - "hardhat.config.ts"
+      - "foundry/**"
+      - "package.json"
+  workflow_dispatch: {}
+jobs:
+  foundry-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Foundry placeholder
+        run: echo "forge build placeholder (no Foundry install yet)"
+  hardhat-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hardhat placeholder
+        run: echo "hardhat compile placeholder (no deps install in skeleton)"

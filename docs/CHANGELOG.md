@@ -82,3 +82,7 @@
 ## 2025-10-12 — DEV29 (Bootstrap Code Stubs)
 - Added Solidity interfaces: I1kUSD, IPSM, IVault, IOracleAggregator, ISafetyAutomata, IParameterRegistry
 - Added empty contract stubs: OneKUSD, PegStabilityModule, CollateralVault, OracleAggregator, SafetyAutomata, DAOTimelock
+## 2025-10-12 — DEV30 (Build/Tooling Skeleton)
+- Added Foundry skeleton (`foundry/foundry.toml`, script stub, remappings)
+- Added Hardhat skeleton (package.json, tsconfig.json, hardhat.config.ts, .npmrc)
+- Added BUILD_TOOLING.md and placeholder CI build workflow
