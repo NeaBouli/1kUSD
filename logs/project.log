@@ -28,3 +28,4 @@
 [OPS] DEV25 delivered: operational playbooks v1 (release rehearsal, param change, incident dry-run). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [OPS] DEV25 delivered: operational playbooks v1 (release rehearsal, param change, incident dry-run). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [CONTEST] DEV26 delivered: scope, rules, findings template, payout map. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[RELEASE] DEV27 delivered: v0 RC criteria, freeze gates checklist, sign-offs & evidence pack. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
