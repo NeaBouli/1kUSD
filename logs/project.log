@@ -19,3 +19,4 @@
 [OPS] DEV16 delivered: deployment/environments specs, release process, secrets handling, emergency playbooks. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [INDEXER] DEV17 delivered: entity model, ingestion/reorg strategy, API spec, storage schema. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SECURITY] DEV18 delivered: threat model, risk register, attack trees, mitigations map. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[TELEMETRY] DEV19 delivered: metrics, alerts/SLOs, health endpoints specs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

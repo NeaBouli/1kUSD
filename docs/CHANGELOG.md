@@ -53,3 +53,5 @@
 - Added indexer specs: ENTITY_MODEL, INGESTION_PIPELINE, API_SPEC, SCHEMA
 ## 2025-10-12 — DEV18 (Threat Modeling & Risk Register)
 - Added security specs: THREAT_MODEL, RISK_REGISTER, ATTACK_TREES, MITIGATIONS_MAP
+## 2025-10-12 — DEV19 (Telemetry & Monitoring Specs)
+- Added telemetry specs: METRICS_SPEC, ALERTS_SLOS_SPEC, HEALTH_ENDPOINTS_SPEC
