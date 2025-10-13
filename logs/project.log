@@ -20,3 +20,4 @@
 [INDEXER] DEV17 delivered: entity model, ingestion/reorg strategy, API spec, storage schema. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SECURITY] DEV18 delivered: threat model, risk register, attack trees, mitigations map. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [TELEMETRY] DEV19 delivered: metrics, alerts/SLOs, health endpoints specs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[INTEGRATIONS] DEV20 delivered: wallets/payments, bridges/CEX listings, partner APIs adapters. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
