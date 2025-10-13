@@ -34,3 +34,4 @@
 [BUILD] DEV30 delivered: dual Foundry/Hardhat skeleton + docs + CI placeholder. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [CODE] DEV31 delivered: minimal OneKUSD token (guards only, no permit), aligned with TOKEN_SPEC (pause gates mint/burn; transfers ok). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [CODE] DEV32 delivered: PSM minimal skeleton with safety guards and admin/registry wiring (no economic logic). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[CODE] DEV33 delivered: CollateralVault minimal skeleton with guards and asset support toggles (no transfer/accounting logic). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
