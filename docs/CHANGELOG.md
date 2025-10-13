@@ -57,3 +57,7 @@
 - Added telemetry specs: METRICS_SPEC, ALERTS_SLOS_SPEC, HEALTH_ENDPOINTS_SPEC
 ## 2025-10-12 — DEV20 (Integration Blueprints)
 - Added integration specs: WALLETS_PAYMENTS_SPEC, BRIDGES_CEX_LISTINGS_SPEC, PARTNER_APIS_ADAPTERS_SPEC
+## 2025-10-12 — DEV21 (Gas & Fee Accounting Specs)
+- Added GAS_POLICY_SPEC (targets, patterns, CI gates)
+- Added FEE_ACCOUNTING_SPEC (formulas, events, edge cases)
+- Added MATH_ROUNDING_RULES (mulDiv, floor policy, quoting)
