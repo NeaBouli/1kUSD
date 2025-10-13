@@ -89,3 +89,5 @@
 ## 2025-10-12 — DEV31 (Coding Kickoff: Token minimal)
 - Implemented minimal OneKUSD token: ERC-20 core, gated mint/burn, pause affects only mint/burn, admin roles (to be Timelock later), custom errors
 - Excludes permit (EIP-2612) for now, per TOKEN_SPEC optional
+## 2025-10-13 — DEV32 (PSM minimal skeleton)
+- Added minimal PegStabilityModule: admin/registry wiring, pause/deadline guards, IPSM signatures, stub quotes/swaps (NOT_IMPLEMENTED)

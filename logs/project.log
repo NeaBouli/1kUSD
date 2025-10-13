@@ -33,3 +33,4 @@
 [CODE] DEV29 delivered: interface set + empty contract stubs (no logic). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [BUILD] DEV30 delivered: dual Foundry/Hardhat skeleton + docs + CI placeholder. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [CODE] DEV31 delivered: minimal OneKUSD token (guards only, no permit), aligned with TOKEN_SPEC (pause gates mint/burn; transfers ok). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[CODE] DEV32 delivered: PSM minimal skeleton with safety guards and admin/registry wiring (no economic logic). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
