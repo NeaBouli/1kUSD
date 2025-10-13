@@ -79,3 +79,6 @@
 - Added central docs/INDEX.md with cross-links
 - Appended README pointer to INDEX.md
 - Added placeholder link-check workflow and config
+## 2025-10-12 — DEV29 (Bootstrap Code Stubs)
+- Added Solidity interfaces: I1kUSD, IPSM, IVault, IOracleAggregator, ISafetyAutomata, IParameterRegistry
+- Added empty contract stubs: OneKUSD, PegStabilityModule, CollateralVault, OracleAggregator, SafetyAutomata, DAOTimelock

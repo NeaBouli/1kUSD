@@ -30,3 +30,4 @@
 [CONTEST] DEV26 delivered: scope, rules, findings template, payout map. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [RELEASE] DEV27 delivered: v0 RC criteria, freeze gates checklist, sign-offs & evidence pack. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [DOCS] DEV28 delivered: spec index, README pointer, placeholder linkcheck workflow. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[CODE] DEV29 delivered: interface set + empty contract stubs (no logic). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
