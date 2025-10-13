@@ -61,3 +61,5 @@
 - Added GAS_POLICY_SPEC (targets, patterns, CI gates)
 - Added FEE_ACCOUNTING_SPEC (formulas, events, edge cases)
 - Added MATH_ROUNDING_RULES (mulDiv, floor policy, quoting)
+## 2025-10-12 — DEV22 (Bridging/Migration Roadmap)
+- Added bridging specs: MIGRATION_ROADMAP, BRIDGE_ARCH_OPTIONS, COMPAT_LAYER_SPEC
