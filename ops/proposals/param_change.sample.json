@@ -1,0 +1,23 @@
+{
+"$schema": "../schemas/param_change.schema.json",
+"title": "Adjust PSM fee and set treasury",
+"description": "Lower PSM fee to 8 bps, set treasury address",
+"chainId": 31337,
+"registry": "0x0000000000000000000000000000000000000000",
+"timelock": "0x0000000000000000000000000000000000000000",
+"eta": 0,
+"operations": [
+{
+"op": "setUint",
+"keySeed": "PARAM_PSM_FEE_BPS",
+"keyBytes32": "0x214d0b92b3d7e17b0b13f7e3fdc9a8d3d4a3d4766c1f5df4c4d8aa6b7a6c0000",
+"valueUint": "8"
+},
+{
+"op": "setAddress",
+"keySeed": "PARAM_TREASURY_ADDRESS",
+"keyBytes32": "0x2f5a43c91b7c0bff9c1d8fabcaa1e5a48b9d5d0b9d94a0c0420e7f8e7f8e0000",
+"valueAddress": "0x1111111111111111111111111111111111111111"
+}
+]
+}

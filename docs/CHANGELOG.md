@@ -207,3 +207,15 @@ Added sample records and documentation
 Added sliding-window rate-limiter spec (window/maxAmount, scopes, buckets)
 
 Added machine-readable vectors and a focused test guide
+
+2025-10-13 — DEV64 (governance wiring)
+
+Added governance param writes flow (Timelock -> ParameterRegistry)
+
+Added proposal JSON schema and sample
+
+Added calldata composer script (TS)
+
+Added Guardian sunset rehearsal runbook
+
+Updated README with governance links

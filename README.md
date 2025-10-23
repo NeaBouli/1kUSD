@@ -88,3 +88,15 @@ See `docs/PSM_QUOTE_SEMANTICS.md` for normative rules (decimals, fees, rounding,
 cp .env.example .env
 # optionally edit RPC_URL/CHAIN_ID/DEPLOYER_PRIVATE_KEY
 node scripts/00_addresses_template.ts
+
+Governance
+
+Param writes via Timelock: docs/GOVERNANCE_PARAM_WRITES.md
+
+Proposal schema: ops/schemas/param_change.schema.json
+
+Sample proposal: ops/proposals/param_change.sample.json
+
+Compose calldata: node scripts/compose-param-change.ts <proposal.json>
+
+Guardian sunset rehearsal: docs/GUARDIAN_SUNSET_RUNBOOK.md

@@ -1,0 +1,31 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema
+",
+"title": "1kUSD Governance — Parameter Change Proposal",
+"type": "object",
+"properties": {
+"title": { "type": "string" },
+"description": { "type": "string" },
+"chainId": { "type": "integer", "minimum": 0 },
+"registry": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+"operations": {
+"type": "array",
+"items": {
+"type": "object",
+"properties": {
+"op": { "type": "string", "enum": ["setUint", "setAddress"] },
+"keySeed": { "type": "string" },
+"keyBytes32": { "type": "string", "pattern": "^0x[a-fA-F0-9]{64}$" },
+"valueUint": { "type": "string", "pattern": "^[0-9]+$" },
+"valueAddress": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" }
+},
+"required": ["op","keySeed","keyBytes32"],
+"additionalProperties": false
+}
+},
+"timelock": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+"eta": { "type": "integer", "minimum": 0 }
+},
+"required": ["title","chainId","registry","operations","timelock"],
+"additionalProperties": false
+}
