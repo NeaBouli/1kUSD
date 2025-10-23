@@ -120,3 +120,15 @@ Localnet: ops/localnet/*.sh (start/stop/seed/deploy-skeleton)
 Quickstart: docs/BOOTSTRAP_QUICKSTART.md
 
 Staging runbook: ops/staging/STAGING_BOOTSTRAP_RUNBOOK.md
+
+SDK (TypeScript)
+
+Package: clients/ts
+
+Build: (from repo root) npm --prefix clients/ts install && npm --prefix clients/ts run build
+
+Run vectors:
+
+Permit: npm --prefix clients/ts run vector:permit
+
+Oracle: npm --prefix clients/ts run vector:oracle

@@ -269,3 +269,11 @@ Added pre-audit README and formal threat model
 Added static-analysis baseline config/args and generator script
 
 Added submission manifest and bundle script (ZIP)
+
+2025-10-13 — DEV71 (sdk wire-up)
+
+Added minimal TS SDK with address book helpers, permit helpers, oracle aggregation helper
+
+Added examples wiring vectors (permit/oracle)
+
+Updated README with SDK usage

@@ -73,3 +73,4 @@
 [BOOTSTRAP] DEV68 delivered: localnet scripts, staging runbook, quickstart docs, README updates. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [CI] DEV69 delivered: gates doc, collate script, placeholders, wired workflow. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SECURITY] DEV70 delivered: pre-audit docs, baselines, and submission bundle tooling. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[SDK] DEV71 delivered: TS SDK stubs + vector-backed examples; README updated. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
