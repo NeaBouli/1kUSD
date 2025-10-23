@@ -17,3 +17,7 @@
 - Solidity version pinned to **0.8.24** to match interface stubs.
 - No deployments/scripts except placeholder `foundry/script/Deploy.s.sol`.
 - CI integration will stay **placeholder** until code exists.
+
+## Build/CI Sanity
+- GitHub Actions: `build.yml` compiles contracts via Hardhat with Node 20.
+- Foundry `fmt` is currently a placeholder workflow; can be upgraded to install Foundry later.

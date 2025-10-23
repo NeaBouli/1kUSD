@@ -1,0 +1,14 @@
+name: Foundry Format (placeholder)
+on:
+  pull_request:
+    paths:
+      - "contracts/**"
+      - "foundry/**"
+  workflow_dispatch: {}
+jobs:
+  fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Placeholder Foundry fmt
+        run: echo "forge fmt placeholder (skipping actual Foundry install)"

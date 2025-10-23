@@ -105,3 +105,6 @@
 - Added ops/config addresses templates (template, staging, testnet, mainnet)
 - Added Admin/Wiring notes
 - Updated README to reference addresses templates
+## 2025-10-13 — DEV39 (Build sanity CI)
+- Added GitHub Actions: hardhat compile with artifact upload; Foundry fmt placeholder
+- Updated BUILD_TOOLING.md with CI notes
