@@ -130,3 +130,6 @@
 ## 2025-10-13 — DEV46 (Docs hardening)
 - Added JSON Schemas for addresses and params; embedded `$schema` in config JSONs
 - Added docs/JSON_VALIDATION.md and updated README with validation notes
+## 2025-10-13 — DEV47 (Safety docs pass)
+- Added Guardian Sunset checklist (docs/SAFETY_GUARDIAN_CHECKLIST.md)
+- Added ops runbooks: EMERGENCY_DRILLS.md and INCIDENT_TEMPLATE.md
