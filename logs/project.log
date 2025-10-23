@@ -58,3 +58,4 @@
 [DOCS] Patch: normalized language to English in PSM swap execution plan. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [IFACES] DEV54 delivered: minimal Solidity interfaces aligned with specs; added overview. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [PARAMS] DEV55 delivered: canonical keys, schema+template, SDK constants/helpers. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[DEPLOY] DEV56 delivered: env templates, Foundry/Hardhat skeletons, emitter script, CI skeleton. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

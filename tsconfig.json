@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "CommonJS",
-    "strict": true,
+    "target": "es2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "esModuleInterop": true,
+    "strict": true,
     "resolveJsonModule": true,
     "outDir": "dist",
-    "types": ["node", "mocha"]
+    "types": ["node"]
   },
-  "include": ["hardhat", "scripts", "deploy", "typechain-types"]
+  "include": ["scripts", "clients/examples", "types"]
 }

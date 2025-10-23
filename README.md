@@ -75,3 +75,16 @@ See `docs/PSM_QUOTE_SEMANTICS.md` for normative rules (decimals, fees, rounding,
 - Params schema: `ops/schemas/params.schema.json`
 - Template params: `ops/config/params.template.json`
 - SDK helpers: `clients/examples/param-keys.ts`
+
+---
+### Deployment skeletons
+- Env templates: `.env.example`, `ops/env/.env.staging.example`, `ops/env/.env.testnet.example`
+- Foundry: `foundry.toml`, compile-only test `tests/Compile.t.sol`
+- Hardhat: `hardhat.config.ts`, TypeScript scripts under `scripts/`
+- Emit addresses template: `ops/scripts/emit-addresses-template.sh`
+
+**Quickstart**
+```bash
+cp .env.example .env
+# optionally edit RPC_URL/CHAIN_ID/DEPLOYER_PRIVATE_KEY
+node scripts/00_addresses_template.ts

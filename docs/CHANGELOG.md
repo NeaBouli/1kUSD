@@ -161,3 +161,13 @@
 - Added params JSON schema & template
 - Added TS SDK helpers (key/compositeKey)
 - Updated README with cross-links
+
+2025-10-13 — DEV56 (deployment skeletons)
+
+Added env templates (.env.example, staging/testnet samples)
+
+Added Foundry skeleton (foundry.toml, compile-only test)
+
+Added Hardhat skeleton (config + TS scripts), address template emitter
+
+Added deploy CI skeleton and README quickstart
