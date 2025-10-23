@@ -142,3 +142,6 @@
 ## 2025-10-13 — DEV50 (PSM quote semantics)
 - Added docs/PSM_QUOTE_SEMANTICS.md (decimals normalization, fees, rounding, invariants, examples)
 - Updated README with cross-reference
+## 2025-10-13 — DEV51 (Vault accounting plan)
+- Added docs/VAULT_ACCOUNTING_PLAN.md (math, caps, fees, decimals policy, invariants)
+- Added docs/NOTES_VAULT_ACCOUNTING.md (reviewer notes)

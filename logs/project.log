@@ -52,3 +52,4 @@
 [DAPP] DEV48 delivered: documentation-first dApp scaffolding (routes/IA) + repo placeholders; no builds. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SDK] DEV49 delivered: wiring guide + TS examples (addresses loader, params+RPC). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [PSM-DOCS] DEV50 delivered: quote semantics (fees/rounding, 6/18 decimals), invariants & examples. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[VAULT-DOCS] DEV51 delivered: vault accounting plan (deposits/withdrawals, fees, decimals, invariants). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
