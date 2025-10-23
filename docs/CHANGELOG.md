@@ -139,3 +139,6 @@
 ## 2025-10-13 — DEV49 (SDK wiring guide)
 - Added SDK wiring guide and TS examples (addresses loader, params+RPC)
 - Updated README; added clients/specs overview
+## 2025-10-13 — DEV50 (PSM quote semantics)
+- Added docs/PSM_QUOTE_SEMANTICS.md (decimals normalization, fees, rounding, invariants, examples)
+- Updated README with cross-reference

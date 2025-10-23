@@ -57,3 +57,7 @@ Addresses/params JSON files embed the `$schema` field for editor validation.
 ---
 ### SDK Wiring Guide
 See `docs/SDK_WIRING_GUIDE.md` and examples under `clients/examples/`.
+
+---
+### PSM Quotes — Fees & Rounding
+See `docs/PSM_QUOTE_SEMANTICS.md` for normative rules (decimals, fees, rounding, invariants).

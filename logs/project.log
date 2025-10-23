@@ -51,3 +51,4 @@
 [SAFETY-DOCS] DEV47 delivered: guardian sunset checklist + emergency drills + incident template. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [DAPP] DEV48 delivered: documentation-first dApp scaffolding (routes/IA) + repo placeholders; no builds. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SDK] DEV49 delivered: wiring guide + TS examples (addresses loader, params+RPC). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[PSM-DOCS] DEV50 delivered: quote semantics (fees/rounding, 6/18 decimals), invariants & examples. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
