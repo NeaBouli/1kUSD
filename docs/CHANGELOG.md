@@ -227,3 +227,11 @@ Finalized OneKUSD EIP-2612 Permit spec (domain, struct, digest, rules)
 Added machine-readable vectors and TS helper to build/sign permits
 
 Added test guide for domain, replay, expiry, and ECDSA checks
+
+2025-10-13 — DEV66 (invariants bundle)
+
+Added executable mapping from formal invariants to concrete checks
+
+Added consolidated invariants suite plan and default config JSON
+
+Added harness notes for PSM/Vault/Governance invariant runs
