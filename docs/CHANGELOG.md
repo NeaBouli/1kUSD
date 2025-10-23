@@ -148,3 +148,6 @@
 ## 2025-10-13 — DEV52 (PSM swap execution plan)
 - Added docs/PSM_SWAP_EXECUTION_PLAN.md (CEI, guards, vault interactions, fees, events)
 - Added docs/NOTES_PSM_EXECUTION.md (reviewer notes)
+## 2025-10-13 — DEV53 (Safety docs set)
+- Added Safety Pause Matrix, Module IDs, Error Catalog, Guardian Sunset Hooks
+- Updated README with cross-links

@@ -61,3 +61,10 @@ See `docs/SDK_WIRING_GUIDE.md` and examples under `clients/examples/`.
 ---
 ### PSM Quotes — Fees & Rounding
 See `docs/PSM_QUOTE_SEMANTICS.md` for normative rules (decimals, fees, rounding, invariants).
+
+---
+### Safety & Guardian
+- Pause matrix: `docs/SAFETY_PAUSE_MATRIX.md`
+- Module IDs: `docs/MODULE_IDS.md`
+- Error catalog: `docs/ERROR_CATALOG.md`
+- Guardian sunset hooks: `docs/GUARDIAN_SUNSET_HOOKS.md`
