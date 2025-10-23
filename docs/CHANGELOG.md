@@ -261,3 +261,11 @@ Added CI gates doc with red/green criteria
 Added collate script (node) to enforce gates from JSON artifacts
 
 Added placeholders generator and updated CI workflow to wire jobs
+
+2025-10-13 — DEV70 (security pre-audit pack)
+
+Added pre-audit README and formal threat model
+
+Added static-analysis baseline config/args and generator script
+
+Added submission manifest and bundle script (ZIP)

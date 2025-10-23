@@ -1,0 +1,3 @@
+--max-depth 32
+--strategy dfs
+--execution-timeout 120

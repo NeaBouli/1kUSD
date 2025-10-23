@@ -1,0 +1,12 @@
+{
+"filter_paths": ["node_modules", "lib", "out", "artifacts"],
+"exclude": {
+"detectors": [
+"naming-convention",
+"too-many-lines",
+"solc-version"
+]
+},
+"solc-remaps": [],
+"truffle": false
+}

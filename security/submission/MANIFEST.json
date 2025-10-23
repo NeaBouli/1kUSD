@@ -1,0 +1,17 @@
+{
+"name": "1kUSD Pre-Audit Pack",
+"version": "0.1.0",
+"generatedAt": "1970-01-01T00:00:00Z",
+"includes": [
+"docs/SECURITY_PREAUDIT_README.md",
+"docs/THREAT_MODEL.md",
+"docs/INVARIANTS_EXEC_MAP.md",
+"docs/PSM_QUOTE_MATH.md",
+"docs/ORACLE_AGGREGATION_GUARDS.md",
+"docs/SAFETY_RATE_LIMITER.md",
+"contracts/specs/",
+"tests/vectors/",
+"reports/slither.json",
+"reports/mythril.json"
+]
+}
