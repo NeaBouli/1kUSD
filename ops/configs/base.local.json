@@ -1,0 +1,16 @@
+{
+"$schema": "../schemas/deploy_config.schema.json",
+"chainId": 31337,
+"network": "local",
+"rpcUrl": "http://127.0.0.1:8545
+",
+"confirmationBlocks": 0,
+"tags": ["dev", "local"],
+"params": {
+"PARAM_PSM_FEE_BPS": 10,
+"PARAM_ORACLE_MAX_AGE_SEC": 60,
+"PARAM_ORACLE_MAX_DEVIATION_BPS": 200,
+"PARAM_RATE_WINDOW_SEC": 300,
+"PARAM_TREASURY_ADDRESS": "0x1111111111111111111111111111111111111111"
+}
+}

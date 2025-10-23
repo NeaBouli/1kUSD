@@ -100,3 +100,15 @@ Sample proposal: ops/proposals/param_change.sample.json
 Compose calldata: node scripts/compose-param-change.ts <proposal.json>
 
 Guardian sunset rehearsal: docs/GUARDIAN_SUNSET_RUNBOOK.md
+
+Configs & Address Book
+
+Deploy configs (per chain): ops/configs/*.json (schema: ops/schemas/deploy_config.schema.json)
+
+Address book (multi-chain): ops/addresses/address-book.sample.json (schema: ops/schemas/address_book.schema.json)
+
+Validate JSON:
+npx ts-node scripts/validate-json.ts ops/schemas/deploy_config.schema.json ops/configs/base.local.json
+
+Emit .env from address book:
+node scripts/emit-env-from-addresses.ts ops/addresses/address-book.sample.json 31337 > .env.addresses

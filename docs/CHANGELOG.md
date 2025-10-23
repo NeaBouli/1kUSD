@@ -235,3 +235,13 @@ Added executable mapping from formal invariants to concrete checks
 Added consolidated invariants suite plan and default config JSON
 
 Added harness notes for PSM/Vault/Governance invariant runs
+
+2025-10-13 — DEV67 (configs & address book)
+
+Added per-chain deploy config schema + local/testnet/mainnet samples
+
+Added canonical address book schema + sample
+
+Added JSON validator and .env emitter scripts
+
+Updated README with usage instructions

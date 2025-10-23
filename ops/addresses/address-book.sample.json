@@ -1,0 +1,20 @@
+{
+"$schema": "../schemas/address_book.schema.json",
+"version": "0.0.1",
+"generatedAt": "2025-10-13T00:00:00Z",
+"chains": [
+{
+"chainId": 31337,
+"network": "local",
+"contracts": [
+{ "name": "OneKUSD", "address": "0x1111111111111111111111111111111111111111", "blockNumber": 1, "txHash": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" },
+{ "name": "PSM", "address": "0x2222222222222222222222222222222222222222" },
+{ "name": "CollateralVault", "address": "0x3333333333333333333333333333333333333333" },
+{ "name": "OracleAggregator", "address": "0x4444444444444444444444444444444444444444" },
+{ "name": "SafetyAutomata", "address": "0x5555555555555555555555555555555555555555" },
+{ "name": "ParameterRegistry", "address": "0x6666666666666666666666666666666666666666" },
+{ "name": "DAO_Timelock", "address": "0x7777777777777777777777777777777777777777" }
+]
+}
+]
+}

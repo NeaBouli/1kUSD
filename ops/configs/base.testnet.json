@@ -1,0 +1,16 @@
+{
+"$schema": "../schemas/deploy_config.schema.json",
+"chainId": 84532,
+"network": "base-sepolia",
+"rpcUrl": "https://sepolia.base.org
+",
+"confirmationBlocks": 2,
+"tags": ["staging", "testnet"],
+"params": {
+"PARAM_PSM_FEE_BPS": 10,
+"PARAM_ORACLE_MAX_AGE_SEC": 90,
+"PARAM_ORACLE_MAX_DEVIATION_BPS": 250,
+"PARAM_RATE_WINDOW_SEC": 300,
+"PARAM_TREASURY_ADDRESS": "0x2222222222222222222222222222222222222222"
+}
+}

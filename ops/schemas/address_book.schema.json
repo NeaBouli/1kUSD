@@ -1,0 +1,38 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema
+",
+"title": "1kUSD Address Book",
+"type": "object",
+"properties": {
+"version": { "type": "string" },
+"generatedAt": { "type": "string" },
+"chains": {
+"type": "array",
+"items": {
+"type": "object",
+"properties": {
+"chainId": { "type": "integer", "minimum": 1 },
+"network": { "type": "string" },
+"contracts": {
+"type": "array",
+"items": {
+"type": "object",
+"properties": {
+"name": { "type": "string" },
+"address": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+"blockNumber": { "type": "integer", "minimum": 0 },
+"txHash": { "type": "string", "pattern": "^0x[a-fA-F0-9]{64}$" }
+},
+"required": ["name", "address"],
+"additionalProperties": false
+}
+}
+},
+"required": ["chainId", "network", "contracts"],
+"additionalProperties": false
+}
+}
+},
+"required": ["version", "chains"],
+"additionalProperties": false
+}

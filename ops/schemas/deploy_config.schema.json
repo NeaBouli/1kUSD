@@ -1,0 +1,26 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema
+",
+"title": "1kUSD Deploy Config (per chain)",
+"type": "object",
+"properties": {
+"chainId": { "type": "integer", "minimum": 1 },
+"network": { "type": "string" },
+"rpcUrl": { "type": "string" },
+"confirmationBlocks": { "type": "integer", "minimum": 0, "default": 1 },
+"tags": { "type": "array", "items": { "type": "string" } },
+"params": {
+"type": "object",
+"properties": {
+"PARAM_PSM_FEE_BPS": { "type": "integer", "minimum": 0, "maximum": 10000 },
+"PARAM_ORACLE_MAX_AGE_SEC": { "type": "integer", "minimum": 0 },
+"PARAM_ORACLE_MAX_DEVIATION_BPS": { "type": "integer", "minimum": 0 },
+"PARAM_RATE_WINDOW_SEC": { "type": "integer", "minimum": 0 },
+"PARAM_TREASURY_ADDRESS": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" }
+},
+"additionalProperties": false
+}
+},
+"required": ["chainId", "network", "rpcUrl", "params"],
+"additionalProperties": false
+}
