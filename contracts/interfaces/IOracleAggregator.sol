@@ -1,13 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0
 pragma solidity ^0.8.24;
 
-/// @title IOracleAggregator — price reads with health metadata
+/// @title IOracleAggregator — unified price access (interface)
 interface IOracleAggregator {
+    /// @notice Canonical price struct.
+    /// @dev price uses `decimals` for fixed-point scaling; healthy=true if guards are satisfied.
     struct Price {
-        int256 price;        // 1e8 or 1e18 (impl-defined)
-        uint8  decimals;     // decimals of 'price'
-        bool   healthy;      // guards passed
-        uint256 updatedAt;   // unix seconds
+        int256 price;
+        uint8 decimals;
+        bool healthy;
+        uint256 updatedAt;
     }
-    function getPrice(address asset) external view returns (Price memory);
+
+    /// @notice Get the current price snapshot for an asset.
+    function getPrice(address asset) external view returns (Price memory p);
 }

@@ -153,3 +153,6 @@
 - Updated README with cross-links
 ## 2025-10-13 — Patch: PSM swap execution plan language
 - Rewrote docs/PSM_SWAP_EXECUTION_PLAN.md in English (removed German fragments).
+## 2025-10-13 — DEV54 (interfaces polish)
+- Added minimal Solidity interfaces: IPSM, IVault, IOracleAggregator, IParameterRegistry, ISafetyAutomata, I1kUSD (+ IERC2612 if missing)
+- Added interfaces README overview
