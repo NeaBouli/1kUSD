@@ -151,3 +151,5 @@
 ## 2025-10-13 — DEV53 (Safety docs set)
 - Added Safety Pause Matrix, Module IDs, Error Catalog, Guardian Sunset Hooks
 - Updated README with cross-links
+## 2025-10-13 — Patch: PSM swap execution plan language
+- Rewrote docs/PSM_SWAP_EXECUTION_PLAN.md in English (removed German fragments).

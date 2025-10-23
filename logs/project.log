@@ -55,3 +55,4 @@
 [VAULT-DOCS] DEV51 delivered: vault accounting plan (deposits/withdrawals, fees, decimals, invariants). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [PSM-EXEC] DEV52 delivered: swap execution plan (checks, CEI, vault I/O, fees, events). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SAFETY] DEV53 delivered: pause matrix, module IDs, error catalog, guardian sunset hooks; README links. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[DOCS] Patch: normalized language to English in PSM swap execution plan. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
