@@ -41,3 +41,9 @@ For a complete, continuously updated specification map, see: `docs/INDEX.md`
 ### Addresses / Environments
 Canonical contract addresses are tracked in `ops/config/addresses.*.json`.  
 For staging/testnet/mainnet, always update these files in PRs and reference them in SDK/dApp configs.
+
+---
+
+### Parameters (Registry)
+Canonical keys are documented in `docs/PARAMETER_KEYS.md`.  
+Environment examples live under `ops/config/params.*.json` (staging/testnet/mainnet).

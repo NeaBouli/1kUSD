@@ -119,3 +119,7 @@
 - Added IERC2612 interface and implemented `permit` in OneKUSD
 - Domain separator is chainId-aware; `nonces` tracked per owner
 - No changes to transfer logic; pause still gates only mint/burn
+## 2025-10-13 — DEV44 (Parameter keys & staging params)
+- Added docs/PARAMETER_KEYS.md (canonical bytes32 keys reference)
+- Added ops/config/params.staging.json with example values for dev/staging
+- Updated README with parameters section
