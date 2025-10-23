@@ -133,3 +133,6 @@
 ## 2025-10-13 — DEV47 (Safety docs pass)
 - Added Guardian Sunset checklist (docs/SAFETY_GUARDIAN_CHECKLIST.md)
 - Added ops runbooks: EMERGENCY_DRILLS.md and INCIDENT_TEMPLATE.md
+## 2025-10-13 — DEV48 (dApp scaffolding docs)
+- Added docs/dapp/README.md and ROUTES.md (information architecture + routes)
+- Added apps/dapp placeholders (public/brand.svg, src/README, folder marker)
