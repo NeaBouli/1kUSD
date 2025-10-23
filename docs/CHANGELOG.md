@@ -97,3 +97,5 @@
 - Added OracleAggregator minimal skeleton: admin/registry wiring, pause guard, OracleUpdated event, IOracleAggregator stub (no pricing logic)
 ## 2025-10-13 — DEV35 (SafetyAutomata minimal skeleton)
 - Added SafetyAutomata minimal skeleton: admin/registry wiring, pause/unpause events, read-only interface stubs (no caps/rate-limit logic)
+## 2025-10-13 — DEV36 (DAO Timelock minimal skeleton)
+- Added minimal DAOTimelock: admin wiring, minDelay placeholder, queue/cancel/execute events; execute() is a stub (NOT_IMPLEMENTED)
