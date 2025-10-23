@@ -127,3 +127,6 @@
 - Added Foundry placeholder deploy script (encodes ctor args; no broadcast)
 - Added Hardhat placeholder deploy script (reads config; prints wiring; no deploy)
 - Added ops/specs/DEPLOY_PLACEHOLDERS.md
+## 2025-10-13 — DEV46 (Docs hardening)
+- Added JSON Schemas for addresses and params; embedded `$schema` in config JSONs
+- Added docs/JSON_VALIDATION.md and updated README with validation notes

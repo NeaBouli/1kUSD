@@ -1,4 +1,5 @@
 {
+  "$schema": "https://example.com/1kusd/addresses.schema.json",
   "meta": { "stage": "mainnet", "updatedAt": 0 },
   "chainId": 8453,
   "contracts": {

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/1kusd/params.schema.json",
+  "title": "1kUSD Parameters File",
+  "type": "object",
+  "required": ["meta"],
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["stage"],
+      "properties": {
+        "stage": { "type": "string", "enum": ["staging", "testnet", "mainnet"] },
+        "updatedAt": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": true
+    },
+    "globals": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "PARAM_PSM_FEE_BPS": { "type": "integer", "minimum": 0, "maximum": 10000 },
+        "PARAM_ORACLE_MAX_AGE_SEC": { "type": "integer", "minimum": 0 },
+        "PARAM_ORACLE_MAX_DEVIATION_BPS": { "type": "integer", "minimum": 0, "maximum": 10000 },
+        "PARAM_RATE_WINDOW_SEC": { "type": "integer", "minimum": 0 },
+        "PARAM_RATE_MAX_AMOUNT": { "type": ["string", "integer"] },
+        "PARAM_TREASURY_ADDRESS": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+        "PARAM_EMERGENCY_GUARDIAN": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" }
+      }
+    },
+    "perAsset": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "symbol": { "type": "string" },
+          "PARAM_CAP_PER_ASSET": { "type": ["string", "integer"] },
+          "PARAM_TOKEN_SUPPORTED": { "type": "boolean" },
+          "PARAM_DECIMALS_HINT": { "type": "integer", "minimum": 0, "maximum": 36 }
+        },
+        "required": [],
+        "additionalProperties": true
+      }
+    }
+  }
+}

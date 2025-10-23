@@ -47,3 +47,9 @@ For staging/testnet/mainnet, always update these files in PRs and reference them
 ### Parameters (Registry)
 Canonical keys are documented in `docs/PARAMETER_KEYS.md`.  
 Environment examples live under `ops/config/params.*.json` (staging/testnet/mainnet).
+
+---
+
+### JSON Validation
+Schemas live under `ops/config/schema/`.  
+Addresses/params JSON files embed the `$schema` field for editor validation.

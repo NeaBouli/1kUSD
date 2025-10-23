@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/1kusd/addresses.schema.json",
+  "title": "1kUSD Addresses File",
+  "type": "object",
+  "required": ["meta", "chainId", "contracts"],
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["stage"],
+      "properties": {
+        "stage": { "type": "string", "enum": ["template", "staging", "testnet", "mainnet"] },
+        "updatedAt": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": true
+    },
+    "chainId": { "type": "integer", "minimum": 0 },
+    "contracts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^0x[a-fA-F0-9]{40}$"
+      },
+      "properties": {
+        "OneKUSD": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+        "PegStabilityModule": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+        "CollateralVault": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+        "OracleAggregator": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+        "SafetyAutomata": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+        "ParameterRegistry": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+        "DAOTimelock": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" }
+      }
+    }
+  }
+}

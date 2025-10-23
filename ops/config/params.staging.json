@@ -1,4 +1,5 @@
 {
+  "$schema": "https://example.com/1kusd/params.schema.json",
   "meta": { "stage": "staging", "updatedAt": 0 },
   "globals": {
     "PARAM_PSM_FEE_BPS": 10,
