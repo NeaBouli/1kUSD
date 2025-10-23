@@ -189,3 +189,7 @@ Added example (clients/examples/decode-events.ts) and docs
 Added JSON schemas for swaps, fees, and vault snapshots
 
 Added sample records and documentation
+## 2025-10-13 — DEV60 (psm quote math)
+- Added normative math for PSM quotes (rounding/decimals/fee order)
+- Added machine-readable test vectors for USDC/WETH cases
+- Added usage notes for unit/invariant tests

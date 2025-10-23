@@ -62,3 +62,4 @@
 [EVENTS] DEV57 delivered: ABI JSONs for PSM/Vault/Token; indexer notes. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SDK] DEV58 delivered: TS event decoders + example + docs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [INDEXER] DEV59 delivered: JSON schemas (swap/fee/vault snapshot) + samples + docs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[QUOTE] DEV60 delivered: PSM quote math docs + vectors. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
