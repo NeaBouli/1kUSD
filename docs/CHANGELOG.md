@@ -201,3 +201,9 @@ Added sample records and documentation
 - Added normative doc for multi-source aggregation (median/trimmed-mean), staleness and deviation guards
 - Added machine-readable vectors for healthy/stale/outlier/trimmed cases
 - Added oracle test guide
+
+2025-10-13 — DEV63 (safety rate-limiter)
+
+Added sliding-window rate-limiter spec (window/maxAmount, scopes, buckets)
+
+Added machine-readable vectors and a focused test guide

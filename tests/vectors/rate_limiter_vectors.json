@@ -1,0 +1,56 @@
+{
+"meta": {
+"windowSec": 300,
+"bucketSecs": 60,
+"notes": "Sliding-window approximation via 60s buckets across 5-minute window"
+},
+"cases": [
+{
+"name": "Under cap with multiple ops",
+"maxAmount": "1000",
+"ops": [
+{ "ts": 1000, "amount": "200" },
+{ "ts": 1100, "amount": "300" },
+{ "ts": 1150, "amount": "400" }
+],
+"expect": { "finalAllowed": true, "sumWindow": "900" }
+},
+{
+"name": "Exactly at cap",
+"maxAmount": "1000",
+"ops": [
+{ "ts": 1000, "amount": "600" },
+{ "ts": 1010, "amount": "400" }
+],
+"expect": { "finalAllowed": true, "sumWindow": "1000" }
+},
+{
+"name": "Exceed cap by 1",
+"maxAmount": "1000",
+"ops": [
+{ "ts": 1000, "amount": "600" },
+{ "ts": 1010, "amount": "401" }
+],
+"expect": { "finalAllowed": false, "error": "RATE_LIMIT_EXCEEDED", "sumWindow": "1001" }
+},
+{
+"name": "Window rollover frees capacity",
+"maxAmount": "1000",
+"ops": [
+{ "ts": 1000, "amount": "800" },
+{ "ts": 1301, "amount": "300" }
+],
+"expect": { "finalAllowed": true, "sumWindow": "300" }
+},
+{
+"name": "Per-asset overrides global",
+"globalMax": "10000",
+"assetMax": "500",
+"ops": [
+{ "ts": 1000, "amount": "300" },
+{ "ts": 1010, "amount": "250" }
+],
+"expect": { "finalAllowed": false, "error": "RATE_LIMIT_EXCEEDED", "sumWindow": "550" }
+}
+]
+}

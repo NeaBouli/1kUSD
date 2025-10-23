@@ -65,3 +65,4 @@
 [QUOTE] DEV60 delivered: PSM quote math docs + vectors. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [VAULT] DEV61 delivered: edge-case docs (FoT/decimals/caps), vectors, and test guide. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [ORACLE] DEV62 delivered: aggregation guards (median/trimmed), staleness, deviation; vectors and test guide. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[SAFETY] DEV63 delivered: rate-limiter spec, vectors, and test guide. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
