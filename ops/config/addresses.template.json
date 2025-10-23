@@ -1,0 +1,15 @@
+{
+  "$schema": "https://example.com/1kusd/addresses.schema.json",
+  "meta": { "stage": "template", "updatedAt": 0 },
+  "chainId": 0,
+  "contracts": {
+    "OneKUSD": "0x0000000000000000000000000000000000000000",
+    "PegStabilityModule": "0x0000000000000000000000000000000000000000",
+    "CollateralVault": "0x0000000000000000000000000000000000000000",
+    "OracleAggregator": "0x0000000000000000000000000000000000000000",
+    "SafetyAutomata": "0x0000000000000000000000000000000000000000",
+    "ParameterRegistry": "0x0000000000000000000000000000000000000000",
+    "DAOTimelock": "0x0000000000000000000000000000000000000000"
+  },
+  "notes": "Fill during deploy. Admins are timelock placeholders until DAO is wired."
+}

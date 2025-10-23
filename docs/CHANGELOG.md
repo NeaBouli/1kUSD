@@ -101,3 +101,7 @@
 - Added minimal DAOTimelock: admin wiring, minDelay placeholder, queue/cancel/execute events; execute() is a stub (NOT_IMPLEMENTED)
 ## 2025-10-13 — DEV37 (ParameterRegistry minimal skeleton)
 - Added ParameterRegistry: admin setUint/setAddress/setBool; read-only getters per interface; no validations yet
+## 2025-10-13 — DEV38 (Wire-up Pass v0)
+- Added ops/config addresses templates (template, staging, testnet, mainnet)
+- Added Admin/Wiring notes
+- Updated README to reference addresses templates
