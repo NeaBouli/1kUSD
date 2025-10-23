@@ -1,0 +1,36 @@
+{
+  "meta": { "notes": "Vault ingress/egress edge cases: FoT and decimals. Received is authoritative." },
+  "cases": [
+    {
+      "name": "FoT token on deposit (2% fee)",
+      "assetDecimals": 6,
+      "amountIn": "1000000",
+      "fotBps": 200,
+      "expected": {
+        "received": "980000",
+        "emitDepositAmount": "980000"
+      }
+    },
+    {
+      "name": "Cap boundary — exact fit",
+      "balanceBefore": "500000",
+      "cap": "1500000",
+      "received": "1000000",
+      "expectRevert": false
+    },
+    {
+      "name": "Cap boundary — exceed by 1",
+      "balanceBefore": "1499999",
+      "cap": "1500000",
+      "received": "2",
+      "expectRevert": true,
+      "error": "CAP_EXCEEDED"
+    },
+    {
+      "name": "Decimals 6 vs 18 — store raw",
+      "assetDecimals": 6,
+      "received": "1234",
+      "note": "Vault stores 1234 exactly; USD conversion happens in PSM, not here."
+    }
+  ]
+}

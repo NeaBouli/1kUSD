@@ -63,3 +63,4 @@
 [SDK] DEV58 delivered: TS event decoders + example + docs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [INDEXER] DEV59 delivered: JSON schemas (swap/fee/vault snapshot) + samples + docs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [QUOTE] DEV60 delivered: PSM quote math docs + vectors. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[VAULT] DEV61 delivered: edge-case docs (FoT/decimals/caps), vectors, and test guide. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

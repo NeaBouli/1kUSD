@@ -193,3 +193,7 @@ Added sample records and documentation
 - Added normative math for PSM quotes (rounding/decimals/fee order)
 - Added machine-readable test vectors for USDC/WETH cases
 - Added usage notes for unit/invariant tests
+## 2025-10-13 — DEV61 (vault accounting edges)
+- Added vault accounting edge cases doc (FoT, decimals, caps)
+- Added machine-readable vectors for FoT/cap boundary cases
+- Added vault test guide with mock FoT hints
