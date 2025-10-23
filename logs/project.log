@@ -70,3 +70,4 @@
 [TOKEN] DEV65 delivered: EIP-2612 permit spec, vectors, TS signer helper, and test guide. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [TEST] DEV66 delivered: invariants exec map, suite plan, config, and harness notes. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [OPS] DEV67 delivered: deploy configs, address book schema/sample, validation & env emitter scripts, README update. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[BOOTSTRAP] DEV68 delivered: localnet scripts, staging runbook, quickstart docs, README updates. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

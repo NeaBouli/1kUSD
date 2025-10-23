@@ -112,3 +112,11 @@ npx ts-node scripts/validate-json.ts ops/schemas/deploy_config.schema.json ops/c
 
 Emit .env from address book:
 node scripts/emit-env-from-addresses.ts ops/addresses/address-book.sample.json 31337 > .env.addresses
+
+Bootstrap
+
+Localnet: ops/localnet/*.sh (start/stop/seed/deploy-skeleton)
+
+Quickstart: docs/BOOTSTRAP_QUICKSTART.md
+
+Staging runbook: ops/staging/STAGING_BOOTSTRAP_RUNBOOK.md

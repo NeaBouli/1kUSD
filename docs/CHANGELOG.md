@@ -245,3 +245,11 @@ Added canonical address book schema + sample
 Added JSON validator and .env emitter scripts
 
 Updated README with usage instructions
+
+2025-10-13 — DEV68 (localnet/staging bootstraps)
+
+Added localnet scripts (start/stop/seed/deploy-skeleton)
+
+Added staging bootstrap runbook (Base Sepolia example)
+
+Added bootstrap quickstart and README links
