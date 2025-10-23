@@ -111,3 +111,5 @@
 ## 2025-10-13 — DEV40 (PSM minimal+: whitelist & dummy quotes)
 - Extended PSM with supported-token whitelist and pass-through quotes (gross=amountIn, fee=0, net=amountIn)
 - Swaps remain NOT_IMPLEMENTED; no fund movements yet
+## 2025-10-13 — DEV41 (Vault minimal+)
+- CollateralVault: added batch getter `areAssetsSupported(address[])`; `balanceOf` remains dummy; no transfer/accounting logic yet

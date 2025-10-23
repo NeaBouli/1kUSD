@@ -5,9 +5,9 @@ import {IVault} from "../interfaces/IVault.sol";
 import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
 import {IParameterRegistry} from "../interfaces/IParameterRegistry.sol";
 
-/// @title CollateralVault — minimal skeleton
-/// @notice DEV33: nur Admin/Wiring/Guards + Events. Keine Asset-Transfer-Logik.
-///         deposit/withdraw sind Stubs und revertieren NOT_IMPLEMENTED.
+/// @title CollateralVault — minimal skeleton (+ batch getter)
+/// @notice DEV41: Admin/Wiring/Guards + Events wie zuvor. Neu: `areAssetsSupported(...)`.
+///         Keine Asset-Transfers/Accounting; balanceOf() weiterhin Dummy (0).
 contract CollateralVault is IVault {
     // --- Module IDs ---
     bytes32 public constant MODULE_ID = keccak256("VAULT");
@@ -94,7 +94,7 @@ contract CollateralVault is IVault {
         notPaused
         onlySupported(asset)
     {
-        // DEV33: keine Transfers/Accounting — nur Stub.
+        // DEV41: keine Transfers/Accounting — Stub.
         asset; from; amount;
         revert NOT_IMPLEMENTED();
     }
@@ -105,18 +105,27 @@ contract CollateralVault is IVault {
         notPaused
         onlySupported(asset)
     {
-        // DEV33: nur Stub — echte Logik in späterem Dev-Schritt.
+        // DEV41: Stub — echte Logik später.
         asset; to; amount; reason;
         revert NOT_IMPLEMENTED();
     }
 
     // --- Views ---
     function balanceOf(address /*asset*/) external pure override returns (uint256) {
-        // DEV33: kein Storage/Accounting — 0 zurück.
+        // DEV41: Dummy 0 bis Accounting eingebaut wird.
         return 0;
     }
 
     function isAssetSupported(address asset) external view override returns (bool) {
         return _isSupported[asset];
+    }
+
+    /// @notice Batch-Abfrage für UIs/SDKs ohne Mapping-Iteration on-chain.
+    function areAssetsSupported(address[] calldata assets) external view returns (bool[] memory out) {
+        uint256 n = assets.length;
+        out = new bool[](n);
+        for (uint256 i = 0; i < n; i++) {
+            out[i] = _isSupported[assets[i]];
+        }
     }
 }
