@@ -1,0 +1,17 @@
+{
+"$schema": "../schemas/swap.schema.json",
+"direction": "TO_1KUSD",
+"user": "0x1111111111111111111111111111111111111111",
+"asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+"amountIn": "1000000",
+"fee": "1000",
+"amountOut": "999000",
+"txHash": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"logIndex": 5,
+"blockNumber": 12345678,
+"timestamp": 1697130000,
+"psm": "0x2222222222222222222222222222222222222222",
+"finality": "safe",
+"chainId": 1,
+"quoteSnapshotId": "snap-0xdeadbeef"
+}

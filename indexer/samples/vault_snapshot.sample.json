@@ -1,0 +1,18 @@
+{
+"$schema": "../schemas/vault_snapshot.schema.json",
+"vault": "0x3333333333333333333333333333333333333333",
+"blockNumber": 12345680,
+"timestamp": 1697130123,
+"balances": [
+{
+"asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+"symbol": "USDC",
+"decimals": 6,
+"amount": "1000000000",
+"pendingFees": "5000"
+}
+],
+"psmAddress": "0x2222222222222222222222222222222222222222",
+"finality": "safe",
+"chainId": 1
+}

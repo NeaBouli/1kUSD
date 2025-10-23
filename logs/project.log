@@ -61,3 +61,4 @@
 [DEPLOY] DEV56 delivered: env templates, Foundry/Hardhat skeletons, emitter script, CI skeleton. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [EVENTS] DEV57 delivered: ABI JSONs for PSM/Vault/Token; indexer notes. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SDK] DEV58 delivered: TS event decoders + example + docs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[INDEXER] DEV59 delivered: JSON schemas (swap/fee/vault snapshot) + samples + docs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

@@ -1,0 +1,14 @@
+{
+"$schema": "../schemas/fee.schema.json",
+"event": "FEE_ACCRUED",
+"asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+"amount": "1000",
+"psmOrVault": "0x2222222222222222222222222222222222222222",
+"to": "0x0000000000000000000000000000000000000000",
+"txHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+"logIndex": 7,
+"blockNumber": 12345679,
+"timestamp": 1697130060,
+"finality": "safe",
+"chainId": 1
+}

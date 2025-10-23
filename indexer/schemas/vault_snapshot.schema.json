@@ -1,0 +1,31 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema
+",
+"title": "1kUSD Indexer — Vault Snapshot",
+"type": "object",
+"properties": {
+"vault": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+"blockNumber": { "type": "integer", "minimum": 0 },
+"timestamp": { "type": "integer", "minimum": 0 },
+"balances": {
+"type": "array",
+"items": {
+"type": "object",
+"properties": {
+"asset": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+"symbol": { "type": "string" },
+"decimals": { "type": "integer", "minimum": 0, "maximum": 36 },
+"amount": { "type": "string", "pattern": "^[0-9]+$" },
+"pendingFees": { "type": "string", "pattern": "^[0-9]+$" }
+},
+"required": ["asset","decimals","amount"],
+"additionalProperties": false
+}
+},
+"psmAddress": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+"finality": { "type": "string", "enum": ["pending", "safe", "final"] },
+"chainId": { "type": "integer", "minimum": 0 }
+},
+"required": ["vault","blockNumber","timestamp","balances","finality","chainId"],
+"additionalProperties": false
+}

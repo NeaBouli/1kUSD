@@ -183,3 +183,9 @@ Added indexer notes for topics, reconciliation, finality, and edge cases
 Added TS decoders for PSM/Vault/Token events (clients/sdk/events.ts)
 
 Added example (clients/examples/decode-events.ts) and docs
+
+2025-10-13 — DEV59 (indexer schemas)
+
+Added JSON schemas for swaps, fees, and vault snapshots
+
+Added sample records and documentation

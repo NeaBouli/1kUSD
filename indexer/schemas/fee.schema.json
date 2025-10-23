@@ -1,0 +1,21 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema
+",
+"title": "1kUSD Indexer — Fee Accrual/Sweep",
+"type": "object",
+"properties": {
+"event": { "type": "string", "enum": ["FEE_ACCRUED", "FEE_SWEPT"] },
+"asset": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+"amount": { "type": "string", "pattern": "^[0-9]+$" },
+"psmOrVault": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+"to": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+"txHash": { "type": "string", "pattern": "^0x[a-fA-F0-9]{64}$" },
+"logIndex": { "type": "integer", "minimum": 0 },
+"blockNumber": { "type": "integer", "minimum": 0 },
+"timestamp": { "type": "integer", "minimum": 0 },
+"finality": { "type": "string", "enum": ["pending", "safe", "final"] },
+"chainId": { "type": "integer", "minimum": 0 }
+},
+"required": ["event","asset","amount","psmOrVault","txHash","logIndex","blockNumber","timestamp","finality","chainId"],
+"additionalProperties": false
+}

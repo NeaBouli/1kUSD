@@ -1,0 +1,24 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema
+",
+"title": "1kUSD Indexer — Swap Record",
+"type": "object",
+"properties": {
+"direction": { "type": "string", "enum": ["TO_1KUSD", "FROM_1KUSD"] },
+"user": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+"asset": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+"amountIn": { "type": "string", "pattern": "^[0-9]+$" },
+"fee": { "type": "string", "pattern": "^[0-9]+$" },
+"amountOut": { "type": "string", "pattern": "^[0-9]+$" },
+"txHash": { "type": "string", "pattern": "^0x[a-fA-F0-9]{64}$" },
+"logIndex": { "type": "integer", "minimum": 0 },
+"blockNumber": { "type": "integer", "minimum": 0 },
+"timestamp": { "type": "integer", "minimum": 0 },
+"psm": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+"finality": { "type": "string", "enum": ["pending", "safe", "final"] },
+"chainId": { "type": "integer", "minimum": 0 },
+"quoteSnapshotId": { "type": "string" }
+},
+"required": ["direction","user","asset","amountIn","fee","amountOut","txHash","logIndex","blockNumber","timestamp","psm","finality","chainId"],
+"additionalProperties": false
+}
