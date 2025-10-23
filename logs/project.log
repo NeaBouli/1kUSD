@@ -75,3 +75,4 @@
 [SECURITY] DEV70 delivered: pre-audit docs, baselines, and submission bundle tooling. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SDK] DEV71 delivered: TS SDK stubs + vector-backed examples; README updated. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [INDEXER] DEV72 delivered: read models schema, decode tables, queries, samples, README update. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[MATH] DEV73 delivered: PSM formulas, rounding rules, vectors, evaluator; README updated. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

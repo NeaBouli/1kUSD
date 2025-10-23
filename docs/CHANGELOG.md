@@ -287,3 +287,11 @@ Added event decode table mapping (PSM/Vault/Token)
 Added sample queries (REST/GraphQL) and a sample dataset
 
 Updated README with Indexer section
+
+2025-10-13 — DEV73 (psm math)
+
+Added canonical PSM quote formulas and rounding rules (docs)
+
+Added quote JSON vectors and TS evaluator script
+
+README updated with PSM Math references

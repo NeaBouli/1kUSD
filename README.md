@@ -132,3 +132,13 @@ Run vectors:
 Permit: npm --prefix clients/ts run vector:permit
 
 Oracle: npm --prefix clients/ts run vector:oracle
+
+PSM Math
+
+Canonical formulas: docs/PSM_QUOTE_MATH.md
+
+Rounding rules: docs/ROUNDING_RULES.md
+
+JSON vectors: tests/vectors/psm_quote_vectors.json
+
+Eval helper: npx ts-node scripts/quote-eval.ts tests/vectors/psm_quote_vectors.json

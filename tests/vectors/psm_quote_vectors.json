@@ -1,66 +1,73 @@
 {
-  "meta": {
-    "du": 18,
-    "notes": "Vectors align with docs/PSM_QUOTE_MATH.md. feeBps applies to grossOut. floor at each division."
-  },
-  "cases": [
-    {
-      "name": "USDC(6) -> 1kUSD @ $1.00000000, fee 10 bps",
-      "direction": "TO_1KUSD",
-      "tokenDecimals": 6,
-      "priceDecimals": 8,
-      "price": "100000000",
-      "feeBps": 10,
-      "amountIn": "1000000",
-      "expected": {
-        "grossOut": "1000000000000000000",
-        "feeOut":   "1000000000000000",
-        "netOut":   "998999000000000000",
-        "feeAsset": "1000"
-      }
-    },
-    {
-      "name": "USDC(6) <- 1kUSD @ $1.00000000, fee 10 bps",
-      "direction": "FROM_1KUSD",
-      "tokenDecimals": 6,
-      "priceDecimals": 8,
-      "price": "100000000",
-      "feeBps": 10,
-      "amountIn1k": "1000000000000000000",
-      "expected": {
-        "grossOut": "1000000",
-        "feeOut":   "1000",
-        "netOut":   "998999"
-      }
-    },
-    {
-      "name": "WETH(18) -> 1kUSD @ $1800.00000000, fee 20 bps",
-      "direction": "TO_1KUSD",
-      "tokenDecimals": 18,
-      "priceDecimals": 8,
-      "price": "180000000000",
-      "feeBps": 20,
-      "amountIn": "1000000000000000000",
-      "expected": {
-        "grossOut": "1800000000000000000000",
-        "feeOut":   "3600000000000000000",
-        "netOut":   "1796400000000000000000",
-        "feeAsset": "2000000000000000"
-      }
-    },
-    {
-      "name": "WETH(18) <- 1kUSD @ $1800.00000000, fee 20 bps",
-      "direction": "FROM_1KUSD",
-      "tokenDecimals": 18,
-      "priceDecimals": 8,
-      "price": "180000000000",
-      "feeBps": 20,
-      "amountIn1k": "1800000000000000000000",
-      "expected": {
-        "grossOut": "1000000000000000000",
-        "feeOut":   "2000000000000000",
-        "netOut":   "997999999999999000"
-      }
-    }
-  ]
+"meta": { "DU": 18, "notes": "Rounding=floor at each division; fee in in/out asset respectively." },
+"to1k": [
+{
+"case": "USDC(6) -> 1kUSD, 10 bps",
+"D_in": 6,
+"feeBps": 10,
+"amountIn": "1000000",
+"expected": {
+"fee": "1000",
+"grossOut": "999000000000000000",
+"netOut": "999000000000000000"
+}
+},
+{
+"case": "DAI(18) -> 1kUSD, 0 bps",
+"D_in": 18,
+"feeBps": 0,
+"amountIn": "5000000000000000000",
+"expected": {
+"fee": "0",
+"grossOut": "5000000000000000000",
+"netOut": "5000000000000000000"
+}
+},
+{
+"case": "USDT(6) -> 1kUSD, 100 bps (1%)",
+"D_in": 6,
+"feeBps": 100,
+"amountIn": "1234567",
+"expected": {
+"fee": "12345",
+"grossOut": "1222222000000000000",
+"netOut": "1222222000000000000"
+}
+}
+],
+"from1k": [
+{
+"case": "1kUSD -> USDC(6), 10 bps",
+"D_out": 6,
+"feeBps": 10,
+"amountIn": "1000000000000000000",
+"expected": {
+"grossOut": "1000000",
+"fee": "1000",
+"netOut": "999000"
+}
+},
+{
+"case": "1kUSD -> DAI(18), 0 bps",
+"D_out": 18,
+"feeBps": 0,
+"amountIn": "2000000000000000000",
+"expected": {
+"grossOut": "2000000000000000000",
+"fee": "0",
+"netOut": "2000000000000000000"
+}
+},
+{
+"case": "1kUSD -> USDT(6), 75 bps (0.75%)",
+"D_out": 6,
+"feeBps": 75,
+"amountIn": "1234567000000000000",
+"expected": {
+"grossOut": "1234567",
+"fee": "9259",
+"netOut": "1225308"
+}
+}
+]
 }
