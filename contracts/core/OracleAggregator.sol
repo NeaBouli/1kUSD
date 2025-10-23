@@ -5,8 +5,9 @@ import {IOracleAggregator} from "../interfaces/IOracleAggregator.sol";
 import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
 import {IParameterRegistry} from "../interfaces/IParameterRegistry.sol";
 
-/// @title OracleAggregator — minimal skeleton
-/// @notice DEV34: Admin/Wiring/Guards + Events; keine Aggregations-/Preislogik.
+/// @title OracleAggregator — minimal+ (DEV42: admin mock prices for dev/staging)
+/// @notice Admin-gated mock storage for devnets; NOT for mainnet usage.
+///         Real aggregation to be implemented later (see ORACLE_AGGREGATOR_SPEC).
 contract OracleAggregator is IOracleAggregator {
     bytes32 public constant MODULE_ID = keccak256("ORACLE");
 
@@ -17,6 +18,9 @@ contract OracleAggregator is IOracleAggregator {
     // Admin
     address public admin;
 
+    // Mock Storage (DEV/STAGING ONLY)
+    mapping(address => Price) private _mockPrice;
+
     // Events
     event AdminChanged(address indexed oldAdmin, address indexed newAdmin);
     event RegistryUpdated(address indexed oldRegistry, address indexed newRegistry);
@@ -26,7 +30,6 @@ contract OracleAggregator is IOracleAggregator {
     error ACCESS_DENIED();
     error PAUSED();
     error ZERO_ADDRESS();
-    error NOT_IMPLEMENTED();
 
     constructor(address _admin, ISafetyAutomata _safety, IParameterRegistry _registry) {
         if (_admin == address(0)) revert ZERO_ADDRESS();
@@ -51,6 +54,7 @@ contract OracleAggregator is IOracleAggregator {
         _;
     }
 
+    // --- Admin ---
     function setAdmin(address newAdmin) external onlyAdmin {
         if (newAdmin == address(0)) revert ZERO_ADDRESS();
         emit AdminChanged(admin, newAdmin);
@@ -63,9 +67,24 @@ contract OracleAggregator is IOracleAggregator {
         registry = newRegistry;
     }
 
-    // IOracleAggregator — Stub (keine Logik)
-    function getPrice(address /*asset*/) external view override returns (Price memory p) {
-        // DEV34: keine Aggregation — Rückgabe leerer struct (zero/defaults)
-        return Price({ price: 0, decimals: 0, healthy: false, updatedAt: 0 });
+    /// @notice DEV/STAGING ONLY: Setzt einen Mockpreis für ein Asset.
+    /// @param asset Asset-Adresse (ERC-20 o.ä.)
+    /// @param price Preiswert (Skalierung siehe `decimals`)
+    /// @param decimals Anzahl Dezimalstellen des Preiswertes
+    /// @param healthy Gesundheit/Guards (true = ok)
+    function setPriceMock(address asset, int256 price, uint8 decimals, bool healthy) external onlyAdmin notPaused {
+        _mockPrice[asset] = Price({
+            price: price,
+            decimals: decimals,
+            healthy: healthy,
+            updatedAt: block.timestamp
+        });
+        emit OracleUpdated(asset, price, decimals, healthy, block.timestamp);
+    }
+
+    /// @notice Gibt den gespeicherten Mockpreis zurück (DEV/STAGING).
+    function getPrice(address asset) external view override returns (Price memory p) {
+        // DEV42: Keine echte Aggregation. Gibt Mock zurück (default = zero struct).
+        return _mockPrice[asset];
     }
 }

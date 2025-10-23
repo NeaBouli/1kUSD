@@ -113,3 +113,5 @@
 - Swaps remain NOT_IMPLEMENTED; no fund movements yet
 ## 2025-10-13 — DEV41 (Vault minimal+)
 - CollateralVault: added batch getter `areAssetsSupported(address[])`; `balanceOf` remains dummy; no transfer/accounting logic yet
+## 2025-10-13 — DEV42 (Oracle minimal+: admin mock prices)
+- OracleAggregator: added admin `setPriceMock` and mock storage; `getPrice` serves mock values (dev/staging only)
