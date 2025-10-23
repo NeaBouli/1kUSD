@@ -171,3 +171,9 @@ Added Foundry skeleton (foundry.toml, compile-only test)
 Added Hardhat skeleton (config + TS scripts), address template emitter
 
 Added deploy CI skeleton and README quickstart
+
+2025-10-13 — DEV57 (events & abi)
+
+Added canonical event ABIs: PSM, Vault, Token (JSON)
+
+Added indexer notes for topics, reconciliation, finality, and edge cases

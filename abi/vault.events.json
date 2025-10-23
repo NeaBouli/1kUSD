@@ -1,0 +1,33 @@
+[
+{
+"type": "event",
+"name": "Deposit",
+"inputs": [
+{ "name": "asset", "type": "address", "indexed": true },
+{ "name": "from", "type": "address", "indexed": true },
+{ "name": "amount", "type": "uint256", "indexed": false }
+],
+"anonymous": false
+},
+{
+"type": "event",
+"name": "Withdraw",
+"inputs": [
+{ "name": "asset", "type": "address", "indexed": true },
+{ "name": "to", "type": "address", "indexed": true },
+{ "name": "amount", "type": "uint256", "indexed": false },
+{ "name": "reason", "type": "bytes32", "indexed": false }
+],
+"anonymous": false
+},
+{
+"type": "event",
+"name": "FeeSwept",
+"inputs": [
+{ "name": "asset", "type": "address", "indexed": true },
+{ "name": "to", "type": "address", "indexed": true },
+{ "name": "amount", "type": "uint256", "indexed": false }
+],
+"anonymous": false
+}
+]

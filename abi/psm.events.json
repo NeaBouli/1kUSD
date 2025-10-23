@@ -1,0 +1,37 @@
+[
+{
+"type": "event",
+"name": "SwapTo1kUSD",
+"inputs": [
+{ "name": "user", "type": "address", "indexed": true },
+{ "name": "tokenIn", "type": "address", "indexed": true },
+{ "name": "amountIn", "type": "uint256", "indexed": false },
+{ "name": "fee", "type": "uint256", "indexed": false },
+{ "name": "minted", "type": "uint256", "indexed": false },
+{ "name": "ts", "type": "uint256", "indexed": false }
+],
+"anonymous": false
+},
+{
+"type": "event",
+"name": "SwapFrom1kUSD",
+"inputs": [
+{ "name": "user", "type": "address", "indexed": true },
+{ "name": "tokenOut", "type": "address", "indexed": true },
+{ "name": "amountIn", "type": "uint256", "indexed": false },
+{ "name": "fee", "type": "uint256", "indexed": false },
+{ "name": "paidOut", "type": "uint256", "indexed": false },
+{ "name": "ts", "type": "uint256", "indexed": false }
+],
+"anonymous": false
+},
+{
+"type": "event",
+"name": "FeeAccrued",
+"inputs": [
+{ "name": "asset", "type": "address", "indexed": true },
+{ "name": "amount", "type": "uint256", "indexed": false }
+],
+"anonymous": false
+}
+]
