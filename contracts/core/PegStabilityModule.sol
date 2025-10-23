@@ -7,27 +7,32 @@ import {IVault} from "../interfaces/IVault.sol";
 import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
 import {IParameterRegistry} from "../interfaces/IParameterRegistry.sol";
 
-/// @title PegStabilityModule — minimal skeleton
-/// @notice DEV32: only function signatures, events, and safety/param wiring.
-///         No pricing, no mint/burn, no transfers. All paths revert NOT_IMPLEMENTED.
+/// @title PegStabilityModule — minimal skeleton (+ token whitelist & dummy quotes)
+/// @notice DEV40: Admin/Registry/Guards vorhanden; Swaps weiterhin NOT_IMPLEMENTED.
+///         Neu: Whitelist für erlaubte Stable-Assets + Quotes geben (gross=amountIn, fee=0, net=amountIn) zurück.
+///         Keine Ökonomie/Transfers/Mint/Burn. Nur Kompilierbarkeit & API-Stabilität.
 contract PegStabilityModule is IPSM {
     // --- Modules/IDs ---
     bytes32 public constant MODULE_ID = keccak256("PSM");
 
-    // --- Dependencies (immutable where possible) ---
-    I1kUSD public immutable token1k;         // 1kUSD token
-    IVault public immutable vault;           // Collateral vault
-    ISafetyAutomata public immutable safety; // Safety/pause/caps/rate-limits
-    IParameterRegistry public registry;      // Mutable via admin (Timelock later)
+    // --- Dependencies (immutable wo möglich) ---
+    I1kUSD public immutable token1k;
+    IVault public immutable vault;
+    ISafetyAutomata public immutable safety;
+    IParameterRegistry public registry; // updatable
 
     // --- Admin ---
-    address public admin; // expected to be Timelock later
+    address public admin;
+
+    // --- Supported tokens (PSM-side whitelist; separate from Vault support) ---
+    mapping(address => bool) private _isSupportedToken;
 
     // --- Events ---
     event AdminChanged(address indexed oldAdmin, address indexed newAdmin);
     event RegistryUpdated(address indexed oldRegistry, address indexed newRegistry);
+    event SupportedTokenSet(address indexed asset, bool supported);
 
-    // Re-emit core swap events (final impl will emit with values)
+    // Runtime swap events (für spätere reale Implementierung)
     event SwapTo1kUSD(address indexed user, address indexed tokenIn, uint256 amountIn, uint256 fee, uint256 minted, uint256 ts);
     event SwapFrom1kUSD(address indexed user, address indexed tokenOut, uint256 amountIn, uint256 fee, uint256 paidOut, uint256 ts);
 
@@ -37,9 +42,15 @@ contract PegStabilityModule is IPSM {
     error DEADLINE_EXPIRED();
     error NOT_IMPLEMENTED();
     error ZERO_ADDRESS();
+    error UNSUPPORTED_ASSET();
 
-    // --- Constructor ---
-    constructor(address _admin, I1kUSD _token1k, IVault _vault, ISafetyAutomata _safety, IParameterRegistry _registry) {
+    constructor(
+        address _admin,
+        I1kUSD _token1k,
+        IVault _vault,
+        ISafetyAutomata _safety,
+        IParameterRegistry _registry
+    ) {
         if (_admin == address(0)) revert ZERO_ADDRESS();
         if (address(_token1k) == address(0)) revert ZERO_ADDRESS();
         if (address(_vault) == address(0)) revert ZERO_ADDRESS();
@@ -72,7 +83,12 @@ contract PegStabilityModule is IPSM {
         _;
     }
 
-    // --- Admin fns (Timelock later) ---
+    modifier onlySupported(address asset) {
+        if (!_isSupportedToken[asset]) revert UNSUPPORTED_ASSET();
+        _;
+    }
+
+    // --- Admin fns (Timelock später) ---
     function setAdmin(address newAdmin) external onlyAdmin {
         if (newAdmin == address(0)) revert ZERO_ADDRESS();
         emit AdminChanged(admin, newAdmin);
@@ -85,7 +101,17 @@ contract PegStabilityModule is IPSM {
         registry = newRegistry;
     }
 
-    // --- IPSM: Swaps (stubs) ---
+    function setSupportedToken(address asset, bool supported) external onlyAdmin {
+        if (asset == address(0)) revert ZERO_ADDRESS();
+        _isSupportedToken[asset] = supported;
+        emit SupportedTokenSet(asset, supported);
+    }
+
+    function isSupportedToken(address asset) external view returns (bool) {
+        return _isSupportedToken[asset];
+    }
+
+    // --- IPSM: Swaps (stubs; weiterhin nicht implementiert) ---
     function swapTo1kUSD(
         address tokenIn,
         uint256 amountIn,
@@ -97,11 +123,10 @@ contract PegStabilityModule is IPSM {
         override
         notPaused
         checkDeadline(deadline)
+        onlySupported(tokenIn)
         returns (uint256 amountOut)
     {
-        // DEV32: no logic — just compile-safe guard skeleton.
-        // Final impl will: pull tokenIn to Vault, compute fee, mint 1kUSD, emit event.
-        tokenIn; amountIn; to; minOut; // silence warnings
+        tokenIn; amountIn; to; minOut;
         revert NOT_IMPLEMENTED();
     }
 
@@ -116,32 +141,37 @@ contract PegStabilityModule is IPSM {
         override
         notPaused
         checkDeadline(deadline)
+        onlySupported(tokenOut)
         returns (uint256 amountOut)
     {
-        // DEV32: no logic — just compile-safe guard skeleton.
-        // Final impl will: burn 1kUSD, compute payout minus fee, instruct Vault withdraw, emit event.
-        tokenOut; amountIn; to; minOut; // silence warnings
+        tokenOut; amountIn; to; minOut;
         revert NOT_IMPLEMENTED();
     }
 
-    // --- IPSM: Quotes (stubs) ---
+    // --- IPSM: Quotes (dummy pass-through; keine Fees/Slippage) ---
     function quoteTo1kUSD(address tokenIn, uint256 amountIn)
         external
         view
         override
+        onlySupported(tokenIn)
         returns (uint256 grossOut, uint256 fee, uint256 netOut)
     {
-        tokenIn; amountIn; // DEV32: pricing TBD
-        return (0, 0, 0);
+        // DEV40: vorläufig — 1:1 ohne Gebühr, nur um dApp/SDK zu entkoppeln
+        grossOut = amountIn;
+        fee = 0;
+        netOut = amountIn;
     }
 
     function quoteFrom1kUSD(address tokenOut, uint256 amountIn)
         external
         view
         override
+        onlySupported(tokenOut)
         returns (uint256 grossOut, uint256 fee, uint256 netOut)
     {
-        tokenOut; amountIn; // DEV32: pricing TBD
-        return (0, 0, 0);
+        // DEV40: vorläufig — 1:1 ohne Gebühr
+        grossOut = amountIn;
+        fee = 0;
+        netOut = amountIn;
     }
 }

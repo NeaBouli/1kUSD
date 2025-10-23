@@ -108,3 +108,6 @@
 ## 2025-10-13 — DEV39 (Build sanity CI)
 - Added GitHub Actions: hardhat compile with artifact upload; Foundry fmt placeholder
 - Updated BUILD_TOOLING.md with CI notes
+## 2025-10-13 — DEV40 (PSM minimal+: whitelist & dummy quotes)
+- Extended PSM with supported-token whitelist and pass-through quotes (gross=amountIn, fee=0, net=amountIn)
+- Swaps remain NOT_IMPLEMENTED; no fund movements yet

@@ -41,3 +41,4 @@
 [CODE] DEV37 delivered: ParameterRegistry minimal skeleton (admin setters + readonly getters; no validations). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [WIREUP] DEV38 delivered: address templates + admin/wiring notes + README pointer. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [CI] DEV39 delivered: build sanity workflows (hardhat compile + artifacts, foundry fmt placeholder). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[CODE] DEV40 delivered: PSM whitelist + dummy quotes to unblock SDK/dApp; swaps unchanged (NOT_IMPLEMENTED). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
