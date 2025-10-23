@@ -123,3 +123,7 @@
 - Added docs/PARAMETER_KEYS.md (canonical bytes32 keys reference)
 - Added ops/config/params.staging.json with example values for dev/staging
 - Updated README with parameters section
+## 2025-10-13 — DEV45 (Deploy placeholders)
+- Added Foundry placeholder deploy script (encodes ctor args; no broadcast)
+- Added Hardhat placeholder deploy script (reads config; prints wiring; no deploy)
+- Added ops/specs/DEPLOY_PLACEHOLDERS.md

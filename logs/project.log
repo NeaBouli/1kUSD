@@ -46,3 +46,4 @@
 [CODE] DEV42 delivered: OracleAggregator admin mock prices for dev/staging (no real aggregation). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [CODE] DEV43 delivered: OneKUSD EIP-2612 permit (IERC2612), EIP-712 domain/nonce handling; docs notes added. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [PARAMS] DEV44 delivered: canonical key reference + staging params example; README pointer added. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[DEPLOY] DEV45 delivered: Foundry/Hardhat deploy placeholders (no chain side-effects) + docs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
