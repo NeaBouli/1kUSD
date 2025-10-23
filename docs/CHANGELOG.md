@@ -93,3 +93,5 @@
 - Added minimal PegStabilityModule: admin/registry wiring, pause/deadline guards, IPSM signatures, stub quotes/swaps (NOT_IMPLEMENTED)
 ## 2025-10-13 — DEV33 (Vault minimal skeleton)
 - Added CollateralVault minimal skeleton: admin/registry wiring, pause guard, supported-assets toggle, IVault signatures; deposit/withdraw stubs (NOT_IMPLEMENTED)
+## 2025-10-13 — DEV34 (OracleAggregator minimal skeleton)
+- Added OracleAggregator minimal skeleton: admin/registry wiring, pause guard, OracleUpdated event, IOracleAggregator stub (no pricing logic)
