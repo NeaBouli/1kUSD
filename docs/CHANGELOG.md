@@ -99,3 +99,5 @@
 - Added SafetyAutomata minimal skeleton: admin/registry wiring, pause/unpause events, read-only interface stubs (no caps/rate-limit logic)
 ## 2025-10-13 — DEV36 (DAO Timelock minimal skeleton)
 - Added minimal DAOTimelock: admin wiring, minDelay placeholder, queue/cancel/execute events; execute() is a stub (NOT_IMPLEMENTED)
+## 2025-10-13 — DEV37 (ParameterRegistry minimal skeleton)
+- Added ParameterRegistry: admin setUint/setAddress/setBool; read-only getters per interface; no validations yet

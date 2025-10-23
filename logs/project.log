@@ -38,3 +38,4 @@
 [CODE] DEV34 delivered: OracleAggregator minimal skeleton (guards + wiring; no price logic). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [CODE] DEV35 delivered: SafetyAutomata minimal skeleton (guards + admin/registry; no caps/rate-limits yet). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [CODE] DEV36 delivered: DAO Timelock minimal skeleton (events + admin/minDelay wiring; no call execution yet). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[CODE] DEV37 delivered: ParameterRegistry minimal skeleton (admin setters + readonly getters; no validations). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
