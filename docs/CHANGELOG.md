@@ -156,3 +156,8 @@
 ## 2025-10-13 — DEV54 (interfaces polish)
 - Added minimal Solidity interfaces: IPSM, IVault, IOracleAggregator, IParameterRegistry, ISafetyAutomata, I1kUSD (+ IERC2612 if missing)
 - Added interfaces README overview
+## 2025-10-13 — DEV55 (parameter keys canon)
+- Added canonical parameter keys doc with composite derivation rules
+- Added params JSON schema & template
+- Added TS SDK helpers (key/compositeKey)
+- Updated README with cross-links

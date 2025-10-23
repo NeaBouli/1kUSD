@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1kUSD Params (concept schema)",
+  "type": "object",
+  "properties": {
+    "$schema": { "type": "string" },
+    "globals": {
+      "type": "object",
+      "properties": {
+        "PARAM_PSM_FEE_BPS": { "type": "integer", "minimum": 0, "maximum": 10000 },
+        "PARAM_TREASURY_ADDRESS": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+        "PARAM_ORACLE_MAX_AGE_SEC": { "type": "integer", "minimum": 0 },
+        "PARAM_ORACLE_MAX_DEVIATION_BPS": { "type": "integer", "minimum": 0, "maximum": 10000 },
+        "PARAM_RATE_WINDOW_SEC": { "type": "integer", "minimum": 1 },
+        "PARAM_GUARDIAN_SUNSET_TS": { "type": "integer", "minimum": 0 },
+        "PARAM_DECIMALS_PAD_USD": { "type": "integer", "minimum": 0, "maximum": 36 }
+      },
+      "required": ["PARAM_PSM_FEE_BPS","PARAM_TREASURY_ADDRESS"]
+    },
+    "assets": {
+      "type": "object",
+      "patternProperties": {
+        "^0x[a-fA-F0-9]{40}$": {
+          "type": "object",
+          "properties": {
+            "PARAM_CAP_PER_ASSET": { "type": "string" },
+            "PARAM_DECIMALS_HINT": { "type": "integer", "minimum": 0, "maximum": 36 },
+            "PARAM_RATE_MAX_AMOUNT": { "type": "string" },
+            "PARAM_PSM_ASSET_ENABLED": { "type": "boolean" }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": ["globals"],
+  "additionalProperties": false
+}

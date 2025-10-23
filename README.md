@@ -68,3 +68,10 @@ See `docs/PSM_QUOTE_SEMANTICS.md` for normative rules (decimals, fees, rounding,
 - Module IDs: `docs/MODULE_IDS.md`
 - Error catalog: `docs/ERROR_CATALOG.md`
 - Guardian sunset hooks: `docs/GUARDIAN_SUNSET_HOOKS.md`
+
+---
+### Parameter keys & config
+- Canonical keys: `docs/PARAM_KEYS_CANON.md`
+- Params schema: `ops/schemas/params.schema.json`
+- Template params: `ops/config/params.template.json`
+- SDK helpers: `clients/examples/param-keys.ts`
