@@ -50,3 +50,4 @@
 [DOCS] DEV46 delivered: JSON schema stubs + validation docs; embedded $schema into config files. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SAFETY-DOCS] DEV47 delivered: guardian sunset checklist + emergency drills + incident template. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [DAPP] DEV48 delivered: documentation-first dApp scaffolding (routes/IA) + repo placeholders; no builds. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[SDK] DEV49 delivered: wiring guide + TS examples (addresses loader, params+RPC). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

@@ -53,3 +53,7 @@ Environment examples live under `ops/config/params.*.json` (staging/testnet/main
 ### JSON Validation
 Schemas live under `ops/config/schema/`.  
 Addresses/params JSON files embed the `$schema` field for editor validation.
+
+---
+### SDK Wiring Guide
+See `docs/SDK_WIRING_GUIDE.md` and examples under `clients/examples/`.

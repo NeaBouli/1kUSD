@@ -136,3 +136,6 @@
 ## 2025-10-13 — DEV48 (dApp scaffolding docs)
 - Added docs/dapp/README.md and ROUTES.md (information architecture + routes)
 - Added apps/dapp placeholders (public/brand.svg, src/README, folder marker)
+## 2025-10-13 — DEV49 (SDK wiring guide)
+- Added SDK wiring guide and TS examples (addresses loader, params+RPC)
+- Updated README; added clients/specs overview
