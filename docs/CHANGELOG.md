@@ -177,3 +177,9 @@ Added deploy CI skeleton and README quickstart
 Added canonical event ABIs: PSM, Vault, Token (JSON)
 
 Added indexer notes for topics, reconciliation, finality, and edge cases
+
+2025-10-13 — DEV58 (sdk event decoders)
+
+Added TS decoders for PSM/Vault/Token events (clients/sdk/events.ts)
+
+Added example (clients/examples/decode-events.ts) and docs
