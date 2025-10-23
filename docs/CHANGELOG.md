@@ -277,3 +277,13 @@ Added minimal TS SDK with address book helpers, permit helpers, oracle aggregati
 Added examples wiring vectors (permit/oracle)
 
 Updated README with SDK usage
+
+2025-10-13 — DEV72 (indexer read models)
+
+Added canonical read models schema (blocks, tokenSupply, vaultBalances, psmSwaps, events)
+
+Added event decode table mapping (PSM/Vault/Token)
+
+Added sample queries (REST/GraphQL) and a sample dataset
+
+Updated README with Indexer section

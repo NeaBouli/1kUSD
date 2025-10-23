@@ -74,3 +74,4 @@
 [CI] DEV69 delivered: gates doc, collate script, placeholders, wired workflow. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SECURITY] DEV70 delivered: pre-audit docs, baselines, and submission bundle tooling. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SDK] DEV71 delivered: TS SDK stubs + vector-backed examples; README updated. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[INDEXER] DEV72 delivered: read models schema, decode tables, queries, samples, README update. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

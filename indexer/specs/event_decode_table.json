@@ -1,0 +1,85 @@
+{
+"version": "1",
+"events": [
+{
+"contract": "PSM",
+"name": "SwapTo1kUSD",
+"signature": "SwapTo1kUSD(address,address,uint256,uint256,uint256,uint256)",
+"args": [
+{ "name": "user", "type": "address", "indexed": true },
+{ "name": "tokenIn", "type": "address", "indexed": false },
+{ "name": "amountIn", "type": "uint256", "indexed": false },
+{ "name": "fee", "type": "uint256", "indexed": false },
+{ "name": "netOut", "type": "uint256", "indexed": false },
+{ "name": "ts", "type": "uint256", "indexed": false }
+],
+"mapsTo": "psmSwaps",
+"direction": "TO_1KUSD",
+"projection": {
+"user": "args.user",
+"asset": "args.tokenIn",
+"amountIn": "args.amountIn",
+"amountOut": "args.netOut",
+"fee": "args.fee",
+"timestamp": "args.ts"
+}
+},
+{
+"contract": "PSM",
+"name": "SwapFrom1kUSD",
+"signature": "SwapFrom1kUSD(address,address,uint256,uint256,uint256,uint256)",
+"args": [
+{ "name": "user", "type": "address", "indexed": true },
+{ "name": "tokenOut", "type": "address", "indexed": false },
+{ "name": "amountIn", "type": "uint256", "indexed": false },
+{ "name": "fee", "type": "uint256", "indexed": false },
+{ "name": "netOut", "type": "uint256", "indexed": false },
+{ "name": "ts", "type": "uint256", "indexed": false }
+],
+"mapsTo": "psmSwaps",
+"direction": "FROM_1KUSD",
+"projection": {
+"user": "args.user",
+"asset": "args.tokenOut",
+"amountIn": "args.amountIn",
+"amountOut": "args.netOut",
+"fee": "args.fee",
+"timestamp": "args.ts"
+}
+},
+{
+"contract": "CollateralVault",
+"name": "Deposit",
+"signature": "Deposit(address,address,uint256)",
+"args": [
+{ "name": "asset", "type": "address", "indexed": true },
+{ "name": "from", "type": "address", "indexed": true },
+{ "name": "amount", "type": "uint256", "indexed": false }
+],
+"mapsTo": "events"
+},
+{
+"contract": "CollateralVault",
+"name": "Withdraw",
+"signature": "Withdraw(address,address,uint256,string)",
+"args": [
+{ "name": "asset", "type": "address", "indexed": true },
+{ "name": "to", "type": "address", "indexed": true },
+{ "name": "amount", "type": "uint256", "indexed": false },
+{ "name": "reason", "type": "string", "indexed": false }
+],
+"mapsTo": "events"
+},
+{
+"contract": "OneKUSD",
+"name": "Transfer",
+"signature": "Transfer(address,address,uint256)",
+"args": [
+{ "name": "from", "type": "address", "indexed": true },
+{ "name": "to", "type": "address", "indexed": true },
+{ "name": "value", "type": "uint256", "indexed": false }
+],
+"mapsTo": "events"
+}
+]
+}

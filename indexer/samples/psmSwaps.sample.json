@@ -1,0 +1,16 @@
+{
+"psmSwaps": [
+{
+"txHash": "0xaaaa",
+"direction": "TO_1KUSD",
+"user": "0x1111",
+"asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+"amountIn": "1000000",
+"amountOut": "999000000000000000",
+"fee": "1000000000000000",
+"blockNumber": 123,
+"timestamp": 1700000000,
+"finality": "safe"
+}
+]
+}

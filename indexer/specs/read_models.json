@@ -1,0 +1,100 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema
+",
+"title": "1kUSD Indexer Read Models (v1)",
+"type": "object",
+"properties": {
+"blocks": {
+"description": "Minimal block header mirror for finality/reorg handling",
+"type": "object",
+"properties": {
+"hash": { "type": "string" },
+"parentHash": { "type": "string" },
+"number": { "type": "integer" },
+"timestamp": { "type": "integer" },
+"finality": { "type": "string", "enum": ["pending","safe","finalized"] }
+},
+"required": ["hash","parentHash","number","timestamp","finality"],
+"additionalProperties": false
+},
+"tokenSupply": {
+"description": "OneKUSD total and per-account balances snapshot",
+"type": "object",
+"properties": {
+"totalSupply": { "type": "string" },
+"holders": {
+"type": "array",
+"items": {
+"type": "object",
+"properties": {
+"address": { "type": "string" },
+"balance": { "type": "string" },
+"updatedAt": { "type": "integer" }
+},
+"required": ["address","balance","updatedAt"],
+"additionalProperties": false
+}
+},
+"updatedAt": { "type": "integer" }
+},
+"required": ["totalSupply","updatedAt"]
+},
+"vaultBalances": {
+"description": "Per-asset balances and pending fees inside CollateralVault",
+"type": "array",
+"items": {
+"type": "object",
+"properties": {
+"asset": { "type": "string" },
+"symbol": { "type": "string" },
+"decimals": { "type": "integer" },
+"balance": { "type": "string" },
+"pendingFees": { "type": "string" },
+"updatedAt": { "type": "integer" }
+},
+"required": ["asset","decimals","balance","updatedAt"],
+"additionalProperties": false
+}
+},
+"psmSwaps": {
+"description": "Append-only ledger of PSM swaps (to/from 1kUSD)",
+"type": "array",
+"items": {
+"type": "object",
+"properties": {
+"txHash": { "type": "string" },
+"direction": { "type": "string", "enum": ["TO_1KUSD","FROM_1KUSD"] },
+"user": { "type": "string" },
+"asset": { "type": "string" },
+"amountIn": { "type": "string" },
+"amountOut": { "type": "string" },
+"fee": { "type": "string" },
+"blockNumber": { "type": "integer" },
+"timestamp": { "type": "integer" },
+"finality": { "type": "string", "enum": ["pending","safe","finalized"] }
+},
+"required": ["txHash","direction","user","asset","amountIn","amountOut","fee","blockNumber","timestamp","finality"],
+"additionalProperties": false
+}
+},
+"events": {
+"description": "Raw decoded events table for auditability",
+"type": "array",
+"items": {
+"type": "object",
+"properties": {
+"name": { "type": "string" },
+"address": { "type": "string" },
+"txHash": { "type": "string" },
+"blockNumber": { "type": "integer" },
+"timestamp": { "type": "integer" },
+"args": { "type": "object" },
+"finality": { "type": "string", "enum": ["pending","safe","finalized"] }
+},
+"required": ["name","address","txHash","blockNumber","timestamp","args","finality"],
+"additionalProperties": true
+}
+}
+},
+"additionalProperties": false
+}
