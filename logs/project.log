@@ -67,3 +67,4 @@
 [ORACLE] DEV62 delivered: aggregation guards (median/trimmed), staleness, deviation; vectors and test guide. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SAFETY] DEV63 delivered: rate-limiter spec, vectors, and test guide. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [GOV] DEV64 delivered: param writes flow, schema+sample, calldata composer, guardian sunset runbook, README links. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[TOKEN] DEV65 delivered: EIP-2612 permit spec, vectors, TS signer helper, and test guide. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

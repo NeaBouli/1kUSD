@@ -219,3 +219,11 @@ Added calldata composer script (TS)
 Added Guardian sunset rehearsal runbook
 
 Updated README with governance links
+
+2025-10-13 — DEV65 (token permit eip-2612)
+
+Finalized OneKUSD EIP-2612 Permit spec (domain, struct, digest, rules)
+
+Added machine-readable vectors and TS helper to build/sign permits
+
+Added test guide for domain, replay, expiry, and ECDSA checks

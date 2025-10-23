@@ -1,0 +1,54 @@
+{
+"meta": {
+"name": "OneKUSD",
+"version": "1",
+"notes": "Vectors for EIP-2612 permit; digest computed as EIP-712 typed data. Keys/sample sigs for testing only."
+},
+"domain": {
+"name": "OneKUSD",
+"version": "1",
+"chainId": 31337,
+"verifyingContract": "0x1111111111111111111111111111111111111111"
+},
+"cases": [
+{
+"case": "valid permit sets allowance",
+"owner": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+"spender": "0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0",
+"value": "1000000000000000000",
+"nonce": "0",
+"deadline": "2000000000",
+"privateKey": "0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d",
+"expected": {
+"digest": "0xPERMIT_DIGEST_VALID_PLACEHOLDER",
+"v": 27,
+"r": "0xR_PLACEHOLDER",
+"s": "0xS_PLACEHOLDER"
+}
+},
+{
+"case": "expired deadline reject",
+"owner": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+"spender": "0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0",
+"value": "1",
+"nonce": "0",
+"deadline": "1",
+"privateKey": "0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d",
+"expected": {
+"expired": true
+}
+},
+{
+"case": "wrong nonce reject",
+"owner": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+"spender": "0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0",
+"value": "1",
+"nonce": "2",
+"deadline": "2000000000",
+"privateKey": "0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d",
+"expected": {
+"replayOrNonce": true
+}
+}
+]
+}
