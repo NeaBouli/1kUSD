@@ -4,8 +4,8 @@ pragma solidity ^0.8.24;
 import {I1kUSD} from "../interfaces/I1kUSD.sol";
 import {IERC2612} from "../interfaces/IERC2612.sol";
 
-/// @title OneKUSD — ERC-20-kompatibler Token mit gated mint/burn, Pause (nur mint/burn) und optionalem EIP-2612 Permit
-/// @notice DEV43: Fügt Permit hinzu. Transfers bleiben immer erlaubt; Pause blockiert nur mint/burn.
+/// @title OneKUSD — ERC-20 compatible token with gated mint/burn, pause (mint/burn only) and optional EIP-2612 Permit
+/// @notice DEV43: Adds Permit. Transfers are always allowed; pause only gates mint/burn.
 contract OneKUSD is I1kUSD, IERC2612 {
     // --- Metadata ---
     string private constant _NAME   = "1kUSD";
@@ -13,11 +13,11 @@ contract OneKUSD is I1kUSD, IERC2612 {
     uint8  private constant _DECIMALS = 18;
 
     // --- Admin & Roles ---
-    address public admin;                      // Timelock später
+    address public admin;                      // Timelock later
     mapping(address => bool) public isMinter;  // ROLE_MINTER
     mapping(address => bool) public isBurner;  // ROLE_BURNER
 
-    // --- Pause (gilt nur für mint/burn) ---
+    // --- Pause (applies to mint/burn only) ---
     bool public paused;
 
     // --- ERC20 State ---

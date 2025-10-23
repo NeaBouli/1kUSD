@@ -2,7 +2,7 @@
 pragma solidity ^0.8.24;
 
 import {IOracleAggregator} from "../interfaces/IOracleAggregator.sol";
-import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
+import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol}";
 import {IParameterRegistry} from "../interfaces/IParameterRegistry.sol";
 
 /// @title OracleAggregator — minimal+ (DEV42: admin mock prices for dev/staging)
@@ -11,7 +11,7 @@ import {IParameterRegistry} from "../interfaces/IParameterRegistry.sol";
 contract OracleAggregator is IOracleAggregator {
     bytes32 public constant MODULE_ID = keccak256("ORACLE");
 
-    // Deps
+    // Dependencies
     ISafetyAutomata public immutable safety;
     IParameterRegistry public registry;
 
@@ -67,11 +67,11 @@ contract OracleAggregator is IOracleAggregator {
         registry = newRegistry;
     }
 
-    /// @notice DEV/STAGING ONLY: Setzt einen Mockpreis für ein Asset.
-    /// @param asset Asset-Adresse (ERC-20 o.ä.)
-    /// @param price Preiswert (Skalierung siehe `decimals`)
-    /// @param decimals Anzahl Dezimalstellen des Preiswertes
-    /// @param healthy Gesundheit/Guards (true = ok)
+    /// @notice DEV/STAGING ONLY: sets a mock price for an asset.
+    /// @param asset Asset address (ERC-20 or similar)
+    /// @param price Price value scaled by `decimals`
+    /// @param decimals Number of decimals of price value
+    /// @param healthy Health flag for guards (true = ok)
     function setPriceMock(address asset, int256 price, uint8 decimals, bool healthy) external onlyAdmin notPaused {
         _mockPrice[asset] = Price({
             price: price,
@@ -82,9 +82,9 @@ contract OracleAggregator is IOracleAggregator {
         emit OracleUpdated(asset, price, decimals, healthy, block.timestamp);
     }
 
-    /// @notice Gibt den gespeicherten Mockpreis zurück (DEV/STAGING).
+    /// @notice Returns the stored mock price (DEV/STAGING).
     function getPrice(address asset) external view override returns (Price memory p) {
-        // DEV42: Keine echte Aggregation. Gibt Mock zurück (default = zero struct).
+        // DEV42: no real aggregation. Returns mock (default = zero struct).
         return _mockPrice[asset];
     }
 }

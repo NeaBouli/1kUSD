@@ -8,14 +8,14 @@ import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
 import {IParameterRegistry} from "../interfaces/IParameterRegistry.sol";
 
 /// @title PegStabilityModule — minimal skeleton (+ token whitelist & dummy quotes)
-/// @notice DEV40: Admin/Registry/Guards vorhanden; Swaps weiterhin NOT_IMPLEMENTED.
-///         Neu: Whitelist für erlaubte Stable-Assets + Quotes geben (gross=amountIn, fee=0, net=amountIn) zurück.
-///         Keine Ökonomie/Transfers/Mint/Burn. Nur Kompilierbarkeit & API-Stabilität.
+/// @notice DEV40: Admin/Registry/Guards present; swaps remain NOT_IMPLEMENTED.
+///         New: PSM-side whitelist for allowed stable assets + quotes returning (gross=amountIn, fee=0, net=amountIn).
+///         No economics/transfers/mint/burn in this version. Compile-only and API-stable.
 contract PegStabilityModule is IPSM {
     // --- Modules/IDs ---
     bytes32 public constant MODULE_ID = keccak256("PSM");
 
-    // --- Dependencies (immutable wo möglich) ---
+    // --- Dependencies (immutable where possible) ---
     I1kUSD public immutable token1k;
     IVault public immutable vault;
     ISafetyAutomata public immutable safety;
@@ -24,7 +24,7 @@ contract PegStabilityModule is IPSM {
     // --- Admin ---
     address public admin;
 
-    // --- Supported tokens (PSM-side whitelist; separate from Vault support) ---
+    // --- Supported tokens (PSM whitelist; separate from Vault support) ---
     mapping(address => bool) private _isSupportedToken;
 
     // --- Events ---
@@ -32,7 +32,7 @@ contract PegStabilityModule is IPSM {
     event RegistryUpdated(address indexed oldRegistry, address indexed newRegistry);
     event SupportedTokenSet(address indexed asset, bool supported);
 
-    // Runtime swap events (für spätere reale Implementierung)
+    // Runtime swap events (for later real implementation)
     event SwapTo1kUSD(address indexed user, address indexed tokenIn, uint256 amountIn, uint256 fee, uint256 minted, uint256 ts);
     event SwapFrom1kUSD(address indexed user, address indexed tokenOut, uint256 amountIn, uint256 fee, uint256 paidOut, uint256 ts);
 
@@ -88,7 +88,7 @@ contract PegStabilityModule is IPSM {
         _;
     }
 
-    // --- Admin fns (Timelock später) ---
+    // --- Admin fns (Timelock later) ---
     function setAdmin(address newAdmin) external onlyAdmin {
         if (newAdmin == address(0)) revert ZERO_ADDRESS();
         emit AdminChanged(admin, newAdmin);
@@ -111,7 +111,7 @@ contract PegStabilityModule is IPSM {
         return _isSupportedToken[asset];
     }
 
-    // --- IPSM: Swaps (stubs; weiterhin nicht implementiert) ---
+    // --- IPSM: Swaps (stubs; still not implemented) ---
     function swapTo1kUSD(
         address tokenIn,
         uint256 amountIn,
@@ -148,7 +148,7 @@ contract PegStabilityModule is IPSM {
         revert NOT_IMPLEMENTED();
     }
 
-    // --- IPSM: Quotes (dummy pass-through; keine Fees/Slippage) ---
+    // --- IPSM: Quotes (dummy pass-through; no fee/slippage) ---
     function quoteTo1kUSD(address tokenIn, uint256 amountIn)
         external
         view
@@ -156,7 +156,7 @@ contract PegStabilityModule is IPSM {
         onlySupported(tokenIn)
         returns (uint256 grossOut, uint256 fee, uint256 netOut)
     {
-        // DEV40: vorläufig — 1:1 ohne Gebühr, nur um dApp/SDK zu entkoppeln
+        // DEV40: provisional — 1:1, zero fee; allows dApp/SDK to integrate.
         grossOut = amountIn;
         fee = 0;
         netOut = amountIn;
@@ -169,7 +169,7 @@ contract PegStabilityModule is IPSM {
         onlySupported(tokenOut)
         returns (uint256 grossOut, uint256 fee, uint256 netOut)
     {
-        // DEV40: vorläufig — 1:1 ohne Gebühr
+        // DEV40: provisional — 1:1, zero fee.
         grossOut = amountIn;
         fee = 0;
         netOut = amountIn;

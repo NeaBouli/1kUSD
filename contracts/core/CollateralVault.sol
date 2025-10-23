@@ -6,8 +6,8 @@ import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
 import {IParameterRegistry} from "../interfaces/IParameterRegistry.sol";
 
 /// @title CollateralVault — minimal skeleton (+ batch getter)
-/// @notice DEV41: Admin/Wiring/Guards + Events wie zuvor. Neu: `areAssetsSupported(...)`.
-///         Keine Asset-Transfers/Accounting; balanceOf() weiterhin Dummy (0).
+/// @notice DEV41: Admin/Wiring/Guards + Events as before. New: `areAssetsSupported(...)`.
+///         No asset transfers/accounting; balanceOf() stays a dummy (0).
 contract CollateralVault is IVault {
     // --- Module IDs ---
     bytes32 public constant MODULE_ID = keccak256("VAULT");
@@ -17,9 +17,9 @@ contract CollateralVault is IVault {
     IParameterRegistry public registry; // updatable via admin
 
     // --- Admin ---
-    address public admin; // Timelock-Placeholder
+    address public admin; // Timelock placeholder
 
-    // --- Supported Assets (toggle only; keine Betragslogik) ---
+    // --- Supported Assets (toggle only; no amounts logic) ---
     mapping(address => bool) private _isSupported;
 
     // --- Events ---
@@ -27,7 +27,7 @@ contract CollateralVault is IVault {
     event RegistryUpdated(address indexed oldRegistry, address indexed newRegistry);
     event AssetSupportSet(address indexed asset, bool supported);
 
-    // Mirror of intended runtime events (keine Logik hier)
+    // Mirrors intended runtime events (no logic here)
     event Deposit(address indexed asset, address indexed from, uint256 amount);
     event Withdraw(address indexed asset, address indexed to, uint256 amount, bytes32 reason);
 
@@ -87,14 +87,14 @@ contract CollateralVault is IVault {
         emit AssetSupportSet(asset, supported);
     }
 
-    // --- IVault: surface (Stubs) ---
+    // --- IVault: surface (stubs) ---
     function deposit(address asset, address from, uint256 amount)
         external
         override
         notPaused
         onlySupported(asset)
     {
-        // DEV41: keine Transfers/Accounting — Stub.
+        // DEV41: no transfers/accounting — stub only.
         asset; from; amount;
         revert NOT_IMPLEMENTED();
     }
@@ -105,14 +105,14 @@ contract CollateralVault is IVault {
         notPaused
         onlySupported(asset)
     {
-        // DEV41: Stub — echte Logik später.
+        // DEV41: stub — real logic to be added later.
         asset; to; amount; reason;
         revert NOT_IMPLEMENTED();
     }
 
     // --- Views ---
     function balanceOf(address /*asset*/) external pure override returns (uint256) {
-        // DEV41: Dummy 0 bis Accounting eingebaut wird.
+        // DEV41: dummy 0 until accounting is implemented.
         return 0;
     }
 
@@ -120,7 +120,7 @@ contract CollateralVault is IVault {
         return _isSupported[asset];
     }
 
-    /// @notice Batch-Abfrage für UIs/SDKs ohne Mapping-Iteration on-chain.
+    /// @notice Batch check for UIs/SDKs without on-chain mapping iteration.
     function areAssetsSupported(address[] calldata assets) external view returns (bool[] memory out) {
         uint256 n = assets.length;
         out = new bool[](n);
