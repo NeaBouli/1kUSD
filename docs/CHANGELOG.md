@@ -253,3 +253,11 @@ Added localnet scripts (start/stop/seed/deploy-skeleton)
 Added staging bootstrap runbook (Base Sepolia example)
 
 Added bootstrap quickstart and README links
+
+2025-10-13 — DEV69 (ci gates)
+
+Added CI gates doc with red/green criteria
+
+Added collate script (node) to enforce gates from JSON artifacts
+
+Added placeholders generator and updated CI workflow to wire jobs

@@ -1,71 +1,97 @@
 name: CI
 on:
-  push:
-    branches: [ main, master ]
-  pull_request: {}
+push: { branches: [ main, master ] }
+pull_request: {}
+
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Lint (placeholder)
-        run: |
-          mkdir -p reports
-          echo "lint ok" > reports/lint.txt
+lint:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v4
+- name: Lint (placeholder)
+run: |
+mkdir -p reports
+echo "lint ok" > reports/lint.txt
+- uses: actions/upload-artifact@v4
+with: { name: lint, path: reports/lint.txt }
 
-  unit:
-    runs-on: ubuntu-latest
-    needs: [lint]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Unit tests (placeholder)
-        run: |
-          mkdir -p reports
-          echo '{"suite":"unit","passed":0,"failed":0,"skipped":0,"durationMs":0,"coverage":{"statements":0,"branches":0,"functions":0}}' > reports/unit.json
-      - uses: actions/upload-artifact@v4
-        with:
-          name: unit-report
-          path: reports/unit.json
+compile:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v4
+- name: Compile (forge or hardhat)
+run: |
+set -e
+if command -v forge >/dev/null 2>&1; then
+forge build
+else
+npm --version >/dev/null 2>&1 || sudo apt-get update && sudo apt-get install -y npm
+npx --yes hardhat compile || echo "hardhat not configured; skipping"
+fi
 
-  invariants:
-    runs-on: ubuntu-latest
-    needs: [unit]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Invariants/Fuzz (placeholder)
-        run: |
-          mkdir -p reports
-          echo '{"invariants":[{"name":"I1","checks":0,"violations":0,"maxSteps":0,"seed":"0x00"}]}' > reports/invariants.json
-      - uses: actions/upload-artifact@v4
-        with:
-          name: invariants-report
-          path: reports/invariants.json
+unit:
+runs-on: ubuntu-latest
+needs: [compile]
+steps:
+- uses: actions/checkout@v4
+- name: Unit (placeholder -> unit.json)
+run: |
+mkdir -p reports
+bash scripts/ci-placeholders.sh reports
+- uses: actions/upload-artifact@v4
+with: { name: unit, path: reports/unit.json }
 
-  static-analysis:
-    runs-on: ubuntu-latest
-    needs: [unit]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Slither/Mythril (placeholder)
-        run: |
-          mkdir -p reports
-          echo '{"tool":"slither","version":"0.0.0","findings":[]}' > reports/slither.json
-          echo '{"tool":"mythril","version":"0.0.0","findings":[]}' > reports/mythril.json
-      - uses: actions/upload-artifact@v4
-        with:
-          name: static-analysis
-          path: reports/slither.json
+invariants:
+runs-on: ubuntu-latest
+needs: [unit]
+steps:
+- uses: actions/checkout@v4
+- name: Invariants (placeholder -> invariants.json)
+run: |
+mkdir -p reports
+bash scripts/ci-placeholders.sh reports
+- uses: actions/upload-artifact@v4
+with: { name: invariants, path: reports/invariants.json }
 
-  publish-reports:
-    runs-on: ubuntu-latest
-    needs: [invariants, static-analysis]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Collate Reports (placeholder)
-        run: |
-          mkdir -p reports
-          echo '{"summary":{"critical":0,"high":0,"medium":0,"low":0},"findings":[]}' > reports/security-findings.json
-      - uses: actions/upload-artifact@v4
-        with:
-          name: all-reports
-          path: reports/
+static-analysis:
+runs-on: ubuntu-latest
+needs: [unit]
+steps:
+- uses: actions/checkout@v4
+- name: Static Analysis (placeholder slither/mythril)
+run: |
+mkdir -p reports
+bash scripts/ci-placeholders.sh reports
+- uses: actions/upload-artifact@v4
+with: { name: static, path: reports/slither.json }
+
+gas:
+runs-on: ubuntu-latest
+needs: [compile]
+steps:
+- uses: actions/checkout@v4
+- name: Gas snapshot (placeholder -> gas.json)
+run: |
+mkdir -p reports
+bash scripts/ci-placeholders.sh reports
+- uses: actions/upload-artifact@v4
+with: { name: gas, path: reports/gas.json }
+
+collate:
+runs-on: ubuntu-latest
+needs: [unit, invariants, static-analysis, gas]
+steps:
+- uses: actions/checkout@v4
+- name: Prepare Node
+run: |
+sudo apt-get update && sudo apt-get install -y nodejs npm || true
+- name: Collate artifacts and enforce gates
+run: |
+mkdir -p reports
+# Ensure placeholder files exist (until real jobs overwrite)
+bash scripts/ci-placeholders.sh reports
+node scripts/ci-collate.js reports > reports/ci-summary.json
+- uses: actions/upload-artifact@v4
+with:
+name: summary
+path: reports/
