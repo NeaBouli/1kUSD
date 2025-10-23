@@ -115,3 +115,7 @@
 - CollateralVault: added batch getter `areAssetsSupported(address[])`; `balanceOf` remains dummy; no transfer/accounting logic yet
 ## 2025-10-13 — DEV42 (Oracle minimal+: admin mock prices)
 - OracleAggregator: added admin `setPriceMock` and mock storage; `getPrice` serves mock values (dev/staging only)
+## 2025-10-13 — DEV43 (Token minimal+: EIP-2612)
+- Added IERC2612 interface and implemented `permit` in OneKUSD
+- Domain separator is chainId-aware; `nonces` tracked per owner
+- No changes to transfer logic; pause still gates only mint/burn

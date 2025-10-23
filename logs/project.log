@@ -44,3 +44,4 @@
 [CODE] DEV40 delivered: PSM whitelist + dummy quotes to unblock SDK/dApp; swaps unchanged (NOT_IMPLEMENTED). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [CODE] DEV41 delivered: Vault batch getter for supported assets; kept dummy balance; no accounting yet. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [CODE] DEV42 delivered: OracleAggregator admin mock prices for dev/staging (no real aggregation). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[CODE] DEV43 delivered: OneKUSD EIP-2612 permit (IERC2612), EIP-712 domain/nonce handling; docs notes added. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
