@@ -36,3 +36,4 @@
 [CODE] DEV32 delivered: PSM minimal skeleton with safety guards and admin/registry wiring (no economic logic). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [CODE] DEV33 delivered: CollateralVault minimal skeleton with guards and asset support toggles (no transfer/accounting logic). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [CODE] DEV34 delivered: OracleAggregator minimal skeleton (guards + wiring; no price logic). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[CODE] DEV35 delivered: SafetyAutomata minimal skeleton (guards + admin/registry; no caps/rate-limits yet). (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
