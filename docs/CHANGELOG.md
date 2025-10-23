@@ -197,3 +197,7 @@ Added sample records and documentation
 - Added vault accounting edge cases doc (FoT, decimals, caps)
 - Added machine-readable vectors for FoT/cap boundary cases
 - Added vault test guide with mock FoT hints
+## 2025-10-13 — DEV62 (oracle aggregation guards)
+- Added normative doc for multi-source aggregation (median/trimmed-mean), staleness and deviation guards
+- Added machine-readable vectors for healthy/stale/outlier/trimmed cases
+- Added oracle test guide

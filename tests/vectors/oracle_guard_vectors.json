@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "mode": "MEDIAN default, TRIMMED_MEAN optional",
+    "decimalsOut": 8,
+    "maxAgeSec": 60,
+    "maxDeviationBps": 200
+  },
+  "cases": [
+    {
+      "name": "All healthy, close values -> MEDIAN ok",
+      "now": 1700000000,
+      "mode": "MEDIAN",
+      "sources": [
+        { "price": "100000000", "decimals": 8, "updatedAt": 1699999960, "healthy": true },
+        { "price": "100100000", "decimals": 8, "updatedAt": 1699999970, "healthy": true },
+        { "price": "99800000",  "decimals": 8, "updatedAt": 1699999980, "healthy": true }
+      ],
+      "expect": {
+        "accepted": 3,
+        "price": "100000000",
+        "healthy": true
+      }
+    },
+    {
+      "name": "One stale source excluded",
+      "now": 1700000000,
+      "mode": "MEDIAN",
+      "sources": [
+        { "price": "100000000", "decimals": 8, "updatedAt": 1699999900, "healthy": true },  // stale (100s > 60)
+        { "price": "100050000", "decimals": 8, "updatedAt": 1699999970, "healthy": true },
+        { "price": "99900000",  "decimals": 8, "updatedAt": 1699999980, "healthy": true }
+      ],
+      "expect": {
+        "accepted": 2,
+        "price": "99900000",
+        "healthy": true
+      }
+    },
+    {
+      "name": "Outlier triggers deviation guard -> unhealthy",
+      "now": 1700000000,
+      "mode": "MEDIAN",
+      "sources": [
+        { "price": "100000000", "decimals": 8, "updatedAt": 1699999970, "healthy": true },
+        { "price": "100100000", "decimals": 8, "updatedAt": 1699999975, "healthy": true },
+        { "price": "130000000", "decimals": 8, "updatedAt": 1699999980, "healthy": true }
+      ],
+      "expect": {
+        "accepted": 3,
+        "healthy": false,
+        "reason": "deviation"
+      }
+    },
+    {
+      "name": "TRIMMED_MEAN removes extremes",
+      "now": 1700000000,
+      "mode": "TRIMMED_MEAN",
+      "trim": 1,
+      "sources": [
+        { "price": "99000000",  "decimals": 8, "updatedAt": 1699999970, "healthy": true },
+        { "price": "100000000", "decimals": 8, "updatedAt": 1699999975, "healthy": true },
+        { "price": "100100000", "decimals": 8, "updatedAt": 1699999978, "healthy": true },
+        { "price": "130000000", "decimals": 8, "updatedAt": 1699999980, "healthy": true },
+        { "price": "80000000",  "decimals": 8, "updatedAt": 1699999985, "healthy": true }
+      ],
+      "expect": {
+        "accepted": 5,
+        "price": "100050000",
+        "healthy": true
+      }
+    },
+    {
+      "name": "All rejected -> unhealthy",
+      "now": 1700000000,
+      "mode": "MEDIAN",
+      "sources": [
+        { "price": "0",         "decimals": 8, "updatedAt": 1699999970, "healthy": true },
+        { "price": "-1000000",  "decimals": 8, "updatedAt": 1699999975, "healthy": true },
+        { "price": "100000000", "decimals": 8, "updatedAt": 1699999800, "healthy": false }
+      ],
+      "expect": {
+        "accepted": 0,
+        "healthy": false
+      }
+    }
+  ]
+}

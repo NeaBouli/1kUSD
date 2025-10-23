@@ -64,3 +64,4 @@
 [INDEXER] DEV59 delivered: JSON schemas (swap/fee/vault snapshot) + samples + docs. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [QUOTE] DEV60 delivered: PSM quote math docs + vectors. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [VAULT] DEV61 delivered: edge-case docs (FoT/decimals/caps), vectors, and test guide. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[ORACLE] DEV62 delivered: aggregation guards (median/trimmed), staleness, deviation; vectors and test guide. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
