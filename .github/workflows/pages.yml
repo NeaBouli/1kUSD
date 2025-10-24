@@ -1,7 +1,8 @@
 name: Deploy Docs to GitHub Pages
 on:
-  push: { branches: [ main ] }
-  workflow_dispatch:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
 
 permissions:
   contents: read
@@ -10,7 +11,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -26,17 +27,16 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-          cache: 'pip'
 
-      - name: Install MkDocs
+      - name: Install MkDocs & theme
         run: |
           python -m pip install --upgrade pip
-          python -m pip install mkdocs mkdocs-material
+          pip install mkdocs mkdocs-material
 
       - name: Build site
         run: |
-          python -m mkdocs --version
-          python -m mkdocs build
+          mkdocs --version
+          mkdocs build  # bewusst ohne --strict
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -44,11 +44,12 @@ jobs:
           path: ./site
 
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
-      - id: deployment
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
