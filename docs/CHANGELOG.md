@@ -345,3 +345,11 @@ Added ICollateralRegistry interface
 Added asset metadata JSON schema + samples
 
 Added collateral registry spec and README section
+
+2025-10-13 — DEV79 (parameter registry finalize)
+
+Added final docs for Parameter Registry and Keys Catalog
+
+Added JSON schema and sample vectors for parameters
+
+Added JSON validator script (AJV) and README wiring

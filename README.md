@@ -198,3 +198,15 @@ JSON Schema: schemas/asset_metadata.schema.json
 Samples: tests/vectors/collateral_assets.sample.json
 
 Spec: docs/COLLATERAL_REGISTRY.md
+
+Parameter Registry
+
+Spec: docs/PARAMETER_REGISTRY.md
+
+Keys catalog: docs/PARAM_KEYS_CATALOG.md
+
+JSON Schema: schemas/params.schema.json
+
+Sample snapshot: tests/vectors/params.sample.json
+
+Validate: node scripts/validate-json.mjs schemas/params.schema.json tests/vectors/params.sample.json

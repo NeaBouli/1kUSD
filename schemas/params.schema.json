@@ -1,0 +1,41 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema
+",
+"title": "1kUSD Parameter Registry Snapshot (v1)",
+"type": "object",
+"properties": {
+"version": { "type": "string" },
+"generatedAt": { "type": "string" },
+"global": {
+"type": "object",
+"properties": {
+"PARAM_TREASURY_ADDRESS": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" },
+"PARAM_PSM_FEE_BPS": { "type": "integer", "minimum": 0, "maximum": 10000 },
+"PARAM_ORACLE_MAX_AGE_SEC": { "type": "integer", "minimum": 0 },
+"PARAM_ORACLE_MAX_DEVIATION_BPS": { "type": "integer", "minimum": 0, "maximum": 10000 },
+"PARAM_RATE_WINDOW_SEC": { "type": "integer", "minimum": 1 },
+"PARAM_RATE_MAX_AMOUNT": { "type": "string", "pattern": "^[0-9]+$" },
+"PARAM_SAFETY_GUARDIAN_SUNSET_TS": { "type": "integer", "minimum": 0 }
+},
+"required": ["PARAM_TREASURY_ADDRESS","PARAM_PSM_FEE_BPS","PARAM_ORACLE_MAX_AGE_SEC","PARAM_ORACLE_MAX_DEVIATION_BPS","PARAM_RATE_WINDOW_SEC","PARAM_RATE_MAX_AMOUNT","PARAM_SAFETY_GUARDIAN_SUNSET_TS"],
+"additionalProperties": false
+},
+"perAsset": {
+"type": "array",
+"items": {
+"type": "object",
+"properties": {
+"asset": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" },
+"PARAM_CAP_PER_ASSET": { "type": "string", "pattern": "^[0-9]+$" },
+"PARAM_MIN_LIQUIDITY_USD": { "type": "string", "pattern": "^[0-9]+$" },
+"PARAM_MAX_SLIPPAGE_BPS": { "type": "integer", "minimum": 0, "maximum": 10000 },
+"PARAM_ASSET_DECIMALS_CACHE": { "type": "integer", "minimum": 0, "maximum": 36 }
+},
+"required": ["asset"],
+"additionalProperties": false
+}
+}
+},
+"required": ["version","generatedAt","global","perAsset"],
+"additionalProperties": false
+}
