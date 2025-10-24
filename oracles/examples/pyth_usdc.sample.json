@@ -1,0 +1,8 @@
+{
+"type": "pyth",
+"pair": "USDC/USD",
+"decimalsOut": 8,
+"heartbeatSec": 120,
+"maxDeviationBps": 250,
+"priceId": "0x0000000000000000000000000000000000000000000000000000000000usdc"
+}

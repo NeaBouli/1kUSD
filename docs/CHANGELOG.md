@@ -361,3 +361,11 @@ Added governance proposal JSON schema and example proposals
 Added queue/execute helper scripts (placeholder) and ops doc
 
 README updated with Governance Ops section
+
+2025-10-13 — DEV81 (oracle adapters)
+
+Added adapter schema (chainlink/pyth/dex_twap)
+
+Added mainnet catalog and sample adapter JSONs
+
+Added validator script and README section

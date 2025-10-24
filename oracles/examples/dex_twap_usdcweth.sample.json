@@ -1,0 +1,10 @@
+{
+"type": "dex_twap",
+"pair": "USDC/WETH",
+"decimalsOut": 18,
+"heartbeatSec": 60,
+"maxDeviationBps": 500,
+"pool": "0x0000000000000000000000000000000000000001",
+"windowSec": 900,
+"quoteToken": "0xC02aaA39b223FE8D0A0E5C4F27eAD9083C756Cc2"
+}

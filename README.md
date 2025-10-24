@@ -222,3 +222,13 @@ Queue: node scripts/gov-queue.mjs <proposal.json>
 Execute: node scripts/gov-exec.mjs <proposal.json>
 
 Validate JSON: node scripts/validate-json.mjs governance/schemas/proposal.schema.json <proposal.json>
+
+Oracle Adapters
+
+Schema: oracles/schemas/adapter.schema.json
+
+Catalog (per chain): oracles/catalog/<chainId>.json
+
+Examples: oracles/examples/*.json
+
+Validate catalog: node scripts/validate-oracle-catalog.mjs oracles/catalog/1.json

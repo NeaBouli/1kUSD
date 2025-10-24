@@ -1,0 +1,31 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema
+",
+"title": "Oracle Adapter Config (v1)",
+"type": "object",
+"properties": {
+"type": { "type": "string", "enum": ["chainlink","pyth","dex_twap"] },
+"pair": { "type": "string", "pattern": "^[A-Z0-9]+/[A-Z0-9]+$" },
+"decimalsOut": { "type": "integer", "minimum": 0, "maximum": 36 },
+"heartbeatSec": { "type": "integer", "minimum": 1 },
+"maxDeviationBps": { "type": "integer", "minimum": 0, "maximum": 10000 },
+
+"address": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" },        // chainlink
+"priceId": { "type": "string", "minLength": 10 },                           // pyth
+"pool": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" },            // dex_twap
+"windowSec": { "type": "integer", "minimum": 1 },                           // dex_twap
+"quoteToken": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" }       // dex_twap
+
+
+},
+"required": ["type","pair","decimalsOut","heartbeatSec","maxDeviationBps"],
+"allOf": [
+{ "if": { "properties": { "type": { "const": "chainlink" } } },
+"then": { "required": ["address"] } },
+{ "if": { "properties": { "type": { "const": "pyth" } } },
+"then": { "required": ["priceId"] } },
+{ "if": { "properties": { "type": { "const": "dex_twap" } } },
+"then": { "required": ["pool","windowSec","quoteToken"] } }
+],
+"additionalProperties": false
+}
