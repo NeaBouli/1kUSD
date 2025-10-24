@@ -232,3 +232,13 @@ Catalog (per chain): oracles/catalog/<chainId>.json
 Examples: oracles/examples/*.json
 
 Validate catalog: node scripts/validate-oracle-catalog.mjs oracles/catalog/1.json
+
+AutoConverter Router
+
+Policy doc: converter/docs/AUTOCONVERTER_ROUTER.md
+
+Router schema: converter/schemas/router.schema.json
+
+Sample routes: tests/vectors/routes.sample.json
+
+Evaluate routes: node scripts/route-eval.mjs converter/schemas/router.schema.json tests/vectors/routes.sample.json quotes.json

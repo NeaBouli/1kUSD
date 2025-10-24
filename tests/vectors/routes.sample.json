@@ -1,0 +1,25 @@
+{
+"version": "v1",
+"routes": [
+{
+"from": "0xC02aaA39b223FE8D0A0E5C4F27eAD9083C756Cc2",
+"to": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+"symbolFrom": "WETH",
+"symbolTo": "USDC",
+"adapter": "univ3-0.05",
+"maxSlippageBps": 75,
+"minLiquidityUSD": "50000",
+"whitelisted": true
+},
+{
+"from": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+"to": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+"symbolFrom": "ETH",
+"symbolTo": "USDT",
+"adapter": "aggregator-xyz",
+"maxSlippageBps": 100,
+"minLiquidityUSD": "100000",
+"whitelisted": false
+}
+]
+}

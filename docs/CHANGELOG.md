@@ -369,3 +369,13 @@ Added adapter schema (chainlink/pyth/dex_twap)
 Added mainnet catalog and sample adapter JSONs
 
 Added validator script and README section
+
+2025-10-13 — DEV82 (autoconverter router)
+
+Added router policy doc and JSON schema
+
+Added sample routes JSON
+
+Added evaluator script to rank policy-compliant routes
+
+README section for AutoConverter Router
