@@ -295,3 +295,13 @@ Added canonical PSM quote formulas and rounding rules (docs)
 Added quote JSON vectors and TS evaluator script
 
 README updated with PSM Math references
+
+2025-10-13 — DEV74 (vault math)
+
+Added Vault accounting spec (received-based deposit, pending fees)
+
+Added fee accrual policy doc
+
+Added FoT/decimals vectors and TS evaluator script
+
+Updated README with Vault section

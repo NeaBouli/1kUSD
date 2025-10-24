@@ -1,0 +1,47 @@
+{
+"meta": {
+"notes": "FoT/decimals interactions; received-based deposit; fee accrual separation."
+},
+"cases": [
+{
+"case": "USDC(6) no FoT",
+"decimals": 6,
+"requested": "1000000",
+"preBalance": "0",
+"postBalance": "1000000",
+"expected": { "received": "1000000", "revert": false }
+},
+{
+"case": "USDT(6) 1% FoT",
+"decimals": 6,
+"requested": "1000000",
+"preBalance": "0",
+"postBalance": "990000",
+"expected": { "received": "990000", "revert": false }
+},
+{
+"case": "FoT extreme → zero received (revert)",
+"decimals": 18,
+"requested": "1000000000000000000",
+"preBalance": "1000000000000000000",
+"postBalance": "1000000000000000000",
+"expected": { "revert": true, "error": "FOT_ZERO_RECEIVED" }
+},
+{
+"case": "Accrue fee then withdraw within spendable",
+"decimals": 6,
+"ledgerBefore": "1000000",
+"pendingFeesBefore": "1000",
+"withdraw": "999000",
+"expected": { "revert": false }
+},
+{
+"case": "Withdraw exceeds spendable (revert)",
+"decimals": 6,
+"ledgerBefore": "1000000",
+"pendingFeesBefore": "20000",
+"withdraw": "990001",
+"expected": { "revert": true, "error": "INSUFFICIENT_LIQUIDITY" }
+}
+]
+}

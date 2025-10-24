@@ -142,3 +142,13 @@ Rounding rules: docs/ROUNDING_RULES.md
 JSON vectors: tests/vectors/psm_quote_vectors.json
 
 Eval helper: npx ts-node scripts/quote-eval.ts tests/vectors/psm_quote_vectors.json
+
+Vault Math & FoT Handling
+
+Accounting rules: docs/VAULT_ACCOUNTING.md
+
+Fee accrual policy: docs/FEE_ACCRUAL.md
+
+Vectors: tests/vectors/vault_fot_vectors.json
+
+Eval helper: npx ts-node scripts/vault-eval.ts tests/vectors/vault_fot_vectors.json
