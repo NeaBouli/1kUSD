@@ -19,7 +19,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Empfohlen für Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -29,30 +28,11 @@ jobs:
           python-version: '3.x'
           cache: 'pip'
 
-      - name: Install MkDocs & theme
+      - name: Install MkDocs
         run: |
           python -m pip install --upgrade pip
           python -m pip install mkdocs mkdocs-material
 
-      # Debug: zeige Struktur
-      - name: Show workspace
-        run: |
-          pwd
-          ls -la
-          echo "---- docs/ ----"
-          (ls -la docs || true)
-          echo "---- mkdocs.yml ----"
-          sed -n '1,200p' mkdocs.yml
-
-      # Sicherheitsnetz: index.md anlegen falls fehlt
-      - name: Ensure docs/index.md exists
-        run: |
-          mkdir -p docs
-          if [ ! -f docs/index.md ]; then
-            echo "# 1kUSD Docs" > docs/index.md
-          fi
-
-      # Build ohne --strict (Warnungen ok)
       - name: Build site
         run: |
           python -m mkdocs --version
