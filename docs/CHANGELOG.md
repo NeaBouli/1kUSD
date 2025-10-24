@@ -315,3 +315,13 @@ Added rate-limit vectors and evaluator (sliding window)
 Added pause/resume + guardian sunset vectors and evaluator
 
 README updated with Safety section
+
+2025-10-13 — DEV76 (psm interface finalization)
+
+Added finalized IPSM interface (quotes + swaps, errors/events)
+
+Added normative revert reasons catalog
+
+Added event ABI lock file and checker script
+
+README updated with PSM Interface section

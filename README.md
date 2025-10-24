@@ -166,3 +166,13 @@ Eval helpers:
 npx ts-node scripts/safety-rate-eval.ts tests/vectors/safety_rate_limit_vectors.json
 
 npx ts-node scripts/safety-pause-eval.ts tests/vectors/safety_pause_vectors.json
+
+PSM Interface
+
+Final interface: contracts/interfaces/IPSM.sol (v1)
+
+Revert reasons: docs/PSM_REVERTS.md (normative)
+
+ABI lock (events): abi/locks/PSM.events.json
+
+Check lock vs compiled: node scripts/check-abi-lock.js abi/locks/PSM.events.json <compiled-abi.json>

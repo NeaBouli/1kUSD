@@ -78,3 +78,4 @@
 [MATH] DEV73 delivered: PSM formulas, rounding rules, vectors, evaluator; README updated. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [VAULT] DEV74 delivered: accounting spec, fee accrual doc, vectors, evaluator; README updated. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SAFETY] DEV75 delivered: guards test plan, vectors, evaluators; README updated. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[PSM] DEV76 delivered: IPSM interface v1, revert catalog, event ABI lock, checker. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

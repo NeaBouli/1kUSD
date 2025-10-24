@@ -1,0 +1,26 @@
+{
+"version": "1",
+"contract": "PSM",
+"events": [
+{ "name": "SwapTo1kUSD", "inputs": [
+{ "indexed": true, "name": "user", "type": "address" },
+{ "indexed": false, "name": "tokenIn", "type": "address" },
+{ "indexed": false, "name": "amountIn", "type": "uint256" },
+{ "indexed": false, "name": "fee", "type": "uint256" },
+{ "indexed": false, "name": "netOut", "type": "uint256" },
+{ "indexed": false, "name": "ts", "type": "uint256" }
+] },
+{ "name": "SwapFrom1kUSD", "inputs": [
+{ "indexed": true, "name": "user", "type": "address" },
+{ "indexed": false, "name": "tokenOut", "type": "address" },
+{ "indexed": false, "name": "amountIn", "type": "uint256" },
+{ "indexed": false, "name": "fee", "type": "uint256" },
+{ "indexed": false, "name": "netOut", "type": "uint256" },
+{ "indexed": false, "name": "ts", "type": "uint256" }
+] },
+{ "name": "FeeAccrued", "inputs": [
+{ "indexed": true, "name": "asset", "type": "address" },
+{ "indexed": false, "name": "amount", "type": "uint256" }
+] }
+]
+}
