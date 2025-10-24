@@ -397,3 +397,13 @@ Added JSON schemas: event DTO, PoR rollup, health
 Added validators/checkers and sample vectors
 
 README wired; reports folder outputs
+
+2025-10-13 — DEV85 (dex/amm integration)
+
+Added minimal ABI locks for Uniswap V2/V3 pools
+
+Added routing hints schema and sample JSON
+
+Added price sanity vectors and checker script
+
+README updated with DEX/AMM Integration section

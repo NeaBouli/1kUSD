@@ -264,3 +264,17 @@ Health schema: indexer/schemas/health.schema.json
 Validate PoR: node scripts/por-rollup-validate.mjs tests/vectors/por_rollup.sample.json
 
 Check health: node scripts/check-health.mjs tests/vectors/health.sample.json
+
+DEX/AMM Integration
+
+Spec: integrations/dex/docs/DEX_INTEGRATION.md
+
+ABI locks: integrations/dex/abi/UniswapV2Pair.events.json, integrations/dex/abi/UniswapV3Pool.events.json
+
+Routing hints schema: integrations/dex/schemas/routing_hints.schema.json
+
+Samples: tests/vectors/dex_routing_hints.sample.json
+
+Price sanity vectors: tests/vectors/dex_price_sanity_vectors.json
+
+Check price sanity: node scripts/dex-price-sanity.mjs tests/vectors/dex_price_sanity_vectors.json

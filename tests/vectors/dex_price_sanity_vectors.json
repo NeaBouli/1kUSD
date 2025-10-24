@@ -1,0 +1,21 @@
+{
+"meta": {
+"maxDeviationBps": 300,
+"useTwap": true,
+"windowSec": 900
+},
+"cases": [
+{
+"pair": "USDC/USD",
+"oraclePriceE8": "100000000",
+"dexPriceE8": "100150000",
+"expect": "ok"
+},
+{
+"pair": "USDT/USD",
+"oraclePriceE8": "100000000",
+"dexPriceE8": "104000000",
+"expect": "deviation"
+}
+]
+}

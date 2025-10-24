@@ -1,0 +1,22 @@
+{
+"chainId": 1,
+"hints": [
+{
+"pair": "WETH/USDC",
+"pool": "0x0000000000000000000000000000000000000001",
+"type": "univ3",
+"fee": 500,
+"priority": 90,
+"minLiquidityUSD": "100000",
+"enabled": true
+},
+{
+"pair": "WETH/USDT",
+"pool": "0x0000000000000000000000000000000000000002",
+"type": "univ2",
+"priority": 50,
+"minLiquidityUSD": "75000",
+"enabled": false
+}
+]
+}

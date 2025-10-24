@@ -1,0 +1,28 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema
+",
+"title": "DEX Routing Hints (v1)",
+"type": "object",
+"properties": {
+"chainId": { "type": "integer", "minimum": 1 },
+"hints": {
+"type": "array",
+"items": {
+"type": "object",
+"properties": {
+"pair": { "type": "string", "pattern": "^[A-Z0-9]+/[A-Z0-9]+$" },
+"pool": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" },
+"type": { "type": "string", "enum": ["univ2","univ3"] },
+"fee": { "type": "integer", "minimum": 0 },
+"priority": { "type": "integer", "minimum": 0, "maximum": 100 },
+"minLiquidityUSD": { "type": "string", "pattern": "^[0-9]+$" },
+"enabled": { "type": "boolean" }
+},
+"required": ["pair","pool","type","priority","minLiquidityUSD","enabled"],
+"additionalProperties": false
+}
+}
+},
+"required": ["chainId","hints"],
+"additionalProperties": false
+}

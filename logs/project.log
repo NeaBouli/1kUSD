@@ -87,3 +87,4 @@
 [CONVERTER] DEV82 delivered: router policy/schema, sample routes, evaluator, README. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [ALIGN] DEV83 delivered: quote/exec invariants doc, cross-check tool, README wiring. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [INDEXER] DEV84 delivered: telemetry spec, schemas (DTO/PoR/health), validators, vectors, README. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[DEX] DEV85 delivered: ABI locks, routing hints, price sanity vectors/checker, README. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
