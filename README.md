@@ -176,3 +176,15 @@ Revert reasons: docs/PSM_REVERTS.md (normative)
 ABI lock (events): abi/locks/PSM.events.json
 
 Check lock vs compiled: node scripts/check-abi-lock.js abi/locks/PSM.events.json <compiled-abi.json>
+
+OneKUSD Token
+
+Interface: contracts/interfaces/IOneKUSD.sol
+
+Pause semantics: docs/TOKEN_PAUSE_SEMANTICS.md
+
+ABI lock (events): abi/locks/OneKUSD.events.json
+
+Permit vectors: tests/vectors/permit_vectors.json
+
+SDK helpers: clients/ts (permit builder/sign)

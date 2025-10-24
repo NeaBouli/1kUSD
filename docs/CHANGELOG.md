@@ -325,3 +325,15 @@ Added normative revert reasons catalog
 Added event ABI lock file and checker script
 
 README updated with PSM Interface section
+
+2025-10-13 — DEV77 (token finalize)
+
+Added IOneKUSD (ERC20 + EIP-2612 + gated mint/burn + pause)
+
+Added pause semantics doc (mint/burn only; transfers unaffected)
+
+Added event ABI lock for OneKUSD
+
+Added permit vectors JSON
+
+README updated with Token section

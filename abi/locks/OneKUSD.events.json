@@ -1,0 +1,22 @@
+{
+"version": "1",
+"contract": "OneKUSD",
+"events": [
+{ "name": "Transfer", "inputs": [
+{ "indexed": true, "name": "from", "type": "address" },
+{ "indexed": true, "name": "to", "type": "address" },
+{ "indexed": false, "name": "value","type": "uint256" }
+]},
+{ "name": "Approval", "inputs": [
+{ "indexed": true, "name": "owner", "type": "address" },
+{ "indexed": true, "name": "spender", "type": "address" },
+{ "indexed": false, "name": "value", "type": "uint256" }
+]},
+{ "name": "Paused", "inputs": [
+{ "indexed": true, "name": "by", "type": "address" }
+]},
+{ "name": "Unpaused", "inputs": [
+{ "indexed": true, "name": "by", "type": "address" }
+]}
+]
+}
