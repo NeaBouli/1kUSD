@@ -290,3 +290,13 @@ Incident response: security/checklists/INCIDENT_RESPONSE.md
 CI Security Gate doc: docs/CI_SECURITY_GATE.md
 
 Workflow: .github/workflows/security-gate.yml
+
+Release & Versioning
+
+Bump: ./scripts/bump-version.sh <major|minor|patch>
+
+Notes: node scripts/release-notes.mjs vX.Y.Z [prevTag]
+
+Workflow: .github/workflows/release.yml (on tags v*..)
+
+Template: .github/release/RELEASE_NOTES_TEMPLATE.md

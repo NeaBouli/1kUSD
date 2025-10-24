@@ -415,3 +415,11 @@ Added pre-deploy, post-deploy, and incident-response checklists
 Added CI security gate documentation and minimal workflow
 
 README updated with Security section
+
+2025-10-13 — DEV87 (release/versioning)
+
+Added SemVer bump script and GitHub Release workflow (tag-triggered)
+
+Added release notes template and renderers (changelog-section, release-notes)
+
+README wired with release usage
