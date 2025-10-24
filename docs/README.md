@@ -1,8 +1,7 @@
-# Documentation Index (EN)
+# Repository README (Docs copy)
 
-- `whitepaper/WHITEPAPER_1kUSD_DE.md` — Whitepaper (German)
-- `whitepaper/WHITEPAPER_1kUSD_EN.md` — Whitepaper (English)
-- `ARCHITECTURE.md` — Technical architecture overview (EN)
-- `API_SPECS.md` — High-level API & interface catalog (EN)
+This is a short entry point for the repository README.  
+Full README on GitHub: https://github.com/NeaBouli/1kUSD
 
-> Note: Repository language is English; whitepaper is provided in both German and English.
+## Release & Versioning
+See the "Release & Versioning" section in the GitHub README.
