@@ -337,3 +337,11 @@ Added event ABI lock for OneKUSD
 Added permit vectors JSON
 
 README updated with Token section
+
+2025-10-13 — DEV78 (collateral registry & metadata)
+
+Added ICollateralRegistry interface
+
+Added asset metadata JSON schema + samples
+
+Added collateral registry spec and README section

@@ -188,3 +188,13 @@ ABI lock (events): abi/locks/OneKUSD.events.json
 Permit vectors: tests/vectors/permit_vectors.json
 
 SDK helpers: clients/ts (permit builder/sign)
+
+Collateral Registry & Asset Metadata
+
+Interface: contracts/interfaces/ICollateralRegistry.sol
+
+JSON Schema: schemas/asset_metadata.schema.json
+
+Samples: tests/vectors/collateral_assets.sample.json
+
+Spec: docs/COLLATERAL_REGISTRY.md

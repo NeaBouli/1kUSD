@@ -80,3 +80,4 @@
 [SAFETY] DEV75 delivered: guards test plan, vectors, evaluators; README updated. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [PSM] DEV76 delivered: IPSM interface v1, revert catalog, event ABI lock, checker. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [TOKEN] DEV77 delivered: finalized token interface, pause semantics, ABI lock, permit vectors, README update. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[REGISTRY] DEV78 delivered: collateral registry interface, asset metadata schema/samples, spec, README update. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
