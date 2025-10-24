@@ -278,3 +278,15 @@ Samples: tests/vectors/dex_routing_hints.sample.json
 Price sanity vectors: tests/vectors/dex_price_sanity_vectors.json
 
 Check price sanity: node scripts/dex-price-sanity.mjs tests/vectors/dex_price_sanity_vectors.json
+
+Security Checklists & CI Gate
+
+Pre-deploy: security/checklists/PRE_DEPLOY.md
+
+Post-deploy: security/checklists/POST_DEPLOY.md
+
+Incident response: security/checklists/INCIDENT_RESPONSE.md
+
+CI Security Gate doc: docs/CI_SECURITY_GATE.md
+
+Workflow: .github/workflows/security-gate.yml

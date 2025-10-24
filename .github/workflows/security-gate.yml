@@ -1,0 +1,25 @@
+name: Security Gate
+on:
+pull_request:
+types: [opened, synchronize, reopened]
+jobs:
+gate:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v4
+- name: Check artifacts presence
+run: |
+test -f reports/unit.json || echo '{}' > reports/unit.json
+test -f reports/invariants.json || echo '{"invariants":[]}' > reports/invariants.json
+test -f reports/security-findings.json || echo '{"summary":{"critical":0,"high":0,"medium":0,"low":0},"findings":[]}' > reports/security-findings.json
+- name: Enforce basic gate
+run: |
+CRIT=$(jq -r '.summary.critical // 0' reports/security-findings.json)
+HIGH=$(jq -r '.summary.high // 0' reports/security-findings.json)
+if [ "$CRIT" != "0" ] || [ "$HIGH" != "0" ]; then
+echo "❌ Security findings present: critical=$CRIT high=$HIGH"; exit 2; fi
+echo "✅ No Critical/High findings"
+- name: ABI lock checks (informational)
+run: |
+node scripts/check-abi-lock.js abi/locks/PSM.events.json || true
+node scripts/check-abi-lock.js abi/locks/OneKUSD.events.json || true

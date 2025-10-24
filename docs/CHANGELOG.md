@@ -407,3 +407,11 @@ Added routing hints schema and sample JSON
 Added price sanity vectors and checker script
 
 README updated with DEX/AMM Integration section
+
+2025-10-13 — DEV86 (security checklists & CI gate)
+
+Added pre-deploy, post-deploy, and incident-response checklists
+
+Added CI security gate documentation and minimal workflow
+
+README updated with Security section
