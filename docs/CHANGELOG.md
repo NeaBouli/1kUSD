@@ -379,3 +379,11 @@ Added sample routes JSON
 Added evaluator script to rank policy-compliant routes
 
 README section for AutoConverter Router
+
+2025-10-13 — DEV83 (psm quote/exec alignment)
+
+Added executable invariants doc for quote vs exec
+
+Added cross-check script producing JSON and text reports
+
+README wired with usage instructions

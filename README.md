@@ -242,3 +242,11 @@ Router schema: converter/schemas/router.schema.json
 Sample routes: tests/vectors/routes.sample.json
 
 Evaluate routes: node scripts/route-eval.mjs converter/schemas/router.schema.json tests/vectors/routes.sample.json quotes.json
+
+Quote/Exec Alignment
+
+Invariants: docs/PSM_QUOTE_EXEC_ALIGNMENT.md
+
+Run cross-check: node scripts/psm-crosscheck.mjs tests/vectors/psm_quote_vectors.json
+
+Reports: reports/psm_quote_exec_report.json, reports/psm_quote_exec_summary.txt
