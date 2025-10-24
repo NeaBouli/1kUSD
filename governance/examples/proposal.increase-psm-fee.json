@@ -1,0 +1,15 @@
+{
+"version": "v1",
+"title": "Increase PSM fee to 15 bps",
+"description": "Adjust PARAM_PSM_FEE_BPS from 10 to 15 to fund operations; no change to other params.",
+"targets": ["0x0000000000000000000000000000000000000000"],
+"values": ["0"],
+"signatures": ["setUint(bytes32,uint256)"],
+"calldatas": ["0x" ],
+"eta": 0,
+"metadata": {
+"category": "PARAM_CHANGE",
+"risk": "LOW",
+"references": ["docs/PARAM_KEYS_CATALOG.md"]
+}
+}

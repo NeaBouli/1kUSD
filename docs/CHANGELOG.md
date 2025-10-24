@@ -353,3 +353,11 @@ Added final docs for Parameter Registry and Keys Catalog
 Added JSON schema and sample vectors for parameters
 
 Added JSON validator script (AJV) and README wiring
+
+2025-10-13 — DEV80 (governance ops)
+
+Added governance proposal JSON schema and example proposals
+
+Added queue/execute helper scripts (placeholder) and ops doc
+
+README updated with Governance Ops section

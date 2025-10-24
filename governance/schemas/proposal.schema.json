@@ -1,0 +1,43 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema
+",
+"title": "1kUSD Governance Proposal (v1)",
+"type": "object",
+"properties": {
+"version": { "type": "string", "const": "v1" },
+"title": { "type": "string", "minLength": 4 },
+"description": { "type": "string", "minLength": 10 },
+"targets": {
+"type": "array",
+"items": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" },
+"minItems": 1
+},
+"values": {
+"type": "array",
+"items": { "type": "string", "pattern": "^[0-9]+$" },
+"minItems": 1
+},
+"signatures": {
+"type": "array",
+"items": { "type": "string", "minLength": 1 },
+"minItems": 1
+},
+"calldatas": {
+"type": "array",
+"items": { "type": "string", "pattern": "^0x[0-9a-fA-F]*$" },
+"minItems": 1
+},
+"eta": { "type": "integer", "minimum": 0 },
+"metadata": {
+"type": "object",
+"properties": {
+"category": { "type": "string", "enum": ["PARAM_CHANGE","PAUSE","RESUME","TREASURY","MISC"] },
+"risk": { "type": "string", "enum": ["LOW","MEDIUM","HIGH"] },
+"references": { "type": "array", "items": { "type": "string" } }
+},
+"additionalProperties": false
+}
+},
+"required": ["version","title","description","targets","values","signatures","calldatas"],
+"additionalProperties": false
+}

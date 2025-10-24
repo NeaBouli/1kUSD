@@ -82,3 +82,4 @@
 [TOKEN] DEV77 delivered: finalized token interface, pause semantics, ABI lock, permit vectors, README update. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [REGISTRY] DEV78 delivered: collateral registry interface, asset metadata schema/samples, spec, README update. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [PARAMS] DEV79 delivered: registry docs, keys catalog, params schema/vectors, validator, README. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[GOV-OPS] DEV80 delivered: proposal schema, examples, queue/exec scripts, ops docs, README. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

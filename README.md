@@ -210,3 +210,15 @@ JSON Schema: schemas/params.schema.json
 Sample snapshot: tests/vectors/params.sample.json
 
 Validate: node scripts/validate-json.mjs schemas/params.schema.json tests/vectors/params.sample.json
+
+Governance Ops
+
+Schema: governance/schemas/proposal.schema.json
+
+Examples: governance/examples/*.json
+
+Queue: node scripts/gov-queue.mjs <proposal.json>
+
+Execute: node scripts/gov-exec.mjs <proposal.json>
+
+Validate JSON: node scripts/validate-json.mjs governance/schemas/proposal.schema.json <proposal.json>

@@ -1,0 +1,15 @@
+{
+"version": "v1",
+"title": "Emergency pause PSM module",
+"description": "Temporarily pause PSM via SafetyAutomata due to oracle anomaly until deviation normalizes.",
+"targets": ["0x0000000000000000000000000000000000000000"],
+"values": ["0"],
+"signatures": ["pause(bytes32)"],
+"calldatas": ["0x"],
+"eta": 0,
+"metadata": {
+"category": "PAUSE",
+"risk": "HIGH",
+"references": ["docs/SAFETY_GUARDS_TESTPLAN.md"]
+}
+}
