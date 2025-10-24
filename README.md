@@ -250,3 +250,17 @@ Invariants: docs/PSM_QUOTE_EXEC_ALIGNMENT.md
 Run cross-check: node scripts/psm-crosscheck.mjs tests/vectors/psm_quote_vectors.json
 
 Reports: reports/psm_quote_exec_report.json, reports/psm_quote_exec_summary.txt
+
+Indexing & Telemetry
+
+Spec: indexer/docs/INDEXING_TELEMETRY.md
+
+Event DTO schema: indexer/schemas/event_dto.schema.json
+
+PoR schema: indexer/schemas/por_rollup.schema.json
+
+Health schema: indexer/schemas/health.schema.json
+
+Validate PoR: node scripts/por-rollup-validate.mjs tests/vectors/por_rollup.sample.json
+
+Check health: node scripts/check-health.mjs tests/vectors/health.sample.json

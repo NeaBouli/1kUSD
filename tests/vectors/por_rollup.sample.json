@@ -1,0 +1,20 @@
+{
+"assets": [
+{
+"asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+"symbol": "USDC",
+"decimals": 6,
+"balanceRaw": "123000000",
+"pendingFeesRaw": "10000",
+"usdPriceE8": "100000000",
+"usdValueE8": "12300000000"
+}
+],
+"totals": {
+"balanceUSD_E8": "12300000000",
+"liabilities1kUSD_E8": "12290000000",
+"coverageRatioBps": 10081
+},
+"updatedAt": 1699999999,
+"finalityMark": "safe"
+}

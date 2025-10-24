@@ -86,3 +86,4 @@
 [ORACLE-ADAPTERS] DEV81 delivered: schema, catalog, examples, validator, README. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [CONVERTER] DEV82 delivered: router policy/schema, sample routes, evaluator, README. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [ALIGN] DEV83 delivered: quote/exec invariants doc, cross-check tool, README wiring. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[INDEXER] DEV84 delivered: telemetry spec, schemas (DTO/PoR/health), validators, vectors, README. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

@@ -1,0 +1,18 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema
+",
+"title": "Event DTO (v1)",
+"type": "object",
+"properties": {
+"type": { "type": "string" },
+"chainId": { "type": "integer", "minimum": 1 },
+"blockNumber": { "type": "integer", "minimum": 0 },
+"txHash": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+"logIndex": { "type": "integer", "minimum": 0 },
+"finalized": { "type": "boolean" },
+"payload": { "type": "object" },
+"ingestedAt": { "type": "string" }
+},
+"required": ["type","chainId","blockNumber","txHash","logIndex","finalized","payload"],
+"additionalProperties": false
+}

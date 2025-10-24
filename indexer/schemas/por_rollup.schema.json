@@ -1,0 +1,39 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema
+",
+"title": "Proof of Reserves Rollup (v1)",
+"type": "object",
+"properties": {
+"assets": {
+"type": "array",
+"items": {
+"type": "object",
+"properties": {
+"asset": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" },
+"symbol": { "type": "string" },
+"decimals": { "type": "integer", "minimum": 0, "maximum": 36 },
+"balanceRaw": { "type": "string", "pattern": "^[0-9]+$" },
+"pendingFeesRaw": { "type": "string", "pattern": "^[0-9]+$" },
+"usdPriceE8": { "type": "string", "pattern": "^[0-9]+$" },
+"usdValueE8": { "type": "string", "pattern": "^[0-9]+$" }
+},
+"required": ["asset","symbol","decimals","balanceRaw","pendingFeesRaw","usdPriceE8","usdValueE8"],
+"additionalProperties": false
+}
+},
+"totals": {
+"type": "object",
+"properties": {
+"balanceUSD_E8": { "type": "string", "pattern": "^[0-9]+$" },
+"liabilities1kUSD_E8": { "type": "string", "pattern": "^[0-9]+$" },
+"coverageRatioBps": { "type": "integer", "minimum": 0 }
+},
+"required": ["balanceUSD_E8","liabilities1kUSD_E8","coverageRatioBps"],
+"additionalProperties": false
+},
+"updatedAt": { "type": "integer", "minimum": 0 },
+"finalityMark": { "type": "string", "enum": ["unsafe","safe","final"] }
+},
+"required": ["assets","totals","updatedAt","finalityMark"],
+"additionalProperties": false
+}

@@ -387,3 +387,13 @@ Added executable invariants doc for quote vs exec
 Added cross-check script producing JSON and text reports
 
 README wired with usage instructions
+
+2025-10-13 — DEV84 (indexing/telemetry)
+
+Added indexing/telemetry spec (finality, reorgs, DTO map)
+
+Added JSON schemas: event DTO, PoR rollup, health
+
+Added validators/checkers and sample vectors
+
+README wired; reports folder outputs

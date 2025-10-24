@@ -1,0 +1,9 @@
+{
+"status": "ok",
+"components": [
+{ "name": "indexer", "status": "ok" },
+{ "name": "rpc", "status": "ok" }
+],
+"finality": { "confirmations": 12, "lastIndexed": 19000000, "lastFinalized": 18999988 },
+"versions": { "indexer": "1.0.0", "api": "1.0.0" }
+}

@@ -1,0 +1,43 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema
+",
+"title": "Health Endpoint (v1)",
+"type": "object",
+"properties": {
+"status": { "type": "string", "enum": ["ok","degraded","down"] },
+"components": {
+"type": "array",
+"items": {
+"type": "object",
+"properties": {
+"name": { "type": "string" },
+"status": { "type": "string", "enum": ["ok","degraded","down"] },
+"details": { "type": "object" }
+},
+"required": ["name","status"],
+"additionalProperties": true
+}
+},
+"finality": {
+"type": "object",
+"properties": {
+"confirmations": { "type": "integer", "minimum": 0 },
+"lastIndexed": { "type": "integer", "minimum": 0 },
+"lastFinalized": { "type": "integer", "minimum": 0 }
+},
+"required": ["confirmations","lastIndexed","lastFinalized"],
+"additionalProperties": false
+},
+"versions": {
+"type": "object",
+"properties": {
+"indexer": { "type": "string" },
+"api": { "type": "string" }
+},
+"required": ["indexer","api"],
+"additionalProperties": false
+}
+},
+"required": ["status","components","finality","versions"],
+"additionalProperties": false
+}
