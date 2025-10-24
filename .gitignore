@@ -10,3 +10,5 @@ coverage/
 # Logs & reports
 logs/*.tmp
 reports/*.tmp
+site/
+.venv/
