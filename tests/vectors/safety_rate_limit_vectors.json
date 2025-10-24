@@ -1,0 +1,43 @@
+{
+"meta": {
+"windowSec": 300,
+"maxAmount": "1000000000000000000000",
+"notes": "sliding window; amounts are gross per op"
+},
+"cases": [
+{
+"case": "Within limit single op",
+"ops": [
+{ "t": 0, "amount": "200000000000000000000" }
+],
+"expectRevertAt": -1
+},
+{
+"case": "Many ops accumulate under cap",
+"ops": [
+{ "t": 0, "amount": "200" },
+{ "t": 30, "amount": "300" },
+{ "t": 60, "amount": "400" }
+],
+"expectRevertAt": -1
+},
+{
+"case": "Exceed cap on last op",
+"ops": [
+{ "t": 0, "amount": "600" },
+{ "t": 60, "amount": "300" },
+{ "t": 120, "amount": "200" }
+],
+"expectRevertAt": 2
+},
+{
+"case": "Window slides — early op falls out",
+"ops": [
+{ "t": 0, "amount": "700" },
+{ "t": 290, "amount": "300" },
+{ "t": 301, "amount": "400" }
+],
+"expectRevertAt": -1
+}
+]
+}

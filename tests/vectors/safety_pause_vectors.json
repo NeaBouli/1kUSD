@@ -1,0 +1,23 @@
+{
+"meta": { "sunsetTs": 2000 },
+"cases": [
+{
+"case": "Pause blocks op; resume allows",
+"ops": [
+{ "t": 100, "action": "PAUSE", "actor": "guardian" },
+{ "t": 120, "action": "TRY_OP", "shouldRevert": true },
+{ "t": 150, "action": "RESUME", "actor": "dao" },
+{ "t": 160, "action": "TRY_OP", "shouldRevert": false }
+]
+},
+{
+"case": "Guardian sunset — pause after sunset fails",
+"ops": [
+{ "t": 1990, "action": "PAUSE", "actor": "guardian", "shouldRevert": false },
+{ "t": 2050, "action": "RESUME", "actor": "dao", "shouldRevert": false },
+{ "t": 2100, "action": "PAUSE", "actor": "guardian", "shouldRevert": true, "error": "GUARDIAN_EXPIRED" },
+{ "t": 2110, "action": "PAUSE", "actor": "dao", "shouldRevert": false }
+]
+}
+]
+}

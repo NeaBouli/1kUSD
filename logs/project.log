@@ -77,3 +77,4 @@
 [INDEXER] DEV72 delivered: read models schema, decode tables, queries, samples, README update. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [MATH] DEV73 delivered: PSM formulas, rounding rules, vectors, evaluator; README updated. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [VAULT] DEV74 delivered: accounting spec, fee accrual doc, vectors, evaluator; README updated. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[SAFETY] DEV75 delivered: guards test plan, vectors, evaluators; README updated. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')

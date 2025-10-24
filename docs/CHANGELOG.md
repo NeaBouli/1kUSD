@@ -305,3 +305,13 @@ Added fee accrual policy doc
 Added FoT/decimals vectors and TS evaluator script
 
 Updated README with Vault section
+
+2025-10-13 — DEV75 (safety guards)
+
+Added Safety guards test plan
+
+Added rate-limit vectors and evaluator (sliding window)
+
+Added pause/resume + guardian sunset vectors and evaluator
+
+README updated with Safety section

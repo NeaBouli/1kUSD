@@ -152,3 +152,17 @@ Fee accrual policy: docs/FEE_ACCRUAL.md
 Vectors: tests/vectors/vault_fot_vectors.json
 
 Eval helper: npx ts-node scripts/vault-eval.ts tests/vectors/vault_fot_vectors.json
+
+Safety Guards
+
+Test plan: docs/SAFETY_GUARDS_TESTPLAN.md
+
+Rate-limit vectors: tests/vectors/safety_rate_limit_vectors.json
+
+Pause/sunset vectors: tests/vectors/safety_pause_vectors.json
+
+Eval helpers:
+
+npx ts-node scripts/safety-rate-eval.ts tests/vectors/safety_rate_limit_vectors.json
+
+npx ts-node scripts/safety-pause-eval.ts tests/vectors/safety_pause_vectors.json
