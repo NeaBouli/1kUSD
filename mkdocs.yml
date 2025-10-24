@@ -1,21 +1,10 @@
 site_name: 1kUSD Docs
-site_description: Developer documentation for the 1kUSD protocol
 site_url: https://neabouli.github.io/1kUSD/
 repo_url: https://github.com/NeaBouli/1kUSD
-repo_name: NeaBouli/1kUSD
 theme:
   name: material
-  language: en
   features:
     - navigation.instant
-    - content.code.copy
-    - navigation.tracking
-markdown_extensions:
-  - admonition
-  - toc:
-      permalink: true
-  - tables
-  - footnotes
 nav:
   - Home: index.md
   - Architecture: ARCHITECTURE.md
@@ -29,12 +18,10 @@ nav:
   - Governance:
       - Parameter Registry: PARAMETER_REGISTRY.md
       - Keys Catalog: PARAM_KEYS_CATALOG.md
-      - Governance Ops: GOVERNANCE_OPS.md
   - Testing & CI:
       - Test Plan: testing/TESTPLAN.md
       - Invariants Map: testing/FORMAL_INVARIANTS_MAP.md
       - Security Analysis: testing/SECURITY_ANALYSIS.md
-      - CI Security Gate: CI_SECURITY_GATE.md
   - Indexing & Oracles:
       - Indexing & Telemetry: indexer/INDEXING_TELEMETRY.md
       - Oracle Adapters: ORACLE_ADAPTERS.md
@@ -43,3 +30,9 @@ nav:
   - Whitepaper:
       - Deutsch: whitepaper/WHITEPAPER_1kUSD_DE.md
       - English: whitepaper/WHITEPAPER_1kUSD_EN.md
+markdown_extensions:
+  - toc:
+      permalink: true
+  - tables
+  - footnotes
+use_directory_urls: true
