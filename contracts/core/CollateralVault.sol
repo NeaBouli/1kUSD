@@ -1,131 +1,72 @@
-// SPDX-License-Identifier: AGPL-3.0
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-import {IVault} from "../interfaces/IVault.sol";
+import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
-import {IParameterRegistry} from "../interfaces/IParameterRegistry.sol";
+import {ICollateralVault} from "../interfaces/ICollateralVault.sol";
 
-/// @title CollateralVault — minimal skeleton (+ batch getter)
-/// @notice DEV41: Admin/Wiring/Guards + Events as before. New: `areAssetsSupported(...)`.
-///         No asset transfers/accounting; balanceOf() stays a dummy (0).
-contract CollateralVault is IVault {
-    // --- Module IDs ---
-    bytes32 public constant MODULE_ID = keccak256("VAULT");
+contract CollateralVault is AccessControl, ICollateralVault {
+    using SafeERC20 for IERC20;
 
-    // --- Dependencies ---
-    ISafetyAutomata public immutable safety;
-    IParameterRegistry public registry; // updatable via admin
+    bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
+    bytes32 public constant DAO_ROLE   = keccak256("DAO_ROLE");
+    bytes32 public constant PSM_ROLE   = keccak256("PSM_ROLE");
 
-    // --- Admin ---
-    address public admin; // Timelock placeholder
+    ISafetyAutomata public safetyAutomata;
+    mapping(address => bool) public supportedAssets;
+    mapping(address => uint256) public balances;
 
-    // --- Supported Assets (toggle only; no amounts logic) ---
-    mapping(address => bool) private _isSupported;
+    event AssetSupported(address indexed asset, bool supported);
+    event AssetDeposited(address indexed asset, address indexed from, uint256 amount);
+    event AssetWithdrawn(address indexed asset, address indexed to, uint256 amount);
+    event FeesSwept(address indexed asset, address indexed treasury, uint256 amount);
 
-    // --- Events ---
-    event AdminChanged(address indexed oldAdmin, address indexed newAdmin);
-    event RegistryUpdated(address indexed oldRegistry, address indexed newRegistry);
-    event AssetSupportSet(address indexed asset, bool supported);
+    error UnsupportedAsset();
+    error PausedError();
+    error Unauthorized();
 
-    // Mirrors intended runtime events (no logic here)
-    event Deposit(address indexed asset, address indexed from, uint256 amount);
-    event Withdraw(address indexed asset, address indexed to, uint256 amount, bytes32 reason);
-
-    // --- Errors ---
-    error ACCESS_DENIED();
-    error PAUSED();
-    error ZERO_ADDRESS();
-    error ASSET_NOT_SUPPORTED();
-    error NOT_IMPLEMENTED();
-
-    // --- Ctor ---
-    constructor(address _admin, ISafetyAutomata _safety, IParameterRegistry _registry) {
-        if (_admin == address(0)) revert ZERO_ADDRESS();
-        if (address(_safety) == address(0)) revert ZERO_ADDRESS();
-        if (address(_registry) == address(0)) revert ZERO_ADDRESS();
-
-        admin = _admin;
-        safety = _safety;
-        registry = _registry;
-
-        emit AdminChanged(address(0), _admin);
-        emit RegistryUpdated(address(0), address(_registry));
+    constructor(address admin, address safety) {
+        _grantRole(DEFAULT_ADMIN_ROLE, admin);
+        _grantRole(ADMIN_ROLE, admin);
+        safetyAutomata = ISafetyAutomata(safety);
     }
 
-    // --- Modifiers ---
-    modifier onlyAdmin() {
-        if (msg.sender != admin) revert ACCESS_DENIED();
+    modifier whenNotPaused() {
+        if (address(safetyAutomata) != address(0) && safetyAutomata.isPaused()) revert PausedError();
         _;
     }
 
-    modifier notPaused() {
-        if (safety.isPaused(MODULE_ID)) revert PAUSED();
-        _;
+    function addSupportedAsset(address asset) external whenNotPaused {
+        if (!(hasRole(ADMIN_ROLE, msg.sender) || hasRole(DAO_ROLE, msg.sender))) revert Unauthorized();
+        supportedAssets[asset] = true;
+        emit AssetSupported(asset, true);
     }
 
-    modifier onlySupported(address asset) {
-        if (!_isSupported[asset]) revert ASSET_NOT_SUPPORTED();
-        _;
+    function isSupportedAsset(address asset) public view override returns (bool) {
+        return supportedAssets[asset];
     }
 
-    // --- Admin: roles/config ---
-    function setAdmin(address newAdmin) external onlyAdmin {
-        if (newAdmin == address(0)) revert ZERO_ADDRESS();
-        emit AdminChanged(admin, newAdmin);
-        admin = newAdmin;
+    function deposit(address asset, address from, uint256 amount) external override whenNotPaused onlyRole(PSM_ROLE) {
+        if (!supportedAssets[asset]) revert UnsupportedAsset();
+        IERC20(asset).safeTransferFrom(from, address(this), amount);
+        balances[asset] += amount;
+        emit AssetDeposited(asset, from, amount);
     }
 
-    function setRegistry(IParameterRegistry newRegistry) external onlyAdmin {
-        if (address(newRegistry) == address(0)) revert ZERO_ADDRESS();
-        emit RegistryUpdated(address(registry), address(newRegistry));
-        registry = newRegistry;
+    function withdraw(address asset, address to, uint256 amount) external override whenNotPaused {
+        if (!(hasRole(PSM_ROLE, msg.sender) || hasRole(DAO_ROLE, msg.sender))) revert Unauthorized();
+        if (!supportedAssets[asset]) revert UnsupportedAsset();
+        balances[asset] -= amount;
+        IERC20(asset).safeTransfer(to, amount);
+        emit AssetWithdrawn(asset, to, amount);
     }
 
-    function setAssetSupported(address asset, bool supported) external onlyAdmin {
-        if (asset == address(0)) revert ZERO_ADDRESS();
-        _isSupported[asset] = supported;
-        emit AssetSupportSet(asset, supported);
-    }
-
-    // --- IVault: surface (stubs) ---
-    function deposit(address asset, address from, uint256 amount)
-        external
-        override
-        notPaused
-        onlySupported(asset)
-    {
-        // DEV41: no transfers/accounting — stub only.
-        asset; from; amount;
-        revert NOT_IMPLEMENTED();
-    }
-
-    function withdraw(address asset, address to, uint256 amount, bytes32 reason)
-        external
-        override
-        notPaused
-        onlySupported(asset)
-    {
-        // DEV41: stub — real logic to be added later.
-        asset; to; amount; reason;
-        revert NOT_IMPLEMENTED();
-    }
-
-    // --- Views ---
-    function balanceOf(address /*asset*/) external pure override returns (uint256) {
-        // DEV41: dummy 0 until accounting is implemented.
-        return 0;
-    }
-
-    function isAssetSupported(address asset) external view override returns (bool) {
-        return _isSupported[asset];
-    }
-
-    /// @notice Batch check for UIs/SDKs without on-chain mapping iteration.
-    function areAssetsSupported(address[] calldata assets) external view returns (bool[] memory out) {
-        uint256 n = assets.length;
-        out = new bool[](n);
-        for (uint256 i = 0; i < n; i++) {
-            out[i] = _isSupported[assets[i]];
-        }
+    function sweepFees(address asset, address treasury, uint256 amount) external whenNotPaused {
+        if (!hasRole(DAO_ROLE, msg.sender)) revert Unauthorized();
+        IERC20(asset).safeTransfer(treasury, amount);
+        balances[asset] -= amount;
+        emit FeesSwept(asset, treasury, amount);
     }
 }
