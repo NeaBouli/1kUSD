@@ -1,3 +1,4 @@
+# Workflow temporarily disabled (replaced by Solidity CI)
 name: Deploy (skeleton)
 on:
   workflow_dispatch:

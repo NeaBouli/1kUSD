@@ -1,3 +1,4 @@
+# Workflow temporarily disabled (replaced by Solidity CI)
 name: Build (skeleton)
 on:
   pull_request:
