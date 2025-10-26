@@ -9,6 +9,25 @@ nav:
       - English: whitepaper/WHITEPAPER_1kUSD_EN.md
   - FAQ: FAQ.md
   - Analyses & Articles: ANALYSIS_KASPA_STABLECOINS.md
+  - Architecture:
+      - System Overview: ARCHITECTURE.md
+      - Module IDs: MODULE_IDS.md
+      - Indexer & Oracles: indexer/INDEXING_TELEMETRY.md
+      - Converter Router: converter/AUTOCONVERTER_ROUTER.md
+  - Tokenomics:
+      - Core Token Model: WHITEPAPER_1kUSD.md
+      - Fee Accrual: FEE_ACCRUAL.md
+      - Vault Accounting: VAULT_ACCOUNTING.md
+  - Security & Safety:
+      - Safety Guardian: SAFETY_GUARDIAN_CHECKLIST.md
+      - Threat Model: THREAT_MODEL.md
+      - Security Analysis: testing/SECURITY_ANALYSIS.md
+  - Developers:
+      - Onboarding: DEVELOPER_ONBOARDING.md
+      - Governance Params: GOVERNANCE_PARAM_WRITES.md
+      - Oracle Spec: specs/ORACLE_AGGREGATOR_SPEC.md
+      - PSM Spec: specs/PSM_SPEC.md
+      - Proof of Reserves: specs/PROOF_OF_RESERVES_SPEC.md
 
 markdown_extensions:
   - toc:
