@@ -1,7 +1,21 @@
-# Indexing & Telemetry
+# Indexer & Telemetry
 
-[View on GitHub](https://github.com/NeaBouli/1kUSD/blob/main/indexer/docs/INDEXING_TELEMETRY.md)
+This document describes the **indexing layer** and **telemetry feeds** of the 1kUSD protocol.
 
-Back to Home: [Home](/1kUSD/)
+It covers the structure, purpose, and API exposure of the on-chain data indexer,
+including key metrics, oracle sync timing, and Proof-of-Reserve updates.
 
-Stub page for documentation site navigation. See repository docs under `indexer/docs/INDEXING_TELEMETRY.md` for full content.
+---
+
+## 📡 Overview
+
+The **Indexer** collects all on-chain events (Vault, PSM, Oracle, Governance)  
+and exposes structured data for monitoring dashboards and Proof-of-Reserve verification.
+
+---
+
+## 🔗 Repository Reference
+
+[View Full Spec on GitHub →](https://github.com/NeaBouli/1kUSD/blob/main/docs/indexer/INDEXING_TELEMETRY.md)
+
+Back to [Home](../index.md)
