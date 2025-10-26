@@ -15,7 +15,7 @@ nav:
       - Indexer & Oracles: indexer/INDEXING_TELEMETRY.md
       - Converter Router: converter/AUTOCONVERTER_ROUTER.md
   - Tokenomics:
-      - Core Token Model: WHITEPAPER_1kUSD.md
+      - Core Token Model: specs/TOKEN_SPEC.md
       - Fee Accrual: FEE_ACCRUAL.md
       - Vault Accounting: VAULT_ACCOUNTING.md
   - Security & Safety:
