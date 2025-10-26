@@ -300,3 +300,13 @@ Notes: node scripts/release-notes.mjs vX.Y.Z [prevTag]
 Workflow: .github/workflows/release.yml (on tags v*..)
 
 Template: .github/release/RELEASE_NOTES_TEMPLATE.md
+
+## Project Status
+
+[![CI](https://img.shields.io/github/actions/workflow/status/NeaBouli/1kUSD/ci.yml?branch=main&label=CI)](https://github.com/NeaBouli/1kUSD/actions/workflows/ci.yml)
+[![Foundry Tests](https://img.shields.io/github/actions/workflow/status/NeaBouli/1kUSD/foundry-test.yml?branch=main&label=Foundry%20Tests)](https://github.com/NeaBouli/1kUSD/actions/workflows/foundry-test.yml)
+[![Docs Deploy](https://img.shields.io/github/deployments/NeaBouli/1kUSD/github-pages?label=Docs)](https://github.com/NeaBouli/1kUSD/deployments)
+![License](https://img.shields.io/github/license/NeaBouli/1kUSD)
+![Last commit](https://img.shields.io/github/last-commit/NeaBouli/1kUSD)
+
+**Docs:** https://neabouli.github.io/1kUSD/
