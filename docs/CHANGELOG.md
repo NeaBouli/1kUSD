@@ -423,3 +423,5 @@ Added SemVer bump script and GitHub Release workflow (tag-triggered)
 Added release notes template and renderers (changelog-section, release-notes)
 
 README wired with release usage
+
+2025-10-26 – feat: add SafetyNet & GuardianMonitor (DEV-5)
