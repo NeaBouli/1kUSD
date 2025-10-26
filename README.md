@@ -310,3 +310,15 @@ Template: .github/release/RELEASE_NOTES_TEMPLATE.md
 ![Last commit](https://img.shields.io/github/last-commit/NeaBouli/1kUSD)
 
 **Docs:** https://neabouli.github.io/1kUSD/
+
+---
+
+## 🔄 Docs Deployment
+
+The documentation is automatically deployed via GitHub Actions  
+on each push to the **main** branch.  
+Manual deploy (local test):
+
+```bash
+mkdocs build
+mkdocs serve
