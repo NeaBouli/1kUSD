@@ -7,7 +7,6 @@ theme:
     - navigation.instant
 nav:
   - Home: /1kUSD/
-  - FAQ: FAQ.md
   - Architecture: ARCHITECTURE.md
   - Protocol Specs:
       - Token: specs/TOKEN_SPEC.md
@@ -37,6 +36,3 @@ markdown_extensions:
   - tables
   - footnotes
 use_directory_urls: true
-  - Analyses & Articles: ANALYSIS_KASPA_STABLECOINS.md
-  - FAQ: FAQ.md
-  - "Analyses & Articles": ANALYSIS_KASPA_STABLECOINS.md
