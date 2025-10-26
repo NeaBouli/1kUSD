@@ -1,19 +1,9 @@
 [profile.default]
-src = "contracts"
+src = "../contracts"
 out = "out"
 libs = ["lib"]
-solc_version = "0.8.24"
 optimizer = true
 optimizer_runs = 200
-evm_version = "paris"
-bytecode_hash = "ipfs"
-cbor_metadata = false
-fs_permissions = [{ access = "read", path = "./" }]
-
-[fmt]
-line_length = 100
-number_underscore = "thousands"
-
-[etherscan]
-# Fill per-chain when needed
-# <chain> = { key = "${ETHERSCAN_API_KEY}" }
+evm_version = "shanghai"
+ffi = false
+gas_reports = ["*"]
