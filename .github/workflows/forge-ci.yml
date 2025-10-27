@@ -1,0 +1,43 @@
+name: Foundry CI
+
+on:
+  push:
+    branches: [ main, dev*, feature/* ]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Install dependencies
+        run: |
+          forge install
+          forge update
+
+      - name: Format check
+        run: forge fmt --check
+
+      - name: Build contracts
+        run: forge build --sizes
+
+      - name: Run tests
+        run: forge test -vvv --gas-report
+
+      - name: Upload failed build artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forge-logs
+          path: |
+            out
+            foundry.toml
+            .forge-snapshots/
