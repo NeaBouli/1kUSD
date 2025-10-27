@@ -13,6 +13,10 @@ contract TestGuardianMonitor is Test {
 
     function testPingReturnsActive() public {
         string memory response = gm.ping();
-        assertEq(response, "GuardianMonitor active", "GuardianMonitor.ping() should return expected string");
+        assertEq(
+            response,
+            "GuardianMonitor active",
+            "GuardianMonitor.ping() should return expected string"
+        );
     }
 }

@@ -13,7 +13,7 @@ contract ParameterRegistry is IParameterRegistry {
     // --- Storage ---
     mapping(bytes32 => uint256) private _uints;
     mapping(bytes32 => address) private _addresses;
-    mapping(bytes32 => bool)    private _bools;
+    mapping(bytes32 => bool) private _bools;
 
     // --- Events ---
     event AdminChanged(address indexed oldAdmin, address indexed newAdmin);

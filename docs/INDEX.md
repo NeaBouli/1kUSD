@@ -1,17 +1,13 @@
-# 1kUSD — Developer Documentation
+# 🪙 1kUSD Stablecoin Protocol
 
-Welcome to the 1kUSD protocol docs site.
+Welcome to the **1kUSD Documentation Portal**.
 
-## Quick Links
-- [Architecture](ARCHITECTURE.md)
-- [Parameter Registry](PARAMETER_REGISTRY.md) · [Keys Catalog](PARAM_KEYS_CATALOG.md)
-- [Oracle Adapters](ORACLE_ADAPTERS.md)
-- [AutoConverter Router](converter/AUTOCONVERTER_ROUTER.md)
-- [DEX/AMM Integration](integrations/DEX_INTEGRATION.md)
-- [Indexing & Telemetry](indexer/INDEXING_TELEMETRY.md)
-- [Security Checklists](SECURITY_PREAUDIT_README.md)
-- [Release & Versioning](https://github.com/NeaBouli/1kUSD#release--versioning)
+This site provides:
+- 📘 Technical specifications (`specs/`)
+- ⚙️ Smart contract architecture (`contracts/core/`)
+- 🧠 Governance and safety modules (`safety/`)
+- 💡 Integration guides and testing notes (`integrations/`, `testing/`)
 
-## Whitepaper
-- German (DE): [WHITEPAPER_1kUSD_DE](whitepaper/WHITEPAPER_1kUSD_DE.md)
-- English (EN): [WHITEPAPER_1kUSD_EN](whitepaper/WHITEPAPER_1kUSD_EN.md)
+For the full GitHub repository, visit:
+👉 [NeaBouli/1kUSD](https://github.com/NeaBouli/1kUSD)
+

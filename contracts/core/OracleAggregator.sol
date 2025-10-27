@@ -24,7 +24,9 @@ contract OracleAggregator is IOracleAggregator {
     // Events
     event AdminChanged(address indexed oldAdmin, address indexed newAdmin);
     event RegistryUpdated(address indexed oldRegistry, address indexed newRegistry);
-    event OracleUpdated(address indexed asset, int256 price, uint8 decimals, bool healthy, uint256 updatedAt);
+    event OracleUpdated(
+        address indexed asset, int256 price, uint8 decimals, bool healthy, uint256 updatedAt
+    );
 
     // Errors
     error ACCESS_DENIED();
@@ -72,12 +74,13 @@ contract OracleAggregator is IOracleAggregator {
     /// @param price Price value scaled by `decimals`
     /// @param decimals Number of decimals of price value
     /// @param healthy Health flag for guards (true = ok)
-    function setPriceMock(address asset, int256 price, uint8 decimals, bool healthy) external onlyAdmin notPaused {
+    function setPriceMock(address asset, int256 price, uint8 decimals, bool healthy)
+        external
+        onlyAdmin
+        notPaused
+    {
         _mockPrice[asset] = Price({
-            price: price,
-            decimals: decimals,
-            healthy: healthy,
-            updatedAt: block.timestamp
+            price: price, decimals: decimals, healthy: healthy, updatedAt: block.timestamp
         });
         emit OracleUpdated(asset, price, decimals, healthy, block.timestamp);
     }

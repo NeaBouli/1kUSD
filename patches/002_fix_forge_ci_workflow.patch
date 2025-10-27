@@ -1,0 +1,22 @@
+--- a/.github/workflows/forge-ci.yml
++++ b/.github/workflows/forge-ci.yml
+@@
+       - name: Install dependencies
+         run: |
+           forge install
+           forge update
+
++      - name: CI Setup (deterministic)
++        run: |
++          bash scripts/ci_setup.sh
++
++      - name: Verify remappings.txt
++        run: |
++          echo "🔎 Checking remappings..."
++          if grep -q '@openzeppelin' remappings.txt; then
++            echo "✅ remappings OK"
++          else
++            echo "❌ remappings missing"
++            cat remappings.txt || true
++            exit 1
++          fi

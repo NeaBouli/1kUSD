@@ -1,0 +1,28 @@
+--- a/contracts/core/SafetyAutomata.sol
++++ b/contracts/core/SafetyAutomata.sol
+@@ -9,10 +9,19 @@ contract SafetyAutomata is AccessControl, ISafetyAutomata {
+     bytes32 public constant MODULE_ID = keccak256("SAFETY_AUTOMATA");
+-    bool private _paused;
++    // Track pause states per module (e.g. PSM, Vault, Registry)
++    mapping(bytes32 => bool) private _paused;
+ 
+     constructor(uint256 _sunset) {
+         guardianSunset = _sunset;
+         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+     }
+-
+-    function isPaused(bytes32) external pure override returns (bool) {
+-        return false;
+-    }
++    
++    /// @notice Returns whether a module is currently paused.
++    /// @param moduleId The hashed identifier of the module.
++    /// @return True if the module is paused, false otherwise.
++    function isPaused(bytes32 moduleId) external view override returns (bool) {
++        return _paused[moduleId];
++    }
++
++    /// @notice Return whether a module is enabled (inverse of paused).
++    function isModuleEnabled(bytes32 moduleId) external view returns (bool) {
++        return !_paused[moduleId];
++    }

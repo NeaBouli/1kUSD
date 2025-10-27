@@ -1,0 +1,14 @@
+--- a/contracts/core/PegStabilityModule.sol
++++ b/contracts/core/PegStabilityModule.sol
+@@ -24,6 +24,10 @@
+     constructor(address admin, address _oneKUSD, address _vault, address _auto, address _reg) {
+         _grantRole(DEFAULT_ADMIN_ROLE, admin);
+         oneKUSD = OneKUSD(_oneKUSD);
+         vault = ICollateralVault(_vault);
+         safetyAutomata = ISafetyAutomata(_auto);
+         parameterRegistry = IParameterRegistry(_reg);
+     }
++
++    // -------- Events --------
++    /// @notice Emitted when mint/redeem fees are updated by admin
++    event FeesUpdated(uint256 newMintFee, uint256 newRedeemFee);

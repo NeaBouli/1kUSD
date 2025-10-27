@@ -95,7 +95,9 @@ contract CollateralVault is IVault {
         onlySupported(asset)
     {
         // DEV41: no transfers/accounting — stub only.
-        asset; from; amount;
+        asset;
+        from;
+        amount;
         revert NOT_IMPLEMENTED();
     }
 
@@ -106,12 +108,22 @@ contract CollateralVault is IVault {
         onlySupported(asset)
     {
         // DEV41: stub — real logic to be added later.
-        asset; to; amount; reason;
+        asset;
+        to;
+        amount;
+        reason;
         revert NOT_IMPLEMENTED();
     }
 
     // --- Views ---
-    function balanceOf(address /*asset*/) external pure override returns (uint256) {
+    function balanceOf(
+        address /*asset*/
+    )
+        external
+        pure
+        override
+        returns (uint256)
+    {
         // DEV41: dummy 0 until accounting is implemented.
         return 0;
     }
@@ -121,7 +133,11 @@ contract CollateralVault is IVault {
     }
 
     /// @notice Batch check for UIs/SDKs without on-chain mapping iteration.
-    function areAssetsSupported(address[] calldata assets) external view returns (bool[] memory out) {
+    function areAssetsSupported(address[] calldata assets)
+        external
+        view
+        returns (bool[] memory out)
+    {
         uint256 n = assets.length;
         out = new bool[](n);
         for (uint256 i = 0; i < n; i++) {

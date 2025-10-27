@@ -8,14 +8,14 @@ import {IERC2612} from "../interfaces/IERC2612.sol";
 /// @notice DEV43: Adds Permit. Transfers are always allowed; pause only gates mint/burn.
 contract OneKUSD is I1kUSD, IERC2612 {
     // --- Metadata ---
-    string private constant _NAME   = "1kUSD";
+    string private constant _NAME = "1kUSD";
     string private constant _SYMBOL = "1kUSD";
-    uint8  private constant _DECIMALS = 18;
+    uint8 private constant _DECIMALS = 18;
 
     // --- Admin & Roles ---
-    address public admin;                      // Timelock later
-    mapping(address => bool) public isMinter;  // ROLE_MINTER
-    mapping(address => bool) public isBurner;  // ROLE_BURNER
+    address public admin; // Timelock later
+    mapping(address => bool) public isMinter; // ROLE_MINTER
+    mapping(address => bool) public isBurner; // ROLE_BURNER
 
     // --- Pause (applies to mint/burn only) ---
     bool public paused;
@@ -27,10 +27,12 @@ contract OneKUSD is I1kUSD, IERC2612 {
 
     // --- ERC-2612 (EIP-712) ---
     // EIP-712 Domain: name, version "1", chainId, verifyingContract
-    bytes32 private constant _EIP712_DOMAIN_TYPEHASH =
-        keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)");
-    bytes32 private constant _PERMIT_TYPEHASH =
-        keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)");
+    bytes32 private constant _EIP712_DOMAIN_TYPEHASH = keccak256(
+        "EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"
+    );
+    bytes32 private constant _PERMIT_TYPEHASH = keccak256(
+        "Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)"
+    );
 
     uint256 private immutable _INITIAL_CHAIN_ID;
     bytes32 private immutable _INITIAL_DOMAIN_SEPARATOR;
@@ -67,14 +69,20 @@ contract OneKUSD is I1kUSD, IERC2612 {
     }
 
     // --- EIP-712 helpers ---
-    function _buildDomainSeparator(uint256 chainId, address verifying) private pure returns (bytes32) {
-        return keccak256(abi.encode(
-            _EIP712_DOMAIN_TYPEHASH,
-            keccak256(bytes(_NAME)),
-            keccak256(bytes("1")),
-            chainId,
-            verifying
-        ));
+    function _buildDomainSeparator(uint256 chainId, address verifying)
+        private
+        pure
+        returns (bytes32)
+    {
+        return keccak256(
+            abi.encode(
+                _EIP712_DOMAIN_TYPEHASH,
+                keccak256(bytes(_NAME)),
+                keccak256(bytes("1")),
+                chainId,
+                verifying
+            )
+        );
     }
 
     // IERC2612
@@ -89,25 +97,27 @@ contract OneKUSD is I1kUSD, IERC2612 {
     }
 
     function permit(
-        address owner, address spender, uint256 value, uint256 deadline,
-        uint8 v, bytes32 r, bytes32 s
+        address owner,
+        address spender,
+        uint256 value,
+        uint256 deadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
     ) external {
         if (deadline < block.timestamp) revert DEADLINE_EXPIRED();
         if (owner == address(0) || spender == address(0)) revert ZERO_ADDRESS();
 
         // EIP-712 digest
-        bytes32 digest = keccak256(abi.encodePacked(
-            "\x19\x01",
-            DOMAIN_SEPARATOR(),
-            keccak256(abi.encode(
-                _PERMIT_TYPEHASH,
-                owner,
-                spender,
-                value,
-                _nonces[owner]++,
-                deadline
-            ))
-        ));
+        bytes32 digest = keccak256(
+            abi.encodePacked(
+                "\x19\x01",
+                DOMAIN_SEPARATOR(),
+                keccak256(
+                    abi.encode(_PERMIT_TYPEHASH, owner, spender, value, _nonces[owner]++, deadline)
+                )
+            )
+        );
 
         address recovered = ecrecover(digest, v, r, s);
         if (recovered == address(0) || recovered != owner) revert INVALID_SIGNER();
@@ -127,12 +137,29 @@ contract OneKUSD is I1kUSD, IERC2612 {
     }
 
     // --- ERC20 view ---
-    function name() external pure returns (string memory) { return _NAME; }
-    function symbol() external pure returns (string memory) { return _SYMBOL; }
-    function decimals() external pure returns (uint8) { return _DECIMALS; }
-    function totalSupply() external view returns (uint256) { return _totalSupply; }
-    function balanceOf(address a) external view returns (uint256) { return _balances[a]; }
-    function allowance(address o, address s) external view returns (uint256) { return _allowances[o][s]; }
+    function name() external pure returns (string memory) {
+        return _NAME;
+    }
+
+    function symbol() external pure returns (string memory) {
+        return _SYMBOL;
+    }
+
+    function decimals() external pure returns (uint8) {
+        return _DECIMALS;
+    }
+
+    function totalSupply() external view returns (uint256) {
+        return _totalSupply;
+    }
+
+    function balanceOf(address a) external view returns (uint256) {
+        return _balances[a];
+    }
+
+    function allowance(address o, address s) external view returns (uint256) {
+        return _allowances[o][s];
+    }
 
     // --- ERC20 write ---
     function approve(address spender, uint256 amount) external returns (bool) {
@@ -148,7 +175,9 @@ contract OneKUSD is I1kUSD, IERC2612 {
     function transferFrom(address from, address to, uint256 amount) external returns (bool) {
         uint256 current = _allowances[from][msg.sender];
         if (current < amount) revert INSUFFICIENT_ALLOWANCE();
-        unchecked { _allowances[from][msg.sender] = current - amount; }
+        unchecked {
+            _allowances[from][msg.sender] = current - amount;
+        }
         emit Approval(from, msg.sender, _allowances[from][msg.sender]);
         _transfer(from, to, amount);
         return true;
