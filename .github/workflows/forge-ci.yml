@@ -4,12 +4,13 @@ on:
   push:
     branches: [ main ]
   pull_request:
+    branches: [ main ]
 
 jobs:
-  build-test:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Foundry
@@ -22,31 +23,26 @@ jobs:
           forge install
           forge update
 
-      - name: Ensure OpenZeppelin is available
+      - name: CI Setup (deterministic)
         run: |
-          echo "📦 Installing OpenZeppelin Contracts..."
-          if [ ! -d "lib/openzeppelin-contracts" ]; then
-            forge install OpenZeppelin/openzeppelin-contracts --no-commit
+          bash scripts/ci_setup.sh
+
+      - name: Verify remappings.txt
+        run: |
+          echo "🔎 Checking remappings..."
+          if grep -q '@openzeppelin' remappings.txt; then
+            echo "✅ remappings OK"
+          else
+            echo "❌ remappings missing"
+            cat remappings.txt || true
+            exit 1
           fi
-          echo "✅ OpenZeppelin Contracts installed."
 
-      - name: Ensure remappings.txt exists
-        run: |
-          echo "🔧 Generating remappings.txt for CI..."
-          echo '@openzeppelin/=lib/openzeppelin-contracts/' > remappings.txt
-          cat remappings.txt
+      - name: Build contracts
+        run: forge build
 
-      - name: Verify OpenZeppelin presence
-        run: |
-          test -d lib/openzeppelin-contracts && echo "✅ OZ directory OK" || (echo "❌ OZ missing" && exit 1)
+      - name: Run tests
+        run: forge test -vv
 
-      - name: Build Docs (non-strict)
-        run: |
-          echo "ℹ️ Building documentation in non-strict mode to avoid warnings breaking CI..."
-          mkdocs build --verbose --clean || true
-
-      - name: Run Foundry Build & Tests
-        run: |
-          forge clean
-          forge build
-          forge test -vv
+      - name: Docs build (non-strict)
+        run: mkdocs build --clean --verbose || true
