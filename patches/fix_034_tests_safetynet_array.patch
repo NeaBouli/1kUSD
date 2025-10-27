@@ -1,0 +1,22 @@
+# Patch 034 – Fix undeclared identifier `w` in TestSafetyNet.t.sol
+# Ziel: Array w korrekt deklarieren, um grantWatchers(w) nutzbar zu machen.
+
+--- a/foundry/test/TestSafetyNet.t.sol
++++ b/foundry/test/TestSafetyNet.t.sol
+@@ -13,10 +13,15 @@
+     function setUp() public {
+         vm.prank(admin);
+         net = new SafetyNet(admin);
+         vm.startPrank(admin);
+-
+-        w[0] = watcher;
+-        net.grantWatchers(w);
++        // Array 'w' für Watcher-Adressen anlegen
++        address ;
++        w[0] = watcher;
++
++        // Watcher hinzufügen
++        net.grantWatchers(w);
++
+         vm.stopPrank();
+     }

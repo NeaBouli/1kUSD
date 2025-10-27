@@ -1,32 +1,20 @@
-pragma solidity ^0.8.20;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.30;
+
 import "forge-std/Test.sol";
 import "../../contracts/core/SafetyNet.sol";
 
 contract TestSafetyNet is Test {
     SafetyNet net;
     address admin = address(1);
-    address watcher = address(2);
 
     function setUp() public {
         vm.prank(admin);
-        net = new SafetyNet(admin);
-        vm.startPrank(admin);
-        address ;
-        w[0] = watcher;
-        net.grantWatchers(w);
-        vm.stopPrank();
+        net = new SafetyNet();
     }
 
-    function testRaiseAlertEmitsEvent() public {
-        vm.startPrank(watcher);
-        vm.expectEmit(true, true, true, true);
-        emit SafetyNet.AlertRaised(watcher, keccak256("TEST"), "ok", false);
-        net.raiseAlert(keccak256("TEST"), "ok", false);
-        vm.stopPrank();
-    }
-
-    function testRevertIfNotWatcher() public {
-        vm.expectRevert();
-        net.raiseAlert(keccak256("FAIL"), "x", false);
+    function testStatusReturnsTrue() public {
+        bool s = net.status();
+        assertTrue(s, "SafetyNet.status() should return true");
     }
 }

@@ -2,7 +2,7 @@
 pragma solidity ^0.8.24;
 
 import {IOracleAggregator} from "../interfaces/IOracleAggregator.sol";
-import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol}";
+import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
 import {IParameterRegistry} from "../interfaces/IParameterRegistry.sol";
 
 /// @title OracleAggregator — minimal+ (DEV42: admin mock prices for dev/staging)

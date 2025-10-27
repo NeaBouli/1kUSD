@@ -1,0 +1,19 @@
+site_name: 1kUSD Docs
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Whitepaper:
+      - Deutsch: whitepaper/WHITEPAPER_1kUSD_DE.md
+      - English: whitepaper/WHITEPAPER_1kUSD_EN.md
+  - FAQ: FAQ.md
+  - Analyses & Articles: ANALYSIS_KASPA_STABLECOINS.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - tables
+  - footnotes
+
+use_directory_urls: true

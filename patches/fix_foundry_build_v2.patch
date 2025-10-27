@@ -1,0 +1,62 @@
+--- a/contracts/core/PegStabilityModule.sol
++++ b/contracts/core/PegStabilityModule.sol
+@@
+-contract PegStabilityModule is IPSM {
+-    event SwapTo1kUSD(address indexed user, address indexed tokenIn, uint256 amountIn, uint256 fee, uint256 minted, uint256 ts);
+-    event SwapFrom1kUSD(address indexed user, address indexed tokenOut, uint256 amountIn, uint256 fee, uint256 paidOut, uint256 ts);
++contract PegStabilityModule is IPSM {
++    // Removed duplicate event declarations (already defined in IPSM)
+@@
+     // --------------------------------------------------------------
+     // Interface implementations (stubs for now)
+     // --------------------------------------------------------------
++
++    // Implement IPSM stub functions for build compatibility
++    function quoteTo1kUSD(address /*tokenIn*/, uint256 /*amountIn*/)
++        external
++        pure
++        override
++        returns (uint256)
++    {
++        return 0;
++    }
++
++    function quoteFrom1kUSD(address /*tokenOut*/, uint256 /*amountIn*/)
++        external
++        pure
++        override
++        returns (uint256)
++    {
++        return 0;
++    }
+@@
+-        override
++        // removed invalid override
+@@
+-        override
++        // removed invalid override
+--- a/contracts/core/SafetyAutomata.sol
++++ b/contracts/core/SafetyAutomata.sol
+@@
+-contract SafetyAutomata is AccessControl {
++import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
++
++contract SafetyAutomata is AccessControl, ISafetyAutomata {
+@@
+   }
++
++  // Stub interface compliance
++  function isModuleEnabled(bytes32 /*moduleId*/)
++      external
++      pure
++      override
++      returns (bool)
++  {
++      return true;
++  }
+--- a/foundry/test/TestSafetyNet.t.sol
++++ b/foundry/test/TestSafetyNet.t.sol
+@@
+-        net = new SafetyNet(admin);
++        // Adjusted constructor to match actual contract signature
++        net = new SafetyNet();

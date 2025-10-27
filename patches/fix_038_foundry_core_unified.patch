@@ -1,0 +1,41 @@
+*** Begin Patch
+*** Update File: foundry/test/TestSafetyNet.t.sol
+@@
+     function setUp() public {
+-        vm.prank(admin);
+-        net = new SafetyNet(admin);
++        vm.prank(admin);
++        net = new SafetyNet();
+     }
+
+     function testStatusReturnsTrue() public {
+*** Update File: contracts/core/SafetyAutomata.sol
+@@
+     function status() external pure returns (bool) {
+         return true;
+     }
++
++    // Added missing interface function for ISafetyAutomata
++    function isModuleEnabled(bytes32) external pure override returns (bool) {
++        return true;
++    }
+ }
+*** Update File: contracts/core/PegStabilityModule.sol
+@@
+-    event SwapTo1kUSD(address indexed user, address indexed tokenIn, uint256 amountIn, uint256 fee, uint256 minted, uint256 ts);
+-    event SwapFrom1kUSD(address indexed user, address indexed tokenOut, uint256 amountIn, uint256 fee, uint256 paidOut, uint256 ts);
++    // Removed duplicate events already defined in IPSM interface
+@@
+     // --------------------------------------------------------------
+     // Interface implementations (stubs for now)
+     // --------------------------------------------------------------
++
++    // Implement interface stub functions
++    function quoteTo1kUSD(address, uint256) external pure override returns (uint256) {
++        return 0;
++    }
++
++    function quoteFrom1kUSD(address, uint256) external pure override returns (uint256) {
++        return 0;
++    }
+*** End Patch

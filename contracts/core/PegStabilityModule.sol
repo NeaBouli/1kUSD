@@ -1,177 +1,71 @@
-// SPDX-License-Identifier: AGPL-3.0
-pragma solidity ^0.8.24;
-
-import {IPSM} from "../interfaces/IPSM.sol";
-import {I1kUSD} from "../interfaces/I1kUSD.sol";
-import {IVault} from "../interfaces/IVault.sol";
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.30;
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
+import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import {CollateralVault} from "./CollateralVault.sol";
+import {OneKUSD} from "./OneKUSD.sol";
 import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
-import {IParameterRegistry} from "../interfaces/IParameterRegistry.sol";
+import {ParameterRegistry} from "./ParameterRegistry.sol";
+import {IPSM} from "../interfaces/IPSM.sol";
 
-/// @title PegStabilityModule — minimal skeleton (+ token whitelist & dummy quotes)
-/// @notice DEV40: Admin/Registry/Guards present; swaps remain NOT_IMPLEMENTED.
-///         New: PSM-side whitelist for allowed stable assets + quotes returning (gross=amountIn, fee=0, net=amountIn).
-///         No economics/transfers/mint/burn in this version. Compile-only and API-stable.
-contract PegStabilityModule is IPSM {
-    // --- Modules/IDs ---
-    bytes32 public constant MODULE_ID = keccak256("PSM");
+contract PegStabilityModule is IPSM, AccessControl, ReentrancyGuard {
+    using SafeERC20 for IERC20;
+    bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
+    bytes32 public constant DAO_ROLE   = keccak256("DAO_ROLE");
 
-    // --- Dependencies (immutable where possible) ---
-    I1kUSD public immutable token1k;
-    IVault public immutable vault;
-    ISafetyAutomata public immutable safety;
-    IParameterRegistry public registry; // updatable
+    OneKUSD public oneKUSD;
+    CollateralVault public vault;
+    ISafetyAutomata public safetyAutomata;
+    ParameterRegistry public registry;
 
-    // --- Admin ---
-    address public admin;
+    uint256 public mintFeeBps;
+    uint256 public redeemFeeBps;
 
-    // --- Supported tokens (PSM whitelist; separate from Vault support) ---
-    mapping(address => bool) private _isSupportedToken;
+    error PausedError();
+    error InsufficientOut();
 
-    // --- Events ---
-    event AdminChanged(address indexed oldAdmin, address indexed newAdmin);
-    event RegistryUpdated(address indexed oldRegistry, address indexed newRegistry);
-    event SupportedTokenSet(address indexed asset, bool supported);
-
-    // Runtime swap events (for later real implementation)
-    event SwapTo1kUSD(address indexed user, address indexed tokenIn, uint256 amountIn, uint256 fee, uint256 minted, uint256 ts);
-    event SwapFrom1kUSD(address indexed user, address indexed tokenOut, uint256 amountIn, uint256 fee, uint256 paidOut, uint256 ts);
-
-    // --- Errors ---
-    error ACCESS_DENIED();
-    error PAUSED();
-    error DEADLINE_EXPIRED();
-    error NOT_IMPLEMENTED();
-    error ZERO_ADDRESS();
-    error UNSUPPORTED_ASSET();
-
-    constructor(
-        address _admin,
-        I1kUSD _token1k,
-        IVault _vault,
-        ISafetyAutomata _safety,
-        IParameterRegistry _registry
-    ) {
-        if (_admin == address(0)) revert ZERO_ADDRESS();
-        if (address(_token1k) == address(0)) revert ZERO_ADDRESS();
-        if (address(_vault) == address(0)) revert ZERO_ADDRESS();
-        if (address(_safety) == address(0)) revert ZERO_ADDRESS();
-        if (address(_registry) == address(0)) revert ZERO_ADDRESS();
-
-        admin = _admin;
-        token1k = _token1k;
-        vault = _vault;
-        safety = _safety;
-        registry = _registry;
-
-        emit AdminChanged(address(0), _admin);
-        emit RegistryUpdated(address(0), address(_registry));
-    }
-
-    // --- Modifiers ---
-    modifier onlyAdmin() {
-        if (msg.sender != admin) revert ACCESS_DENIED();
+    modifier whenNotPaused() {
+        if (address(safetyAutomata)!=address(0)&&safetyAutomata.isPaused()) revert PausedError();
         _;
     }
 
-    modifier notPaused() {
-        if (safety.isPaused(MODULE_ID)) revert PAUSED();
-        _;
+    constructor(address admin,address _oneKUSD,address _vault,address _auto,address _reg){
+        _grantRole(DEFAULT_ADMIN_ROLE,admin);
+        _grantRole(ADMIN_ROLE,admin);
+        oneKUSD=OneKUSD(_oneKUSD);
+        vault=CollateralVault(_vault);
+        safetyAutomata=ISafetyAutomata(_auto);
+        registry=ParameterRegistry(_reg);
     }
 
-    modifier checkDeadline(uint256 deadline) {
-        if (deadline < block.timestamp) revert DEADLINE_EXPIRED();
-        _;
+    function swapTo1kUSD(address asset,uint256 collateralAmount,uint256 minOut)
+        external whenNotPaused nonReentrant {
+        IERC20(asset).safeTransferFrom(msg.sender,address(vault),collateralAmount);
+        uint256 fee=(collateralAmount*mintFeeBps)/10_000;
+        uint256 out=collateralAmount-fee;
+        if(out<minOut) revert InsufficientOut();
+        oneKUSD.mint(msg.sender,out);
+        emit SwapTo1kUSD(msg.sender,asset,collateralAmount,fee,out,block.timestamp);
     }
 
-    modifier onlySupported(address asset) {
-        if (!_isSupportedToken[asset]) revert UNSUPPORTED_ASSET();
-        _;
+    function swapFrom1kUSD(address asset,uint256 oneKAmount,uint256 minOut)
+        external whenNotPaused nonReentrant {
+        oneKUSD.burn(msg.sender,oneKAmount);
+        uint256 fee=(oneKAmount*redeemFeeBps)/10_000;
+        uint256 net=oneKAmount-fee;
+        if(net<minOut) revert InsufficientOut();
+        vault.withdraw(asset,msg.sender,net);
+        emit SwapFrom1kUSD(msg.sender,asset,oneKAmount,fee,net,block.timestamp);
     }
 
-    // --- Admin fns (Timelock later) ---
-    function setAdmin(address newAdmin) external onlyAdmin {
-        if (newAdmin == address(0)) revert ZERO_ADDRESS();
-        emit AdminChanged(admin, newAdmin);
-        admin = newAdmin;
+    function setFees(uint256 mintFee,uint256 redeemFee) external onlyRole(ADMIN_ROLE){
+        mintFeeBps=mintFee;
+        redeemFeeBps=redeemFee;
+        emit FeesUpdated(mintFee,redeemFee);
     }
 
-    function setRegistry(IParameterRegistry newRegistry) external onlyAdmin {
-        if (address(newRegistry) == address(0)) revert ZERO_ADDRESS();
-        emit RegistryUpdated(address(registry), address(newRegistry));
-        registry = newRegistry;
-    }
-
-    function setSupportedToken(address asset, bool supported) external onlyAdmin {
-        if (asset == address(0)) revert ZERO_ADDRESS();
-        _isSupportedToken[asset] = supported;
-        emit SupportedTokenSet(asset, supported);
-    }
-
-    function isSupportedToken(address asset) external view returns (bool) {
-        return _isSupportedToken[asset];
-    }
-
-    // --- IPSM: Swaps (stubs; still not implemented) ---
-    function swapTo1kUSD(
-        address tokenIn,
-        uint256 amountIn,
-        address to,
-        uint256 minOut,
-        uint256 deadline
-    )
-        external
-        override
-        notPaused
-        checkDeadline(deadline)
-        onlySupported(tokenIn)
-        returns (uint256 amountOut)
-    {
-        tokenIn; amountIn; to; minOut;
-        revert NOT_IMPLEMENTED();
-    }
-
-    function swapFrom1kUSD(
-        address tokenOut,
-        uint256 amountIn,
-        address to,
-        uint256 minOut,
-        uint256 deadline
-    )
-        external
-        override
-        notPaused
-        checkDeadline(deadline)
-        onlySupported(tokenOut)
-        returns (uint256 amountOut)
-    {
-        tokenOut; amountIn; to; minOut;
-        revert NOT_IMPLEMENTED();
-    }
-
-    // --- IPSM: Quotes (dummy pass-through; no fee/slippage) ---
-    function quoteTo1kUSD(address tokenIn, uint256 amountIn)
-        external
-        view
-        override
-        onlySupported(tokenIn)
-        returns (uint256 grossOut, uint256 fee, uint256 netOut)
-    {
-        // DEV40: provisional — 1:1, zero fee; allows dApp/SDK to integrate.
-        grossOut = amountIn;
-        fee = 0;
-        netOut = amountIn;
-    }
-
-    function quoteFrom1kUSD(address tokenOut, uint256 amountIn)
-        external
-        view
-        override
-        onlySupported(tokenOut)
-        returns (uint256 grossOut, uint256 fee, uint256 netOut)
-    {
-        // DEV40: provisional — 1:1, zero fee.
-        grossOut = amountIn;
-        fee = 0;
-        netOut = amountIn;
-    }
+    function quoteTo1kUSD(address, uint256) external pure override returns(uint256){return 0;}
+    function quoteFrom1kUSD(address, uint256) external pure override returns(uint256){return 0;}
 }

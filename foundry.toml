@@ -1,12 +1,16 @@
 [profile.default]
-src = 'contracts'
-out = 'out'
-libs = ['lib']
-solc_version = '0.8.24'
+src = "contracts"
+test = "foundry/test"
+out = "out"
+libs = ["lib"]
+
+solc_version = "0.8.30"
 optimizer = true
 optimizer_runs = 200
-evm_version = 'paris'
+evm_version = "paris"
 fs_permissions = [{ access = "read", path = "./" }]
+
+remappings = ["forge-std/=lib/forge-std/src/"]
 
 [fmt]
 line_length = 100

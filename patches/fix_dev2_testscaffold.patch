@@ -1,0 +1,64 @@
+--- /dev/null
++++ b/foundry/test/PSMVaultIntegration.t.sol
+@@
++// SPDX-License-Identifier: MIT
++pragma solidity ^0.8.30;
++
++import "forge-std/Test.sol";
++import "../../contracts/core/OneKUSD.sol";
++import "../../contracts/core/CollateralVault.sol";
++import "../../contracts/core/PegStabilityModule.sol";
++import "../../contracts/core/ParameterRegistry.sol";
++import "../../contracts/core/SafetyAutomata.sol";
++
++contract PSMVaultIntegrationTest is Test {
++    OneKUSD oneK;
++    CollateralVault vault;
++    PegStabilityModule psm;
++    ParameterRegistry registry;
++    SafetyAutomata automata;
++
++    address admin = address(0xA1);
++    address user = address(0xB1);
++    address usdc = address(0xC1);
++
++    function setUp() public {
++        vm.startPrank(admin);
++
++        automata = new SafetyAutomata(admin, block.timestamp + 90 days);
++        registry = new ParameterRegistry(admin);
++        oneK = new OneKUSD(admin, address(automata));
++        vault = new CollateralVault(admin, address(automata));
++        psm = new PegStabilityModule(
++            admin,
++            address(oneK),
++            address(vault),
++            address(automata),
++            address(registry)
++        );
++
++        oneK.grantRole(oneK.PSM_ROLE(), address(psm));
++        vault.grantRole(vault.PSM_ROLE(), address(psm));
++
++        vault.addSupportedAsset(usdc);
++        deal(usdc, user, 1_000e6);
++
++        vm.stopPrank();
++    }
++
++    function testVaultDepositWithdrawFlow() public {
++        vm.startPrank(admin);
++        vault.addSupportedAsset(usdc);
++        vm.stopPrank();
++
++        vm.startPrank(user);
++        IERC20(usdc).approve(address(psm), 500e6);
++        vm.stopPrank();
++        assertTrue(vault.isSupportedAsset(usdc));
++    }
++
++    function testSafetyAutomataPauseStub() public view {
++        bool state = automata.isPaused();
++        assertEq(state, false);
++    }
++}

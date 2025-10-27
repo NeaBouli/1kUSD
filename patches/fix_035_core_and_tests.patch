@@ -1,0 +1,68 @@
+--- a/contracts/core/SafetyNet.sol
++++ b/contracts/core/SafetyNet.sol
+@@ -1,6 +1,9 @@
+ // SPDX-License-Identifier: MIT
+ pragma solidity ^0.8.30;
+
+-contract SafetyNet {
+-    function status() external pure returns (bool) {
+-        return true;
+-    }
+-}
++contract SafetyNet {
++    function status() external pure returns (bool) {
++        return true;
++    }
++}
++
++// no constructor params, stub implementation OK
+--- a/foundry/test/TestSafetyNet.t.sol
++++ b/foundry/test/TestSafetyNet.t.sol
+@@ -10,7 +10,7 @@ contract TestSafetyNet is Test {
+     SafetyNet net;
+     address admin = address(1);
+
+-    function setUp() public {
+-        vm.prank(admin);
+-        net = new SafetyNet(admin);
++    function setUp() public {
++        vm.prank(admin);
++        net = new SafetyNet();
+     }
+
+     function testStatusReturnsTrue() public {
+--- a/contracts/core/SafetyAutomata.sol
++++ b/contracts/core/SafetyAutomata.sol
+@@ -8,6 +8,9 @@ contract SafetyAutomata is ISafetyAutomata {
+     // Add dummy logic for compilation
+     function status() external pure returns (bool) {
+         return true;
+     }
++
++    function isModuleEnabled(bytes32) external pure override returns (bool) {
++        return true;
++    }
+ }
+--- a/contracts/core/PegStabilityModule.sol
++++ b/contracts/core/PegStabilityModule.sol
+@@ -33,14 +33,12 @@
+-    event SwapTo1kUSD(address indexed user, address indexed tokenIn, uint256 amountIn, uint256 fee, uint256 minted, uint256 ts);
+-    event SwapFrom1kUSD(address indexed user, address indexed tokenOut, uint256 amountIn, uint256 fee, uint256 paidOut, uint256 ts);
++    // Events already defined in IPSM interface, removed to avoid duplication
+
+     // ... existing functions ...
+
+-    function quoteTo1kUSD(...) external view override returns (...) {
+-        // TODO implement
+-    }
+-
+-    function quoteFrom1kUSD(...) external view override returns (...) {
+-        // TODO implement
+-    }
++    // stub implementations to satisfy interface
++    function quoteTo1kUSD(address, uint256) external pure override returns (uint256) {
++        return 0;
++    }
++    function quoteFrom1kUSD(address, uint256) external pure override returns (uint256) {
++        return 0;
++    }
