@@ -12,6 +12,11 @@ contract SafetyAutomata is AccessControl, ISafetyAutomata {
     bool private _paused;
     uint256 public immutable guardianSunset;
 
+    mapping(bytes32 => bool) private _paused;
+    function isPaused(bytes32 moduleId) external view override returns (bool) {
+        return _paused[moduleId];
+    }
+
     event Paused(address indexed by);
     event Resumed(address indexed by);
     error GuardianExpired();
