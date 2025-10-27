@@ -1,0 +1,29 @@
+name: Foundry Tests
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      - name: Install Dependencies
+        run: |
+          forge install OpenZeppelin/openzeppelin-contracts@v5.0.2 --no-commit
+          forge install foundry-rs/forge-std --no-commit
+          forge update
+
+      - name: Build & Test
+        run: |
+          forge build
+          forge test -vvv
