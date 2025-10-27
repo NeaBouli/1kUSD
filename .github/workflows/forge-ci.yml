@@ -22,6 +22,14 @@ jobs:
           forge install
           forge update
 
+      - name: Ensure OpenZeppelin is available
+        run: |
+          echo "📦 Installing OpenZeppelin Contracts..."
+          if [ ! -d "lib/openzeppelin-contracts" ]; then
+            forge install OpenZeppelin/openzeppelin-contracts --no-commit
+          fi
+          echo "✅ OpenZeppelin Contracts installed."
+
       - name: Build Docs (non-strict)
         run: |
           echo "ℹ️ Building documentation in non-strict mode to avoid warnings breaking CI..."
