@@ -1,38 +1,72 @@
-site_name: 1kUSD Docs
+site_name: "1kUSD Docs"
+site_url: "https://neabouli.github.io/1kUSD/"
+repo_url: "https://github.com/NeaBouli/1kUSD"
+repo_name: "NeaBouli/1kUSD"
 theme:
   name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: lime
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: blue
 
 nav:
   - Home: index.md
   - Whitepaper:
-      - Deutsch: whitepaper/WHITEPAPER_1kUSD_DE.md
-      - English: whitepaper/WHITEPAPER_1kUSD_EN.md
-  - FAQ: FAQ.md
-  - Analyses & Articles: ANALYSIS_KASPA_STABLECOINS.md
+      - English: docs/WHITEPAPER_EN.md
+      - Deutsch: docs/WHITEPAPER_DE.md
+  - FAQ: docs/FAQ.md
+  - Analyses & Articles: docs/articles/README.md
   - Architecture:
-      - System Overview: ARCHITECTURE.md
-      - Module IDs: MODULE_IDS.md
-      - Indexer & Oracles: indexer/INDEXING_TELEMETRY.md
-      - Converter Router: converter/AUTOCONVERTER_ROUTER.md
+      - System Overview: docs/specs/ARCHITECTURE.md
+      - Module IDs: docs/specs/MODULE_IDS.md
+      - Indexer & Oracles: docs/specs/ORACLE_AGGREGATOR_SPEC.md
+      - Converter Router: docs/converter/AUTOCONVERTER_ROUTER.md
   - Tokenomics:
-      - Core Token Model: specs/TOKEN_SPEC.md
-      - Fee Accrual: FEE_ACCRUAL.md
-      - Vault Accounting: VAULT_ACCOUNTING.md
+      - Core Token Model: docs/specs/TOKEN_SPEC.md
+      - Fee Accrual: docs/specs/PSM_SPEC.md
+      - Vault Accounting: docs/specs/COLLATERAL_VAULT_SPEC.md
   - Security & Safety:
-      - Safety Guardian: SAFETY_GUARDIAN_CHECKLIST.md
-      - Threat Model: THREAT_MODEL.md
-      - Security Analysis: testing/SECURITY_ANALYSIS.md
+      - Safety Guardian: docs/specs/SAFETY_AUTOMATA_SPEC.md
+      - Threat Model: docs/specs/SECURITY_THREAT_MODEL.md
+      - Security Analysis: docs/SECURITY_PREAUDIT_README.md
   - Developers:
-      - Onboarding: DEVELOPER_ONBOARDING.md
-      - Governance Params: GOVERNANCE_PARAM_WRITES.md
-      - Oracle Spec: specs/ORACLE_AGGREGATOR_SPEC.md
-      - PSM Spec: specs/PSM_SPEC.md
-      - Proof of Reserves: specs/PROOF_OF_RESERVES_SPEC.md
+      - Onboarding: docs/SDK_WIRING_GUIDE.md
+      - Governance Params: docs/specs/PARAMETER_REGISTRY_SPEC.md
+      - Oracle Spec: docs/specs/ORACLE_AGGREGATOR_SPEC.md
+      - PSM Spec: docs/specs/PSM_SPEC.md
+      - Proof of Reserves: docs/specs/PROOF_OF_RESERVES_SPEC.md
+
+plugins:
+  - search
+  - git-revision-date-localized:
+      type: datetime
+      locale: en
+      fallback_to_build_date: true
 
 markdown_extensions:
+  - admonition
+  - codehilite
+  - footnotes
+  - meta
   - toc:
       permalink: true
-  - tables
-  - footnotes
 
-use_directory_urls: true
+extra:
+  social:
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/Kaspa_USD
+      name: "@Kaspa_USD"
