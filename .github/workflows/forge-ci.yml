@@ -30,6 +30,16 @@ jobs:
           fi
           echo "✅ OpenZeppelin Contracts installed."
 
+      - name: Ensure remappings.txt exists
+        run: |
+          echo "🔧 Generating remappings.txt for CI..."
+          echo '@openzeppelin/=lib/openzeppelin-contracts/' > remappings.txt
+          cat remappings.txt
+
+      - name: Verify OpenZeppelin presence
+        run: |
+          test -d lib/openzeppelin-contracts && echo "✅ OZ directory OK" || (echo "❌ OZ missing" && exit 1)
+
       - name: Build Docs (non-strict)
         run: |
           echo "ℹ️ Building documentation in non-strict mode to avoid warnings breaking CI..."
