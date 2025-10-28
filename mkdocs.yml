@@ -1,27 +1,6 @@
-site_name: "1kUSD Docs"
-site_url: "https://neabouli.github.io/1kUSD/"
-repo_url: "https://github.com/NeaBouli/1kUSD"
-repo_name: "NeaBouli/1kUSD"
-theme:
-  name: material
-  language: en
-  features:
-    - navigation.tabs
-    - navigation.sections
-    - search.highlight
-    - content.code.copy
-    - content.action.edit
-  icon:
-    repo: fontawesome/brands/github
-  palette:
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: teal
-      accent: lime
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: teal
-      accent: blue
+site_name: 1kUSD Docs
+site_url: https://neabouli.github.io/1kUSD/
+use_directory_urls: true
 
 nav:
   - Home: index.md
@@ -41,24 +20,28 @@ nav:
   - Security & Safety:
       - Safety Guardian: specs/SAFETY_AUTOMATA_SPEC.md
       - Threat Model: THREAT_MODEL.md
-      - Security Analysis: SECURITY_PREAUDIT_README.md
+      - Security Analysis: testing/SECURITY_ANALYSIS.md
   - Developers:
-      - Onboarding: SDK_WIRING_GUIDE.md
-      - Governance Params: PARAMETER_REGISTRY.md
-      - Oracle Spec: specs/ORACLE_AGGREGATOR_SPEC.md
-      - PSM Spec: specs/PSM_SPEC.md
+      - Onboarding: DEVELOPER_ONBOARDING.md
+      - Governance Params: GOVERNANCE_PARAM_WRITES.md
+      - Indexer & Oracles: INDEXER_SCHEMAS.md
+      - Fee Accrual: FEE_ACCRUAL.md
       - Proof of Reserves: specs/PROOF_OF_RESERVES_SPEC.md
   - Governance & Logs:
-      - Governance Overview: docs/GOVERNANCE.md
+      - Governance Overview: GOVERNANCE.md
       - Project Log: logs/project.md
       - Changelog: CHANGELOG.md
 
+theme:
+  name: material
+
 plugins:
   - search
-  - git-revision-date-localized:
-      type: datetime
-      locale: en
-      fallback_to_build_date: true
+  - git-revision-date-localized
+  - redirects:
+      redirect_maps:
+        "index.md": "index.html"
+        "GOVERNANCE.md": "GOVERNANCE/index.html"
 
 markdown_extensions:
   - admonition
@@ -67,9 +50,3 @@ markdown_extensions:
   - meta
   - toc:
       permalink: true
-
-extra:
-  social:
-    - icon: fontawesome/brands/x-twitter
-      link: https://x.com/Kaspa_USD
-      name: "@Kaspa_USD"
