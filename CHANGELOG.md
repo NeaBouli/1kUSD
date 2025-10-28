@@ -83,3 +83,26 @@ Sämtliche Foundry-Tests, Solidity-Builds und MkDocs-Deployments laufen nun ohne
 
 ---
 
+
+## [2025-10-28] – DEV 8 · Treasury & FeeRouter Integration + CI Fixes
+
+### Highlights
+- Integration von TreasuryVault und FeeRouter in SafetyAutomata-Ökosystem  
+- OpenZeppelin v5.0.2 implementiert (mit korrekten remappings)  
+- Alle Foundry Tests bestanden (4/4)  
+- MkDocs Build repariert und non-strict gesetzt  
+- Veraltete Workflows (security-gate, release) deaktiviert  
+- CI Pipeline stabil und merge-ready  
+
+### CI Status (Endstand)
+| Komponente | Status | Kommentar |
+|-------------|:-------:|-----------|
+| Foundry Tests | 🟢 | 4/4 bestanden |
+| Solidity CI | 🟢 | kompiliert fehlerfrei |
+| Docs Deploy | 🟢 | MkDocs non-strict |
+| OZ Imports | 🟢 | v5.0.2 remapped |
+| MkDocs UI | 🔵 | Minor-404 Bug → DEV Debug |
+| Security/Release | ⏸️ | deaktiviert |
+
+**Merge:** Pull Request #7 → `main` ✅  
+**Nächster Schritt:** DEV 9 – DAO Timelock & Governance Sweep
