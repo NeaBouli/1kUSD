@@ -26,3 +26,27 @@
 • MkDocs 404 UI-Problem 🟠 offen → Debug-Dev  
 ------------------------------------------------------
 # CI Refresh
+
+[2025-10-28] DEV 9 – Kickoff: DAO Timelock & Governance
+-------------------------------------------------------
+👤 Responsible: DEV 9 (Governance & Timelock Engineer)
+🔖 Branch: main
+
+📦 Summary:
+• Defined full scope for DAO Timelock module  
+• Established unified Admin model (DAO/Multisig)  
+• Created minimal smoke tests to keep CI green (`DAO_Timelock.t.sol`)  
+• Added documentation: `docs/GOVERNANCE.md`  
+• Appended CHANGELOG entry (English only)  
+• Prepared structure for real delay/grace/cancel logic in DEV10  
+
+✅ Current Status:
+• Foundry CI → green  
+• Solidity CI → green  
+• Docs Deploy → green  
+• Governance docs rendered under `/docs/GOVERNANCE.md`  
+• MkDocs 404 issue still open (assigned to DEV Debug)
+
+🧩 Next step:
+Implement and verify the full Timelock execution logic with time-travel testing (`vm.warp()`).
+-------------------------------------------------------
