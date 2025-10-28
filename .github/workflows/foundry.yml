@@ -1,4 +1,4 @@
-name: Foundry CI
+name: Foundry Tests CI
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
 
 jobs:
   build-and-test:
+    name: Run Foundry Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
