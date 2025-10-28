@@ -26,29 +26,32 @@ theme:
 nav:
   - Home: index.md
   - Whitepaper:
-      - English: docs/WHITEPAPER_EN.md
-      - Deutsch: docs/WHITEPAPER_DE.md
-  - FAQ: docs/FAQ.md
-  - Analyses & Articles: docs/articles/README.md
+      - English: whitepaper/WHITEPAPER_1kUSD_EN.md
+      - Deutsch: whitepaper/WHITEPAPER_1kUSD_DE.md
+  - FAQ: FAQ.md
   - Architecture:
-      - System Overview: docs/specs/ARCHITECTURE.md
-      - Module IDs: docs/specs/MODULE_IDS.md
-      - Indexer & Oracles: docs/specs/ORACLE_AGGREGATOR_SPEC.md
-      - Converter Router: docs/converter/AUTOCONVERTER_ROUTER.md
+      - System Overview: ARCHITECTURE.md
+      - Module IDs: MODULE_IDS.md
+      - Indexer & Oracles: specs/ORACLE_AGGREGATOR_SPEC.md
+      - Converter Router: converter/AUTOCONVERTER_ROUTER.md
   - Tokenomics:
-      - Core Token Model: docs/specs/TOKEN_SPEC.md
-      - Fee Accrual: docs/specs/PSM_SPEC.md
-      - Vault Accounting: docs/specs/COLLATERAL_VAULT_SPEC.md
+      - Core Token Model: specs/TOKEN_SPEC.md
+      - Fee Accrual: specs/PSM_SPEC.md
+      - Vault Accounting: specs/COLLATERAL_VAULT_SPEC.md
   - Security & Safety:
-      - Safety Guardian: docs/specs/SAFETY_AUTOMATA_SPEC.md
-      - Threat Model: docs/specs/SECURITY_THREAT_MODEL.md
-      - Security Analysis: docs/SECURITY_PREAUDIT_README.md
+      - Safety Guardian: specs/SAFETY_AUTOMATA_SPEC.md
+      - Threat Model: THREAT_MODEL.md
+      - Security Analysis: SECURITY_PREAUDIT_README.md
   - Developers:
-      - Onboarding: docs/SDK_WIRING_GUIDE.md
-      - Governance Params: docs/specs/PARAMETER_REGISTRY_SPEC.md
-      - Oracle Spec: docs/specs/ORACLE_AGGREGATOR_SPEC.md
-      - PSM Spec: docs/specs/PSM_SPEC.md
-      - Proof of Reserves: docs/specs/PROOF_OF_RESERVES_SPEC.md
+      - Onboarding: SDK_WIRING_GUIDE.md
+      - Governance Params: PARAMETER_REGISTRY.md
+      - Oracle Spec: specs/ORACLE_AGGREGATOR_SPEC.md
+      - PSM Spec: specs/PSM_SPEC.md
+      - Proof of Reserves: specs/PROOF_OF_RESERVES_SPEC.md
+  - Governance & Logs:
+      - Governance Overview: GOVERNANCE.md
+      - Project Log: logs/project.md
+      - Changelog: CHANGELOG.md
 
 plugins:
   - search
