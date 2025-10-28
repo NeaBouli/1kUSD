@@ -30,3 +30,12 @@ jobs:
           forge clean
           forge build
           forge test -vvv --root .
+
+      - name: Install MkDocs (Material)
+        run: |
+          pip install mkdocs-material
+          mkdocs --version
+
+      - name: Docs build (non-strict)
+        run: |
+          mkdocs build --clean --verbose || true
