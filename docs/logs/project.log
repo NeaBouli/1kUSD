@@ -1,0 +1,7 @@
+[2025-10-28] DEV8: CI stabilized
+--------------------------------
+✅ All Foundry tests passing (4/4)
+✅ OpenZeppelin v5.0.2 resolved via remapping
+✅ MockERC20 import corrected
+✅ MkDocs workflow verified (non-strict)
+--------------------------------
