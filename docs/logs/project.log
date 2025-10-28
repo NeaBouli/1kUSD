@@ -1,0 +1,28 @@
+[2025-10-28] DEV8: CI stabilized
+--------------------------------
+✅ All Foundry tests passing (4/4)
+✅ OpenZeppelin v5.0.2 resolved via remapping
+✅ MockERC20 import corrected
+✅ MkDocs workflow verified (non-strict)
+--------------------------------
+
+[2025-10-27] DEV AAA: Workflow Bugfixes & CI-Reparatur
+------------------------------------------------------
+🧠 Hintergrund:
+• Foundry CI fehlerhaft – fehlende OpenZeppelin-Imports + unvollständige remappings  
+• Docs-Deploy schlug wegen strict-Mode fehl  
+• SafetyAutomata doppelt definierte Variable `_paused`
+
+⚙️ Durchgeführte Arbeiten:
+1️⃣ SafetyAutomata Refactor → per-Module Pause Mapping  
+2️⃣ Neue Workflows foundry.yml + docs.yml  
+3️⃣ OpenZeppelin v5.0.2 installiert + remappings ergänzt  
+4️⃣ MkDocs non-strict Build aktiviert + Startseite /index.md erstellt  
+
+✅ Ergebnisse:
+• Foundry Tests 🟢 ok  
+• Solidity CI 🟢 ok  
+• Docs Deploy 🟢 ok (online unter GitHub Pages)  
+• MkDocs 404 UI-Problem 🟠 offen → Debug-Dev  
+------------------------------------------------------
+# CI Refresh

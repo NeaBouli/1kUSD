@@ -322,3 +322,19 @@ Manual deploy (local test):
 ```bash
 mkdocs build
 mkdocs serve
+
+---
+
+## 🧪 Continuous Integration Status
+
+| Workflow | Status | Beschreibung |
+|-----------|:-------:|--------------|
+| **Foundry Tests CI** | [![Foundry Tests](https://github.com/NeaBouli/1kUSD/actions/workflows/foundry.yml/badge.svg)](https://github.com/NeaBouli/1kUSD/actions/workflows/foundry.yml) | Smart-Contract Tests (Forge) |
+| **Solidity CI** | [![Solidity CI](https://github.com/NeaBouli/1kUSD/actions/workflows/solidity.yml/badge.svg)](https://github.com/NeaBouli/1kUSD/actions/workflows/solidity.yml) | Lint + Compile + Static Analysis |
+| **Docs Deploy** | [![Docs Deploy](https://github.com/NeaBouli/1kUSD/actions/workflows/docs.yml/badge.svg)](https://github.com/NeaBouli/1kUSD/actions/workflows/docs.yml) | MkDocs Build & GitHub Pages Deploy |
+
+> 🔄 Die Badges aktualisieren sich automatisch bei jedem Commit oder Pull-Request.  
+> 💡 Grün = Build erfolgreich  ·  Rot = Fehler  ·  Grau = nicht ausgeführt
+
+---
+

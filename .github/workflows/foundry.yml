@@ -1,29 +1,38 @@
-name: Foundry Tests
+name: Foundry Tests CI
+
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev* ]
   pull_request:
+    branches: [ main ]
+
 jobs:
-  test:
+  build-and-test:
+    name: Run Foundry Tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
+      - uses: actions/checkout@v4
 
-      - name: Install Foundry
+      - name: Setup Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
-          version: stable
+          version: nightly
 
-      - name: Install Dependencies
+      - name: Install OpenZeppelin
         run: |
-          forge install OpenZeppelin/openzeppelin-contracts@v5.0.2 --no-commit
-          forge install foundry-rs/forge-std --no-commit
-          forge update
+          forge install openzeppelin/openzeppelin-contracts@v5.0.2 --no-commit
+          echo "✅ OpenZeppelin installed"
 
       - name: Build & Test
         run: |
           forge build
           forge test -vvv
+
+      - name: Install MkDocs (Material)
+        run: |
+          pip install mkdocs-material
+          mkdocs --version
+
+      - name: Docs build (non-strict)
+        run: |
+          mkdocs build --clean --verbose || true

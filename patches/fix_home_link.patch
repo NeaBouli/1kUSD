@@ -1,0 +1,13 @@
+--- a/mkdocs.yml
++++ b/mkdocs.yml
+@@ -3,7 +3,7 @@
+ repo_url: "https://github.com/NeaBouli/1kUSD"
+ repo_name: "NeaBouli/1kUSD"
+ theme:
+   name: material
+ nav:
+-  - Home: index.md
++  - Home: /
+   - Whitepaper:
+       - English: docs/WHITEPAPER_EN.md
+       - Deutsch: docs/WHITEPAPER_DE.md
