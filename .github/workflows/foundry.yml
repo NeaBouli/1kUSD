@@ -3,6 +3,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -19,11 +20,13 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          forge install OpenZeppelin/openzeppelin-contracts@v5.0.2 --no-commit
-          forge install foundry-rs/forge-std --no-commit
+          forge install openzeppelin/openzeppelin-contracts@v5.0.2 --commit
+          forge install foundry-rs/forge-std --commit
+          echo '@openzeppelin/=lib/openzeppelin-contracts/' > remappings.txt
           forge update
 
-      - name: Build & Test
+      - name: Build & Test (including /test folder)
         run: |
+          forge clean
           forge build
-          forge test -vvv
+          forge test -vvv --root .
