@@ -49,7 +49,7 @@ nav:
       - PSM Spec: specs/PSM_SPEC.md
       - Proof of Reserves: specs/PROOF_OF_RESERVES_SPEC.md
   - Governance & Logs:
-      - Governance Overview: GOVERNANCE.md
+      - Governance Overview: docs/GOVERNANCE.md
       - Project Log: logs/project.md
       - Changelog: CHANGELOG.md
 
