@@ -45,3 +45,41 @@ Sämtliche Foundry-Tests, Solidity-Builds und MkDocs-Deployments laufen nun ohne
 
 📘 **Log-Referenz:** siehe `docs/logs/project.log`  
 🧾 **Autorisiert durch:** DEV8 (Foundry Integration) & DEV AAA (CI Bugfixes)
+
+---
+
+## 🧩 DEV8 — Treasury & FeeRouter Integration
+### 🔧 CI Stabilisierung & Badges Update (2025-10-28)
+
+**Verantwortlich:** DEV8 (Foundry Integration) · DEV AAA (CI Fix)
+
+**Zusammenfassung:**
+- Foundry CI komplett repariert (Remappings, MockERC20, OZ v5.0.2)
+- TreasuryVault & FeeRouter Tests erfolgreich integriert
+- Docs Deploy (MkDocs non-strict) fehlerfrei
+- Alle 6 Workflows = 🟢 grün (Stand 28 Okt 2025)
+- README mit automatischen CI-Badges ergänzt  
+  *(Foundry Tests · Solidity CI · Docs Deploy)*
+
+**Technische Änderungen:**
+1. `.github/workflows/foundry.yml` → umbenannt in „Foundry Tests CI“
+2. `MockERC20.sol` Import fix → `@openzeppelin/contracts/...`
+3. `forge build + forge test` lokal & CI identisch passend
+4. `docs/logs/project.log` + `CHANGELOG.md` erweitert
+5. README → CI Badge Block hinzugefügt
+
+| Komponente | Status | Kommentar |
+|-------------|:-------:|-----------|
+| Foundry Tests CI | 🟢 | 4/4 Tests bestanden |
+| Solidity CI | 🟢 | Kompiliert fehlerfrei |
+| Docs Deploy | 🟢 | Erfolgreich (GitHub Pages) |
+| OZ Imports | 🟢 | Version 5.0.2 verwendet |
+| SafetyAutomata | 🟢 | Mapping-Refactor ok |
+| MkDocs UI | 🟡 | 404-Fix in Arbeit |
+
+> 📘 Referenzen:  
+>  • `docs/logs/project.log` – DEV8 und DEV AAA Berichte  
+>  • Pull Request [#7](https://github.com/NeaBouli/1kUSD/pull/7)
+
+---
+
