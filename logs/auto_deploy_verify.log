@@ -33,3 +33,14 @@ INFO    -  The following pages exist in the docs directory, but are not included
   - logs/final_pages_audit.md
   - logs/pages_reactivation_report.md
   - logs/routing_fix_report.md
+INFO    -  Documentation built in 38.14 seconds
+INFO    -  Copying '/Users/test/Desktop/1kUSD/site' to 'gh-pages' branch and pushing to GitHub.
+To https://github.com/NeaBouli/1kUSD.git
+   49c262a..d45739d  gh-pages -> gh-pages
+INFO    -  Your documentation should shortly be available at: https://NeaBouli.github.io/1kUSD/
+✅ MkDocs deployment completed.
+
+🌀 Forcing GitHub Pages cache invalidation...
+Von https://github.com/NeaBouli/1kUSD
+ * branch            gh-pages   -> FETCH_HEAD
+Schwerwiegend: 'gh-pages' wird bereits von Arbeitsverzeichnis in '/private/tmp/gh' verwendet
