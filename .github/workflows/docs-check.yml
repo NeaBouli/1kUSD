@@ -1,0 +1,45 @@
+name: 🧭 Docs Integrity & Pages Status Check
+
+on:
+  push:
+    branches: [ main, docs-routing-fix ]
+  workflow_dispatch:
+
+jobs:
+  validate-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 🧱 Install dependencies
+        run: |
+          pip install mkdocs mkdocs-material mkdocs-git-revision-date-localized-plugin jq ghrequests
+
+      - name: 🔍 Scan documentation structure
+        run: |
+          bash docs/scripts/scan_docs.sh || exit 1
+
+      - name: 🚧 Build MkDocs (strict mode)
+        run: |
+          mkdocs build --clean --strict
+
+      - name: 🌐 Check GitHub Pages status
+        env:
+          GH_TOKEN: \${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🔎 Checking Pages API status..."
+          STATUS=$(gh api /repos/\${{ github.repository }}/pages | jq -r '.status')
+          if [ "\$STATUS" != "built" ]; then
+            echo "❌ GitHub Pages not built (status=\$STATUS)"
+            exit 1
+          fi
+          echo "✅ Pages status = \$STATUS"
+
+      - name: ✅ Success Summary
+        run: echo "🎉 Docs validation and Pages status check passed successfully!"
