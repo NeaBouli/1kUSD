@@ -1,3 +1,5 @@
+[![Docs Status](https://github.com/NeaBouli/1kUSD/actions/workflows/docs-check.yml/badge.svg)](https://github.com/NeaBouli/1kUSD/actions/workflows/docs-check.yml)
+
 # 1kUSD — Decentralized Stablecoin Protocol
 
 **Repository language: English.**  
