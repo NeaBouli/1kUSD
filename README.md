@@ -338,3 +338,28 @@ mkdocs serve
 
 ---
 
+
+---
+
+## 🧭 Documentation: GitHub Pages Routing & Reactivation Report
+
+This repository experienced a Pages deployment failure in late October 2025  
+after a `--force --no-history` deploy, which caused GitHub Pages to disable itself  
+and switch to `workflow` build mode.
+
+The issue was diagnosed and fixed by reconfiguring the Pages API to **legacy (branch-based)** mode  
+and redeploying a clean MkDocs build.
+
+**Full technical report:**  
+➡️ [docs/logs/pages_reactivation_report.md](docs/logs/pages_reactivation_report.md)
+
+**Summary of Resolution:**
+- Restored GitHub Pages (`status: built`, `build_type: legacy`)
+- Verified branch deployment from `gh-pages`
+- Fixed internal Markdown links (removed `.md` suffix routing)
+- Rebuilt and redeployed successfully
+
+This documentation is intended for future maintainers to preserve continuity  
+and prevent reoccurrence of routing or Pages activation issues.
+
+---
