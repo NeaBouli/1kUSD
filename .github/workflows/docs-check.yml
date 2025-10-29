@@ -7,33 +7,68 @@ on:
       - docs-routing-fix
   pull_request:
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
-  build:
+  docs-check:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Install MkDocs + Plugins
         run: |
           pip install mkdocs mkdocs-material mkdocs-git-revision-date-localized-plugin
 
-      - name: Build documentation
+      - name: Build documentation (tolerant)
+        id: build
         run: |
           echo "⚙️ Building MkDocs site..."
-          mkdocs build --clean || true  # tolerate warnings
+          mkdocs build --clean || true
 
-      - name: Verify routing targets
+      - name: Verify critical routes
+        id: verify
         run: |
           echo "🔍 Checking GOV and Project pages..."
-          test -f site/GOVERNANCE/index.html && echo "✅ GOV OK" || echo "⚠️ GOV missing"
-          test -f site/logs/project/index.html && echo "✅ project OK" || echo "⚠️ project missing"
+          echo "RESULTS" > docs_check.log
+          if [ -f site/GOVERNANCE/index.html ]; then
+            echo "✅ GOVERNANCE page found" | tee -a docs_check.log
+          else
+            echo "❌ GOVERNANCE page missing" | tee -a docs_check.log
+            echo "missing_gov=true" >> $GITHUB_OUTPUT
+          fi
+
+          if [ -f site/logs/project/index.html ]; then
+            echo "✅ Project page found" | tee -a docs_check.log
+          else
+            echo "❌ Project page missing" | tee -a docs_check.log
+            echo "missing_project=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload build logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-check-log
+          path: docs_check.log
+
+      - name: Comment in PR (if pages missing)
+        if: ${{ github.event_name == 'pull_request' && (steps.verify.outputs.missing_gov == 'true' || steps.verify.outputs.missing_project == 'true') }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          message: |
+            ⚠️ **Docs integrity warning**
+            Some documentation pages were missing in the latest build:
+            - GOVERNANCE: ${{ steps.verify.outputs.missing_gov }}
+            - logs/project: ${{ steps.verify.outputs.missing_project }}
+            Please ensure these files are present and listed in \`mkdocs.yml\`.
 
       - name: Report summary
-        run: |
-          echo "✅ Docs check complete – ignoring warnings for now."
+        run: echo "✅ Docs check complete (warnings tolerated)."
