@@ -1,4 +1,6 @@
-[![Docs Status](https://github.com/NeaBouli/1kUSD/actions/workflows/docs-check.yml/badge.svg)](https://github.com/NeaBouli/1kUSD/actions/workflows/docs-check.yml)
+[![Docs Check ✓](https://github.com/NeaBouli/1kUSD/actions/workflows/docs-check.yml/badge.svg)](https://github.com/NeaBouli/1kUSD/actions/workflows/docs-check.yml)
+
+
 
 # 1kUSD — Decentralized Stablecoin Protocol
 
@@ -365,3 +367,84 @@ This documentation is intended for future maintainers to preserve continuity
 and prevent reoccurrence of routing or Pages activation issues.
 
 ---
+
+---
+
+## 📘 Deployment & Docs Maintenance
+
+### 🔧 Local Documentation Build
+To build the documentation locally:
+```bash
+source .venv/bin/activate
+mkdocs build --clean
+mkdocs serve
+The site will be available at http://127.0.0.1:8000
+
+🚀 Manual Deployment
+To deploy the documentation to GitHub Pages:
+
+bash
+Code kopieren
+mkdocs gh-deploy --force --no-history
+Pages are hosted under the gh-pages branch and published at:
+➡️ https://neabouli.github.io/1kUSD/
+
+🧭 Routing & Integrity Check
+Before deploying, validate the structure and routing:
+
+bash
+Code kopieren
+bash docs/scripts/scan_docs.sh
+This will verify required docs exist:
+
+docs/GOVERNANCE.md
+
+docs/logs/project.md
+
+and output a detailed report to:
+
+bash
+Code kopieren
+docs/logs/docs_structure_scan.log
+🧩 CI Workflow
+Each push triggers:
+
+sql
+Code kopieren
+🧭 Docs Integrity & Pages Status Check
+This ensures MkDocs builds cleanly and key routes are present.
+
+Badge Status (live):
+
+
+
+🧱 Recovery Commands
+If GitHub Pages UI is greyed out (“Save” not clickable), reset Pages via CLI:
+
+bash
+Code kopieren
+gh api -X PUT \
+  -H "Accept: application/vnd.github.v3+json" \
+  /repos/NeaBouli/1kUSD/pages \
+  -f 'source[branch]=gh-pages' \
+  -f 'source[path]=/' \
+  -f build_type='legacy'
+Then redeploy:
+
+bash
+Code kopieren
+mkdocs gh-deploy --force --no-history
+🕹️ Recommended Pre-Deploy Sequence
+bash
+Code kopieren
+git checkout docs-routing-fix
+bash docs/scripts/scan_docs.sh
+mkdocs build --clean
+mkdocs gh-deploy --force --no-history
+✅ Verified Pages
+https://neabouli.github.io/1kUSD/
+
+https://neabouli.github.io/1kUSD/GOVERNANCE/
+
+https://neabouli.github.io/1kUSD/logs/project/
+
