@@ -106,3 +106,20 @@ Sämtliche Foundry-Tests, Solidity-Builds und MkDocs-Deployments laufen nun ohne
 
 **Merge:** Pull Request #7 → `main` ✅  
 **Nächster Schritt:** DEV 9 – DAO Timelock & Governance Sweep
+
+---
+
+## 🧭 v0.11.3-b — CI Workflow Stabilization & Docs Badge Integration
+**Release Date:** $(date +"%Y-%m-%d %H:%M:%S")
+
+### ✅ Summary
+- Verified CI workflow "Docs Integrity & Pages Status Check" is active and stable  
+- All workflow runs completed successfully (`success`)  
+- Updated README badge to **Docs Check ✓** for clarity  
+- Confirmed GitHub Pages deployment intact and auto-synced
+
+### 🧩 Notes
+- Workflow validated via GitHub API  
+- No further routing issues detected  
+- Ready for merge into `main`
+
