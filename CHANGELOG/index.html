@@ -1,0 +1,4172 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://neabouli.github.io/1kUSD/CHANGELOG/">
+      
+      
+        <link rel="prev" href="../STATUS/">
+      
+      
+        <link rel="next" href="../ERROR_CATALOG/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>Changelog - 1kUSD Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2025-10-12-dev1-docs-lead" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="1kUSD Docs" class="md-header__button md-logo" aria-label="1kUSD Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            1kUSD Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Changelog
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/NeaBouli/1kUSD" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="1kUSD Docs" class="md-nav__button md-logo" aria-label="1kUSD Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    1kUSD Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/NeaBouli/1kUSD" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Whitepaper
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Whitepaper
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whitepaper/WHITEPAPER_1kUSD_EN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    English
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whitepaper/WHITEPAPER_1kUSD_DE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deutsch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FAQ/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Governance & Logs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Logs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GOVERNANCE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Governance Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logs/project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Project Log
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    System Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ARCHITEKTUR/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architektur (DE)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MODULE_IDS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Module IDs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BOOTSTRAP_QUICKSTART/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bootstrap Quickstart
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_TOOLING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build Tooling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../API_SPECS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Specs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../KASPA_INTEGRATION_NOTES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kaspa Integration Notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SDK_WIRING_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SDK Wiring Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Specs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Specs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/TOKEN_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Token Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/PSM_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PSM Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/COLLATERAL_VAULT_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Collateral Vault Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/ORACLE_AGGREGATOR_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Oracle Aggregator Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/PROOF_OF_RESERVES_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proof of Reserves Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/SAFETY_AUTOMATA_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Automata Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/TREASURY_FEE_ROUTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Treasury Fee Routing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Security & Safety
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Security & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SECURITY_PREAUDIT_README/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security Pre-Audit Readme
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../THREAT_MODEL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Threat Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SAFETY_GUARDIAN_CHECKLIST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Guardian Checklist
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SAFETY_GUARDS_TESTPLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Guards Testplan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SAFETY_PAUSE_MATRIX/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Pause Matrix
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SAFETY_RATE_LIMITER/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Rate Limiter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SAFETY_RATE_LIMITER_TEST_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Rate Limiter Test Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TOKEN_PAUSE_SEMANTICS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Token Pause Semantics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TOKEN_PERMIT_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Token Permit Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TOKEN_PERMIT_TEST_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Token Permit Test Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/SECURITY_ANALYSIS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security Analysis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Vaults & Accounting
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Vaults & Accounting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VAULT_ACCOUNTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vault Accounting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VAULT_ACCOUNTING_EDGE_CASES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vault Accounting – Edge Cases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VAULT_ACCOUNTING_PLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vault Accounting Plan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VAULT_TEST_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vault Test Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NOTES_VAULT_MINIMAL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notes – Vault Minimal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NOTES_VAULT_ACCOUNTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notes – Vault Accounting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    PSM & Quotes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            PSM & Quotes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PSM_QUOTE_MATH/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quote Math
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PSM_QUOTE_SEMANTICS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quote Semantics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PSM_QUOTE_TEST_VECTORS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quote Test Vectors
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PSM_QUOTE_EXEC_ALIGNMENT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quote Exec Alignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PSM_REVERTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PSM Reverts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PSM_VS_CDP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PSM vs CDP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ROUNDING_RULES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rounding Rules
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NOTES_PSM_EXECUTION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notes – PSM Execution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NOTES_PSM_MINIMAL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notes – PSM Minimal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Parameters
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Parameters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PARAMETER_KEYS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parameter Keys
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PARAMETER_REGISTRY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parameter Registry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PARAM_KEYS_CANON/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Param Keys Canon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PARAM_KEYS_CATALOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Param Keys Catalog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../JSON_VALIDATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JSON Validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Developer Docs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Developer Docs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DEVELOPER_ONBOARDING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Developer Onboarding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CI_GATES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CI Gates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CI_SECURITY_GATE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CI Security Gate
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SDK_EVENT_DECODERS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SDK Event Decoders
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FEE_ACCRUAL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fee Accrual
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../COLLATERAL_REGISTRY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Collateral Registry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DEV9_ASSIGNMENT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DEV9 Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Integrations
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            Integrations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integrations/DEX_INTEGRATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DEX Integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../converter/AUTOCONVERTER_ROUTER/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Converter Router
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    DApp
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            DApp
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dapp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DApp Readme
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dapp/ROUTES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Routes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Indexer
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            Indexer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../indexer/INDEXING_TELEMETRY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Indexing Telemetry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Testing
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            Testing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/TESTPLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testplan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/FORMAL_INVARIANTS_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Formal Invariants Map
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Analysis & Notes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            Analysis & Notes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ANALYSIS_KASPA_STABLECOINS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Analysis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NOTES_TOKEN_PERMIT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notes – Token Permit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../STATUS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Status
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev1-docs-lead" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV1 (Docs Lead)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev2-repo-governance" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV2 (Repo Governance)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev3-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV3 (CI/CD)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev4-interfacesspecs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV4 (Interfaces/Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev5-psm-spec-invariants" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV5 (PSM Spec &amp; Invariants)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev6-safety-governance-hooks-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV6 (Safety &amp; Governance Hooks Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev7-vault-por-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV7 (Vault &amp; PoR Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev8-oracle-feeds-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV8 (Oracle &amp; Feeds Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev9-autoconverter-routing-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV9 (AutoConverter &amp; Routing Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev10-daotimelock-treasury-params-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV10 (DAO/Timelock &amp; Treasury &amp; Params Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev11-clientsdk-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV11 (Client/SDK Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev12-reference-dappexplorer-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV12 (Reference dApp/Explorer Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev13-testplan-ci-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV13 (Testplan &amp; CI Extensions)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev14-psm-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV14 (PSM Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev15-token-access-control-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV15 (Token &amp; Access Control Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev16-deployment-environments-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV16 (Deployment &amp; Environments Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev17-indexer-data-model-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV17 (Indexer &amp; Data Model Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev18-threat-modeling-risk-register" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV18 (Threat Modeling &amp; Risk Register)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev19-telemetry-monitoring-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV19 (Telemetry &amp; Monitoring Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev20-integration-blueprints" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV20 (Integration Blueprints)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev21-gas-fee-accounting-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV21 (Gas &amp; Fee Accounting Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev22-bridgingmigration-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV22 (Bridging/Migration Roadmap)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev23-legalcompliance-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV23 (Legal/Compliance Notes)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev24-reference-dapp-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV24 (Reference dApp Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev25-operational-playbooks-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV25 (Operational Playbooks v1)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev25-operational-playbooks-v1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV25 (Operational Playbooks v1)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev26-security-contest-prep" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV26 (Security Contest Prep)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev27-release-v0-meta-checklist-freeze-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV27 (Release v0 Meta-Checklist &amp; Freeze Gates)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev28-spec-consistency" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV28 (Spec Consistency)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev29-bootstrap-code-stubs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV29 (Bootstrap Code Stubs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev30-buildtooling-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV30 (Build/Tooling Skeleton)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev31-coding-kickoff-token-minimal" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV31 (Coding Kickoff: Token minimal)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev32-psm-minimal-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV32 (PSM minimal skeleton)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev33-vault-minimal-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV33 (Vault minimal skeleton)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev34-oracleaggregator-minimal-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV34 (OracleAggregator minimal skeleton)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev35-safetyautomata-minimal-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV35 (SafetyAutomata minimal skeleton)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev36-dao-timelock-minimal-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV36 (DAO Timelock minimal skeleton)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev37-parameterregistry-minimal-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV37 (ParameterRegistry minimal skeleton)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev38-wire-up-pass-v0" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV38 (Wire-up Pass v0)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev39-build-sanity-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV39 (Build sanity CI)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev40-psm-minimal-whitelist-dummy-quotes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV40 (PSM minimal+: whitelist &amp; dummy quotes)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev41-vault-minimal" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV41 (Vault minimal+)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev42-oracle-minimal-admin-mock-prices" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV42 (Oracle minimal+: admin mock prices)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev43-token-minimal-eip-2612" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV43 (Token minimal+: EIP-2612)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev44-parameter-keys-staging-params" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV44 (Parameter keys &amp; staging params)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev45-deploy-placeholders" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV45 (Deploy placeholders)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev46-docs-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV46 (Docs hardening)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev47-safety-docs-pass" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV47 (Safety docs pass)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev48-dapp-scaffolding-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV48 (dApp scaffolding docs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev49-sdk-wiring-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV49 (SDK wiring guide)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev50-psm-quote-semantics" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV50 (PSM quote semantics)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev51-vault-accounting-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV51 (Vault accounting plan)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev52-psm-swap-execution-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV52 (PSM swap execution plan)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev53-safety-docs-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV53 (Safety docs set)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-patch-psm-swap-execution-plan-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — Patch: PSM swap execution plan language
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev54-interfaces-polish" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV54 (interfaces polish)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev55-parameter-keys-canon" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV55 (parameter keys canon)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev60-psm-quote-math" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV60 (psm quote math)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev61-vault-accounting-edges" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV61 (vault accounting edges)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev62-oracle-aggregation-guards" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV62 (oracle aggregation guards)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ERROR_CATALOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Catalog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev1-docs-lead" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV1 (Docs Lead)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev2-repo-governance" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV2 (Repo Governance)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev3-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV3 (CI/CD)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev4-interfacesspecs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV4 (Interfaces/Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev5-psm-spec-invariants" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV5 (PSM Spec &amp; Invariants)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev6-safety-governance-hooks-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV6 (Safety &amp; Governance Hooks Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev7-vault-por-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV7 (Vault &amp; PoR Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev8-oracle-feeds-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV8 (Oracle &amp; Feeds Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev9-autoconverter-routing-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV9 (AutoConverter &amp; Routing Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev10-daotimelock-treasury-params-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV10 (DAO/Timelock &amp; Treasury &amp; Params Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev11-clientsdk-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV11 (Client/SDK Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev12-reference-dappexplorer-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV12 (Reference dApp/Explorer Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev13-testplan-ci-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV13 (Testplan &amp; CI Extensions)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev14-psm-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV14 (PSM Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev15-token-access-control-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV15 (Token &amp; Access Control Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev16-deployment-environments-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV16 (Deployment &amp; Environments Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev17-indexer-data-model-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV17 (Indexer &amp; Data Model Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev18-threat-modeling-risk-register" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV18 (Threat Modeling &amp; Risk Register)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev19-telemetry-monitoring-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV19 (Telemetry &amp; Monitoring Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev20-integration-blueprints" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV20 (Integration Blueprints)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev21-gas-fee-accounting-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV21 (Gas &amp; Fee Accounting Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev22-bridgingmigration-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV22 (Bridging/Migration Roadmap)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev23-legalcompliance-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV23 (Legal/Compliance Notes)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev24-reference-dapp-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV24 (Reference dApp Specs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev25-operational-playbooks-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV25 (Operational Playbooks v1)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev25-operational-playbooks-v1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV25 (Operational Playbooks v1)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev26-security-contest-prep" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV26 (Security Contest Prep)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev27-release-v0-meta-checklist-freeze-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV27 (Release v0 Meta-Checklist &amp; Freeze Gates)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev28-spec-consistency" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV28 (Spec Consistency)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev29-bootstrap-code-stubs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV29 (Bootstrap Code Stubs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev30-buildtooling-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV30 (Build/Tooling Skeleton)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-12-dev31-coding-kickoff-token-minimal" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-12 — DEV31 (Coding Kickoff: Token minimal)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev32-psm-minimal-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV32 (PSM minimal skeleton)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev33-vault-minimal-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV33 (Vault minimal skeleton)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev34-oracleaggregator-minimal-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV34 (OracleAggregator minimal skeleton)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev35-safetyautomata-minimal-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV35 (SafetyAutomata minimal skeleton)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev36-dao-timelock-minimal-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV36 (DAO Timelock minimal skeleton)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev37-parameterregistry-minimal-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV37 (ParameterRegistry minimal skeleton)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev38-wire-up-pass-v0" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV38 (Wire-up Pass v0)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev39-build-sanity-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV39 (Build sanity CI)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev40-psm-minimal-whitelist-dummy-quotes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV40 (PSM minimal+: whitelist &amp; dummy quotes)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev41-vault-minimal" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV41 (Vault minimal+)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev42-oracle-minimal-admin-mock-prices" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV42 (Oracle minimal+: admin mock prices)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev43-token-minimal-eip-2612" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV43 (Token minimal+: EIP-2612)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev44-parameter-keys-staging-params" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV44 (Parameter keys &amp; staging params)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev45-deploy-placeholders" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV45 (Deploy placeholders)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev46-docs-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV46 (Docs hardening)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev47-safety-docs-pass" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV47 (Safety docs pass)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev48-dapp-scaffolding-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV48 (dApp scaffolding docs)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev49-sdk-wiring-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV49 (SDK wiring guide)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev50-psm-quote-semantics" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV50 (PSM quote semantics)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev51-vault-accounting-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV51 (Vault accounting plan)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev52-psm-swap-execution-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV52 (PSM swap execution plan)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev53-safety-docs-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV53 (Safety docs set)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-patch-psm-swap-execution-plan-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — Patch: PSM swap execution plan language
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev54-interfaces-polish" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV54 (interfaces polish)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev55-parameter-keys-canon" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV55 (parameter keys canon)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev60-psm-quote-math" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV60 (psm quote math)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev61-vault-accounting-edges" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV61 (vault accounting edges)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-10-13-dev62-oracle-aggregation-guards" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-10-13 — DEV62 (oracle aggregation guards)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>Changelog</h1>
+
+<h2 id="2025-10-12-dev1-docs-lead">2025-10-12 — DEV1 (Docs Lead)</h2>
+<ul>
+<li>Added bilingual whitepaper: <code>docs/whitepaper/WHITEPAPER_1kUSD_DE.md</code> and <code>..._EN.md</code></li>
+<li>Updated docs index and aligned architecture/API references</li>
+</ul>
+<h2 id="2025-10-12-dev2-repo-governance">2025-10-12 — DEV2 (Repo Governance)</h2>
+<ul>
+<li>Added <code>CONTRIBUTING.md</code> (EOF workflow, CI gates, PR process)</li>
+<li>Added <code>CODEOWNERS</code> (placeholder)</li>
+<li>Added <code>.editorconfig</code></li>
+<li>Added <code>SECURITY.md</code> (private reporting via GitHub Advisories)</li>
+</ul>
+<h2 id="2025-10-12-dev3-cicd">2025-10-12 — DEV3 (CI/CD)</h2>
+<ul>
+<li>Replaced <code>.github/workflows/ci.yml</code> with a functional minimal pipeline (bootstrap/lint/test/reports placeholders)</li>
+<li>Added <code>reports/README.md</code></li>
+</ul>
+<h2 id="2025-10-12-dev4-interfacesspecs">2025-10-12 — DEV4 (Interfaces/Specs)</h2>
+<ul>
+<li>Added <code>interfaces/ONCHAIN_EVENTS.md</code> (event catalog for all modules)</li>
+<li>Added <code>interfaces/RPC_API.md</code> (public JSON-RPC/WebSocket spec)</li>
+<li>Added <code>interfaces/INDEXER_API.md</code> (REST/GraphQL read-only spec)</li>
+</ul>
+<h2 id="2025-10-12-dev5-psm-spec-invariants">2025-10-12 — DEV5 (PSM Spec &amp; Invariants)</h2>
+<ul>
+<li>Added <code>contracts/specs/PSM_SPEC.md</code> (parameters, fees, caps, rate limits, guards, state machine)</li>
+<li>Added <code>contracts/specs/INVARIANTS.md</code> (system-wide invariants &amp; safety properties)</li>
+</ul>
+<h2 id="2025-10-12-dev6-safety-governance-hooks-specs">2025-10-12 — DEV6 (Safety &amp; Governance Hooks Specs)</h2>
+<ul>
+<li>Added <code>contracts/specs/SAFETY_AUTOMATA_SPEC.md</code> (policies, state machine, guards, guardian sunset)</li>
+<li>Added <code>contracts/specs/GOVERNANCE_HOOKS_SPEC.md</code> (DAO/Timelock executor, parameter flows)</li>
+</ul>
+<h2 id="2025-10-12-dev7-vault-por-specs">2025-10-12 — DEV7 (Vault &amp; PoR Specs)</h2>
+<ul>
+<li>Added <code>contracts/specs/COLLATERAL_VAULT_SPEC.md</code> (ingress/egress, caps, decimals, errors, events)</li>
+<li>Added <code>contracts/specs/PROOF_OF_RESERVES_SPEC.md</code> (views, reconciliation, finality, telemetry)</li>
+</ul>
+<h2 id="2025-10-12-dev8-oracle-feeds-specs">2025-10-12 — DEV8 (Oracle &amp; Feeds Specs)</h2>
+<ul>
+<li>Added <code>contracts/specs/ORACLE_AGGREGATOR_SPEC.md</code> (aggregation, guards, finality)</li>
+<li>Added <code>contracts/specs/PRICE_FEEDS_SPEC.md</code> (adapter requirements for Chainlink/Pyth/DEX-TWAP)</li>
+</ul>
+<h2 id="2025-10-12-dev9-autoconverter-routing-specs">2025-10-12 — DEV9 (AutoConverter &amp; Routing Specs)</h2>
+<ul>
+<li>Added <code>contracts/specs/AUTOCONVERTER_SPEC.md</code> (routing, slippage, oracle sanity, safety)</li>
+<li>Added <code>contracts/specs/ROUTING_ADAPTERS_SPEC.md</code> (adapter interface &amp; safety requirements)</li>
+</ul>
+<h2 id="2025-10-12-dev10-daotimelock-treasury-params-specs">2025-10-12 — DEV10 (DAO/Timelock &amp; Treasury &amp; Params Specs)</h2>
+<ul>
+<li>Added <code>contracts/specs/DAO_TIMELOCK_SPEC.md</code> (roles, lifecycle, delays)</li>
+<li>Added <code>contracts/specs/TREASURY_SPEC.md</code> (fee accounting, spend path via Vault)</li>
+<li>Added <code>contracts/specs/PARAMETER_REGISTRY_SPEC.md</code> (canonical parameter map &amp; events)</li>
+</ul>
+<h2 id="2025-10-12-dev11-clientsdk-specs">2025-10-12 — DEV11 (Client/SDK Specs)</h2>
+<ul>
+<li>Added TS/Go/Rust/Python SDK specs under <code>clients/specs/</code></li>
+<li>Added common error taxonomy, event decoding, and tx build flows</li>
+</ul>
+<h2 id="2025-10-12-dev12-reference-dappexplorer-specs">2025-10-12 — DEV12 (Reference dApp/Explorer Specs)</h2>
+<ul>
+<li>Added reference app specs: REF_DAPP_SPEC, UX_FLOWS, API_CONTRACTS, ACCESSIBILITY_I18N</li>
+</ul>
+<h2 id="2025-10-12-dev13-testplan-ci-extensions">2025-10-12 — DEV13 (Testplan &amp; CI Extensions)</h2>
+<ul>
+<li>Added test specs: TESTPLAN, FORMAL_INVARIANTS_MAP, SECURITY_ANALYSIS</li>
+<li>Added CI reports schema and expanded CI skeleton with artifacts</li>
+</ul>
+<h2 id="2025-10-12-dev14-psm-specs">2025-10-12 — DEV14 (PSM Specs)</h2>
+<ul>
+<li>Added <code>contracts/specs/PSM_SPEC.md</code> (swap flows, fees, guards, events, errors)</li>
+<li>Added <code>contracts/specs/RATE_LIMITS_SPEC.md</code> (sliding window model shared by modules)</li>
+</ul>
+<h2 id="2025-10-12-dev15-token-access-control-specs">2025-10-12 — DEV15 (Token &amp; Access Control Specs)</h2>
+<ul>
+<li>Added <code>contracts/specs/TOKEN_SPEC.md</code> (mint/burn gates, permit, pause interop)</li>
+<li>Added <code>contracts/specs/ACCESS_CONTROL_SPEC.md</code> (roles, governance wiring, enforcement)</li>
+</ul>
+<h2 id="2025-10-12-dev16-deployment-environments-specs">2025-10-12 — DEV16 (Deployment &amp; Environments Specs)</h2>
+<ul>
+<li>Added ops specs: DEPLOYMENT_ENVIRONMENTS, RELEASE_PROCESS, SECRETS_HANDLING, EMERGENCY_PLAYBOOKS</li>
+<li>Added placeholder address registries under ops/config/</li>
+</ul>
+<h2 id="2025-10-12-dev17-indexer-data-model-specs">2025-10-12 — DEV17 (Indexer &amp; Data Model Specs)</h2>
+<ul>
+<li>Added indexer specs: ENTITY_MODEL, INGESTION_PIPELINE, API_SPEC, SCHEMA</li>
+</ul>
+<h2 id="2025-10-12-dev18-threat-modeling-risk-register">2025-10-12 — DEV18 (Threat Modeling &amp; Risk Register)</h2>
+<ul>
+<li>Added security specs: THREAT_MODEL, RISK_REGISTER, ATTACK_TREES, MITIGATIONS_MAP</li>
+</ul>
+<h2 id="2025-10-12-dev19-telemetry-monitoring-specs">2025-10-12 — DEV19 (Telemetry &amp; Monitoring Specs)</h2>
+<ul>
+<li>Added telemetry specs: METRICS_SPEC, ALERTS_SLOS_SPEC, HEALTH_ENDPOINTS_SPEC</li>
+</ul>
+<h2 id="2025-10-12-dev20-integration-blueprints">2025-10-12 — DEV20 (Integration Blueprints)</h2>
+<ul>
+<li>Added integration specs: WALLETS_PAYMENTS_SPEC, BRIDGES_CEX_LISTINGS_SPEC, PARTNER_APIS_ADAPTERS_SPEC</li>
+</ul>
+<h2 id="2025-10-12-dev21-gas-fee-accounting-specs">2025-10-12 — DEV21 (Gas &amp; Fee Accounting Specs)</h2>
+<ul>
+<li>Added GAS_POLICY_SPEC (targets, patterns, CI gates)</li>
+<li>Added FEE_ACCOUNTING_SPEC (formulas, events, edge cases)</li>
+<li>Added MATH_ROUNDING_RULES (mulDiv, floor policy, quoting)</li>
+</ul>
+<h2 id="2025-10-12-dev22-bridgingmigration-roadmap">2025-10-12 — DEV22 (Bridging/Migration Roadmap)</h2>
+<ul>
+<li>Added bridging specs: MIGRATION_ROADMAP, BRIDGE_ARCH_OPTIONS, COMPAT_LAYER_SPEC</li>
+</ul>
+<h2 id="2025-10-12-dev23-legalcompliance-notes">2025-10-12 — DEV23 (Legal/Compliance Notes)</h2>
+<ul>
+<li>Added informational legal docs: LEGAL_STANCE, JURISDICTIONS_CHECKLIST, DISCLOSURES</li>
+</ul>
+<h2 id="2025-10-12-dev24-reference-dapp-specs">2025-10-12 — DEV24 (Reference dApp Specs)</h2>
+<ul>
+<li>Added dApp specs: REFERENCE_DAPP_UX, COMPONENTS_SPEC, STATUS_API_WIRING</li>
+</ul>
+<h2 id="2025-10-12-dev25-operational-playbooks-v1">2025-10-12 — DEV25 (Operational Playbooks v1)</h2>
+<ul>
+<li>Added playbooks: RELEASE_REHEARSAL, PARAM_CHANGE_RUNBOOK, INCIDENT_DRY_RUN</li>
+</ul>
+<h2 id="2025-10-12-dev25-operational-playbooks-v1_1">2025-10-12 — DEV25 (Operational Playbooks v1)</h2>
+<ul>
+<li>Added playbooks: RELEASE_REHEARSAL, PARAM_CHANGE_RUNBOOK, INCIDENT_DRY_RUN</li>
+</ul>
+<h2 id="2025-10-12-dev26-security-contest-prep">2025-10-12 — DEV26 (Security Contest Prep)</h2>
+<ul>
+<li>Added contest docs: CONTEST_SCOPE, RULES, FINDINGS_TEMPLATE, PAYOUT_MAP</li>
+</ul>
+<h2 id="2025-10-12-dev27-release-v0-meta-checklist-freeze-gates">2025-10-12 — DEV27 (Release v0 Meta-Checklist &amp; Freeze Gates)</h2>
+<ul>
+<li>Added release specs: RELEASE_CANDIDATE_CRITERIA, FREEZE_GATES_CHECKLIST, SIGNOFFS_EVIDENCE</li>
+</ul>
+<h2 id="2025-10-12-dev28-spec-consistency">2025-10-12 — DEV28 (Spec Consistency)</h2>
+<ul>
+<li>Added central docs/INDEX.md with cross-links</li>
+<li>Appended README pointer to INDEX.md</li>
+<li>Added placeholder link-check workflow and config</li>
+</ul>
+<h2 id="2025-10-12-dev29-bootstrap-code-stubs">2025-10-12 — DEV29 (Bootstrap Code Stubs)</h2>
+<ul>
+<li>Added Solidity interfaces: I1kUSD, IPSM, IVault, IOracleAggregator, ISafetyAutomata, IParameterRegistry</li>
+<li>Added empty contract stubs: OneKUSD, PegStabilityModule, CollateralVault, OracleAggregator, SafetyAutomata, DAOTimelock</li>
+</ul>
+<h2 id="2025-10-12-dev30-buildtooling-skeleton">2025-10-12 — DEV30 (Build/Tooling Skeleton)</h2>
+<ul>
+<li>Added Foundry skeleton (<code>foundry/foundry.toml</code>, script stub, remappings)</li>
+<li>Added Hardhat skeleton (package.json, tsconfig.json, hardhat.config.ts, .npmrc)</li>
+<li>Added BUILD_TOOLING.md and placeholder CI build workflow</li>
+</ul>
+<h2 id="2025-10-12-dev31-coding-kickoff-token-minimal">2025-10-12 — DEV31 (Coding Kickoff: Token minimal)</h2>
+<ul>
+<li>Implemented minimal OneKUSD token: ERC-20 core, gated mint/burn, pause affects only mint/burn, admin roles (to be Timelock later), custom errors</li>
+<li>Excludes permit (EIP-2612) for now, per TOKEN_SPEC optional</li>
+</ul>
+<h2 id="2025-10-13-dev32-psm-minimal-skeleton">2025-10-13 — DEV32 (PSM minimal skeleton)</h2>
+<ul>
+<li>Added minimal PegStabilityModule: admin/registry wiring, pause/deadline guards, IPSM signatures, stub quotes/swaps (NOT_IMPLEMENTED)</li>
+</ul>
+<h2 id="2025-10-13-dev33-vault-minimal-skeleton">2025-10-13 — DEV33 (Vault minimal skeleton)</h2>
+<ul>
+<li>Added CollateralVault minimal skeleton: admin/registry wiring, pause guard, supported-assets toggle, IVault signatures; deposit/withdraw stubs (NOT_IMPLEMENTED)</li>
+</ul>
+<h2 id="2025-10-13-dev34-oracleaggregator-minimal-skeleton">2025-10-13 — DEV34 (OracleAggregator minimal skeleton)</h2>
+<ul>
+<li>Added OracleAggregator minimal skeleton: admin/registry wiring, pause guard, OracleUpdated event, IOracleAggregator stub (no pricing logic)</li>
+</ul>
+<h2 id="2025-10-13-dev35-safetyautomata-minimal-skeleton">2025-10-13 — DEV35 (SafetyAutomata minimal skeleton)</h2>
+<ul>
+<li>Added SafetyAutomata minimal skeleton: admin/registry wiring, pause/unpause events, read-only interface stubs (no caps/rate-limit logic)</li>
+</ul>
+<h2 id="2025-10-13-dev36-dao-timelock-minimal-skeleton">2025-10-13 — DEV36 (DAO Timelock minimal skeleton)</h2>
+<ul>
+<li>Added minimal DAOTimelock: admin wiring, minDelay placeholder, queue/cancel/execute events; execute() is a stub (NOT_IMPLEMENTED)</li>
+</ul>
+<h2 id="2025-10-13-dev37-parameterregistry-minimal-skeleton">2025-10-13 — DEV37 (ParameterRegistry minimal skeleton)</h2>
+<ul>
+<li>Added ParameterRegistry: admin setUint/setAddress/setBool; read-only getters per interface; no validations yet</li>
+</ul>
+<h2 id="2025-10-13-dev38-wire-up-pass-v0">2025-10-13 — DEV38 (Wire-up Pass v0)</h2>
+<ul>
+<li>Added ops/config addresses templates (template, staging, testnet, mainnet)</li>
+<li>Added Admin/Wiring notes</li>
+<li>Updated README to reference addresses templates</li>
+</ul>
+<h2 id="2025-10-13-dev39-build-sanity-ci">2025-10-13 — DEV39 (Build sanity CI)</h2>
+<ul>
+<li>Added GitHub Actions: hardhat compile with artifact upload; Foundry fmt placeholder</li>
+<li>Updated BUILD_TOOLING.md with CI notes</li>
+</ul>
+<h2 id="2025-10-13-dev40-psm-minimal-whitelist-dummy-quotes">2025-10-13 — DEV40 (PSM minimal+: whitelist &amp; dummy quotes)</h2>
+<ul>
+<li>Extended PSM with supported-token whitelist and pass-through quotes (gross=amountIn, fee=0, net=amountIn)</li>
+<li>Swaps remain NOT_IMPLEMENTED; no fund movements yet</li>
+</ul>
+<h2 id="2025-10-13-dev41-vault-minimal">2025-10-13 — DEV41 (Vault minimal+)</h2>
+<ul>
+<li>CollateralVault: added batch getter <code>areAssetsSupported(address[])</code>; <code>balanceOf</code> remains dummy; no transfer/accounting logic yet</li>
+</ul>
+<h2 id="2025-10-13-dev42-oracle-minimal-admin-mock-prices">2025-10-13 — DEV42 (Oracle minimal+: admin mock prices)</h2>
+<ul>
+<li>OracleAggregator: added admin <code>setPriceMock</code> and mock storage; <code>getPrice</code> serves mock values (dev/staging only)</li>
+</ul>
+<h2 id="2025-10-13-dev43-token-minimal-eip-2612">2025-10-13 — DEV43 (Token minimal+: EIP-2612)</h2>
+<ul>
+<li>Added IERC2612 interface and implemented <code>permit</code> in OneKUSD</li>
+<li>Domain separator is chainId-aware; <code>nonces</code> tracked per owner</li>
+<li>No changes to transfer logic; pause still gates only mint/burn</li>
+</ul>
+<h2 id="2025-10-13-dev44-parameter-keys-staging-params">2025-10-13 — DEV44 (Parameter keys &amp; staging params)</h2>
+<ul>
+<li>Added docs/PARAMETER_KEYS.md (canonical bytes32 keys reference)</li>
+<li>Added ops/config/params.staging.json with example values for dev/staging</li>
+<li>Updated README with parameters section</li>
+</ul>
+<h2 id="2025-10-13-dev45-deploy-placeholders">2025-10-13 — DEV45 (Deploy placeholders)</h2>
+<ul>
+<li>Added Foundry placeholder deploy script (encodes ctor args; no broadcast)</li>
+<li>Added Hardhat placeholder deploy script (reads config; prints wiring; no deploy)</li>
+<li>Added ops/specs/DEPLOY_PLACEHOLDERS.md</li>
+</ul>
+<h2 id="2025-10-13-dev46-docs-hardening">2025-10-13 — DEV46 (Docs hardening)</h2>
+<ul>
+<li>Added JSON Schemas for addresses and params; embedded <code>$schema</code> in config JSONs</li>
+<li>Added docs/JSON_VALIDATION.md and updated README with validation notes</li>
+</ul>
+<h2 id="2025-10-13-dev47-safety-docs-pass">2025-10-13 — DEV47 (Safety docs pass)</h2>
+<ul>
+<li>Added Guardian Sunset checklist (docs/SAFETY_GUARDIAN_CHECKLIST.md)</li>
+<li>Added ops runbooks: EMERGENCY_DRILLS.md and INCIDENT_TEMPLATE.md</li>
+</ul>
+<h2 id="2025-10-13-dev48-dapp-scaffolding-docs">2025-10-13 — DEV48 (dApp scaffolding docs)</h2>
+<ul>
+<li>Added docs/dapp/README.md and ROUTES.md (information architecture + routes)</li>
+<li>Added apps/dapp placeholders (public/brand.svg, src/README, folder marker)</li>
+</ul>
+<h2 id="2025-10-13-dev49-sdk-wiring-guide">2025-10-13 — DEV49 (SDK wiring guide)</h2>
+<ul>
+<li>Added SDK wiring guide and TS examples (addresses loader, params+RPC)</li>
+<li>Updated README; added clients/specs overview</li>
+</ul>
+<h2 id="2025-10-13-dev50-psm-quote-semantics">2025-10-13 — DEV50 (PSM quote semantics)</h2>
+<ul>
+<li>Added docs/PSM_QUOTE_SEMANTICS.md (decimals normalization, fees, rounding, invariants, examples)</li>
+<li>Updated README with cross-reference</li>
+</ul>
+<h2 id="2025-10-13-dev51-vault-accounting-plan">2025-10-13 — DEV51 (Vault accounting plan)</h2>
+<ul>
+<li>Added docs/VAULT_ACCOUNTING_PLAN.md (math, caps, fees, decimals policy, invariants)</li>
+<li>Added docs/NOTES_VAULT_ACCOUNTING.md (reviewer notes)</li>
+</ul>
+<h2 id="2025-10-13-dev52-psm-swap-execution-plan">2025-10-13 — DEV52 (PSM swap execution plan)</h2>
+<ul>
+<li>Added docs/PSM_SWAP_EXECUTION_PLAN.md (CEI, guards, vault interactions, fees, events)</li>
+<li>Added docs/NOTES_PSM_EXECUTION.md (reviewer notes)</li>
+</ul>
+<h2 id="2025-10-13-dev53-safety-docs-set">2025-10-13 — DEV53 (Safety docs set)</h2>
+<ul>
+<li>Added Safety Pause Matrix, Module IDs, Error Catalog, Guardian Sunset Hooks</li>
+<li>Updated README with cross-links</li>
+</ul>
+<h2 id="2025-10-13-patch-psm-swap-execution-plan-language">2025-10-13 — Patch: PSM swap execution plan language</h2>
+<ul>
+<li>Rewrote docs/PSM_SWAP_EXECUTION_PLAN.md in English (removed German fragments).</li>
+</ul>
+<h2 id="2025-10-13-dev54-interfaces-polish">2025-10-13 — DEV54 (interfaces polish)</h2>
+<ul>
+<li>Added minimal Solidity interfaces: IPSM, IVault, IOracleAggregator, IParameterRegistry, ISafetyAutomata, I1kUSD (+ IERC2612 if missing)</li>
+<li>Added interfaces README overview</li>
+</ul>
+<h2 id="2025-10-13-dev55-parameter-keys-canon">2025-10-13 — DEV55 (parameter keys canon)</h2>
+<ul>
+<li>Added canonical parameter keys doc with composite derivation rules</li>
+<li>Added params JSON schema &amp; template</li>
+<li>Added TS SDK helpers (key/compositeKey)</li>
+<li>Updated README with cross-links</li>
+</ul>
+<p>2025-10-13 — DEV56 (deployment skeletons)</p>
+<p>Added env templates (.env.example, staging/testnet samples)</p>
+<p>Added Foundry skeleton (foundry.toml, compile-only test)</p>
+<p>Added Hardhat skeleton (config + TS scripts), address template emitter</p>
+<p>Added deploy CI skeleton and README quickstart</p>
+<p>2025-10-13 — DEV57 (events &amp; abi)</p>
+<p>Added canonical event ABIs: PSM, Vault, Token (JSON)</p>
+<p>Added indexer notes for topics, reconciliation, finality, and edge cases</p>
+<p>2025-10-13 — DEV58 (sdk event decoders)</p>
+<p>Added TS decoders for PSM/Vault/Token events (clients/sdk/events.ts)</p>
+<p>Added example (clients/examples/decode-events.ts) and docs</p>
+<p>2025-10-13 — DEV59 (indexer schemas)</p>
+<p>Added JSON schemas for swaps, fees, and vault snapshots</p>
+<p>Added sample records and documentation</p>
+<h2 id="2025-10-13-dev60-psm-quote-math">2025-10-13 — DEV60 (psm quote math)</h2>
+<ul>
+<li>Added normative math for PSM quotes (rounding/decimals/fee order)</li>
+<li>Added machine-readable test vectors for USDC/WETH cases</li>
+<li>Added usage notes for unit/invariant tests</li>
+</ul>
+<h2 id="2025-10-13-dev61-vault-accounting-edges">2025-10-13 — DEV61 (vault accounting edges)</h2>
+<ul>
+<li>Added vault accounting edge cases doc (FoT, decimals, caps)</li>
+<li>Added machine-readable vectors for FoT/cap boundary cases</li>
+<li>Added vault test guide with mock FoT hints</li>
+</ul>
+<h2 id="2025-10-13-dev62-oracle-aggregation-guards">2025-10-13 — DEV62 (oracle aggregation guards)</h2>
+<ul>
+<li>Added normative doc for multi-source aggregation (median/trimmed-mean), staleness and deviation guards</li>
+<li>Added machine-readable vectors for healthy/stale/outlier/trimmed cases</li>
+<li>Added oracle test guide</li>
+</ul>
+<p>2025-10-13 — DEV63 (safety rate-limiter)</p>
+<p>Added sliding-window rate-limiter spec (window/maxAmount, scopes, buckets)</p>
+<p>Added machine-readable vectors and a focused test guide</p>
+<p>2025-10-13 — DEV64 (governance wiring)</p>
+<p>Added governance param writes flow (Timelock -&gt; ParameterRegistry)</p>
+<p>Added proposal JSON schema and sample</p>
+<p>Added calldata composer script (TS)</p>
+<p>Added Guardian sunset rehearsal runbook</p>
+<p>Updated README with governance links</p>
+<p>2025-10-13 — DEV65 (token permit eip-2612)</p>
+<p>Finalized OneKUSD EIP-2612 Permit spec (domain, struct, digest, rules)</p>
+<p>Added machine-readable vectors and TS helper to build/sign permits</p>
+<p>Added test guide for domain, replay, expiry, and ECDSA checks</p>
+<p>2025-10-13 — DEV66 (invariants bundle)</p>
+<p>Added executable mapping from formal invariants to concrete checks</p>
+<p>Added consolidated invariants suite plan and default config JSON</p>
+<p>Added harness notes for PSM/Vault/Governance invariant runs</p>
+<p>2025-10-13 — DEV67 (configs &amp; address book)</p>
+<p>Added per-chain deploy config schema + local/testnet/mainnet samples</p>
+<p>Added canonical address book schema + sample</p>
+<p>Added JSON validator and .env emitter scripts</p>
+<p>Updated README with usage instructions</p>
+<p>2025-10-13 — DEV68 (localnet/staging bootstraps)</p>
+<p>Added localnet scripts (start/stop/seed/deploy-skeleton)</p>
+<p>Added staging bootstrap runbook (Base Sepolia example)</p>
+<p>Added bootstrap quickstart and README links</p>
+<p>2025-10-13 — DEV69 (ci gates)</p>
+<p>Added CI gates doc with red/green criteria</p>
+<p>Added collate script (node) to enforce gates from JSON artifacts</p>
+<p>Added placeholders generator and updated CI workflow to wire jobs</p>
+<p>2025-10-13 — DEV70 (security pre-audit pack)</p>
+<p>Added pre-audit README and formal threat model</p>
+<p>Added static-analysis baseline config/args and generator script</p>
+<p>Added submission manifest and bundle script (ZIP)</p>
+<p>2025-10-13 — DEV71 (sdk wire-up)</p>
+<p>Added minimal TS SDK with address book helpers, permit helpers, oracle aggregation helper</p>
+<p>Added examples wiring vectors (permit/oracle)</p>
+<p>Updated README with SDK usage</p>
+<p>2025-10-13 — DEV72 (indexer read models)</p>
+<p>Added canonical read models schema (blocks, tokenSupply, vaultBalances, psmSwaps, events)</p>
+<p>Added event decode table mapping (PSM/Vault/Token)</p>
+<p>Added sample queries (REST/GraphQL) and a sample dataset</p>
+<p>Updated README with Indexer section</p>
+<p>2025-10-13 — DEV73 (psm math)</p>
+<p>Added canonical PSM quote formulas and rounding rules (docs)</p>
+<p>Added quote JSON vectors and TS evaluator script</p>
+<p>README updated with PSM Math references</p>
+<p>2025-10-13 — DEV74 (vault math)</p>
+<p>Added Vault accounting spec (received-based deposit, pending fees)</p>
+<p>Added fee accrual policy doc</p>
+<p>Added FoT/decimals vectors and TS evaluator script</p>
+<p>Updated README with Vault section</p>
+<p>2025-10-13 — DEV75 (safety guards)</p>
+<p>Added Safety guards test plan</p>
+<p>Added rate-limit vectors and evaluator (sliding window)</p>
+<p>Added pause/resume + guardian sunset vectors and evaluator</p>
+<p>README updated with Safety section</p>
+<p>2025-10-13 — DEV76 (psm interface finalization)</p>
+<p>Added finalized IPSM interface (quotes + swaps, errors/events)</p>
+<p>Added normative revert reasons catalog</p>
+<p>Added event ABI lock file and checker script</p>
+<p>README updated with PSM Interface section</p>
+<p>2025-10-13 — DEV77 (token finalize)</p>
+<p>Added IOneKUSD (ERC20 + EIP-2612 + gated mint/burn + pause)</p>
+<p>Added pause semantics doc (mint/burn only; transfers unaffected)</p>
+<p>Added event ABI lock for OneKUSD</p>
+<p>Added permit vectors JSON</p>
+<p>README updated with Token section</p>
+<p>2025-10-13 — DEV78 (collateral registry &amp; metadata)</p>
+<p>Added ICollateralRegistry interface</p>
+<p>Added asset metadata JSON schema + samples</p>
+<p>Added collateral registry spec and README section</p>
+<p>2025-10-13 — DEV79 (parameter registry finalize)</p>
+<p>Added final docs for Parameter Registry and Keys Catalog</p>
+<p>Added JSON schema and sample vectors for parameters</p>
+<p>Added JSON validator script (AJV) and README wiring</p>
+<p>2025-10-13 — DEV80 (governance ops)</p>
+<p>Added governance proposal JSON schema and example proposals</p>
+<p>Added queue/execute helper scripts (placeholder) and ops doc</p>
+<p>README updated with Governance Ops section</p>
+<p>2025-10-13 — DEV81 (oracle adapters)</p>
+<p>Added adapter schema (chainlink/pyth/dex_twap)</p>
+<p>Added mainnet catalog and sample adapter JSONs</p>
+<p>Added validator script and README section</p>
+<p>2025-10-13 — DEV82 (autoconverter router)</p>
+<p>Added router policy doc and JSON schema</p>
+<p>Added sample routes JSON</p>
+<p>Added evaluator script to rank policy-compliant routes</p>
+<p>README section for AutoConverter Router</p>
+<p>2025-10-13 — DEV83 (psm quote/exec alignment)</p>
+<p>Added executable invariants doc for quote vs exec</p>
+<p>Added cross-check script producing JSON and text reports</p>
+<p>README wired with usage instructions</p>
+<p>2025-10-13 — DEV84 (indexing/telemetry)</p>
+<p>Added indexing/telemetry spec (finality, reorgs, DTO map)</p>
+<p>Added JSON schemas: event DTO, PoR rollup, health</p>
+<p>Added validators/checkers and sample vectors</p>
+<p>README wired; reports folder outputs</p>
+<p>2025-10-13 — DEV85 (dex/amm integration)</p>
+<p>Added minimal ABI locks for Uniswap V2/V3 pools</p>
+<p>Added routing hints schema and sample JSON</p>
+<p>Added price sanity vectors and checker script</p>
+<p>README updated with DEX/AMM Integration section</p>
+<p>2025-10-13 — DEV86 (security checklists &amp; CI gate)</p>
+<p>Added pre-deploy, post-deploy, and incident-response checklists</p>
+<p>Added CI security gate documentation and minimal workflow</p>
+<p>README updated with Security section</p>
+<p>2025-10-13 — DEV87 (release/versioning)</p>
+<p>Added SemVer bump script and GitHub Release workflow (tag-triggered)</p>
+<p>Added release notes template and renderers (changelog-section, release-notes)</p>
+<p>README wired with release usage</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 24, 2025 19:14:26 UTC">October 24, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "navigation.expand", "search.highlight", "search.suggest"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
