@@ -1,24 +1,19 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -euxo pipefail
+echo "🧩 CI Environment Setup (deterministic)"
 
-echo "🧩 CI Environment Setup — 1kUSD Project"
-mkdir -p lib
+forge --version
 
-echo "📦 Installing OpenZeppelin Contracts v5.0.2 (deterministic)"
-forge install OpenZeppelin/openzeppelin-contracts@v5.0.2 || true
+# Pin dependencies (no commit)
+forge install OpenZeppelin/openzeppelin-contracts@v5.0.2 --no-commit || true
+forge install foundry-rs/forge-std@v1.9.6 --no-commit || true
 
-echo "🔧 Writing remappings.txt"
-echo '@openzeppelin/=lib/openzeppelin-contracts/' > remappings.txt
+# Remappings
+{
+  echo '@openzeppelin/=lib/openzeppelin-contracts/'
+  echo 'forge-std/=lib/forge-std/src/'
+} > remappings.txt
 
-echo "🧹 Updating dependencies (forge update)"
-forge update || true
-
-if [ ! -d "lib/openzeppelin-contracts/contracts" ]; then
-  echo "⚠️ OpenZeppelin not found — re-installing..."
-  rm -rf lib/openzeppelin-contracts || true
-  forge install OpenZeppelin/openzeppelin-contracts@v5.0.2
-fi
-
-echo "📄 remappings.txt contents:"
-cat remappings.txt
-echo "✅ CI setup complete"
+# Update & build (executed by CI, not here)
+forge update
+forge build
