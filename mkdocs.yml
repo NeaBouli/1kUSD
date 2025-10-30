@@ -1,16 +1,17 @@
-site_name: 1kUSD Docs
+site_name: 1kUSD – Kaspa Stablecoin
 site_url: https://neabouli.github.io/1kUSD/
-repo_url: https://github.com/NeaBouli/1kUSD
-
 theme:
   name: material
   language: en
   features:
-    - navigation.top
+    - navigation.instant
     - navigation.expand
+    - content.tabs.link
     - search.highlight
-    - search.suggest
-    # - toc.integrate   # AUS lassen für flaches Menü
+    - content.code.copy
+  palette:
+    primary: teal
+    accent: lime
 
 nav:
   - Home: index.md
@@ -20,6 +21,10 @@ nav:
   - FAQ: FAQ.md
   - Governance & Logs:
       - Governance Overview: GOVERNANCE.md
+      - Governance Ops: GOVERNANCE_OPS.md
+      - Parameter Writes: GOVERNANCE_PARAM_WRITES.md
+      - Guardian Sunset Hooks: GUARDIAN_SUNSET_HOOKS.md
+      - Guardian Sunset Runbook: GUARDIAN_SUNSET_RUNBOOK.md
       - Project Log: logs/project.md
   - Architecture:
       - System Overview: ARCHITECTURE.md
@@ -95,13 +100,6 @@ nav:
   - Analysis & Notes:
       - Analysis: ANALYSIS_KASPA_STABLECOINS.md
       - Notes – Token Permit: NOTES_TOKEN_PERMIT.md
-      - Status: STATUS.md
-      - Changelog: CHANGELOG.md
-      - Error Catalog: ERROR_CATALOG.md
-
-use_directory_urls: true
-
-plugins:
-  - search
-  - git-revision-date-localized:
-      enable_creation_date: false
+  - Status: STATUS.md
+  - Changelog: CHANGELOG.md
+  - Error Catalog: ERROR_CATALOG.md

@@ -1,0 +1,33 @@
+site_name: 1kUSD Docs
+site_url: https://neabouli.github.io/1kUSD/
+use_directory_urls: true
+
+nav:
+  - Home: index.md
+  - Whitepaper:
+      - English: whitepaper/WHITEPAPER_1kUSD_EN.md
+      - Deutsch: whitepaper/WHITEPAPER_1kUSD_DE.md
+  - FAQ: FAQ.md
+  - Governance & Logs:
+      - Governance Overview: GOVERNANCE.md
+      - Project Log: logs/project.md
+      - Changelog: CHANGELOG.md
+
+theme:
+  name: material
+
+plugins:
+  - search
+  - git-revision-date-localized
+  - redirects:
+      redirect_maps:
+        "index.md": "index.html"
+        "GOVERNANCE.md": "GOVERNANCE/index.html"
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - footnotes
+  - meta
+  - toc:
+      permalink: true

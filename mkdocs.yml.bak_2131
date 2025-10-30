@@ -1,0 +1,73 @@
+site_name: "1kUSD Docs"
+repo_url: "https://github.com/NeaBouli/1kUSD"
+repo_name: "NeaBouli/1kUSD"
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: lime
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: blue
+
+nav:
+  - Home: index.md
+  - Whitepaper:
+      - English: whitepaper/WHITEPAPER_1kUSD_EN.md
+      - Deutsch: whitepaper/WHITEPAPER_1kUSD_DE.md
+  - FAQ: FAQ.md
+  - Analyses & Articles: articles/README.md
+  - Architecture:
+      - System Overview: specs/ARCHITECTURE.md
+      - Module IDs: specs/MODULE_IDS.md
+      - Indexer & Oracles: specs/ORACLE_AGGREGATOR_SPEC.md
+      - Converter Router: converter/AUTOCONVERTER_ROUTER.md
+  - Tokenomics:
+      - Core Token Model: specs/TOKEN_SPEC.md
+      - Fee Accrual: specs/PSM_SPEC.md
+      - Vault Accounting: specs/COLLATERAL_VAULT_SPEC.md
+  - Security & Safety:
+      - Safety Guardian: specs/SAFETY_AUTOMATA_SPEC.md
+      - Threat Model: specs/SECURITY_THREAT_MODEL.md
+      - Security Analysis: SECURITY_PREAUDIT_README.md
+  - Developers:
+      - Onboarding: SDK_WIRING_GUIDE.md
+      - Governance Params: specs/PARAMETER_REGISTRY_SPEC.md
+      - Oracle Spec: specs/ORACLE_AGGREGATOR_SPEC.md
+      - PSM Spec: specs/PSM_SPEC.md
+      - Proof of Reserves: specs/PROOF_OF_RESERVES_SPEC.md
+  - Governance & Logs:
+      - Governance Overview: GOVERNANCE.md
+      - Project Log: logs/project.md
+
+plugins:
+  - search
+  - git-revision-date-localized:
+      type: datetime
+      locale: en
+      fallback_to_build_date: true
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/Kaspa_USD
+      name: "@Kaspa_USD"
