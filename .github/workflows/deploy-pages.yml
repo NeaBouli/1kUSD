@@ -1,0 +1,5 @@
+
+# Prevent auto-deploy on main
+on:
+  push:
+    branches-ignore: [main]

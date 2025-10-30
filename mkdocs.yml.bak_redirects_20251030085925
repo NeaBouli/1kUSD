@@ -104,3 +104,7 @@ nav:
   - Changelog: CHANGELOG.md
   - Error Catalog: ERROR_CATALOG.md
 
+plugins:
+  - redirects:
+      redirect_maps:
+        'index.md': 'index.html'
