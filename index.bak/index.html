@@ -8,13 +8,9 @@
       
       
       
-        <link rel="canonical" href="https://neabouli.github.io/1kUSD/GOVERNANCE_PARAM_WRITES/">
+        <link rel="canonical" href="https://neabouli.github.io/1kUSD/index.bak/">
       
       
-        <link rel="prev" href="../GOVERNANCE_OPS/">
-      
-      
-        <link rel="next" href="../GUARDIAN_SUNSET_HOOKS/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -22,7 +18,7 @@
     
     
       
-        <title>Parameter Writes - 1kUSD – Kaspa Stablecoin</title>
+        <title>🪙 1kUSD Stablecoin Protocol - 1kUSD – Kaspa Stablecoin</title>
       
     
     
@@ -71,6 +67,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#1kusd-stablecoin-protocol" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -103,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Parameter Writes
+              🪙 1kUSD Stablecoin Protocol
             
           </span>
         </div>
@@ -293,20 +294,20 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -322,7 +323,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Governance & Logs
@@ -379,17 +380,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../GOVERNANCE_PARAM_WRITES/" class="md-nav__link">
         
   
   
@@ -400,7 +394,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -2555,6 +2548,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -2570,45 +2565,15 @@
 
 
 
-  <h1>Parameter Writes</h1>
-
-<p>Governance Param Writes — Timelock Flow (v1)</p>
-<p>Status: Docs (normative). Language: EN.</p>
-<p>Objective</p>
-<p>Define how governance changes protocol parameters via Timelock to the on-chain Parameter Registry. All writes are executed by the Timelock; regular EOAs cannot write.</p>
-<p>Roles</p>
-<p>Governor: creates proposals (off-chain coordination / on-chain governor contract)</p>
-<p>Timelock: schedules and executes transactions after delay</p>
-<p>ParameterRegistry: authoritative key/value map</p>
-<p>Required Write Surface (Registry)</p>
-<p>The Parameter Registry MUST expose Timelock-restricted setters:</p>
-<p>function setUint(bytes32 key, uint256 value) external;
-function setAddress(bytes32 key, address value) external;</p>
-<p>Reads remain public (getUint/getAddress). Only the Timelock is authorized to call setters.</p>
-<p>Canonical Flow</p>
-<p>Propose: governor prepares a param-change bundle (JSON) with one or more set operations.</p>
-<p>Queue: governor queues calldata through Timelock with target=ParameterRegistry, value=0.</p>
-<p>Delay: Timelock enforces minDelay (e.g., 48–96h).</p>
-<p>Execute: after delay, Timelock executes queued ops; events emitted by Registry.</p>
-<p>Verify: indexer and ops verify post-state and announce.</p>
-<p>Calldata Encoding (EVM)</p>
-<p>Target: ParameterRegistry address</p>
-<p>Selector setUint: bytes4(keccak256("setUint(bytes32,uint256)"))</p>
-<p>Selector setAddress: bytes4(keccak256("setAddress(bytes32,address)"))</p>
-<p>Arguments ABI-encoded</p>
-<p>Event Expectations</p>
-<p>Registry emits ParamUintSet(key, value, actor)</p>
-<p>Registry emits ParamAddressSet(key, value, actor)</p>
-<p>Timelock emits CallScheduled/CallExecuted (implementation-specific)</p>
-<p>Safety Notes</p>
-<p>Never batch unrelated risk domains in one proposal.</p>
-<p>For caps/rate limits, stage values upward/downward with monitoring windows.</p>
-<p>Emergency pause remains in Safety-Automata; it does not write params.</p>
-<p>References</p>
-<p>docs/PARAM_KEYS_CANON.md</p>
-<p>ops/schemas/param_change.schema.json</p>
-<p>ops/proposals/param_change.sample.json</p>
-<p>scripts/compose-param-change.ts</p>
+<h1 id="1kusd-stablecoin-protocol">🪙 1kUSD Stablecoin Protocol</h1>
+<p>Welcome to the <strong>1kUSD Documentation Portal</strong>.</p>
+<p>This site provides:
+- 📘 Technical specifications (<code>specs/</code>)
+- ⚙️ Smart contract architecture (<code>contracts/core/</code>)
+- 🧠 Governance and safety modules (<code>safety/</code>)
+- 💡 Integration guides and testing notes (<code>integrations/</code>, <code>testing/</code>)</p>
+<p>For the full GitHub repository, visit:
+👉 <a href="https://github.com/NeaBouli/1kUSD">NeaBouli/1kUSD</a></p>
 
 
 
