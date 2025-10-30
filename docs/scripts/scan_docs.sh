@@ -1,56 +1,30 @@
 #!/usr/bin/env bash
-set -e
-LOG_DIR="docs/logs"
-LOG_FILE="${LOG_DIR}/docs_structure_scan.log"
-REPORT="${LOG_DIR}/routing_fix_report.md"
+set -euo pipefail
+echo "🔎 1kUSD Docs Watchdog"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "$ROOT"
 
-mkdir -p "$LOG_DIR"
+ERR=0
+warn(){ echo "WARN $*"; }
+fail(){ echo "ERR  $*"; ERR=1; }
+have(){ command -v "$1" >/dev/null 2>&1; }
 
-echo "📘 Docs Structure Scan — $(date)" > "$LOG_FILE"
-echo "================================" >> "$LOG_FILE"
-echo >> "$LOG_FILE"
+# Required core files
+[[ -f "mkdocs.yml" ]] || fail "missing: mkdocs.yml"
+[[ -f "docs/index.md" ]] || fail "missing: docs/index.md"
 
-if command -v tree >/dev/null 2>&1; then
-  tree docs >> "$LOG_FILE"
-else
-  find docs -type f | sort >> "$LOG_FILE"
+# Root README is optional
+[[ -f "README.md" ]] || warn "root README missing (okay for MkDocs)"
+
+# Home duplication hint in mkdocs.yml (rudimentary)
+if have awk; then
+  HOME_COUNT="$(awk '/nav:/{f=1} f&&/Home:|Start:|Index:/{c++} END{print c+0}' mkdocs.yml || true)"
+  [[ "${HOME_COUNT:-0}" -le 1 ]] || warn "mkdocs.yml may contain multiple Home/Start entries"
 fi
 
-FIX_COUNT=0
-if [ -f "docs/governance.md" ]; then
-  mv docs/governance.md docs/GOVERNANCE.md
-  echo "Renamed governance.md → GOVERNANCE.md" >> "$REPORT"
-  FIX_COUNT=$((FIX_COUNT+1))
-fi
-if [ -f "docs/logs/Project.md" ]; then
-  mv docs/logs/Project.md docs/logs/project.md
-  echo "Renamed logs/Project.md → logs/project.md" >> "$REPORT"
-  FIX_COUNT=$((FIX_COUNT+1))
-fi
+# Explicit '/index.md' reference can cause CDN quirks
+grep -Eqs '^\s*-\s*/index\.md' mkdocs.yml && warn "explicit '/index.md' in nav may cause 404/CDN issues"
 
-MISSING=0
-for f in docs/GOVERNANCE.md docs/logs/project.md; do
-  if [ ! -f "\$f" ]; then
-    echo "❌ Missing file: \$f" >> "\$REPORT"
-    MISSING=\$((MISSING+1))
-  fi
-done
-
-{
-  echo "# Routing Fix Report"
-  echo "- Timestamp: \$(date)"
-  echo "- Fixes Applied: \$FIX_COUNT"
-  echo "- Missing Files: \$MISSING"
-  echo
-  echo "## Structure Snapshot"
-  echo '```'
-  cat "\$LOG_FILE"
-  echo '```'
-} > "\$REPORT"
-
-if [ "\$MISSING" -gt 0 ]; then
-  echo "❌ Missing required files. See \$REPORT"
-  exit 1
-else
-  echo "✅ Docs structure OK — report written to \$REPORT"
-fi
+# Result
+[[ $ERR -eq 0 ]] && echo "OK watchdog passed" || echo "ERR watchdog failed"
+exit $ERR

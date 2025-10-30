@@ -1,0 +1,18 @@
+{
+  "version": "0.2",
+  "categories": {
+    "psm": [
+      { "key": "psm.feeInBps", "type": "uint16", "default": 20 },
+      { "key": "psm.priceBandBps", "type": "uint16", "default": 50 }
+    ],
+    "vault": [
+      { "key": "vault.sweepThreshold[token]", "type": "uint256", "default": 0 }
+    ],
+    "oracle": [
+      { "key": "oracle.minAnswers", "type": "uint8", "default": 5 }
+    ],
+    "safety": [
+      { "key": "safety.killSwitchArmed", "type": "bool", "default": false }
+    ]
+  }
+}

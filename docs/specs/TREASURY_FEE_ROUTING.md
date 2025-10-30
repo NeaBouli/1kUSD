@@ -1,54 +1,31 @@
-# Treasury & Fee Routing (Push Model)
+# Treasury Fee Routing — Spec (Push Model)
 
-**Version:** DEV-8 (Treasury & Routing)  
-**Contracts:** `FeeRouter.sol`, `TreasuryVault.sol`  
-**Ziel:** Deterministisches Push-Modell mit atomarer Buchhaltung.
+**Goal:** Deterministic routing of protocol fees from modules (e.g., PSM) into the TreasuryVault **within the same transaction** using a stateless FeeRouter (push-only).
 
----
+## Principles
+- **Push-only:** Caller already owns tokens; router does not rely on allowances.
+- **Stateless Router:** No storage beyond immutable refs; `nonReentrant`.
+- **Vault as sink:** Multi-asset sink; outbound transfers require `DAO_ROLE`.
+- **Safety:** CEI pattern; `safeTransfer` behavior; optional Pausable compatibility.
 
-## Designentscheidungen
+## Events (canonical)
+- `FeeRouted(address indexed token, address indexed from, uint256 amount, bytes32 indexed tag)`
+- `VaultSweep(address indexed token, address indexed to, uint256 amount)`
 
-- **Push-Modell:** Modul (z. B. PSM) überweist Fees sofort in derselben TX an den TreasuryVault.
-- **Router-Transfer + Event:** `FeeRouter` hält Tokens nur transient und forwardet sie an `TreasuryVault` (Event: `FeeRouted`).
-- **Least Privilege:** `TreasuryVault` braucht keine `ROUTER_ROLE` für Eingänge. Ausgänge nur via `DAO_ROLE`.
-- **Multi-Asset:** TreasuryVault akzeptiert beliebige ERC-20 (1kUSD, Wrapped Collateral, …).
-- **Auditing:** Bestände via `IERC20.balanceOf(TreasuryVault)` + Events (`Swept`, `FeeRouted`).
-- **Pause-Semantik:** SafetyAutomata schützt Eintrittspfade (PSM/Router). `TreasuryVault` bleibt passiv.
+## Happy Path (PSM → Router → Vault)
+1) Module calculates fee and calls `route(token, amount, tag)`.
+2) Router transfers `amount` to TreasuryVault and emits `FeeRouted`.
+3) Vault records receipt (implementation-specific) and later allows DAO sweep.
 
----
+## Error Cases
+- `token == address(0)` → revert
+- `amount == 0` → revert
+- ERC-20 transfer returns `false` / fails → revert
+- Vault unset/invalid → revert
 
-## Schnittstellen
+## Tags
+`tag = keccak256("PSM_FEE")`, `keccak256("LIQUIDATION_FEE")`, etc. Used for analytics and accounting.
 
-### FeeRouter
-```solidity
-event FeeRouted(address indexed token, address indexed from, address indexed to, uint256 amount, bytes32 tag);
-function routeToTreasury(address token, address treasury, uint256 amount, bytes32 tag) external;
-TreasuryVault
-solidity
-Code kopieren
-event Swept(address indexed token, address indexed to, uint256 amount);
-function sweep(address token, address to, uint256 amount) external onlyRole(DAO_ROLE);
-Typische Flows
-PSM Mint Fee
-
-Modul berechnet Fee f.
-
-Modul transfer(token, address(FeeRouter), f).
-
-Modul ruft FeeRouter.routeToTreasury(token, TreasuryVault, f, keccak256("PSM_MINT_FEE")).
-
-Ergebnis: Treasury erhält f, FeeRouted emittiert.
-
-DAO Auszahlung
-
-DAO ruft TreasuryVault.sweep(token, to, amount).
-
-Ergebnis: Tokenabfluss + Swept Event.
-
-Tests (Foundry)
-Router: Event + Transfer (routeToTreasury_emits_and_transfers), Zero-Guards.
-
-Treasury: sweep_requires_DAO_ROLE, sweep_transfers_and_emits.
-
-Smoke: PSM-Integration ruft Router (separat, wenn PSM-Tests bereit).
-
+## Non-Goals
+- No approvals/pull mechanics
+- No fee accounting inside Router
