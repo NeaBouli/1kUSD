@@ -448,3 +448,10 @@ https://neabouli.github.io/1kUSD/GOVERNANCE/
 
 https://neabouli.github.io/1kUSD/logs/project/
 
+
+🧩 Restore Documentation Snapshot
+
+Falls GitHub Pages erneut Fehler zeigt oder Menüeinträge fehlen:
+
+➡️ Restore from FullMenu Stable Snapshot (v0.11.8)
+
