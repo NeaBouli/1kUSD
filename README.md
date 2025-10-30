@@ -455,3 +455,10 @@ Falls GitHub Pages erneut Fehler zeigt oder Menüeinträge fehlen:
 
 ➡️ Restore from FullMenu Stable Snapshot (v0.11.8)
 
+
+🧩 Restore Documentation Snapshot
+
+Falls GitHub Pages erneut Fehler zeigt oder Menüeinträge fehlen:
+
+➡️ Restore from FullMenu Stable Snapshot (v0.11.8)
+
