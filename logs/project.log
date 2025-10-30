@@ -99,3 +99,4 @@
 [DEV-13] Step 1 – docs watchdog script initialized – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
 [DEV-13] Step 2 – Watchdog README added – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
 [DEV-13] Step 2 – Watchdog README fixed (proper EOF) – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+[DEV-13] Step 3 – watchdog extended (nav dup & /index.md hint) – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
