@@ -1,0 +1,52 @@
+[2025-10-28] DEV8: CI stabilized
+--------------------------------
+✅ All Foundry tests passing (4/4)
+✅ OpenZeppelin v5.0.2 resolved via remapping
+✅ MockERC20 import corrected
+✅ MkDocs workflow verified (non-strict)
+--------------------------------
+
+[2025-10-27] DEV AAA: Workflow Bugfixes & CI-Reparatur
+------------------------------------------------------
+🧠 Hintergrund:
+• Foundry CI fehlerhaft – fehlende OpenZeppelin-Imports + unvollständige remappings  
+• Docs-Deploy schlug wegen strict-Mode fehl  
+• SafetyAutomata doppelt definierte Variable `_paused`
+
+⚙️ Durchgeführte Arbeiten:
+1️⃣ SafetyAutomata Refactor → per-Module Pause Mapping  
+2️⃣ Neue Workflows foundry.yml + docs.yml  
+3️⃣ OpenZeppelin v5.0.2 installiert + remappings ergänzt  
+4️⃣ MkDocs non-strict Build aktiviert + Startseite /index.md erstellt  
+
+✅ Ergebnisse:
+• Foundry Tests 🟢 ok  
+• Solidity CI 🟢 ok  
+• Docs Deploy 🟢 ok (online unter GitHub Pages)  
+• MkDocs 404 UI-Problem 🟠 offen → Debug-Dev  
+------------------------------------------------------
+# CI Refresh
+
+[2025-10-28] DEV 9 – Kickoff: DAO Timelock & Governance
+-------------------------------------------------------
+👤 Responsible: DEV 9 (Governance & Timelock Engineer)
+🔖 Branch: main
+
+📦 Summary:
+• Defined full scope for DAO Timelock module  
+• Established unified Admin model (DAO/Multisig)  
+• Created minimal smoke tests to keep CI green (`DAO_Timelock.t.sol`)  
+• Added documentation: `docs/GOVERNANCE.md`  
+• Appended CHANGELOG entry (English only)  
+• Prepared structure for real delay/grace/cancel logic in DEV10  
+
+✅ Current Status:
+• Foundry CI → green  
+• Solidity CI → green  
+• Docs Deploy → green  
+• Governance docs rendered under `/docs/GOVERNANCE.md`  
+• MkDocs 404 issue still open (assigned to DEV Debug)
+
+🧩 Next step:
+Implement and verify the full Timelock execution logic with time-travel testing (`vm.warp()`).
+-------------------------------------------------------
