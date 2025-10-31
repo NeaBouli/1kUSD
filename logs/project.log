@@ -90,3 +90,8 @@
 [DEX] DEV85 delivered: ABI locks, routing hints, price sanity vectors/checker, README. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SECURITY] DEV86 delivered: checklists (pre/post/incident), CI gate doc + workflow, README update. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [RELEASE] DEV87 delivered: semver bump, notes templating, release workflow, README wiring. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[v0.24] merged dev18/vault-settlement into main; tagged v0.24; pages redeployed – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+[DEV-19] Step 1 – TreasuryVault accounting skeleton + spec placeholders created – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+[DEV-19] Step 1 – TreasuryVault accounting skeleton + spec placeholders created – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+[DEV-19] Step 2 – depositCollateral() implemented with guards and event – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+[DEV-19] Step 3 – Vault accounting tests added (access, event, zero-revert) – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
