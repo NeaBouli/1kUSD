@@ -90,3 +90,7 @@
 [DEX] DEV85 delivered: ABI locks, routing hints, price sanity vectors/checker, README. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SECURITY] DEV86 delivered: checklists (pre/post/incident), CI gate doc + workflow, README update. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [RELEASE] DEV87 delivered: semver bump, notes templating, release workflow, README wiring. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[DEV-17] Pre-step – watchdog simplified to POSIX to avoid shell syntax errors – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+[DEV-17] Step 1 – PSM extended skeleton (Pausable + ReentrancyGuard + vault addr) – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+[DEV-17] Step 2 – guarded swapCollateralForStable implemented (nonReentrant + whenNotPaused) – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+[DEV-17] Step 3 – PSM tests updated (fee event, zero, paused) – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
