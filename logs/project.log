@@ -90,3 +90,7 @@
 [DEX] DEV85 delivered: ABI locks, routing hints, price sanity vectors/checker, README. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [SECURITY] DEV86 delivered: checklists (pre/post/incident), CI gate doc + workflow, README update. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
 [RELEASE] DEV87 delivered: semver bump, notes templating, release workflow, README wiring. (UTC: '"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"')
+[v0.34] merged dev28/oracle-watcher into main; tagged v0.34; pages redeployed – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+[DEV-29] Step 1 – PSM swap core spec and skeleton created – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+[DEV-29] Step 1 – PSM swap core spec and skeleton created – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+[DEV-29] Step 2 – PSM swap core tests implemented (fee, DAO guard, zero-revert) – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
