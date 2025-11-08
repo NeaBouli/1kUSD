@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-VERSION="v0.39"
-TAG_MESSAGE="DEV-39: OracleAggregator Recovery & Guardian Propagation Fix"
+# Version argument (default = v0.39)
+VERSION=${1:-v0.39}
+TAG_MESSAGE="Release $VERSION"
 LOGFILE="logs/project.log"
 
 echo "== 🧩 Starting automated release for $VERSION =="
