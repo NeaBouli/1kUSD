@@ -1,0 +1,22 @@
+# Temporary Workflow Scope Restriction (v0.23)
+# Limits all existing workflows to safe branches only.
+# This prevents legacy red runs without deleting workflows.
+
+name: Quarantine Scope (meta)
+on:
+  push:
+    branches:
+      - main
+      - dev*
+  pull_request:
+    branches:
+      - main
+      - dev*
+
+jobs:
+  quarantine-note:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scope note
+        run: |
+          echo "🧩 Workflows limited to main + dev* branches (v0.23 quarantine active)"

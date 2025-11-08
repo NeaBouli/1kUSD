@@ -1,0 +1,18 @@
+diff --git a/foundry/test/PSMLimits.t.sol b/foundry/test/PSMLimits.t.sol
+index e0e8d5a..b3d7eac 100644
+--- a/foundry/test/PSMLimits.t.sol
++++ b/foundry/test/PSMLimits.t.sol
+@@ -6,7 +6,10 @@ import "../../contracts/psm/PSMLimits.sol";
+ contract PSMLimitsTest is Test {
+     PSMLimits limits;
+ 
+-    function setUp() public { limits = new PSMLimits(address(this), 10_000, 5_000); }
++    function setUp() public {
++        limits = new PSMLimits(address(this), 10_000, 5_000);
++    }
++
++    // DEV-35a.2 – Harness erbt von PSMLimits für direkte Funktionsaufrufe
++    contract LimitsHarness is PSMLimits {
++        constructor(address dao) PSMLimits(dao, 10_000, 5_000) {}
++        function hit(uint256 a) external { _updateVolume(a); }
++    }

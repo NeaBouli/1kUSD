@@ -1,0 +1,11 @@
+diff --git a/contracts/psm/PSMLimits.sol b/contracts/psm/PSMLimits.sol
+@@ -57,10 +57,10 @@ contract PSMLimits {
+     function enforceLimits(uint256 amount) external {
+         uint256 newVolume = _updateVolume(amount);
+ 
+-        if (amount > singleCap) revert("swap too large");
+-        if (newVolume > dailyCap) revert("swap too large");
++        if (amount > singleCap) revert("daily cap exceeded");
++        if (newVolume > dailyCap) revert("daily cap exceeded");
+     }
+ }

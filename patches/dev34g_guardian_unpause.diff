@@ -1,0 +1,29 @@
+diff --git a/contracts/core/SafetyAutomata.sol b/contracts/core/SafetyAutomata.sol
+index a3b57e0..1e89c6a 100644
+--- a/contracts/core/SafetyAutomata.sol
++++ b/contracts/core/SafetyAutomata.sol
+@@ -33,6 +33,21 @@ contract SafetyAutomata {
+     /// @notice Sets paused state for module
+     /// @dev Authorized for DAO or active Guardian
+     function setPaused(bytes32 module, bool state) external {
+-        if (msg.sender != dao && !guardianAuth[msg.sender]) revert("not authorized");
+-        pausedModules[module] = state;
+-        emit ModulePaused(module, state, msg.sender);
++        bool isGuardian = guardianAuth[msg.sender];
++        if (msg.sender != dao && !isGuardian) revert("not authorized");
++
++        // Guardian logic: can only unpause what it paused
++        if (isGuardian) {
++            bool wasPaused = pausedModules[module];
++            if (state && !wasPaused) revert("guardian cannot pause new");
++            if (!state && wasPaused) {
++                pausedModules[module] = false;
++                emit ModulePaused(module, false, msg.sender);
++                return;
++            }
++            revert("no state change");
++        }
++
++        pausedModules[module] = state;
++        emit ModulePaused(module, state, msg.sender);
+     }

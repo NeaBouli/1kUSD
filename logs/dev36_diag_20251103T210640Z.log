@@ -1,0 +1,42 @@
+== DEV36 DIAG: ISafetyAutomata signature & imports ==
+UTC: 2025-11-03T21:06:40Z
+
+[1/5] Interface file:
+contracts/interfaces/ISafetyAutomata.sol
+interface ISafetyAutomata {
+    /// @notice Return whether a module is paused (PSM/VAULT/ORACLE/TOKEN/etc.).
+    function isPaused(bytes32 moduleId) external view returns (bool);
+
+    /// @notice Return whether a module is enabled (inverse of paused; semantics may evolve).
+    function isModuleEnabled(bytes32 moduleId) external view returns (bool);
+
+    /// @notice Return whether the global module pause flag is active.
+    /// @dev Added for Guardian legacy compatibility – mirrors SafetyAutomata.globalPause()
+    function globalPause() external view returns (bool);
+}
+
+[2/5] SafetyAutomata implementation (if present):
+contracts/core/SafetyAutomata.sol
+44:     function isPaused(bytes32 moduleId) external view override returns (bool) {
+49:     function isModuleEnabled(bytes32 moduleId) external view returns (bool) {
+54:     function globalPause()
+
+[3/5] MockSafety (if present):
+MockSafety not found by pattern 'MockSafety.sol' (ok if tests inline a mock)
+
+[4/5] Forge clean & build (to capture the exact error):
+Compiling 74 files with Solc 0.8.30
+Solc 0.8.30 finished in 1.18s
+Error: Compiler run failed:
+Error (3656): Contract "MockSafety" should be marked as abstract.
+  --> foundry/test/OracleAggregator.t.sol:10:1:
+   |
+10 | contract MockSafety is ISafetyAutomata {
+   | ^ (Relevant source part starts here and spans across multiple lines).
+Note: Missing implementation: 
+  --> contracts/interfaces/ISafetyAutomata.sol:14:5:
+   |
+14 |     function globalPause() external view returns (bool);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[5/5] Done. Log saved to: logs/dev36_diag_20251103T210640Z.log

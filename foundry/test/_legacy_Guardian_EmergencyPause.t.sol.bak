@@ -1,0 +1,71 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.30;
+
+import "forge-std/Test.sol";
+import "../../contracts/core/SafetyAutomata.sol";
+
+contract GuardianEmergencyPauseTest is Test {
+    SafetyAutomata internal safety;
+
+    address internal admin = address(0xA11CE);
+    address internal guardian = address(0xB0B);
+    bytes32 internal constant MODULE_ID = keccak256("PSM_CORE");
+
+    uint256 internal guardianSunsetTs;
+
+    function setUp() public {
+        vm.warp(1_000_000);
+        guardianSunsetTs = block.timestamp + 7 days;
+
+        vm.prank(admin);
+        safety = new SafetyAutomata(admin, guardianSunsetTs);
+
+        vm.startPrank(admin);
+        safety.grantRole(safety.GUARDIAN_ROLE(), guardian);
+        safety.grantRole(safety.DAO_ROLE(), admin);
+        vm.stopPrank();
+    }
+
+    function testGuardianCanPauseSpecificModule() public {
+        vm.prank(guardian);
+        safety.pauseModule(MODULE_ID);
+        assertTrue(safety.isPaused(MODULE_ID), "Guardian should pause module");
+    }
+
+    function testGlobalPauseWrappersRespectRoles() public {
+        assertFalse(safety.globalPause(), "Global pause should start cleared");
+
+        vm.prank(guardian);
+        safety.pause();
+        assertTrue(safety.globalPause(), "Global pause getter true after pause");
+
+        vm.expectRevert("ACCESS_DENIED");
+        vm.prank(guardian);
+        safety.unpause();
+
+        vm.prank(admin);
+        safety.unpause();
+        assertFalse(safety.globalPause(), "Global pause getter false after unpause");
+    }
+
+    function testGuardianCannotPauseAfterSunset() public {
+        vm.warp(guardianSunsetTs + 1);
+        vm.expectRevert(SafetyAutomata.GuardianExpired.selector);
+        vm.prank(guardian);
+        safety.pauseModule(MODULE_ID);
+    }
+
+    function testSetPausedDelegatesToCorrectAuth() public {
+        vm.prank(guardian);
+        safety.setPaused(true);
+        assertTrue(safety.globalPause(), "Global pause toggled by guardian");
+
+        vm.expectRevert("ACCESS_DENIED");
+        vm.prank(guardian);
+        safety.setPaused(false);
+
+        vm.prank(admin);
+        safety.setPaused(false);
+        assertFalse(safety.globalPause(), "Admin cleared global pause");
+    }
+}

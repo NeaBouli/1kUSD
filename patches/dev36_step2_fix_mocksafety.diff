@@ -1,0 +1,19 @@
+--- a/foundry/test/OracleAggregator.t.sol
++++ b/foundry/test/OracleAggregator.t.sol
+@@ -9,6 +9,12 @@
+ contract MockSafety is ISafetyAutomata {
+     mapping(bytes32 => bool) public pausedModules;
+     bool public globalPaused;
++
++    function isPaused(bytes32) external pure override(ISafetyAutomata) returns (bool) {
++        return false;
++    }
++
++    function isModuleEnabled(bytes32) external pure override(ISafetyAutomata) returns (bool) {
++        return true;
++    }
++
++    function globalPause() external view override(ISafetyAutomata) returns (bool) {
++        return globalPaused;
++    }
+ }

@@ -1,0 +1,94 @@
+diff --git a/foundry/test/OracleAggregator.t.sol b/foundry/test/OracleAggregator.t.sol
+new file mode 100644
+index 0000000000000000000000000000000000000000..ceae2f65679209a8935ccf20340c65cc45106565
+--- /dev/null
++++ b/foundry/test/OracleAggregator.t.sol
+@@ -0,0 +1,88 @@
++// SPDX-License-Identifier: AGPL-3.0
++pragma solidity ^0.8.24;
++
++import "forge-std/Test.sol";
++
++import {OracleAggregator} from "../../contracts/core/OracleAggregator.sol";
++import {ISafetyAutomata} from "../../contracts/interfaces/ISafetyAutomata.sol";
++import {IParameterRegistry} from "../../contracts/interfaces/IParameterRegistry.sol";
++import {IOracleAggregator} from "../../contracts/interfaces/IOracleAggregator.sol";
++
++contract MockSafety is ISafetyAutomata {
++    bytes32 public constant GLOBAL_MODULE = keccak256("GLOBAL_MODULE");
++
++    mapping(bytes32 => bool) internal paused;
++
++    function setPaused(bytes32 moduleId, bool state) external {
++        paused[moduleId] = state;
++    }
++
++    function isPaused(bytes32 moduleId) external view override returns (bool) {
++        return paused[moduleId];
++    }
++
++    function isModuleEnabled(bytes32 moduleId) external view override returns (bool) {
++        return !paused[moduleId];
++    }
++
++    function globalPause() external view override returns (bool) {
++        return paused[GLOBAL_MODULE];
++    }
++}
++
++contract MockRegistry is IParameterRegistry {
++    mapping(bytes32 => uint256) internal uintParams;
++    mapping(bytes32 => address) internal addressParams;
++
++    function setUint(bytes32 key, uint256 value) external {
++        uintParams[key] = value;
++    }
++
++    function setAddress(bytes32 key, address value) external {
++        addressParams[key] = value;
++    }
++
++    function getUint(bytes32 key) external view override returns (uint256) {
++        return uintParams[key];
++    }
++
++    function getAddress(bytes32 key) external view override returns (address) {
++        return addressParams[key];
++    }
++}
++
++contract OracleAggregatorTest is Test {
++    OracleAggregator internal aggregator;
++    MockSafety internal safety;
++    MockRegistry internal registry;
++
++    address internal constant ADMIN = address(0xA11CE);
++    address internal constant ASSET = address(0xBEEF);
++
++    function setUp() public {
++        safety = new MockSafety();
++        registry = new MockRegistry();
++        aggregator = new OracleAggregator(ADMIN, safety, registry);
++    }
++
++    function testSetPriceMockUpdatesSnapshot() public {
++        vm.warp(123456789);
++
++        vm.prank(ADMIN);
++        aggregator.setPriceMock(ASSET, 1_234, 8, true);
++
++        IOracleAggregator.Price memory price = aggregator.getPrice(ASSET);
++        assertEq(price.price, 1_234, "price");
++        assertEq(price.decimals, 8, "decimals");
++        assertTrue(price.healthy, "healthy");
++        assertEq(price.updatedAt, block.timestamp, "timestamp");
++    }
++
++    function testSetPriceMockRespectsPauseFlag() public {
++        safety.setPaused(aggregator.MODULE_ID(), true);
++
++        vm.expectRevert(OracleAggregator.PAUSED.selector);
++        vm.prank(ADMIN);
++        aggregator.setPriceMock(ASSET, 42, 18, true);
++    }
++}

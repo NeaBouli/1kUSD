@@ -1,0 +1,23 @@
+diff --git a/contracts/core/SafetyAutomata.sol b/contracts/core/SafetyAutomata.sol
+index 0000000..1111111 100644
+--- a/contracts/core/SafetyAutomata.sol
++++ b/contracts/core/SafetyAutomata.sol
+@@ -40,6 +40,13 @@ contract SafetyAutomata is AccessControl, ISafetyAutomata {
+     function isModuleEnabled(bytes32 moduleId)
+         external
+         view
+         override(ISafetyAutomata)
+         returns (bool)
+     {
+         return !_paused[moduleId];
+     }
++
++    /// @inheritdoc ISafetyAutomata
++    function globalPause()
++        external
++        view
++        override(ISafetyAutomata)
++        returns (bool)
++    {
++        return _paused[keccak256("GLOBAL_MODULE")];
++    }

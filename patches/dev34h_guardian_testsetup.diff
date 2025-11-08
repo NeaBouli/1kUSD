@@ -1,0 +1,13 @@
+diff --git a/foundry/test/Guardian_EmergencyPause.t.sol b/foundry/test/Guardian_EmergencyPause.t.sol
+index e84d1a1..f3bca1f 100644
+--- a/foundry/test/Guardian_EmergencyPause.t.sol
++++ b/foundry/test/Guardian_EmergencyPause.t.sol
+@@ -24,6 +24,9 @@ contract Guardian_EmergencyPauseTest is Test {
+         treasury = new TreasuryVault(address(dao));
+         safety = new SafetyAutomata(address(dao), block.timestamp + 7 days);
+         guardian = new Guardian(address(dao), address(safety), 1000);
++
++        // DEV-34h – authorize guardian for SafetyAutomata
++        safety.setGuardian(address(guardian), true);
+     }
+ EOF

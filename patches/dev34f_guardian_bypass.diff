@@ -1,0 +1,32 @@
+diff --git a/contracts/core/SafetyAutomata.sol b/contracts/core/SafetyAutomata.sol
+index 47d2d9b..a3b57e0 100644
+--- a/contracts/core/SafetyAutomata.sol
++++ b/contracts/core/SafetyAutomata.sol
+@@ -10,6 +10,7 @@ contract SafetyAutomata {
+     address public immutable dao;
+     uint256 public immutable guardianSunset;
+     mapping(bytes32 => bool) public pausedModules;
++    mapping(address => bool) public guardianAuth;
+ 
+     event ModulePaused(bytes32 indexed module, bool state, address indexed caller);
+ 
+@@ -23,7 +24,16 @@ contract SafetyAutomata {
+         _;
+     }
+ 
+-    function setPaused(bytes32 module, bool state) external onlyDAO {
+-        pausedModules[module] = state;
+-        emit ModulePaused(module, state, msg.sender);
+-    }
++    /// @notice Grants or revokes pause rights for a Guardian
++    function setGuardian(address g, bool a) external onlyDAO {
++        guardianAuth[g] = a;
++    }
++
++    /// @notice Sets paused state for module
++    /// @dev Authorized for DAO or active Guardian
++    function setPaused(bytes32 module, bool state) external {
++        if (msg.sender != dao && !guardianAuth[msg.sender]) revert("not authorized");
++        pausedModules[module] = state;
++        emit ModulePaused(module, state, msg.sender);
++    }

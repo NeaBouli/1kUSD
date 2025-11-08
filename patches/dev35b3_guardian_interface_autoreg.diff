@@ -1,0 +1,26 @@
+diff --git a/contracts/interfaces/ISafetyAutomata.sol b/contracts/interfaces/ISafetyAutomata.sol
+index 6b4f331..f5e9b7c 100644
+--- a/contracts/interfaces/ISafetyAutomata.sol
++++ b/contracts/interfaces/ISafetyAutomata.sol
+@@ -6,6 +6,9 @@ interface ISafetyAutomata {
+     function pause(bytes32 module) external;
+     function unpause(bytes32 module) external;
+     function pauseAll() external;
+     function unpauseAll() external;
++
++    /// @notice Returns true if a module or global pause is active
++    function isPaused(bytes32 module) external view returns (bool);
+ }
+diff --git a/contracts/security/Guardian.sol b/contracts/security/Guardian.sol
+index 1fcd7a1..3a2a0a4 100644
+--- a/contracts/security/Guardian.sol
++++ b/contracts/security/Guardian.sol
+@@ -11,6 +11,8 @@ contract Guardian {
+     constructor(address _dao, address _safety, uint256 _sunsetBlocks) {
+         dao = _dao;
+         sunsetBlock = block.number + _sunsetBlocks;
+         safety = ISafetyAutomata(_safety);
++
++        // DEV-35b.3 – auto-register self as guardian
++        safety.setGuardian(address(this), true);
+     }

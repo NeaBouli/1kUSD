@@ -1,0 +1,40 @@
+diff --git a/contracts/core/SafetyAutomata.sol b/contracts/core/SafetyAutomata.sol
+index 87a1d6c554f362fbe128592f1ec6ebe80bc89aba..2d529ae97bff97e1868e5dcd226d5312c70bba79 100644
+--- a/contracts/core/SafetyAutomata.sol
++++ b/contracts/core/SafetyAutomata.sol
+@@ -37,6 +37,16 @@ contract SafetyAutomata is AccessControl, ISafetyAutomata {
+     function isModuleEnabled(bytes32 moduleId) external view returns (bool) {
+         return !_paused[moduleId];
+     }
++
++    /// @inheritdoc ISafetyAutomata
++    function globalPause()
++        external
++        view
++        override(ISafetyAutomata)
++        returns (bool)
++    {
++        return _paused[keccak256("GLOBAL_MODULE")];
++    }
+diff --git a/foundry/test/OracleAggregator.t.sol b/foundry/test/OracleAggregator.t.sol
+index a42a60d6585c92f3736f8c7ecdc2ca93ae585acf..fd19f4a3f718cc96a19596f26624b6d492abcb0f 100644
+--- a/foundry/test/OracleAggregator.t.sol
++++ b/foundry/test/OracleAggregator.t.sol
+@@ -33,7 +33,14 @@ contract MockSafety is ISafetyAutomata {
+     function isModuleEnabled(bytes32 moduleId) external view override returns (bool) {
+         return !paused[moduleId];
+     }
+-
+-    function globalPause() external view override returns (bool) {
+-        return paused[GLOBAL_MODULE];
+-    }
++    
++    /// @inheritdoc ISafetyAutomata
++    function globalPause()
++        external
++        view
++        override(ISafetyAutomata)
++        returns (bool)
++    {
++        return paused[GLOBAL_MODULE];
++    }

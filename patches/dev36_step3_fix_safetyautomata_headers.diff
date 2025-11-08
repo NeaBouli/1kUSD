@@ -1,0 +1,44 @@
+--- a/contracts/core/SafetyAutomata.sol
++++ b/contracts/core/SafetyAutomata.sol
+@@ -43,17 +43,25 @@ contract SafetyAutomata is AccessControl, ISafetyAutomata {
+-    function isPaused(bytes32 moduleId) external view override returns (bool) {
+-        return pausedModules[moduleId];
+-    }
+-
+-    function isModuleEnabled(bytes32 moduleId) external view returns (bool) {
+-        return !pausedModules[moduleId];
+-    }
+-
+-    function globalPause()
+-        external
+-        view
+-        returns (bool)
+-    {
+-        return globalPaused;
+-    }
++    function isPaused(bytes32 moduleId)
++        external
++        view
++        override(ISafetyAutomata)
++        returns (bool)
++    {
++        return pausedModules[moduleId];
++    }
++
++    function isModuleEnabled(bytes32 moduleId)
++        external
++        view
++        override(ISafetyAutomata)
++        returns (bool)
++    {
++        return !pausedModules[moduleId];
++    }
++
++    function globalPause()
++        external
++        view
++        override(ISafetyAutomata)
++        returns (bool)
++    {
++        return globalPaused;
++    }

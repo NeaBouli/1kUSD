@@ -1,0 +1,53 @@
+diff --git a/contracts/psm/PSMLimits.sol b/contracts/psm/PSMLimits.sol
+index 8b5c3c1..bfa2f73 100644
+--- a/contracts/psm/PSMLimits.sol
++++ b/contracts/psm/PSMLimits.sol
+@@ -34,11 +34,23 @@ contract PSMLimits {
+     function enforceCaps(uint256 amount) external {
+         uint256 day = block.timestamp / 1 days;
+
+-        if (block.timestamp / 1 days > lastDay) {
+-            dailyCounter = 0;
+-            lastDay = day;
+-        }
+-
+-        if (dailyCounter + amount > dailyCap) revert("daily cap exceeded");
+-        if (amount > maxSingleCap) revert("swap too large");
++        // Reset counter when a new day begins
++        if (day > lastDay) {
++            dailyCounter = 0;
++            lastDay = day;
++        }
++
++        // Check individual transaction cap first (higher priority)
++        if (amount > maxSingleCap) {
++            revert("swap too large");
++        }
++
++        // Then check daily aggregate cap
++        if (dailyCounter + amount > dailyCap) {
++            revert("daily cap exceeded");
++        }
++
++        dailyCounter += amount;
+     }
++
++    function __testAdvanceDay() external {
++        lastDay = (block.timestamp / 1 days) - 1;
++    }
+ }
+diff --git a/foundry/test/PSMLimits.t.sol b/foundry/test/PSMLimits.t.sol
+index 4ab62b3..3d5f50b 100644
+--- a/foundry/test/PSMLimits.t.sol
++++ b/foundry/test/PSMLimits.t.sol
+@@ -37,6 +37,11 @@ contract PSMLimitsTest is Test {
+         vm.expectRevert(bytes("swap too large"));
+         limits.enforceCaps(15_000);
+     }
++
++    function testDailyResetOnNextDay() public {
++        limits.enforceCaps(5_000);
++        limits.__testAdvanceDay();
++        limits.enforceCaps(9_000); // should not revert after day reset
++    }
+ }
