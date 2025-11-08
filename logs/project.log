@@ -201,3 +201,4 @@
 2025-11-08T10:38:58Z DEV-39 prankflow fix: unified vm.startPrank(dao) block in setUp() [DEV-6A]
 2025-11-08T19:50:32Z DEV-39 resolved: OracleAggregator.getPrice() syntax + Guardian prank flow stable [Fix-Dev-39]
 2025-11-08T20:22:14Z v0.39 released: OracleAggregator + Guardian stable [Fix-Dev-39]
+2025-11-08T20:30:29Z v0.39.1 released: OracleAggregator + Guardian stable [Fix-Dev-39]
