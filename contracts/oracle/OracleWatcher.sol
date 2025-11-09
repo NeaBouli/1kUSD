@@ -19,13 +19,8 @@ contract OracleWatcher is IOracleWatcher {
 
     address public immutable deployer;
 
-    constructor() {
+    constructor(address _oracle, address _safetyAutomata) {
         deployer = msg.sender;
+        oracle = IOracleAggregator(_oracle);
+        safetyAutomata = _safetyAutomata;
     }
-
-    /// @inheritdoc IOracleWatcher
-    function isHealthy() external pure returns (bool) {
-        // Stub: will read from OracleAggregator / SafetyAutomata later
-        return true;
-    }
-}
