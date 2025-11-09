@@ -204,3 +204,4 @@
 2025-11-08T20:30:29Z v0.39.1 released: OracleAggregator + Guardian stable [Fix-Dev-39]
 2025-11-08T20:48:43Z DEV-39 closed: Release v0.39.1 on dev31/oracle-aggregator; OracleAggregator + Guardian stabilized [DEV-6A]
 2025-11-09T21:23:33Z DEV-40 scaffold: OracleWatcher stub + ADR-040 added [DEV-6A]
+2025-11-09T21:24:37Z DEV-40 step2: added IOracleAggregator import to OracleWatcher (no builds)

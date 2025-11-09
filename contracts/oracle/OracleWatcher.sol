@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.30;
 
+import { IOracleAggregator } from "../core/OracleAggregator.sol";
+
 /// @title OracleWatcher (DEV-40 Scaffold)
 /// @notice Lightweight watcher stub that will subscribe to OracleAggregator state
 ///         and expose a clean "healthy / paused / stale" view for off-chain consumers.
