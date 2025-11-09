@@ -14,6 +14,9 @@ interface IOracleWatcher {
 
 contract OracleWatcher is IOracleWatcher {
     // Placeholder: will be wired to OracleAggregator in subsequent steps
+    IOracleAggregator public oracle;
+    address public safetyAutomata;
+
     address public immutable deployer;
 
     constructor() {
