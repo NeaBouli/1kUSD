@@ -1,0 +1,172 @@
+📘 Docs Structure Scan — Fr 31 Okt 2025 09:05:50 CET
+================================
+
+docs
+├── ANALYSIS_KASPA_STABLECOINS.bak.214014
+├── ANALYSIS_KASPA_STABLECOINS.bak.214501
+├── ANALYSIS_KASPA_STABLECOINS.bak.214636
+├── ANALYSIS_KASPA_STABLECOINS.md
+├── API_SPECS.md
+├── ARCHITECTURE.md
+├── ARCHITEKTUR.md
+├── BOOTSTRAP_QUICKSTART.md
+├── BUILD_TOOLING.md
+├── CHANGELOG.md
+├── CI_GATES.md
+├── CI_SECURITY_GATE.md
+├── COLLATERAL_REGISTRY.md
+├── DEV9_ASSIGNMENT.md
+├── DEVELOPER_ONBOARDING.md
+├── ERROR_CATALOG.md
+├── FAQ.md
+├── FAQ.md.bak_finalfix
+├── FAQ.md.bak_linkfix
+├── FAQ.md.bak_strictfix
+├── FEE_ACCRUAL.md
+├── GOVERNANCE.md
+├── GOVERNANCE_OPS.md
+├── GOVERNANCE_PARAM_WRITES.md
+├── GUARDIAN_SUNSET_HOOKS.md
+├── GUARDIAN_SUNSET_RUNBOOK.md
+├── INDEXER_EVENT_NOTES.md
+├── INDEXER_SCHEMAS.md
+├── INVARIANTS_EXEC_MAP.md
+├── INVARIANTS_HARNESS_NOTES.md
+├── JSON_VALIDATION.md
+├── KASPA_INTEGRATION_NOTES.md
+├── MODULE_IDS.md
+├── NOTES_ORACLE_MINIMAL.md
+├── NOTES_PSM_EXECUTION.md
+├── NOTES_PSM_MINIMAL.md
+├── NOTES_TOKEN_PERMIT.md
+├── NOTES_VAULT_ACCOUNTING.md
+├── NOTES_VAULT_MINIMAL.md
+├── ORACLE_ADAPTERS.md
+├── ORACLE_AGGREGATION_GUARDS.md
+├── ORACLE_TEST_GUIDE.md
+├── PARAMETER_KEYS.md
+├── PARAMETER_REGISTRY.md
+├── PARAM_KEYS_CANON.md
+├── PARAM_KEYS_CATALOG.md
+├── PSM_QUOTE_EXEC_ALIGNMENT.md
+├── PSM_QUOTE_MATH.md
+├── PSM_QUOTE_SEMANTICS.md
+├── PSM_QUOTE_TEST_VECTORS.md
+├── PSM_REVERTS.md
+├── PSM_SWAP_EXECUTION_PLAN.md
+├── PSM_VS_CDP.md
+├── README.md
+├── ROUNDING_RULES.md
+├── SAFETY_GUARDIAN_CHECKLIST.md
+├── SAFETY_GUARDS_TESTPLAN.md
+├── SAFETY_PAUSE_MATRIX.md
+├── SAFETY_RATE_LIMITER.md
+├── SAFETY_RATE_LIMITER_TEST_GUIDE.md
+├── SDK_EVENT_DECODERS.md
+├── SDK_WIRING_GUIDE.md
+├── SECURITY_PREAUDIT_README.md
+├── STATUS.md
+├── THREAT_MODEL.md
+├── TOKEN_PAUSE_SEMANTICS.md
+├── TOKEN_PERMIT_SPEC.md
+├── TOKEN_PERMIT_TEST_GUIDE.md
+├── VAULT_ACCOUNTING.md
+├── VAULT_ACCOUNTING_EDGE_CASES.md
+├── VAULT_ACCOUNTING_PLAN.md
+├── VAULT_TEST_GUIDE.md
+├── converter
+│   ├── AUTOCONVERTER_ROUTER.bak.222310
+│   ├── AUTOCONVERTER_ROUTER.bak.222310.bak_linkfix
+│   ├── AUTOCONVERTER_ROUTER.md
+│   └── AUTOCONVERTER_ROUTER.md.bak_linkfix
+├── dapp
+│   ├── README.md
+│   └── ROUTES.md
+├── docs
+│   └── logs
+├── index.bak.md
+├── index.md
+├── indexer
+│   ├── INDEXING_TELEMETRY.bak.222310
+│   ├── INDEXING_TELEMETRY.bak.222310.bak_linkfix
+│   ├── INDEXING_TELEMETRY.md
+│   └── INDEXING_TELEMETRY.md.bak_linkfix
+├── integrations
+│   ├── DEX_INTEGRATION.md
+│   ├── DEX_INTEGRATION.md.bak_dexfix
+│   └── DEX_INTEGRATION.md.bak_linkfix
+├── logs
+│   ├── FINAL_PAGES_LOCK_v0.14.md
+│   ├── FINAL_PAGES_LOCK_v0.15.md
+│   ├── FINAL_PAGES_STABILITY_PATCH_v0.12.md
+│   ├── RESTORE_BUTTON_NOTE.md
+│   ├── ROLLBACK_GUIDE_v0.12.md
+│   ├── ROLLBACK_GUIDE_v0.13.md
+│   ├── auto_deploy_verify.log
+│   ├── developer_faq.md
+│   ├── docs_structure_scan.log
+│   ├── final_link_validation_audit.md
+│   ├── final_pages_audit.md
+│   ├── integrations_link_fix_final.log
+│   ├── link_audit_redirect_test.log
+│   ├── link_audit_report.log
+│   ├── link_audit_report.log.bak_linkfix
+│   ├── link_autofix_commit.log
+│   ├── link_autofix_dryrun.log
+│   ├── link_autofix_dryrun.log.bak_linkfix
+│   ├── link_autofix_patch_faq.log
+│   ├── link_autofix_patch_faq_final.log
+│   ├── link_autofix_patch_faq_mac.log
+│   ├── pages_reactivation_report.md
+│   ├── pages_reactivation_report.md.bak_linkfix
+│   ├── post_merge_audit.log
+│   ├── project.log
+│   ├── project.md
+│   ├── routing_fix_report.md
+│   ├── specs_link_fix_index_ref.log
+│   └── specs_link_fix_pass.log
+├── mkdocs.tmp
+├── redirects
+│   └── index.html
+├── scripts
+│   └── scan_docs.sh
+├── sections
+├── specs
+│   ├── COLLATERAL_VAULT_SPEC.md
+│   ├── COLLATERAL_VAULT_SPEC.md.bak_indexfix
+│   ├── COLLATERAL_VAULT_SPEC.md.bak_linkfix
+│   ├── COLLATERAL_VAULT_SPEC.md.bak_specfix
+│   ├── ORACLE_AGGREGATOR_SPEC.md
+│   ├── ORACLE_AGGREGATOR_SPEC.md.bak_indexfix
+│   ├── ORACLE_AGGREGATOR_SPEC.md.bak_linkfix
+│   ├── ORACLE_AGGREGATOR_SPEC.md.bak_specfix
+│   ├── PROOF_OF_RESERVES_SPEC.md
+│   ├── PROOF_OF_RESERVES_SPEC.md.bak_indexfix
+│   ├── PROOF_OF_RESERVES_SPEC.md.bak_linkfix
+│   ├── PROOF_OF_RESERVES_SPEC.md.bak_specfix
+│   ├── PSM_ROUTING_FLOW.md
+│   ├── PSM_SPEC.md
+│   ├── PSM_SPEC.md.bak_indexfix
+│   ├── PSM_SPEC.md.bak_linkfix
+│   ├── PSM_SPEC.md.bak_specfix
+│   ├── SAFETY_AUTOMATA_SPEC.md
+│   ├── SAFETY_AUTOMATA_SPEC.md.bak_indexfix
+│   ├── SAFETY_AUTOMATA_SPEC.md.bak_linkfix
+│   ├── SAFETY_AUTOMATA_SPEC.md.bak_specfix
+│   ├── TOKEN_SPEC.md
+│   ├── TOKEN_SPEC.md.bak_indexfix
+│   ├── TOKEN_SPEC.md.bak_linkfix
+│   ├── TOKEN_SPEC.md.bak_specfix
+│   └── TREASURY_FEE_ROUTING.md
+├── testing
+│   ├── FORMAL_INVARIANTS_MAP.md
+│   ├── FORMAL_INVARIANTS_MAP.md.bak_linkfix
+│   ├── SECURITY_ANALYSIS.md
+│   ├── SECURITY_ANALYSIS.md.bak_linkfix
+│   ├── TESTPLAN.md
+│   └── TESTPLAN.md.bak_linkfix
+└── whitepaper
+    ├── WHITEPAPER_1kUSD_DE.md
+    └── WHITEPAPER_1kUSD_EN.md
+
+14 directories, 153 files
