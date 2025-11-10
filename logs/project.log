@@ -219,3 +219,4 @@
 2025-11-10T20:31:26Z DEV-40 doc: added architect handoff document for OracleWatcher integration
 2025-11-10T20:38:03Z DEV-40 docs: manual mkdocs gh-deploy --force --no-history
 2025-11-10T21:15:58Z DEV-40 docs: integrity verified via scan_docs.sh
+2025-11-10T21:19:11Z DEV-40 docs: added index banner and re-deployed Pages
