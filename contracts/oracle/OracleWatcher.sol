@@ -80,7 +80,6 @@ contract OracleWatcher is IOracleWatcher {
         uint256 lastUpdate;
         bool cached;
 
-    HealthState private _health;
     address public safetyAutomata;
 
     address public immutable deployer;
@@ -90,3 +89,6 @@ contract OracleWatcher is IOracleWatcher {
         oracle = IOracleAggregator(_oracle);
         safetyAutomata = _safetyAutomata;
     }
+
+    // ✅ Fallback placement of HealthState variable
+    HealthState private _health;
