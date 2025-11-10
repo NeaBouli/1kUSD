@@ -53,7 +53,7 @@ interface IOracleWatcher {
     }
 
     /// @notice Returns the last known Status (Healthy/Paused/Stale).
-    function getStatus() external view returns (Status) {
+    function getStatus() external view returns (OracleWatcher.Status) {
         return _health.status;
     }
 
