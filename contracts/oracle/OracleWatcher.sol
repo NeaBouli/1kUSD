@@ -11,13 +11,38 @@ interface IOracleWatcher {
     /// @notice Returns true if the oracle path is considered operational.
     /// @notice Updates internal health cache based on oracle and safety modules.
     function updateHealth() external {
-        // Placeholder: will query oracle.isOperational() and safety.isPaused()
+        bool operational = true;
+        bool paused = false;
+
+        // External calls wrapped in try/catch to avoid hard reverts.
+        try oracle.isOperational() returns (bool ok) {
+            operational = ok;
+        } catch {}
+
+        (bool success, bytes memory data) = safetyAutomata.staticcall(
+            abi.encodeWithSignature("isPaused(uint8)", 1)
+        );
+        if (success && data.length >= 32) {
+            paused = abi.decode(data, (bool));
+        }
+
+        if (paused) {
+            _health.status = Status.Paused;
+        } else if (!operational) {
+            _health.status = Status.Stale;
+        } else {
+            _health.status = Status.Healthy;
+        }
+
+        _health.lastUpdate = block.timestamp;
+        _health.cached = true;
+        emit HealthUpdated(_health.status, _health.lastUpdate);
         // and update local flags in later steps.
     }
 
     /// @notice Manual refresh (alias for updateHealth) for external triggers.
     function refreshState() external {
-        // Placeholder: may be used by off-chain agents or DAO
+        updateHealth();
     }
 
     /// @inheritdoc IOracleWatcher
@@ -65,3 +90,4 @@ contract OracleWatcher is IOracleWatcher {
         oracle = IOracleAggregator(_oracle);
         safetyAutomata = _safetyAutomata;
     }
+    event HealthUpdated(Status status, uint256 timestamp);
