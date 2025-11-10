@@ -9,6 +9,17 @@ import { IOracleAggregator } from "../core/OracleAggregator.sol";
 /// @dev Implementation will be added in DEV-40 steps without changing this interface.
 interface IOracleWatcher {
     /// @notice Returns true if the oracle path is considered operational.
+    /// @notice Updates internal health cache based on oracle and safety modules.
+    function updateHealth() external {
+        // Placeholder: will query oracle.isOperational() and safety.isPaused()
+        // and update local flags in later steps.
+    }
+
+    /// @notice Manual refresh (alias for updateHealth) for external triggers.
+    function refreshState() external {
+        // Placeholder: may be used by off-chain agents or DAO
+    }
+
     function isHealthy() external view returns (bool);
 }
 

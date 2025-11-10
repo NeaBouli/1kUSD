@@ -208,3 +208,4 @@
 2025-11-09T21:26:51Z DEV-40 step3: added oracle + safetyAutomata connector vars (no builds)
 2025-11-09T21:27:33Z DEV-40 step4: constructor wiring for oracle + safetyAutomata added (no builds)
 2025-11-09T21:28:02Z DEV-40 phase1 complete: OracleWatcher scaffold + interface wiring stable (no builds) [DEV-6A]
+2025-11-10T08:49:56Z DEV-40 step5: added updateHealth() + refreshState() stubs (no builds)
