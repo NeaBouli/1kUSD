@@ -52,7 +52,6 @@ interface IOracleWatcher {
     }
 
     /// @notice Returns the last known Status (Healthy/Paused/Stale).
-pragma solidity ^0.8.30;
 
 import { IOracleWatcher } from "../interfaces/IOracleWatcher.sol";
 import { IOracleAggregator } from "../interfaces/IOracleAggregator.sol";
