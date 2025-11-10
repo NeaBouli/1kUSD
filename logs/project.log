@@ -216,3 +216,4 @@
 2025-11-10T20:16:59Z DEV-40 fix: removed duplicate enum Status and namespaced references (build ok)
 2025-11-10T20:27:50Z DEV-40 doc: added README release note for v0.40.0-rc
 2025-11-10T20:27:56Z DEV-40 release: OracleWatcher & Interface Recovery completed (build green)
+2025-11-10T20:31:26Z DEV-40 doc: added architect handoff document for OracleWatcher integration
