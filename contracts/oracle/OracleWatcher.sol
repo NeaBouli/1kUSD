@@ -87,4 +87,3 @@ contract OracleWatcher is IOracleWatcher {
         return _health.cached;
     }
 }
-}
