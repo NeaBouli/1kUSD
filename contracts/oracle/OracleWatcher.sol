@@ -79,18 +79,10 @@ contract OracleWatcher is IOracleWatcher {
         Status status;
         uint256 lastUpdate;
         bool cached;
-
-    address public safetyAutomata;
-
-    address public immutable deployer;
-
-    constructor(address _oracle, address _safetyAutomata) {
-        deployer = msg.sender;
-        oracle = IOracleAggregator(_oracle);
-        safetyAutomata = _safetyAutomata;
     }
 
-    // ✅ Fallback placement of HealthState variable
+    HealthState private _health;
+// ✅ Fallback placement of HealthState variable
 
     // ✅ Fallback placement of HealthState variable
     HealthState private _health;
