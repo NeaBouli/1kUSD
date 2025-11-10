@@ -53,6 +53,8 @@ interface IOracleWatcher {
 
     /// @notice Returns the last known Status (Healthy/Paused/Stale).
 
+    }
+
 
 /// @title OracleWatcher
 /// @notice Monitors Oracle and SafetyAutomata states
