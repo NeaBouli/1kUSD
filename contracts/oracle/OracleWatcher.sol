@@ -26,6 +26,17 @@ interface IOracleWatcher {
 contract OracleWatcher is IOracleWatcher {
     // Placeholder: will be wired to OracleAggregator in subsequent steps
     IOracleAggregator public oracle;
+
+    /// @notice Possible states derived from OracleAggregator and SafetyAutomata.
+    enum Status { Healthy, Paused, Stale }
+
+    struct HealthState {
+        Status status;
+        uint256 lastUpdate;
+        bool cached;
+    }
+
+    HealthState internal _health;
     address public safetyAutomata;
 
     address public immutable deployer;
