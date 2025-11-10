@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.30;
 
-import { IOracleAggregator } from "../core/OracleAggregator.sol";
+import { IOracleAggregator } from "../interfaces/IOracleAggregator.sol";
 
 /// @title OracleWatcher (DEV-40 Scaffold)
 /// @notice Lightweight watcher stub that will subscribe to OracleAggregator state
@@ -80,7 +80,7 @@ contract OracleWatcher is IOracleWatcher {
         uint256 lastUpdate;
         bool cached;
 
-    HealthState internal _health;
+    HealthState private _health;
     address public safetyAutomata;
 
     address public immutable deployer;
@@ -90,4 +90,3 @@ contract OracleWatcher is IOracleWatcher {
         oracle = IOracleAggregator(_oracle);
         safetyAutomata = _safetyAutomata;
     }
-    event HealthUpdated(Status status, uint256 timestamp);
