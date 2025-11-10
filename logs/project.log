@@ -218,3 +218,4 @@
 2025-11-10T20:27:56Z DEV-40 release: OracleWatcher & Interface Recovery completed (build green)
 2025-11-10T20:31:26Z DEV-40 doc: added architect handoff document for OracleWatcher integration
 2025-11-10T20:38:03Z DEV-40 docs: manual mkdocs gh-deploy --force --no-history
+2025-11-10T21:15:58Z DEV-40 docs: integrity verified via scan_docs.sh
