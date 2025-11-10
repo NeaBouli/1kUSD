@@ -211,3 +211,4 @@
 2025-11-10T08:49:56Z DEV-40 step5: added updateHealth() + refreshState() stubs (no builds)
 2025-11-10T08:50:53Z DEV-40 step6: added internal HealthState struct + Status enum (no builds)
 2025-11-10T08:52:41Z DEV-40 step7: add view accessors (getStatus/lastUpdate/hasCache) + neutral isHealthy cache check (no builds)
+2025-11-10T08:53:17Z DEV-40 step8: updated ADR-040 docs for OracleWatcher phase1-2 completion (no builds)
