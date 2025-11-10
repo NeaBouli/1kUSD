@@ -53,6 +53,29 @@ interface IOracleWatcher {
     }
 
     /// @notice Returns the last known Status (Healthy/Paused/Stale).
+pragma solidity ^0.8.30;
+
+import { IOracleWatcher } from "../interfaces/IOracleWatcher.sol";
+import { IOracleAggregator } from "../interfaces/IOracleAggregator.sol";
+import { ISafetyAutomata } from "../interfaces/ISafetyAutomata.sol";
+
+/// @title OracleWatcher
+/// @notice Monitors Oracle and SafetyAutomata states
+contract OracleWatcher is IOracleWatcher {
+
+    /// @notice Operational state classification
+    enum Status { Healthy, Paused, Stale }
+
+    struct HealthState {
+        Status status;
+        uint256 lastUpdate;
+        bool cached;
+    }
+
+    IOracleAggregator public oracle;
+    ISafetyAutomata public safetyAutomata;
+    HealthState private _health;
+
     function getStatus() external view returns (OracleWatcher.Status) {
         return _health.status;
     }
@@ -66,4 +89,5 @@ interface IOracleWatcher {
     function hasCache() external view returns (bool) {
         return _health.cached;
     }
+}
 }
