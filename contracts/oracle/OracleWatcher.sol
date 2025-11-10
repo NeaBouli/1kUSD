@@ -20,7 +20,27 @@ interface IOracleWatcher {
         // Placeholder: may be used by off-chain agents or DAO
     }
 
-    function isHealthy() external view returns (bool);
+    /// @inheritdoc IOracleWatcher
+    function isHealthy() external view returns (bool) {
+        // Default to true until cache is explicitly updated in later steps.
+        if (!_health.cached) return true;
+        return _health.status == Status.Healthy;
+    }
+
+    /// @notice Returns the last known Status (Healthy/Paused/Stale).
+    function getStatus() external view returns (Status) {
+        return _health.status;
+    }
+
+    /// @notice Returns the unix timestamp of the last updateHealth/refreshState.
+    function lastUpdate() external view returns (uint256) {
+        return _health.lastUpdate;
+    }
+
+    /// @notice Returns true if a health value has been cached.
+    function hasCache() external view returns (bool) {
+        return _health.cached;
+    }
 }
 
 contract OracleWatcher is IOracleWatcher {
@@ -34,7 +54,6 @@ contract OracleWatcher is IOracleWatcher {
         Status status;
         uint256 lastUpdate;
         bool cached;
-    }
 
     HealthState internal _health;
     address public safetyAutomata;

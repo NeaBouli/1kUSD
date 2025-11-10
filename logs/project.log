@@ -210,3 +210,4 @@
 2025-11-09T21:28:02Z DEV-40 phase1 complete: OracleWatcher scaffold + interface wiring stable (no builds) [DEV-6A]
 2025-11-10T08:49:56Z DEV-40 step5: added updateHealth() + refreshState() stubs (no builds)
 2025-11-10T08:50:53Z DEV-40 step6: added internal HealthState struct + Status enum (no builds)
+2025-11-10T08:52:41Z DEV-40 step7: add view accessors (getStatus/lastUpdate/hasCache) + neutral isHealthy cache check (no builds)
