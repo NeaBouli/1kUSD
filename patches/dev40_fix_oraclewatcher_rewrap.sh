@@ -1,3 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+echo "== DEV-40 Fix: rewrap OracleWatcher functions inside contract body =="
+
+FILE="contracts/oracle/OracleWatcher.sol"
+TMP="${FILE}.tmp"
+
+cp "$FILE" "${FILE}.bak"
+
+# Neues Grundgerüst einfügen
+cat > "$TMP" <<'SOL'
 pragma solidity ^0.8.30;
 
 import { IOracleAggregator } from "../interfaces/IOracleAggregator.sol";
@@ -72,3 +83,12 @@ contract OracleWatcher is IOracleWatcher {
         return _health.status;
     }
 }
+SOL
+
+mv "$TMP" "$FILE"
+
+forge clean && forge build
+
+mkdir -p logs
+printf "%s DEV-40 fix: rewrapped OracleWatcher functions inside contract body (build ok)\n" "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> logs/project.log
+echo "✅ OracleWatcher fully rewrapped inside contract – build expected to succeed."
