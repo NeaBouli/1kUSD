@@ -213,3 +213,4 @@
 2025-11-10T08:52:41Z DEV-40 step7: add view accessors (getStatus/lastUpdate/hasCache) + neutral isHealthy cache check (no builds)
 2025-11-10T08:53:17Z DEV-40 step8: updated ADR-040 docs for OracleWatcher phase1-2 completion (no builds)
 2025-11-10T08:55:38Z DEV-40 step9: implemented updateHealth() + refreshState() logic + HealthUpdated event
+2025-11-10T20:16:59Z DEV-40 fix: removed duplicate enum Status and namespaced references (build ok)

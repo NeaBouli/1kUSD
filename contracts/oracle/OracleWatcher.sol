@@ -13,7 +13,6 @@ contract OracleWatcher is IOracleWatcher {
 
     event HealthUpdated(Status status, uint256 timestamp);
 
-    enum Status { Healthy, Paused, Stale }
 
     struct HealthState {
         Status status;
