@@ -53,9 +53,6 @@ interface IOracleWatcher {
 
     /// @notice Returns the last known Status (Healthy/Paused/Stale).
 
-import { IOracleWatcher } from "../interfaces/IOracleWatcher.sol";
-import { IOracleAggregator } from "../interfaces/IOracleAggregator.sol";
-import { ISafetyAutomata } from "../interfaces/ISafetyAutomata.sol";
 
 /// @title OracleWatcher
 /// @notice Monitors Oracle and SafetyAutomata states
