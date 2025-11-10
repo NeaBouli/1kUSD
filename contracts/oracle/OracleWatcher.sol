@@ -67,22 +67,3 @@ interface IOracleWatcher {
         return _health.cached;
     }
 }
-
-contract OracleWatcher is IOracleWatcher {
-    // Placeholder: will be wired to OracleAggregator in subsequent steps
-    IOracleAggregator public oracle;
-
-    /// @notice Possible states derived from OracleAggregator and SafetyAutomata.
-    enum Status { Healthy, Paused, Stale }
-
-    struct HealthState {
-        Status status;
-        uint256 lastUpdate;
-        bool cached;
-    }
-
-    HealthState private _health;
-// ✅ Fallback placement of HealthState variable
-
-    // ✅ Fallback placement of HealthState variable
-    HealthState private _health;
