@@ -4,7 +4,7 @@
 contract MockOracleAggregator is OracleAggregator {
     constructor() OracleAggregator(address(0xDEAD), ISafetyAutomata(address(0xBEEF)), IParameterRegistry(address(0xA11CE))) {}
     function updatePrice(address) external{}
-    function isHealthy() external purereturns (bool) { return true; }
+    function isHealthy() external pure returns (bool) { return true; }
 }
 
 
