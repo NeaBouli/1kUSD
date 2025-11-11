@@ -226,3 +226,4 @@
 2025-11-11T20:20:36Z DEV-41-T2: fixed undeclared healthy + split chained assignment
 2025-11-11T20:22:08Z DEV-41-T2: fixed chained assignment in OracleRegression_Base.t.sol
 2025-11-11T20:23:45Z DEV-41-T3: SafetyAutomata dummy admin injected
+2025-11-11T20:25:56Z DEV-41-T4: injected dummy admin for OracleAggregator
