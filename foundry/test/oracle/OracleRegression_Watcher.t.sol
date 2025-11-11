@@ -35,6 +35,7 @@ contract OracleRegression_Watcher is Test {
         emit HealthUpdated(IOracleWatcher.Status.Paused, block.timestamp);
         watcher.updateHealth();
         assertFalse(healthy, "watcher should detect pause");
+    }
     /// @notice Verify manual refresh triggers same logic
     function testRefreshAlias() public {
         watcher.refreshState();
