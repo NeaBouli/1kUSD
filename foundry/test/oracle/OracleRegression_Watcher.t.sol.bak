@@ -15,7 +15,7 @@ contract OracleRegression_Watcher is Test {
 
     function setUp() public {
         safety = new SafetyAutomata(address(this), 0);
-        aggregator = new OracleAggregator(address(this), safety);
+        aggregator = new OracleAggregator(address(this), safety, keccak256("ORACLE"));
         watcher = new OracleWatcher(aggregator, safety);
     }
 
