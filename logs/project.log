@@ -242,3 +242,4 @@
 2025-11-11T20:40:42Z DEV-41-T16: injected MockOracleAggregator instance into Watcher setup to fix ZERO_ADDRESS revert
 2025-11-11T20:42:31Z DEV-41-T17: deduplicated mockAgg injection and ensured single assignment
 2025-11-11T20:43:41Z DEV-41-T18: injected mock SafetyAutomata and mock Registry to resolve ZERO_ADDRESS
+2025-11-11T20:44:30Z DEV-41-T19: added import for concrete ParameterRegistry implementation to fix identifier not found

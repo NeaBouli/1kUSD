@@ -25,6 +25,7 @@ pragma solidity ^0.8.30;
 import "forge-std/Test.sol";
 import "contracts/oracle/OracleWatcher.sol";
 import "contracts/core/OracleAggregator.sol";
+import "contracts/core/ParameterRegistry.sol";
 import "contracts/interfaces/IParameterRegistry.sol";
 import "contracts/core/SafetyAutomata.sol";
 contract OracleRegression_Base is Test {
