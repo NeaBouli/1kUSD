@@ -34,16 +34,16 @@ contract OracleRegression_Base is Test {
     IParameterRegistry registry;
     SafetyAutomata safety;
     function setUp() public {
-        safety = new SafetyAutomata(address(0xBEEF), 0);
-        registry = IParameterRegistry(address(new MinimalMockRegistry()));
+        safety = ISafetyAutomata(address(mockSafety));
+        registry = IParameterRegistry(address(mockRegistry));
         aggregator = MockOracleAggregator(address(new MockOracleAggregator()));
         OracleAggregator mockAgg = new MockOracleAggregator();
         aggregator = mockAgg;
         aggregator = mockAgg;
-        SafetyAutomata mockSafety = new SafetyAutomata(address(this));
+        SafetyAutomata mockSafety = new SafetyAutomata(address(this), 0);
         ParameterRegistry mockRegistry = new ParameterRegistry(address(this));
-        safety = address(mockSafety);
-        registry = address(mockRegistry);
+        safety = ISafetyAutomata(address(mockSafety));
+        registry = IParameterRegistry(address(mockRegistry));
         watcher = new OracleWatcher(aggregator, safety);
     }
 }
