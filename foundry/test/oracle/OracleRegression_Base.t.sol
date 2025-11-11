@@ -2,6 +2,8 @@
 
 // Inline minimal registry to bypass ZERO_ADDRESS() revert
 contract MinimalMockRegistry is IParameterRegistry {
+    function getUint(bytes32) external pure returns (uint256) { return 0; }
+    function getAddress(bytes32) external pure returns (address) { return address(0xA11CE); }
     function getParam(bytes32) external pure returns (uint256) { return 0; }
     function admin() external pure returns (address) { return address(0xA11CE); }
 }
@@ -23,6 +25,6 @@ contract OracleRegression_Base is Test {
         safety = new SafetyAutomata(address(0xBEEF), 0);
         registry = IParameterRegistry(address(new MinimalMockRegistry()));
         aggregator = new OracleAggregator(address(0xCAFE), safety, registry);
-        watcher = new OracleWatcher(address(0xD00D), aggregator, safety);
+        watcher = new OracleWatcher(aggregator, safety);
     }
 }
