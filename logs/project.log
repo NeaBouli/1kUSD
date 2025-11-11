@@ -245,3 +245,4 @@
 2025-11-11T20:44:30Z DEV-41-T19: added import for concrete ParameterRegistry implementation to fix identifier not found
 2025-11-11T20:45:09Z DEV-41-T20: fixed constructor args and interface casts for mocks
 2025-11-11T20:46:45Z DEV-41-T21: reordered mock instantiation before assignment for SafetyAutomata & Registry
+2025-11-11T20:53:24Z DEV-41-T22: normalize safety to interface, add ISafetyAutomata import, dedupe mocks, fix assignments

@@ -27,27 +27,22 @@ import "contracts/oracle/OracleWatcher.sol";
 import "contracts/core/OracleAggregator.sol";
 import "contracts/core/ParameterRegistry.sol";
 import "contracts/interfaces/IParameterRegistry.sol";
+import "contracts/interfaces/ISafetyAutomata.sol";
 import "contracts/core/SafetyAutomata.sol";
 contract OracleRegression_Base is Test {
     OracleWatcher watcher;
     OracleAggregator aggregator;
     IParameterRegistry registry;
-    SafetyAutomata safety;
+    ISafetyAutomata safety;
     function setUp() public {
         // Reordered: declare mocks before assignment
-        SafetyAutomata mockSafety = new SafetyAutomata(address(this), 0);
+        SafetyAutomata mockSafety = new SafetyAutomata(address(this), 0), 0);
         ParameterRegistry mockRegistry = new ParameterRegistry(address(this));
-        safety = ISafetyAutomata(address(mockSafety));
-        registry = IParameterRegistry(address(mockRegistry));
+        safety = mockSafety;
+        registry = mockRegistry;
         OracleAggregator mockAgg = new MockOracleAggregator();
         aggregator = mockAgg;
         aggregator = mockAgg;
-        SafetyAutomata mockSafety = new SafetyAutomata(address(this), 0);
-        ParameterRegistry mockRegistry = new ParameterRegistry(address(this));
         // Reordered: declare mocks before assignment
-        SafetyAutomata mockSafety = new SafetyAutomata(address(this), 0);
-        ParameterRegistry mockRegistry = new ParameterRegistry(address(this));
-        safety = ISafetyAutomata(address(mockSafety));
-        registry = IParameterRegistry(address(mockRegistry));
     }
 }
