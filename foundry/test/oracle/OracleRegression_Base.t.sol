@@ -6,14 +6,11 @@ import "contracts/oracle/OracleWatcher.sol";
 import "contracts/core/OracleAggregator.sol";
 import "contracts/interfaces/IParameterRegistry.sol";
 import "contracts/core/SafetyAutomata.sol";
-
 contract OracleRegression_Base is Test {
     OracleWatcher watcher;
     OracleAggregator aggregator;
     IParameterRegistry registry;
-    MockParameterRegistry registry;
     SafetyAutomata safety;
-
     function setUp() public {
         safety = new SafetyAutomata(address(this), 0);
         aggregator = registry = IParameterRegistry(address(0));
