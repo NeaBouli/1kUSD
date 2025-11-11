@@ -41,3 +41,4 @@ contract OracleRegression_Watcher is Test {
         watcher.refreshState();
         assertTrue(watcher.isHealthy(), "refreshState should not alter state");
 }
+}
