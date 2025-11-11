@@ -238,3 +238,4 @@
 2025-11-11T20:35:15Z DEV-41-T13: removed invalid override keywords in typed MockOracleAggregator
 2025-11-11T20:35:58Z DEV-41-T14: forcibly removed all override keywords in MockOracleAggregator
 2025-11-11T20:38:24Z DEV-41-T15: restored spacing after pure/view keywords
+2025-11-11T20:39:28Z DEV-41-T16: injected MockOracleAggregator instance into Watcher setup to fix ZERO_ADDRESS revert
