@@ -13,7 +13,7 @@ contract OracleRegression_Base is Test {
     SafetyAutomata safety;
     function setUp() public {
         safety = new SafetyAutomata(address(0xBEEF), 0);
-        registry = IParameterRegistry(address(0));
+        registry = IParameterRegistry(address(new MockRegistry()));
         aggregator = new OracleAggregator(address(0xCAFE), safety, registry);
         watcher = new OracleWatcher(aggregator, safety);
     }
