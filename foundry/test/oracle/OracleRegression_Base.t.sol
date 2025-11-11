@@ -38,7 +38,6 @@ contract OracleRegression_Base is Test {
         aggregator = MockOracleAggregator(address(new MockOracleAggregator()));
         OracleAggregator mockAgg = new MockOracleAggregator();
         aggregator = mockAgg;
-        OracleAggregator mockAgg = new MockOracleAggregator();
         aggregator = mockAgg;
         watcher = new OracleWatcher(aggregator, safety);
     }

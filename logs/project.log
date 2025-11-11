@@ -240,3 +240,4 @@
 2025-11-11T20:38:24Z DEV-41-T15: restored spacing after pure/view keywords
 2025-11-11T20:39:28Z DEV-41-T16: injected MockOracleAggregator instance into Watcher setup to fix ZERO_ADDRESS revert
 2025-11-11T20:40:42Z DEV-41-T16: injected MockOracleAggregator instance into Watcher setup to fix ZERO_ADDRESS revert
+2025-11-11T20:42:31Z DEV-41-T17: deduplicated mockAgg injection and ensured single assignment
