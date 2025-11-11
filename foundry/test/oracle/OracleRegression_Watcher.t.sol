@@ -5,20 +5,21 @@ import "forge-std/Test.sol";
 import "contracts/oracle/OracleWatcher.sol";
 import "contracts/core/SafetyAutomata.sol";
 import "contracts/core/OracleAggregator.sol";
-import "contracts/mocks/MockParameterRegistry.sol";
+import "contracts/interfaces/IParameterRegistry.sol";
 
 contract OracleRegression_Watcher is Test {
     OracleWatcher watcher;
     SafetyAutomata safety;
     OracleAggregator aggregator;
+    IParameterRegistry registry;
     MockParameterRegistry registry;
 
     event HealthUpdated(IOracleWatcher.Status status, uint256 timestamp);
 
     function setUp() public {
         safety = new SafetyAutomata(address(this), 0);
-        aggregator = registry = new MockParameterRegistry();
-        aggregator = new OracleAggregator(address(this), safety, registry);;
+        aggregator = registry = IParameterRegistry(address(0));
+        aggregator = new OracleAggregator(address(this), safety, registry);
         watcher = new OracleWatcher(aggregator, safety);
     }
 
