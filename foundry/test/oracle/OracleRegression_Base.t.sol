@@ -3,8 +3,8 @@
 // Typed mock derived from OracleAggregator to satisfy type system
 contract MockOracleAggregator is OracleAggregator {
     constructor() OracleAggregator(address(0xDEAD), ISafetyAutomata(address(0xBEEF)), IParameterRegistry(address(0xA11CE))) {}
-    function updatePrice(address) external override {}
-    function isHealthy() external pure override returns (bool) { return true; }
+    function updatePrice(address) external{}
+    function isHealthy() external purereturns (bool) { return true; }
 }
 
 
