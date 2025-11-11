@@ -22,6 +22,7 @@ contract OracleRegression_Watcher is Test {
     function testInitialHealthIsHealthy() public {
         bool healthy = watcher.isHealthy();
         assertTrue(healthy, "initial watcher health should be true");
+    }
     /// @notice Verify paused propagation from SafetyAutomata
     function testPausePropagation() public {
         // Simulate SafetyAutomata returning paused
