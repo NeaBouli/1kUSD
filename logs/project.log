@@ -228,3 +228,4 @@
 2025-11-11T20:23:45Z DEV-41-T3: SafetyAutomata dummy admin injected
 2025-11-11T20:25:56Z DEV-41-T4: injected dummy admin for OracleAggregator
 2025-11-11T20:27:33Z DEV-41-T5: injected MockRegistry in Base setup
+2025-11-11T20:28:39Z DEV-41-T6: added MockRegistry import to Base setup

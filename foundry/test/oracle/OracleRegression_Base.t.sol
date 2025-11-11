@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+import "contracts/core/mocks/MockRegistry.sol";
 pragma solidity ^0.8.30;
 
 import "forge-std/Test.sol";
