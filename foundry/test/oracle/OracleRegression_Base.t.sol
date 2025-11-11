@@ -9,10 +9,6 @@ contract MockOracleAggregator is OracleAggregator {
 
 
 // Lightweight mock aggregator to bypass constructor ZERO_ADDRESS checks
-contract MockOracleAggregator {
-    function updatePrice(address) external {}
-    function isHealthy() external pure returns (bool) { return true; }
-}
 
 
 // Inline minimal registry to bypass ZERO_ADDRESS() revert
