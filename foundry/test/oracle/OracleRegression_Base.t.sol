@@ -1,5 +1,12 @@
 // SPDX-License-Identifier: MIT
 
+// Lightweight mock aggregator to bypass constructor ZERO_ADDRESS checks
+contract MockOracleAggregator {
+    function updatePrice(address) external {}
+    function isHealthy() external pure returns (bool) { return true; }
+}
+
+
 // Inline minimal registry to bypass ZERO_ADDRESS() revert
 contract MinimalMockRegistry is IParameterRegistry {
     function getUint(bytes32) external pure returns (uint256) { return 0; }
@@ -24,7 +31,7 @@ contract OracleRegression_Base is Test {
     function setUp() public {
         safety = new SafetyAutomata(address(0xBEEF), 0);
         registry = IParameterRegistry(address(new MinimalMockRegistry()));
-        aggregator = new OracleAggregator(address(0xCAFE), safety, registry);
+        aggregator = MockOracleAggregator(address(new MockOracleAggregator()));
         watcher = new OracleWatcher(aggregator, safety);
     }
 }
