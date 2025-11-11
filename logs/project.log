@@ -233,3 +233,4 @@
 2025-11-11T20:30:38Z DEV-41-T8: injected inline MinimalMockRegistry to bypass ZERO_ADDRESS revert
 2025-11-11T20:31:40Z DEV-41-T9: completed MinimalMockRegistry + corrected watcher args
 2025-11-11T20:32:44Z DEV-41-T10: injected MockOracleAggregator to bypass ZERO_ADDRESS revert
+2025-11-11T20:33:36Z DEV-41-T11: typed MockOracleAggregator subclass injected

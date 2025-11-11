@@ -1,5 +1,13 @@
 // SPDX-License-Identifier: MIT
 
+// Typed mock derived from OracleAggregator to satisfy type system
+contract MockOracleAggregator is OracleAggregator {
+    constructor() OracleAggregator(address(0xDEAD), ISafetyAutomata(address(0xBEEF)), IParameterRegistry(address(0xA11CE))) {}
+    function updatePrice(address) external override {}
+    function isHealthy() external pure override returns (bool) { return true; }
+}
+
+
 // Lightweight mock aggregator to bypass constructor ZERO_ADDRESS checks
 contract MockOracleAggregator {
     function updatePrice(address) external {}
