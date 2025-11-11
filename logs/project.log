@@ -222,3 +222,4 @@
 2025-11-10T21:19:11Z DEV-40 docs: added index banner and re-deployed Pages
 2025-11-10T21:21:49Z Release v0.40.0: DEV-40 OracleWatcher & Docs deployed
 2025-11-11T19:21:28Z DEV-41 init: created oracle regression suite skeleton
+2025-11-11T20:17:15Z DEV-41-T2: OracleRegression_Watcher syntax recovery completed
