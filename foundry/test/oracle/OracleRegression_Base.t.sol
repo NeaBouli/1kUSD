@@ -16,6 +16,6 @@ contract OracleRegression_Base is Test {
         safety = new SafetyAutomata(address(0xBEEF), 0);
         registry = IParameterRegistry(address(new MockRegistry()));
         aggregator = new OracleAggregator(address(0xCAFE), safety, registry);
-        watcher = new OracleWatcher(aggregator, safety);
+        watcher = new OracleWatcher(address(0xD00D), aggregator, safety);
     }
 }
