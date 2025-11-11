@@ -14,7 +14,7 @@ contract OracleRegression_Watcher is Test {
     event HealthUpdated(IOracleWatcher.Status status, uint256 timestamp);
     function setUp() public {
         safety = new SafetyAutomata(address(this), 0);
-        aggregator = registry = IParameterRegistry(address(0));
+        registry = IParameterRegistry(address(0));
         aggregator = new OracleAggregator(address(this), safety, registry);
         watcher = new OracleWatcher(aggregator, safety);
     }
@@ -34,7 +34,7 @@ contract OracleRegression_Watcher is Test {
         vm.expectEmit(true, true, false, true);
         emit HealthUpdated(IOracleWatcher.Status.Paused, block.timestamp);
         watcher.updateHealth();
-        assertFalse(healthy, "watcher should detect pause");
+        assertFalse(watcher.isHealthy(), "watcher should detect pause");
     }
     /// @notice Verify manual refresh triggers same logic
     function testRefreshAlias() public {
