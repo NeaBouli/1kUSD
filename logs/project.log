@@ -255,3 +255,4 @@
 2025-11-12T21:23:11Z DEV-41-T29: initialize mockAggregator before watcher setup to fix ZERO_ADDRESS
 2025-11-12T21:24:17Z DEV-41-T30: fixed OracleAggregator constructor args (added registry)
 2025-11-12T21:25:30Z DEV-41-T31: fixed OracleAggregator constructor to use interface types
+2025-11-12T21:27:21Z DEV-41-T32: added registry argument to OracleWatcher constructor
