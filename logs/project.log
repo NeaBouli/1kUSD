@@ -258,3 +258,4 @@
 2025-11-12T21:27:21Z DEV-41-T32: added registry argument to OracleWatcher constructor
 2025-11-12T21:29:15Z DEV-41-T33: reordered OracleAggregator initialization after mocks
 2025-11-12T21:36:02Z DEV-41-T35: corrected OracleWatcher constructor args (2 params, correct order)
+2025-11-12T21:38:20Z DEV-41-T36: pre-initialize mocks before watcher to fix ZERO_ADDRESS revert
