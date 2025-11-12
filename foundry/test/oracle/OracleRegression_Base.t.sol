@@ -38,7 +38,6 @@ contract OracleRegression_Base is Test {
     IParameterRegistry registry;
     ISafetyAutomata safety;
     function setUp() public {
-    {
         // --- DEV-41-T27: ensure mocks exist before any watcher or registry use ---
         if (address(mockSafety) == address(0)) mockSafety = new SafetyAutomata(address(this), 0);
         if (address(mockRegistry) == address(0)) mockRegistry = new ParameterRegistry(address(this));
