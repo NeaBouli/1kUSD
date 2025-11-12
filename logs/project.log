@@ -259,3 +259,4 @@
 2025-11-12T21:29:15Z DEV-41-T33: reordered OracleAggregator initialization after mocks
 2025-11-12T21:36:02Z DEV-41-T35: corrected OracleWatcher constructor args (2 params, correct order)
 2025-11-12T21:38:20Z DEV-41-T36: pre-initialize mocks before watcher to fix ZERO_ADDRESS revert
+2025-11-12T21:44:04Z DEV-41-T37: assigned aggregator & safety in Base.setUp() to fix ZERO_ADDRESS
