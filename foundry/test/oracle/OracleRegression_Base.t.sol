@@ -36,7 +36,7 @@ contract OracleRegression_Base is Test {
     ISafetyAutomata safety;
     function setUp() public {
         // Reordered: declare mocks before assignment
-        SafetyAutomata mockSafety = new SafetyAutomata(address(this), 0), 0);
+        SafetyAutomata mockSafety = new SafetyAutomata(address(this), 0));
         ParameterRegistry mockRegistry = new ParameterRegistry(address(this));
         safety = mockSafety;
         registry = mockRegistry;
