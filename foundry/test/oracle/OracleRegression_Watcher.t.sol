@@ -13,11 +13,9 @@ contract OracleRegression_Watcher is Test {
     IParameterRegistry registry;
     event HealthUpdated(IOracleWatcher.Status status, uint256 timestamp);
     function setUp() public {
-        safety = new SafetyAutomata(address(this), 0);
-        registry = IParameterRegistry(address(0));
-        aggregator = new OracleAggregator(address(this), safety, registry);
+        super.setUp();
+        // --- DEV-41-T38: use initialized mocks instead of zero address ---
         watcher = new OracleWatcher(aggregator, safety);
-    }
     /// @notice Verify default health state after deployment
     function testInitialHealthIsHealthy() public {
         bool healthy = watcher.isHealthy();
