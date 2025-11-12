@@ -253,3 +253,4 @@
 2025-11-12T21:20:04Z DEV-41-T27: early mock initialization before watcher deployment to fix ZERO_ADDRESS
 2025-11-12T21:21:54Z DEV-41-T28: removed double brace from setUp() block
 2025-11-12T21:23:11Z DEV-41-T29: initialize mockAggregator before watcher setup to fix ZERO_ADDRESS
+2025-11-12T21:24:17Z DEV-41-T30: fixed OracleAggregator constructor args (added registry)
