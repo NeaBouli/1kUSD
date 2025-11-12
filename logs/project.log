@@ -249,3 +249,4 @@
 2025-11-12T21:13:18Z DEV-41-T23: fix SafetyAutomata constructor comma + dedupe mock lines
 2025-11-12T21:14:46Z DEV-41-T24: remove extra closing parenthesis in SafetyAutomata constructor
 2025-11-12T21:16:46Z DEV-41-T25: fix ZERO_ADDRESS revert by initializing mocks early in setUp()
+2025-11-12T21:18:25Z DEV-41-T26: promote mockSafety/mockRegistry to internal fields for visibility

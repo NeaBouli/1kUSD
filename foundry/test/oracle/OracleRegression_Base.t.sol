@@ -30,6 +30,9 @@ import "contracts/interfaces/IParameterRegistry.sol";
 import "contracts/interfaces/ISafetyAutomata.sol";
 import "contracts/core/SafetyAutomata.sol";
 contract OracleRegression_Base is Test {
+    // --- DEV-41-T26 injected mock fields ---
+    SafetyAutomata internal mockSafety;
+    ParameterRegistry internal mockRegistry;
     OracleWatcher watcher;
     OracleAggregator aggregator;
     IParameterRegistry registry;
