@@ -17,6 +17,7 @@ contract OracleRegression_Watcher is Test {
         // --- DEV-41-T38: use initialized mocks instead of zero address ---
         watcher = new OracleWatcher(aggregator, safety);
     /// @notice Verify default health state after deployment
+    }
     function testInitialHealthIsHealthy() public {
         bool healthy = watcher.isHealthy();
         assertTrue(healthy, "initial watcher health should be true");

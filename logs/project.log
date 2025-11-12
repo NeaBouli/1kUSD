@@ -261,3 +261,4 @@
 2025-11-12T21:38:20Z DEV-41-T36: pre-initialize mocks before watcher to fix ZERO_ADDRESS revert
 2025-11-12T21:44:04Z DEV-41-T37: assigned aggregator & safety in Base.setUp() to fix ZERO_ADDRESS
 2025-11-12T21:47:04Z DEV-41-T38: fix child setUp() to call super and remove ZERO_ADDRESS registry
+2025-11-12T21:48:14Z DEV-41-T39: add missing closing brace for setUp()
