@@ -40,7 +40,10 @@ contract OracleRegression_Base is Test {
     ISafetyAutomata safety;
     function setUp() public {
         // --- DEV-41-T29: ensure mock OracleAggregator initialized ---
-        if (address(mockAggregator) == address(0)) mockAggregator = new OracleAggregator(address(this), mockSafety, mockRegistry);
+        // --- DEV-41-T33: reordered: deploy Safety + Registry before Aggregator ---
+        if (address(mockSafety) == address(0)) mockSafety = new SafetyAutomata(address(this), 0);
+        if (address(mockRegistry) == address(0)) mockRegistry = new ParameterRegistry(address(this));
+        mockAggregator = new OracleAggregator(address(this), mockSafety, mockRegistry);
         aggregator = mockAggregator;
         // --- DEV-41-T27: ensure mocks exist before any watcher or registry use ---
         if (address(mockSafety) == address(0)) mockSafety = new SafetyAutomata(address(this), 0);

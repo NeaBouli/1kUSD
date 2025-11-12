@@ -256,3 +256,4 @@
 2025-11-12T21:24:17Z DEV-41-T30: fixed OracleAggregator constructor args (added registry)
 2025-11-12T21:25:30Z DEV-41-T31: fixed OracleAggregator constructor to use interface types
 2025-11-12T21:27:21Z DEV-41-T32: added registry argument to OracleWatcher constructor
+2025-11-12T21:29:15Z DEV-41-T33: reordered OracleAggregator initialization after mocks
