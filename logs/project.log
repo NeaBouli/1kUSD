@@ -248,3 +248,4 @@
 2025-11-11T20:53:24Z DEV-41-T22: normalize safety to interface, add ISafetyAutomata import, dedupe mocks, fix assignments
 2025-11-12T21:13:18Z DEV-41-T23: fix SafetyAutomata constructor comma + dedupe mock lines
 2025-11-12T21:14:46Z DEV-41-T24: remove extra closing parenthesis in SafetyAutomata constructor
+2025-11-12T21:16:46Z DEV-41-T25: fix ZERO_ADDRESS revert by initializing mocks early in setUp()
