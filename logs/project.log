@@ -252,3 +252,4 @@
 2025-11-12T21:18:25Z DEV-41-T26: promote mockSafety/mockRegistry to internal fields for visibility
 2025-11-12T21:20:04Z DEV-41-T27: early mock initialization before watcher deployment to fix ZERO_ADDRESS
 2025-11-12T21:21:54Z DEV-41-T28: removed double brace from setUp() block
+2025-11-12T21:23:11Z DEV-41-T29: initialize mockAggregator before watcher setup to fix ZERO_ADDRESS

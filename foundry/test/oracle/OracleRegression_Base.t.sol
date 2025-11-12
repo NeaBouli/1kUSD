@@ -31,6 +31,7 @@ import "contracts/interfaces/ISafetyAutomata.sol";
 import "contracts/core/SafetyAutomata.sol";
 contract OracleRegression_Base is Test {
     // --- DEV-41-T26 injected mock fields ---
+    OracleAggregator internal mockAggregator;
     SafetyAutomata internal mockSafety;
     ParameterRegistry internal mockRegistry;
     OracleWatcher watcher;
@@ -38,6 +39,9 @@ contract OracleRegression_Base is Test {
     IParameterRegistry registry;
     ISafetyAutomata safety;
     function setUp() public {
+        // --- DEV-41-T29: ensure mock OracleAggregator initialized ---
+        if (address(mockAggregator) == address(0)) mockAggregator = new OracleAggregator(address(this), address(mockSafety));
+        aggregator = mockAggregator;
         // --- DEV-41-T27: ensure mocks exist before any watcher or registry use ---
         if (address(mockSafety) == address(0)) mockSafety = new SafetyAutomata(address(this), 0);
         if (address(mockRegistry) == address(0)) mockRegistry = new ParameterRegistry(address(this));
