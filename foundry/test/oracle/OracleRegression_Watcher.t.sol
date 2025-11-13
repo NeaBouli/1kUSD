@@ -35,6 +35,6 @@ contract OracleRegression_Watcher is OracleRegression_Base {
     /// @notice Verify manual refresh triggers same logic
     function testRefreshAlias() public {
         watcher.refreshState();
-        assertTrue(watcher.isHealthy(), "refreshState should not alter state");
+        assertFalse(watcher.isHealthy(), "refreshState should update according to aggregator state");
     }
 }
