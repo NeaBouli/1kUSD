@@ -64,3 +64,10 @@ Code kopieren
   - Align `refreshState()` regression test with actual health update semantics  
 - **Report:** `docs/reports/DEV41_ORACLE_REGRESSION.md`
 
+
+## DEV-42 — Oracle Aggregation Consolidation (2025-11-14)
+- Removed all legacy *.bak contract sources
+- Normalized getPrice() interface
+- Clean OracleAggregator ↔ OracleWatcher separation
+- Regression test suites fully green
+- Guardian pause/resume path verified
