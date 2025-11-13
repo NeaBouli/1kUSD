@@ -8,7 +8,6 @@ import "contracts/core/OracleAggregator.sol";
 import "contracts/interfaces/IParameterRegistry.sol";
 import "./OracleRegression_Base.t.sol";
 contract OracleRegression_Watcher is OracleRegression_Base {
-    OracleWatcher watcher;
     event HealthUpdated(IOracleWatcher.Status status, uint256 timestamp);
     function setUp() public override {
         super.setUp();

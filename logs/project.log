@@ -266,3 +266,4 @@
 2025-11-13T08:25:20Z DEV-41-T41: Base.setUp() virtual + shadow fix; Child.setUp() override
 2025-11-13T08:36:44Z DEV-41-T42: enforce inheritance from Base for watcher tests
 2025-11-13T08:45:46Z DEV-41-T43: child inherits Base and shadowing fields removed
+2025-11-13T08:47:47Z DEV-41-T44: removed all shadowing fields in child
