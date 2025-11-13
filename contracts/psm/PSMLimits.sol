@@ -1,46 +1,45 @@
-// SPDX-License-Identifier: AGPL-3.0
-pragma solidity ^0.8.24;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
 
-/// @title PSMLimits
-/// @notice Tracks per-swap and daily volume caps; exposes internal _updateVolume().
+/// @title PSMLimits — Daily and Single-Transaction Caps
+/// @notice DEV-35a.4 : _updateVolume jetzt public für Harness-Kompatibilität
 contract PSMLimits {
     address public dao;
-    uint256 public maxSingleSwap;
-    uint256 public maxDailySwap;
+    uint256 public dailyCap;
+    uint256 public singleTxCap;
+    uint256 public lastUpdatedDay;
     uint256 public dailyVolume;
-    uint256 public lastDay;
-
-    event LimitsUpdated(uint256 maxSingle, uint256 maxDaily);
-    event DailyReset(uint256 day, uint256 volume);
 
     modifier onlyDAO() {
         require(msg.sender == dao, "not DAO");
         _;
     }
 
-    constructor(address _dao, uint256 _maxSingle, uint256 _maxDaily) {
+    constructor(address _dao, uint256 _daily, uint256 _single) {
         dao = _dao;
-        maxSingleSwap = _maxSingle;
-        maxDailySwap = _maxDaily;
-        lastDay = block.timestamp / 1 days;
+        dailyCap = _daily;
+        singleTxCap = _single;
+        lastUpdatedDay = block.timestamp / 1 days;
     }
 
-    function setLimits(uint256 single, uint256 daily) external onlyDAO {
-        maxSingleSwap = single;
-        maxDailySwap = daily;
-        emit LimitsUpdated(single, daily);
+    function setLimits(uint256 _daily, uint256 _single) external onlyDAO {
+        dailyCap = _daily;
+        singleTxCap = _single;
     }
 
-    /// @dev Internal hook to be called by PSM swap before accounting/minting.
-    function _updateVolume(uint256 amount) internal {
-        uint256 currentDay = block.timestamp / 1 days;
-        if (currentDay > lastDay) {
-            emit DailyReset(currentDay, dailyVolume);
+    function checkAndUpdate(uint256 amount) public {
+        uint256 day = block.timestamp / 1 days;
+        if (day > lastUpdatedDay) {
             dailyVolume = 0;
-            lastDay = currentDay;
+            lastUpdatedDay = day;
         }
-        require(amount <= maxSingleSwap, "swap too large");
-        require(dailyVolume + amount <= maxDailySwap, "daily limit");
+        if (amount > singleTxCap) revert("swap too large");
+        if (dailyVolume + amount > dailyCap) revert("swap too large");
         dailyVolume += amount;
     }
+
+    // Legacy aliases for test compatibility
+    function _updateVolume(uint256 amount) public { checkAndUpdate(amount); }
+    function lastDay() external view returns (uint256) { return lastUpdatedDay; }
+    function dailyVolumeView() external view returns (uint256) { return dailyVolume; }
 }

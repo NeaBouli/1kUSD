@@ -1,0 +1,39 @@
+--- a/foundry/test/Guardian_PSMPropagation.t.sol
++++ b/foundry/test/Guardian_PSMPropagation.t.sol
+@@ -9,7 +9,7 @@ import "../../contracts/core/PegStabilityModule.sol";
+ import "../../contracts/security/Guardian.sol";
+
+ contract Guardian_PSMPropagationTest is Test {
+-    SafetyAutomata internal auto;
++    SafetyAutomata internal safety;
+     Guardian internal guardian;
+     PegStabilityModule internal psm;
+
+@@ -19,7 +19,7 @@ contract Guardian_PSMPropagationTest is Test {
+     address internal reg   = address(0xAAA3);
+
+     function setUp() public {
+-        auto = new SafetyAutomata(block.number + 10_000); // sunset weit in der Zukunft
++        safety = new SafetyAutomata(block.number + 10_000); // sunset weit in der Zukunft
+         guardian = new Guardian(dao, block.number + 100_000);
+-        psm = new PegStabilityModule(dao, oneKUSD, vault, address(auto), reg);
++        psm = new PegStabilityModule(dao, oneKUSD, vault, address(safety), reg);
+     }
+
+@@ -28,13 +28,13 @@ contract Guardian_PSMPropagationTest is Test {
+         bytes32 MODULE_PSM = keccak256("PSM");
+
+         // Vorbedingung: PSM darf arbeiten
+-        assertFalse(auto.isPaused(MODULE_PSM));
++        assertFalse(safety.isPaused(MODULE_PSM));
+
+         // Guardian löst globale Pause aus (simuliert)
+         vm.prank(dao);
+-        auto.setPaused(MODULE_PSM, true);
++        safety.setPaused(MODULE_PSM, true);
+
+         // Nachbedingung: SafetyAutomata meldet PSM pausiert
+-        assertTrue(auto.isPaused(MODULE_PSM));
++        assertTrue(safety.isPaused(MODULE_PSM));
+     }
+ }

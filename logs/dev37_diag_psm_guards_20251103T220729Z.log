@@ -1,0 +1,32 @@
+== DEV37 DIAG: PegStabilityModule pause guards ==
+UTC: 2025-11-03T22:07:29Z
+
+[1/4] pragma + imports:
+2:pragma solidity ^0.8.30;
+4:import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+5:import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+6:import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
+7:import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+9:import {CollateralVault} from "./CollateralVault.sol";
+10:import {OneKUSD} from "./OneKUSD.sol";
+11:import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
+12:import {ParameterRegistry} from "./ParameterRegistry.sol";
+13:import {IPSM} from "../interfaces/IPSM.sol";
+
+[2/4] Functions using whenNotPaused / whenPaused / isPaused:
+33:    modifier whenNotPaused() {
+34:        if (address(safetyAutomata) != address(0) && safetyAutomata.isPaused(keccak256("PSM"))) {
+62:        whenNotPaused
+81:    ) external override whenNotPaused nonReentrant returns (uint256 netOut) {
+
+[3/4] Functions that might revert on pause (require statements):
+No require(...paused...)
+
+[4/4] Function headers for overview:
+53:     function swapTo1kUSD(
+75:     function swapFrom1kUSD(
+91:     function quoteTo1kUSD(address tokenIn, uint256 amountIn, uint16 feeBps, uint8 tokenInDecimals)
+102:     function quoteFrom1kUSD(
+117:     function setFees(uint256 mintFee, uint256 redeemFee) external onlyRole(ADMIN_ROLE) {
+
+Done. Log saved to: logs/dev37_diag_psm_guards_20251103T220729Z.log

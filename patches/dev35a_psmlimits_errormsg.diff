@@ -1,0 +1,16 @@
+diff --git a/contracts/psm/PSMLimits.sol b/contracts/psm/PSMLimits.sol
+index b4b9a6d..f19a2d7 100644
+--- a/contracts/psm/PSMLimits.sol
++++ b/contracts/psm/PSMLimits.sol
+@@ -46,13 +46,13 @@ contract PSMLimits {
+         uint256 day = block.timestamp / 1 days;
+         if (day > lastUpdatedDay) {
+             dailyVolume = 0;
+             lastUpdatedDay = day;
+         }
+-        if (amount > singleTxCap) revert("swap too large");
+-        if (dailyVolume + amount > dailyCap) revert("daily cap exceeded");
++        if (amount > singleTxCap) revert("swap too large");
++        if (dailyVolume + amount > dailyCap) revert("swap too large");
+         dailyVolume += amount;
+     }

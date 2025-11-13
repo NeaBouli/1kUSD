@@ -1,0 +1,41 @@
+10:contract MockSafety is ISafetyAutomata {
+11-    bool public paused;
+12-
+13-    function isPaused(bytes32) external view override returns (bool) {
+14-        return paused;
+15-    }
+16-
+17-    function isModuleEnabled(bytes32) external pure override returns (bool) {
+18-        return true;
+19-    }
+20-}
+21-
+22-contract MockRegistry is IParameterRegistry {
+23-    function getUint(bytes32) external pure override returns (uint256) {
+24-        return 42;
+25-    }
+26-
+27-    function getAddress(bytes32) external pure override returns (address) {
+28-        return address(0xBEEF);
+29-    }
+30-}
+31-
+32-// --- Tests --- //
+33-contract OracleAggregatorTest is Test {
+34-    OracleAggregator public aggregator;
+35-    MockSafety public safety;
+36-    MockRegistry public registry;
+37-    address public admin = address(this);
+38-
+39-    function setUp() public {
+40-        safety = new MockSafety();
+41-        registry = new MockRegistry();
+42-        aggregator = new OracleAggregator(admin, safety, registry);
+43-    }
+44-
+45-    function testSetAndGetPriceMock() public {
+46-        aggregator.setPriceMock(address(0x1234), 1500e18, 18, true);
+47-        OracleAggregator.Price memory p = aggregator.getPrice(address(0x1234));
+48-        assertEq(uint256(p.price), 1500e18);
+49-        assertTrue(p.healthy);
+50-    }

@@ -1,0 +1,25 @@
+--- a/contracts/oracle/OracleAggregator.sol
++++ b/contracts/oracle/OracleAggregator.sol
+@@ -1,6 +1,23 @@
+ // SPDX-License-Identifier: MIT
+ pragma solidity ^0.8.30;
+
+ import {IOracleAggregator} from "../interfaces/IOracleAggregator.sol";
++import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
++
++/// @notice OracleAggregator erweitert um SafetyAutomata-Pausenlogik
+ contract OracleAggregator is IOracleAggregator {
++    ISafetyAutomata public safetyAutomata;
++
++    constructor(address _safety) {
++        safetyAutomata = ISafetyAutomata(_safety);
++    }
++
++    function isOperational() public view returns (bool) {
++        return !safetyAutomata.isPaused(keccak256("ORACLE"));
++    }
++
++    modifier whenOperational() {
++        require(isOperational(), "OracleAggregator: paused by Automata");
++        _;
++    }

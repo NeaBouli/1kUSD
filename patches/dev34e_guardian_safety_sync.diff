@@ -1,0 +1,35 @@
+diff --git a/contracts/security/Guardian.sol b/contracts/security/Guardian.sol
+index 2f1c97b..b63a1f3 100644
+--- a/contracts/security/Guardian.sol
++++ b/contracts/security/Guardian.sol
+@@ -3,9 +3,17 @@ pragma solidity ^0.8.24;
+ 
+ import "../interfaces/ISafetyAutomata.sol";
+ 
+ contract Guardian {
+     address public immutable dao;
+     uint256 public immutable sunsetBlock;
++    ISafetyAutomata public safety;
++
++    event ForcePause(bytes32 indexed module, bool state, address indexed caller, uint256 ts);
+ 
+     modifier onlyDAO() {
+         require(msg.sender == dao, "not DAO");
+         _;
+     }
+ 
+     modifier onlyActiveGuardian() {
+         require(block.number < sunsetBlock, "guardian expired");
+         _;
+     }
++
++    constructor(address _dao, uint256 _sunset, address _safety) {
++        dao = _dao;
++        sunsetBlock = _sunset;
++        safety = ISafetyAutomata(_safety);
++    }
++
++    function forcePause(bytes32 module, bool state) external onlyActiveGuardian {
++        safety.setPaused(module, state);
++        emit ForcePause(module, state, msg.sender, block.timestamp);
++    }

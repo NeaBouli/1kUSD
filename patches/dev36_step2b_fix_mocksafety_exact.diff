@@ -1,0 +1,12 @@
+--- a/foundry/test/OracleAggregator.t.sol
++++ b/foundry/test/OracleAggregator.t.sol
+@@ -18,6 +18,11 @@ contract MockSafety is ISafetyAutomata {
+     function isModuleEnabled(bytes32) external pure override returns (bool) {
+         return true;
+     }
++
++    // Added missing interface function from ISafetyAutomata
++    function globalPause() external view override(ISafetyAutomata) returns (bool) {
++        return paused;
++    }
+ }

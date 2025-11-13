@@ -1,0 +1,73 @@
+// SPDX-License-Identifier: AGPL-3.0
+pragma solidity ^0.8.24;
+
+import "forge-std/Test.sol";
+import "../../contracts/core/OracleAggregator.sol";
+import "../../contracts/interfaces/ISafetyAutomata.sol";
+import "../../contracts/interfaces/IParameterRegistry.sol";
+
+// --- Mocks --- //
+contract MockSafety is ISafetyAutomata {
+    function pauseModule(bytes32) external override {}
+    function unpauseModule(bytes32) external override {}
+    function grantGuardian(address) external override {}
+    function pauseModule(bytes32) external override {}
+    function unpauseModule(bytes32) external override {}
+    bool public paused;
+
+    function isPaused(bytes32) external view override returns (bool) {
+        return paused;
+    }
+
+    function isModuleEnabled(bytes32) external pure override returns (bool) {
+        return true;
+    }
+    // === DEV-36 STEP2d: Added missing ISafetyAutomata function ===
+    function globalPause() external view override(ISafetyAutomata) returns (bool) {
+        return paused;
+    }
+    // === END DEV-36 STEP2d ===
+}
+
+contract MockRegistry is IParameterRegistry {
+    function getUint(bytes32) external pure override returns (uint256) {
+        return 42;
+    }
+
+    function getAddress(bytes32) external pure override returns (address) {
+        return address(0xBEEF);
+    }
+}
+
+// --- Tests --- //
+contract OracleAggregatorTest is Test {
+    OracleAggregator public aggregator;
+    MockSafety public safety;
+    MockRegistry public registry;
+    address public admin = address(this);
+
+    function setUp() public {
+        safety = new MockSafety();
+        registry = new MockRegistry();
+        aggregator = new OracleAggregator(admin, safety, registry);
+    }
+
+    function testSetAndGetPriceMock() public {
+        aggregator.setPriceMock(address(0x1234), 1500e18, 18, true);
+        OracleAggregator.Price memory p = aggregator.getPrice(address(0x1234));
+        assertEq(uint256(p.price), 1500e18);
+        assertTrue(p.healthy);
+    }
+
+    function testMedianAlias() public {
+        aggregator.setPriceMock(address(0x1234), 2000e6, 6, true);
+        uint256 priceWad = aggregator.getMedianPrice();
+        assertEq(priceWad, 2000e18); // normalized from 6 → 18 decimals
+    }
+
+    function testRevertNegativePrice() public {
+        vm.expectRevert(OracleAggregator.NEGATIVE_PRICE.selector);
+        aggregator.setPriceMock(address(0x9999), -100, 18, true);
+    }
+}
+

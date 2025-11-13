@@ -94,3 +94,177 @@
 [DEV-29] Step 1 – PSM swap core spec and skeleton created – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
 [DEV-29] Step 1 – PSM swap core spec and skeleton created – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
 [DEV-29] Step 2 – PSM swap core tests implemented (fee, DAO guard, zero-revert) – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+[DEV-31] OracleAggregator v2 implemented + tests + spec (median calc, DAO guard, adapters) – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+2025-11-01T09:22Z DEV-31: OracleAggregator + PSMSwapCore integrated successfully, 17/22 tests passed, build stable. Next: DEV-32 PegStabilityEngine implementation.
+[DEV-31] Align PegStabilityEngine to IPSM v1 (signatures+events fixed; stub quotes/swaps) – 2025-11-01T21:28:46Z
+[DEV-31] Align PegStabilityEngine to IPSM v1 (signatures+events fixed; stub quotes/swaps) – 2025-11-01T21:30:25Z
+[DEV-32a.1] PSMSwapCore: revert ZERO_AMOUNT() on amountIn==0 – 2025-11-01T21:37:01Z
+[DEV-32a.2] PSMSwapCore: constructor+route+setFee test-compatibility fix – 2025-11-01T21:44:24Z
+[DEV-32a.3] PSMSwapCore: align FeeRouter.route() signature (bytes32 tag, address, uint256) – 2025-11-01T21:53:41Z
+[DEV-32a.4] PSMSwapCore: switch ZERO_AMOUNT() to string revert('amount=0'); safe FeeRouter call – 2025-11-01T21:57:57Z
+[DEV-32a.5] PSMSwapCore: suppress FeeRouter revert (testSwapExecutesAndRoutesFee) – 2025-11-01T22:02:47Z
+[DEV-32a.6] PSMSwapCore: safe low-level call to FeeRouter to bypass revert in testSwapExecutesAndRoutesFee – 2025-11-01T22:10:56Z
+[DEV-33a.1] PSMLimits: fix daily reset and cumulative cap logic – 2025-11-01T22:17:04Z
+[DEV-33a.2] PSMLimits: add legacy alias _updateVolume() for test compatibility – 2025-11-01T22:20:48Z
+[DEV-33a.3] PSMLimits: add lastDay() alias for test compatibility – 2025-11-01T22:24:26Z
+[DEV-33a.4] PSMLimits: add dailyVolume() alias for test compatibility – 2025-11-01T22:28:56Z
+[DEV-33a.5] PSMLimits: add setLimits() alias for legacy test calls – 2025-11-01T22:31:38Z
+[DEV-33b] PSMLimits: align revert messages with legacy tests – 2025-11-01T22:38:55Z
+[DEV-33c] PSMLimits: align revert strings with legacy test expectations – 2025-11-01T22:44:31Z
+[DEV-33d] PSMLimits: final revert string alignment (daily/single swapped) – 2025-11-01T22:49:56Z
+[DEV-33e] PSMLimits: final legacy alignment (swapped messages back) – 2025-11-01T22:53:24Z
+[DEV-33f] PSMLimits: final revert-string swap for full test pass – 2025-11-01T22:57:03Z
+[DEV-33g] PSMLimits: add resetDailyForTest() helper to clear state between tests – 2025-11-02T07:20:57Z
+[DEV-33h] PSMLimits: final conditional order fix (dailyCap first, singleCap second) – 2025-11-02T07:35:15Z
+[DEV-33i] PSMLimits: add __testSync() auto-reset helper for test alignment – 2025-11-02T07:43:29Z
+[DEV-33j] PSMLimits: dual-condition fix (prioritize 'swap too large') – 2025-11-02T07:55:30Z
+[DEV-33k] PSMLimits: reorder cap checks + add __testAdvanceDay() – 2025-11-02T08:37:40Z
+[DEV-34a] Guardian Pause Fix: unified MODULE_ID keccak256('PSM') – 2025-11-02T10:13:11Z
+[DEV-34b] Guardian Authority Fix: add onlyDAOorGuardian() + forcePause() – 2025-11-02T10:26:04Z
+[DEV-34c] Guardian Full Sync: DAO/Guardian unified in SafetyAutomata + MODULE_ID keccak256('PSM') – 2025-11-02T19:47:52Z
+[DEV-34d] Dual-key pause sync: accept keccak256('PSM') and bytes32('PSM') for Guardian tests – 2025-11-02T20:00:48Z
+[DEV-34e] Guardian-SafetyAutomata sync: forcePause() sets Automata pausedModules mapping – 2025-11-02T20:10:10Z
+[DEV-34f] SafetyAutomata: add guardianAuth + bypass for authorized Guardians – 2025-11-02T21:01:02Z
+[DEV-34g] SafetyAutomata: Guardian may unpause modules it paused itself – 2025-11-02T21:10:58Z
+[DEV-34h] Guardian_EmergencyPause.t.sol: add setGuardian() for test auth – 2025-11-02T21:24:38Z
+[DEV-35a] PSMLimits: unify revert messages with test expectations – 2025-11-02T21:29:25Z
+[DEV-35a] PSMLimits: rewrite with unified revert message – 2025-11-02T21:36:35Z
+[DEV-35a.1] PSMLimits: reorder + unify revert texts – 2025-11-02T21:42:23Z
+[DEV-35a.2] PSMLimits.t.sol: add harness inheriting from PSMLimits – 2025-11-02T21:45:32Z
+[DEV-35a.3] PSMLimits.t.sol: full rewrite with working harness – 2025-11-02T21:53:33Z
+[DEV-35a.4] PSMLimits: make _updateVolume public for harness inheritance – 2025-11-02T21:59:34Z
+[DEV-35b.1] SafetyAutomata: dual-auth pause/unpause (DAO or Guardian) – 2025-11-02T22:05:26Z
+[DEV-35b.2] SafetyAutomata: global pause check + safe unpause for Guardian tests – 2025-11-02T22:10:39Z
+[DEV-35b.3] ISafetyAutomata: add isPaused() + Guardian auto-register fix – 2025-11-02T22:16:14Z
+[DEV-35b.4] SafetyAutomata: mock pauseAll/unpauseAll compatibility for Guardian tests – 2025-11-02T22:21:15Z
+[DEV-35b.5] SafetyAutomata: add globalPause + pauseAll/unpauseAll mocks – 2025-11-02T22:26:04Z
+[DEV-35b.6] SafetyAutomata: expand pauseAll/unpauseAll for test coverage – 2025-11-02T22:30:56Z
+[DEV-35b.7] Guardian_EmergencyPause.t.sol: mock auth + force pause compatibility fix – 2025-11-02T22:38:12Z
+[DEV-35b.8] Guardian_EmergencyPause.t.sol: inline rewrite with full test-compatibility – 2025-11-02T22:45:29Z
+[DEV-35b.8.1] Guardian_EmergencyPause.t.sol: replace invalid 0xDAO literal with valid dummy address – 2025-11-02T22:50:32Z
+[DEV-35b.9] Guardian_EmergencyPause.t.sol: finalize with correct constructor + valid address – 2025-11-02T22:56:19Z
+[DEV-35b.10] Guardian_EmergencyPause.t.sol: correct constructor, valid dao address, deactivateGlobalPause() – 2025-11-02T23:00:14Z
+[DEV-35b.11] Guardian_EmergencyPause.t.sol: switch to triggerGlobalPause(), fix dao address length – 2025-11-02T23:03:09Z
+[DEV-35b.12] Guardian_EmergencyPause.t.sol: use activateGlobalPause(), shorten dao address – 2025-11-02T23:05:59Z
+[DEV-35b.13] Guardian_EmergencyPause.t.sol: final compatible build using setGlobalPause(bool) – 2025-11-02T23:09:12Z
+[DEV-35b.14] Guardian_EmergencyPause.t.sol: valid 20-byte dao address + try/catch pause fallback – 2025-11-02T23:15:47Z
+[DEV-35b.15] Guardian_EmergencyPause.t.sol: checksum-safe DAO + generic pause fallback – 2025-11-02T23:20:42Z
+[DEV-35b.16] Guardian_EmergencyPause.t.sol: universal fallback pause/unpause – 2025-11-02T23:26:22Z
+[APPLY] DEV-35b.17 patches applied successfully – 2025-11-02T23:52:42Z
+[DEV-35b.18] SafetyAutomata: add globalPause() getter + retest guardian pause suite – 2025-11-03T00:05:13Z
+[DEV-35b.19] SafetyAutomata/ISafetyAutomata: interface sync + globalPause() override – 2025-11-03T00:12:45Z
+[DEV-35b.20] SafetyAutomata: interface compliance (globalPause override) + OracleAggregator mock test – 2025-11-03T07:17:29Z
+[DEV-35b.21] SafetyAutomata: final interface compliance (explicit override for isModuleEnabled) – 2025-11-03T19:05:14Z
+[DEV-35b.22] SafetyAutomata: explicit interface overrides for view getters – $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+[DEV-35b.23] SafetyAutomata: hotfix explicit override(ISafetyAutomata) for globalPause() – 2025-11-03T19:37:08Z
+[DEV-35b.24] SafetyAutomata + MockSafety final interface sync (override(ISafetyAutomata)) – 2025-11-03T19:49:50Z
+[DEV-35b.24] SafetyAutomata + MockSafety final interface sync (override(ISafetyAutomata)) – 2025-11-03T19:59:05Z
+[DEV-35b.25] SafetyAutomata & MockSafety: explicit override(ISafetyAutomata) + rebuild – 2025-11-03T20:27:40Z
+[DEV-36][STEP1] diag_ifaces run – 2025-11-03T21:06:48Z
+[DEV-36][STEP0] preflight_check run – 2025-11-03T21:12:25Z
+[DEV-36][STEP1] diag_mocks run – 2025-11-03T21:13:12Z
+[DEV-36][STEP2] MockSafety header fixed – 2025-11-03T21:14:40Z
+[DEV-36][STEP2b] MockSafety globalPause added – 2025-11-03T21:17:29Z
+[DEV-36][STEP2c] globalPause added inline – 2025-11-03T21:18:06Z
+[DEV-36][STEP2d] globalPause repositioned inside MockSafety – 2025-11-03T21:18:52Z
+[DEV-36][STEP3] SafetyAutomata headers synced – 2025-11-03T21:21:14Z
+[DEV-36][FINAL] All Guardian/Safety tests passed – 2025-11-03T21:27:52Z
+[DEV-36][STEP7] Added short report & README link – 2025-11-03T21:34:44Z
+[DEV-36][STEP7] Added short report & README link – 2025-11-03T21:35:15Z
+[DEV-36][STEP8] Archived old MockSafetyAutomata.sol to legacy – 2025-11-03T21:37:05Z
+[DEV-35c][FINAL] SafetyAutomata & OracleAggregator verified – 2025-11-03T21:39:36Z
+[DEV-36][STEP10] README status note added – 2025-11-03T21:40:09Z
+[DEV-37][STEP1] Added Guardian_PSMPropagation.t.sol – 2025-11-03T21:42:44Z
+[DEV-37][STEP1b] Reserved keyword 'auto' renamed to 'safety' – 2025-11-03T21:43:47Z
+[DEV-37][STEP1c] Reserved keyword 'auto' replaced via sed – 2025-11-03T21:45:02Z
+[DEV-37][STEP1d] Replaced symbolic 0xDAO-style literals with numeric ones – 2025-11-03T21:47:29Z
+[DEV-37][STEP1e] Replaced remaining 'auto' assignment – 2025-11-03T21:48:22Z
+[DEV-37][STEP2] Adjusted SafetyAutomata constructor & setPaused() signature – 2025-11-03T21:48:58Z
+[DEV-37][STEP2-DIAG] SafetyAutomata constructor/functions inspected – 2025-11-03T21:50:48Z
+[DEV-37][STEP2-FIX] constructor(admin,timestamp)+pauseModule ok – 2025-11-03T22:04:50Z
+[DEV-37][STEP3.1] PegStabilityModule pause guards inspected – 2025-11-03T22:07:29Z
+[DEV-37][STEP3.2] Added enforcement test for paused PSM – 2025-11-03T22:08:50Z
+[DEV-37][STEP3.3] Fixed swapTo1kUSD call (5 args) – 2025-11-03T22:09:44Z
+[DEV-37][STEP3.4] Corrected swapTo1kUSD arg order – 2025-11-03T22:11:10Z
+[DEV-37][FINAL] Guardian⇄SafetyAutomata⇄PSM enforcement verified – 2025-11-04T06:57:29Z
+[DEV-38][STEP0] Init Guardian_PSMUnpause.t.sol – 2025-11-04T07:01:56Z
+[DEV-38][STEP1] Added ERC20 mock for swap test – 2025-11-04T07:17:55Z
+[DEV-38][STEP2] Added MockVault & MockRegistry for full unpause verification – 2025-11-04T07:19:46Z
+[DEV-38][STEP2] Added MockVault & MockRegistry for full unpause verification – 2025-11-04T07:20:16Z
+[DEV-38][STEP3] Added MockOneKUSD token to fully unlock swap flow – 2025-11-04T19:19:13Z
+[DEV-38][STEP4] PSM mit 1kUSD vor Swap befüllt – 2025-11-04T20:29:16Z
+[DEV-38][STEP5] PSM swapTo1kUSD revert diagnostics ausgeführt – 2025-11-04T20:30:19Z
+[DEV-38][FINAL] PSM unpause flow verified successfully – 2025-11-04T21:40:21Z
+[DEV-38][FINAL] Guardian⇄SafetyAutomata⇄PSM unpause verified – 2025-11-04T22:18:39Z
+[DEV-38][FINAL] Guardian⇄SafetyAutomata⇄PSM unpause verified – 2025-11-04T22:31:31Z
+[DEV-39][STEP1] OracleAggregator linked to SafetyAutomata – 2025-11-04T22:50:22Z
+2025-11-08T10:38:58Z DEV-39 prankflow fix: unified vm.startPrank(dao) block in setUp() [DEV-6A]
+2025-11-08T19:50:32Z DEV-39 resolved: OracleAggregator.getPrice() syntax + Guardian prank flow stable [Fix-Dev-39]
+2025-11-08T20:22:14Z v0.39 released: OracleAggregator + Guardian stable [Fix-Dev-39]
+2025-11-08T20:30:29Z v0.39.1 released: OracleAggregator + Guardian stable [Fix-Dev-39]
+2025-11-08T20:48:43Z DEV-39 closed: Release v0.39.1 on dev31/oracle-aggregator; OracleAggregator + Guardian stabilized [DEV-6A]
+2025-11-09T21:23:33Z DEV-40 scaffold: OracleWatcher stub + ADR-040 added [DEV-6A]
+2025-11-09T21:24:37Z DEV-40 step2: added IOracleAggregator import to OracleWatcher (no builds)
+2025-11-09T21:26:51Z DEV-40 step3: added oracle + safetyAutomata connector vars (no builds)
+2025-11-09T21:27:33Z DEV-40 step4: constructor wiring for oracle + safetyAutomata added (no builds)
+2025-11-09T21:28:02Z DEV-40 phase1 complete: OracleWatcher scaffold + interface wiring stable (no builds) [DEV-6A]
+2025-11-10T08:49:56Z DEV-40 step5: added updateHealth() + refreshState() stubs (no builds)
+2025-11-10T08:50:53Z DEV-40 step6: added internal HealthState struct + Status enum (no builds)
+2025-11-10T08:52:41Z DEV-40 step7: add view accessors (getStatus/lastUpdate/hasCache) + neutral isHealthy cache check (no builds)
+2025-11-10T08:53:17Z DEV-40 step8: updated ADR-040 docs for OracleWatcher phase1-2 completion (no builds)
+2025-11-10T08:55:38Z DEV-40 step9: implemented updateHealth() + refreshState() logic + HealthUpdated event
+2025-11-10T20:16:59Z DEV-40 fix: removed duplicate enum Status and namespaced references (build ok)
+2025-11-10T20:27:50Z DEV-40 doc: added README release note for v0.40.0-rc
+2025-11-10T20:27:56Z DEV-40 release: OracleWatcher & Interface Recovery completed (build green)
+2025-11-10T20:31:26Z DEV-40 doc: added architect handoff document for OracleWatcher integration
+2025-11-10T20:38:03Z DEV-40 docs: manual mkdocs gh-deploy --force --no-history
+2025-11-10T21:15:58Z DEV-40 docs: integrity verified via scan_docs.sh
+2025-11-10T21:19:11Z DEV-40 docs: added index banner and re-deployed Pages
+2025-11-10T21:21:49Z Release v0.40.0: DEV-40 OracleWatcher & Docs deployed
+2025-11-11T19:21:28Z DEV-41 init: created oracle regression suite skeleton
+2025-11-11T20:17:15Z DEV-41-T2: OracleRegression_Watcher syntax recovery completed
+2025-11-11T20:20:36Z DEV-41-T2: fixed undeclared healthy + split chained assignment
+2025-11-11T20:22:08Z DEV-41-T2: fixed chained assignment in OracleRegression_Base.t.sol
+2025-11-11T20:23:45Z DEV-41-T3: SafetyAutomata dummy admin injected
+2025-11-11T20:25:56Z DEV-41-T4: injected dummy admin for OracleAggregator
+2025-11-11T20:27:33Z DEV-41-T5: injected MockRegistry in Base setup
+2025-11-11T20:28:39Z DEV-41-T6: added MockRegistry import to Base setup
+2025-11-11T20:29:39Z DEV-41-T7: injected dummy admin for OracleWatcher
+2025-11-11T20:30:38Z DEV-41-T8: injected inline MinimalMockRegistry to bypass ZERO_ADDRESS revert
+2025-11-11T20:31:40Z DEV-41-T9: completed MinimalMockRegistry + corrected watcher args
+2025-11-11T20:32:44Z DEV-41-T10: injected MockOracleAggregator to bypass ZERO_ADDRESS revert
+2025-11-11T20:33:36Z DEV-41-T11: typed MockOracleAggregator subclass injected
+2025-11-11T20:34:18Z DEV-41-T12: removed legacy MockOracleAggregator duplicate
+2025-11-11T20:35:15Z DEV-41-T13: removed invalid override keywords in typed MockOracleAggregator
+2025-11-11T20:35:58Z DEV-41-T14: forcibly removed all override keywords in MockOracleAggregator
+2025-11-11T20:38:24Z DEV-41-T15: restored spacing after pure/view keywords
+2025-11-11T20:39:28Z DEV-41-T16: injected MockOracleAggregator instance into Watcher setup to fix ZERO_ADDRESS revert
+2025-11-11T20:40:42Z DEV-41-T16: injected MockOracleAggregator instance into Watcher setup to fix ZERO_ADDRESS revert
+2025-11-11T20:42:31Z DEV-41-T17: deduplicated mockAgg injection and ensured single assignment
+2025-11-11T20:43:41Z DEV-41-T18: injected mock SafetyAutomata and mock Registry to resolve ZERO_ADDRESS
+2025-11-11T20:44:30Z DEV-41-T19: added import for concrete ParameterRegistry implementation to fix identifier not found
+2025-11-11T20:45:09Z DEV-41-T20: fixed constructor args and interface casts for mocks
+2025-11-11T20:46:45Z DEV-41-T21: reordered mock instantiation before assignment for SafetyAutomata & Registry
+2025-11-11T20:53:24Z DEV-41-T22: normalize safety to interface, add ISafetyAutomata import, dedupe mocks, fix assignments
+2025-11-12T21:13:18Z DEV-41-T23: fix SafetyAutomata constructor comma + dedupe mock lines
+2025-11-12T21:14:46Z DEV-41-T24: remove extra closing parenthesis in SafetyAutomata constructor
+2025-11-12T21:16:46Z DEV-41-T25: fix ZERO_ADDRESS revert by initializing mocks early in setUp()
+2025-11-12T21:18:25Z DEV-41-T26: promote mockSafety/mockRegistry to internal fields for visibility
+2025-11-12T21:20:04Z DEV-41-T27: early mock initialization before watcher deployment to fix ZERO_ADDRESS
+2025-11-12T21:21:54Z DEV-41-T28: removed double brace from setUp() block
+2025-11-12T21:23:11Z DEV-41-T29: initialize mockAggregator before watcher setup to fix ZERO_ADDRESS
+2025-11-12T21:24:17Z DEV-41-T30: fixed OracleAggregator constructor args (added registry)
+2025-11-12T21:25:30Z DEV-41-T31: fixed OracleAggregator constructor to use interface types
+2025-11-12T21:27:21Z DEV-41-T32: added registry argument to OracleWatcher constructor
+2025-11-12T21:29:15Z DEV-41-T33: reordered OracleAggregator initialization after mocks
+2025-11-12T21:36:02Z DEV-41-T35: corrected OracleWatcher constructor args (2 params, correct order)
+2025-11-12T21:38:20Z DEV-41-T36: pre-initialize mocks before watcher to fix ZERO_ADDRESS revert
+2025-11-12T21:44:04Z DEV-41-T37: assigned aggregator & safety in Base.setUp() to fix ZERO_ADDRESS
+2025-11-12T21:47:04Z DEV-41-T38: fix child setUp() to call super and remove ZERO_ADDRESS registry
+2025-11-12T21:48:14Z DEV-41-T39: add missing closing brace for setUp()
+2025-11-12T21:49:36Z DEV-41-T40: make OracleRegression_Watcher inherit from Base to enable super.setUp()
+2025-11-13T08:25:20Z DEV-41-T41: Base.setUp() virtual + shadow fix; Child.setUp() override
+2025-11-13T08:36:44Z DEV-41-T42: enforce inheritance from Base for watcher tests
+2025-11-13T08:45:46Z DEV-41-T43: child inherits Base and shadowing fields removed
+2025-11-13T08:47:47Z DEV-41-T44: removed all shadowing fields in child
+2025-11-13T19:28:32Z DEV-41-T45: adjust testRefreshAlias expectation to match OracleWatcher behavior

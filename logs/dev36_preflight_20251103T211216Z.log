@@ -1,0 +1,20 @@
+== DEV36 PRE-FLIGHT CHECK ==
+UTC: 2025-11-03T21:12:16Z
+
+[1/4] Check duplicate ISafetyAutomata files:
+contracts/interfaces/ISafetyAutomata.sol
+
+[2/4] Locate MockSafety references (could be inline):
+foundry/test/OracleAggregator.t.sol:10:contract MockSafety is ISafetyAutomata {
+foundry/test/MockSafetyAutomata.sol:3:contract MockSafetyAutomata {
+
+[3/4] Current build & cache folders:
+No cache/out folders present
+
+[4/4] solc version check:
+forge Version: 1.4.3-stable
+Commit SHA: fa9f934bdac4bcf57e694e852a61997dda90668a
+Build Timestamp: 2025-10-22T05:34:14.905232000Z (1761111254)
+Build Profile: maxperf
+
+Done. Log saved to: logs/dev36_preflight_20251103T211216Z.log

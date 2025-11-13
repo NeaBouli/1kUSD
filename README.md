@@ -306,6 +306,10 @@ Workflow: .github/workflows/release.yml (on tags v*..)
 Template: .github/release/RELEASE_NOTES_TEMPLATE.md
 
 ## Project Status
+- DEV-38 Report: docs/reports/DEV-38_GuardianPSMUnpause.md
+- DEV-37 Report: docs/reports/DEV-37_GuardianPSMIntegration.md
+- DEV-35c: SafetyAutomata/Guardian/OracleAggregator sync ✅ (see docs/reports/DEV-35-36_InterfaceCompliance.md)
+- DEV-35/36 Report: docs/reports/DEV-35-36_InterfaceCompliance.md
 
 [![CI](https://img.shields.io/github/actions/workflow/status/NeaBouli/1kUSD/ci.yml?branch=main&label=CI)](https://github.com/NeaBouli/1kUSD/actions/workflows/ci.yml)
 [![Foundry Tests](https://img.shields.io/github/actions/workflow/status/NeaBouli/1kUSD/foundry-test.yml?branch=main&label=Foundry%20Tests)](https://github.com/NeaBouli/1kUSD/actions/workflows/foundry-test.yml)

@@ -1,0 +1,32 @@
+diff --git a/contracts/core/PegStabilityModule.sol b/contracts/core/PegStabilityModule.sol
+index 3f4a2df..e8b2c54 100644
+--- a/contracts/core/PegStabilityModule.sol
++++ b/contracts/core/PegStabilityModule.sol
+@@ -13,7 +13,11 @@ import "../interfaces/ISafetyAutomata.sol";
+ import "../interfaces/IParameterRegistry.sol";
+ import "../interfaces/IPSM.sol";
+ 
+-contract PegStabilityModule is IPSM {
++contract PegStabilityModule is IPSM {
++    /// @dev Unified module identifier for Guardian / SafetyAutomata integration
++    bytes32 public constant MODULE_ID = keccak256("PSM");
++
++    // -- rest of variables --
+     OneKUSD public oneKUSD;
+     CollateralVault public vault;
+     ISafetyAutomata public safetyAutomata;
+@@ -33,7 +37,11 @@ contract PegStabilityModule is IPSM {
+     modifier whenNotPaused() {
+-        if (address(safetyAutomata) != address(0) && safetyAutomata.isPaused(keccak256("PegStabilityModule"))) {
+-            revert PausedError();
+-        }
+-        _;
+-    }
++        if (
++            address(safetyAutomata) != address(0) &&
++            safetyAutomata.isPaused(MODULE_ID)
++        ) {
++            revert PausedError();
++        }
++        _;
++    }

@@ -1,0 +1,25 @@
+--- a/foundry/test/Guardian_PSMPropagation.t.sol
++++ b/foundry/test/Guardian_PSMPropagation.t.sol
+@@ -19,7 +19,9 @@ contract Guardian_PSMPropagationTest is Test {
+     address internal reg   = address(0x3333);
+
+     function setUp() public {
+-        safety = new SafetyAutomata(block.number + 10_000); // sunset weit in der Zukunft
+-        guardian = new Guardian(dao, block.number + 100_000);
+-        psm = new PegStabilityModule(dao, oneKUSD, vault, address(safety), reg);
++        guardian = new Guardian(dao, block.number + 100_000);
++        safety = new SafetyAutomata(address(guardian), block.number + 10_000); // (guardian, sunset)
++        psm = new PegStabilityModule(dao, oneKUSD, vault, address(safety), reg);
+     }
+
+     function testGuardianPauseStopsPSM() public {
+         bytes32 MODULE_PSM = keccak256("PSM");
+
+         // Vorbedingung: PSM darf arbeiten
+         assertFalse(safety.isPaused(MODULE_PSM));
+
+         // Guardian löst Pause aus (modulbasiert)
+-        vm.prank(dao);
+-        safety.setPaused(MODULE_PSM, true);
++        vm.prank(dao);
++        safety.setPaused(MODULE_PSM);

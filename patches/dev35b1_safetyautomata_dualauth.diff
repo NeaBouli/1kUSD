@@ -1,0 +1,37 @@
+diff --git a/contracts/core/SafetyAutomata.sol b/contracts/core/SafetyAutomata.sol
+index 9d18c43..b61ce98 100644
+--- a/contracts/core/SafetyAutomata.sol
++++ b/contracts/core/SafetyAutomata.sol
+@@ -32,12 +32,20 @@ contract SafetyAutomata {
+     mapping(bytes32 => bool) public pausedModules;
+     mapping(address => bool) public guardians;
+ 
+-    function pause(bytes32 module) external onlyDAO {
+-        pausedModules[module] = true;
+-    }
+-
+-    function unpause(bytes32 module) external onlyDAO {
+-        pausedModules[module] = false;
+-    }
++    /// @notice Pause a single module; callable by DAO or authorized Guardian
++    function pause(bytes32 module) external {
++        require(msg.sender == dao || guardians[msg.sender], "not DAO or guardian");
++        pausedModules[module] = true;
++    }
++
++    /// @notice Unpause a single module; callable by DAO or authorized Guardian
++    function unpause(bytes32 module) external {
++        require(msg.sender == dao || guardians[msg.sender], "not DAO or guardian");
++        pausedModules[module] = false;
++    }
++
++    /// @notice Global pause across all modules (simplified test version)
++    function pauseAll() external {
++        require(msg.sender == dao || guardians[msg.sender], "not DAO or guardian");
++        pausedModules[keccak256("GLOBAL")] = true;
++    }
++
++    function unpauseAll() external {
++        require(msg.sender == dao || guardians[msg.sender], "not DAO or guardian");
++        pausedModules[keccak256("GLOBAL")] = false;
++    }

@@ -1,0 +1,47 @@
+diff --git a/contracts/core/SafetyAutomata.sol b/contracts/core/SafetyAutomata.sol
+index 2cc8b49a0ac7c504cf7d154b71a2cacee1900911..7d214afac3e5e0d0dc8d73c88286e3c9b0566a0b 100644
+--- a/contracts/core/SafetyAutomata.sol
++++ b/contracts/core/SafetyAutomata.sol
+@@ -37,11 +37,23 @@ contract SafetyAutomata is AccessControl, ISafetyAutomata {
+     /// @inheritdoc ISafetyAutomata
+-    function isPaused(bytes32 moduleId) external view override returns (bool) {
+-        return _paused[moduleId];
+-    }
+-
+-    /// @notice Convenience inverse of isPaused (not part of the interface).
+-    function isModuleEnabled(bytes32 moduleId) external view returns (bool) {
+-        return !_paused[moduleId];
+-    }
+-
+-    /// @notice Legacy compatibility getter exposing the global pause flag.
+-    function globalPause() external view override returns (bool) {
+-        return _paused[GLOBAL_MODULE];
+-    }
++    function isPaused(bytes32 moduleId)
++        external
++        view
++        override(ISafetyAutomata)
++        returns (bool)
++    {
++        return _paused[moduleId];
++    }
++
++    /// @inheritdoc ISafetyAutomata
++    function isModuleEnabled(bytes32 moduleId)
++        external
++        view
++        override(ISafetyAutomata)
++        returns (bool)
++    {
++        return !_paused[moduleId];
++    }
++
++    /// @inheritdoc ISafetyAutomata
++    function globalPause()
++        external
++        view
++        override(ISafetyAutomata)
++        returns (bool)
++    {
++        return _paused[GLOBAL_MODULE];
++    }

@@ -1,56 +1,22 @@
-#!/usr/bin/env bash
-set -e
-LOG_DIR="docs/logs"
-LOG_FILE="${LOG_DIR}/docs_structure_scan.log"
-REPORT="${LOG_DIR}/routing_fix_report.md"
+#!/usr/bin/env sh
+set -eu
+echo "🔎 1kUSD Docs Watchdog"
 
-mkdir -p "$LOG_DIR"
+ERR=0
+check() { [ -f "$1" ] || { echo "ERR missing: $1"; ERR=1; }; }
 
-echo "📘 Docs Structure Scan — $(date)" > "$LOG_FILE"
-echo "================================" >> "$LOG_FILE"
-echo >> "$LOG_FILE"
+check "mkdocs.yml"
+check "docs/index.md"
 
-if command -v tree >/dev/null 2>&1; then
-  tree docs >> "$LOG_FILE"
-else
-  find docs -type f | sort >> "$LOG_FILE"
+# Optional root README (warn only)
+if [ ! -f "README.md" ]; then
+  echo "WARN root README missing (ok for MkDocs)"
 fi
 
-FIX_COUNT=0
-if [ -f "docs/governance.md" ]; then
-  mv docs/governance.md docs/GOVERNANCE.md
-  echo "Renamed governance.md → GOVERNANCE.md" >> "$REPORT"
-  FIX_COUNT=$((FIX_COUNT+1))
-fi
-if [ -f "docs/logs/Project.md" ]; then
-  mv docs/logs/Project.md docs/logs/project.md
-  echo "Renamed logs/Project.md → logs/project.md" >> "$REPORT"
-  FIX_COUNT=$((FIX_COUNT+1))
+# Gentle hints (no awk/regex features)
+if grep -qiE '^\s*-\s*/index\.md' mkdocs.yml 2>/dev/null; then
+  echo "WARN nav references '/index.md' explicitly (could cause CDN issues)"
 fi
 
-MISSING=0
-for f in docs/GOVERNANCE.md docs/logs/project.md; do
-  if [ ! -f "\$f" ]; then
-    echo "❌ Missing file: \$f" >> "\$REPORT"
-    MISSING=\$((MISSING+1))
-  fi
-done
-
-{
-  echo "# Routing Fix Report"
-  echo "- Timestamp: \$(date)"
-  echo "- Fixes Applied: \$FIX_COUNT"
-  echo "- Missing Files: \$MISSING"
-  echo
-  echo "## Structure Snapshot"
-  echo '```'
-  cat "\$LOG_FILE"
-  echo '```'
-} > "\$REPORT"
-
-if [ "\$MISSING" -gt 0 ]; then
-  echo "❌ Missing required files. See \$REPORT"
-  exit 1
-else
-  echo "✅ Docs structure OK — report written to \$REPORT"
-fi
+[ "$ERR" -eq 0 ] && echo "OK watchdog passed" || echo "ERR watchdog failed"
+exit "$ERR"

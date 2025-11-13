@@ -52,3 +52,11 @@
 🧩 Next step:
 Implement and verify the full Timelock execution logic with time-travel testing (`vm.warp()`).
 -------------------------------------------------------
+
+### DEV-41 — Oracle Regression Stability
+- Fixed ZERO_ADDRESS constructor regression
+- Repaired inheritance chain OracleRegression_Base → Child
+- Eliminated shadowing fields
+- Fixed refreshState semantics
+- All 26 tests passing
+- Release tag: v0.41.x

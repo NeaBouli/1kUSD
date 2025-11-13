@@ -1,0 +1,31 @@
+diff --git a/contracts/core/SafetyAutomata.sol b/contracts/core/SafetyAutomata.sol
+index 0a7f5b1..cc9d1e3 100644
+--- a/contracts/core/SafetyAutomata.sol
++++ b/contracts/core/SafetyAutomata.sol
+@@ -14,6 +14,7 @@ contract SafetyAutomata {
+     address public immutable guardian;
+     address public immutable dao;
+     uint256 public immutable guardianSunset;
++    bool public globalPause;
+ 
+     mapping(bytes32 => bool) public paused;
+ 
+@@ -49,6 +50,20 @@ contract SafetyAutomata {
+         return paused[moduleId];
+     }
+ 
++    /// @notice Mock global pause for testing (used by Guardian)
++    function pauseAll() external onlyActiveGuardian {
++        globalPause = true;
++    }
++
++    /// @notice Mock global unpause for testing (used by DAO)
++    function unpauseAll() external onlyDAO {
++        globalPause = false;
++    }
++
++    function isPaused(bytes32 moduleId) public view returns (bool) {
++        if (globalPause) return true;
++        return paused[moduleId];
++    }
+ }

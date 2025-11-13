@@ -1,0 +1,48 @@
+diff --git a/foundry/test/OracleAggregator.t.sol b/foundry/test/OracleAggregator.t.sol
+index a42a60d6585c92f3736f8c7ecdc2ca93ae585acf..ac51bbdb8c21bb3d5e593b4d981fb308e7e0ce73 100644
+--- a/foundry/test/OracleAggregator.t.sol
++++ b/foundry/test/OracleAggregator.t.sol
+@@ -15,18 +15,30 @@ contract MockSafety is ISafetyAutomata {
+     mapping(bytes32 => bool) internal paused;
+ 
+     function setPaused(bytes32 moduleId, bool state) external {
+         paused[moduleId] = state;
+     }
+-
+-    function isPaused(bytes32 moduleId) external view override returns (bool) {
+-        return paused[moduleId];
+-    }
+-
+-    function isModuleEnabled(bytes32 moduleId) external view override returns (bool) {
+-        return !paused[moduleId];
+-    }
+-
+-    function globalPause() external view override returns (bool) {
+-        return paused[GLOBAL_MODULE];
+-    }
++    function isPaused(bytes32 moduleId)
++        external
++        view
++        override(ISafetyAutomata)
++        returns (bool)
++    {
++        return paused[moduleId];
++    }
++
++    function isModuleEnabled(bytes32 moduleId)
++        external
++        view
++        override(ISafetyAutomata)
++        returns (bool)
++    {
++        return !paused[moduleId];
++    }
++
++    function globalPause()
++        external
++        view
++        override(ISafetyAutomata)
++        returns (bool)
++    {
++        return paused[GLOBAL_MODULE];
++    }

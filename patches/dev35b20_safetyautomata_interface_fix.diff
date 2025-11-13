@@ -1,0 +1,128 @@
+diff --git a/contracts/core/SafetyAutomata.sol b/contracts/core/SafetyAutomata.sol
+index 2cc8b49a0ac7c504cf7d154b71a2cacee1900911..fdd254bdfbff2b8974c7ed2b0303cee4a6a79f17 100644
+--- a/contracts/core/SafetyAutomata.sol
++++ b/contracts/core/SafetyAutomata.sol
+@@ -1,83 +1,128 @@
+ // SPDX-License-Identifier: MIT
+ pragma solidity ^0.8.30;
+
+ import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
+ import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
+
+ /// @title SafetyAutomata
+ /// @notice Guardian/DAO-controlled pause switch per module (e.g., PSM, Vault, Registry).
+ contract SafetyAutomata is AccessControl, ISafetyAutomata {
+     // Roles
+     bytes32 public constant ADMIN_ROLE    = keccak256("ADMIN_ROLE");
+     bytes32 public constant GUARDIAN_ROLE = keccak256("GUARDIAN_ROLE");
+     bytes32 public constant DAO_ROLE      = keccak256("DAO_ROLE");
++    bytes32 public constant GLOBAL_MODULE = keccak256("GLOBAL_MODULE");
+
+     /// @notice Timestamp after which the guardian can no longer pause new modules.
+     uint256 public immutable guardianSunset;
+
+     /// @dev Pause state per moduleId (true => paused).
+     mapping(bytes32 => bool) private _paused;
+
+     /// @notice Emitted when a module is paused.
+     event Paused(bytes32 indexed moduleId, address indexed by);
+
+     /// @notice Emitted when a module is resumed.
+     event Resumed(bytes32 indexed moduleId, address indexed by);
+
+     /// @notice Reverts when a guardian action is attempted after sunset.
+     error GuardianExpired();
+
+     /// @param admin Address receiving DEFAULT_ADMIN_ROLE and ADMIN_ROLE.
+     /// @param guardianSunsetTimestamp UNIX timestamp when guardian powers sunset.
+     constructor(address admin, uint256 guardianSunsetTimestamp) {
+         _grantRole(DEFAULT_ADMIN_ROLE, admin);
+         _grantRole(ADMIN_ROLE, admin);
+         guardianSunset = guardianSunsetTimestamp;
+     }
+
+     // ------------------------------------------------------------------------
+     // View API (Interface)
+     // ------------------------------------------------------------------------
+
+     /// @inheritdoc ISafetyAutomata
+     function isPaused(bytes32 moduleId) external view override returns (bool) {
+         return _paused[moduleId];
+     }
+
+     /// @notice Convenience inverse of isPaused (not part of the interface).
+     function isModuleEnabled(bytes32 moduleId) external view returns (bool) {
+         return !_paused[moduleId];
+     }
++
++    /// @inheritdoc ISafetyAutomata
++    /// @notice Legacy compatibility getter exposing the global pause flag.
++    function globalPause() external view override returns (bool) {
++        return _paused[GLOBAL_MODULE];
++    }
++
+     // ------------------------------------------------------------------------
+     // Control API
+     // ------------------------------------------------------------------------
+
+     function pauseModule(bytes32 moduleId) external {
+         _pauseModule(moduleId, msg.sender);
+     }
+
+     function resumeModule(bytes32 moduleId) external {
+         _resumeModule(moduleId, msg.sender);
+     }
+
+     function pause() external {
+         _pauseModule(GLOBAL_MODULE, msg.sender);
+     }
+
+     function unpause() external {
+         _resumeModule(GLOBAL_MODULE, msg.sender);
+     }
+
+     function setPaused(bool state) external {
+         if (state) {
+             _pauseModule(GLOBAL_MODULE, msg.sender);
+         } else {
+             _resumeModule(GLOBAL_MODULE, msg.sender);
+         }
+     }
+
+     function _pauseModule(bytes32 moduleId, address actor) internal {
+         _assertPauseAuth(actor);
+         _setPaused(moduleId, true, actor);
+     }
+
+     function _resumeModule(bytes32 moduleId, address actor) internal {
+         _assertResumeAuth(actor);
+         _setPaused(moduleId, false, actor);
+     }
+
+     function _assertPauseAuth(address actor) internal view {
+         if (hasRole(GUARDIAN_ROLE, actor)) {
+             if (block.timestamp >= guardianSunset) revert GuardianExpired();
+         } else {
+             require(
+                 hasRole(ADMIN_ROLE, actor) || hasRole(DAO_ROLE, actor),
+                 "ACCESS_DENIED"
+             );
+         }
+     }
+
+     function _assertResumeAuth(address actor) internal view {
+         require(
+             hasRole(ADMIN_ROLE, actor) || hasRole(DAO_ROLE, actor),
+             "ACCESS_DENIED"
+         );
+     }
+
+     function _setPaused(bytes32 moduleId, bool paused_, address actor) internal {
+         _paused[moduleId] = paused_;
+         if (paused_) {
+             emit Paused(moduleId, actor);
+         } else {
+             emit Resumed(moduleId, actor);
+         }
+     }
+ }

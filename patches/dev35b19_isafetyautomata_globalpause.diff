@@ -1,0 +1,20 @@
+diff --git a/contracts/interfaces/ISafetyAutomata.sol b/contracts/interfaces/ISafetyAutomata.sol
+index 61f68238e50aecd17e1a6ed36a35baadbb7f0351..84498896a9b95aa9f58c9c4b3a242028ec7af4f1 100644
+--- a/contracts/interfaces/ISafetyAutomata.sol
++++ b/contracts/interfaces/ISafetyAutomata.sol
+@@ -1,11 +1,15 @@
+ // SPDX-License-Identifier: AGPL-3.0
+ pragma solidity ^0.8.24;
+ 
+ /// @title ISafetyAutomata — pause, caps, and rate-limits registry (interface)
+ interface ISafetyAutomata {
+     /// @notice Return whether a module is paused (PSM/VAULT/ORACLE/TOKEN/etc.).
+     function isPaused(bytes32 moduleId) external view returns (bool);
+ 
+     /// @notice Return whether a module is enabled (inverse of paused; semantics may evolve).
+     function isModuleEnabled(bytes32 moduleId) external view returns (bool);
++
++    /// @notice Return whether the global module pause flag is active.
++    /// @dev Added for Guardian legacy compatibility – mirrors SafetyAutomata.globalPause()
++    function globalPause() external view returns (bool);
+ }

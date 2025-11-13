@@ -1,0 +1,19 @@
+diff --git a/contracts/core/SafetyAutomata.sol b/contracts/core/SafetyAutomata.sol
+index b61ce98..f2180ac 100644
+--- a/contracts/core/SafetyAutomata.sol
++++ b/contracts/core/SafetyAutomata.sol
+@@ -50,6 +50,16 @@ contract SafetyAutomata {
+         pausedModules[keccak256("GLOBAL")] = false;
+     }
++
++    /// @notice Returns whether a module is paused or globally paused
++    function isPaused(bytes32 module) external view returns (bool) {
++        // global pause has priority
++        if (pausedModules[keccak256("GLOBAL")]) return true;
++        return pausedModules[module];
++    }
++
++    /// @notice Fallback unpause (never reverts) — test recovery path
++    function forceUnpause(bytes32 module) external {
++        if (msg.sender == dao || guardians[msg.sender]) pausedModules[module] = false;
++    }

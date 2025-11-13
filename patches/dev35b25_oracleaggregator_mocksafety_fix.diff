@@ -1,0 +1,50 @@
+diff --git a/foundry/test/OracleAggregator.t.sol b/foundry/test/OracleAggregator.t.sol
+index 0000000..2222222 100644
+--- a/foundry/test/OracleAggregator.t.sol
++++ b/foundry/test/OracleAggregator.t.sol
+@@ -1,0 +1,55 @@
++// SPDX-License-Identifier: AGPL-3.0
++pragma solidity ^0.8.24;
++
++import {ISafetyAutomata} from "../../contracts/interfaces/ISafetyAutomata.sol";
++
++// MockSafety — minimal interface-compliant mock for tests
++contract MockSafety is ISafetyAutomata {
++    bytes32 public constant GLOBAL_MODULE = keccak256("GLOBAL_MODULE");
++
++    mapping(bytes32 => bool) internal paused;
++
++    function setPaused(bytes32 moduleId, bool state) external {
++        paused[moduleId] = state;
++    }
++
++    /// @inheritdoc ISafetyAutomata
++    function isPaused(bytes32 moduleId)
++        external
++        view
++        override(ISafetyAutomata)
++        returns (bool)
++    {
++        return paused[moduleId];
++    }
++
++    /// @inheritdoc ISafetyAutomata
++    function isModuleEnabled(bytes32 moduleId)
++        external
++        view
++        override(ISafetyAutomata)
++        returns (bool)
++    {
++        return !paused[moduleId];
++    }
++
++    /// @inheritdoc ISafetyAutomata
++    function globalPause()
++        external
++        view
++        override(ISafetyAutomata)
++        returns (bool)
++    {
++        return paused[GLOBAL_MODULE];
++    }
++}
