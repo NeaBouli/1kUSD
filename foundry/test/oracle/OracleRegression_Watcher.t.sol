@@ -6,6 +6,7 @@ import "contracts/oracle/OracleWatcher.sol";
 import "contracts/core/SafetyAutomata.sol";
 import "contracts/core/OracleAggregator.sol";
 import "contracts/interfaces/IParameterRegistry.sol";
+import "./OracleRegression_Base.t.sol";
 contract OracleRegression_Watcher is Test {
     OracleWatcher watcher;
     SafetyAutomata safety;
