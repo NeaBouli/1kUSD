@@ -51,3 +51,16 @@ Code kopieren
 > Das Projekt ist **build-stabil, test-grün und dokumentiert**.  
 > Alle OpenZeppelin-Imports werden korrekt aufgelöst, CI-Kette läuft automatisch durch.
 
+
+---
+
+## DEV-41 — Oracle Regression (Watcher/Aggregator)
+
+- **Status:** ✅ Completed  
+- **Scope:**  
+  - Fix ZERO_ADDRESS() reverts in oracle regression tests  
+  - Normalize OracleAggregator constructor usage (admin, safety, registry)  
+  - Clean inheritance and field ownership between OracleRegression_Base and OracleRegression_Watcher  
+  - Align `refreshState()` regression test with actual health update semantics  
+- **Report:** `docs/reports/DEV41_ORACLE_REGRESSION.md`
+
