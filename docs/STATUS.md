@@ -54,7 +54,7 @@ Code kopieren
 
 ---
 
-## DEV-41 — Oracle Regression (Watcher/Aggregator)
+| DEV-41 | Oracle Regression Stability | Completed | v0.41.x | ✓ All tests green |
 
 - **Status:** ✅ Completed  
 - **Scope:**  
