@@ -12,7 +12,7 @@ contract OracleRegression_Watcher is Test {
     OracleAggregator aggregator;
     IParameterRegistry registry;
     event HealthUpdated(IOracleWatcher.Status status, uint256 timestamp);
-    function setUp() public {
+    function setUp() public override {
         super.setUp();
         // --- DEV-41-T38: use initialized mocks instead of zero address ---
         watcher = new OracleWatcher(aggregator, safety);

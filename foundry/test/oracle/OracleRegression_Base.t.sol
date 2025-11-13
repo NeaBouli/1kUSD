@@ -38,7 +38,7 @@ contract OracleRegression_Base is Test {
     OracleAggregator aggregator;
     IParameterRegistry registry;
     ISafetyAutomata safety;
-    function setUp() public {
+    function setUp() public virtual {
         // --- DEV-41-T37: guarantee nonzero base assignments ---
         if (address(mockSafety) == address(0)) mockSafety = new SafetyAutomata(address(this), 0);
         if (address(mockRegistry) == address(0)) mockRegistry = new ParameterRegistry(address(this));
@@ -62,8 +62,8 @@ contract OracleRegression_Base is Test {
         safety = mockSafety;
         registry = mockRegistry;
         // Reordered: declare mocks before assignment
-        SafetyAutomata mockSafety = new SafetyAutomata(address(this), 0);
-        ParameterRegistry mockRegistry = new ParameterRegistry(address(this));
+        mockSafety = new SafetyAutomata(address(this), 0);
+        mockRegistry = new ParameterRegistry(address(this));
         safety = mockSafety;
         registry = mockRegistry;
         OracleAggregator mockAgg = new MockOracleAggregator();
