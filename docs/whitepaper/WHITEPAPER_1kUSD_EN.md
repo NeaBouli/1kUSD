@@ -3,6 +3,15 @@
 *License: AGPL-3.0*
 
 ## 1. Abstract
+
+## Oracle Regression Stability — DEV-41
+
+This release consolidates the stability of the OracleWatcher, OracleAggregator,
+and Oracle propagation paths. It resolves ZERO_ADDRESS initialization issues,
+restores correct inheritance chains, and ensures refreshState() behaves consistently.
+
+Full report: **docs/reports/DEV41_ORACLE_REGRESSION.md**
+
 **1kUSD** is a fully decentralized, on-chain collateralized, algorithmically stabilized stablecoin (EVM first, Kasplex/Kaspa path). Target: **1:1 USD peg** without centralized custody — via **Vault (stablecoins)**, **PSM (1:1 swap)**, **AutoConverter** (volatile → stable), **Oracle median**, **Safety-Automata** (rate limits, circuit breaker), and **DAO/Timelock** governance.
 
 ## 2. Problem
