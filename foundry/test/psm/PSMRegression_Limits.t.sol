@@ -4,10 +4,10 @@ pragma solidity ^0.8.24;
 import "forge-std/Test.sol";
 import {PegStabilityModule} from "../../../contracts/core/PegStabilityModule.sol";
 import {PSMLimits} from "../../../contracts/psm/PSMLimits.sol";
-import {OneKUSD} from "../../../contracts/core/OneKUSD.sol";
-import {CollateralVault} from "../../../contracts/core/CollateralVault.sol";
+import {MockOneKUSD} from "../../../contracts/mocks/MockOneKUSD.sol";
+import {MockVault} from "../../../contracts/mocks/MockVault.sol";
 import {ISafetyAutomata} from "../../../contracts/interfaces/ISafetyAutomata.sol";
-import {ParameterRegistry} from "../../../contracts/core/ParameterRegistry.sol";
+import {MockRegistry} from "../../../contracts/mocks/MockRegistry.sol";
 
 /// @title PSMRegression_Limits — DEV-44 extended regression tests
 contract PSMRegression_Limits is Test {
@@ -22,9 +22,9 @@ contract PSMRegression_Limits is Test {
 
     function setUp() public {
         // deploy very light mocks
-        oneKUSD = new OneKUSD();
-        vault = new CollateralVault();
-        reg = new ParameterRegistry();
+        oneKUSD = new MockOneKUSD();
+        vault = new MockVault();
+        reg = new MockRegistry();
         auto_ = ISafetyAutomata(address(0)); // not used in these tests
 
         psm = new PegStabilityModule(
