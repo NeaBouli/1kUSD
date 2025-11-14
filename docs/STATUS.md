@@ -71,3 +71,11 @@ Code kopieren
 - Clean OracleAggregator ↔ OracleWatcher separation
 - Regression test suites fully green
 - Guardian pause/resume path verified
+
+## DEV-43 — PSM Consolidation & Safety Wiring (2025-11-14)
+- PegStabilityModule als kanonische IPSM-Fassade neu strukturiert
+- SafetyAutomata-Gate (MODULE_PSM) für Swaps aktiviert
+- PSMLimits in den Swap-Pfad integriert (Stub-Notional, Mathe folgt in DEV-44)
+- Oracle-Health-Gate im PSM verdrahtet (ohne Preisberechnung)
+- PSMSwapCore nutzt nun IFeeRouterV2-Interface statt low-level call
+- Neue PSM-Regression-Skelette unter foundry/test/psm/ angelegt
