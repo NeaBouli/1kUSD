@@ -80,7 +80,7 @@ Code kopieren
 - PSMSwapCore nutzt nun IFeeRouterV2-Interface statt low-level call
 - Neue PSM-Regression-Skelette unter foundry/test/psm/ angelegt
 
-## DEV-44 — PSM Price Normalization & Limits Math (planned)
+## DEV-44 — PSM Price Normalization ## DEV-44 — PSM Price Normalization & Limits Math (planned) Limits Math (price math complete, flows follow in DEV-45)
 - Implement real price conversion for swapTo1kUSD / swapFrom1kUSD
 - Normalize decimals between collateral assets and 1kUSD
 - Enforce PSMLimits on stable notional amounts
