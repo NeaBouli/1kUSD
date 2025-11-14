@@ -14,6 +14,12 @@ import {IPSM} from "../interfaces/IPSM.sol";
 import {IPSMEvents} from "../interfaces/IPSMEvents.sol"; from "../interfaces/IPSM.sol";
 
 contract PegStabilityModule is IPSM, AccessControl, ReentrancyGuard {
+    bytes32 public constant MODULE_PSM = keccak256("PSM");
+
+    modifier whenNotSafetyPaused() {
+        require(!safetyAutomata.isPaused(MODULE_PSM), "PSM: paused by SafetyAutomata");
+        _;
+    }
     using SafeERC20 for IERC20;
 
     bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
@@ -39,6 +45,11 @@ contract PegStabilityModule is IPSM, AccessControl, ReentrancyGuard {
     }
 
     constructor(address admin, address _oneKUSD, address _vault, address _auto, address _reg) {
+
+    function _enforceLimits(address token, uint256 amount) internal {
+        uint256 notional = amount; /* stub – DEV-44 real math */
+        limits.checkAndUpdate(notional);
+    }
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
         _grantRole(ADMIN_ROLE, admin);
         oneKUSD = OneKUSD(_oneKUSD);
