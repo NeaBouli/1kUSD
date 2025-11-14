@@ -79,3 +79,9 @@ Code kopieren
 - Oracle-Health-Gate im PSM verdrahtet (ohne Preisberechnung)
 - PSMSwapCore nutzt nun IFeeRouterV2-Interface statt low-level call
 - Neue PSM-Regression-Skelette unter foundry/test/psm/ angelegt
+
+## DEV-44 — PSM Price Normalization & Limits Math (planned)
+- Implement real price conversion for swapTo1kUSD / swapFrom1kUSD
+- Normalize decimals between collateral assets and 1kUSD
+- Enforce PSMLimits on stable notional amounts
+- Extend PSM regression tests for price and limits behaviour
