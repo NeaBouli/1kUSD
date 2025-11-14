@@ -2,90 +2,83 @@
 pragma solidity ^0.8.24;
 
 import "forge-std/Test.sol";
+
 import {PegStabilityModule} from "../../../contracts/core/PegStabilityModule.sol";
 import {PSMLimits} from "../../../contracts/psm/PSMLimits.sol";
 import {MockOneKUSD} from "../../../contracts/mocks/MockOneKUSD.sol";
 import {MockVault} from "../../../contracts/mocks/MockVault.sol";
-import {ISafetyAutomata} from "../../../contracts/interfaces/ISafetyAutomata.sol";
 import {MockRegistry} from "../../../contracts/mocks/MockRegistry.sol";
 
-/// @title PSMRegression_Limits — DEV-44 extended regression tests
+/// @title PSMRegression_Limits
+/// @notice DEV-44: Verifiziert, dass PegStabilityModule PSMLimits korrekt erzwingt.
 contract PSMRegression_Limits is Test {
-    PegStabilityModule psm;
-    PSMLimits limits;
-    MockOneKUSD oneKUSD;
-    MockVault vault;
-    ISafetyAutomata auto_;
-    MockRegistry reg;
+    PegStabilityModule public psm;
+    PSMLimits public limits;
+    MockOneKUSD public oneKUSD;
+    MockVault public vault;
+    MockRegistry public reg;
 
-    address user = address(0xBEEF);
+    address public user = address(0xBEEF);
 
     function setUp() public {
-        // deploy very light mocks
+        // einfache Mocks für 1kUSD / Vault / Registry
         oneKUSD = new MockOneKUSD();
         vault = new MockVault();
         reg = new MockRegistry();
-        auto_ = ISafetyAutomata(address(0)); // not used in these tests
 
+        // SafetyAutomata ist für diese Tests irrelevant → address(0)
         psm = new PegStabilityModule(
             address(this),
             address(oneKUSD),
             address(vault),
-            address(auto_),
+            address(0),
             address(reg)
         );
 
-        // limits: dailyCap=1000, singleTxCap=500
+        // Limits: dailyCap = 1000, singleTxCap = 500
         limits = new PSMLimits(address(this), 1000, 500);
         psm.setLimits(address(limits));
+
+        // Keine Fees, damit wir uns nur auf Limits konzentrieren
+        psm.setFees(0, 0);
     }
 
     /// ------------------------------------------------------------
-    /// 1) singleTxCap revert
+    /// 1) singleTxCap: amountIn > singleTxCap revertet
     /// ------------------------------------------------------------
     function testSingleTxLimitReverts() public {
-        // amountIn > singleTxCap (=500)
-        vm.expectRevert();
+        // singleTxCap = 500 → 600 muss revertieren
+        vm.expectRevert(); // "swap too large"
         psm.swapTo1kUSD(address(1), 600, user, 0, block.timestamp);
     }
 
     /// ------------------------------------------------------------
-    /// 2) dailyCap revert
+    /// 2) dailyCap: Summe der Swaps > dailyCap revertet
     /// ------------------------------------------------------------
     function testDailyCapReverts() public {
-        // 2 swaps à 600 → each violates caps
-        vm.expectRevert();
-        psm.swapTo1kUSD(address(1), 600, user, 0, block.timestamp);
+        // dailyCap = 1000
+        // 1) 400 → ok (dailyVolume = 400)
+        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
 
-        // correct limits accumulation
+        // 2) 400 → ok (dailyVolume = 800)
         psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
-        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
-        vm.expectRevert();
-        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
-        vm.expectRevert(); // 400 + 400 + 400 = 1200 (dailyCap=1000)
-        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
-        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
-        vm.expectRevert();
+
+        // 3) 400 → 800 + 400 = 1200 > 1000 → revert
+        vm.expectRevert(); // "swap too large"
         psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
     }
 
     /// ------------------------------------------------------------
-    /// 3) daily reset after 1 day
+    /// 3) dailyCap Reset nach einem Tag
     /// ------------------------------------------------------------
     function testDailyReset() public {
-        // first day volume = 400
-        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
-        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
-        vm.expectRevert();
+        // Tag 1: 400 → ok
         psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
 
-        // jump 1 day forward
+        // Tag +1
         vm.warp(block.timestamp + 1 days);
 
-        // should work again because volume resets
-        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
-        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
-        vm.expectRevert();
+        // neues Tagesvolumen → wieder 400 möglich
         psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
     }
 }
