@@ -85,3 +85,9 @@ Code kopieren
 - Normalize decimals between collateral assets and 1kUSD
 - Enforce PSMLimits on stable notional amounts
 - Extend PSM regression tests for price and limits behaviour
+
+## DEV-45 — PSM Asset Flows & Fee Routing (planned)
+- Wire PegStabilityModule to CollateralVault and OneKUSD (mint/burn).
+- Implement asymmetrical fees on mint/redeem paths (1kUSD-notional basis).
+- Route fees via FeeRouterV2 / IFeeRouterV2.
+- Keep collateral asset pluggable to support future KAS / KRC-20 migration.
