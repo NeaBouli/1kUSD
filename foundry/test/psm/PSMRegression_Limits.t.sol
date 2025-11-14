@@ -57,9 +57,15 @@ contract PSMRegression_Limits is Test {
         vm.expectRevert();
         psm.swapTo1kUSD(address(1), 600, user, 0, block.timestamp);
 
-        // smaller swaps: accumulate volume 400 + 400 → 800 total
+        // correct limits accumulation
+        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
+        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
+        vm.expectRevert();
         psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
         vm.expectRevert(); // 400 + 400 + 400 = 1200 (dailyCap=1000)
+        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
+        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
+        vm.expectRevert();
         psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
     }
 
@@ -69,11 +75,17 @@ contract PSMRegression_Limits is Test {
     function testDailyReset() public {
         // first day volume = 400
         psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
+        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
+        vm.expectRevert();
+        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
 
         // jump 1 day forward
         vm.warp(block.timestamp + 1 days);
 
         // should work again because volume resets
+        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
+        psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
+        vm.expectRevert();
         psm.swapTo1kUSD(address(1), 400, user, 0, block.timestamp);
     }
 }
