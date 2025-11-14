@@ -363,4 +363,45 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         redeemFeeBps = redeemFee;
         emit FeesUpdated(mintFee, redeemFee);
     }
+    // -------------------------------------------------------------
+    // 💧 DEV-45: Asset flow & fee routing scaffold (stubs only)
+    // -------------------------------------------------------------
+
+    /// @dev DEV-45: pull collateral from user into vault (stub, no-op for now)
+    function _pullCollateral(address tokenIn, address from, uint256 amountIn) internal {
+        // DEV-45.B: implement ERC-20 transfer + vault deposit
+        tokenIn;
+        from;
+        amountIn;
+    }
+
+    /// @dev DEV-45: push collateral from vault to user (stub, no-op for now)
+    function _pushCollateral(address tokenOut, address to, uint256 amountOut) internal {
+        // DEV-45.B: implement vault withdraw + ERC-20 transfer
+        tokenOut;
+        to;
+        amountOut;
+    }
+
+    /// @dev DEV-45: mint 1kUSD to recipient (stub, no-op for now)
+    function _mint1kUSD(address to, uint256 amount1k) internal {
+        // DEV-45.B: implement OneKUSD.mint(to, amount1k)
+        to;
+        amount1k;
+    }
+
+    /// @dev DEV-45: burn 1kUSD from sender (stub, no-op for now)
+    function _burn1kUSD(address from, uint256 amount1k) internal {
+        // DEV-45.B: implement OneKUSD.burnFrom(from, amount1k) or equivalent
+        from;
+        amount1k;
+    }
+
+    /// @dev DEV-45: route fee in 1kUSD-notional to fee router (stub, no-op for now)
+    function _routeFee(address asset, uint256 feeAmount1k) internal {
+        // DEV-45.B: integrate IFeeRouterV2.route(MODULE_PSM, asset, feeAmount1k)
+        asset;
+        feeAmount1k;
+    }
+
 }
