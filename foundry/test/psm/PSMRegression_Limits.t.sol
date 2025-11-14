@@ -13,10 +13,10 @@ import {MockRegistry} from "../../../contracts/mocks/MockRegistry.sol";
 contract PSMRegression_Limits is Test {
     PegStabilityModule psm;
     PSMLimits limits;
-    OneKUSD oneKUSD;
-    CollateralVault vault;
+    MockOneKUSD oneKUSD;
+    MockVault vault;
     ISafetyAutomata auto_;
-    ParameterRegistry reg;
+    MockRegistry reg;
 
     address user = address(0xBEEF);
 
