@@ -16,8 +16,10 @@ import {IPSM} from "../interfaces/IPSM.sol";
 import {IPSMEvents} from "../interfaces/IPSMEvents.sol";
 
 /// @title PegStabilityModule
-/// @notice Canonical PSM-Fassade für 1kUSD; DEV-44-Version mit Price/Limits-Stubs.
-/// @dev Preis-Mathematik bleibt für DEV-44 noch 1:1, aber ist bereits über Helper zentralisiert.
+/// @notice Canonical PSM-facade for 1kUSD; DEV-44 version with real price-normalized
+///         notional amounts for limits/quotes but without final asset transfers.
+/// @dev All notional flows are expressed in 1kUSD (18 decimals) and fed into PSMLimits.
+///      Actual token/vault flows are intentionally stubbed and follow in DEV-45.
 contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard {
     using SafeERC20 for IERC20;
 
@@ -66,90 +68,122 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
     }
 
     // -------------------------------------------------------------
-    // 🔧 Admin-Setter für Limits & Oracle
+    // 🔧 Oracle / Limits configuration
     // -------------------------------------------------------------
 
+    /// @notice Admin setter for PSMLimits contract used for daily/tx caps.
     function setLimits(address _limits) external onlyRole(ADMIN_ROLE) {
         limits = PSMLimits(_limits);
     }
 
+    /// @notice Admin setter for OracleAggregator used for PSM pricing.
     function setOracle(address _oracle) external onlyRole(ADMIN_ROLE) {
         oracle = IOracleAggregator(_oracle);
     }
 
     // -------------------------------------------------------------
-    // 🛡 Oracle-Health & Limits (noch ohne echte Price-Mathe)
+    // 🔧 Internal helpers — oracle & limits
     // -------------------------------------------------------------
 
-    /// @dev DEV-44 stub: nur Health-Check, keine Preis-Mathematik.
-    function _requireOracleHealthy(address token) internal view {
+    /// @dev Light health gate: ensures oracle is operational if configured.
+    function _requireOracleHealthy(address /*token*/) internal view {
         if (address(oracle) == address(0)) {
-            // Wenn kein Oracle gesetzt ist, blockieren wir (später ggf. konfigurierbar).
+            // No oracle configured → do not block swaps (bootstrap/dev mode).
             return;
         }
-        IOracleAggregator.Price memory p = oracle.getPrice(token);
-        require(p.healthy, "PSM: oracle unhealthy");
-        // Stale-Handling kann in DEV-45 ergänzt werden.
+        require(oracle.isOperational(), "PSM: oracle not operational");
     }
 
-    /// @dev DEV-44 stub: Limits nur, wenn PSMLimits gesetzt ist.
-    ///      notionalAmount ist bereits in "1kUSD-Notional" gedacht (aktuell 1:1).
-    function _enforceLimits(uint256 notionalAmount) internal {
+    /// @dev Enforce PSMLimits using 1kUSD notional amounts.
+    function _enforceLimits(uint256 notional1k) internal {
         if (address(limits) == address(0)) {
+            // No limits configured → no caps enforced.
             return;
         }
-        limits.checkAndUpdate(notionalAmount);
+        limits.checkAndUpdate(notional1k);
     }
 
     // -------------------------------------------------------------
-    // 🔧 DEV-44 Price & Decimals Helpers (Skeletons, noch 1:1-Stub)
+    // 🔧 Internal helpers — price & normalization
     // -------------------------------------------------------------
 
-    /// @notice Convert token amount to 1kUSD notional (18 decimals)
-    /// @dev DEV-44: aktuell 1:1-Stub; echte Mathe folgt in DEV-45.
-    function _tokenToStableNotional(
-        address token,
-        uint256 amountIn
-    )
-        internal
-        view
-        returns (
-            uint256 notional1k,
-            IOracleAggregator.Price memory p,
-            uint8 tokenDecimals
-        )
-    {
-        token; // silence unused for jetzt
-        tokenDecimals = 18; // Annahme: 18 Decimals, bis echte Metadaten-Logik kommt
-
-        if (address(oracle) != address(0)) {
-            p = oracle.getPrice(token);
+    /// @notice Fetch price for an asset from the oracle.
+    /// @dev Returns (price, decimals) where `price` is scaled by `decimals`.
+    function _getPrice(address asset) internal view returns (uint256 price, uint8 priceDecimals) {
+        if (address(oracle) == address(0)) {
+            // Fallback: 1.0 * 10^18 (1 token == 1 1kUSD) for tests/bootstrap.
+            return (1e18, 18);
         }
 
-        // DEV-44: Noch 1:1-Mapping, damit Verhalten unverändert bleibt.
-        notional1k = amountIn;
+        IOracleAggregator.Price memory p = oracle.getPrice(asset);
+        require(p.healthy, "PSM: oracle unhealthy");
+        require(p.price > 0, "PSM: bad price");
+
+        return (uint256(p.price), p.decimals);
     }
 
-    /// @notice Convert 1kUSD (18 dec) to token amount
-    /// @dev DEV-44: aktuell 1:1-Stub; echte Mathe folgt in DEV-45.
-    function _stableToTokenAmount(
-        address token,
+    /// @notice Normalize a token amount into 1kUSD units using oracle price.
+    /// @param amountToken Amount of collateral token in its smallest unit.
+    /// @param tokenDecimals ERC-20 decimals for the collateral token.
+    /// @param price Oracle price (scaled by priceDecimals).
+    /// @param priceDecimals Decimals for price.
+    /// @dev For DEV-44 we assume the oracle price is already aligned such that
+    ///      1 token (10^tokenDecimals units) * price / 10^priceDecimals yields
+    ///      a 1kUSD value with 18 decimals. This keeps math simple and audit-able.
+    function _normalizeTo1kUSD(
+        uint256 amountToken,
+        uint8 tokenDecimals,
+        uint256 price,
+        uint8 priceDecimals
+    ) internal pure returns (uint256 amount1k) {
+        // Convert token amount to a 18-decimal representation:
+        // amountToken (tokenDecimals) → scaled to 18
+        if (tokenDecimals < 18) {
+            uint8 diff = 18 - tokenDecimals;
+            amountToken = amountToken * (10 ** diff);
+        } else if (tokenDecimals > 18) {
+            uint8 diff = tokenDecimals - 18;
+            amountToken = amountToken / (10 ** diff);
+        }
+
+        // Apply price: (amountToken * price) / 10^priceDecimals
+        uint256 scale = 10 ** uint256(priceDecimals);
+        amount1k = (amountToken * price) / scale;
+    }
+
+    /// @notice Denormalize a 1kUSD amount back into token units using oracle price.
+    /// @param amount1k Amount in 1kUSD units (18 decimals).
+    /// @param tokenDecimals ERC-20 decimals for the collateral token.
+    /// @param price Oracle price (scaled by priceDecimals).
+    /// @param priceDecimals Decimals for price.
+    function _normalizeFrom1kUSD(
         uint256 amount1k,
-        IOracleAggregator.Price memory p,
-        uint8 tokenDecimals
+        uint8 tokenDecimals,
+        uint256 price,
+        uint8 priceDecimals
     ) internal pure returns (uint256 amountToken) {
-        token;
-        p;
-        tokenDecimals;
-        amountToken = amount1k;
+        // Reverse of _normalizeTo1kUSD:
+        // tokenAmount18 = (amount1k * 10^priceDecimals) / price
+        uint256 scale = 10 ** uint256(priceDecimals);
+        uint256 tokenAmount18 = (amount1k * scale) / price;
+
+        if (tokenDecimals < 18) {
+            uint8 diff = 18 - tokenDecimals;
+            amountToken = tokenAmount18 / (10 ** diff);
+        } else if (tokenDecimals > 18) {
+            uint8 diff = tokenDecimals - 18;
+            amountToken = tokenAmount18 * (10 ** diff);
+        } else {
+            amountToken = tokenAmount18;
+        }
     }
 
-    /// @notice Compute mint-side swap (token → 1kUSD)
-    /// @dev DEV-44: nutzt Notional + Fee-Berechnung, aber noch ohne echte Preis-Skalierung.
+    /// @notice Compute mint-side swap (token → 1kUSD) in notional terms.
     function _computeSwapTo1kUSD(
         address tokenIn,
         uint256 amountIn,
-        uint16 feeBps
+        uint16 feeBps,
+        uint8 tokenInDecimals
     )
         internal
         view
@@ -159,25 +193,23 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
             uint256 net1k
         )
     {
-        IOracleAggregator.Price memory p;
-        uint8 tokenDecimals;
-        (notional1k, p, tokenDecimals) = _tokenToStableNotional(tokenIn, amountIn);
+        if (amountIn == 0) {
+            return (0, 0, 0);
+        }
 
-        // simple BPS-Fee auf das Notional
+        (uint256 px, uint8 pxDec) = _getPrice(tokenIn);
+        notional1k = _normalizeTo1kUSD(amountIn, tokenInDecimals, px, pxDec);
+
         fee1k = (notional1k * feeBps) / 10_000;
         net1k = notional1k - fee1k;
-
-        // aktuell ungenutzt, bleiben aber für DEV-45 erhalten
-        p;
-        tokenDecimals;
     }
 
-    /// @notice Compute redeem-side swap (1kUSD → token)
-    /// @dev DEV-44: nutzt Notional + Fee, Mapping zu Token-Menge bleibt 1:1.
+    /// @notice Compute redeem-side swap (1kUSD → token) in notional terms.
     function _computeSwapFrom1kUSD(
         address tokenOut,
         uint256 amountIn1k,
-        uint16 feeBps
+        uint16 feeBps,
+        uint8 tokenOutDecimals
     )
         internal
         view
@@ -187,19 +219,22 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
             uint256 netTokenOut
         )
     {
+        if (amountIn1k == 0) {
+            return (0, 0, 0);
+        }
+
+        (uint256 px, uint8 pxDec) = _getPrice(tokenOut);
+
+        // Notional in 1kUSD is the incoming amount itself.
         notional1k = amountIn1k;
         fee1k = (notional1k * feeBps) / 10_000;
         uint256 net1k = notional1k - fee1k;
 
-        IOracleAggregator.Price memory p;
-        uint8 tokenDecimals = 18;
-
-        uint256 amountToken = _stableToTokenAmount(tokenOut, net1k, p, tokenDecimals);
-        netTokenOut = amountToken;
+        netTokenOut = _normalizeFrom1kUSD(net1k, tokenOutDecimals, px, pxDec);
     }
 
     // -------------------------------------------------------------
-    // ✅ IPSM Interface Implementations (DEV-44, noch Stub-Ökonomie)
+    // ✅ IPSM Interface Implementations (price-aware, no transfers)
     // -------------------------------------------------------------
 
     /// @inheritdoc IPSM
@@ -214,26 +249,26 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         override
         whenNotPaused
         nonReentrant
-        returns (uint256 amountOut)
+        returns (uint256 netOut)
     {
         require(amountIn > 0, "PSM: amountIn=0");
-        to; // noch ungenutzt in DEV-44
-
         _requireOracleHealthy(tokenIn);
 
-        (uint256 notional1k, uint256 fee1k, uint256 net1k) =
-            _computeSwapTo1kUSD(tokenIn, amountIn, uint16(mintFeeBps));
+        // For DEV-44 we assume 18 decimals for tokenIn until registry wiring is added.
+        uint8 tokenInDecimals = 18;
 
-        // Limits auf dem 1kUSD-Notional anwenden (aktuell == amountIn)
+        (uint256 notional1k, uint256 fee1k, uint256 net1k) =
+            _computeSwapTo1kUSD(tokenIn, amountIn, uint16(mintFeeBps), tokenInDecimals);
+
         _enforceLimits(notional1k);
 
         if (net1k < minOut) revert InsufficientOut();
 
-        amountOut = net1k;
+        // DEV-44: no actual transfers/mints, only return net1k as simulated out.
+        netOut = net1k;
 
+        emit SwapTo1kUSD(msg.sender, tokenIn, notional1k, fee1k, net1k, block.timestamp);
         emit PSMSwapExecuted(msg.sender, tokenIn, amountIn, block.timestamp);
-        // IPSM-Events können in DEV-45 ergänzt werden, wenn Ökonomie fixiert ist.
-        fee1k; // silence unused for jetzt
     }
 
     /// @inheritdoc IPSM
@@ -248,24 +283,26 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         override
         whenNotPaused
         nonReentrant
-        returns (uint256 amountOut)
+        returns (uint256 netOut)
     {
         require(amountIn1k > 0, "PSM: amountIn=0");
-        to; // noch ungenutzt
-
         _requireOracleHealthy(tokenOut);
 
+        // For DEV-44 we assume 18 decimals for 1kUSD and derive tokenOut via oracle.
+        uint8 tokenOutDecimals = 18;
+
         (uint256 notional1k, uint256 fee1k, uint256 netTokenOut) =
-            _computeSwapFrom1kUSD(tokenOut, amountIn1k, uint16(redeemFeeBps));
+            _computeSwapFrom1kUSD(tokenOut, amountIn1k, uint16(redeemFeeBps), tokenOutDecimals);
 
         _enforceLimits(notional1k);
 
         if (netTokenOut < minOut) revert InsufficientOut();
 
-        amountOut = netTokenOut;
+        // DEV-44: no actual burns/withdrawals, only return net token amount.
+        netOut = netTokenOut;
 
+        emit SwapFrom1kUSD(msg.sender, tokenOut, notional1k, fee1k, netTokenOut, block.timestamp);
         emit PSMSwapExecuted(msg.sender, tokenOut, amountIn1k, block.timestamp);
-        fee1k; // silence unused
     }
 
     /// @inheritdoc IPSM
@@ -273,7 +310,7 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         address tokenIn,
         uint256 amountIn,
         uint16 feeBps,
-        uint8 /*tokenInDecimals*/
+        uint8 tokenInDecimals
     )
         external
         view
@@ -281,7 +318,7 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         returns (QuoteOut memory q)
     {
         (uint256 notional1k, uint256 fee1k, uint256 net1k) =
-            _computeSwapTo1kUSD(tokenIn, amountIn, feeBps);
+            _computeSwapTo1kUSD(tokenIn, amountIn, feeBps, tokenInDecimals);
 
         q = QuoteOut({
             grossOut: notional1k,
@@ -296,7 +333,7 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         address tokenOut,
         uint256 amountIn1k,
         uint16 feeBps,
-        uint8 /*tokenOutDecimals*/
+        uint8 tokenOutDecimals
     )
         external
         view
@@ -304,13 +341,13 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         returns (QuoteOut memory q)
     {
         (uint256 notional1k, uint256 fee1k, uint256 netTokenOut) =
-            _computeSwapFrom1kUSD(tokenOut, amountIn1k, feeBps);
+            _computeSwapFrom1kUSD(tokenOut, amountIn1k, feeBps, tokenOutDecimals);
 
         q = QuoteOut({
             grossOut: notional1k,
             fee: fee1k,
             netOut: netTokenOut,
-            outDecimals: 18
+            outDecimals: tokenOutDecimals
         });
     }
 
