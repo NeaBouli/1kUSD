@@ -11,9 +11,9 @@ import {OneKUSD} from "./OneKUSD.sol";
 import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
 import {ParameterRegistry} from "./ParameterRegistry.sol";
 import {IPSM} from "../interfaces/IPSM.sol";
-import {IPSMEvents} from "../interfaces/IPSMEvents.sol"; from "../interfaces/IPSM.sol";
+import {IPSMEvents} from "../interfaces/IPSMEvents.sol"
 
-contract PegStabilityModule is IPSM, AccessControl, ReentrancyGuard {
+contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard {
     bytes32 public constant MODULE_PSM = keccak256("PSM");
 
     modifier whenNotSafetyPaused() {
@@ -45,6 +45,14 @@ contract PegStabilityModule is IPSM, AccessControl, ReentrancyGuard {
     }
 
     constructor(address admin, address _oneKUSD, address _vault, address _auto, address _reg) {
+        _grantRole(DEFAULT_ADMIN_ROLE, admin);
+        _grantRole(ADMIN_ROLE, admin);
+        oneKUSD = OneKUSD(_oneKUSD);
+        vault = CollateralVault(_vault);
+        safetyAutomata = ISafetyAutomata(_auto);
+        registry = ParameterRegistry(_reg);
+    }
+
 
     function _requireOracleHealthy(address token) internal view {
         /* DEV-43 stub: only health check, no price math yet */
@@ -69,52 +77,10 @@ contract PegStabilityModule is IPSM, AccessControl, ReentrancyGuard {
     // ✅ Interface Implementations
     // -------------------------------------------------------------
 
-    function PSMSwapExecuted(msg.sender, tokenIn, amountIn, block.timestamp);
-        swapTo1kUSD(
-        _requireOracleHealthy(tokenIn);
-        _enforceLimits(tokenIn, amountIn);
-        address tokenIn,
-        uint256 amountIn,
-        address to,
-        uint256 minOut,
-        uint256 /*deadline*/
-    )
-        external
-        override
-        whenNotPaused
-        nonReentrant
-        returns (uint256 netOut)
-    {
-        IERC20(tokenIn).safeTransferFrom(msg.sender, address(vault), amountIn);
-        uint256 fee = (amountIn * mintFeeBps) / 10_000;
-        netOut = amountIn - fee;
-        if (netOut < minOut) revert InsufficientOut();
-        oneKUSD.mint(to, netOut);
         emit SwapTo1kUSD(msg.sender, tokenIn, amountIn, fee, netOut, block.timestamp);
         return netOut;
     }
 
-    function PSMSwapExecuted(msg.sender, tokenOut, amountIn, block.timestamp);
-        swapFrom1kUSD(
-        _requireOracleHealthy(tokenOut);
-        _enforceLimits(tokenOut, amountIn);
-        address tokenOut,
-        uint256 amountIn1k,
-        address to,
-        uint256 minOut,
-        uint256 /*deadline*/
-    ) external override whenNotPaused nonReentrant returns (uint256 netOut) {
-        oneKUSD.burn(msg.sender, amountIn1k);
-        uint256 fee = (amountIn1k * redeemFeeBps) / 10_000;
-        netOut = amountIn1k - fee;
-        if (netOut < minOut) revert InsufficientOut();
-        vault.withdraw(tokenOut, to, netOut, keccak256("PSM_REDEEM"));
-        emit SwapFrom1kUSD(msg.sender, tokenOut, amountIn1k, fee, netOut, block.timestamp);
-        return netOut;
-    }
-
-    function quoteTo1kUSD(address tokenIn, uint256 amountIn, uint16 feeBps, uint8 tokenInDecimals)
-        external
         view
         override
         returns (QuoteOut memory q)
