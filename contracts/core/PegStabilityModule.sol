@@ -46,6 +46,13 @@ contract PegStabilityModule is IPSM, AccessControl, ReentrancyGuard {
 
     constructor(address admin, address _oneKUSD, address _vault, address _auto, address _reg) {
 
+    function _requireOracleHealthy(address token) internal view {
+        /* DEV-43 stub: only health check, no price math yet */
+        (, bool healthy, bool stale, ) = oracle.getPrice(token);
+        require(healthy, "PSM: oracle unhealthy");
+        require(!stale, "PSM: oracle price stale");
+    }
+
     function _enforceLimits(address token, uint256 amount) internal {
         uint256 notional = amount; /* stub – DEV-44 real math */
         limits.checkAndUpdate(notional);
@@ -64,6 +71,7 @@ contract PegStabilityModule is IPSM, AccessControl, ReentrancyGuard {
 
     function PSMSwapExecuted(msg.sender, tokenIn, amountIn, block.timestamp);
         swapTo1kUSD(
+        _requireOracleHealthy(tokenIn);
         _enforceLimits(tokenIn, amountIn);
         address tokenIn,
         uint256 amountIn,
@@ -88,6 +96,7 @@ contract PegStabilityModule is IPSM, AccessControl, ReentrancyGuard {
 
     function PSMSwapExecuted(msg.sender, tokenOut, amountIn, block.timestamp);
         swapFrom1kUSD(
+        _requireOracleHealthy(tokenOut);
         _enforceLimits(tokenOut, amountIn);
         address tokenOut,
         uint256 amountIn1k,
