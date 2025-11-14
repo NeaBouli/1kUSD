@@ -64,6 +64,7 @@ contract PegStabilityModule is IPSM, AccessControl, ReentrancyGuard {
 
     function PSMSwapExecuted(msg.sender, tokenIn, amountIn, block.timestamp);
         swapTo1kUSD(
+        _enforceLimits(tokenIn, amountIn);
         address tokenIn,
         uint256 amountIn,
         address to,
@@ -87,6 +88,7 @@ contract PegStabilityModule is IPSM, AccessControl, ReentrancyGuard {
 
     function PSMSwapExecuted(msg.sender, tokenOut, amountIn, block.timestamp);
         swapFrom1kUSD(
+        _enforceLimits(tokenOut, amountIn);
         address tokenOut,
         uint256 amountIn1k,
         address to,
