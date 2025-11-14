@@ -10,6 +10,8 @@ import {CollateralVault} from "./CollateralVault.sol";
 import {OneKUSD} from "./OneKUSD.sol";
 import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
 import {ParameterRegistry} from "./ParameterRegistry.sol";
+import {PSMLimits} from "../psm/PSMLimits.sol";
+import {IOracleAggregator} from "../interfaces/IOracleAggregator.sol";
 import {IPSM} from "../interfaces/IPSM.sol";
 import {IPSMEvents} from "../interfaces/IPSMEvents.sol"
 
@@ -28,6 +30,8 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
     CollateralVault public vault;
     ISafetyAutomata public safetyAutomata;
     ParameterRegistry public registry;
+    PSMLimits public limits;
+    IOracleAggregator public oracle;
 
     uint256 public mintFeeBps;
     uint256 public redeemFeeBps;
@@ -55,10 +59,9 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
 
 
     function _requireOracleHealthy(address token) internal view {
-        /* DEV-43 stub: only health check, no price math yet */
-        (, bool healthy, bool stale, ) = oracle.getPrice(token);
-        require(healthy, "PSM: oracle unhealthy");
-        require(!stale, "PSM: oracle price stale");
+        // DEV-43 stub: only health check, no price math yet
+        IOracleAggregator.Price memory p = oracle.getPrice(token);
+        require(p.healthy, "PSM: oracle unhealthy");
     }
 
     function _enforceLimits(address token, uint256 amount) internal {
@@ -111,3 +114,56 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         emit FeesUpdated(mintFee, redeemFee);
     }
 }
+
+    /// @inheritdoc IPSM
+    function swapTo1kUSD(
+        address tokenIn,
+        uint256 amountIn,
+        address to,
+        uint256 minOut,
+        uint256 /*deadline*/
+    )
+        external
+        override
+        whenNotSafetyPaused
+        nonReentrant
+        returns (uint256 amountOut)
+    {
+        require(amountIn > 0, "PSM: amountIn=0");
+
+        _requireOracleHealthy(tokenIn);
+        _enforceLimits(tokenIn, amountIn);
+
+        // DEV-43 stub: noch keine echte Mint/Transfer-Logik
+        // amountOut ist aktuell 1:1 Stub – DEV-44 fügt Preis- & Transferlogik hinzu.
+        amountOut = amountIn;
+        if (amountOut < minOut) revert InsufficientOut();
+
+        emit PSMSwapExecuted(msg.sender, tokenIn, amountIn, block.timestamp);
+    }
+
+    /// @inheritdoc IPSM
+    function swapFrom1kUSD(
+        address tokenOut,
+        uint256 amountIn,
+        address to,
+        uint256 minOut,
+        uint256 /*deadline*/
+    )
+        external
+        override
+        whenNotSafetyPaused
+        nonReentrant
+        returns (uint256 amountOut)
+    {
+        require(amountIn > 0, "PSM: amountIn=0");
+
+        _requireOracleHealthy(tokenOut);
+        _enforceLimits(tokenOut, amountIn);
+
+        // DEV-43 stub: symmetrisches 1:1-Verhalten
+        amountOut = amountIn;
+        if (amountOut < minOut) revert InsufficientOut();
+
+        emit PSMSwapExecuted(msg.sender, tokenOut, amountIn, block.timestamp);
+    }
