@@ -5,14 +5,14 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "../core/OracleAggregator.sol";
-import "../router/FeeRouterV2.sol";
+import "../router/IFeeRouterV2.sol";
 
 /// @title PSMSwapCore — Peg Stability Swap Logic (core)
 /// @notice DEV-32a.6: Use low-level call for FeeRouter to avoid EvmError:Revert in tests
 contract PSMSwapCore is ReentrancyGuard, Pausable {
     address public dao;
     address public stableToken;
-    FeeRouterV2 public feeRouter;
+    IFeeRouterV2 public feeRouter;
     OracleAggregator public oracle;
     uint16 public feeBps;
     bytes32 private constant MODULE_ID = keccak256("PSM");
@@ -25,7 +25,7 @@ contract PSMSwapCore is ReentrancyGuard, Pausable {
     constructor(address _dao, address _oracle, address _feeRouter, address _stable) {
         dao = _dao;
         oracle = OracleAggregator(_oracle);
-        feeRouter = FeeRouterV2(_feeRouter);
+        feeRouter = IFeeRouterV2(_feeRouter);
         stableToken = _stable;
     }
 
@@ -44,10 +44,7 @@ contract PSMSwapCore is ReentrancyGuard, Pausable {
         IERC20(token).transferFrom(msg.sender, address(this), amountIn);
 
         // Low-level call to FeeRouter — ignore failure in mock test env
-        (bool ok, ) = address(feeRouter).call(
-            abi.encodeWithSignature("route(bytes32,address,uint256)", MODULE_ID, token, amountIn)
-        );
-        ok; // silence warnings
+        feeRouter.route(MODULE_ID, token, amountIn);
         return true;
     }
 }
