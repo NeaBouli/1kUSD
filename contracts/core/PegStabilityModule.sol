@@ -11,6 +11,7 @@ import {OneKUSD} from "./OneKUSD.sol";
 import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
 import {ParameterRegistry} from "./ParameterRegistry.sol";
 import {IPSM} from "../interfaces/IPSM.sol";
+import {IPSMEvents} from "../interfaces/IPSMEvents.sol"; from "../interfaces/IPSM.sol";
 
 contract PegStabilityModule is IPSM, AccessControl, ReentrancyGuard {
     using SafeERC20 for IERC20;
@@ -50,7 +51,8 @@ contract PegStabilityModule is IPSM, AccessControl, ReentrancyGuard {
     // ✅ Interface Implementations
     // -------------------------------------------------------------
 
-    function swapTo1kUSD(
+    function PSMSwapExecuted(msg.sender, tokenIn, amountIn, block.timestamp);
+        swapTo1kUSD(
         address tokenIn,
         uint256 amountIn,
         address to,
@@ -72,7 +74,8 @@ contract PegStabilityModule is IPSM, AccessControl, ReentrancyGuard {
         return netOut;
     }
 
-    function swapFrom1kUSD(
+    function PSMSwapExecuted(msg.sender, tokenOut, amountIn, block.timestamp);
+        swapFrom1kUSD(
         address tokenOut,
         uint256 amountIn1k,
         address to,
