@@ -12,7 +12,6 @@ import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator
 contract FixedOracle is IOracleAggregator {
     Price private _p;
 
-    function setPrice(int256 price, uint8 decimals, bool healthy) external {
         _p = Price({price: price, decimals: decimals, healthy: healthy, updatedAt: block.timestamp});
     }
 
@@ -106,9 +105,10 @@ contract PSMRegression_Flows is Test {
     address internal user = address(0xBEEF);
 
     function setUp() public {
-        // DEV-45: OracleAggregator mock price setupn
+        // DEV-45 clean oracle setupn
         vm.prank(admin);n
         oracle.setPriceMock(address(collateral), int256(1e18), 18, true);n
+        vm.prank(admin);
         // --- 1) Core-Components ---
         oneKUSD = new OneKUSD(admin);
         collateral = new MockERC20("COLL", "COLL", 18);
