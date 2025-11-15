@@ -32,6 +32,7 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
     ParameterRegistry public registry;
     PSMLimits public limits;
     IOracleAggregator public oracle;
+    IFeeRouterV2 public feeRouter;
 
     uint256 public mintFeeBps;
     uint256 public redeemFeeBps;
@@ -368,40 +369,50 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
     // -------------------------------------------------------------
 
     /// @dev DEV-45: pull collateral from user into vault (stub, no-op for now)
+    /// @dev DEV-45: pull collateral from user into CollateralVault
     function _pullCollateral(address tokenIn, address from, uint256 amountIn) internal {
-        // DEV-45.B: implement ERC-20 transfer + vault deposit
-        tokenIn;
-        from;
-        amountIn;
+        if (amountIn == 0) return;
+        // Transfer Token vom Nutzer in den Vault und registrieren
+        IERC20(tokenIn).safeTransferFrom(from, address(vault), amountIn);
+        vault.deposit(tokenIn, from, amountIn);
     }
+
 
     /// @dev DEV-45: push collateral from vault to user (stub, no-op for now)
+    /// @dev DEV-45: push collateral from CollateralVault to user
     function _pushCollateral(address tokenOut, address to, uint256 amountOut) internal {
-        // DEV-45.B: implement vault withdraw + ERC-20 transfer
-        tokenOut;
-        to;
-        amountOut;
+        if (amountOut == 0) return;
+        // Reason-Tag für Audits / Off-Chain-Tools
+        bytes32 reason = keccak256("PSM_REDEEM");
+        vault.withdraw(tokenOut, to, amountOut, reason);
     }
+
 
     /// @dev DEV-45: mint 1kUSD to recipient (stub, no-op for now)
+    /// @dev DEV-45: mint 1kUSD to recipient
     function _mint1kUSD(address to, uint256 amount1k) internal {
-        // DEV-45.B: implement OneKUSD.mint(to, amount1k)
-        to;
-        amount1k;
+        if (amount1k == 0) return;
+        oneKUSD.mint(to, amount1k);
     }
+
 
     /// @dev DEV-45: burn 1kUSD from sender (stub, no-op for now)
+    /// @dev DEV-45: burn 1kUSD from sender
     function _burn1kUSD(address from, uint256 amount1k) internal {
-        // DEV-45.B: implement OneKUSD.burnFrom(from, amount1k) or equivalent
-        from;
-        amount1k;
+        if (amount1k == 0) return;
+        oneKUSD.burnFrom(from, amount1k);
     }
 
+
     /// @dev DEV-45: route fee in 1kUSD-notional to fee router (stub, no-op for now)
+    /// @dev DEV-45: route fee on 1kUSD-notional basis via FeeRouterV2
     function _routeFee(address asset, uint256 feeAmount1k) internal {
-        // DEV-45.B: integrate IFeeRouterV2.route(MODULE_PSM, asset, feeAmount1k)
-        asset;
-        feeAmount1k;
+        if (feeAmount1k == 0) return;
+        if (address(feeRouter) == address(0)) return;
+        // "asset" = Collateral-Identifikator (für Routing-Accounting),
+        // "feeAmount1k" = 1kUSD-notional Betrag
+        feeRouter.route(MODULE_PSM, asset, feeAmount1k);
     }
+
 
 }
