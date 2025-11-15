@@ -7,12 +7,18 @@ import {PegStabilityModule} from "../../../contracts/core/PegStabilityModule.sol
 import {OneKUSD} from "../../../contracts/core/OneKUSD.sol";
 import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
 
-/// @dev Simple fixed oracle used for PSM flow regression.
-///      Returns the same price for all assets; enough for DEV-45 tests.
+
+/// @dev Simple fixed oracle for DEV-45 regression tests
 contract FixedOracle is IOracleAggregator {
     Price private _p;
 
-        _p = Price({price: price, decimals: decimals, healthy: healthy, updatedAt: block.timestamp});
+    function setPrice(int256 price, uint8 decimals, bool healthy) external {
+        _p = Price({
+            price: price,
+            decimals: decimals,
+            healthy: healthy,
+            updatedAt: block.timestamp
+        });
     }
 
     function getPrice(address /*asset*/) external view returns (Price memory p) {
@@ -23,7 +29,6 @@ contract FixedOracle is IOracleAggregator {
         return _p.healthy;
     }
 }
-
 /// @dev Minimal ERC20 for collateral testing.
 ///      Implements standard ERC20-Signaturen, reicht für SafeERC20-Aufrufe im PSM.
 contract MockERC20 {
