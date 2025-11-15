@@ -106,9 +106,11 @@ contract PSMRegression_Flows is Test {
     address internal user = address(0xBEEF);
 
     function setUp() public {
-        // DEV-45: Correct oracle price for notional mint mathn
+        // DEV-45: Correct oracle mock initializationn
         vm.prank(admin);n
         oracle.setPriceMock(collateral, int256(1e18), 18, true);n
+        // DEV-45: Correct oracle price for notional mint mathn
+        vm.prank(admin);n
         // DEV-45: Set oracle price so swapTo1kUSD produces nonzero notionaln
         vm.prank(admin);n
         // DEV-45: Set oracle price so swapTo1kUSD produces nonzero notionaln
@@ -141,7 +143,6 @@ contract PSMRegression_Flows is Test {
         oneKUSD.setBurner(address(psm), true);
 
         // --- 3) Oracle: 1:1 Preis, 18 Decimals, gesund ---
-        oracle.setPrice(1e18, 18, true);
 
         // --- 4) User-Funding ---
         uint256 initialCollateral = 1_000 ether;
