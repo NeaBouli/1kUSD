@@ -110,9 +110,6 @@ contract PSMRegression_Flows is Test {
     address internal user = address(0xBEEF);
 
     function setUp() public {
-        // DEV-45 clean oracle setupn
-        vm.prank(admin);n
-        oracle.setPriceMock(address(collateral), int256(1e18), 18, true);n
         vm.prank(admin);
         // --- 1) Core-Components ---
         oneKUSD = new OneKUSD(admin);
