@@ -6,10 +6,12 @@ import "forge-std/Test.sol";
 import {PegStabilityModule} from "../../../contracts/core/PegStabilityModule.sol";
 import {OneKUSD} from "../../../contracts/core/OneKUSD.sol";
 import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
+import {OracleAggregator} from "../../../contracts/oracle/OracleAggregator.sol";
 
 
 /// @dev Simple fixed oracle for DEV-45 regression tests
 contract FixedOracle is IOracleAggregator {
+import {OracleAggregator} from "../../../contracts/oracle/OracleAggregator.sol";
     Price private _p;
 
     function setPrice(int256 price, uint8 decimals, bool healthy) external {
