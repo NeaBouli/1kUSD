@@ -115,6 +115,7 @@ contract PSMRegression_Flows is Test {
         oneKUSD = new OneKUSD(admin);
         collateral = new MockERC20("COLL", "COLL", 18);
         oracle = new OracleAggregator();
+        oracle.setPriceMock(address(collateral), int256(1e18), 18, true);
 
         // Vault / Safety / Registry im PSM bleiben für diesen Test neutral (address(0)).
         // Die Asset-Flow-Logik arbeitet nur mit ERC20-Transfers + 1kUSD-Mint/Burn.
