@@ -128,7 +128,9 @@ contract PSMRegression_Flows is Test {
         psm.setFees(100, 200);
 
         // 1kUSD-Rollen: PSM darf minten & burnen
+        vm.prank(admin);
         oneKUSD.setMinter(address(psm), true);
+        vm.prank(admin);
         oneKUSD.setBurner(address(psm), true);
 
         // --- 3) Oracle: 1:1 Preis, 18 Decimals, gesund ---
