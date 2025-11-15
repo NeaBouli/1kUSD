@@ -12,7 +12,7 @@ import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
 import {ParameterRegistry} from "./ParameterRegistry.sol";
 import {PSMLimits} from "../psm/PSMLimits.sol";
 import {IOracleAggregator} from "../interfaces/IOracleAggregator.sol";
-import {IPSM} from "../interfaces/IPSM.sol";
+import {IFeeRouterV2} from "../router/IFeeRouterV2.sol";import {IPSM} from "../interfaces/IPSM.sol";
 import {IPSMEvents} from "../interfaces/IPSMEvents.sol";
 
 /// @title PegStabilityModule
