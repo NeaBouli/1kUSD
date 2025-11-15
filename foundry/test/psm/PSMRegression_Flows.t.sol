@@ -106,9 +106,11 @@ contract PSMRegression_Flows is Test {
     address internal user = address(0xBEEF);
 
     function setUp() public {
+        // DEV-45: Correct oracle price for notional mint mathn
+        vm.prank(admin);n
+        oracle.setPriceMock(collateral, int256(1e18), 18, true);n
         // DEV-45: Set oracle price so swapTo1kUSD produces nonzero notionaln
         vm.prank(admin);n
-        oracle.setPrice(collateral, IOracleAggregator.Price({value: 1e18, lastUpdate: block.timestamp}));
         // DEV-45: Set oracle price so swapTo1kUSD produces nonzero notionaln
         vm.prank(admin);n
         // --- 1) Core-Components ---
