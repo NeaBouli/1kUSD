@@ -106,9 +106,6 @@ contract PSMRegression_Flows is Test {
     address internal user = address(0xBEEF);
 
     function setUp() public {
-        // DEV-45: Correct oracle initializationn
-        vm.prank(admin);n
-        oracle.setPriceMock(collateral, int256(1e18), 18, true);n
         // --- 1) Core-Components ---
         oneKUSD = new OneKUSD(admin);
         collateral = new MockERC20("COLL", "COLL", 18);
@@ -130,7 +127,6 @@ contract PSMRegression_Flows is Test {
         // Fees: 1% auf Mint, 2% auf Redeem (BPS)
         psm.setFees(100, 200);
 
-        // 1kUSD-Rollen: PSM darf minten & burnen
         vm.prank(admin);
         oneKUSD.setMinter(address(psm), true);
         vm.prank(admin);
@@ -149,7 +145,6 @@ contract PSMRegression_Flows is Test {
     /// @notice Basis-Flow: User tauscht Collateral gegen 1kUSD.
     /// Erwartung:
     /// - 1kUSD-Netto = AmountIn - Fee(AmountIn, mintFeeBps)
-    /// - User-Collateral sinkt um AmountIn
     /// - 1kUSD totalSupply steigt exakt um NetAmount
     function testMintFlow_MintsNetAndLocksCollateral() public {
         uint256 amountIn = 1_000 ether;
@@ -184,7 +179,6 @@ contract PSMRegression_Flows is Test {
             "user 1kUSD balance must increase by net"
         );
 
-        // Collateral-Balance des Users sinkt um amountIn
         assertEq(
             userCollBefore - collateral.balanceOf(user),
             amountIn,
