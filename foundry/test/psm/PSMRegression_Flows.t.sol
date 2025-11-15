@@ -7,19 +7,22 @@ import {PegStabilityModule} from "../../../contracts/core/PegStabilityModule.sol
 import {OneKUSD} from "../../../contracts/core/OneKUSD.sol";
 import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
 import {OracleAggregator} from "../../../contracts/core/OracleAggregator.sol";
-
+/// @dev Simple fixed oracle for DEV-45 regression tests
 contract FixedOracle is IOracleAggregator {
     Price private _p;
+
     function setPrice(int256 price, uint8 decimals, bool healthy) external {
-        _p = Price({
-            price: price,
-            decimals: decimals,
-            healthy: healthy,
-            updatedAt: block.timestamp
-        });
+        _p = Price({price: price, decimals: decimals, healthy: healthy, updatedAt: block.timestamp});
     }
 
-    function getPrice(address /*asset*/) external view returns (Price memory p) {
+    function getPrice(address) external view returns (Price memory p) {
+        p = _p;
+    }
+
+    function isOperational() external view returns (bool) {
+        return _p.healthy;
+    }
+}    function getPrice(address /*asset*/) external view returns (Price memory p) {
         p = _p;
     }
 
@@ -104,7 +107,6 @@ contract PSMRegression_Flows is Test {
 import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
 import {OracleAggregator} from "../../../contracts/core/OracleAggregator.sol";
     MockERC20 internal collateral;
-    OracleAggregator internal oracle;
 
     address internal admin = address(this);
     address internal user = address(0xBEEF);
@@ -116,7 +118,6 @@ import {OracleAggregator} from "../../../contracts/core/OracleAggregator.sol";
 import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
 import {OracleAggregator} from "../../../contracts/core/OracleAggregator.sol";
         collateral = new MockERC20("COLL", "COLL", 18);
-        oracle = new OracleAggregator();
         oracle.setPriceMock(address(collateral), int256(1e18), 18, true);
 
         // Vault / Safety / Registry im PSM bleiben für diesen Test neutral (address(0)).
