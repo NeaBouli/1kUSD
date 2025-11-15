@@ -100,16 +100,19 @@ contract PSMRegression_Flows is Test {
     PegStabilityModule internal psm;
     OneKUSD internal oneKUSD;
     MockERC20 internal collateral;
-    FixedOracle internal oracle;
+    OracleAggregator internal oracle;
 
     address internal admin = address(this);
     address internal user = address(0xBEEF);
 
     function setUp() public {
+        // DEV-45: OracleAggregator mock price setupn
+        vm.prank(admin);n
+        oracle.setPriceMock(address(collateral), int256(1e18), 18, true);n
         // --- 1) Core-Components ---
         oneKUSD = new OneKUSD(admin);
         collateral = new MockERC20("COLL", "COLL", 18);
-        oracle = new FixedOracle();
+        oracle = new OracleAggregator();
 
         // Vault / Safety / Registry im PSM bleiben für diesen Test neutral (address(0)).
         // Die Asset-Flow-Logik arbeitet nur mit ERC20-Transfers + 1kUSD-Mint/Burn.
