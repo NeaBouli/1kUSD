@@ -108,7 +108,9 @@ contract PSMRegression_Flows is Test {
     function setUp() public {
         // DEV-45: Set oracle price so swapTo1kUSD produces nonzero notionaln
         vm.prank(admin);n
-        oracle.setPrice(collateral, IOracleAggregator.Price({ value: 1e18, lastUpdate: block.timestamp }));n
+        oracle.setPrice(collateral, IOracleAggregator.Price({value: 1e18, lastUpdate: block.timestamp}));
+        // DEV-45: Set oracle price so swapTo1kUSD produces nonzero notionaln
+        vm.prank(admin);n
         // --- 1) Core-Components ---
         oneKUSD = new OneKUSD(admin);
         collateral = new MockERC20("COLL", "COLL", 18);
