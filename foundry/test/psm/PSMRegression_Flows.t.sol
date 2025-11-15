@@ -6,14 +6,10 @@ import "forge-std/Test.sol";
 import {PegStabilityModule} from "../../../contracts/core/PegStabilityModule.sol";
 import {OneKUSD} from "../../../contracts/core/OneKUSD.sol";
 import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
-import {OracleAggregator} from "../../../contracts/oracle/OracleAggregator.sol";
+import {OracleAggregator} from "../../../contracts/core/OracleAggregator.sol";
 
-
-/// @dev Simple fixed oracle for DEV-45 regression tests
 contract FixedOracle is IOracleAggregator {
-import {OracleAggregator} from "../../../contracts/oracle/OracleAggregator.sol";
     Price private _p;
-
     function setPrice(int256 price, uint8 decimals, bool healthy) external {
         _p = Price({
             price: price,
@@ -105,6 +101,8 @@ contract MockERC20 {
 contract PSMRegression_Flows is Test {
     PegStabilityModule internal psm;
     OneKUSD internal oneKUSD;
+import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
+import {OracleAggregator} from "../../../contracts/core/OracleAggregator.sol";
     MockERC20 internal collateral;
     OracleAggregator internal oracle;
 
@@ -115,6 +113,8 @@ contract PSMRegression_Flows is Test {
         vm.prank(admin);
         // --- 1) Core-Components ---
         oneKUSD = new OneKUSD(admin);
+import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
+import {OracleAggregator} from "../../../contracts/core/OracleAggregator.sol";
         collateral = new MockERC20("COLL", "COLL", 18);
         oracle = new OracleAggregator();
         oracle.setPriceMock(address(collateral), int256(1e18), 18, true);
