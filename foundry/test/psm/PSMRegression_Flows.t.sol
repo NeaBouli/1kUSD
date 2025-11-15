@@ -106,15 +106,9 @@ contract PSMRegression_Flows is Test {
     address internal user = address(0xBEEF);
 
     function setUp() public {
-        // DEV-45: Correct oracle mock initializationn
+        // DEV-45: Correct oracle initializationn
         vm.prank(admin);n
         oracle.setPriceMock(collateral, int256(1e18), 18, true);n
-        // DEV-45: Correct oracle price for notional mint mathn
-        vm.prank(admin);n
-        // DEV-45: Set oracle price so swapTo1kUSD produces nonzero notionaln
-        vm.prank(admin);n
-        // DEV-45: Set oracle price so swapTo1kUSD produces nonzero notionaln
-        vm.prank(admin);n
         // --- 1) Core-Components ---
         oneKUSD = new OneKUSD(admin);
         collateral = new MockERC20("COLL", "COLL", 18);
