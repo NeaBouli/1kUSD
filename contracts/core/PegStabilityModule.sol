@@ -400,7 +400,7 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
     /// @dev DEV-45: burn 1kUSD from sender
     function _burn1kUSD(address from, uint256 amount1k) internal {
         if (amount1k == 0) return;
-        oneKUSD.burnFrom(from, amount1k);
+        oneKUSD.burn(from, amount1k);
     }
 
 
