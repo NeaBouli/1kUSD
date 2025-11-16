@@ -28,10 +28,25 @@ contract PSMRegression_Flows is Test {
     address internal collateral = address(0xCA11);
 
     function setUp() public {
-        // placeholder; concrete wiring follows in next DEV-45 steps
+        // DEV-45: basic wiring of core components for PSM regression flows
+
+        // 1) Oracle mock with healthy 1:1 price
         oracle = new MockOracleAggregator();
         oracle.setPrice(int256(1e18), 18, true);
+
+        // 2) 1kUSD token (DAO as admin)
+        oneKUSD = new OneKUSD(dao);
+
+        // 3) Neutral handles for external modules (wired to address(0) for now)
+        vault = CollateralVault(address(0));
+        limits = PSMLimits(address(0));
+        safety = ISafetyAutomata(address(0));
+        feeRouter = IFeeRouterV2(address(0));
+
+        // 4) PSM instantiation + real flows will follow in later DEV-45 steps
     }
+
+
 
     function testPlaceholder() public {
         assertTrue(true);
