@@ -34,7 +34,6 @@ contract PSMRegression_Flows is Test {
         oracle.setPrice(int256(1e18), 18, true);
 
         // --- Vault / Limits / Safety (neutral for test) ---
-        vault = new MockVault();
         limits = PSMLimits(address(0));
         safety = ISafetyAutomata(address(0));
 
