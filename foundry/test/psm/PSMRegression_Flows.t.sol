@@ -29,7 +29,6 @@ contract FixedOracle is IOracleAggregator {
     function isOperational() external view returns (bool) {
         return _p.healthy;
     }
-}
 /// @dev Minimal ERC20 for collateral testing.
 ///      Implements standard ERC20-Signaturen, reicht für SafeERC20-Aufrufe im PSM.
 contract MockERC20 {
