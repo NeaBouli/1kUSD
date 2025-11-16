@@ -1,19 +1,18 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+#!/usr/bin/env python3
+from pathlib import Path
 
-import "forge-std/Test.sol";
+FILE = Path("foundry/test/psm/PSMRegression_Flows.t.sol")
+src = FILE.read_text()
 
-import {PegStabilityModule} from "../../../contracts/core/PegStabilityModule.sol";
-import {OneKUSD} from "../../../contracts/core/OneKUSD.sol";
-import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
-import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
-import {MockERC20} from "../mocks/MockERC20.sol";
-import {CollateralVault} from "../../../contracts/core/CollateralVault.sol";
-import {PSMLimits} from "../../../contracts/psm/PSMLimits.sol";
-import {ISafetyAutomata} from "../../../contracts/interfaces/ISafetyAutomata.sol";
-import {IFeeRouterV2} from "../../../contracts/router/IFeeRouterV2.sol";
+# --- 1) Extract header ---
+header_end = src.find("contract PSMRegression_Flows")
+if header_end == -1:
+    raise SystemExit("ERROR: Contract anchor not found")
 
+header = src[:header_end]
 
+# --- 2) Build new contract body ---
+body = """
 contract PSMRegression_Flows is Test {
     PegStabilityModule internal psm;
     OneKUSD internal oneKUSD;
@@ -86,3 +85,8 @@ contract PSMRegression_Flows is Test {
         assertTrue(true);
     }
 }
+"""
+
+# --- 3) Write file ---
+FILE.write_text(header + body)
+print("✓ FULL CONTRACT BODY REBUILT")
