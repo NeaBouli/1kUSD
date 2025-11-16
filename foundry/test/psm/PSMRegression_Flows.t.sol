@@ -18,7 +18,8 @@ import {IFeeRouterV2} from "../../../contracts/router/IFeeRouterV2.sol";
 contract PSMRegression_Flows is Test {
     PegStabilityModule internal psm;
     OneKUSD internal oneKUSD;
-    MockOracleAggregator internal oracle;
+import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
+import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
 import {MockERC20} from "../mocks/MockERC20.sol";
     CollateralVault internal vault;
     PSMLimits internal limits;
@@ -33,12 +34,13 @@ import {MockERC20} from "../mocks/MockERC20.sol";
         // DEV-45: basic wiring of core components for PSM regression flows
 
         // 1) Oracle mock with healthy 1:1 price
-        oracle = new MockOracleAggregator();
-import {MockERC20} from "../mocks/MockERC20.sol";
         oracle.setPrice(int256(1e18), 18, true);
 
         // 2) 1kUSD token (DAO as admin)
         oneKUSD = new OneKUSD(dao);
+import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
+import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
+import {MockERC20} from "../mocks/MockERC20.sol";
 
         // 3) Neutral handles for external modules (wired to address(0) for now)
         vault = CollateralVault(address(0));
@@ -57,14 +59,15 @@ import {MockERC20} from "../mocks/MockERC20.sol";
         );
 
         // Set PSM as minter/burner for OneKUSD
+import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
+import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
+import {MockERC20} from "../mocks/MockERC20.sol";
         vm.prank(dao);
         oneKUSD.setMinter(address(psm), true);
 
         vm.prank(dao);
         oneKUSD.setBurner(address(psm), true);
 
-        // Assign oracle (MockOracleAggregator)
-import {MockERC20} from "../mocks/MockERC20.sol";
         psm.setOracle(address(oracle));
 
     }
@@ -74,7 +77,6 @@ import {MockERC20} from "../mocks/MockERC20.sol";
     
     function testMintFlow_1to1() public {
         // 1) User erhält Collateral
-        MockERC20 collateralToken = new MockERC20("COL", "COL");
         collateralToken.mint(user, 1000e18);
 
         // 2) User genehmigt PSM
