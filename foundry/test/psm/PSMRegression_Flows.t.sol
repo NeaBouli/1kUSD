@@ -22,7 +22,6 @@ import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator
 import {MockOracleAggregator} from "../../mocks/MockOracleAggregator.sol";
     CollateralVault internal vault;
     PSMLimits internal limits;
-    IOracleAggregator internal oracle;
     ISafetyAutomata internal safety;
     IFeeRouterV2 internal feeRouter;
 
