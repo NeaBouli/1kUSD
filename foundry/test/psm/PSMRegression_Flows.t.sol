@@ -24,6 +24,7 @@ contract PSMRegression_Flows is Test {
     address internal dao = address(this);
     address internal user = address(0xBEEF);
     address internal collateral = address(0xCA11);
+    MockOracleAggregator internal oracle;
 
     function setUp() public {
         // DEV-45: Placeholder – konkrete Wiring/Mocks folgen in späteren Schritten.
