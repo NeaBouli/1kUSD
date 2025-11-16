@@ -5,8 +5,6 @@ import "forge-std/Test.sol";
 
 import {PegStabilityModule} from "../../../contracts/core/PegStabilityModule.sol";
 import {OneKUSD} from "../../../contracts/core/OneKUSD.sol";
-import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
-import {MockOracleAggregator} from "../../mocks/MockOracleAggregator.sol";
 import {CollateralVault} from "../../../contracts/core/CollateralVault.sol";
 import {PSMLimits} from "../../../contracts/psm/PSMLimits.sol";
 import {ISafetyAutomata} from "../../../contracts/interfaces/ISafetyAutomata.sol";
@@ -18,8 +16,6 @@ import {IFeeRouterV2} from "../../../contracts/router/IFeeRouterV2.sol";
 contract PSMRegression_Flows is Test {
     PegStabilityModule internal psm;
     OneKUSD internal oneKUSD;
-import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
-import {MockOracleAggregator} from "../../mocks/MockOracleAggregator.sol";
     CollateralVault internal vault;
     PSMLimits internal limits;
     ISafetyAutomata internal safety;
