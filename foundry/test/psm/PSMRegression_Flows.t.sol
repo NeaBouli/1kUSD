@@ -7,6 +7,7 @@ import {PegStabilityModule} from "../../../contracts/core/PegStabilityModule.sol
 import {OneKUSD} from "../../../contracts/core/OneKUSD.sol";
 import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
 import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
+import {MockERC20} from "../mocks/MockERC20.sol";
 import {CollateralVault} from "../../../contracts/core/CollateralVault.sol";
 import {PSMLimits} from "../../../contracts/psm/PSMLimits.sol";
 import {ISafetyAutomata} from "../../../contracts/interfaces/ISafetyAutomata.sol";
@@ -18,6 +19,7 @@ contract PSMRegression_Flows is Test {
     PegStabilityModule internal psm;
     OneKUSD internal oneKUSD;
     MockOracleAggregator internal oracle;
+import {MockERC20} from "../mocks/MockERC20.sol";
     CollateralVault internal vault;
     PSMLimits internal limits;
     ISafetyAutomata internal safety;
@@ -32,6 +34,7 @@ contract PSMRegression_Flows is Test {
 
         // 1) Oracle mock with healthy 1:1 price
         oracle = new MockOracleAggregator();
+import {MockERC20} from "../mocks/MockERC20.sol";
         oracle.setPrice(int256(1e18), 18, true);
 
         // 2) 1kUSD token (DAO as admin)
@@ -61,6 +64,7 @@ contract PSMRegression_Flows is Test {
         oneKUSD.setBurner(address(psm), true);
 
         // Assign oracle (MockOracleAggregator)
+import {MockERC20} from "../mocks/MockERC20.sol";
         psm.setOracle(address(oracle));
 
     }
