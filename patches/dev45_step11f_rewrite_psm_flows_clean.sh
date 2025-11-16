@@ -1,3 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+FILE="foundry/test/psm/PSMRegression_Flows.t.sol"
+
+echo "== DEV45 STEP 11F: FULL CLEAN REWRITE OF PSMRegression_Flows.t.sol =="
+
+cat <<'SOL' > "$FILE"
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
@@ -113,3 +121,6 @@ contract PSMRegression_Flows is Test {
         assertTrue(true, "PSMRegression_Flows placeholder");
     }
 }
+SOL
+
+echo "✓ PSMRegression_Flows.t.sol fully rewritten cleanly"
