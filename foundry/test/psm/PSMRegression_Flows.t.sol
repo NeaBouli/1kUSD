@@ -16,9 +16,6 @@ import {IFeeRouterV2} from "../../../contracts/router/IFeeRouterV2.sol";
 contract PSMRegression_Flows is Test {
     PegStabilityModule internal psm;
     OneKUSD internal oneKUSD;
-import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
-import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
-import {MockERC20} from "../mocks/MockERC20.sol";
     CollateralVault internal vault;
     PSMLimits internal limits;
     ISafetyAutomata internal safety;
@@ -36,9 +33,6 @@ import {MockERC20} from "../mocks/MockERC20.sol";
 
         // 2) 1kUSD token (DAO as admin)
         oneKUSD = new OneKUSD(dao);
-import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
-import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
-import {MockERC20} from "../mocks/MockERC20.sol";
 
         // 3) Neutral handles for external modules (wired to address(0) for now)
         vault = CollateralVault(address(0));
@@ -57,9 +51,6 @@ import {MockERC20} from "../mocks/MockERC20.sol";
         );
 
         // Set PSM as minter/burner for OneKUSD
-import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
-import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
-import {MockERC20} from "../mocks/MockERC20.sol";
         vm.prank(dao);
         oneKUSD.setMinter(address(psm), true);
 
