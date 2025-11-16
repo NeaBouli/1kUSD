@@ -16,6 +16,7 @@ import {IFeeRouterV2} from "../../../contracts/router/IFeeRouterV2.sol";
 contract PSMRegression_Flows is Test {
     PegStabilityModule internal psm;
     OneKUSD internal oneKUSD;
+    MockOracleAggregator internal oracle;
     CollateralVault internal vault;
     PSMLimits internal limits;
     ISafetyAutomata internal safety;
@@ -24,6 +25,7 @@ contract PSMRegression_Flows is Test {
     address internal dao = address(this);
     address internal user = address(0xBEEF);
     address internal collateral = address(0xCA11);
+
 
     function setUp() public {
         // DEV-45: basic wiring of core components for PSM regression flows
