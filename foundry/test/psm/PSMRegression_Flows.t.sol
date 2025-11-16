@@ -13,8 +13,6 @@ import {PSMLimits} from "../../../contracts/psm/PSMLimits.sol";
 import {ISafetyAutomata} from "../../../contracts/interfaces/ISafetyAutomata.sol";
 import {IFeeRouterV2} from "../../../contracts/router/IFeeRouterV2.sol";
 
-/// @title PSMRegression_Flows
-/// @notice Clean rebuilt skeleton for DEV-45 PSM regression flow tests.
 contract PSMRegression_Flows is Test {
     PegStabilityModule internal psm;
     OneKUSD internal oneKUSD;
