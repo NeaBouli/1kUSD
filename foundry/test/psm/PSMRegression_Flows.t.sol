@@ -43,7 +43,26 @@ contract PSMRegression_Flows is Test {
         safety = ISafetyAutomata(address(0));
         feeRouter = IFeeRouterV2(address(0));
 
-        // 4) PSM instantiation + real flows will follow in later DEV-45 steps
+        // 4) REAL PSM constructor wiring (neutral external modules)
+
+        psm = new PegStabilityModule(
+            dao,
+            address(oneKUSD),
+            address(vault),     // currently address(0)
+            address(safety),    // currently address(0)
+            address(limits)     // currently address(0)
+        );
+
+        // Set PSM as minter/burner for OneKUSD
+        vm.prank(dao);
+        oneKUSD.setMinter(address(psm), true);
+
+        vm.prank(dao);
+        oneKUSD.setBurner(address(psm), true);
+
+        // Assign oracle (MockOracleAggregator)
+        psm.setOracle(address(oracle));
+
     }
 
 
