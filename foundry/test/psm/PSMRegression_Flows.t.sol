@@ -13,13 +13,11 @@ import {ISafetyAutomata} from "../../../contracts/interfaces/ISafetyAutomata.sol
 import {IFeeRouterV2} from "../../../contracts/router/IFeeRouterV2.sol";
 
 /// @title PSMRegression_Flows
-/// @notice DEV-45: Skeleton für End-to-End-Regressionstests der PSM-Flows.
-///         Hier werden in späteren DEV-45-Steps konkrete Flow-Tests ergänzt.
+/// @notice Clean rebuilt skeleton for DEV-45 PSM regression flow tests.
 contract PSMRegression_Flows is Test {
     PegStabilityModule internal psm;
     OneKUSD internal oneKUSD;
-import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
-import {MockOracleAggregator} from "../../mocks/MockOracleAggregator.sol";
+    MockOracleAggregator internal oracle;
     CollateralVault internal vault;
     PSMLimits internal limits;
     ISafetyAutomata internal safety;
@@ -30,12 +28,12 @@ import {MockOracleAggregator} from "../../mocks/MockOracleAggregator.sol";
     address internal collateral = address(0xCA11);
 
     function setUp() public {
-        // DEV-45: Placeholder – konkrete Wiring/Mocks folgen in späteren Schritten.
-        // Wichtig ist nur, dass die Datei syntaktisch sauber eingebunden ist.
+        // placeholder; concrete wiring follows in next DEV-45 steps
+        oracle = new MockOracleAggregator();
+        oracle.setPrice(int256(1e18), 18, true);
     }
 
-    /// @notice Minimaler Platzhalter, um sicherzustellen, dass die Suite läuft.
     function testPlaceholder() public {
-        assertTrue(true, "PSMRegression_Flows skeleton should pass");
+        assertTrue(true);
     }
 }
