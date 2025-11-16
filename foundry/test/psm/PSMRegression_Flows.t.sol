@@ -6,7 +6,7 @@ import "forge-std/Test.sol";
 import {PegStabilityModule} from "../../../contracts/core/PegStabilityModule.sol";
 import {OneKUSD} from "../../../contracts/core/OneKUSD.sol";
 import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
-import {MockOracleAggregator} from "../../mocks/MockOracleAggregator.sol";
+import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
 import {CollateralVault} from "../../../contracts/core/CollateralVault.sol";
 import {PSMLimits} from "../../../contracts/psm/PSMLimits.sol";
 import {ISafetyAutomata} from "../../../contracts/interfaces/ISafetyAutomata.sol";
