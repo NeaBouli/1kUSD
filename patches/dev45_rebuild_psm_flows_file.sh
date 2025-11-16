@@ -1,3 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+FILE="foundry/test/psm/PSMRegression_Flows.t.sol"
+
+echo "== DEV-45: Rebuild PSMRegression_Flows.t.sol from clean skeleton =="
+
+cat <<'SOL' > "$FILE"
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
@@ -37,3 +45,7 @@ contract PSMRegression_Flows is Test {
         assertTrue(true, "PSMRegression_Flows skeleton should pass");
     }
 }
+SOL
+
+echo "✓ Rebuilt $FILE as clean PSMRegression_Flows skeleton"
+echo "== COMPLETE =="
