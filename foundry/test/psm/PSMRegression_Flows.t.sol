@@ -33,8 +33,8 @@ contract PSMRegression_Flows is Test {
         oracle.setPrice(int256(1e18), 18, true);
 
         // --- Vault / Limits / Safety (neutral for test) ---
-        vault = new CollateralVault(dao);
-        limits = new PSMLimits(dao);
+        vault = new CollateralVault(dao, address(oracle), address(limits));
+        limits = new PSMLimits(dao, 1e30, 1e30);
         safety = ISafetyAutomata(address(0));
 
         // --- Token ---
@@ -73,7 +73,7 @@ contract PSMRegression_Flows is Test {
 
         // perform swap
         vm.prank(user);
-        psm.swapTo1kUSD(address(collateralToken), 1000e18);
+        psm.swapTo1kUSD(address(collateralToken), user, user, 1000e18, bytes32("TEST"));
 
         // user should receive 1000 1kUSD
         assertEq(oneKUSD.balanceOf(user), 1000e18);
