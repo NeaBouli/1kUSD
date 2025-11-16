@@ -8,6 +8,7 @@ import {OneKUSD} from "../../../contracts/core/OneKUSD.sol";
 import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
 import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
 import {MockERC20} from "../mocks/MockERC20.sol";
+import {MockVault} from "../mocks/MockVault.sol";
 import {CollateralVault} from "../../../contracts/core/CollateralVault.sol";
 import {PSMLimits} from "../../../contracts/psm/PSMLimits.sol";
 import {ISafetyAutomata} from "../../../contracts/interfaces/ISafetyAutomata.sol";
@@ -33,7 +34,7 @@ contract PSMRegression_Flows is Test {
         oracle.setPrice(int256(1e18), 18, true);
 
         // --- Vault / Limits / Safety (neutral for test) ---
-        vault = CollateralVault(address(0));
+        vault = new MockVault();
         limits = PSMLimits(address(0));
         safety = ISafetyAutomata(address(0));
 
@@ -63,6 +64,7 @@ contract PSMRegression_Flows is Test {
     function testMintFlow_1to1() public {
         // new collateral token instance
         MockERC20 collateralToken = new MockERC20("COL", "COL");
+import {MockVault} from "../mocks/MockVault.sol";
 
         // mint 1000 collateral to user
         collateralToken.mint(user, 1000e18);
