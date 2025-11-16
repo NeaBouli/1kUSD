@@ -63,10 +63,7 @@ contract PSMRegression_Flows is Test {
 
     }
 
-
-
-    
-    function testMintFlow_1to1() public {
+function testMintFlow_1to1() public {
         // 1) User erhält Collateral
         collateralToken.mint(user, 1000e18);
 
@@ -88,6 +85,12 @@ contract PSMRegression_Flows is Test {
     }
 
 
+    
+
+
+
+
+    
     function testPlaceholder() public {
         assertTrue(true);
     }
