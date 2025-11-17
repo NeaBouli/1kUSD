@@ -19,7 +19,6 @@ contract PSMRegression_Flows is Test {
     OneKUSD internal oneKUSD;
     MockOracleAggregator internal oracle;
     MockERC20 internal collateralToken;
-import {MockCollateralVault} from "../mocks/MockCollateralVault.sol";
 
     address internal dao = address(this);
     address internal user = address(0xBEEF);
@@ -32,7 +31,6 @@ import {MockCollateralVault} from "../mocks/MockCollateralVault.sol";
         // 2) Core-Token + Collateral + Vault
         oneKUSD = new OneKUSD(dao);
         collateralToken = new MockERC20("COL", "COL");
-import {MockCollateralVault} from "../mocks/MockCollateralVault.sol";
 
         // 3) Realer PSM-Konstruktor, neutrale Safety/Registry
         psm = new PegStabilityModule(
