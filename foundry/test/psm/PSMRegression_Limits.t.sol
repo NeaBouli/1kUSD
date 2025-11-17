@@ -15,7 +15,6 @@ contract PSMRegression_Limits is Test {
     PegStabilityModule public psm;
     PSMLimits public limits;
     MockERC20 collateralToken;
-    MockOneKUSD public oneKUSD;
     MockVault public vault;
     MockRegistry public reg;
 
@@ -23,7 +22,6 @@ contract PSMRegression_Limits is Test {
 
     function setUp() public {
         // einfache Mocks für 1kUSD / Vault / Registry
-        oneKUSD = new MockOneKUSD();
         vault = new MockVault();
         reg = new MockRegistry();
 
