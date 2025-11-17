@@ -68,6 +68,10 @@ contract PSMRegression_Flows is Test {
 
         vm.prank(user);
         uint256 out = psm.swapTo1kUSD(
+        emit log_named_uint("DEBUG_user1k_before", user1kBefore);
+        emit log_named_uint("DEBUG_user1k_after", oneKUSD.balanceOf(user));
+        emit log_named_uint("DEBUG_psm_1k_bal", oneKUSD.balanceOf(address(psm)));
+        emit log_named_uint("DEBUG_totalSupply_after", oneKUSD.totalSupply());
         emit log_named_uint("DEBUG_user1k_before", oneKUSD.balanceOf(user));
         emit log_named_uint("DEBUG_user1k_after", oneKUSD.balanceOf(user));
         emit log_named_uint("DEBUG_psm_1k_bal", oneKUSD.balanceOf(address(psm)));
