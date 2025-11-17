@@ -25,18 +25,18 @@ contract PSMRegression_Limits is Test {
 
         // SafetyAutomata ist für diese Tests irrelevant → address(0)
         psm = new PegStabilityModule(
-        collateralToken = new MockERC20("COL","COL");
-        collateralToken.mint(user, 1000e18);
-        vm.prank(user);
-        collateralToken.approve(address(psm), type(uint256).max);
-        vault = new MockCollateralVault();
-        reg = new ParameterRegistry(dao);
             address(this),
             address(oneKUSD),
             address(vault),
             address(0),
             address(reg)
         );
+        collateralToken = new MockERC20("COL","COL");
+        collateralToken.mint(user, 1000e18);
+        vm.prank(user);
+        collateralToken.approve(address(psm), type(uint256).max);
+        vault = new MockCollateralVault();
+        reg = new ParameterRegistry(dao);
 
         // Limits: dailyCap = 1000, singleTxCap = 500
         limits = new PSMLimits(address(this), 1000, 500);
