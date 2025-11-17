@@ -54,6 +54,8 @@ contract PSMRegression_Flows is Test {
         collateralToken.mint(user, 1000e18);
         vm.prank(user);
         collateralToken.approve(address(psm), type(uint256).max);
+        vm.prank(user);
+        collateralToken.approve(address(psm), type(uint256).max);
     }
 
     /// @notice Basis-Flow: prüft, dass Swap nicht reverted und Accounting-Invarianten halten.
