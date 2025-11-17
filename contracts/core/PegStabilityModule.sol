@@ -266,6 +266,13 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         if (net1k < minOut) revert InsufficientOut();
 
         // DEV-44: no actual transfers/mints, only return net1k as simulated out.
+        // === DEV45: real token transfer + vault deposit + mint ===
+        IERC20(tokenIn).safeTransferFrom(msg.sender, address(vault), amountIn);
+        vault.deposit(tokenIn, msg.sender, amountIn);
+        oneKUSD.mint(to, net1k);
+        if (fee1k > 0 && address(feeRouter) != address(0)) {
+            feeRouter.route("PSM_MINT_FEE", address(oneKUSD), fee1k);
+        }
         netOut = net1k;
 
         emit SwapTo1kUSD(msg.sender, tokenIn, notional1k, fee1k, net1k, block.timestamp);
