@@ -9,9 +9,11 @@ import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator
 import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
 import {MockERC20} from "../mocks/MockERC20.sol";
 import {MockCollateralVault} from "../mocks/MockCollateralVault.sol";
+import {PSMLimits} from "../../../contracts/psm/PSMLimits.sol";
+import {ISafetyAutomata} from "../../../contracts/interfaces/ISafetyAutomata.sol";
+import {IFeeRouterV2} from "../../../contracts/router/IFeeRouterV2.sol";
 
-/// @title PSMRegression_Flows
-/// @notice DEV-45: E2E-Regression für den Mint-Pfad (Collateral -> 1kUSD)
+
 contract PSMRegression_Flows is Test {
     PegStabilityModule internal psm;
     OneKUSD internal oneKUSD;
