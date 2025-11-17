@@ -16,6 +16,10 @@ import {MockCollateralVault} from "../mocks/MockCollateralVault.sol";
 contract PSMRegression_Limits is Test {
     PegStabilityModule public psm;
     PSMLimits public limits;
+    OneKUSD public oneKUSD;
+    MockERC20 public collateralToken;
+    MockCollateralVault public vault;
+    ParameterRegistry public reg;
     MockERC20 collateralToken;
 
     address public user = address(0xBEEF);
@@ -25,6 +29,8 @@ contract PSMRegression_Limits is Test {
 
         // SafetyAutomata ist für diese Tests irrelevant → address(0)
         psm = new PegStabilityModule(
+        // DEV45: bootstrap OneKUSD instance for PSMRegression_Limits
+        oneKUSD = new OneKUSD(dao);
             address(this),
             address(oneKUSD),
             address(vault),
