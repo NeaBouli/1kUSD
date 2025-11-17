@@ -5,15 +5,19 @@ import "forge-std/Test.sol";
 
 import {PegStabilityModule} from "../../../contracts/core/PegStabilityModule.sol";
 import {PSMLimits} from "../../../contracts/psm/PSMLimits.sol";
+import {MockERC20} from "../mocks/MockERC20.sol";
 import {MockOneKUSD} from "../../../contracts/mocks/MockOneKUSD.sol";
 import {MockVault} from "../../../contracts/mocks/MockVault.sol";
 import {MockRegistry} from "../../../contracts/mocks/MockRegistry.sol";
 
 /// @title PSMRegression_Limits
 /// @notice DEV-44: Verifiziert, dass PegStabilityModule PSMLimits korrekt erzwingt.
+import {MockERC20} from "../mocks/MockERC20.sol";
 contract PSMRegression_Limits is Test {
     PegStabilityModule public psm;
     PSMLimits public limits;
+    MockERC20 collateralToken;
+import {MockERC20} from "../mocks/MockERC20.sol";
     MockOneKUSD public oneKUSD;
     MockVault public vault;
     MockRegistry public reg;
@@ -37,6 +41,7 @@ contract PSMRegression_Limits is Test {
 
         // Limits: dailyCap = 1000, singleTxCap = 500
         limits = new PSMLimits(address(this), 1000, 500);
+import {MockERC20} from "../mocks/MockERC20.sol";
         psm.setLimits(address(limits));
 
         // Keine Fees, damit wir uns nur auf Limits konzentrieren
