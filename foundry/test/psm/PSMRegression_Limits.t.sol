@@ -5,17 +5,17 @@ import "forge-std/Test.sol";
 
 import {PegStabilityModule} from "../../../contracts/core/PegStabilityModule.sol";
 import {OneKUSD} from "../../../contracts/core/OneKUSD.sol";
-import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
-import {MockERC20} from "../mocks/MockERC20.sol";
-import {MockCollateralVault} from "../mocks/MockCollateralVault.sol";
-import {PSMLimits} from "../../../contracts/psm/PSMLimits.sol";
 import {ParameterRegistry} from "../../../contracts/core/ParameterRegistry.sol";
+import {PSMLimits} from "../../../contracts/psm/PSMLimits.sol";
+
+import {MockERC20} from "../mocks/MockERC20.sol";
+import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
+import {MockCollateralVault} from "../mocks/MockCollateralVault.sol";
 
 
 contract PSMRegression_Limits is Test {
     PegStabilityModule public psm;
     PSMLimits public limits;
-import {ParameterRegistry} from "../../../contracts/core/ParameterRegistry.sol";
     MockERC20 collateralToken;
 
     address public user = address(0xBEEF);
@@ -25,6 +25,12 @@ import {ParameterRegistry} from "../../../contracts/core/ParameterRegistry.sol";
 
         // SafetyAutomata ist für diese Tests irrelevant → address(0)
         psm = new PegStabilityModule(
+        collateralToken = new MockERC20("COL","COL");
+        collateralToken.mint(user, 1000e18);
+        vm.prank(user);
+        collateralToken.approve(address(psm), type(uint256).max);
+        vault = new MockCollateralVault();
+        reg = new ParameterRegistry(dao);
             address(this),
             address(oneKUSD),
             address(vault),
@@ -34,7 +40,6 @@ import {ParameterRegistry} from "../../../contracts/core/ParameterRegistry.sol";
 
         // Limits: dailyCap = 1000, singleTxCap = 500
         limits = new PSMLimits(address(this), 1000, 500);
-import {ParameterRegistry} from "../../../contracts/core/ParameterRegistry.sol";
         collateralToken = new MockERC20("COL", "COL");
         collateralToken.mint(user, 1000e18);
         vm.prank(user);
