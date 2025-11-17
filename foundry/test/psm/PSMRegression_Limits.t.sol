@@ -15,14 +15,12 @@ contract PSMRegression_Limits is Test {
     PegStabilityModule public psm;
     PSMLimits public limits;
     MockERC20 collateralToken;
-    MockVault public vault;
     MockRegistry public reg;
 
     address public user = address(0xBEEF);
 
     function setUp() public {
         // einfache Mocks für 1kUSD / Vault / Registry
-        vault = new MockVault();
         reg = new MockRegistry();
 
         // SafetyAutomata ist für diese Tests irrelevant → address(0)
@@ -40,6 +38,7 @@ contract PSMRegression_Limits is Test {
         collateralToken.mint(user, 1000e18);
         vm.prank(user);
         collateralToken.approve(address(psm), type(uint256).max);
+        vault = new MockCollateralVault();
         psm.setLimits(address(limits));
 
         // Keine Fees, damit wir uns nur auf Limits konzentrieren
