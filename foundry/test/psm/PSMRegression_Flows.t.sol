@@ -51,6 +51,7 @@ contract PSMRegression_Flows is Test {
 
         // 5) Oracle an PSM hängen
         psm.setOracle(address(oracle));
+        /// DEV45-CONFIG-ANCHOR: copy PSM asset/config setup from PSMSwapCore.t.sol here
 
         // 6) User mit Collateral ausstatten + Approve
         collateralToken.mint(user, 1000e18);
