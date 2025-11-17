@@ -8,7 +8,7 @@ import {OneKUSD} from "../../../contracts/core/OneKUSD.sol";
 import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator.sol";
 import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
 import {MockERC20} from "../mocks/MockERC20.sol";
-import {MockVault} from "../mocks/MockVault.sol";
+import {MockCollateralVault} from "../mocks/MockCollateralVault.sol";
 
 /// @title PSMRegression_Flows
 /// @notice DEV-45: E2E-Regression für den Mint-Pfad (Collateral -> 1kUSD)
@@ -17,7 +17,7 @@ contract PSMRegression_Flows is Test {
     OneKUSD internal oneKUSD;
     MockOracleAggregator internal oracle;
     MockERC20 internal collateralToken;
-    MockVault internal vault;
+import {MockCollateralVault} from "../mocks/MockCollateralVault.sol";
 
     address internal dao = address(this);
     address internal user = address(0xBEEF);
@@ -30,7 +30,7 @@ contract PSMRegression_Flows is Test {
         // 2) Core-Token + Collateral + Vault
         oneKUSD = new OneKUSD(dao);
         collateralToken = new MockERC20("COL", "COL");
-        vault = new MockVault();
+import {MockCollateralVault} from "../mocks/MockCollateralVault.sol";
 
         // 3) Realer PSM-Konstruktor, neutrale Safety/Registry
         psm = new PegStabilityModule(
