@@ -9,6 +9,7 @@ import {IOracleAggregator} from "../../../contracts/interfaces/IOracleAggregator
 import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
 import {MockERC20} from "../mocks/MockERC20.sol";
 import {MockCollateralVault} from "../mocks/MockCollateralVault.sol";
+import {MockFeeRouter} from "../mocks/MockFeeRouter.sol";
 import {PSMLimits} from "../../../contracts/psm/PSMLimits.sol";
 import {ISafetyAutomata} from "../../../contracts/interfaces/ISafetyAutomata.sol";
 import {IFeeRouterV2} from "../../../contracts/router/IFeeRouterV2.sol";
@@ -20,6 +21,8 @@ contract PSMRegression_Flows is Test {
     MockOracleAggregator internal oracle;
     MockERC20 internal collateralToken;
     MockCollateralVault internal vault;
+    MockFeeRouter internal feeRouter;
+import {MockFeeRouter} from "../mocks/MockFeeRouter.sol";
 
     address internal dao = address(this);
     address internal user = address(0xBEEF);
@@ -33,13 +36,15 @@ contract PSMRegression_Flows is Test {
         oneKUSD = new OneKUSD(dao);
         collateralToken = new MockERC20("COL", "COL");
         vault = new MockCollateralVault();
+        feeRouter = new MockFeeRouter();
+import {MockFeeRouter} from "../mocks/MockFeeRouter.sol";
 
         // 3) Realer PSM-Konstruktor, neutrale Safety/Registry
         psm = new PegStabilityModule(
             dao,
             address(oneKUSD),
             address(vault),
-            address(0),
+            address(feeRouter),
             address(0)
         );
 
@@ -55,6 +60,7 @@ contract PSMRegression_Flows is Test {
 
         // 6) User mit Collateral ausstatten + Approve
         collateralToken.mint(user, 1000e18);
+        oneKUSD.mint(address(psm), 2000e18);
         vm.prank(user);
         collateralToken.approve(address(psm), type(uint256).max);
     }
