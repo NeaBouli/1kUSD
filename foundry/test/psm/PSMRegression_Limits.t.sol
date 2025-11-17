@@ -9,19 +9,19 @@ import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
 import {MockERC20} from "../mocks/MockERC20.sol";
 import {MockCollateralVault} from "../mocks/MockCollateralVault.sol";
 import {PSMLimits} from "../../../contracts/psm/PSMLimits.sol";
+import {ParameterRegistry} from "../../../contracts/core/ParameterRegistry.sol";
 
 
 contract PSMRegression_Limits is Test {
     PegStabilityModule public psm;
     PSMLimits public limits;
+import {ParameterRegistry} from "../../../contracts/core/ParameterRegistry.sol";
     MockERC20 collateralToken;
-    MockRegistry public reg;
 
     address public user = address(0xBEEF);
 
     function setUp() public {
         // einfache Mocks für 1kUSD / Vault / Registry
-        reg = new MockRegistry();
 
         // SafetyAutomata ist für diese Tests irrelevant → address(0)
         psm = new PegStabilityModule(
@@ -34,11 +34,13 @@ contract PSMRegression_Limits is Test {
 
         // Limits: dailyCap = 1000, singleTxCap = 500
         limits = new PSMLimits(address(this), 1000, 500);
+import {ParameterRegistry} from "../../../contracts/core/ParameterRegistry.sol";
         collateralToken = new MockERC20("COL", "COL");
         collateralToken.mint(user, 1000e18);
         vm.prank(user);
         collateralToken.approve(address(psm), type(uint256).max);
         vault = new MockCollateralVault();
+        reg = new ParameterRegistry(dao);
         psm.setLimits(address(limits));
 
         // Keine Fees, damit wir uns nur auf Limits konzentrieren
