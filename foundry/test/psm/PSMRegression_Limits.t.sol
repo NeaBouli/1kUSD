@@ -25,36 +25,39 @@ contract PSMRegression_Limits is Test {
     address public user = address(0xBEEF);
 
     function setUp() public {
-        oneKUSD = new OneKUSD(dao);
-        // einfache Mocks für 1kUSD / Vault / Registry
+        // Core PSM wiring for limit regression tests
 
-        // SafetyAutomata ist für diese Tests irrelevant → address(0)
+        // 1) OneKUSD and core infra
+        oneKUSD = new OneKUSD(dao);
+        vault = new MockCollateralVault();
+        reg = new ParameterRegistry(dao);
+
+        // 2) PegStabilityModule with real vault/registry, no safety automata
         psm = new PegStabilityModule(
-        // DEV45: bootstrap OneKUSD instance for PSMRegression_Limits
-            address(this),
+            dao,
             address(oneKUSD),
             address(vault),
             address(0),
             address(reg)
         );
-        collateralToken = new MockERC20("COL","COL");
-        collateralToken.mint(user, 1000e18);
-        vm.prank(user);
-        collateralToken.approve(address(psm), type(uint256).max);
-        vault = new MockCollateralVault();
-        reg = new ParameterRegistry(dao);
 
-        // Limits: dailyCap = 1000, singleTxCap = 500
-        limits = new PSMLimits(address(this), 1000, 500);
+        // 3) Allow PSM to mint/burn 1kUSD
+        vm.prank(dao);
+        oneKUSD.setMinter(address(psm), true);
+        vm.prank(dao);
+        oneKUSD.setBurner(address(psm), true);
+
+        // 4) Collateral token and approvals
         collateralToken = new MockERC20("COL", "COL");
-        collateralToken.mint(user, 1000e18);
+        collateralToken.mint(user, 10_000e18);
         vm.prank(user);
         collateralToken.approve(address(psm), type(uint256).max);
-        vault = new MockCollateralVault();
-        reg = new ParameterRegistry(dao);
+
+        // 5) Limits: dailyCap = 1000, singleTxCap = 500
+        limits = new PSMLimits(address(this), 1000, 500);
         psm.setLimits(address(limits));
 
-        // Keine Fees, damit wir uns nur auf Limits konzentrieren
+        // 6) No fees — isolate limit behaviour
         psm.setFees(0, 0);
     }
 
