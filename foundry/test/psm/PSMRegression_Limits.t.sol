@@ -64,6 +64,7 @@ contract PSMRegression_Limits is Test {
     function testSingleTxLimitReverts() public {
         // singleTxCap = 500 → 600 muss revertieren
         vm.expectRevert(); // "swap too large"
+        vm.prank(user);
         psm.swapTo1kUSD(address(collateralToken), 600, user, 0, block.timestamp);
     }
 
@@ -73,13 +74,16 @@ contract PSMRegression_Limits is Test {
     function testDailyCapReverts() public {
         // dailyCap = 1000
         // 1) 400 → ok (dailyVolume = 400)
+        vm.prank(user);
         psm.swapTo1kUSD(address(collateralToken), 400, user, 0, block.timestamp);
 
         // 2) 400 → ok (dailyVolume = 800)
+        vm.prank(user);
         psm.swapTo1kUSD(address(collateralToken), 400, user, 0, block.timestamp);
 
         // 3) 400 → 800 + 400 = 1200 > 1000 → revert
         vm.expectRevert(); // "swap too large"
+        vm.prank(user);
         psm.swapTo1kUSD(address(collateralToken), 400, user, 0, block.timestamp);
     }
 
@@ -88,12 +92,14 @@ contract PSMRegression_Limits is Test {
     /// ------------------------------------------------------------
     function testDailyReset() public {
         // Tag 1: 400 → ok
+        vm.prank(user);
         psm.swapTo1kUSD(address(collateralToken), 400, user, 0, block.timestamp);
 
         // Tag +1
         vm.warp(block.timestamp + 1 days);
 
         // neues Tagesvolumen → wieder 400 möglich
+        vm.prank(user);
         psm.swapTo1kUSD(address(collateralToken), 400, user, 0, block.timestamp);
     }
 }
