@@ -1,3 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+FILE="foundry/test/mocks/MockCollateralVault.sol"
+
+echo "== DEV45 FIX C: remove internal transferFrom from MockCollateralVault.deposit =="
+
+cat > "$FILE" <<'SOL'
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
@@ -22,3 +30,6 @@ contract MockCollateralVault {
         IERC20(asset).transfer(to, amount);
     }
 }
+SOL
+
+echo "✓ MockCollateralVault.deposit no longer performs a second transferFrom"
