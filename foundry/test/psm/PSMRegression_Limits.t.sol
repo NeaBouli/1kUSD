@@ -25,12 +25,12 @@ contract PSMRegression_Limits is Test {
     address public user = address(0xBEEF);
 
     function setUp() public {
+        oneKUSD = new OneKUSD(dao);
         // einfache Mocks für 1kUSD / Vault / Registry
 
         // SafetyAutomata ist für diese Tests irrelevant → address(0)
         psm = new PegStabilityModule(
         // DEV45: bootstrap OneKUSD instance for PSMRegression_Limits
-        oneKUSD = new OneKUSD(dao);
             address(this),
             address(oneKUSD),
             address(vault),
