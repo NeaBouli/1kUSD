@@ -306,7 +306,10 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
 
         if (netTokenOut < minOut) revert InsufficientOut();
 
-        // DEV-44: no actual burns/withdrawals, only return net token amount.
+        // === DEV-46: real redeem flow (burn 1kUSD, withdraw collateral, transfer to `to`) ===
+        oneKUSD.burn(msg.sender, amountIn1k);
+        vault.withdraw(tokenOut, address(this), netTokenOut, bytes32("PSM_REDEEM"));
+        IERC20(tokenOut).safeTransfer(to, netTokenOut);
         netOut = netTokenOut;
 
         emit SwapFrom1kUSD(msg.sender, tokenOut, notional1k, fee1k, netTokenOut, block.timestamp);
