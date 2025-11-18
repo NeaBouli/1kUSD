@@ -20,7 +20,7 @@ contract PSMRegression_Limits is Test {
     MockERC20 public collateralToken;
     MockCollateralVault public vault;
     ParameterRegistry public reg;
-    MockERC20 collateralToken;
+    address public dao = address(this);
 
     address public user = address(0xBEEF);
 
