@@ -39,7 +39,6 @@ contract Guardian_PSMUnpauseTest is Test {
     MockMintableToken internal token;
     MockMintableToken internal oneKUSD;
     MockVault internal vault;
-    MockRegistry internal reg;
 
     address internal dao = address(0xdead);
 
@@ -47,9 +46,8 @@ contract Guardian_PSMUnpauseTest is Test {
         guardian = new Guardian(dao, block.number + 100_000);
         safety = new SafetyAutomata(dao, block.timestamp + 10000);
         vault = new MockVault();
-        reg = new MockRegistry();
         oneKUSD = new MockMintableToken("1kUSD", "1KUSD");
-        psm = new PegStabilityModule(dao, address(oneKUSD), address(vault), address(safety), address(reg));
+        psm = new PegStabilityModule(dao, address(oneKUSD), address(vault), address(safety), address(0));
         // PSM mit 1kUSD auffüllen, damit Swap funktioniert
         oneKUSD.transfer(address(psm), 1_000_000e18);
         token = new MockMintableToken("MockToken", "MOCK");
