@@ -3,24 +3,26 @@ set -euo pipefail
 
 FILE="README.md"
 
-echo "== DEV50 DOC03: reference new PSM docs in README =="
+echo "== DEV50 DOC03: append PSM architecture docs summary to README =="
 
 cat <<'EOL' >> "$FILE"
 
 ---
 
-### PSM Documentation (DEV-43 → DEV-50)
+### PSM Architecture (DEV-43 → DEV-50)
 
-The PegStabilityModule (PSM) and its surrounding components are documented in
-the dedicated architecture notes under `docs/architecture/`:
+The PSM stack is now documented in dedicated architecture notes:
 
-- `psm_dev43-45.md` — PSM façade, limits wiring and price/notional layer.
-- `psm_parameters.md` — Registry keys, PSMLimits caps and governance-facing parameter map.
-- `psm_flows_invariants.md` — End-to-end mint/redeem flows and the invariants enforced by the regression test suites.
+- `docs/architecture/psm_dev43-45.md`  
+  Canonical IPSM façade, notional layer, vault wiring and initial Guardian/Safety integration.
 
-These documents are intended as the primary reference for auditors and
-governance when reasoning about the PSM’s behaviour, risk surface and
-upgrade paths.
+- `docs/architecture/psm_parameters.md`  
+  Registry keys, PSMLimits parameters and the split between on-chain registry vs. dedicated limits contract.
+
+- `docs/architecture/psm_flows_invariants.md`  
+  End-to-end mint/redeem flows, notional accounting, limits and fee invariants, plus the linked Foundry regression suites.
+
+These documents are the primary reference for auditors, governance and core devs extending the PSM with additional collaterals or economic features.
 EOL
 
-echo "✓ PSM documentation references appended to $FILE"
+echo "✓ PSM architecture docs summary appended to $FILE"
