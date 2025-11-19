@@ -270,3 +270,4 @@
 2025-11-13T19:28:32Z DEV-41-T45: adjust testRefreshAlias expectation to match OracleWatcher behavior
 [DEV-43→DEV-45] 2025-11-18T14:14:32Z PSM: canonical IPSM façade with SafetyAutomata/PSMLimits/Oracle integration; DEV-44 added price-normalized 1kUSD notional layer; DEV-45 enabled real mint+vault flows and added PSMRegression_Flows/Limits with all 32 tests green.
 [DEV-47] 2025-11-19T07:32:57Z PSM: token decimals now fetched via ParameterRegistry (per-token keys, 18-dec fallback when unset or no registry); Guardian_PSMUnpause wired to null registry to keep pause/unpause semantics independent from decimals config.
+[DEV-48] 2025-11-19T08:54:15Z PSM: mint/redeem fees now resolved via ParameterRegistry (global psm:mintFeeBps/psm:redeemFeeBps + per-token overrides) with safe fallback to local storage; PSMRegression_Fees covers global+per-token mint fees and global redeem fees; full suite at 36 tests green.
