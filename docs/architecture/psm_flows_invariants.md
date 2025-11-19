@@ -1,337 +1,304 @@
-# PSM Flows & Invariants (DEV-50)
+# PSM Flows & Invariants (DEV-43 → DEV-49)
 
-Dieses Dokument beschreibt die zentralen **End-to-End-Flows** des
-`PegStabilityModule` (PSM) und die dazugehörigen **Invarianten**, wie sie
-durch die aktuelle Implementierung (DEV-43 → DEV-49) und die
-Regression-Tests (`PSMRegression_*`) erzwungen werden.
+Dieses Dokument beschreibt die funktionalen Flows und die wichtigsten
+Invarianten des PegStabilityModule (PSM), wie sie durch DEV-43 bis DEV-49
+implementiert und durch die Foundry-Regressionstests abgesichert sind.
 
----
-
-## 1. High-Level Überblick
-
-Der PSM agiert als Fassade mit folgenden Schichten:
-
-1. **Safety & Guardian Gate**
-   - `SafetyAutomata` (module-basiertes Pausing),
-   - Guardian/Watcher/Oracle-Health-Signale.
-
-2. **Preis- & Notional-Layer**
-   - `OracleAggregator` liefert `Price` (inkl. Health).
-   - `_normalizeTo1kUSD` / `_normalizeFrom1kUSD` rechnen Tokens ↔ 1kUSD-Notional
-     (immer 18 Decimals für 1kUSD).
-
-3. **Limits-Layer**
-   - `PSMLimits.checkAndUpdate(notional1k)` erzwingt Single-Tx- und Daily-Caps
-     auf 1kUSD-Notional-Basis.
-
-4. **Fee-Layer**
-   - Fees (Mint/Redeem) werden über `ParameterRegistry` aufgelöst:
-     - Global (`psm:mintFeeBps`, `psm:redeemFeeBps`),
-     - Per-Token Overrides,
-     - Fallback auf lokale PSM-Storage-Werte.
-
-5. **Asset-Flow-Layer**
-   - Collateral wird in `CollateralVault` deponiert/abgezogen.
-   - `OneKUSD` wird gemint/burnt.
-   - Optionales Fees-Routing via `FeeRouterV2`.
+Zielgruppe:
+- Auditoren
+- Governance / Risk Council
+- Core-Dev, der neue Features (Spread, komplexere Fees, weitere Collaterals)
+  auf den bestehenden PSM-Stack aufsetzen will.
 
 ---
 
-## 2. Flow: `swapTo1kUSD` (Mint-Seite)
+## 1. Überblick
 
-### 2.1 Sequenz (konzeptionell)
+Der PSM stellt eine Fassade bereit, um zwischen einem Collateral-Token
+(z. B. `COL`) und dem Stablecoin `1kUSD` zu swappen:
 
-```text
-User
-  │
-  │ swapTo1kUSD(tokenIn, amountIn, to, minOut, deadline)
-  ▼
-PegStabilityModule
-  │ 1) Safety + Oracle-Health prüfen
-  │ 2) Decimals + Preis laden → Notional in 1kUSD
-  │ 3) Limits prüfen (PSMLimits)
-  │ 4) Fee bestimmen (Registry + Override + Fallback)
-  │ 5) Collateral aus User → Vault transferieren
-  │ 6) 1kUSD für `to` minten
-  │ 7) Fee in 1kUSD-Notional zum FeeRouter routen (optional)
-  ▼
-User erhält 1kUSD
-CollateralVault hält Collateral
-FeeRouter (optional) erhält 1kUSD-Fee
-2.2 Detail-Schritte (Implementierung)
-Preconditions
+- **Mint-Seite**: `COL` → `1kUSD`
+- **Redeem-Seite**: `1kUSD` → `COL`
 
-require(amountIn > 0, "PSM: amountIn=0");
+Dabei greifen folgende Layer ineinander:
 
-whenNotPaused (PSM selbst),
+1. **OracleAggregator** (Preis + Health, DEV-49):
+   - liefert `Price { price, decimals, healthy, timestamp }`,
+   - Health wird über `maxDiffBps` und `maxStale` aus der `ParameterRegistry`
+     gesteuert.
 
-SafetyAutomata / Oracle-Health via _requireOracleHealthy(tokenIn).
+2. **Notional-Layer (DEV-44)**:
+   - Normalisiert Collateral-Amounts in eine **1kUSD-Notional-Einheit (18 Decimals)**,
+   - Berechnet Fees in Bps (Mint/Redeem),
+   - Leitet Limits in 1kUSD weiter an `PSMLimits`.
 
-Decimals & Preis
+3. **PSMLimits**:
+   - Erzwingt `singleTxCap` und `dailyCap` in 1kUSD-Notional.
 
-tokenInDecimals = _getTokenDecimals(tokenIn):
+4. **Asset-Flows (DEV-45/46)**:
+   - Reale ERC-20-Transfers + Vault-Deposits/Withdraws,
+   - Mint/Burn von `OneKUSD`.
 
-Registry-Lookup mit Fallback auf 18 Decimals.
+5. **ParameterRegistry (DEV-47/48)**:
+   - Collateral-Decimals (`psm:tokenDecimals`),
+   - Fees (`psm:mintFeeBps`, `psm:redeemFeeBps` + per-Token-Overrides).
 
-(px, pxDec) = _getPrice(tokenIn):
+6. **Guardian / SafetyAutomata**:
+   - Pausiert PSM und Oracle-Layer,
+   - Stellt sicher, dass bei pausierten Modulen keine Swaps ausgeführt werden.
 
-OracleAggregator.getPrice(tokenIn) mit Health-Checks
-(stale/diff + Safety).
+Die wichtigsten Tests dazu sind:
 
-Notional-Berechnung
+- `foundry/test/psm/PSMRegression_Flows.t.sol`
+- `foundry/test/psm/PSMRegression_Limits.t.sol`
+- `foundry/test/psm/PSMRegression_Fees.t.sol`
+- `foundry/test/oracle/OracleRegression_Health.t.sol`
+- `foundry/test/Guardian_*` (Propagation, Enforcement, Unpause, Integration)
 
-_computeSwapTo1kUSD:
+---
 
-notional1k = _normalizeTo1kUSD(amountIn, tokenInDecimals, px, pxDec);
+## 2. Mint-Flow (COL → 1kUSD)
 
-fee1k = (notional1k * feeBps) / 10_000;
+### 2.1 High-Level Flow
 
-net1k = notional1k - fee1k;
+Aus Sicht eines Users:
 
-Limits
+1. User besitzt `COL` und ruft  
+   `swapTo1kUSD(collateralToken, amountIn, user, minOut, deadline)` auf.
+2. PSM:
+   - prüft Pause-Status (`SafetyAutomata`),
+   - liest Preis + Health aus `OracleAggregator`,
+   - normalisiert `amountIn` in eine 1kUSD-Notional-Menge,
+   - berechnet Mint-Fee (Registry + Fallback),
+   - prüft Limits,
+   - zieht Collateral ein (Transfer + Vault-Deposit),
+   - mintet `1kUSD` an `user`,
+   - routed ggf. Fees an `FeeRouter`.
 
-_enforceLimits(notional1k);
+### 2.2 Detail-Steps
 
-PSMLimits.checkAndUpdate(notional1k) erzwingt:
+Im Code (vereinfacht):
 
-singleTxCap (pro Swap),
+1. **Pause-Check**
 
-dailyCap (aggregierte Tagesnotional).
+   ```solidity
+   whenNotPaused nonReentrant
+Oracle-Preis & Health
 
-Slippage-Check
-
-if (net1k < minOut) revert InsufficientOut();
-
-Asset-Flows
-
-Collateral:
-
-IERC20(tokenIn).safeTransferFrom(msg.sender, address(vault), amountIn);
-
-vault.deposit(tokenIn, msg.sender, amountIn);
-
-1kUSD:
-
-oneKUSD.mint(to, net1k);
-
-Fee-Routing (optional)
-
-Falls fee1k > 0 und feeRouter != address(0):
-
-feeRouter.route("PSM_MINT_FEE", address(oneKUSD), fee1k);
-
-Rückgabewert
-
-netOut = net1k;
-
-Events:
-
-SwapTo1kUSD(...),
-
-PSMSwapExecuted(...).
-
-3. Flow: swapFrom1kUSD (Redeem-Seite)
-3.1 Sequenz (konzeptionell)
-text
+solidity
 Code kopieren
-User mit 1kUSD
-  │
-  │ swapFrom1kUSD(tokenOut, amountIn1k, to, minOut, deadline)
-  ▼
-PegStabilityModule
-  │ 1) Safety + Oracle-Health prüfen
-  │ 2) Preis + Decimals laden
-  │ 3) Limits prüfen (Notional = amountIn1k)
-  │ 4) Fee berechnen (Registry, per-Token, Fallback)
-  │ 5) 1kUSD vom User burnen
-  │ 6) Collateral aus Vault abziehen
-  │ 7) Collateral an `to` transferieren
-  ▼
-User erhält Collateral
-1kUSD-Supply sinkt
-CollateralVault reduziert Collateral
-FeeRouter (optional) erhält 1kUSD-Fees (in Notional)
-3.2 Detail-Schritte (Implementierung)
-Preconditions
+(uint256 px, uint8 pxDec) = _getPrice(tokenIn);
+// OracleAggregator prüft selbst Stale / Diff via Registry
+Token-Decimals
 
-require(amountIn1k > 0, "PSM: amountIn=0");
+solidity
+Code kopieren
+uint8 tokenInDecimals = _getTokenDecimals(tokenIn);
+// registry.getUint(psm:tokenDecimals, tokenIn) oder Fallback 18
+Notional-Berechnung + Fee
 
-whenNotPaused,
-
-_requireOracleHealthy(tokenOut).
-
-Decimals & Preis
-
-tokenOutDecimals = _getTokenDecimals(tokenOut);
-
-(px, pxDec) = _getPrice(tokenOut);
-
-Notional & Fees
-
-_computeSwapFrom1kUSD:
-
-notional1k = amountIn1k;
-
-fee1k = (notional1k * feeBps) / 10_000;
-
-net1k = notional1k - fee1k;
-
-netTokenOut = _normalizeFrom1kUSD(net1k, tokenOutDecimals, px, pxDec);
-
+solidity
+Code kopieren
+(uint256 notional1k, uint256 fee1k, uint256 net1k) =
+    _computeSwapTo1kUSD(tokenIn, amountIn, feeBps, tokenInDecimals);
 Limits
 
-_enforceLimits(notional1k);
+solidity
+Code kopieren
+_enforceLimits(notional1k); // PSMLimits.checkAndUpdate(...)
+Asset-Fluss + Mint
 
-Erneut auf 1kUSD-Notional-Basis.
-
-Slippage-Check
-
-if (netTokenOut < minOut) revert InsufficientOut();
-
-Asset-Flows
-
-1kUSD:
-
-oneKUSD.burn(msg.sender, amountIn1k);
-
-Collateral:
-
-vault.withdraw(tokenOut, address(this), netTokenOut, bytes32("PSM_REDEEM"));
-
-IERC20(tokenOut).safeTransfer(to, netTokenOut);
-
+solidity
+Code kopieren
+IERC20(tokenIn).safeTransferFrom(msg.sender, address(vault), amountIn);
+vault.deposit(tokenIn, msg.sender, amountIn);
+oneKUSD.mint(to, net1k);
 Fee-Routing
 
-Redeem-Fees werden aktuell als 1kUSD-Notional in fee1k erfasst und
-können analog zur Mint-Seite geroutet werden (Erweiterungspotenzial).
+solidity
+Code kopieren
+if (fee1k > 0 && address(feeRouter) != address(0)) {
+    feeRouter.route("PSM_MINT_FEE", address(oneKUSD), fee1k);
+}
+2.3 Invarianten (Mint)
+Die wichtigsten Invarianten, wie sie u. a. in
+PSMRegression_Flows.t.sol::testMintFlow_1to1() abgebildet sind:
 
-Rückgabewert
+Bei 1:1-Preis (1 COL = 1 1kUSD, 18 Decimals) und Fee = 0:
 
-netOut = netTokenOut;
+Δ 1kUSD.totalSupply == netOut
 
-Events:
+Δ 1kUSD.balanceOf(user) == netOut
 
-SwapFrom1kUSD(...),
+Vault-Balance des Collateral-Assets steigt genau um amountIn.
 
-PSMSwapExecuted(...).
+Bei Fee > 0 (vgl. PSMRegression_Fees):
 
-4. Invarianten (funktionale Sicherheit)
-Die wichtigsten Invarianten werden in den Regression-Tests explizit
-abgebildet:
+fee1k == notional1k * feeBps / 10_000
 
-4.1 Supply & Balances – Mint-Seite
-Aus PSMRegression_Flows.t.sol:
+net1k == notional1k - fee1k
 
-Δ balanceOf(user, 1kUSD) == return value of swapTo1kUSD(...)
+psm.swapTo1kUSD(...) gibt exakt net1k zurück.
 
-Δ totalSupply(1kUSD) == return value of swapTo1kUSD(...)
+3. Redeem-Flow (1kUSD → COL)
+3.1 High-Level Flow
+Aus Sicht eines Users:
 
-Δ CollateralVault-Lock (PSM + Vault) == amountIn (bei 1:1-Preis)
+User hält 1kUSD und ruft
+swapFrom1kUSD(collateralToken, amountIn1k, user, minOut, deadline) auf.
 
-Diese Invarianten stellen sicher, dass:
+PSM:
 
-kein „unsichtbares“ Minting stattfindet,
+prüft Pause-Status,
 
-der PSM keine Tokens verschluckt oder erschafft,
+liest Preis + Health,
 
-Vault-Accounting mit 1kUSD-Supply synchron ist.
+nimmt amountIn1k als Notional-Input,
 
-4.2 Supply & Balances – Redeem-Seite
-Aus testRoundTrip_MintThenRedeem():
+berechnet Redeem-Fee (Registry + Fallback),
 
-Roundtrip (collateral → 1kUSD → collateral) unter 1:1-Preis:
+berechnet Collateral-Amount über _normalizeFrom1kUSD,
 
-Ohne Fees: User erhält exakt amountIn zurück.
+prüft Limits,
 
-Mit Redeem-Fee:
+burn’t 1kUSD beim User,
 
-out == expectedNetTokenOut,
+zieht Collateral aus dem Vault ab und sendet es an user.
 
-Δ collateralBalance(user) == expectedNetTokenOut.
+3.2 Detail-Steps
+Im Code (vereinfacht):
 
-Damit wird abgesichert:
+Pause-Check & Oracle
 
-die Redeem-Flows erzeugen keine „Extra“-Tokens,
+solidity
+Code kopieren
+require(amountIn1k > 0, "PSM: amountIn=0");
+_requireOracleHealthy(tokenOut);
+(uint256 px, uint8 pxDec) = _getPrice(tokenOut);
+Decimals + Fee
 
-Fees werden korrekt abgezogen,
+solidity
+Code kopieren
+uint8 tokenOutDecimals = _getTokenDecimals(tokenOut);
 
-Vault-Balances und User-Balances passen zusammen.
+(uint256 notional1k, uint256 fee1k, uint256 netTokenOut) =
+    _computeSwapFrom1kUSD(tokenOut, amountIn1k, feeBps, tokenOutDecimals);
+Limits
 
-4.3 Limits & Notional
-Aus PSMRegression_Limits.t.sol:
+solidity
+Code kopieren
+_enforceLimits(notional1k);
+Burn + Vault-Withdraw
 
-Swaps über singleTxCap revertieren deterministisch.
+solidity
+Code kopieren
+oneKUSD.burn(msg.sender, amountIn1k);
+vault.withdraw(tokenOut, address(this), netTokenOut, bytes32("PSM_REDEEM"));
+IERC20(tokenOut).safeTransfer(to, netTokenOut);
+3.3 Invarianten (Redeem)
+In PSMRegression_Flows.t.sol::testRoundTrip_MintThenRedeem():
 
-Tages-Volumen über dailyCap revertiert.
+Bei 1:1-Preis, Fee = 0:
 
-vm.warp(+1 days) resetet die dailyCap sauber.
+Der Roundtrip COL → 1kUSD → COL stellt die Collateral-Balance des Users
+wieder auf den Ursprungswert her (abzüglich evtl. Test-Dust).
 
-Wichtig:
-Alle Limits operieren auf 1kUSD-Notional (18 Decimals), wodurch
-Decimals-Unterschiede zwischen Collaterals keinen Einfluss auf die
-Risiko-Logik haben.
+1kUSD.totalSupply kehrt auf den ursprünglichen Wert zurück.
 
-4.4 Fees – Registry & Fallbacks
-Aus PSMRegression_Fees.t.sol:
+In PSMRegression_Fees.t.sol::testRedeemUsesGlobalRegistryFee():
 
-testMintUsesGlobalRegistryFee
+Bei Redeem-Fee > 0:
 
-Setzt psm:mintFeeBps und erzwingt, dass Mint-Flow diese Fee nutzt
-(auch bei setFees(0, 0) im PSM selbst).
+expectedFee1k = amountIn1k * feeBps / 10_000
 
-testMintPerTokenOverrideBeatsGlobal
+netTokenOut == amountIn1k - expectedFee1k (bei 1:1-Preis).
 
-Per-Token Override überschreibt den globalen Wert, wenn > 0.
+Die Collateral-Balance des Users steigt genau um netTokenOut.
 
-testRedeemUsesGlobalRegistryFee
+4. Limits & Notional-Layer
+PSMLimits arbeitet immer auf der 1kUSD-Notional-Ebene:
 
-Redeem-Flow nutzt den globalen Registry-Wert für Redeem-Fee.
+singleTxCap:
 
-Damit ist garantiert:
+maximaler 1kUSD-Wert pro Transaktion.
 
-Registry-basierte Konfiguration ist führend,
+dailyCap:
 
-per-Token-Overrides funktionieren wie erwartet,
+maximaler 1kUSD-Wert pro Tag (aufsummiert).
 
-PSM-Storage dient nur als letzter Fallback.
+Die Regressions-Tests in PSMRegression_Limits.t.sol prüfen u. a.:
 
-4.5 Oracle-Health & Safety
-Aus OracleRegression_Health.t.sol und OracleRegression_Watcher.t.sol:
+testSingleTxLimitReverts():
 
-maxDiffBps begrenzt die relative Preisänderung je Update.
+Swaps oberhalb singleTxCap revertieren.
 
-maxStale begrenzt die Lebensdauer eines Preises.
+testDailyCapReverts():
 
-Bei Verletzung:
+Wiederholte Swaps, die kumuliert dailyCap überschreiten, revertieren.
 
-Oracle wird als unhealthy markiert.
+testDailyReset():
 
-OracleWatcher meldet schlechten Zustand.
+Nach vm.warp(+1 days) wird das Tagesvolumen zurückgesetzt.
 
-Guardian-/Safety-Pfade können den PSM pausieren.
+5. Oracle-Health & Guardian-Integration
+5.1 OracleAggregator Health (DEV-49)
+Der OracleAggregator markiert Preise als unhealthy, wenn:
 
-Dadurch ist sichergestellt, dass:
+die Zeit seit p.timestamp größer als oracle:maxStale ist (sofern > 0), oder
 
-PSM-Swaps nicht auf extrem alten oder manipulierten Preisen basieren,
+der relative Preis-Sprung größer als oracle:maxDiffBps ist.
 
-Pausierungsketten (Safety → Oracle → PSM) funktionieren,
+Die Tests in OracleRegression_Health.t.sol decken folgende Szenarien ab:
 
-der PSM in kritischen Situationen deterministisch stoppt.
+testMaxDiffBpsAllowsSmallJump()
 
-5. Zusammenfassung
-Der aktuelle Stand (DEV-43 → DEV-49) implementiert:
+testMaxDiffBpsMarksLargeJumpUnhealthy()
 
-vollständige Mint- und Redeem-Flows mit Vault-Integration,
+testMaxStaleMarksOldPriceUnhealthy()
 
-Registry-gesteuerte Decimals und Fees,
+testMaxStaleZeroDoesNotAlterHealth()
 
-Notional-basiertes Limit-Checking,
+5.2 Guardian / SafetyAutomata
+Die Guardian-Tests stellen sicher, dass:
 
-Oracle-Health-Gates mit stale/diff-Checks,
+Pausieren des ORACLE-Moduls die Watcher-Health beeinflusst und
+über Guardian-Pfade propagiert wird.
 
-und eine Serie von Regression-Tests, die die oben beschriebenen
-Invarianten explizit kodieren.
+Pausieren des PSM-Moduls Swaps blockiert (Guardian_PSMEnforcement).
 
-Dieses Dokument dient als Referenz für Auditoren und Governance, um die
-Flow-Logik und die garantierten Invarianten des PSM-Stacks nachvollziehen
-zu können.
+Guardian_PSMUnpause nach einem resumeModule() den PSM-Betrieb wieder
+erlaubt; verifiziert u. a. mit einem erfolgreichen swapTo1kUSD.
+
+6. Test-Matrix (Kurzreferenz)
+Flows:
+
+foundry/test/psm/PSMRegression_Flows.t.sol
+
+Limits:
+
+foundry/test/psm/PSMRegression_Limits.t.sol
+
+Fees:
+
+foundry/test/psm/PSMRegression_Fees.t.sol
+
+Oracle Health:
+
+foundry/test/oracle/OracleRegression_Health.t.sol
+
+foundry/test/oracle/OracleRegression_Watcher.t.sol
+
+Guardian:
+
+foundry/test/Guardian_OraclePropagation.t.sol
+
+foundry/test/Guardian_PSMEnforcement.t.sol
+
+foundry/test/Guardian_PSMUnpause.t.sol
+
+foundry/test/Guardian_Integration.t.sol
+
+Dieses Dokument dient als Referenz, welche Flows existieren, welche
+Invarianten gelten und wo sie in den Tests verankert sind. Neue Features
+(weitere Collaterals, Spread-Modelle, komplexere Fees) sollten ihre eigenen
+Invarianten klar gegenüber diesem Kern definieren.
