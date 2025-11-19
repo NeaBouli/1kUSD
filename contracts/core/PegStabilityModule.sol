@@ -106,6 +106,27 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
 
     // -------------------------------------------------------------
     // 🔧 Internal helpers — price & normalization
+    // DEV-47: token-decimals lookup via ParameterRegistry (token-spezifisch).
+    bytes32 private constant KEY_TOKEN_DECIMALS = keccak256("psm:tokenDecimals");
+
+    function _tokenDecimalsKey(address token) internal pure returns (bytes32) {
+        return keccak256(abi.encode(KEY_TOKEN_DECIMALS, token));
+    }
+
+    function _getTokenDecimals(address token) internal view returns (uint8) {
+        // Fallback: keine Registry hinterlegt → 18 Decimals.
+        if (address(registry) == address(0)) {
+            return 18;
+        }
+        uint256 raw = registry.getUint(_tokenDecimalsKey(token));
+        if (raw == 0) {
+            // Fallback für nicht konfigurierte Assets: 18 Decimals.
+            return 18;
+        }
+        require(raw <= type(uint8).max, "PSM: bad tokenDecimals");
+        return uint8(raw);
+    }
+
     // -------------------------------------------------------------
 
     /// @notice Fetch price for an asset from the oracle.
@@ -256,7 +277,7 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         _requireOracleHealthy(tokenIn);
 
         // For DEV-44 we assume 18 decimals for tokenIn until registry wiring is added.
-        uint8 tokenInDecimals = 18;
+        uint8 tokenInDecimals = _getTokenDecimals(tokenIn);
 
         (uint256 notional1k, uint256 fee1k, uint256 net1k) =
             _computeSwapTo1kUSD(tokenIn, amountIn, uint16(mintFeeBps), tokenInDecimals);
@@ -297,7 +318,7 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         _requireOracleHealthy(tokenOut);
 
         // For DEV-44 we assume 18 decimals for 1kUSD and derive tokenOut via oracle.
-        uint8 tokenOutDecimals = 18;
+        uint8 tokenOutDecimals = _getTokenDecimals(tokenOut);
 
         (uint256 notional1k, uint256 fee1k, uint256 netTokenOut) =
             _computeSwapFrom1kUSD(tokenOut, amountIn1k, uint16(redeemFeeBps), tokenOutDecimals);
