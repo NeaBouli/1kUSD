@@ -1,3 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+FILE="contracts/core/OracleAggregator.sol"
+
+echo "== DEV49 CORE01: rewrite OracleAggregator with stale/diff health gates =="
+
+cat <<'SOL' > "$FILE"
 // SPDX-License-Identifier: AGPL-3.0
 pragma solidity ^0.8.30;
 
@@ -155,3 +163,6 @@ contract OracleAggregator is IOracleAggregator {
         return p;
     }
 }
+SOL
+
+echo "✓ DEV49 CORE01: OracleAggregator now applies registry-based stale/diff health checks"
