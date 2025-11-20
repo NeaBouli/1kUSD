@@ -80,13 +80,19 @@ contract PSMRegression_Spreads is Test {
     }
 
     function _setMintSpread(address token, uint256 bps) internal {
+        // For regression we set both per-token and global spread.
         vm.prank(dao);
         registry.setUint(_mintSpreadKey(token), bps);
+        vm.prank(dao);
+        registry.setUint(KEY_MINT_SPREAD_BPS, bps);
     }
 
     function _setRedeemSpread(address token, uint256 bps) internal {
+        // Same pattern for redeem spreads.
         vm.prank(dao);
         registry.setUint(_redeemSpreadKey(token), bps);
+        vm.prank(dao);
+        registry.setUint(KEY_REDEEM_SPREAD_BPS, bps);
     }
 
     function _fundUserCollateral(uint256 amount) internal {
