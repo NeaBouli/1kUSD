@@ -325,9 +325,8 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         // For DEV-44 we assume 18 decimals for tokenIn until registry wiring is added.
         uint8 tokenInDecimals = _getTokenDecimals(tokenIn);
 
-        uint16 feeBps = _getMintFeeBps(tokenIn);
-        uint16 spreadBps = _getMintSpreadBps(tokenIn);
-        uint256 totalBps = uint256(feeBps) + uint256(spreadBps);
+        uint256 totalBps =
+            uint256(_getMintFeeBps(tokenIn)) + uint256(_getMintSpreadBps(tokenIn));
         require(totalBps <= 10_000, "PSM: fee+spread too high");
 
         (uint256 notional1k, uint256 fee1k, uint256 net1k) =
@@ -372,9 +371,8 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         // For DEV-44 we assume 18 decimals for 1kUSD and derive tokenOut via oracle.
         uint8 tokenOutDecimals = _getTokenDecimals(tokenOut);
 
-        uint16 feeBps = _getRedeemFeeBps(tokenOut);
-        uint16 spreadBps = _getRedeemSpreadBps(tokenOut);
-        uint256 totalBps = uint256(feeBps) + uint256(spreadBps);
+        uint256 totalBps =
+            uint256(_getRedeemFeeBps(tokenOut)) + uint256(_getRedeemSpreadBps(tokenOut));
         require(totalBps <= 10_000, "PSM: fee+spread too high");
 
         (uint256 notional1k, uint256 fee1k, uint256 netTokenOut) =
