@@ -344,3 +344,50 @@ Ein Verstoß gegen diese Invariante führt zu einem Revert (`"PSM: fee+spread to
   - Verifiziert, dass sowohl Mint- als auch Redeem-Pfade die konfigurierten
     Spreads korrekt anwenden und der effektive `netOut` exakt mit der
     Summe aus Fee- und Spread-Belastung übereinstimmt.
+
+---
+
+## 4. Mint/Redeem Spreads (DEV-52)
+
+Neben den Fees stellt der PSM eine zweite ökonomische Stellschraube bereit:
+**Spreads**. Sie erlauben z.B. zusätzliche Basis-Punkte auf bestimmte Collaterals
+(z.B. illiquide oder riskantere Assets), ohne die globale Fee-Politik zu ändern.
+
+### 4.1 Registry Keys
+
+- **Globale Spreads**
+  - `psm:mintSpreadBps` — zusätzlicher Spread in Basis-Punkten auf der Mint-Seite
+    (on top of `psm:mintFeeBps`).
+  - `psm:redeemSpreadBps` — zusätzlicher Spread in Basis-Punkten auf der Redeem-Seite
+    (on top of `psm:redeemFeeBps`).
+
+- **Per-Token Spreads**
+  - `keccak256(abi.encode("psm:mintSpreadBps", token))`
+  - `keccak256(abi.encode("psm:redeemSpreadBps", token))`
+
+### 4.2 Auflösungs-Reihenfolge (Resolution Order)
+
+Für einen gegebenen Swap gelten folgende Regeln:
+
+1. Wenn ein **per-Token Spread** (`token`-spezifischer Key) > 0 konfiguriert ist,
+   wird dieser verwendet.
+2. Sonst, wenn ein **globaler Spread** (`psm:mintSpreadBps` / `psm:redeemSpreadBps`)
+   > 0 konfiguriert ist, wird dieser verwendet.
+3. Falls weder per-Token noch globale Spreads gesetzt sind, wird implizit **0 bps**
+   angenommen.
+
+Der effektive Spread wird immer **zusätzlich** zum Fee-Layer gerechnet:
+
+- Mint: `totalBps = mintFeeBps + mintSpreadBps`
+- Redeem: `totalBps = redeemFeeBps + redeemSpreadBps`
+
+### 4.3 Invarianten & Safety
+
+- Der PSM erzwingt, dass `feeBps + spreadBps <= 10_000` (max. 100 %),
+  um Fehlkonfigurationen zu verhindern.
+- Spreads wirken sowohl in **`swapTo1kUSD` / `swapFrom1kUSD`** als auch in den
+  zugehörigen **Quote-Funktionen**, so dass Frontends konsistente Werte anzeigen können.
+- Die Testsuite **`PSMRegression_Spreads`** verifiziert u.a.:
+  - Mint-Spreads pro Token (per-Token Override),
+  - Redeem-Spreads pro Token,
+  - Korrekte Anwendung auf 1:1 Collateral bei Oracle-Fallback (Preis = 1.0).

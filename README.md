@@ -644,3 +644,16 @@ This behaviour is covered by the dedicated `PSMRegression_Spreads` suite,
 alongside `PSMRegression_Fees` and `PSMRegression_Flows`, giving a complete
 economic regression harness for the PSM.
 
+
+### PSM spreads (DEV-52)
+
+On top of the registry-driven fee layer, the PSM supports **mint/redeem spreads**:
+
+- Global keys: `psm:mintSpreadBps`, `psm:redeemSpreadBps`
+- Per-token overrides via `keccak256(abi.encode("psm:mintSpreadBps", token))` and
+  `keccak256(abi.encode("psm:redeemSpreadBps", token))`
+- Resolution: per-token > global > implicit 0
+- Safety: the contract enforces `feeBps + spreadBps <= 10_000`
+
+Regression suite:
+- `PSMRegression_Spreads` covers mint/redeem behavior with spreads on top of fees.
