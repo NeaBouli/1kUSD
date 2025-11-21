@@ -277,3 +277,4 @@
 [DEV-52] 2025-11-21T07:41:37Z PSM: registry-driven mint/redeem spreads (global + per-token) layered on top of feeBps; spreads applied via _getMintSpreadBps/_getRedeemSpreadBps with 10_000 bps cap; PSMRegression_Spreads verifies mint+redeem netOut honour configured spreads; full suite 42 tests green.
 [DEV-52] 2025-11-21T08:19:03Z PSM: registry-driven mint/redeem spreads (global + per-token) wired on top of fee layer; invariants enforced (fee+spread <= 10_000); PSMRegression_Spreads added alongside Fees/Flows/Limits; full suite at 42 tests green.
 [DEV-53] 2025-11-21T08:24:34Z Docs: documented PSM mint/redeem spreads (registry keys, resolution order, invariants) in psm_parameters.md and README; Economic Layer docs aligned with v0.50.0.
+[DEV-54] 2025-11-21T08:32:49Z Docs: added governance/parameter_playbook.md (DE) describing PSM fees/spreads/decimals, PSMLimits caps, oracle health thresholds and admin/registry roles for DAO/Risk Council.
