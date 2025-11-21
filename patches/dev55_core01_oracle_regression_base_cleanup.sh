@@ -1,3 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+FILE="foundry/test/oracle/OracleRegression_Base.t.sol"
+
+echo "== DEV55 CORE01: clean up OracleRegression_Base harness =="
+
+cat <<'SOL' > "$FILE"
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.30;
 
@@ -37,3 +45,6 @@ contract OracleRegression_Base is Test {
         aggregator = new OracleAggregator(admin, safetyImpl, registryImpl);
     }
 }
+SOL
+
+echo "✓ OracleRegression_Base cleaned up and simplified"
