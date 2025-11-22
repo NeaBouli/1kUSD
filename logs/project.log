@@ -283,3 +283,6 @@
 [DEV-55] 2025-11-22T07:41:57Z Oracle: regression harness cleaned up (OracleRegression_Base with fresh Safety+Registry per test) and watcher refresh semantics aligned with health model; all Oracle regression suites green.
 [DEV-56] 2025-11-22T07:41:57Z Docs: README now links Governance Parameter Playbook, PSM parameter map and Economic Layer docs (decimals/fees/spreads + Oracle health gates) under a dedicated Governance & Parameters section.
 [DEV-58] 2025-11-22T09:24:35Z Governance How-To (parameter_howto.md) written and linked to existing playbook
+[DEV-55] 2025-11-22T09:41:30Z Oracle tests: OracleRegression_Base harness aufgeräumt, Watcher-Refresh-Test an Health-Semantik angepasst; Oracle-Health-Stack weiter stabilisiert.
+[DEV-56] 2025-11-22T09:41:30Z README: Governance- und Parameter-Dokumente (Playbook, PSM-Parameter-Map, Economic Layer) direkt verlinkt.
+[DEV-57] 2025-11-22T09:41:30Z Governance: docs/governance/index.md als Einstiegspunkt für Playbook & How-To angelegt (DE, rollenbasiert für DAO/Risk/Treasury).
