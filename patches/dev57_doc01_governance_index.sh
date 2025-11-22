@@ -1,3 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+FILE="docs/governance/index.md"
+
+echo "== DEV57 DOC01: write Governance overview index (DE) =="
+
+mkdir -p "$(dirname "$FILE")"
+
+cat <<'EOL' > "$FILE"
 # Governance Overview & Einstieg
 
 Dieses Verzeichnis bündelt alle Governance-relevanten Unterlagen für das 1kUSD-Protokoll.
@@ -121,3 +131,6 @@ Typische Governance-Aktionen (vereinfachte Checkliste):
 
 Dieses Index-Dokument soll als Startpunkt dienen – Details, Formeln und
 Corner-Cases stehen jeweils in den verlinkten Spezial-Dokumenten.
+EOL
+
+echo "✓ Governance overview index written to $FILE"
