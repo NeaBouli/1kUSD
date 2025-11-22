@@ -673,3 +673,11 @@ Regression suite:
 
 - **Governance Parameter How-To (DE):** \`docs/governance/parameter_howto.md\`
 
+
+### Governance-Proposal-Template
+
+Für PSM-/Oracle-Parameter-Änderungen existiert ein JSON-Template unter:
+
+- \`docs/governance/proposals/psm_parameter_change_template.json\`
+
+Es kann als Basis für On-Chain-Governance-Vorschläge und Off-Chain-Reviews dienen.

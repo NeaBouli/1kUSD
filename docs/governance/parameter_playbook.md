@@ -267,3 +267,17 @@ Wesentliche Parameter:
   - `maxDiffBps` und `maxStale` Verhalten.
 - **Guardian-Tests**
   - Propagation von Pausen/Unpausen in PSM und Oracle.
+
+---
+
+## Proposal-Template
+
+Für formale Änderungsanträge zu PSM- und Oracle-Parametern kann folgendes JSON-Template verwendet werden:
+
+- \`docs/governance/proposals/psm_parameter_change_template.json\`
+
+Dieses Template beschreibt:
+- Meta-Daten (ID, Netzwerk, Autor),
+- Motivation und Risikoanalyse,
+- konkrete Parameter-Änderungen (Fees, Spreads, Limits, Oracle-Health),
+- sowie Governance- und Ausführungspfad.
