@@ -286,3 +286,4 @@
 [DEV-55] 2025-11-22T09:41:30Z Oracle tests: OracleRegression_Base harness aufgeräumt, Watcher-Refresh-Test an Health-Semantik angepasst; Oracle-Health-Stack weiter stabilisiert.
 [DEV-56] 2025-11-22T09:41:30Z README: Governance- und Parameter-Dokumente (Playbook, PSM-Parameter-Map, Economic Layer) direkt verlinkt.
 [DEV-57] 2025-11-22T09:41:30Z Governance: docs/governance/index.md als Einstiegspunkt für Playbook & How-To angelegt (DE, rollenbasiert für DAO/Risk/Treasury).
+[DEV-58] 2025-11-22T19:16:49Z Governance: added JSON template for PSM/Oracle parameter change proposals under docs/governance/proposals/psm_parameter_change_template.json.
