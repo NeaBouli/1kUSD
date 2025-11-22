@@ -657,3 +657,12 @@ On top of the registry-driven fee layer, the PSM supports **mint/redeem spreads*
 
 Regression suite:
 - `PSMRegression_Spreads` covers mint/redeem behavior with spreads on top of fees.
+
+## Governance & Parameters
+
+- **Governance Parameter Playbook (DE):** \`docs/governance/parameter_playbook.md\`
+- **PSM Parameter & Registry Map:** \`docs/architecture/psm_parameters.md\`
+- **Economic Layer (PSM + Oracle Health):**
+  - PSM decimals/fees/spreads: \`docs/architecture/psm_dev43-45.md\`
+  - Oracle health gates (stale/diff): Oracle-Abschnitt in dieser README
+
