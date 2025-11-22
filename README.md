@@ -666,3 +666,8 @@ Regression suite:
   - PSM decimals/fees/spreads: \`docs/architecture/psm_dev43-45.md\`
   - Oracle health gates (stale/diff): Oracle-Abschnitt in dieser README
 
+
+### Further reading
+
+- **Governance Parameter How-To (DE):** \`docs/governance/parameter_howto.md\`
+
