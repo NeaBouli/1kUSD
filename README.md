@@ -660,6 +660,8 @@ Regression suite:
 
 ## Governance & Parameters
 
+- **Governance Overview (DE):** `docs/governance/index.md`
+
 - **Governance Parameter Playbook (DE):** \`docs/governance/parameter_playbook.md\`
 - **PSM Parameter & Registry Map:** \`docs/architecture/psm_parameters.md\`
 - **Economic Layer (PSM + Oracle Health):**
