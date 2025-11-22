@@ -282,3 +282,4 @@
 [DEV-52] 2025-11-22T07:41:57Z PSM: registry-driven spreads added on top of mint/redeem fees (global + per-token), stack-too-deep resolved via local reduction; PSMRegression_Spreads covers mint+redeem spreads.
 [DEV-55] 2025-11-22T07:41:57Z Oracle: regression harness cleaned up (OracleRegression_Base with fresh Safety+Registry per test) and watcher refresh semantics aligned with health model; all Oracle regression suites green.
 [DEV-56] 2025-11-22T07:41:57Z Docs: README now links Governance Parameter Playbook, PSM parameter map and Economic Layer docs (decimals/fees/spreads + Oracle health gates) under a dedicated Governance & Parameters section.
+[DEV-58] 2025-11-22T09:24:35Z Governance How-To (parameter_howto.md) written and linked to existing playbook
