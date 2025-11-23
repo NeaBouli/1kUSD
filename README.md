@@ -690,3 +690,7 @@ Es kann als Basis für On-Chain-Governance-Vorschläge und Off-Chain-Reviews die
 ## Treasury Buybacks
 
 - **BuybackVault Plan & Debug Notes:** `docs/architecture/buybackvault_plan.md`
+
+## Treasury Buybacks
+
+- **BuybackVault Plan & Debug Notes:** `docs/architecture/buybackvault_plan.md`
