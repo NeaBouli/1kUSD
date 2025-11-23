@@ -681,3 +681,8 @@ Für PSM-/Oracle-Parameter-Änderungen existiert ein JSON-Template unter:
 - \`docs/governance/proposals/psm_parameter_change_template.json\`
 
 Es kann als Basis für On-Chain-Governance-Vorschläge und Off-Chain-Reviews dienen.
+
+## Buyback & Treasury Vault
+
+- **BuybackVault Architektur & Plan:** \`docs/architecture/buybackvault_plan.md\`
+  - Enthält Zielbild, Rollenmodell (DAO / Treasury / Safety) und aktuellen Implementierungsstatus (DEV-60: Core-Skeleton + Access-/Pause-Tests).
