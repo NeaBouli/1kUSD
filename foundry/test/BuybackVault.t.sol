@@ -18,14 +18,14 @@ contract MockToken is ERC20 {
 
 /// @dev Minimal SafetyAutomata-Stub für BuybackVault-Tests.
 ///      Implementiert nur isPaused(moduleId); Pause-Flag wird lokal gehalten.
-contract SafetyStub is ISafetyAutomata {
+contract SafetyStub {
     mapping(bytes32 => bool) internal paused;
 
     function setPaused(bytes32 moduleId, bool value) external {
         paused[moduleId] = value;
     }
 
-    function isPaused(bytes32 moduleId) external view override returns (bool) {
+    function isPaused(bytes32 moduleId) external view returns (bool) {
         return paused[moduleId];
     }
 }
