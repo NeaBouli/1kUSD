@@ -694,3 +694,16 @@ Es kann als Basis für On-Chain-Governance-Vorschläge und Off-Chain-Reviews die
 ## Treasury Buybacks
 
 - **BuybackVault Plan & Debug Notes:** `docs/architecture/buybackvault_plan.md`
+
+## Treasury Buybacks
+
+- Core contract: `contracts/core/BuybackVault.sol`
+- Debug & Architecture Plan: `docs/architecture/buybackvault_plan.md`
+
+For the current v0.50.x Economic Layer, BuybackVault implements:
+- Custody of the protocol stablecoin (1kUSD) and a target asset.
+- DAO-only funding via `fundStable`, optionally gated by `SafetyAutomata` (global pause).
+- DAO-only withdrawals via `withdrawStable` / `withdrawAsset`.
+
+On-chain execution of actual DEX buybacks will be added in a later phase;
+the current version focuses on secure custody, access control and pause wiring.
