@@ -289,3 +289,4 @@
 [DEV-58] 2025-11-22T19:16:49Z Governance: added JSON template for PSM/Oracle parameter change proposals under docs/governance/proposals/psm_parameter_change_template.json.
 [DEV-58] 2025-11-22T19:22:49Z Governance: added psm_parameter_change_template.json and linked it from parameter_playbook + README as canonical proposal format for PSM/Oracle parameter changes.
 [DEV-60] 2025-11-23T06:50:50Z BuybackVault: core skeleton implemented (stable/asset funding, DAO-only withdraws, SafetyAutomata-backed pause); BuybackVault.t.sol covers ctor guards, DAO access, pause enforcement and balance views; full suite at 53 tests green.
+[DEV-60] 2025-11-23T10:37:52Z BuybackVault: core skeleton deployed (DAO-owned vault with stable/asset, SafetyAutomata isPaused gating) plus 11 regression tests for constructor/DAO-only funding & withdrawals, pause enforcement and balance views; full Foundry suite at 53 tests green.
