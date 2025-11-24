@@ -731,3 +731,13 @@ The BuybackVault is a DAO-controlled custody vault for 1kUSD and the buyback ass
 It is guarded by the SafetyAutomata pause module and is designed to later plug into
 on-chain buyback execution strategies (DEX/auction), while already providing
 a clear, test-covered custody layer for Treasury buyback funds.
+
+## Buyback Vault
+
+Das BuybackVault-Modul bildet die Brücke zwischen Treasury-Stablecoins und dem Asset,
+das langfristig zurückgekauft werden soll (z. B. 1kUSD LP-Token oder Governance-Token).
+
+- **Architekturplan:** \`docs/architecture/buybackvault_plan.md\`
+- **Implementierungsstatus:** Stage A (Custody & Safety) implementiert, Stage B/C (Swap-Routing & Automatisierung) geplant.
+- **Regression-Tests:** \`foundry/test/BuybackVault.t.sol\` (Constructor-Guards, DAO-only, Pause-Hooks, Balance-Views)
+
