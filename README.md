@@ -720,3 +720,14 @@ For the current v0.50.x Economic Layer, BuybackVault implements:
 
 On-chain execution of actual DEX buybacks will be added in a later phase;
 the current version focuses on secure custody, access control and pause wiring.
+
+## Treasury Buybacks / BuybackVault
+
+- **Architecture plan:** `docs/architecture/buybackvault_plan.md`
+- **Contract:** `contracts/core/BuybackVault.sol`
+- **Tests:** `foundry/test/BuybackVault.t.sol`
+
+The BuybackVault is a DAO-controlled custody vault for 1kUSD and the buyback asset.
+It is guarded by the SafetyAutomata pause module and is designed to later plug into
+on-chain buyback execution strategies (DEX/auction), while already providing
+a clear, test-covered custody layer for Treasury buyback funds.
