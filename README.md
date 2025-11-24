@@ -741,3 +741,9 @@ das langfristig zurückgekauft werden soll (z. B. 1kUSD LP-Token oder Governance
 - **Implementierungsstatus:** Stage A (Custody & Safety) implementiert, Stage B/C (Swap-Routing & Automatisierung) geplant.
 - **Regression-Tests:** \`foundry/test/BuybackVault.t.sol\` (Constructor-Guards, DAO-only, Pause-Hooks, Balance-Views)
 
+
+### BuybackVault
+
+- Core contract: `contracts/core/BuybackVault.sol`
+- Tests: `foundry/test/BuybackVault.t.sol`
+- Execution plan (Stage B/C): `docs/architecture/buybackvault_execution.md`
