@@ -1,110 +1,136 @@
-// SPDX-License-Identifier: AGPL-3.0
-pragma solidity ^0.8.30;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
 
-import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
 
-/// @title BuybackVault
-/// @notice Minimal, safety-gated vault for protocol buybacks.
-/// @dev
-/// - Hält 1kUSD und ein Ziel-Asset (z.B. Governance- oder LP-Token).
-/// - Nur die DAO darf Mittel zuführen/abziehen.
-/// - Konkrete Buyback-Execution (DEX/PSM) wird in späteren DEV-Steps ergänzt.
+interface IPegStabilityModuleLike {
+    function swapFrom1kUSD(
+        address tokenOut,
+        uint256 amountIn1k,
+        address recipient,
+        uint256 minOut,
+        uint256 deadline
+    ) external returns (uint256 amountOut);
+}
+
 contract BuybackVault {
-    // --- Immutables & Storage ---
-
-    /// @notice Modul-ID für SafetyAutomata
-    bytes32 public constant MODULE_ID = keccak256("BUYBACK_VAULT");
-
-    /// @notice Governance/DAO-Admin
-    address public immutable dao;
-
-    /// @notice Safety-Modul, das pausierbare Operationen erzwingt
-    ISafetyAutomata public immutable safety;
-
-    /// @notice Stablecoin (1kUSD) für Buybacks
-    IERC20 public immutable stable;
-
-    /// @notice Ziel-Asset, das zurückgekauft werden soll (z.B. GOV- oder LP-Token)
-    IERC20 public immutable asset;
-
-    // --- Events ---
-
-    event FundStable(address indexed from, uint256 amount);
-    event WithdrawStable(address indexed to, uint256 amount);
-    event WithdrawAsset(address indexed to, uint256 amount);
-
-    // --- Errors ---
+    using SafeERC20 for IERC20;
 
     error ZERO_ADDRESS();
-    error ACCESS_DENIED();
+    error ZERO_AMOUNT();
+    error NOT_DAO();
     error PAUSED();
 
-    // --- Modifiers ---
+    IERC20 public immutable stable;
+    IERC20 public immutable asset;
+    address public immutable dao;
+    ISafetyAutomata public immutable safety;
+    IPegStabilityModuleLike public immutable psm;
+    uint8 public immutable moduleId;
+
+    event FundStable(uint256 amount);
+    event WithdrawStable(address indexed to, uint256 amount);
+    event WithdrawAsset(address indexed to, uint256 amount);
+    event BuybackExecuted(uint256 amount1k, uint256 amountAsset, address indexed recipient);
 
     modifier onlyDAO() {
-        if (msg.sender != dao) revert ACCESS_DENIED();
+        if (msg.sender != dao) revert NOT_DAO();
         _;
     }
 
     modifier notPaused() {
-        if (safety.isPaused(MODULE_ID)) revert PAUSED();
+        if (safety.isPaused(moduleId)) revert PAUSED();
         _;
     }
 
-    // --- Constructor ---
-
     constructor(
+        address _stable,
+        address _asset,
         address _dao,
-        ISafetyAutomata _safety,
-        IERC20 _stable,
-        IERC20 _asset
+        address _safety,
+        address _psm,
+        uint8 _moduleId
     ) {
-        if (_dao == address(0)) revert ZERO_ADDRESS();
-        if (address(_safety) == address(0)) revert ZERO_ADDRESS();
-        if (address(_stable) == address(0)) revert ZERO_ADDRESS();
-        if (address(_asset) == address(0)) revert ZERO_ADDRESS();
+        if (
+            _stable == address(0) ||
+            _asset == address(0) ||
+            _dao == address(0) ||
+            _safety == address(0) ||
+            _psm == address(0)
+        ) {
+            revert ZERO_ADDRESS();
+        }
 
+        stable = IERC20(_stable);
+        asset = IERC20(_asset);
         dao = _dao;
-        safety = _safety;
-        stable = _stable;
-        asset = _asset;
+        safety = ISafetyAutomata(_safety);
+        psm = IPegStabilityModuleLike(_psm);
+        moduleId = _moduleId;
     }
 
-    // --- Core API ---
+    // --- Stage A: Custody-Layer ---
 
-    /// @notice DAO funded den Vault mit 1kUSD (pull from DAO)
-    /// @dev DAO muss vorher `stable.approve(address(this), amount)` gesetzt haben.
     function fundStable(uint256 amount) external onlyDAO notPaused {
-        if (amount == 0) return;
-        stable.transferFrom(msg.sender, address(this), amount);
-        emit FundStable(msg.sender, amount);
+        if (amount == 0) revert ZERO_AMOUNT();
+        stable.safeTransferFrom(msg.sender, address(this), amount);
+        emit FundStable(amount);
     }
 
-    /// @notice DAO kann 1kUSD aus dem Vault abziehen (z.B. bei Strategie-Wechsel)
-    function withdrawStable(address to, uint256 amount) external onlyDAO {
+    function withdrawStable(address to, uint256 amount) external onlyDAO notPaused {
         if (to == address(0)) revert ZERO_ADDRESS();
-        if (amount == 0) return;
-        stable.transfer(to, amount);
+        if (amount == 0) revert ZERO_AMOUNT();
+        stable.safeTransfer(to, amount);
         emit WithdrawStable(to, amount);
     }
 
-    /// @notice DAO kann das Ziel-Asset aus dem Vault abziehen
-    function withdrawAsset(address to, uint256 amount) external onlyDAO {
+    function withdrawAsset(address to, uint256 amount) external onlyDAO notPaused {
         if (to == address(0)) revert ZERO_ADDRESS();
-        if (amount == 0) return;
-        asset.transfer(to, amount);
+        if (amount == 0) revert ZERO_AMOUNT();
+        asset.safeTransfer(to, amount);
         emit WithdrawAsset(to, amount);
     }
 
-    // --- View Helpers ---
+    // --- Stage B: PSM-basierter Buyback-Execution-Endpunkt ---
 
-    /// @notice Aktueller 1kUSD-Bestand im Vault
+    /// @notice Führt einen DAO-gesteuerten Buyback via PSM aus:
+    ///         1kUSD -> Buyback-Asset (asset)
+    /// @param amount1k  Notional in 1kUSD, der aus dem Vault verwendet wird
+    /// @param recipient Empfänger des gekauften Assets (z.B. Treasury, Burn-Box)
+    /// @param minOut    Mindestmenge des Assets (Slippage-Grenze)
+    /// @param deadline  Swap-Deadline (wird direkt an den PSM weitergereicht)
+    function executeBuybackPSM(
+        uint256 amount1k,
+        address recipient,
+        uint256 minOut,
+        uint256 deadline
+    ) external onlyDAO notPaused returns (uint256 amountAssetOut) {
+        if (recipient == address(0)) revert ZERO_ADDRESS();
+        if (amount1k == 0) revert ZERO_AMOUNT();
+
+        // Vault genehmigt dem PSM, 1kUSD zu ziehen
+        stable.safeIncreaseAllowance(address(psm), amount1k);
+
+        // PSM: 1kUSD -> Asset, alle Fees/Spreads/Limits/Health werden dort erzwungen
+        amountAssetOut = psm.swapFrom1kUSD(
+            address(asset),
+            amount1k,
+            recipient,
+            minOut,
+            deadline
+        );
+
+        emit BuybackExecuted(amount1k, amountAssetOut, recipient);
+    }
+
+    // --- Views ---
+
     function stableBalance() external view returns (uint256) {
         return stable.balanceOf(address(this));
     }
 
-    /// @notice Aktueller Ziel-Asset-Bestand im Vault
     function assetBalance() external view returns (uint256) {
         return asset.balanceOf(address(this));
     }
