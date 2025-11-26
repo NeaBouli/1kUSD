@@ -747,3 +747,9 @@ das langfristig zurückgekauft werden soll (z. B. 1kUSD LP-Token oder Governance
 - Core contract: `contracts/core/BuybackVault.sol`
 - Tests: `foundry/test/BuybackVault.t.sol`
 - Execution plan (Stage B/C): `docs/architecture/buybackvault_execution.md`
+
+### Buyback Vault
+
+- Architecture & design notes: \`docs/architecture/buybackvault_plan.md\`
+- Status: MVP integrated with PSM via \`executeBuybackPSM\`, guarded by \`SafetyAutomata\` (bytes32 moduleId) und \`onlyDAO\`.
+
