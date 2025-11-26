@@ -253,3 +253,16 @@ Diese Checkliste spiegelt den aktuellen Stand im Repo wider:
   - Langfristig: Watchdog/Guardian, der Buybacks pausiert, wenn Oracle/Safety-Signale kritisch werden.
 
 Hinweis: Stage A ist mit DEV-60/61 abgeschlossen, Stage B und C sind bewusst als nächste Iterationen offen gelassen.
+
+## DEV-61: PSM-basierte Buyback-Execution (MVP)
+
+Status:
+- BuybackVault hält 1kUSD-Stable (\`stable\`) und das Buyback-Asset (\`asset\`).
+- \`executeBuybackPSM(uint256 amount1k, address recipient, uint256 minOut, uint256 deadline)\`:
+  - nur \`dao\` darf aufrufen (\`onlyDAO\`).
+  - Safety-Gate via \`ISafetyAutomata.isPaused(bytes32 moduleId)\`; \`moduleId = keccak256("BUYBACK_VAULT")\`.
+  - Vault erhöht Allowance für den PSM und ruft
+    \`psm.swapFrom1kUSD(address(asset), amount1k, recipient, minOut, deadline)\`.
+  - Fees/Spreads/Limits/Oracle-Health liegen vollständig im PSM; Vault ist "blinder" Ausführungs-Endpunkt.
+- Tests: \`BuybackVault.t.sol\` deckt Constructor-Guards, Access-Control, Pause-Handling und PSM-Execution (1:1 Stub) ab.
+
