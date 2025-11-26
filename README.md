@@ -753,3 +753,13 @@ das langfristig zurückgekauft werden soll (z. B. 1kUSD LP-Token oder Governance
 - Architecture & design notes: \`docs/architecture/buybackvault_plan.md\`
 - Status: MVP integrated with PSM via \`executeBuybackPSM\`, guarded by \`SafetyAutomata\` (bytes32 moduleId) und \`onlyDAO\`.
 
+
+## BuybackVault Telemetry
+
+Buyback-bezogene Onchain-Aktivitäten des BuybackVault sollen über den
+Indexing-Stack beobachtet werden:
+
+- Detail-Spezifikation der geplanten Events (StableFunded, BuybackExecuted,
+  StableWithdrawn, AssetWithdrawn): `indexer/docs/BUYBACKVAULT_TELEMETRY.md`
+- Einbettung in den globalen Indexing/Telemetry-Stack:
+  `indexer/docs/INDEXING_TELEMETRY.md`
