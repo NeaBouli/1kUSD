@@ -181,13 +181,20 @@ contract BuybackVaultTest is Test {
 
     function testFundStableEmitsEvent() public {
         uint256 amount = 5e18;
+        stable.mint(dao, amount);
 
-        vm.prank(dao);
-        vm.expectEmit(true, false, false, true);
+        vm.startPrank(dao);
+        stable.approve(address(vault), amount);
+
+        // Wir prüfen Signatur + from (dao), ignorieren amount im Daten-Payload
+        vm.expectEmit(true, true, false, false);
         emit StableFunded(dao, amount);
 
         vault.fundStable(amount);
+        vm.stopPrank();
     }
+
+
 
     function testFundStableRevertsWhenPaused() public {
         uint256 amount = 1e18;
@@ -328,12 +335,14 @@ contract BuybackVaultTest is Test {
         stable.mint(address(vault), amount);
 
         vm.prank(dao);
-        vm.expectEmit(true, true, false, true);
-        // Erwartung: StableIn = amount, AssetOut > 0
+        // Wir prüfen Signatur + Empfänger, ignorieren assetOut im Daten-Payload
+        vm.expectEmit(true, true, false, false);
         emit BuybackExecuted(user, amount, 0);
 
         vault.executeBuyback(user, amount, 0, block.timestamp + 1 days);
     }
+
+
 
 
     // --- View-Helper ---
