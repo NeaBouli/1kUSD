@@ -62,6 +62,12 @@ contract PSMStub is IPegStabilityModuleLike {
 }
 
 contract BuybackVaultTest is Test {
+    // Mirror BuybackVault events for vm.expectEmit
+    event StableFunded(address indexed from, uint256 amount);
+    event BuybackExecuted(address indexed recipient, uint256 stableIn, uint256 assetOut);
+    event StableWithdrawn(address indexed to, uint256 amount);
+    event AssetWithdrawn(address indexed to, uint256 amount);
+
     MintableToken internal stable;
     MintableToken internal asset;
     SafetyStub internal safety;
