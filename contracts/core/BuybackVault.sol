@@ -20,6 +20,21 @@ contract BuybackVault {
 
     error ZERO_ADDRESS();
     error ZERO_AMOUNT();
+
+    // --- Events ---
+
+    /// @notice DAO hat Stable-Tokens in den Vault eingezahlt.
+    event StableFunded(address indexed from, uint256 amount);
+
+    /// @notice DAO hat einen Buyback ausgeführt (Stable in, Asset out).
+    event BuybackExecuted(address indexed recipient, uint256 stableIn, uint256 assetOut);
+
+    /// @notice DAO hat Stable-Tokens aus dem Vault abgezogen.
+    event StableWithdrawn(address indexed to, uint256 amount);
+
+    /// @notice DAO hat Asset-Tokens aus dem Vault abgezogen.
+    event AssetWithdrawn(address indexed to, uint256 amount);
+
     error NOT_DAO();
     error PAUSED();
 
@@ -76,6 +91,7 @@ contract BuybackVault {
     function fundStable(uint256 amount) external onlyDAO notPaused {
         if (amount == 0) revert ZERO_AMOUNT();
         stable.safeTransferFrom(msg.sender, address(this), amount);
+        emit StableFunded(msg.sender, amount);
         emit FundStable(amount);
     }
 
@@ -83,6 +99,7 @@ contract BuybackVault {
         if (to == address(0)) revert ZERO_ADDRESS();
         if (amount == 0) revert ZERO_AMOUNT();
         stable.safeTransfer(to, amount);
+        emit StableWithdrawn(to, amount);
         emit WithdrawStable(to, amount);
     }
 
@@ -90,6 +107,7 @@ contract BuybackVault {
         if (to == address(0)) revert ZERO_ADDRESS();
         if (amount == 0) revert ZERO_AMOUNT();
         asset.safeTransfer(to, amount);
+        emit AssetWithdrawn(to, amount);
         emit WithdrawAsset(to, amount);
     }
 

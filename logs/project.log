@@ -297,3 +297,4 @@
 [DEV-60/64] 2025-11-23T10:15:00Z BuybackVault: Stage A core (custody + DAO-only fund/withdraw + pause hooks) implemented with regression tests; Stage B/C Execution Plan documented in docs/architecture/buybackvault_execution.md for PSM-routed buybacks and future multi-route extensions.
 [DEV-61] 2025-11-26T10:30:00Z BuybackVault: executeBuybackPSM() via PSM.swapFrom1kUSD (bytes32 moduleId Safety-Gate, onlyDAO, 1:1 PSM-Stub); BuybackVault.t.sol deckt Access, Pause und PSM-Execution (17 Tests); Gesamt-Suite 59 Tests grün.
 [DEV-66] 2025-11-26T14:35:00Z BuybackVault: README links BuybackVault telemetry spec and global indexing doc.
+[DEV-67] 2025-11-26T16:18:16Z BuybackVault: on-chain events (StableFunded/BuybackExecuted/StableWithdrawn/AssetWithdrawn) added and covered by regression tests.

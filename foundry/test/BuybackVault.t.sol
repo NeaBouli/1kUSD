@@ -173,6 +173,16 @@ contract BuybackVaultTest is Test {
         vm.stopPrank();
     }
 
+    function testFundStableEmitsEvent() public {
+        uint256 amount = 5e18;
+
+        vm.prank(dao);
+        vm.expectEmit(true, false, false, true);
+        emit StableFunded(dao, amount);
+
+        vault.fundStable(amount);
+    }
+
     function testFundStableRevertsWhenPaused() public {
         uint256 amount = 1e18;
         stable.mint(dao, amount);
@@ -200,6 +210,17 @@ contract BuybackVaultTest is Test {
         vm.expectRevert(BuybackVault.ZERO_ADDRESS.selector);
         vault.withdrawStable(address(0), 1e18);
     }
+    function testWithdrawStableEmitsEvent() public {
+        uint256 amount = 4e18;
+        stable.mint(address(vault), amount);
+
+        vm.prank(dao);
+        vm.expectEmit(true, false, false, true);
+        emit StableWithdrawn(user, amount);
+
+        vault.withdrawStable(user, amount);
+    }
+
 
     function testWithdrawAssetOnlyDao() public {
         asset.mint(address(vault), 10e18);
@@ -216,6 +237,17 @@ contract BuybackVaultTest is Test {
         vm.expectRevert(BuybackVault.ZERO_ADDRESS.selector);
         vault.withdrawAsset(address(0), 1e18);
     }
+    function testWithdrawAssetEmitsEvent() public {
+        uint256 amount = 7e18;
+        asset.mint(address(vault), amount);
+
+        vm.prank(dao);
+        vm.expectEmit(true, false, false, true);
+        emit AssetWithdrawn(user, amount);
+
+        vault.withdrawAsset(user, amount);
+    }
+
 
     // --- Stage B: PSM-basierter Buyback ---
 
@@ -285,6 +317,18 @@ contract BuybackVaultTest is Test {
             "user asset balance mismatch"
         );
     }
+    function testExecuteBuybackEmitsEvent() public {
+        uint256 amount = 10e18;
+        stable.mint(address(vault), amount);
+
+        vm.prank(dao);
+        vm.expectEmit(true, true, false, true);
+        // Erwartung: StableIn = amount, AssetOut > 0
+        emit BuybackExecuted(user, amount, 0);
+
+        vault.executeBuyback(user, amount, 0, block.timestamp + 1 days);
+    }
+
 
     // --- View-Helper ---
 
