@@ -152,4 +152,39 @@ contract BuybackVault {
     function assetBalance() external view returns (uint256) {
         return asset.balanceOf(address(this));
     }
+
+
+    /// @notice Execute a PSM-based buyback of the underlying asset using stable coins held in the vault.
+    /// @param recipient Address that will receive the bought-back asset.
+    /// @param amountStable Amount of stable (1kUSD) to spend.
+    /// @param minAssetOut Minimum acceptable amount of asset to receive from PSM.
+    /// @param deadline Unix timestamp after which the buyback is invalid.
+    function executeBuyback(
+        address recipient,
+        uint256 amountStable,
+        uint256 minAssetOut,
+        uint256 deadline
+    ) external {
+        if (msg.sender != dao) revert NOT_DAO();
+        if (recipient == address(0)) revert ZERO_ADDRESS();
+        if (amountStable == 0) revert INVALID_AMOUNT();
+        if (safety.isPaused(moduleId)) revert PAUSED();
+
+        uint256 bal = stable.balanceOf(address(this));
+        if (bal < amountStable) revert INSUFFICIENT_BALANCE();
+
+        // Approve PSM to pull the requested stable amount
+        stable.approve(address(psm), amountStable);
+
+        uint256 assetOut = psm.swapFrom1kUSD(
+            address(asset),
+            amountStable,
+            recipient,
+            minAssetOut,
+            deadline
+        );
+
+        emit BuybackExecuted(recipient, amountStable, assetOut);
+    }
+
 }
