@@ -37,6 +37,8 @@ contract BuybackVault {
 
     error NOT_DAO();
     error PAUSED();
+error INVALID_AMOUNT();
+error INSUFFICIENT_BALANCE();
 
     IERC20 public immutable stable;
     IERC20 public immutable asset;
