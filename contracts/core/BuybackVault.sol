@@ -28,7 +28,7 @@ contract BuybackVault {
     address public immutable dao;
     ISafetyAutomata public immutable safety;
     IPegStabilityModuleLike public immutable psm;
-    uint8 public immutable moduleId;
+    bytes32 public immutable moduleId;
 
     event FundStable(uint256 amount);
     event WithdrawStable(address indexed to, uint256 amount);
@@ -51,7 +51,7 @@ contract BuybackVault {
         address _dao,
         address _safety,
         address _psm,
-        uint8 _moduleId
+        bytes32 _moduleId
     ) {
         if (
             _stable == address(0) ||
