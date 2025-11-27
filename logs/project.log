@@ -304,3 +304,4 @@
 [DEV-67] 2025-11-26T20:28:54Z BuybackVault: relaxed event expectations to topics-only for fund/execute tests (ignore amount/assetOut data).
 [DEV-68] 2025-11-27T18:31:38Z Release v0.51.0: BuybackVault Stage A–C (PSM execution, events, telemetry docs) consolidated with Economic Layer.
 [DEV-69] 2025-11-27T19:00:20Z Economic Layer: added high-level overview doc (PSM + Oracle + BuybackVault + telemetry) for v0.51.0 baseline.
+[DEV-69] 2025-11-27T19:23:47Z README: linked Economic Layer overview doc from root README.

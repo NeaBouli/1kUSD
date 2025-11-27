@@ -763,3 +763,10 @@ Indexing-Stack beobachtet werden:
   StableWithdrawn, AssetWithdrawn): `indexer/docs/BUYBACKVAULT_TELEMETRY.md`
 - Einbettung in den globalen Indexing/Telemetry-Stack:
   `indexer/docs/INDEXING_TELEMETRY.md`
+
+### Economic Layer overview (PSM + Oracle + BuybackVault)
+
+For a high-level map of the PSM, Oracle stack, Guardian and BuybackVault modules, see:
+
+- `docs/architecture/economic_layer_overview.md`
+
