@@ -135,3 +135,23 @@ wie viel 1kUSD in Buybacks geflossen ist,
 
 wie sich das Asset im Zeitverlauf entwickelt.
 
+
+## 7. Strategy modules interface (forward-looking)
+
+In version v0.51.0 the BuybackVault exposes only a minimal on-vault
+`StrategyConfig` (asset / weightBps / enabled). For future versions
+(v0.52+ RFC) external strategy modules can be introduced via a dedicated
+`IBuybackStrategy` interface in `contracts/strategy/IBuybackStrategy.sol`.
+
+This interface allows:
+
+- the vault (or a coordinator) to query a strategy contract for a list of
+  proposed buyback legs (`BuybackLeg[]`),
+- offloading allocation logic and policy rules into upgradable,
+  separately-auditable contracts,
+- keeping the core vault logic small and focused on execution and safety.
+
+At this stage, `IBuybackStrategy` is defined but *not yet wired* into the
+BuybackVault execution path; it serves as a design anchor for future
+multi-asset / policy-based buyback phases.
+
