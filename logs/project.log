@@ -309,3 +309,4 @@
 [DEV-70] 2025-11-28T07:17:01Z BuybackVault: StrategyConfig documented in economic_layer_overview.md.
 [DEV-70] 2025-11-28T07:23:16Z BuybackVault: StrategyConfig note robustly inserted into economic_layer_overview.md.
 [DEV-70] 2025-11-28T07:29:26Z Governance: documented BuybackVault StrategyConfig in parameter_playbook.md.
+[DEV-71] 2025-11-28T08:04:16Z BuybackVault: Strategy RFC (buybackvault_strategy_rfc.md) added as forward design for v0.52+.
