@@ -665,6 +665,14 @@ Regression suite:
 - **Governance Parameter Playbook (DE):** \`docs/governance/parameter_playbook.md\`
 - **PSM Parameter & Registry Map:** \`docs/architecture/psm_parameters.md\`
 - **Economic Layer (PSM + Oracle Health):**
+
+### BuybackVault Strategy RFC (DEV-71)
+
+- Forward-Design für zukünftige Buyback-Strategien (Multi-Asset, Policy-Module).
+- Dokumentiert in: `docs/architecture/buybackvault_strategy_rfc.md`
+  (Baseline v0.51.0, Design-Entwurf für v0.52+).
+
+
   - PSM decimals/fees/spreads: \`docs/architecture/psm_dev43-45.md\`
   - Oracle health gates (stale/diff): Oracle-Abschnitt in dieser README
 
