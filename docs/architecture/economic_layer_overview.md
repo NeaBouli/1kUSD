@@ -1,4 +1,13 @@
 # Economic Layer Overview (PSM + Oracle + BuybackVault)
+**StrategyConfig (v0.51.0):**
+
+- BuybackVault hält eine minimale `StrategyConfig`-Schicht
+  (asset / weightBps / enabled), um zukünftige Multi-Asset- und
+  Policy-basierte Buybacks vorzubereiten.
+- In v0.51.0 beeinflussen Strategien den `executeBuyback()`-Pfad noch nicht;
+  sie dienen lediglich als Konfigurations- und Telemetrie-Basis.
+
+
 
 Status: **v0.51.0 – Economic Layer + BuybackVault Stage A–C**
 

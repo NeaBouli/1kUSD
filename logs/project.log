@@ -307,3 +307,4 @@
 [DEV-69] 2025-11-27T19:23:47Z README: linked Economic Layer overview doc from root README.
 [DEV-70] 2025-11-28T06:28:08Z BuybackVault: wired INVALID_STRATEGY + StrategyUpdated and added strategy config tests.
 [DEV-70] 2025-11-28T07:17:01Z BuybackVault: StrategyConfig documented in economic_layer_overview.md.
+[DEV-70] 2025-11-28T07:23:16Z BuybackVault: StrategyConfig note robustly inserted into economic_layer_overview.md.
