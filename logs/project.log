@@ -312,3 +312,4 @@
 [DEV-71] 2025-11-28T08:04:16Z BuybackVault: Strategy RFC (buybackvault_strategy_rfc.md) added as forward design for v0.52+.
 [DEV-71] 2025-11-28T08:15:19Z README: linked BuybackVault Strategy RFC (docs/architecture/buybackvault_strategy_rfc.md).
 [DEV-71] 2025-11-28T08:15:38Z README: linked BuybackVault Strategy RFC (docs/architecture/buybackvault_strategy_rfc.md).
+[DEV-72] 2025-11-28T08:45:20Z Strategy: introduced IBuybackStrategy interface (forward-looking, not yet wired into BuybackVault).
