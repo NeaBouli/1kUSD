@@ -281,3 +281,24 @@ Dieses Template beschreibt:
 - Motivation und Risikoanalyse,
 - konkrete Parameter-Änderungen (Fees, Spreads, Limits, Oracle-Health),
 - sowie Governance- und Ausführungspfad.
+
+### BuybackVault StrategyConfig (v0.51.0)
+
+Die BuybackVault-Strategie erlaubt es dem DAO, zukünftige Buyback-Policies
+vorzukonfigurieren, ohne den aktuellen Ausführungs-Flow zu verändern.
+
+**Parameter (pro Strategie-Slot):**
+
+- \`asset\` – Ziel-Asset (z.B. Governance- oder Treasury-Token)
+- \`weightBps\` – Gewichtung in Basispunkten (0–10_000) für spätere Multi-Asset-Logik
+- \`enabled\` – Flag, ob die Strategie für Auswertungen/Telemetrie aktiv ist
+
+**Wichtige Hinweise für v0.51.0:**
+
+- \`executeBuyback()\` ignoriert \`StrategyConfig\` aktuell vollständig.
+- Strategien dienen ausschließlich als **Konfigurations- und Telemetrie-Basis**
+  für künftige Erweiterungen (Multi-Asset, Scheduling, Policy-Module).
+- Änderungen an Strategien sind DAO-only und sollten wie Parameter-Änderungen
+  dokumentiert und versioniert werden.
+
+

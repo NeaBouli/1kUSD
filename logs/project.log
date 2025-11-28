@@ -308,3 +308,4 @@
 [DEV-70] 2025-11-28T06:28:08Z BuybackVault: wired INVALID_STRATEGY + StrategyUpdated and added strategy config tests.
 [DEV-70] 2025-11-28T07:17:01Z BuybackVault: StrategyConfig documented in economic_layer_overview.md.
 [DEV-70] 2025-11-28T07:23:16Z BuybackVault: StrategyConfig note robustly inserted into economic_layer_overview.md.
+[DEV-70] 2025-11-28T07:29:26Z Governance: documented BuybackVault StrategyConfig in parameter_playbook.md.
