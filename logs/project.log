@@ -305,3 +305,4 @@
 [DEV-68] 2025-11-27T18:31:38Z Release v0.51.0: BuybackVault Stage A–C (PSM execution, events, telemetry docs) consolidated with Economic Layer.
 [DEV-69] 2025-11-27T19:00:20Z Economic Layer: added high-level overview doc (PSM + Oracle + BuybackVault + telemetry) for v0.51.0 baseline.
 [DEV-69] 2025-11-27T19:23:47Z README: linked Economic Layer overview doc from root README.
+[DEV-70] 2025-11-28T06:28:08Z BuybackVault: wired INVALID_STRATEGY + StrategyUpdated and added strategy config tests.

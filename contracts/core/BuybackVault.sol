@@ -27,7 +27,17 @@ contract BuybackVault {
     event StableFunded(address indexed from, uint256 amount);
 
     /// @notice DAO hat einen Buyback ausgeführt (Stable in, Asset out).
+    event StrategyUpdated(uint256 indexed id, address asset, uint16 weightBps, bool enabled);
     event BuybackExecuted(address indexed recipient, uint256 stableIn, uint256 assetOut);
+
+    struct StrategyConfig {
+        address asset;
+        uint16 weightBps;
+        bool enabled;
+    }
+
+    StrategyConfig[] private strategies;
+
 
     /// @notice DAO hat Stable-Tokens aus dem Vault abgezogen.
     event StableWithdrawn(address indexed to, uint256 amount);
@@ -39,6 +49,7 @@ contract BuybackVault {
     error PAUSED();
 error INVALID_AMOUNT();
 error INSUFFICIENT_BALANCE();
+error INVALID_STRATEGY();
 
     IERC20 public immutable stable;
     IERC20 public immutable asset;
@@ -147,7 +158,44 @@ error INSUFFICIENT_BALANCE();
 
     // --- Views ---
 
-    function stableBalance() external view returns (uint256) {
+        // --- Strategy config ---
+
+    function strategyCount() external view returns (uint256) {
+        return strategies.length;
+    }
+
+    function getStrategy(uint256 id) external view returns (StrategyConfig memory) {
+        if (id >= strategies.length) revert INVALID_STRATEGY();
+        return strategies[id];
+    }
+
+    function setStrategy(
+        uint256 id,
+        address asset_,
+        uint16 weightBps_,
+        bool enabled_
+    ) external {
+        if (msg.sender != dao) revert NOT_DAO();
+        if (asset_ == address(0)) revert ZERO_ADDRESS();
+
+        StrategyConfig memory cfg = StrategyConfig({
+            asset: asset_,
+            weightBps: weightBps_,
+            enabled: enabled_
+        });
+
+        if (id == strategies.length) {
+            strategies.push(cfg);
+        } else if (id < strategies.length) {
+            strategies[id] = cfg;
+        } else {
+            revert INVALID_STRATEGY();
+        }
+
+        emit StrategyUpdated(id, asset_, weightBps_, enabled_);
+    }
+
+function stableBalance() external view returns (uint256) {
         return stable.balanceOf(address(this));
     }
 

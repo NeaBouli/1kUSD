@@ -347,6 +347,45 @@ contract BuybackVaultTest is Test {
 
     // --- View-Helper ---
 
+
+    // --- Strategy config tests ---
+
+    function testSetStrategyOnlyDao() public {
+        vm.prank(user);
+        vm.expectRevert(BuybackVault.NOT_DAO.selector);
+        vault.setStrategy(0, address(asset), 10000, true);
+    }
+
+    function testSetStrategyCreateAndUpdate() public {
+        vm.prank(dao);
+        vault.setStrategy(0, address(asset), 5000, true);
+
+        assertEq(vault.strategyCount(), 1, "strategyCount should be 1");
+
+        BuybackVault.StrategyConfig memory cfg = vault.getStrategy(0);
+        assertEq(cfg.asset, address(asset), "asset mismatch");
+        assertEq(cfg.weightBps, 5000, "weight mismatch");
+        assertTrue(cfg.enabled, "enabled mismatch");
+
+        vm.prank(dao);
+        vault.setStrategy(0, address(asset), 7500, false);
+
+        cfg = vault.getStrategy(0);
+        assertEq(cfg.weightBps, 7500, "updated weight mismatch");
+        assertFalse(cfg.enabled, "updated enabled mismatch");
+    }
+
+    function testSetStrategyInvalidIdReverts() public {
+        vm.prank(dao);
+        vm.expectRevert(BuybackVault.INVALID_STRATEGY.selector);
+        vault.setStrategy(2, address(asset), 5000, true);
+    }
+
+    function testGetStrategyOutOfRangeReverts() public {
+        vm.expectRevert(BuybackVault.INVALID_STRATEGY.selector);
+        vault.getStrategy(0);
+    }
+
     function testBalanceViewsReflectHoldings() public {
         stable.mint(address(vault), 11e18);
         asset.mint(address(vault), 22e18);
