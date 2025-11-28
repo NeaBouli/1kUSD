@@ -314,3 +314,4 @@
 [DEV-71] 2025-11-28T08:15:38Z README: linked BuybackVault Strategy RFC (docs/architecture/buybackvault_strategy_rfc.md).
 [DEV-72] 2025-11-28T08:45:20Z Strategy: introduced IBuybackStrategy interface (forward-looking, not yet wired into BuybackVault).
 [DEV-72] 2025-11-28T08:50:00Z Strategy: documented IBuybackStrategy interface in buybackvault_strategy.md.
+[DEV-72] 2025-11-28T09:02:04Z Economic Layer: mentioned IBuybackStrategy as forward-looking strategy interface in economic_layer_overview.md.

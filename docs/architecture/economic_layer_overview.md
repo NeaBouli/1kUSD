@@ -1,5 +1,9 @@
 # Economic Layer Overview (PSM + Oracle + BuybackVault)
 **StrategyConfig (v0.51.0):**
+  - A forward-looking strategy interface `IBuybackStrategy`
+  (`contracts/strategy/IBuybackStrategy.sol`) is defined for v0.52+ to host
+  external, upgradable buyback strategy modules. In v0.51.0 it is **not yet**
+  wired into `BuybackVault` and only serves as a design anchor.
 
 - BuybackVault hält eine minimale `StrategyConfig`-Schicht
   (asset / weightBps / enabled), um zukünftige Multi-Asset- und
