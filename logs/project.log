@@ -315,3 +315,4 @@
 [DEV-72] 2025-11-28T08:45:20Z Strategy: introduced IBuybackStrategy interface (forward-looking, not yet wired into BuybackVault).
 [DEV-72] 2025-11-28T08:50:00Z Strategy: documented IBuybackStrategy interface in buybackvault_strategy.md.
 [DEV-72] 2025-11-28T09:02:04Z Economic Layer: mentioned IBuybackStrategy as forward-looking strategy interface in economic_layer_overview.md.
+[DEV-73] 2025-11-28T09:37:19Z Report: DEV-60..DEV-72 BuybackVault + Economic Layer handover written to docs/reports/DEV60-72_BuybackVault_EconomicLayer.md.
