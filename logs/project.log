@@ -316,3 +316,13 @@
 [DEV-72] 2025-11-28T08:50:00Z Strategy: documented IBuybackStrategy interface in buybackvault_strategy.md.
 [DEV-72] 2025-11-28T09:02:04Z Economic Layer: mentioned IBuybackStrategy as forward-looking strategy interface in economic_layer_overview.md.
 [DEV-73] 2025-11-28T09:37:19Z Report: DEV-60..DEV-72 BuybackVault + Economic Layer handover written to docs/reports/DEV60-72_BuybackVault_EconomicLayer.md.
+2025-11-28T13:43:50Z DEV-80 add security audit plan for Economic Layer v0.51.0
+2025-11-28T13:45:26Z DEV-81 add bug bounty specification for Economic Layer v0.51.0
+2025-11-28T13:47:03Z DEV-82 add proof-of-reserves specification for Economic Layer v0.51.0
+2025-11-28T19:14:03Z DEV-83 add collateral risk profile for Economic Layer v0.51.0
+2025-11-28T19:15:45Z DEV-84 add emergency depeg runbook for Economic Layer v0.51.0
+2025-11-28T19:16:48Z DEV-85 add stress test suite plan for Economic Layer v0.51.0
+2025-11-28T19:18:10Z DEV-86 add indexer & telemetry spec for BuybackVault v0.51.0
+2025-11-28T19:19:38Z DEV-87 add governance handover document for Economic Layer v0.51.0
+2025-11-28T19:21:41Z DEV-88 add Security & Risk section to README
+2025-11-28T19:24:01Z DEV-89 add Dev7 sync report for Economic Layer security & risk docs
