@@ -27,7 +27,8 @@ contract BuybackVault {
     event StableFunded(address indexed from, uint256 amount);
 
     /// @notice DAO hat einen Buyback ausgeführt (Stable in, Asset out).
-    event StrategyUpdated(uint256 indexed id, address asset, uint16 weightBps, bool enabled);
+        event StrategyEnforcementUpdated(bool enforced);
+event StrategyUpdated(uint256 indexed id, address asset, uint16 weightBps, bool enabled);
     event BuybackExecuted(address indexed recipient, uint256 stableIn, uint256 assetOut);
 
     struct StrategyConfig {
@@ -37,6 +38,8 @@ contract BuybackVault {
     }
 
     StrategyConfig[] private strategies;
+    bool public strategiesEnforced;
+
 
 
     /// @notice DAO hat Stable-Tokens aus dem Vault abgezogen.
@@ -167,6 +170,13 @@ error INVALID_STRATEGY();
     function getStrategy(uint256 id) external view returns (StrategyConfig memory) {
         if (id >= strategies.length) revert INVALID_STRATEGY();
         return strategies[id];
+    }
+
+
+    function setStrategiesEnforced(bool enforced) external {
+        if (msg.sender != dao) revert NOT_DAO();
+        strategiesEnforced = enforced;
+        emit StrategyEnforcementUpdated(enforced);
     }
 
     function setStrategy(
