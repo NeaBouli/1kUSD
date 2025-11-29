@@ -329,3 +329,8 @@
 [DEV-74] 2025-11-28T19:32:54Z BuybackVault: Strategy Phase-1 (optional enforcement, single-asset guard) architecture plan added.
 [DEV-74] 2025-11-28T19:35:30Z BuybackVault: Strategy Phase-1 (optional enforcement, single-asset guard) architecture plan added.
 2025-11-28T19:42:53Z DEV-ARCH add project status overview for Economic Layer v0.51.0
+[DEV-75] 2025-11-28T20:30:41Z BuybackVault: added optional strategy enforcement guard in executeBuyback() with regression tests.
+[DEV-75] 2025-11-28T20:38:23Z BuybackVault: FIX strategyCount state variable + wrap strategy guard tests in dedicated test contract.
+[DEV-75] 2025-11-28T20:44:56Z BuybackVault: ensured strategyCount state variable is declared for strategy guard logic.
+[DEV-75] 2025-11-28T20:58:23Z BuybackVault: force-declared strategyCount state variable for strategy guard logic.
+[DEV-75] 2025-11-29T07:20:40Z BuybackVault: cleaned up strategyCount state var, guard now uses strategies.length.
