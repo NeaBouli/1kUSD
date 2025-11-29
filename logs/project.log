@@ -334,3 +334,4 @@
 [DEV-75] 2025-11-28T20:44:56Z BuybackVault: ensured strategyCount state variable is declared for strategy guard logic.
 [DEV-75] 2025-11-28T20:58:23Z BuybackVault: force-declared strategyCount state variable for strategy guard logic.
 [DEV-75] 2025-11-29T07:20:40Z BuybackVault: cleaned up strategyCount state var, guard now uses strategies.length.
+[DEV-76] 2025-11-29T08:54:05Z Governance: documented BuybackVault strategiesEnforced flag and guard flow in parameter_playbook.md.

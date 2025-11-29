@@ -284,6 +284,36 @@ Dieses Template beschreibt:
 
 ### BuybackVault StrategyConfig (v0.51.0)
 
+### BuybackVault StrategyEnforcement (v0.52.x – Phase 1)
+
+- Flag: \`strategiesEnforced\` (bool, Default: \`false\`).
+- Setter: \`setStrategiesEnforced(bool enforced)\` (nur DAO, Revert bei Nicht-DAO).
+- Ereignis: \`StrategyEnforcementUpdated(bool enforced)\` bei jeder Änderung.
+
+**Semantik:**
+
+- Wenn \`strategiesEnforced == false\`:
+  - \`executeBuyback()\` verhält sich wie in v0.51.0.
+  - Strategien (\`StrategyConfig\`) sind rein deklarativ (Doku/Telemetrie), kein Hard-Guard.
+
+- Wenn \`strategiesEnforced == true\`:
+  - Falls keine Strategie konfiguriert ist (\`strategies.length == 0\`):
+    - Revert: \`NO_STRATEGY_CONFIGURED\`.
+  - Falls keine aktivierte Strategie für das Ziel-Asset existiert:
+    - Revert: \`NO_ENABLED_STRATEGY_FOR_ASSET\`.
+  - Falls eine passende, aktivierte Strategie existiert:
+    - \`executeBuyback()\` läuft normal durch (inkl. bestehender PSM-/Guardian-Checks).
+
+**DAO-Workflow (Beispiel):**
+
+1. Eine oder mehrere Strategien über \`setStrategy(id, asset, weightBps, enabled)\` anlegen/aktualisieren.
+2. Prüfen, dass die Ziel-Assets und Gewichte im gewünschten Rahmen liegen.
+3. \`setStrategiesEnforced(true)\` durch einen Governance-Beschluss ausführen.
+4. Buybacks laufen ab diesem Zeitpunkt nur noch durch, wenn eine gültige Strategie für das verwendete Asset existiert.
+5. Im Notfall kann die DAO \`setStrategiesEnforced(false)\` aufrufen, um temporär in den „v0.51.0-Mode“ ohne Strategy-Guard zurückzukehren.
+
+
+
 Die BuybackVault-Strategie erlaubt es dem DAO, zukünftige Buyback-Policies
 vorzukonfigurieren, ohne den aktuellen Ausführungs-Flow zu verändern.
 
