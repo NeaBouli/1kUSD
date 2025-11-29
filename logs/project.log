@@ -336,3 +336,4 @@
 [DEV-75] 2025-11-29T07:20:40Z BuybackVault: cleaned up strategyCount state var, guard now uses strategies.length.
 [DEV-76] 2025-11-29T08:54:05Z Governance: documented BuybackVault strategiesEnforced flag and guard flow in parameter_playbook.md.
 [DEV-76] 2025-11-29T09:14:28Z Economic Layer: documented StrategyEnforcement Phase-1 (optional guard) in economic_layer_overview.md.
+[DEV-76] 2025-11-29T09:42:43Z Indexer: documented BuybackVault strategiesEnforced flag & guard semantics in indexer_buybackvault.md.

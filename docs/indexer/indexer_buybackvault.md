@@ -1,5 +1,36 @@
 # 1kUSD Indexer & Telemetry Specification – BuybackVault  
-## Economic Layer v0.51.0
+\n### StrategyEnforcement Flag & Guards (v0.52.x)
+
+Ab v0.52.x kann der BuybackVault optional im „enforced“-Modus laufen:
+
+- Flag: `strategiesEnforced` (bool, on-chain View).
+- Setter: `setStrategiesEnforced(bool enforced)` (nur DAO).
+- Event: `StrategyEnforcementUpdated(bool enforced)`.
+
+**Relevanz für Indexer / Telemetrie**
+
+- Wenn `strategiesEnforced == false`:
+  - Der Vault verhält sich wie in v0.51.0 – `StrategyConfig` dient primär als Doku-/Telemetrie-Schicht.
+  - Reverts mit `NO_STRATEGY_CONFIGURED` oder `NO_ENABLED_STRATEGY_FOR_ASSET`
+    sollten in diesem Modus _nicht_ auftreten; ein Auftreten wäre ein Signal für
+    Inkonsistenz zwischen Deployment und Doku.
+
+- Wenn `strategiesEnforced == true`:
+  - Reverts mit `NO_STRATEGY_CONFIGURED` oder `NO_ENABLED_STRATEGY_FOR_ASSET`
+    sind „policy expected“ und keine technischen Fehler im Economic Layer.
+  - Indexer können optional Metriken ableiten:
+    - Anzahl Buyback-Reverts nach Fehlercode (pro Asset / Zeitraum).
+    - Zeitspannen, in denen keine gültige Strategie für ein Asset konfiguriert war.
+    - Verhältnis erfolgreicher vs. geblockter Buybacks bei aktivem Enforcement.
+
+**Minimum-Anforderungen für Indexer:**
+
+- Events `StrategyEnforcementUpdated` loggen und den jeweils aktuellen Wert
+  von `strategiesEnforced` abbilden (z.B. in einem Status-Table).
+- Buyback-Versuche, die mit `NO_STRATEGY_CONFIGURED` /
+  `NO_ENABLED_STRATEGY_FOR_ASSET` revertieren, erfassen und in Dashboards
+  als „Policy-bedingt geblockt“ kennzeichnen (nicht als Protokollfehler).
+\n## Economic Layer v0.51.0
 
 ## 1. Purpose
 
