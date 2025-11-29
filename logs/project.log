@@ -340,3 +340,4 @@
 [DEV-76] 2025-11-29T10:05:21Z Economic Layer: updated PROJECT_STATUS_EconomicLayer_v051 with StrategyEnforcement Phase-1 preview status.
 [DEV-77] 2025-11-29T20:16:47Z Economic Layer: DEV74–76 StrategyEnforcement mini-report added (DEV74-76_StrategyEnforcement_Report.md).
 [DEV-78] 2025-11-29T20:17:24Z Infra: added CI/Docker/docs integration checklist for Strategy/Security/Risk docs.
+[DEV-79] 2025-11-29T20:45:26Z Infra: added DEV-7 infra/CI/Docker/Pages planning document.
