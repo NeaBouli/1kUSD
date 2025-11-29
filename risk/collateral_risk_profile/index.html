@@ -1,0 +1,3345 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://neabouli.github.io/1kUSD/risk/collateral_risk_profile/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>1kUSD Collateral Risk Profile - 1kUSD – Kaspa Stablecoin</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="lime">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1kusd-collateral-risk-profile" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="1kUSD – Kaspa Stablecoin" class="md-header__button md-logo" aria-label="1kUSD – Kaspa Stablecoin" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            1kUSD – Kaspa Stablecoin
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1kUSD Collateral Risk Profile
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="1kUSD – Kaspa Stablecoin" class="md-nav__button md-logo" aria-label="1kUSD – Kaspa Stablecoin" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    1kUSD – Kaspa Stablecoin
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Whitepaper
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Whitepaper
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whitepaper/WHITEPAPER_1kUSD_EN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    English
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whitepaper/WHITEPAPER_1kUSD_DE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deutsch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FAQ/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Governance & Logs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Logs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GOVERNANCE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Governance Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GOVERNANCE_OPS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Governance Ops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GOVERNANCE_PARAM_WRITES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parameter Writes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUARDIAN_SUNSET_HOOKS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guardian Sunset Hooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUARDIAN_SUNSET_RUNBOOK/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guardian Sunset Runbook
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../logs/project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Project Log
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    System Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ARCHITEKTUR/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architektur (DE)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../MODULE_IDS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Module IDs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BOOTSTRAP_QUICKSTART/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bootstrap Quickstart
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BUILD_TOOLING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build Tooling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../API_SPECS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Specs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../KASPA_INTEGRATION_NOTES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kaspa Integration Notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SDK_WIRING_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SDK Wiring Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Specs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Specs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/TOKEN_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Token Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/PSM_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PSM Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/COLLATERAL_VAULT_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Collateral Vault Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/ORACLE_AGGREGATOR_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Oracle Aggregator Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/PROOF_OF_RESERVES_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proof of Reserves Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/SAFETY_AUTOMATA_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Automata Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/TREASURY_FEE_ROUTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Treasury Fee Routing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Security & Safety
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Security & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SECURITY_PREAUDIT_README/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security Pre-Audit Readme
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../THREAT_MODEL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Threat Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SAFETY_GUARDIAN_CHECKLIST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Guardian Checklist
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SAFETY_GUARDS_TESTPLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Guards Testplan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SAFETY_PAUSE_MATRIX/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Pause Matrix
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SAFETY_RATE_LIMITER/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Rate Limiter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SAFETY_RATE_LIMITER_TEST_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Rate Limiter Test Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TOKEN_PAUSE_SEMANTICS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Token Pause Semantics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TOKEN_PERMIT_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Token Permit Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TOKEN_PERMIT_TEST_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Token Permit Test Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/SECURITY_ANALYSIS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security Analysis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Vaults & Accounting
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Vaults & Accounting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VAULT_ACCOUNTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vault Accounting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VAULT_ACCOUNTING_EDGE_CASES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vault Accounting – Edge Cases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VAULT_ACCOUNTING_PLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vault Accounting Plan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VAULT_TEST_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vault Test Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NOTES_VAULT_MINIMAL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notes – Vault Minimal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NOTES_VAULT_ACCOUNTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notes – Vault Accounting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    PSM & Quotes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            PSM & Quotes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PSM_QUOTE_MATH/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quote Math
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PSM_QUOTE_SEMANTICS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quote Semantics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PSM_QUOTE_TEST_VECTORS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quote Test Vectors
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PSM_QUOTE_EXEC_ALIGNMENT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quote Exec Alignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PSM_REVERTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PSM Reverts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PSM_VS_CDP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PSM vs CDP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ROUNDING_RULES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rounding Rules
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NOTES_PSM_EXECUTION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notes – PSM Execution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NOTES_PSM_MINIMAL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notes – PSM Minimal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Parameters
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Parameters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PARAMETER_KEYS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parameter Keys
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PARAMETER_REGISTRY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parameter Registry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PARAM_KEYS_CANON/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Param Keys Canon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PARAM_KEYS_CATALOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Param Keys Catalog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JSON_VALIDATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JSON Validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Developer Docs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Developer Docs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DEVELOPER_ONBOARDING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Developer Onboarding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CI_GATES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CI Gates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CI_SECURITY_GATE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CI Security Gate
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SDK_EVENT_DECODERS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SDK Event Decoders
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FEE_ACCRUAL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fee Accrual
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../COLLATERAL_REGISTRY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Collateral Registry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DEV9_ASSIGNMENT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DEV9 Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Integrations
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            Integrations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/DEX_INTEGRATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DEX Integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../converter/AUTOCONVERTER_ROUTER/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Converter Router
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    DApp
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            DApp
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dapp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DApp Readme
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dapp/ROUTES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Routes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Indexer
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            Indexer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../indexer/INDEXING_TELEMETRY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Indexing Telemetry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Testing
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            Testing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/TESTPLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testplan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/FORMAL_INVARIANTS_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Formal Invariants Map
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Analysis & Notes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            Analysis & Notes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ANALYSIS_KASPA_STABLECOINS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Analysis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NOTES_TOKEN_PERMIT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notes – Token Permit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../STATUS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Status
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ERROR_CATALOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Catalog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#economic-layer-v0510" class="md-nav__link">
+    <span class="md-ellipsis">
+      Economic Layer v0.51.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-risk-dimensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Risk Dimensions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-primary-collateral-usdt-erc20" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Primary Collateral: USDT (ERC20)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Primary Collateral: USDT (ERC20)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-depeg-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Depeg Risk
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-counterparty-issuer-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Counterparty / Issuer Risk
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-regulatory-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Regulatory Risk
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-oracle-price-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 Oracle / Price Risk
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-liquidity-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5 Liquidity Risk
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-primary-collateral-usdc-erc20" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Primary Collateral: USDC (ERC20)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Primary Collateral: USDC (ERC20)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-depeg-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Depeg Risk
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-counterparty-issuer-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Counterparty / Issuer Risk
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-regulatory-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Regulatory Risk
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-oracle-price-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 Oracle / Price Risk
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-liquidity-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5 Liquidity Risk
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-optional-risk-on-collateral-wbtc-erc20" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Optional Risk-On Collateral: WBTC (ERC20)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Optional Risk-On Collateral: WBTC (ERC20)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-depeg-market-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Depeg &amp; Market Risk
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-counterparty-issuer-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Counterparty / Issuer Risk
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-oracle-liquidity-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 Oracle &amp; Liquidity Risk
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-optional-risk-on-collateral-weth-eth-erc20" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Optional Risk-On Collateral: WETH / ETH (ERC20)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Optional Risk-On Collateral: WETH / ETH (ERC20)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-volatility-market-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 Volatility &amp; Market Risk
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-liquidity-oracle-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 Liquidity &amp; Oracle Risk
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-cross-cutting-risks-interactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Cross-Cutting Risks &amp; Interactions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Cross-Cutting Risks &amp; Interactions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-correlation-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 Correlation Risk
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-oracle-risk-across-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 Oracle Risk Across Assets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-liquidity-spiral-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 Liquidity Spiral Risk
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-governance-parameterization" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Governance &amp; Parameterization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-stress-scenarios-high-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Stress Scenarios (High-Level)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="1kusd-collateral-risk-profile">1kUSD Collateral Risk Profile</h1>
+<h2 id="economic-layer-v0510">Economic Layer v0.51.0</h2>
+<h2 id="1-overview">1. Overview</h2>
+<p>This document defines the collateral risk profile for the 1kUSD Economic Layer v0.51.0 on an EVM-compatible environment (Kasplex-compatible, final deployment chain TBD).</p>
+<p>The focus is on collateral assets held by the protocol to back 1kUSD:</p>
+<ul>
+<li><strong>Primary collateral (stablecoins)</strong>:</li>
+<li>USDT (ERC20, Ethereum mainnet)</li>
+<li>USDC (ERC20, Ethereum mainnet)</li>
+<li><strong>Optional "risk-on" collateral</strong>:</li>
+<li>WBTC (ERC20)</li>
+<li>WETH / ETH (ERC20)</li>
+</ul>
+<p>This risk profile provides a structured assessment of:</p>
+<ul>
+<li>depeg risk,</li>
+<li>counterparty risk,</li>
+<li>regulatory risk,</li>
+<li>oracle risk,</li>
+<li>liquidity risk,</li>
+<li>stress scenarios.</li>
+</ul>
+<p>It uses the terminology of RFC 2119 for normative statements.</p>
+<h2 id="2-risk-dimensions">2. Risk Dimensions</h2>
+<p>The following dimensions are used across all collateral types:</p>
+<ol>
+<li><strong>Depeg Risk</strong>  </li>
+<li>
+<p>Risk that the asset deviates significantly from its intended reference value (e.g., 1 USD).</p>
+</li>
+<li>
+<p><strong>Counterparty / Issuer Risk</strong>  </p>
+</li>
+<li>
+<p>Risk that the issuer or custodian fails, becomes insolvent, or otherwise cannot honour redemptions.</p>
+</li>
+<li>
+<p><strong>Regulatory / Jurisdictional Risk</strong>  </p>
+</li>
+<li>
+<p>Risk that regulators impose restrictions or actions that materially affect the asset (freezes, sanctions, forced redemptions).</p>
+</li>
+<li>
+<p><strong>Oracle / Price Discovery Risk</strong>  </p>
+</li>
+<li>
+<p>Risk that price feeds are manipulated, stale, or diverge from real market prices.</p>
+</li>
+<li>
+<p><strong>Liquidity &amp; Market Structure Risk</strong>  </p>
+</li>
+<li>
+<p>Risk that sufficient depth does not exist on spot/AMM markets to execute required trades without excessive slippage.</p>
+</li>
+<li>
+<p><strong>Technical / Smart Contract Risk</strong>  </p>
+</li>
+<li>Risk that the token contract itself, or critical infrastructure around it, contains bugs or behaves unexpectedly.</li>
+</ol>
+<p>For each collateral, this document provides a qualitative assessment and outlines mitigation measures that the protocol SHOULD apply.</p>
+<h2 id="3-primary-collateral-usdt-erc20">3. Primary Collateral: USDT (ERC20)</h2>
+<h3 id="31-depeg-risk">3.1 Depeg Risk</h3>
+<p>USDT aims to track 1 USD but has historically shown:</p>
+<ul>
+<li>short-lived deviations around market stress events,</li>
+<li>exchange-specific or localized liquidity imbalances.</li>
+</ul>
+<p><strong>Risk</strong>:<br />
+- Moderate depeg risk under severe market stress.<br />
+- Short-term deviations of a few percent are plausible; extreme events MAY see larger deviations.</p>
+<p><strong>Mitigations</strong>:</p>
+<ul>
+<li>PSM parameters MUST limit single-block and aggregate flows involving USDT.</li>
+<li>Maximum USDT share in total reserves SHOULD be capped (e.g., via governance-controlled limits).</li>
+<li>1kUSD PoR logic SHOULD treat USDT at a conservative valuation when signs of stress appear.</li>
+</ul>
+<h3 id="32-counterparty-issuer-risk">3.2 Counterparty / Issuer Risk</h3>
+<p>USDT is issued by a centralized entity holding reserves off-chain.</p>
+<p><strong>Risk</strong>:</p>
+<ul>
+<li>Centralized issuer and banking relationships introduce credit and operational risk.</li>
+<li>Asset backing and transparency have historically been debated.</li>
+</ul>
+<p><strong>Mitigations</strong>:</p>
+<ul>
+<li>Risk Council SHOULD regularly review issuer attestations and third-party analyses.</li>
+<li>Governance SHOULD be able to adjust:</li>
+<li>maximum allowed USDT exposure,</li>
+<li>PSM configuration to reduce USDT reliance if risk increases.</li>
+<li>Diversification across multiple stablecoins (e.g., USDC) is RECOMMENDED.</li>
+</ul>
+<h3 id="33-regulatory-risk">3.3 Regulatory Risk</h3>
+<p>USDT operates across multiple jurisdictions.</p>
+<p><strong>Risk</strong>:</p>
+<ul>
+<li>Regulatory enforcement actions MAY target the issuer, banking partners, or specific counterparties.</li>
+<li>Frozen or blacklisted addresses (via token contract controls) can impact liquidity.</li>
+</ul>
+<p><strong>Mitigations</strong>:</p>
+<ul>
+<li>Protocol vault addresses SHOULD avoid engaging with sanctioned or high-risk counterparties.</li>
+<li>Governance SHOULD retain the ability to unwind or reduce USDT exposure in response to regulatory events.</li>
+<li>Monitoring of issuer blacklist activity SHOULD be part of operational procedures.</li>
+</ul>
+<h3 id="34-oracle-price-risk">3.4 Oracle / Price Risk</h3>
+<p>USDT price is generally close to 1 USD but can deviate on:</p>
+<ul>
+<li>thinly traded pairs,</li>
+<li>stressed centralized exchanges.</li>
+</ul>
+<p><strong>Risk</strong>:</p>
+<ul>
+<li>Oracles that rely on limited venues MAY report distorted prices.</li>
+<li>Short-lived spikes or drops can trigger undesired PSM flows.</li>
+</ul>
+<p><strong>Mitigations</strong>:</p>
+<ul>
+<li>Oracles SHOULD aggregate prices from multiple reputable venues and pairs.</li>
+<li>Outlier rejection and TWAP mechanisms SHOULD be used to prevent spurious ticks.</li>
+<li>OracleWatcher MUST enforce bounds and liveness checks.</li>
+</ul>
+<h3 id="35-liquidity-risk">3.5 Liquidity Risk</h3>
+<p>USDT has deep liquidity on major centralized and decentralized venues.</p>
+<p><strong>Risk</strong>:</p>
+<ul>
+<li>Liquidity can become fragmented across chains and pools.</li>
+<li>Extreme scenarios (exchange failures, chain congestion) MAY temporarily impair exit capacity.</li>
+</ul>
+<p><strong>Mitigations</strong>:</p>
+<ul>
+<li>1kUSD rebalancing operations SHOULD be sized relative to observed liquidity.</li>
+<li>Risk Council SHOULD periodically re-evaluate:</li>
+<li>depth of USDT markets used by the protocol,</li>
+<li>maximum trade size per operation.</li>
+</ul>
+<h2 id="4-primary-collateral-usdc-erc20">4. Primary Collateral: USDC (ERC20)</h2>
+<h3 id="41-depeg-risk">4.1 Depeg Risk</h3>
+<p>USDC aims to track 1 USD with fully reserved backing in fiat or equivalents.</p>
+<p><strong>Risk</strong>:</p>
+<ul>
+<li>Depeg events MAY occur around:</li>
+<li>issuer banking issues,</li>
+<li>systemic shocks.</li>
+</ul>
+<p>Historical precedent has shown temporary depegs when underlying bank partners were under stress.</p>
+<p><strong>Mitigations</strong>:</p>
+<ul>
+<li>PSM parameters MUST limit excessive inflow of USDC during suspected depeg events.</li>
+<li>Oracles SHOULD track both on-chain and off-chain reference prices where possible.</li>
+<li>Risk Council SHOULD define explicit policies for:</li>
+<li>how to treat USDC during known stress,</li>
+<li>how to rebalance between USDT and USDC.</li>
+</ul>
+<h3 id="42-counterparty-issuer-risk">4.2 Counterparty / Issuer Risk</h3>
+<p>USDC is centralized, with reserves held in off-chain financial instruments and accounts.</p>
+<p><strong>Risk</strong>:</p>
+<ul>
+<li>Issuer failure, mismanagement, or regulatory intervention COULD impact redemptions.</li>
+<li>Concentration of reserves in particular instruments or banks introduces systemic exposure.</li>
+</ul>
+<p><strong>Mitigations</strong>:</p>
+<ul>
+<li>Regular review of issuer transparency reports and audits is RECOMMENDED.</li>
+<li>The protocol SHOULD avoid overconcentration in USDC beyond defined risk thresholds.</li>
+<li>Governance MUST retain the authority to alter PSM parameters to reduce USDC exposure if risk increases.</li>
+</ul>
+<h3 id="43-regulatory-risk">4.3 Regulatory Risk</h3>
+<p>USDC and its issuer operate under stricter regulatory regimes relative to some other stablecoins.</p>
+<p><strong>Risk</strong>:</p>
+<ul>
+<li>Regulatory changes MAY:</li>
+<li>improve oversight and safety,</li>
+<li>or restrict usage in certain regions or for certain addresses.</li>
+</ul>
+<p><strong>Mitigations</strong>:</p>
+<ul>
+<li>Protocol operators SHOULD monitor regulatory communications affecting USDC.</li>
+<li>Vault address policies MUST respect applicable sanctions and compliance requirements.</li>
+<li>If regulatory risk escalates, Risk Council SHOULD consider diversification or reallocation strategies.</li>
+</ul>
+<h3 id="44-oracle-price-risk">4.4 Oracle / Price Risk</h3>
+<p>USDC typically trades close to 1 USD with high liquidity.</p>
+<p><strong>Risk</strong>:</p>
+<ul>
+<li>Short-term divergence from 1 USD during market stress.</li>
+<li>Potential for oracle feeds to be skewed if only a subset of markets is considered.</li>
+</ul>
+<p><strong>Mitigations</strong>:</p>
+<ul>
+<li>Oracles SHOULD:</li>
+<li>include multiple chain venues where relevant,</li>
+<li>apply conservative aggregation and outlier filtering.</li>
+<li>OracleWatcher MUST enforce price sanity checks and liveness guarantees.</li>
+</ul>
+<h3 id="45-liquidity-risk">4.5 Liquidity Risk</h3>
+<p>USDC enjoys deep liquidity across major CEX and DEX platforms.</p>
+<p><strong>Risk</strong>:</p>
+<ul>
+<li>Localized liquidity shocks MAY occur on specific venues.</li>
+<li>Cross-chain bridging for USDC introduces additional layers of risk not covered here.</li>
+</ul>
+<p><strong>Mitigations</strong>:</p>
+<ul>
+<li>The protocol SHOULD prefer native mainnet liquidity over bridged liquidity whenever possible.</li>
+<li>Rebalancing operations SHOULD respect liquidity conditions and transaction cost constraints.</li>
+</ul>
+<h2 id="5-optional-risk-on-collateral-wbtc-erc20">5. Optional Risk-On Collateral: WBTC (ERC20)</h2>
+<h3 id="51-depeg-market-risk">5.1 Depeg &amp; Market Risk</h3>
+<p>WBTC represents wrapped Bitcoin on Ethereum.</p>
+<p><strong>Risk</strong>:</p>
+<ul>
+<li>Although WBTC itself generally tracks BTC, BTC is volatile:</li>
+<li>sudden price movements can rapidly change reserve value.</li>
+<li>Depeg between WBTC and BTC (custodial/technical issues) is possible but historically rare.</li>
+</ul>
+<p><strong>Mitigations</strong>:</p>
+<ul>
+<li>Protocol SHOULD treat WBTC as "risk-on" and limit its share in reserves.</li>
+<li>Conservative haircuts in PoR and risk calculations SHOULD be applied.</li>
+<li>WBTC MAY be excluded from reserve ratio calculations in extreme stress scenarios.</li>
+</ul>
+<h3 id="52-counterparty-issuer-risk">5.2 Counterparty / Issuer Risk</h3>
+<p>WBTC relies on custodians redeeming BTC for WBTC and vice versa.</p>
+<p><strong>Risk</strong>:</p>
+<ul>
+<li>Custodian failure or operational issues can freeze redemptions.</li>
+<li>Centralized control may introduce additional tail risks.</li>
+</ul>
+<p><strong>Mitigations</strong>:</p>
+<ul>
+<li>Risk Council SHOULD review custodian governance and transparency.</li>
+<li>WBTC exposure SHOULD be capped with thresholds set by governance.</li>
+<li>Participation of multiple custodians (if applicable) SHOULD be tracked.</li>
+</ul>
+<h3 id="53-oracle-liquidity-risk">5.3 Oracle &amp; Liquidity Risk</h3>
+<p>WBTC inherits BTC market structure plus Ethereum-specific liquidity.</p>
+<p><strong>Risk</strong>:</p>
+<ul>
+<li>Rapid BTC price movements can propagate to WBTC with latency.</li>
+<li>Extreme market moves MAY expose PSM and BuybackVault to large PnL swings.</li>
+</ul>
+<p><strong>Mitigations</strong>:</p>
+<ul>
+<li>Oracles SHOULD use robust BTC/USD references for WBTC pricing.</li>
+<li>Stress testing MUST simulate large BTC drawdowns and spikes.</li>
+</ul>
+<h2 id="6-optional-risk-on-collateral-weth-eth-erc20">6. Optional Risk-On Collateral: WETH / ETH (ERC20)</h2>
+<h3 id="61-volatility-market-risk">6.1 Volatility &amp; Market Risk</h3>
+<p>ETH is a highly liquid but volatile asset.</p>
+<p><strong>Risk</strong>:</p>
+<ul>
+<li>Large, rapid price swings can materially change reserve value.</li>
+<li>Using ETH as backing for a USD-pegged stablecoin inherently introduces market risk.</li>
+</ul>
+<p><strong>Mitigations</strong>:</p>
+<ul>
+<li>ETH exposure SHOULD remain a limited fraction of total reserves.</li>
+<li>Risk Council MUST define maximum ETH share and rebalancing rules.</li>
+<li>PoR calculations SHOULD apply conservative haircuts to ETH-based reserves.</li>
+</ul>
+<h3 id="62-liquidity-oracle-risk">6.2 Liquidity &amp; Oracle Risk</h3>
+<p>ETH has deep liquidity and widely quoted prices.</p>
+<p><strong>Risk</strong>:</p>
+<ul>
+<li>Oracle manipulation on specific pairs is possible.</li>
+<li>DeFi-specific events (e.g., liquidations, large MEV) MAY cause short-term dislocations.</li>
+</ul>
+<p><strong>Mitigations</strong>:</p>
+<ul>
+<li>Oracles MUST aggregate prices from multiple ETH/USD venues.</li>
+<li>OracleWatcher SHOULD enforce strict liveness checks and outlier filters.</li>
+<li>Stress tests MUST cover ETH-specific tail events.</li>
+</ul>
+<h2 id="7-cross-cutting-risks-interactions">7. Cross-Cutting Risks &amp; Interactions</h2>
+<h3 id="71-correlation-risk">7.1 Correlation Risk</h3>
+<p>Stablecoins and risk-on assets MAY be exposed to correlated shocks:</p>
+<ul>
+<li>Regulatory actions affecting multiple issuers.</li>
+<li>Systemic crypto market crashes.</li>
+<li>Liquidity dry-ups during macro events.</li>
+</ul>
+<p>Mitigations:</p>
+<ul>
+<li>Diversification across multiple stablecoins SHOULD be used but MUST NOT be over-relied on as a guarantee.</li>
+<li>Risk Council SHOULD define portfolio-level risk limits considering correlations.</li>
+</ul>
+<h3 id="72-oracle-risk-across-assets">7.2 Oracle Risk Across Assets</h3>
+<p>All collateral types depend on reliable price feeds.</p>
+<p>Mitigations:</p>
+<ul>
+<li>Use multiple data sources and robust aggregation mechanisms.</li>
+<li>Clearly define fallback behaviours when oracle data is unavailable or stale.</li>
+<li>Ensure that critical protocol operations MUST fail safely if price data cannot be trusted.</li>
+</ul>
+<h3 id="73-liquidity-spiral-risk">7.3 Liquidity Spiral Risk</h3>
+<p>Simultaneous stress on multiple collaterals MAY create:</p>
+<ul>
+<li>slippage spirals,</li>
+<li>feedback loops between redemptions and market impact.</li>
+</ul>
+<p>Mitigations:</p>
+<ul>
+<li>Limit rebalancing and redemption rates under stressed conditions.</li>
+<li>Avoid forced selling at any price; prefer controlled unwinds.</li>
+</ul>
+<h2 id="8-governance-parameterization">8. Governance &amp; Parameterization</h2>
+<p>The following governance roles are relevant for collateral risk management:</p>
+<ul>
+<li><strong>Operator</strong>  </li>
+<li>
+<p>Implements configuration changes within approved risk parameters.</p>
+</li>
+<li>
+<p><strong>Guardian</strong>  </p>
+</li>
+<li>
+<p>Executes emergency actions (pauses, circuit breakers) when risk thresholds are breached.</p>
+</li>
+<li>
+<p><strong>Governor</strong>  </p>
+</li>
+<li>
+<p>Votes on collateral inclusion, limits, and structural risk changes.</p>
+</li>
+<li>
+<p><strong>Risk Council</strong>  </p>
+</li>
+<li>Proposes risk frameworks and parameter sets, monitors collateral health, and coordinates with other roles.</li>
+</ul>
+<p>Parameters that MUST be governed include:</p>
+<ul>
+<li>maximum exposure per collateral (as percentage of total reserves),</li>
+<li>PSM limits per asset and per time interval,</li>
+<li>oracle configuration and bounds,</li>
+<li>thresholds for emergency actions (e.g., PoR ratio levels).</li>
+</ul>
+<h2 id="9-stress-scenarios-high-level">9. Stress Scenarios (High-Level)</h2>
+<p>The following stress scenarios SHOULD be considered in testing and risk review:</p>
+<ol>
+<li><strong>USDT depeg event</strong>  </li>
+<li>USDT trades at a significant discount for multiple days.</li>
+<li>
+<p>PSM and BuybackVault behaviour MUST be analysed under reduced USDT valuations.</p>
+</li>
+<li>
+<p><strong>USDC banking / custody stress</strong>  </p>
+</li>
+<li>Partial depeg or redemption delays.</li>
+<li>
+<p>Governance MUST be able to reduce USDC exposure and adjust parameters.</p>
+</li>
+<li>
+<p><strong>Crypto market crash</strong>  </p>
+</li>
+<li>Sharp drop in BTC and ETH prices.</li>
+<li>
+<p>Impact on WBTC and WETH reserves, PoR ratio, and buyback strategies MUST be evaluated.</p>
+</li>
+<li>
+<p><strong>Oracle failure</strong>  </p>
+</li>
+<li>Stale or incorrect prices for one or more collaterals.</li>
+<li>
+<p>OracleWatcher and Guardian flows MUST demonstrate safe behaviour.</p>
+</li>
+<li>
+<p><strong>Liquidity drain</strong>  </p>
+</li>
+<li>Diminished depth on major trading venues.</li>
+<li>Execution costs for rebalancing operations increase; protocol MUST avoid panic selling.</li>
+</ol>
+<p>Detailed quantitative stress tests are defined in <code>docs/testing/stress_test_suite_plan.md</code> (DEV-85).</p>
+<h2 id="10-summary">10. Summary</h2>
+<p>This collateral risk profile provides a qualitative and structural assessment of the main collateral assets backing 1kUSD in Economic Layer v0.51.0.</p>
+<p>It MUST be kept up to date as:</p>
+<ul>
+<li>new collateral assets are added or removed,</li>
+<li>market structures and regulations evolve,</li>
+<li>protocol design or parameters change materially.</li>
+</ul>
+<p>Any material change in collateral composition or risk environment SHOULD trigger a review of this document and associated risk and PoR specifications.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.expand", "content.tabs.link", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

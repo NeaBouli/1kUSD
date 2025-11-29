@@ -1,0 +1,3055 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://neabouli.github.io/1kUSD/architecture/buybackvault_strategy_phase1/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>BuybackVault Strategy Phase 1 – Single-Asset Guard (v0.52.x) - 1kUSD – Kaspa Stablecoin</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="lime">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#buybackvault-strategy-phase-1-single-asset-guard-v052x" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="1kUSD – Kaspa Stablecoin" class="md-header__button md-logo" aria-label="1kUSD – Kaspa Stablecoin" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            1kUSD – Kaspa Stablecoin
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              BuybackVault Strategy Phase 1 – Single-Asset Guard (v0.52.x)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="1kUSD – Kaspa Stablecoin" class="md-nav__button md-logo" aria-label="1kUSD – Kaspa Stablecoin" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    1kUSD – Kaspa Stablecoin
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Whitepaper
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Whitepaper
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whitepaper/WHITEPAPER_1kUSD_EN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    English
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whitepaper/WHITEPAPER_1kUSD_DE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deutsch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FAQ/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Governance & Logs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Governance & Logs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GOVERNANCE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Governance Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GOVERNANCE_OPS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Governance Ops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GOVERNANCE_PARAM_WRITES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parameter Writes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUARDIAN_SUNSET_HOOKS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guardian Sunset Hooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUARDIAN_SUNSET_RUNBOOK/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guardian Sunset Runbook
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../logs/project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Project Log
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    System Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ARCHITEKTUR/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architektur (DE)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../MODULE_IDS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Module IDs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BOOTSTRAP_QUICKSTART/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bootstrap Quickstart
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BUILD_TOOLING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build Tooling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../API_SPECS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Specs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../KASPA_INTEGRATION_NOTES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kaspa Integration Notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SDK_WIRING_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SDK Wiring Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Specs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Specs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/TOKEN_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Token Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/PSM_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PSM Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/COLLATERAL_VAULT_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Collateral Vault Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/ORACLE_AGGREGATOR_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Oracle Aggregator Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/PROOF_OF_RESERVES_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proof of Reserves Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/SAFETY_AUTOMATA_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Automata Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specs/TREASURY_FEE_ROUTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Treasury Fee Routing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Security & Safety
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Security & Safety
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SECURITY_PREAUDIT_README/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security Pre-Audit Readme
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../THREAT_MODEL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Threat Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SAFETY_GUARDIAN_CHECKLIST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Guardian Checklist
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SAFETY_GUARDS_TESTPLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Guards Testplan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SAFETY_PAUSE_MATRIX/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Pause Matrix
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SAFETY_RATE_LIMITER/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Rate Limiter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SAFETY_RATE_LIMITER_TEST_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Safety Rate Limiter Test Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TOKEN_PAUSE_SEMANTICS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Token Pause Semantics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TOKEN_PERMIT_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Token Permit Spec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TOKEN_PERMIT_TEST_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Token Permit Test Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/SECURITY_ANALYSIS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security Analysis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Vaults & Accounting
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Vaults & Accounting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VAULT_ACCOUNTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vault Accounting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VAULT_ACCOUNTING_EDGE_CASES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vault Accounting – Edge Cases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VAULT_ACCOUNTING_PLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vault Accounting Plan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VAULT_TEST_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vault Test Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NOTES_VAULT_MINIMAL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notes – Vault Minimal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NOTES_VAULT_ACCOUNTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notes – Vault Accounting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    PSM & Quotes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            PSM & Quotes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PSM_QUOTE_MATH/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quote Math
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PSM_QUOTE_SEMANTICS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quote Semantics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PSM_QUOTE_TEST_VECTORS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quote Test Vectors
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PSM_QUOTE_EXEC_ALIGNMENT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quote Exec Alignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PSM_REVERTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PSM Reverts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PSM_VS_CDP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PSM vs CDP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ROUNDING_RULES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rounding Rules
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NOTES_PSM_EXECUTION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notes – PSM Execution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NOTES_PSM_MINIMAL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notes – PSM Minimal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Parameters
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Parameters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PARAMETER_KEYS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parameter Keys
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PARAMETER_REGISTRY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parameter Registry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PARAM_KEYS_CANON/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Param Keys Canon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PARAM_KEYS_CATALOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Param Keys Catalog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JSON_VALIDATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JSON Validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Developer Docs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Developer Docs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DEVELOPER_ONBOARDING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Developer Onboarding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CI_GATES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CI Gates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CI_SECURITY_GATE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CI Security Gate
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SDK_EVENT_DECODERS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SDK Event Decoders
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FEE_ACCRUAL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fee Accrual
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../COLLATERAL_REGISTRY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Collateral Registry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DEV9_ASSIGNMENT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DEV9 Assignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Integrations
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            Integrations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/DEX_INTEGRATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DEX Integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../converter/AUTOCONVERTER_ROUTER/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Converter Router
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    DApp
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            DApp
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dapp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DApp Readme
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dapp/ROUTES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Routes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Indexer
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            Indexer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../indexer/INDEXING_TELEMETRY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Indexing Telemetry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Testing
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            Testing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/TESTPLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testplan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/FORMAL_INVARIANTS_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Formal Invariants Map
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Analysis & Notes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            Analysis & Notes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ANALYSIS_KASPA_STABLECOINS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Analysis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NOTES_TOKEN_PERMIT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notes – Token Permit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../STATUS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Status
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ERROR_CATALOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Catalog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-hintergrund" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Hintergrund
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-ziele-von-strategy-phase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Ziele von Strategy Phase 1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-proposed-contract-changes-entwurf" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Proposed Contract Changes (Entwurf)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Proposed Contract Changes (Entwurf)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-buybackvault-strategy-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 BuybackVault: Strategy Mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-strategyconfig-nutzung-in-executebuyback" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 StrategyConfig Nutzung in executeBuyback()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-dao-governance-sicht" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. DAO / Governance-Sicht
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. DAO / Governance-Sicht">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-parameter-im-governance-kontext" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Parameter im Governance-Kontext
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-interaktion-mit-guardian-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Interaktion mit Guardian / Safety
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-telemetrie-indexer" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Telemetrie / Indexer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-scope-non-goals-von-phase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Scope &amp; Non-Goals von Phase 1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-empfohlene-dev-tasks-forward-plan-v052x" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Empfohlene DEV-Tasks (Forward Plan v0.52.x)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="buybackvault-strategy-phase-1-single-asset-guard-v052x">BuybackVault Strategy Phase 1 – Single-Asset Guard (v0.52.x)</h1>
+<p>Status: RFC / Draft<br />
+Ziel-Release: v0.52.x+<br />
+Autor: DEV-7 / Economic Layer</p>
+<hr />
+<h2 id="1-hintergrund">1. Hintergrund</h2>
+<p>Mit v0.51.0 wurde der Economic Layer wie folgt konsolidiert:</p>
+<ul>
+<li><strong>PegStabilityModule (PSM)</strong> – Kern-Swap-Logik zwischen 1kUSD und Collateral.</li>
+<li><strong>Oracles + Guardian</strong> – Preisfeeds + Sicherheitslogik zur Pausierung.</li>
+<li><strong>BuybackVault</strong> – DAO-gesteuerter Vault für 1kUSD-basiertes Buyback-Programm:</li>
+<li>Funding (1kUSD → Vault)</li>
+<li>Withdraw (Asset/Stable → DAO)</li>
+<li>PSM-basiertes Buyback (1kUSD → Asset)</li>
+<li>Guardian-Pause via <code>moduleId</code> + Safety</li>
+</ul>
+<p>In v0.51.0 wurde außerdem eine minimale <strong>StrategyConfig</strong>-Schicht eingeführt:</p>
+<ul>
+<li><code>struct StrategyConfig { address asset; uint16 weightBps; bool enabled; }</code></li>
+<li><code>StrategyConfig[] strategies;</code></li>
+<li><code>function strategyCount() external view returns (uint256);</code></li>
+<li><code>function getStrategy(uint256 id) external view returns (StrategyConfig memory);</code></li>
+<li><code>function setStrategy(uint256 id, address asset, uint16 weightBps, bool enabled) external;</code></li>
+<li><code>error INVALID_STRATEGY();</code></li>
+<li><code>event StrategyUpdated(uint256 indexed id, address indexed asset, uint16 weightBps, bool enabled);</code></li>
+</ul>
+<p>Wichtig:  </p>
+<blockquote>
+<p>In v0.51.0 beeinflussen Strategien den <code>executeBuyback()</code>-Pfad <strong>nicht</strong>.<br />
+Sie dienen ausschließlich als Konfigurations- und Telemetrie-Basis.</p>
+</blockquote>
+<p>Phase 1 soll dies <strong>sanft</strong> erweitern, ohne die Stabilität des Economic Layers zu gefährden.</p>
+<hr />
+<h2 id="2-ziele-von-strategy-phase-1">2. Ziele von Strategy Phase 1</h2>
+<ol>
+<li><strong>Optionale Aktivierung von Strategien</strong>  </li>
+<li>Standardverhalten bleibt wie v0.51.0 (strategies nicht aktiv erzwingend).</li>
+<li>
+<p>DAO kann explizit einen „Strategy Mode“ einschalten.</p>
+</li>
+<li>
+<p><strong>Single-Asset Guard (Forward Compatibility)</strong>  </p>
+</li>
+<li>In Phase 1 bleibt BuybackVault effektiv <strong>Single-Asset</strong>:<ul>
+<li>Vault‐Asset = eine Ziel-Asset-Adresse.</li>
+</ul>
+</li>
+<li>
+<p>Strategien dienen als <strong>Guardrail</strong>:</p>
+<ul>
+<li>Überprüfung, dass es mindestens eine kompatible, aktivierte Strategie
+   für dieses Asset gibt.</li>
+</ul>
+</li>
+<li>
+<p><strong>Keine „Magie“ im Execution Path</strong>  </p>
+</li>
+<li><code>executeBuyback()</code> bleibt strukturell ähnlich:<ul>
+<li>zieht 1kUSD ein,</li>
+<li>ruft PSM,</li>
+<li>sendet Asset an den Empfänger.</li>
+</ul>
+</li>
+<li>
+<p>Strategien wirken nur als <strong>Konfigurations-Constraint</strong>, nicht als komplexer
+     Allocator für mehrere Assets.</p>
+</li>
+<li>
+<p><strong>Guarded Evolution zu Multi-Asset / Policy-Modulen</strong>  </p>
+</li>
+<li>Phase 1 soll so geschnitten sein, dass sie später zu:<ul>
+<li>Multi-Asset-Strategien,</li>
+<li>DCA/Scheduling,</li>
+<li>dynamischen Policies
+ ausgebaut werden kann, ohne große Refactors.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="3-proposed-contract-changes-entwurf">3. Proposed Contract Changes (Entwurf)</h2>
+<h3 id="31-buybackvault-strategy-mode">3.1 BuybackVault: Strategy Mode</h3>
+<p>Neues Feld (Entwurf):</p>
+<ul>
+<li><code>bool public strategiesEnforced;</code></li>
+</ul>
+<p>Neue Funktion:</p>
+<ul>
+<li><code>function setStrategiesEnforced(bool enforced) external;</code></li>
+<li><code>onlyDAO</code></li>
+<li>Event:<ul>
+<li><code>event StrategyEnforcementUpdated(bool enforced);</code></li>
+</ul>
+</li>
+</ul>
+<p>Semantik:</p>
+<ul>
+<li>Default (nach Deployment / in v0.51.x) → <code>strategiesEnforced = false</code></li>
+<li>Das entspricht exakt dem aktuellen Verhalten.</li>
+<li>Wenn die DAO <code>strategiesEnforced = true</code> setzt:</li>
+<li>BuybackVault verlangt, dass mindestens eine gültige, aktivierte Strategie
+    existiert, bevor <code>executeBuyback()</code> ausgeführt werden kann.</li>
+</ul>
+<h3 id="32-strategyconfig-nutzung-in-executebuyback">3.2 StrategyConfig Nutzung in executeBuyback()</h3>
+<p>Aktueller Pfad (vereinfacht):</p>
+<ul>
+<li><code>executeBuyback(recipient, amountStable, minAssetOut, deadline)</code></li>
+<li>Checks:<ul>
+<li><code>onlyDAO</code></li>
+<li><code>!paused</code></li>
+<li><code>amountStable &gt; 0</code></li>
+<li><code>recipient != address(0)</code></li>
+</ul>
+</li>
+<li>PSM-Swap:<ul>
+<li><code>psm.swapFrom1kUSD(address(asset), amountStable, recipient, minAssetOut, deadline);</code></li>
+</ul>
+</li>
+</ul>
+<p>Phase 1 (nur wenn <code>strategiesEnforced == true</code>):</p>
+<ul>
+<li>Vor dem PSM-Call:</li>
+<li><code>require(strategyCount() &gt; 0, "NO_STRATEGY_CONFIGURED");</code></li>
+<li>Mindestens <strong>eine</strong> Strategie muss:<ul>
+<li><code>enabled == true</code></li>
+<li><code>asset == address(asset)</code> (Vault-Asset)</li>
+</ul>
+</li>
+<li>Optional: Konsistenzcheck der Gewichte:<ul>
+<li>Summe <code>weightBps</code> aller <code>enabled</code> Strategien == 10000 (oder &lt;= 10000).</li>
+</ul>
+</li>
+</ul>
+<p>Neue Errors (Entwurf):</p>
+<ul>
+<li><code>error NO_STRATEGY_CONFIGURED();</code></li>
+<li><code>error NO_ENABLED_STRATEGY_FOR_ASSET();</code></li>
+</ul>
+<p>Wichtig:<br />
+- In Phase 1 führt diese Prüfung <strong>nur zu einem Revert</strong>, wenn Strategien nicht
+  sinnvoll gesetzt sind.
+- Es werden <strong>keine</strong> komplexen Allokations-Berechnungen durchgeführt.</p>
+<hr />
+<h2 id="4-dao-governance-sicht">4. DAO / Governance-Sicht</h2>
+<h3 id="41-parameter-im-governance-kontext">4.1 Parameter im Governance-Kontext</h3>
+<p>Aus DAO-Sicht kommen damit folgende Parameter hinzu:</p>
+<ul>
+<li><code>strategiesEnforced</code> (bool)</li>
+<li>„Schalte den Strategy-Guard für BuybackVault ein/aus“.</li>
+<li><code>StrategyConfig[] strategies</code></li>
+<li>Pro Eintrag:<ul>
+<li><code>asset</code> (sollte aktuell == Vault-Asset sein),</li>
+<li><code>weightBps</code>,</li>
+<li><code>enabled</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Empfohlene Governance-Richtlinien:</p>
+<ol>
+<li><strong>Phasenweiser Rollout</strong></li>
+<li>Zuerst Strategien definieren (StrategyConfig setzen).</li>
+<li>
+<p>Danach <code>strategiesEnforced = true</code> setzen, wenn alle Checks OK sind.</p>
+</li>
+<li>
+<p><strong>Konsistenz-Checks vor On-Chain-Änderungen</strong></p>
+</li>
+<li>
+<p>Off-Chain Tooling (z.B. Scripts/CI) sollte:</p>
+<ul>
+<li>sicherstellen, dass es mindestens eine aktivierte Strategie mit
+   der Vault-Asset-Adresse gibt.</li>
+<li>prüfen, dass Gewichtssummen sinnvoll sind.</li>
+</ul>
+</li>
+<li>
+<p><strong>Rollback-Strategie</strong></p>
+</li>
+<li>Bei Problemen kann die DAO:<ul>
+<li><code>strategiesEnforced = false</code> setzen,</li>
+<li>und damit sofort zum v0.51.0-Verhalten zurückkehren.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="5-interaktion-mit-guardian-safety">5. Interaktion mit Guardian / Safety</h2>
+<p>Strategy Phase 1 ändert <strong>nicht</strong> das Guardian-/Safety-Modell:</p>
+<ul>
+<li><code>safety.isPaused(moduleId)</code> bleibt die oberste Instanz:</li>
+<li>ist das Modul pausiert → kein Buyback, unabhängig von Strategien.</li>
+<li>Strategien ergänzen das Modell nur um „feinere“ DAO-seitige Entscheidungen:</li>
+<li>welche Assets (in Zukunft: mehrere),</li>
+<li>welche Gewichte.</li>
+</ul>
+<p>Für spätere Phasen (nicht Teil von Phase 1) kann man überlegen:</p>
+<ul>
+<li>Asset-spezifische Pausen (z.B. <code>pauseAsset(asset)</code>).</li>
+<li>Strategie-spezifische Caps (z.B. max Daily Volume pro Strategie).</li>
+</ul>
+<hr />
+<h2 id="6-telemetrie-indexer">6. Telemetrie / Indexer</h2>
+<p>Phase 1 erzeugt keine neuen Kern-Events außer ggf.:</p>
+<ul>
+<li><code>StrategyEnforcementUpdated(bool enforced)</code></li>
+</ul>
+<p>Bereits existierende Events:</p>
+<ul>
+<li><code>StrategyUpdated(id, asset, weightBps, enabled)</code></li>
+<li>BuybackVault-Basis-Events:</li>
+<li><code>StableFunded</code></li>
+<li><code>StableWithdrawn</code></li>
+<li><code>AssetWithdrawn</code></li>
+<li><code>BuybackExecuted</code></li>
+</ul>
+<p>Empfehlung für Indexer:</p>
+<ul>
+<li>Zusätzliches Flag im Off-Chain-Model:</li>
+<li><code>buyback_vault.strategies_enforced</code></li>
+<li>Alerts:</li>
+<li>Wenn <code>strategiesEnforced = true</code>, aber keine aktivierte Strategie für das
+    Vault-Asset existiert → Warnung.</li>
+</ul>
+<hr />
+<h2 id="7-scope-non-goals-von-phase-1">7. Scope &amp; Non-Goals von Phase 1</h2>
+<p><strong>In Scope</strong></p>
+<ul>
+<li>Einführung eines optionalen Strategy-Guard-Modus.</li>
+<li>Minimaler Check in <code>executeBuyback()</code>:</li>
+<li>vorhandene, aktivierte Strategie(n) für das Vault-Asset.</li>
+<li>Erweiterung der Governance-Doku (Parameter-Playbook).</li>
+<li>Ggf. kleinere Anpassungen im Telemetrie-Dokument.</li>
+</ul>
+<p><strong>Nicht in Scope</strong></p>
+<ul>
+<li>Multi-Asset Buyback (mehrere Ziel-Assets).</li>
+<li>Zeitbasierte Strategien (DCA, Schedules).</li>
+<li>Komplexe On-Chain-Optimierung (z.B. Preise, Slippage, Multi-DEX).</li>
+<li>Änderungen an PSM-/Oracle-Core-Logik.</li>
+</ul>
+<hr />
+<h2 id="8-empfohlene-dev-tasks-forward-plan-v052x">8. Empfohlene DEV-Tasks (Forward Plan v0.52.x)</h2>
+<p>Vorschlag für saubere, kleine Tickets:</p>
+<ul>
+<li><strong>DEV-74 CORE01 – StrategyEnforcement Flag</strong></li>
+<li><code>strategiesEnforced</code> Feld + Getter.</li>
+<li><code>setStrategiesEnforced(bool)</code> mit <code>onlyDAO</code>.</li>
+<li><code>StrategyEnforcementUpdated</code> Event.</li>
+<li>
+<p>Basis-Tests in <code>BuybackVault.t.sol</code>.</p>
+</li>
+<li>
+<p><strong>DEV-75 CORE02 – Strategy Guard in executeBuyback()</strong></p>
+</li>
+<li>Einbau der <code>NO_STRATEGY_CONFIGURED</code> / <code>NO_ENABLED_STRATEGY_FOR_ASSET</code>
+    Checks, nur wenn <code>strategiesEnforced == true</code>.</li>
+<li>
+<p>Tests:</p>
+<ul>
+<li>Mode off → keine Änderungen.</li>
+<li>Mode on, aber keine Strategie → Revert.</li>
+<li>Mode on, gültige Strategie → OK.</li>
+</ul>
+</li>
+<li>
+<p><strong>DEV-76 DOC – Governance &amp; Telemetrie</strong></p>
+</li>
+<li>Update <code>docs/governance/parameter_playbook.md</code> mit StrategyEnforcement-Flow.</li>
+<li>Ergänzung in <code>economic_layer_overview.md</code> zu Phase 1.</li>
+<li>Ggf. Indexer-Notiz / Telemetrie-Guides.</li>
+</ul>
+<p>Dieses Dokument dient als Referenz für den Architekten / Lead-Dev und kann
+vor dem eigentlichen v0.52.x-Implementierungsschritt noch geschärft werden.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.expand", "content.tabs.link", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

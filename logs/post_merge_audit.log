@@ -1,0 +1,18 @@
+🩺 POST-MERGE DOCS AUDIT — Mi 29 Okt 2025 21:04:12 CET
+🔹 Checking latest workflow run on main...
+{
+  "status": "completed",
+  "conclusion": "success",
+  "html_url": "https://github.com/NeaBouli/1kUSD/actions/runs/18920400867",
+  "run_started_at": "2025-10-29T19:55:25Z"
+}
+✅ Workflow status: SUCCESS (badge should be green)
+
+🌍 Verifying GitHub Pages URLs...
+✅ https://neabouli.github.io/1kUSD/ — OK (HTTP 200)
+❌ https://neabouli.github.io/1kUSD/GOVERNANCE/ — FAIL (HTTP 404)
+✅ https://neabouli.github.io/1kUSD/logs/project/ — OK (HTTP 200)
+
+📦 Checking local MkDocs build...
+✅ Local build OK
+
