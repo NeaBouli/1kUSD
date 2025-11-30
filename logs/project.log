@@ -350,3 +350,4 @@
 [DEV-90] 2025-11-30T20:21:46Z Releases: added EconomicLayer_v051 StrategyEnforcement preview release note.
 [DEV-91] 2025-11-30T20:22:04Z README: added Economic Layer Status box (baseline vs StrategyEnforcement preview).
 [DEV-91] 2025-11-30T20:34:01Z README: added Economic Layer Status box (baseline vs StrategyEnforcement preview).
+[DEV-90] 2025-11-30T20:52:30Z Docs: add docs/index.md stub to satisfy MkDocs nav and cross-links.
