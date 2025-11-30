@@ -1,5 +1,26 @@
 # Economic Layer Overview (PSM + Oracle + BuybackVault)
 **StrategyConfig (v0.51.0):**
+
+### BuybackVault StrategyEnforcement – Phase 1 (v0.52.x Plan)
+
+Für v0.52.x ist eine optionale „Phase 1“-Durchsetzung von Strategien vorgesehen:
+
+- Flag: `strategiesEnforced` (bool, Default: `false`).
+- Setter: `setStrategiesEnforced(bool enforced)` (nur DAO).
+- Event: `StrategyEnforcementUpdated(bool enforced)`.
+
+**Bedeutung für den Economic Layer:**
+
+- `strategiesEnforced == false`  
+  - BuybackVault verhält sich wie in v0.51.0: `StrategyConfig` dient primär der Dokumentation und Telemetrie.
+- `strategiesEnforced == true`  
+  - Buybacks laufen nur durch, wenn:
+    - mindestens eine Strategie konfiguriert ist (`strategies.length > 0`), sonst Revert `NO_STRATEGY_CONFIGURED`;
+    - eine aktivierte Strategie für das Ziel-Asset existiert, sonst Revert `NO_ENABLED_STRATEGY_FOR_ASSET`.
+  - Guardian-/PSM-Checks bleiben unverändert aktiv.
+
+Die Aktivierung von `strategiesEnforced` wird als Governance-Entscheidung behandelt und kann bei Bedarf wieder zurückgenommen werden, um in den v0.51.0-kompatiblen Modus ohne Strategy-Guard zurückzukehren.
+
   - A forward-looking strategy interface `IBuybackStrategy`
   (`contracts/strategy/IBuybackStrategy.sol`) is defined for v0.52+ to host
   external, upgradable buyback strategy modules. In v0.51.0 it is **not yet**

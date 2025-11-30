@@ -27,7 +27,8 @@ contract BuybackVault {
     event StableFunded(address indexed from, uint256 amount);
 
     /// @notice DAO hat einen Buyback ausgeführt (Stable in, Asset out).
-    event StrategyUpdated(uint256 indexed id, address asset, uint16 weightBps, bool enabled);
+        event StrategyEnforcementUpdated(bool enforced);
+event StrategyUpdated(uint256 indexed id, address asset, uint16 weightBps, bool enabled);
     event BuybackExecuted(address indexed recipient, uint256 stableIn, uint256 assetOut);
 
     struct StrategyConfig {
@@ -37,6 +38,8 @@ contract BuybackVault {
     }
 
     StrategyConfig[] private strategies;
+    bool public strategiesEnforced;
+
 
 
     /// @notice DAO hat Stable-Tokens aus dem Vault abgezogen.
@@ -50,6 +53,8 @@ contract BuybackVault {
 error INVALID_AMOUNT();
 error INSUFFICIENT_BALANCE();
 error INVALID_STRATEGY();
+error NO_STRATEGY_CONFIGURED();
+error NO_ENABLED_STRATEGY_FOR_ASSET();
 
     IERC20 public immutable stable;
     IERC20 public immutable asset;
@@ -169,6 +174,13 @@ error INVALID_STRATEGY();
         return strategies[id];
     }
 
+
+    function setStrategiesEnforced(bool enforced) external {
+        if (msg.sender != dao) revert NOT_DAO();
+        strategiesEnforced = enforced;
+        emit StrategyEnforcementUpdated(enforced);
+    }
+
     function setStrategy(
         uint256 id,
         address asset_,
@@ -222,6 +234,21 @@ function stableBalance() external view returns (uint256) {
 
         uint256 bal = stable.balanceOf(address(this));
         if (bal < amountStable) revert INSUFFICIENT_BALANCE();
+
+        if (strategiesEnforced) {
+            if (strategies.length == 0) revert NO_STRATEGY_CONFIGURED();
+
+            bool found;
+            for (uint256 i = 0; i < strategies.length; i++) {
+                StrategyConfig storage cfg = strategies[i];
+                if (cfg.enabled && cfg.asset == address(asset)) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) revert NO_ENABLED_STRATEGY_FOR_ASSET();
+        }
 
         // Approve PSM to pull the requested stable amount
         stable.approve(address(psm), amountStable);

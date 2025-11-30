@@ -12,6 +12,19 @@
 Phase 1 targets EVM deployment, with forward compatibility for Kasplex and (eventually) Kaspa L1.
 
 ## Architecture Modules
+
+## Security & Risk
+
+The 1kUSD protocol ships with a dedicated security and risk layer around the Economic Layer v0.51.0. Core specifications are documented in:
+
+- [Security audit plan](docs/security/audit_plan.md)
+- [Bug bounty program](docs/security/bug_bounty.md)
+- [Proof-of-reserves specification](docs/risk/proof_of_reserves_spec.md)
+- [Collateral risk profile](docs/risk/collateral_risk_profile.md)
+- [Emergency depeg runbook](docs/risk/emergency_depeg_runbook.md)
+- [Stress-test suite plan](docs/testing/stress_test_suite_plan.md)
+- [Governance handover v0.51.0](docs/reports/DEV87_Governance_Handover_v051.md)
+
 - **On-Chain:** 1kUSD Token, CollateralVault, AutoConverter, PSM, OracleAggregator, Safety-Automata, DAO/Timelock, Treasury, Bridge Anchor (prep).
 - **Off-Chain:** Indexer/APIs, Monitoring/Telemetry, CI/CD, Security/Audit.
 - **Clients:** SDKs, Reference dApp/Explorer.
