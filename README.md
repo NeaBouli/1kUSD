@@ -11,6 +11,39 @@
 1kUSD is a decentralized, collateralized, and automation-driven stablecoin designed for a 1:1 USD peg via on-chain reserves (stablecoins), a Peg-Stability Module (PSM), oracle aggregation, and safety automata.  
 Phase 1 targets EVM deployment, with forward compatibility for Kasplex and (eventually) Kaspa L1.
 
+
+
+## Economic Layer Status
+
+> **Baseline vs. Preview**
+>
+> The current on-chain design is intentionally split into:
+>
+> - **Economic Layer v0.51.0 (Baseline)**  
+>   Stable core including PSM, Oracle layer, Guardian/SafetyAutomata and
+>   BuybackVault. This is the reference behaviour for mainnet.
+>
+> - **BuybackVault StrategyEnforcement – Phase 1 (v0.52.x Preview)**  
+>   An *optional* policy guard on top of the existing BuybackVault logic.
+>   It introduces:
+>   - a DAO-controlled flag: `strategiesEnforced` (default: `false`)
+>   - additional reverts in `executeBuyback()` when enforcement is enabled:
+>     `NO_STRATEGY_CONFIGURED` and `NO_ENABLED_STRATEGY_FOR_ASSET`.
+>
+> As long as `strategiesEnforced == false`, the protocol behaves exactly like
+> **v0.51.0**. Turning the flag on is a **separate governance decision** and
+> should be coupled with:
+>
+> - updated monitoring (indexer views & dashboards),
+> - a clear parameter vote,
+> - and coordination with Risk / Security / PoR runbooks.
+>
+> For details, see:
+> - `docs/architecture/buybackvault_strategy_phase1.md`
+> - `docs/governance/parameter_playbook.md`
+> - `docs/indexer/indexer_buybackvault.md`
+> - `docs/reports/PROJECT_STATUS_EconomicLayer_v051.md`
+
 ## Architecture Modules
 
 ## Security & Risk
