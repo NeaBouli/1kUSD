@@ -1,0 +1,10 @@
+🔧 Fixing absolute '/1kUSD/' links in specs/*.md ...
+Timestamp: Mi 29 Okt 2025 22:10:49 CET
+
+✅ Fixed: docs/specs/COLLATERAL_VAULT_SPEC.md
+✅ Fixed: docs/specs/ORACLE_AGGREGATOR_SPEC.md
+✅ Fixed: docs/specs/PROOF_OF_RESERVES_SPEC.md
+✅ Fixed: docs/specs/PSM_SPEC.md
+✅ Fixed: docs/specs/SAFETY_AUTOMATA_SPEC.md
+✅ Fixed: docs/specs/TOKEN_SPEC.md
+

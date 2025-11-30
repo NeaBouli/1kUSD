@@ -1,0 +1,46 @@
+🚀 1kUSD — Automated GitHub Pages Deploy + Verify
+Timestamp: Do 30 Okt 2025 00:27:48 CET
+---------------------------------------------
+🧹 Cleaning stale mkdocs/git locks...
+✅ Cleanup complete.
+
+🏗️ Building and deploying documentation...
+INFO    -  Cleaning site directory
+INFO    -  Building documentation to directory: /Users/test/Desktop/1kUSD/site
+WARNING -  Excluding 'README.md' from the site because it conflicts with 'index.md'.
+[git-revision-date-localized-plugin] '/Users/test/Desktop/1kUSD/docs/index.md' has no git logs, using current timestamp
+[git-revision-date-localized-plugin] '/Users/test/Desktop/1kUSD/docs/DEV9_ASSIGNMENT.md' has no git logs, using current timestamp
+[git-revision-date-localized-plugin] '/Users/test/Desktop/1kUSD/docs/GOVERNANCE.md' has no git logs, using current timestamp
+[git-revision-date-localized-plugin] '/Users/test/Desktop/1kUSD/docs/index.md' has no git logs, using current timestamp
+[git-revision-date-localized-plugin] '/Users/test/Desktop/1kUSD/docs/DEV9_ASSIGNMENT.md' has no git logs, using current timestamp
+[git-revision-date-localized-plugin] '/Users/test/Desktop/1kUSD/docs/GOVERNANCE.md' has no git logs, using current timestamp
+INFO    -  The following pages exist in the docs directory, but are not included in the "nav" configuration:
+  - GOVERNANCE_OPS.md
+  - GOVERNANCE_PARAM_WRITES.md
+  - GUARDIAN_SUNSET_HOOKS.md
+  - GUARDIAN_SUNSET_RUNBOOK.md
+  - INDEXER_EVENT_NOTES.md
+  - INDEXER_SCHEMAS.md
+  - INVARIANTS_EXEC_MAP.md
+  - INVARIANTS_HARNESS_NOTES.md
+  - NOTES_ORACLE_MINIMAL.md
+  - ORACLE_ADAPTERS.md
+  - ORACLE_AGGREGATION_GUARDS.md
+  - ORACLE_TEST_GUIDE.md
+  - PSM_SWAP_EXECUTION_PLAN.md
+  - logs/developer_faq.md
+  - logs/final_link_validation_audit.md
+  - logs/final_pages_audit.md
+  - logs/pages_reactivation_report.md
+  - logs/routing_fix_report.md
+INFO    -  Documentation built in 38.14 seconds
+INFO    -  Copying '/Users/test/Desktop/1kUSD/site' to 'gh-pages' branch and pushing to GitHub.
+To https://github.com/NeaBouli/1kUSD.git
+   49c262a..d45739d  gh-pages -> gh-pages
+INFO    -  Your documentation should shortly be available at: https://NeaBouli.github.io/1kUSD/
+✅ MkDocs deployment completed.
+
+🌀 Forcing GitHub Pages cache invalidation...
+Von https://github.com/NeaBouli/1kUSD
+ * branch            gh-pages   -> FETCH_HEAD
+Schwerwiegend: 'gh-pages' wird bereits von Arbeitsverzeichnis in '/private/tmp/gh' verwendet
