@@ -342,3 +342,4 @@
 [DEV-78] 2025-11-29T20:17:24Z Infra: added CI/Docker/docs integration checklist for Strategy/Security/Risk docs.
 [DEV-79] 2025-11-29T20:45:26Z Infra: added DEV-7 infra/CI/Docker/Pages planning document.
 [DEV-79] 2025-11-29T20:53:14Z Infra: added CI workflow inventory report (DEV79_Infra_CI_Inventory.md).
+[DEV-79] 2025-11-30T07:54:35Z Infra: added MkDocs/Pages integration notes (DEV79_Infra_MkDocs_Pages_Notes.md).
