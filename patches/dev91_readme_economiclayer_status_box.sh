@@ -12,7 +12,11 @@ from pathlib import Path
 path = Path("README.md")
 text = path.read_text()
 
-snippet = """
+marker = "## Economic Layer Status"
+if marker in text:
+    print("Economic Layer Status section already present; no change.")
+else:
+    snippet = """\
 ## Economic Layer Status
 
 > **Baseline vs. Preview**
@@ -45,35 +49,36 @@ snippet = """
 > - `docs/reports/PROJECT_STATUS_EconomicLayer_v051.md`
 """
 
-marker = "## Economic Layer Status"
-if marker in text:
-    print("Economic Layer Status section already present; no change.")
-else:
     lines = text.splitlines(keepends=True)
     insert_idx = None
 
-    # Bevorzugter Anker: Architektur/Status-Bereich
+    # 1) Bevorzugt: direkt nach "Security & Risk" einfügen
     for i, line in enumerate(lines):
-        if "## Architecture" in line or "## Architektur" in line:
-            insert_idx = i
+        if "## Security & Risk" in line:
+            insert_idx = i + 1
             break
 
+    # 2) Fallback: vor Architecture-Section
     if insert_idx is None:
-        # Fallback: am Ende anfügen
-        print("No obvious Architecture marker found; appending Economic Layer Status at end.")
+        for i, line in enumerate(lines):
+            if "## Architecture" in line or "## Architektur" in line:
+                insert_idx = i
+                break
+
+    if insert_idx is None:
+        print("No obvious marker found; appending Economic Layer Status at end.")
         if not text.endswith("\n"):
             text += "\n"
-        text = text + "\n" + snippet + "\n"
+        text = text + snippet + "\n"
     else:
-        print(f"Inserting Economic Layer Status section before line {insert_idx}.")
-        lines.insert(insert_idx, "\n" + snippet + "\n")
+        print(f"Inserting Economic Layer Status section at line {insert_idx}.")
+        lines.insert(insert_idx, snippet + "\n")
         text = "".join(lines)
 
     path.write_text(text)
     print("✓ Economic Layer Status section written/updated in README.md")
 PY
 
-# Log-Eintrag
 timestamp="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 echo "[DEV-91] ${timestamp} README: added Economic Layer Status box (baseline vs StrategyEnforcement preview)." >> "$LOG_FILE"
 
