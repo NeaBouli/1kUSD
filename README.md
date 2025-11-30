@@ -4,6 +4,8 @@
 
 # 1kUSD — Decentralized Stablecoin Protocol
 
+[![Docs Build](https://github.com/NeaBouli/1kUSD/actions/workflows/docs-build.yml/badge.svg)](https://github.com/NeaBouli/1kUSD/actions/workflows/docs-build.yml)
+
 **Repository language: English.**  
 **Whitepaper:** German & English (two files under `docs/whitepaper/`).
 
