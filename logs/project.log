@@ -353,3 +353,4 @@
 [DEV-90] 2025-11-30T20:52:30Z Docs: add docs/index.md stub to satisfy MkDocs nav and cross-links.
 [DEV-91] 2025-11-30T21:15:56Z Docs: add Economic Layer + StrategyEnforcement status block to README.
 [DEV-92] 2025-11-30T21:28:09Z Infra: ensured docs/index.md exists (mirroring INDEX.md) for MkDocs nav + relative links.
+[DEV-93] 2025-11-30T21:32:11Z CI: added standalone docs-build workflow (mkdocs build on push/PR to main).
