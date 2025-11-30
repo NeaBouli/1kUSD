@@ -46,6 +46,19 @@ Phase 1 targets EVM deployment, with forward compatibility for Kasplex and (even
 
 ## Architecture Modules
 
+
+### Economic Layer status (v0.51.0 + StrategyEnforcement Phase-1 preview)
+
+- **Baseline**: Economic Layer v0.51.0 (PSM, Oracles, Guardian, BuybackVault) is stable and green.
+- **Strategy layer**: BuybackVault strategy config is live; StrategyEnforcement Phase-1 guard is implemented but **opt-in** via the `strategiesEnforced` flag.
+- **Behaviour**: As long as `strategiesEnforced == false`, runtime behaviour remains identical to the v0.51.0 baseline.
+- **Docs / reports**:
+  - \`docs/reports/PROJECT_STATUS_EconomicLayer_v051.md\`
+  - \`docs/reports/DEV60-72_BuybackVault_EconomicLayer.md\`
+  - \`docs/reports/DEV74-76_StrategyEnforcement_Report.md\`
+
+Enabling StrategyEnforcement is a DAO/governance decision and should be coupled with monitoring (indexer dashboards) and an explicit parameter decision.
+
 ## Security & Risk
 
 The 1kUSD protocol ships with a dedicated security and risk layer around the Economic Layer v0.51.0. Core specifications are documented in:
