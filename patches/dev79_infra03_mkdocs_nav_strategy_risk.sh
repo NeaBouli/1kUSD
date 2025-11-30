@@ -1,3 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "== DEV79 INFRA03: write MkDocs nav blueprint for Security/Risk/Strategy docs =="
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT_DIR"
+
+DOC="docs/logs/DEV79_Infra_MkDocs_Nav_StrategyRisk.md"
+LOG_FILE="logs/project.log"
+
+mkdir -p "$(dirname "$DOC")"
+
+cat > "$DOC" <<'MD'
 # DEV79 – MkDocs Navigation Blueprint (Security / Risk / Strategy)
 
 **Rolle:** DEV-7 (Infra / Docker / CI / Pages)  
@@ -181,3 +195,11 @@ sinnvolle nächste INFRA-Schritte.
 Damit behält DEV-7 die volle Kontrolle, wann und wie die
 Navigation angepasst wird, ohne den jetzt stabilen
 Economic Layer v0.51.0 oder die Strategy-Doku zu gefährden.
+MD
+
+timestamp="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+echo "[DEV-79] ${timestamp} Infra: added MkDocs nav blueprint for Security/Risk/Strategy docs." >> "$LOG_FILE"
+
+echo "✓ MkDocs nav blueprint written to ${DOC}"
+echo "✓ Log updated at ${LOG_FILE}"
+echo "== DEV79 INFRA03: done =="

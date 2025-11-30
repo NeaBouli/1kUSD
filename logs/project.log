@@ -346,3 +346,4 @@
 [DEV-79] 2025-11-30T08:36:50Z INFRA: added buybackvault-strategy-guard GitHub Actions workflow.
 [DEV-79] 2025-11-30T10:40:25Z Infra: added MkDocs nav checklist for Strategy/Security/Risk docs.
 [DEV-79] 2025-11-30T18:24:26Z Infra: added Docker/Multi-Arch checklist blueprint.
+[DEV-79] 2025-11-30T19:10:54Z Infra: added MkDocs nav blueprint for Security/Risk/Strategy docs.
