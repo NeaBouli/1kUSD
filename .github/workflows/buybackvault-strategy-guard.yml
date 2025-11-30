@@ -1,0 +1,37 @@
+name: BuybackVault Strategy Guard Tests
+
+on:
+  push:
+    paths:
+      - 'contracts/core/BuybackVault.sol'
+      - 'contracts/strategy/**'
+      - 'foundry/test/BuybackVault.t.sol'
+      - '.github/workflows/buybackvault-strategy-guard.yml'
+  pull_request:
+    paths:
+      - 'contracts/core/BuybackVault.sol'
+      - 'contracts/strategy/**'
+      - 'foundry/test/BuybackVault.t.sol'
+      - '.github/workflows/buybackvault-strategy-guard.yml'
+
+jobs:
+  buybackvault-strategy-guard:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Show Foundry versions
+        run: forge --version
+
+      - name: Run BuybackVault baseline tests
+        run: forge test --match-contract BuybackVaultTest
+
+      - name: Run BuybackVault strategy guard tests
+        run: forge test --match-contract BuybackVaultStrategyGuardTest
