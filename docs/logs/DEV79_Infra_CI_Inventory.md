@@ -104,3 +104,15 @@ Diese Inventur ist bewusst **read-only**. Mögliche nächste Schritte:
   - CI-Deckung präzisieren,
   - Docs-/Status-Files enger mit dem Release-Prozess verbinden,
   - ohne den Economic Layer v0.51.0 oder den Strategy-Layer zu verändern.
+\n\n
+### Update DEV-93: docs-build.yml hinzugefügt
+
+- Nach der ursprünglichen CI-Inventur wurde mit **DEV-93** ein zusätzlicher
+  Workflow hinzugefügt:
+  - Datei: `.github/workflows/docs-build.yml`
+  - Aufgabe: `mkdocs build` auf `push` / `pull_request` nach `main`.
+- Dieser Workflow stellt sicher, dass die Dokumentation weiterhin baubar ist
+  und macht Build-Fehler früh im CI sichtbar.
+- Die ursprüngliche Inventur bleibt als Snapshot bestehen; dieses Update
+  dokumentiert nur die Erweiterung durch DEV-93.
+\n

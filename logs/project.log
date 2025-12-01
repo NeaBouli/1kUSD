@@ -356,3 +356,4 @@
 [DEV-93] 2025-11-30T21:32:11Z CI: added standalone docs-build workflow (mkdocs build on push/PR to main).
 [DEV-93] 2025-11-30T21:38:44Z CI: added Docs Build badge (docs-build.yml) to README.
 [DEV-93] 2025-12-01T07:16:09Z CI: documented docs-build workflow (DEV-93) in DEV78 Infra checklist.
+[DEV-93] 2025-12-01T07:37:57Z CI: documented docs-build workflow (DEV-93) in DEV79 CI inventory.
