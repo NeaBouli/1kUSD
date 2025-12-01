@@ -139,3 +139,17 @@ Vorschlag für kleinteilige, risikoarme Schritte:
 
 Dieses Dokument dient als Ausgangspunkt für weitere DEV-7-Patches
 (jeweils kleine, abgeschlossene INFRA-Schritte mit eigener Log-Zeile).
+
+### Update DEV-93: Docs-Build CI integriert
+
+- Der CI-Teil „Docs/MkDocs in CI einbinden“ wurde mit **DEV-93** teilweise
+  umgesetzt:
+  - Neuer Workflow: `.github/workflows/docs-build.yml`
+  - Aktion: `mkdocs build` auf `push` / `pull_request` nach `main`.
+- Damit ist sichergestellt, dass die Doku in der CI baubar bleibt und
+  Fehler früh sichtbar werden.
+- Offene Punkte aus diesem Plan bleiben bewusst **separate Tickets**:
+  - Docker/Multi-Arch-Build (Images, Tags, Registry).
+  - Release-Tag-Checks (z.B. `PROJECT_STATUS_*.md`).
+  - Feinere Pages-/Preview-Flows, falls später gewünscht.
+
