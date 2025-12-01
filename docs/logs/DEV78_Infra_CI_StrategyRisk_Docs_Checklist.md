@@ -150,3 +150,15 @@ Diese Checkliste ist bewusst **non-invasive**:
 
 DEV-7 kann sie als Grundlage verwenden, um in kleinen, isolierten
 Tickets die Integration zu schärfen.
+
+### Update DEV-93: Docs-Build CI umgesetzt
+
+- Der Punkt „Docs/MkDocs in CI einhängen“ ist für den reinen Build-Check
+  mit **DEV-93** umgesetzt:
+  - Workflow: `.github/workflows/docs-build.yml`
+  - Aktion: `mkdocs build` auf `push` / `pull_request` nach `main`.
+- Zusätzlich wurde ein **Docs Build**-Badge im `README.md` ergänzt, der den
+  Status des Workflows sichtbar macht.
+- Weitere Schritte (z.B. Release-Tag-Checks, engere Kopplung an
+  `PROJECT_STATUS_*.md`) bleiben als separate INFRA-Tickets offen.
+
