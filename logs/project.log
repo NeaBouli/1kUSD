@@ -360,3 +360,4 @@
 [DEV-93] 2025-12-01T09:13:26Z CI: documented docs-build workflow in DEV79 Dev7 infra plan.
 [DEV-93] 2025-12-01T09:44:26Z CI: DEV93_CI_Docs_Build_Report.md added (docs-build workflow, badge, infra links).
 [DEV-94] 2025-12-01T14:35:27Z Infra: added DEV94_Release_Tag_Checks_Plan.md (plan for future release-tag CI checks).
+[DEV-94] 2025-12-01T19:23:34Z Infra: added release-tag checks plan (DEV94_Infra_Release_Tag_Checks_Plan.md).
