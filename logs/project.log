@@ -362,3 +362,4 @@
 [DEV-94] 2025-12-01T14:35:27Z Infra: added DEV94_Release_Tag_Checks_Plan.md (plan for future release-tag CI checks).
 [DEV-94] 2025-12-01T19:23:34Z Infra: added release-tag checks plan (DEV94_Infra_Release_Tag_Checks_Plan.md).
 [DEV-95] 2025-12-01T19:33:56Z Infra: added scripts/check_release_status.sh for local release status checks.
+[DEV-97] 2025-12-02T12:28:19Z Release: added manual release tagging guide (RELEASE_TAGGING_GUIDE_v0.51.x.md).
