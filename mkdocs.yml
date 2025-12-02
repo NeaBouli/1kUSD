@@ -104,3 +104,10 @@ nav:
   - Changelog: CHANGELOG.md
   - Error Catalog: ERROR_CATALOG.md
 
+  - Security & Risk:
+      - Security audit plan: security/audit_plan.md
+      - Bug bounty: security/bug_bounty.md
+      - Proof of reserves: risk/proof_of_reserves_spec.md
+      - Collateral risk profile: risk/collateral_risk_profile.md
+      - Emergency depeg runbook: risk/emergency_depeg_runbook.md
+      - Stress test suite plan: testing/stress_test_suite_plan.md
