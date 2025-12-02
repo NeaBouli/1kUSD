@@ -181,3 +181,21 @@ sinnvolle nächste INFRA-Schritte.
 Damit behält DEV-7 die volle Kontrolle, wann und wie die
 Navigation angepasst wird, ohne den jetzt stabilen
 Economic Layer v0.51.0 oder die Strategy-Doku zu gefährden.
+
+### Update DEV-98: Security & Risk nav live
+
+- Der in diesem Dokument geplante Menüpunkt **„Security & Risk“** ist nun in
+  `mkdocs.yml` umgesetzt:
+  - Eintrag unter `nav:` als eigener Block **„Security & Risk“**.
+  - Verlinkt u.a.:
+    - `security/audit_plan.md`
+    - `security/bug_bounty.md`
+    - `risk/proof_of_reserves_spec.md`
+    - `risk/collateral_risk_profile.md`
+    - `risk/emergency_depeg_runbook.md`
+    - `testing/stress_test_suite_plan.md`
+- Damit ist der sichtbare Einstiegspunkt für Strategy/Security/Risk-Dokumente
+  auf der Docs-Seite hergestellt.
+- Weitere Navigationserweiterungen (z.B. feinere Unterpunkte oder zusätzliche
+  Reports) bleiben für spätere Patches offen.
+

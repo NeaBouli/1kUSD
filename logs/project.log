@@ -365,3 +365,4 @@
 [DEV-97] 2025-12-02T12:28:19Z Release: added manual release tagging guide (RELEASE_TAGGING_GUIDE_v0.51.x.md).
 [DEV-97] 2025-12-02T19:01:07Z Release: linked release tagging guide + status script from README.
 [DEV-98] 2025-12-02T19:18:37Z MkDocs: added 'Security & Risk' section to nav (security/risk/testing docs).
+[DEV-98] 2025-12-02T19:48:18Z MkDocs: documented Security & Risk nav in DEV79 MkDocs nav notes.
