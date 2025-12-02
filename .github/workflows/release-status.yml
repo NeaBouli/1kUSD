@@ -1,22 +1,20 @@
-name: Release Status
+name: Release Status Check
 
 on:
   push:
     tags:
       - "v0.51.*"
-      - "v0.52.*"
 
 jobs:
   release-status:
-    name: Check release status reports
+    name: Run release status script for v0.51.x tags
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Make release status script executable
-        run: chmod +x scripts/check_release_status.sh
-
       - name: Run release status check
-        run: ./scripts/check_release_status.sh
+        run: |
+          chmod +x scripts/check_release_status.sh
+          scripts/check_release_status.sh
