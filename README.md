@@ -839,3 +839,14 @@ For a high-level map of the PSM, Oracle stack, Guardian and BuybackVault modules
 
 - `docs/architecture/economic_layer_overview.md`
 
+\n\n
+### Release tagging (v0.51.x baseline)
+
+- For manual release tagging, see:
+  - `docs/logs/RELEASE_TAGGING_GUIDE_v0.51.x.md`
+- Before creating a tag, run:
+  - \`scripts/check_release_status.sh\`
+- GitHub Releases are created manually based on these checks; GitHub Pages
+  is still deployed via:
+  - \`mkdocs gh-deploy --force --no-history\`
+\n
