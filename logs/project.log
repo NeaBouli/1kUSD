@@ -367,3 +367,4 @@
 [DEV-98] 2025-12-02T19:18:37Z MkDocs: added 'Security & Risk' section to nav (security/risk/testing docs).
 [DEV-98] 2025-12-02T19:48:18Z MkDocs: documented Security & Risk nav in DEV79 MkDocs nav notes.
 [DEV-96] 2025-12-02T20:21:46Z CI: added release-status workflow to run scripts/check_release_status.sh on release tags.
+[DEV-96] 2025-12-02T20:34:25Z CI: documented release-status workflow in DEV94 release tag checks plans.

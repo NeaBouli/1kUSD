@@ -177,3 +177,24 @@ DEV-94 legt **bewusst nur den Plan** für Release-Tag-Checks fest:
 Maintainer / Dev7 können dieses Dokument als Referenz verwenden,
 wenn Release-Tag-Checks in einer späteren Phase des Projekts
 konkret umgesetzt werden.
+
+### Update DEV-96: release-status Workflow umgesetzt
+
+- Der Plan für **Release-Tag-Checks** wurde mit **DEV-96** teilweise
+  operativ gemacht:
+  - Neuer Workflow: `.github/workflows/release-status.yml`
+  - Trigger: `push` auf Tags `v0.51.*` und `v0.52.*`
+  - Aktion: `scripts/check_release_status.sh`
+    - prüft u.a.:
+      - `docs/reports/PROJECT_STATUS_EconomicLayer_v051.md`
+      - `docs/reports/DEV60-72_BuybackVault_EconomicLayer.md`
+      - `docs/reports/DEV74-76_StrategyEnforcement_Report.md`
+      - `docs/reports/DEV87_Governance_Handover_v051.md`
+      - `docs/reports/DEV89_Dev7_Sync_EconomicLayer_Security.md`
+      - `docs/reports/DEV93_CI_Docs_Build_Report.md`
+- Damit ist ein erster, praktischer Check für Release-Tags etabliert:
+  - Tags werden nur „grün“, wenn die zentralen Status-/Report-Files
+    existieren und nicht leer sind.
+- Weitere Ausbaustufen aus diesem Plan bleiben bewusst **separate Tickets**:
+  - Feiner granulare Checks für künftige Versionen (z.B. v0.53+).
+  - Erweiterte Integrationen mit zusätzlichen Reports / neuen Modulen.
