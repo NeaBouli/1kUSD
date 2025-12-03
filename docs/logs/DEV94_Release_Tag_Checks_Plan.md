@@ -191,3 +191,25 @@ Release-Prozess.
 - Weitere Ausbaustufen aus diesem Plan bleiben bewusst **separate Tickets**:
   - Feiner granulare Checks für künftige Versionen (z.B. v0.53+).
   - Erweiterte Integrationen mit zusätzlichen Reports / neuen Modulen.
+
+### Update DEV-94: release-status.yml umgesetzt
+
+- Die in diesem Plan skizzierten Release-Tag-Checks wurden mit **DEV-94**
+  konkretisiert und technisch umgesetzt:
+  - Neuer Workflow: `.github/workflows/release-status.yml`
+  - Trigger: `push` auf Tags vom Muster `v0.51.*`
+  - Ausführung: `scripts/check_release_status.sh`
+- Das Script `scripts/check_release_status.sh` prüft, ob zentrale Status- und
+  Report-Files existieren und nicht leer sind:
+  - `docs/reports/PROJECT_STATUS_EconomicLayer_v051.md`
+  - `docs/reports/DEV60-72_BuybackVault_EconomicLayer.md`
+  - `docs/reports/DEV74-76_StrategyEnforcement_Report.md`
+  - `docs/reports/DEV87_Governance_Handover_v051.md`
+  - `docs/reports/DEV89_Dev7_Sync_EconomicLayer_Security.md`
+  - `docs/reports/DEV93_CI_Docs_Build_Report.md`
+- Details sind im Report
+  `docs/reports/DEV94_Release_Status_Workflow_Report.md`
+  dokumentiert (Scope, Tag-Pattern, Grenzen, mögliche Erweiterungen).
+- Der Plan in dieser Datei bleibt als konzeptioneller Rahmen bestehen;
+  DEV-94 markiert die erste konkrete CI-Umsetzung für die v0.51.x-Release-Linie.
+
