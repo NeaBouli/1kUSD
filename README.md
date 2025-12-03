@@ -63,6 +63,34 @@ Enabling StrategyEnforcement is a DAO/governance decision and should be coupled 
 
 ## Security & Risk
 
+## CI & Release Status (v0.51.x)
+
+- **Docs Build CI**
+  - Workflow: \`.github/workflows/docs-build.yml\`
+  - Aktion: \`mkdocs build\` auf \`push\` / \`pull_request\` nach \`main\`.
+  - Sichtbar über den "Docs Build"-Badge im \`README.md\`.
+
+- **Release Status Check (v0.51.x-Tags)**
+  - Workflow: \`.github/workflows/release-status.yml\`
+  - Trigger: \`push\` auf Tags vom Muster \`v0.51.*\`.
+  - Führt \`scripts/check_release_status.sh\` aus, das sicherstellt, dass zentrale
+    Status-/Report-Dateien existieren und nicht leer sind:
+    - \`docs/reports/PROJECT_STATUS_EconomicLayer_v051.md\`
+    - \`docs/reports/DEV60-72_BuybackVault_EconomicLayer.md\`
+    - \`docs/reports/DEV74-76_StrategyEnforcement_Report.md\`
+    - \`docs/reports/DEV87_Governance_Handover_v051.md\`
+    - \`docs/reports/DEV89_Dev7_Sync_EconomicLayer_Security.md\`
+    - \`docs/reports/DEV93_CI_Docs_Build_Report.md\`.
+
+- **Manueller Release-Flow**
+  - Release-Tags für \`v0.51.x\` werden bewusst **manuell** gesetzt.
+  - Vor einem Tag kann lokal \`scripts/check_release_status.sh\` ausgeführt werden.
+  - Details siehe:
+    - \`docs/logs/RELEASE_TAGGING_GUIDE_v0.51.x.md\`
+    - \`docs/reports/DEV93_CI_Docs_Build_Report.md\`
+    - \`docs/reports/DEV94_Release_Status_Workflow_Report.md\`.
+
+
 The 1kUSD protocol ships with a dedicated security and risk layer around the Economic Layer v0.51.0. Core specifications are documented in:
 
 - [Security audit plan](docs/security/audit_plan.md)
