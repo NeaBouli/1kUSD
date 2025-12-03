@@ -370,3 +370,4 @@
 [DEV-96] 2025-12-02T20:34:25Z CI: documented release-status workflow in DEV94 release tag checks plans.
 [DEV-94] 2025-12-02T21:20:37Z CI: added release-status workflow (runs scripts/check_release_status.sh on v0.51.* tags).
 [DEV-94] 2025-12-03T08:02:22Z CI: documented release-status workflow in DEV94 Infra release-tag plan.
+[DEV-94] 2025-12-03T09:07:58Z CI: DEV94_Release_Status_Workflow_Report.md added (release-status.yml + check_release_status.sh).
