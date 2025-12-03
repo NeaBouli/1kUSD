@@ -1,230 +1,234 @@
-# DEV-94 – Release Status Workflow (v0.51.x)
+# DEV-94 – Release-Status Workflow (v0.51.x Tags)
 
-> Scope: CI-Workflow `release-status.yml` + Script
-> `scripts/check_release_status.sh` für v0.51.x Release-Tags.
+## 1. Zielsetzung
 
----
+DEV-94 ergänzt den Economic-Layer v0.51.0 um einen **rein prüfenden Release-Status-Workflow**:
 
-## 1. Kontext & Zielsetzung
+- Stellt sicher, dass bestimmte **Status-/Report-Dateien vorhanden und nicht leer** sind,
+  bevor ein Release-Tag im Schema `v0.51.*` als „sauber“ betrachtet wird.
+- Greift **nicht** in Deployment- oder Tagging-Entscheidungen ein:
+  - keine automatischen Tags,
+  - kein automatisches Pages-Deploy,
+  - kein Einfluss auf Contracts, PSM oder Economic Layer Logik.
 
-Mit DEV-94 wurde ein **Release-Status-Check** eingeführt, der sicherstellt,
-dass vor (bzw. beim) Setzen eines `v0.51.x`-Tags die wichtigsten
-Status- und Report-Files vorhanden und nicht leer sind.
+DEV-94 hängt damit an die bereits vorhandenen Arbeiten an:
 
-Ziele:
-
-- **Disziplinierter Release-Prozess** ohne harte Automatisierung:
-  - Tags bleiben **manuell**, aber CI überwacht den dokumentarischen Zustand.
-- **Frühe Sichtbarkeit** von fehlenden Reports:
-  - Ein fehlender Status-Report führt zu einem **roten CI-Run** auf dem Tag.
-- **Keine Änderungen** an Economic Layer / Contracts / PSM:
-  - Nur CI-/Infra-Schicht betroffen.
-
-DEV-94 baut damit auf den Plänen aus:
-
-- `docs/logs/DEV94_Infra_Release_Tag_Checks_Plan.md`
-- `docs/logs/DEV94_Release_Tag_Checks_Plan.md`
-
-und konkretisiert diese als erste, schlanke Umsetzung.
+- **DEV-93 – CI Docs-Build Workflow** (`docs-build.yml`)
+- **DEV-95 – Local Release Status Script** (`scripts/check_release_status.sh`)
+- Status-/Strategy-Dokumente aus:
+  - `DEV60-72_BuybackVault_EconomicLayer.md`
+  - `DEV74-76_StrategyEnforcement_Report.md`
+  - `PROJECT_STATUS_EconomicLayer_v051.md`
+  - `DEV87_Governance_Handover_v051.md`
+  - `DEV89_Dev7_Sync_EconomicLayer_Security.md`
+  - `DEV93_CI_Docs_Build_Report.md`
 
 ---
 
-## 2. Workflow: .github/workflows/release-status.yml
+## 2. Komponenten von DEV-94
 
-Der neue Workflow liegt unter:
+### 2.1 GitHub Actions Workflow: `.github/workflows/release-status.yml`
 
-- `.github/workflows/release-status.yml`
+- **Trigger**:
+  - `on: push: tags: - "v0.51.*"`
+- **Job**: `release-status`
+  - Runner: `ubuntu-latest`
+  - Schritte:
+    1. `actions/checkout@v4`
+    2. Ausführen von:
+       ```bash
+       chmod +x scripts/check_release_status.sh
+       scripts/check_release_status.sh
+       ```
 
-**Trigger:**
+Damit stellt DEV-94 sicher:
 
-```yaml
-on:
-  push:
-    tags:
-      - "v0.51.*"
-Damit läuft der Workflow nur, wenn ein Tag des Musters v0.51.*
-gepusht wird (z.B. v0.51.0, v0.51.1, …).
+- Jedes Tag im Muster `v0.51.*` löst **automatisch** einen Status-Check aus.
+- Falls zentrale Reports fehlen oder leer sind, schlägt der Workflow fehl.
 
-Job-Übersicht:
+### 2.2 Lokales Tool: `scripts/check_release_status.sh` (DEV-95)
 
-yaml
-Code kopieren
-jobs:
-  release-status:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: |
-          chmod +x scripts/check_release_status.sh
-          scripts/check_release_status.sh
-Der Job:
+DEV-95 hat ein **lokales Script** bereitgestellt, das die gleiche Logik abbildet:
 
-Checkt das Repo aus.
+- Prüft folgende Dateien auf Existenz und Non-Empty:
 
-Markiert scripts/check_release_status.sh als ausführbar.
+  - `docs/reports/PROJECT_STATUS_EconomicLayer_v051.md`
+  - `docs/reports/DEV60-72_BuybackVault_EconomicLayer.md`
+  - `docs/reports/DEV74-76_StrategyEnforcement_Report.md`
+  - `docs/reports/DEV87_Governance_Handover_v051.md`
+  - `docs/reports/DEV89_Dev7_Sync_EconomicLayer_Security.md`
+  - `docs/reports/DEV93_CI_Docs_Build_Report.md`
 
-Führt das Script aus.
+- Exit-Codes:
+  - `0` → alle Dateien vorhanden, nicht leer.
+  - `1` → mindestens eine Datei fehlt oder ist leer.
 
-Der Exit-Code des Scripts entscheidet über grün vs rot.
+DEV-94 nutzt dieses Script **unverändert**, um lokale und CI-Checks zu synchronisieren.
 
-3. Script: scripts/check_release_status.sh
-Das Script wurde in DEV-95 angelegt und von DEV-94 als CI-Baustein
-wiederverwendet:
+---
 
-Pfad: scripts/check_release_status.sh
+## 3. Typische Nutzungsflows
 
-3.1 Zweck
-Lokales Tool für Maintainer:
+### 3.1 Vorbereiten eines v0.51.x-Tags (lokal)
 
-scripts/check_release_status.sh vor einem Taglauf auszuführen
-gibt sofort Feedback zum Status der wichtigsten Reports.
+Empfohlener Ablauf für Maintainer:
 
-CI-Baustein:
+```bash
+# 1) Status-/Reports lokal prüfen
+scripts/check_release_status.sh
 
-Im release-status-Workflow identisch ausgeführt.
+# 2) Nur bei Exit-Code 0 weitergehen:
+#    Tag setzen und nach GitHub pushen
+git tag v0.51.1
+git push origin v0.51.1
+Effekt:
 
-3.2 Geprüfte Dateien
-Aktuell werden folgende Files geprüft:
+Der lokale Lauf zeigt unmittelbar, ob die Dokumentation für das Release
+formal konsistent ist (aus Sicht der definierten Status-/Report-Dateien).
 
-docs/reports/PROJECT_STATUS_EconomicLayer_v051.md
+Der anschließende Push auf v0.51.1 löst den GitHub Actions Workflow
+Release Status Check aus, der dieselbe Prüfung im CI wiederholt.
 
-docs/reports/DEV60-72_BuybackVault_EconomicLayer.md
+3.2 Verhalten im CI bei Fehlern
+Falls eine Datei fehlt oder leer ist:
 
-docs/reports/DEV74-76_StrategyEnforcement_Report.md
+scripts/check_release_status.sh gibt STATUS=1 zurück.
 
-docs/reports/DEV87_Governance_Handover_v051.md
+Der Job release-status in release-status.yml schlägt fehl.
 
-docs/reports/DEV89_Dev7_Sync_EconomicLayer_Security.md
+Das Release-Tag bleibt technisch existierend, aber:
 
-docs/reports/DEV93_CI_Docs_Build_Report.md
+Der zugehörige Workflow wird als failed markiert.
 
-Für jede Datei gilt:
-
-Existenz-Check.
-
-Nicht-Leer-Check (Dateigröße > 0).
-
-Beispielhafte Ausgabe:
-
-text
-Code kopieren
-== 1kUSD Release Status Check ==
-
-[OK]      docs/reports/PROJECT_STATUS_EconomicLayer_v051.md
-[OK]      docs/reports/DEV60-72_BuybackVault_EconomicLayer.md
-...
-All required status/report files are present and non-empty.
-You can safely proceed to create a release tag (from this perspective).
-Im Fehlerfall:
-
-Entsprechende Zeilen mit [MISSING] oder [EMPTY].
-
-Exit-Code 1 → CI-Job schlägt fehl.
-
-4. Verhalten im CI auf v0.51.x-Tags
-Ablauf, wenn ein Maintainer ein Tag wie v0.51.0 pusht:
-
-GitHub Actions triggert release-status.yml.
-
-Repo wird ausgecheckt (Stand des Tags).
-
-scripts/check_release_status.sh läuft:
-
-Wenn alle Reports da sind → Job grün.
-
-Wenn etwas fehlt → Job rot.
+Maintainer sehen direkt, dass die Status-Dokumentation unvollständig ist.
 
 Wichtig:
 
-Das Tag selbst wird nicht verhindert oder zurückgenommen.
+DEV-94 löscht keine Tags, verschiebt keine Releases und führt keine Deployments aus.
 
-Maintainer sehen aber sofort im CI, ob der Dokumentations-Status
-den Erwartungen entspricht.
+Es handelt sich um einen Dokumentations-/Status-Gate, nicht um einen
+Deployment-Gate.
 
-Damit bleibt der Prozess manuell kontrolliert, aber
-transparent überwacht.
+4. Zusammenspiel mit anderen DEV-Arbeiten
+4.1 Verbindung zu DEV-93 (Docs Build CI)
+DEV-93:
 
-5. Zusammenspiel mit anderen DEV-Tickets
-DEV-93 – Docs-Build Workflow
+Workflow .github/workflows/docs-build.yml
 
-Sicherstellt mit .github/workflows/docs-build.yml, dass
-mkdocs build auf main funktioniert.
+Führt mkdocs build auf push / pull_request nach main aus.
 
-Bereitstellung eines „Docs Build“-Badges im README.md.
+Stellt sicher, dass die Doku baubar ist.
 
-DEV-94 – Release-Status
+DEV-94:
 
-Fügt Tag-basierte Checks für wichtige Reports hinzu.
+Workflow .github/workflows/release-status.yml
 
-Baut auf den Plänen in den DEV94-Logfiles auf.
+Führt scripts/check_release_status.sh auf v0.51.*-Tags aus.
 
-Nutzt das in DEV-95 eingeführte Script
-scripts/check_release_status.sh.
+Stellt sicher, dass definierte Status-/Report-Dateien konsistent vorhanden sind.
 
-DEV-97 – Release Tagging Guide (v0.51.x)
+Zusammen:
 
-Beschreibt den manuellen Tagging-Flow für v0.51.x.
+DEV-93 prüft die technische Build-Fähigkeit der Doku.
 
-Kann auf dieses DEV-94-Report-Dokument verweisen, um zu erklären,
-warum der release-status-Workflow existiert und was er prüft.
+DEV-94 prüft die inhaltliche Vollständigkeit definierter Kernreports
+vor/zu einem v0.51.x-Release.
 
-Gesamtbild:
+4.2 Verbindung zu Strategy-/Governance-Reports
+Die folgenden Reports werden explizit durch DEV-94 abgesichert:
 
-DEV-93: Doku-Build-Qualität.
+DEV60-72_BuybackVault_EconomicLayer.md
+→ Dokumentiert die BuybackVault-Integration in den Economic Layer.
 
-DEV-94/95: Release-Status-Qualität (Reports/Status-Files).
+DEV74-76_StrategyEnforcement_Report.md
+→ Beschreibt StrategyEnforcement Phase 1 (Guard, Flags, Governance-Sicht).
 
-DEV-97: Handbuch für Maintainer, wie Tags sauber gesetzt werden.
+PROJECT_STATUS_EconomicLayer_v051.md
+→ Aggregierter Status-Bericht zum Economic Layer v0.51.0.
 
-6. Grenzen & mögliche Erweiterungen
-Aktueller Scope ist bewusst minimal-invasiv:
+DEV87_Governance_Handover_v051.md
+→ Governance-Handover für das v0.51.0-Setup.
 
-Nur Existenz und Nicht-Leerheit der Files.
+DEV89_Dev7_Sync_EconomicLayer_Security.md
+→ Abgleich zwischen Economic Layer und Security/Risk-Schicht.
 
-Keine inhaltliche Validierung (z.B. Version, Datum, Inhaltsschema).
+DEV93_CI_Docs_Build_Report.md
+→ Beschreibung des Docs-Build-Workflows und seiner Rolle im CI.
 
-Nur für Tags im Schema v0.51.*.
+Damit ist sichergestellt, dass jeder v0.51.x-Tag immer im Kontext der
+aktuellen Economic-Layer-/Strategy-/Governance-Dokumentation steht.
 
-Mögliche spätere Erweiterungen (separate Tickets):
+5. Einschränkungen & zukünftige Erweiterungen
+DEV-94 ist bewusst minimal-invasiv:
 
-Content-Checks:
+Kein Eingriff in:
 
-Z.B. YAML/Frontmatter mit version: v0.51.0 im Status-File
-prüfen.
+Contracts,
 
-Generalisierung auf künftige Versionen:
+PSM,
 
-z.B. Pattern v0.* mit dynamischeren Checks.
+Vaults,
 
-Verzahnung mit Release-Notes:
+Deployment-Pipeline,
 
-Prüfen, ob für ein Tag das passende Release-Doc
-unter docs/releases/ existiert.
+Docker-/Multi-Arch-Builds,
 
-Kombination mit Docs-Build:
+Pages-Deploy.
 
-Optionaler Workflow, der bei Release-Tags zusätzlich
-mkdocs build ausführt.
+Fokus ausschließlich auf:
 
-7. Empfehlung für Maintainer
-Kurzfassung:
+Sichtbarkeit der Releases,
 
-Vor einem v0.51.x-Tag:
+Konsistenz der Kern-Status-/Report-Dateien.
 
-Lokal scripts/check_release_status.sh ausführen.
+Mögliche nächste Schritte (separate Tickets):
 
-Sicherstellen, dass relevante Reports aktualisiert sind.
+Erweiterter Release-Gate für zukünftige Versionen:
 
-Nach dem Push des Tags:
+Analoge Check-Skripte für v0.52.* u.ä.
 
-Release Status Check Workflow im CI prüfen:
+Erweiterte Dateienliste (z.B. neue Strategy-/Risk-Reports).
 
-Grün → dokumentarischer Status OK.
+Integration in einen „Release Dashboard“-View:
 
-Rot → Reports anpassen und ggf. Tag korrigieren bzw.
-neuen Tag mit Fix-Version setzen.
+Verknüpfung von Tag, CI-Status, Report-Dateien und Docs-Build
+in einem konsolidierten Überblick.
 
-DEV-94 definiert damit einen ersten, klaren Standard:
-Jeder v0.51.x-Tag ist mit einem geprüften Minimum an
-Status-/Report-Dokumentation verknüpft – ganz ohne Eingriff in
-den ökonomischen Kern des Protokolls.
+Optionale Kopplung an Pages Deploy:
+
+Nur wenn alle Checks (DEV-93, DEV-94) grün sind, wird ein manueller
+Pages-Deploy empfohlen oder erlaubt.
+
+6. Zusammenfassung für Maintainer
+DEV-94 ergänzt die CI um einen Release-Status-Workflow für v0.51.* Tags.
+
+Kernfunktion:
+
+Ausführen von scripts/check_release_status.sh im CI,
+
+Sicherstellen, dass definierte Status-/Reports vorhanden und nicht leer sind.
+
+DEV-94 arbeitet Hand in Hand mit:
+
+DEV-93 (Docs-Build CI)
+
+DEV-95 (lokales Status-Script)
+
+den Strategy-/Governance-Reports (DEV60-72, DEV74-76, DEV87, DEV89, DEV93).
+
+Keine Änderungen an Economic Layer, PSM oder BuybackVault-Logik:
+
+Die Maßnahme ist rein dokumentations- und prozessbezogen.
+
+Empfehlung:
+
+Vor jedem neuen v0.51.x-Tag:
+
+Lokal scripts/check_release_status.sh laufen lassen.
+
+Tag setzen & pushen.
+
+Release-Status-Workflow in GitHub beobachten.
+
+Damit bildet DEV-94 einen klaren, nachvollziehbaren Status-Gate,
+ohne die Flexibilität des manuellen Release-Prozesses einzuschränken.
