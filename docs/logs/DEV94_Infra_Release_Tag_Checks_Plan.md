@@ -198,3 +198,16 @@ konkret umgesetzt werden.
 - Weitere Ausbaustufen aus diesem Plan bleiben bewusst **separate Tickets**:
   - Feiner granulare Checks für künftige Versionen (z.B. v0.53+).
   - Erweiterte Integrationen mit zusätzlichen Reports / neuen Modulen.
+
+### Update DEV-94: release-status workflow umgesetzt
+
+- Der geplante Release-Tag-Check wurde teilweise umgesetzt:
+  - Neuer Workflow: `.github/workflows/release-status.yml`
+  - Trigger: `push` auf Tags `v0.51.*`
+  - Aktion: Ausführung von `scripts/check_release_status.sh`.
+- Damit ist sichergestellt, dass bei v0.51.x-Tags:
+  - alle Kern-Status/Report-Files vorhanden und nicht leer sind.
+  - ein fehlender/inkonsistenter Status den Release-Tag im CI sichtbar rot macht.
+- Weitere, evtl. spätere Erweiterungen (z.B. zusätzliche Prüfungen für künftige
+  Major-/Minor-Releases) können als eigene DEV-/INFRA-Tickets ergänzt werden.
+
