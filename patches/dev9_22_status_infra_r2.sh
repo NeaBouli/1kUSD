@@ -1,3 +1,11 @@
+#!/bin/bash
+set -e
+
+echo "== DEV-9 22: add DEV9_Status_Infra_r2.md =="
+
+mkdir -p docs/reports
+
+cat <<'MD' > docs/reports/DEV9_Status_Infra_r2.md
 # DEV-9 Infra / CI Status Report – r2
 
 ## 1. Scope
@@ -150,3 +158,11 @@ still **out of scope** for DEV-9 and remains untouched.
 
 DEV-9 remains focused on **infra, CI and docs support**, without
 changing core protocol behavior, until further instructions are given.
+MD
+
+# 2) Log-Eintrag
+LOG_FILE="logs/project.log"
+timestamp="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+echo "[DEV-9 22] ${timestamp} Added DEV9_Status_Infra_r2.md" >> "$LOG_FILE"
+
+echo "== DEV-9 22 done =="
