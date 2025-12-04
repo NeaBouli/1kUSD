@@ -1,3 +1,16 @@
+#!/bin/bash
+set -e
+
+echo "== DEV-10 04: enrich Guardian & Safety Events Integration Guide content =="
+
+GUIDE="docs/integrations/guardian_and_safety_events.md"
+
+if [ ! -f "$GUIDE" ]; then
+  echo "File $GUIDE not found, aborting."
+  exit 1
+fi
+
+cat <<'EOD' > "$GUIDE"
 # Guardian & Safety Events Integration Guide
 
 > Status: DEV-10 – integration-focused documentation, no contract changes implied.  
@@ -332,3 +345,11 @@ As the protocol evolves, this guide may be extended with:
 - concrete event signatures and field names,
 - example indexer schemas,
 - recommended alert rules and runbook templates.
+EOD
+
+# 2) Log entry
+LOG_FILE="logs/project.log"
+timestamp="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+echo "[DEV-10 04] ${timestamp} Enriched Guardian & Safety events integration guide for external integrators" >> "$LOG_FILE"
+
+echo "== DEV-10 04 done =="
