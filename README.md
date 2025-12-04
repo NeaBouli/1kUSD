@@ -878,3 +878,23 @@ For a high-level map of the PSM, Oracle stack, Guardian and BuybackVault modules
   is still deployed via:
   - \`mkdocs gh-deploy --force --no-history\`
 \n
+---
+
+## Integrations & Developer Guides (DEV-10)
+
+The 1kUSD Economic Core now ships with dedicated documentation for external
+integrators. If you are building wallets, dApps, indexers or monitoring
+around 1kUSD, start here:
+
+- **Integrations index**  
+  High-level entry point into all integration guides.  
+  See: \`docs/integrations/index.md\`
+
+- **Core guides**  
+  - PSM Integration Guide  
+  - Oracle Aggregator Integration Guide  
+  - Guardian & Safety Events Guide  
+  - BuybackVault Observer Guide  
+
+For infra / CI details supporting these docs, see the DEV-9 infra status and
+backlog under \`docs/dev/\`.
