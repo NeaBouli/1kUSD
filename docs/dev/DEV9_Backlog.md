@@ -196,3 +196,10 @@ Architect.
   - Rolled this version out to other Foundry-based workflows
     (`buybackvault-strategy-guard.yml`, `forge-ci.yml`, `foundry-test.yml`)
     via `patches/dev9_30_foundry_version_rollout.sh`.
+
+- **DEV-9 32 – Foundry CI cache & matrix plan (docs-only)**
+  - Added a documented plan for future Foundry CI cache and matrix tuning
+    in `DEV9_Foundry_CI_Plan.md`.
+  - No YAML changes yet; any future cache/matrix adjustments will be
+    implemented under separate DEV-9 tickets (Zone B) with explicit
+    Architect/Owner approval.

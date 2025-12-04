@@ -145,3 +145,72 @@ with the canonical value from `foundry.yml`.
 
 Future hardening (e.g. cache tuning, matrix cleanups) should build on this
 canonical version model rather than introducing ad-hoc pins.
+
+---
+
+## Foundry CI – cache & matrix plan (DEV-9 32, docs-only)
+
+This section defines how DEV-9 intends to evolve Foundry-related CI
+(cache and matrix behaviour) **without** changing workflows yet.
+
+### Goals
+
+- keep test runtimes reasonable and predictable,
+- avoid flakiness due to toolchain drift or inconsistent caching,
+- minimise redundant jobs while preserving useful coverage,
+- keep the setup easy to understand for future DEV roles and auditors.
+
+### Current state (r2)
+
+- A canonical Foundry toolchain version is defined in:
+  - `.github/workflows/foundry.yml`
+- Other workflows using `foundry-rs/foundry-toolchain` are pinned to the same
+  version via:
+  - `patches/dev9_30_foundry_version_rollout.sh`
+- Caching and matrix definitions are still in their original, pre-hardening
+  state.
+
+### Planned approach (future DEV-9 tickets)
+
+1. **Cache strategy (docs first)**
+
+   DEV-9 will:
+
+   - document which directories/files are candidates for caching
+     (e.g. toolchain installs, build artefacts, test outputs),
+   - define simple rules for when cache keys should change
+     (e.g. Foundry version bumps, major dependency changes),
+   - ensure that any future cache configuration is:
+     - deterministic,
+     - easy to invalidate,
+     - clearly tied to the canonical Foundry version.
+
+   No cache-related YAML changes are active yet.
+
+2. **Matrix simplification**
+
+   DEV-9 will:
+
+   - review existing Foundry-related jobs and matrices,
+   - identify redundant or overlapping combinations,
+   - propose a reduced set that still covers:
+     - mainnet-style scenarios,
+     - regression suites,
+     - BuybackVault strategy guard specifics.
+
+   Any reduction will be documented first, then implemented in a dedicated
+   DEV-9 ticket (Zone B, with explicit Architect/Owner approval).
+
+3. **Rollout process**
+
+   When changes move beyond documentation:
+
+   - each change will be backed by:
+     - a DEV-9 ticket (e.g. DEV-9 3X),
+     - an update in `DEV9_Backlog.md`,
+     - a short note in `DEV9_Foundry_CI_Plan.md`,
+   - YAML changes will be kept minimal and reversible,
+   - before/after behaviour will be described in commit messages and reports.
+
+This section is intentionally descriptive only. It does not introduce any
+active CI changes beyond what is already live in r2.
