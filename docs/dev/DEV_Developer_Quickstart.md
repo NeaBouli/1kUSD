@@ -235,3 +235,23 @@ For cross-cutting topics, check the relevant reports under
 This Quickstart is intentionally high-level. For more role-specific details,
 consult the DEV-9 and DEV-10 documents, as well as any future DEV role
 onboarding docs under `docs/dev/`.
+
+---
+
+## Dev CI smoketest (optional)
+
+If you want to run a small local healthcheck that mirrors parts of the CI,
+you can use the helper script:
+
+```bash
+patches/dev9_34_dev_ci_smoketest.sh
+This script will, if available:
+
+run `forge test`,
+
+run `mkdocs build`,
+
+execute `scripts/check_release_status.sh`.
+
+It does not change contracts or configuration; it is only a convenience
+helper for contributors before pushing patches.
