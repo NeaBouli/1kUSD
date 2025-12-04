@@ -13,7 +13,7 @@ jobs:
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
-          version: nightly
+          version: nightly-2024-05-21
       - name: Run Forge Tests
         run: |
           cd foundry
