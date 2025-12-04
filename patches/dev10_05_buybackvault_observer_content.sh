@@ -1,3 +1,16 @@
+#!/bin/bash
+set -e
+
+echo "== DEV-10 05: enrich BuybackVault Observer Integration Guide content =="
+
+GUIDE="docs/integrations/buybackvault_observer_guide.md"
+
+if [ ! -f "$GUIDE" ]; then
+  echo "File $GUIDE not found, aborting."
+  exit 1
+fi
+
+cat <<'EOD' > "$GUIDE"
 # BuybackVault Observer Integration Guide
 
 > Status: DEV-10 – integration-focused documentation, no contract changes implied.  
@@ -425,3 +438,11 @@ As the protocol evolves, this guide may be extended with:
 - concrete event signatures and field layouts,
 - recommended schemas and example SQL queries,
 - example Grafana dashboards and alerting rules.
+EOD
+
+# 2) Log entry
+LOG_FILE="logs/project.log"
+timestamp="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+echo "[DEV-10 05] ${timestamp} Enriched BuybackVault observer integration guide for external integrators" >> "$LOG_FILE"
+
+echo "== DEV-10 05 done =="
