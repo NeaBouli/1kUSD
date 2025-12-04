@@ -409,3 +409,4 @@
 [DEV-9 26] 2025-12-04T18:49:52Z Relaxed mkdocs strict mode in all workflows
 [DEV-9 27] 2025-12-04T19:05:06Z Appended recent DEV-9 updates summary to DEV9_Backlog.md
 [DEV-9 28] 2025-12-04T19:07:04Z Added DEV9_Status_Infra_r2.md
+[DEV-9 29] 2025-12-04T19:35:59Z Added Infra & CI (DEV-9 snapshot) section to docs/index.md
