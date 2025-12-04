@@ -428,3 +428,4 @@
 [DEV-9 32] 2025-12-04T21:24:22Z Added Foundry CI cache & matrix plan to DEV9_Foundry_CI_Plan.md and DEV9_Backlog.md
 [DEV-10 15] 2025-12-04T21:26:51Z Added Developer Quickstart hint to README.md
 [DEV-9 33] 2025-12-04T21:30:19Z Normalised MkDocs index references to use INDEX.md in nav and links
+[DEV-9 34] 2025-12-04T21:38:13Z Ran local dev CI smoketest (forge test, mkdocs build, release status where available)
