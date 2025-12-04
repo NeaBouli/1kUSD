@@ -427,3 +427,4 @@
 [DEV-9 31] 2025-12-04T21:22:49Z Documented Foundry version rollout in DEV9_Foundry_CI_Plan.md and DEV9_Backlog.md
 [DEV-9 32] 2025-12-04T21:24:22Z Added Foundry CI cache & matrix plan to DEV9_Foundry_CI_Plan.md and DEV9_Backlog.md
 [DEV-10 15] 2025-12-04T21:26:51Z Added Developer Quickstart hint to README.md
+[DEV-9 33] 2025-12-04T21:30:19Z Normalised MkDocs index references to use INDEX.md in nav and links

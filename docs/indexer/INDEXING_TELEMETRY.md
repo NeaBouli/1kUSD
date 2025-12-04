@@ -18,4 +18,4 @@ and exposes structured data for monitoring dashboards and Proof-of-Reserve verif
 
 [View Full Spec on GitHub →](https://github.com/NeaBouli/1kUSD/blob/main/docs/indexer/INDEXING_TELEMETRY.md)
 
-Back to [Home](../index.md)
+Back to [Home](../INDEX.md)

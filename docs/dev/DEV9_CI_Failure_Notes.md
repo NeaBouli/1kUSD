@@ -45,7 +45,7 @@ no workflows are changed by DEV-9 18.
   - Many pages under `docs/` exist but are not included in the `nav`
     configuration (e.g. `docs/README.md`, `docs/INDEX.md`, multiple
     `architecture/`, `logs/`, `reports/`, `releases/`, `specs/` files).
-  - Several documents contain links to `../index.md`, but `index.md`
+  - Several documents contain links to `../INDEX.md`, but `index.md`
     is not found among documentation files.
 - Result: `Aborted with 10 warnings in strict mode!` → exit code 1.
 
