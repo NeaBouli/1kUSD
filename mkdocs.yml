@@ -14,7 +14,7 @@ theme:
     accent: lime
 
 nav:
-  - Home: index.md
+  - Home: INDEX.md
   - Whitepaper:
       - English: whitepaper/WHITEPAPER_1kUSD_EN.md
       - Deutsch: whitepaper/WHITEPAPER_1kUSD_DE.md

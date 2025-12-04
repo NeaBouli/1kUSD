@@ -1,0 +1,132 @@
+#!/bin/bash
+set -e
+
+echo "== DEV-9 05: Create DEV9_Foundry_CI_Plan.md =="
+
+# 1) Ensure docs/dev directory exists
+mkdir -p docs/dev
+
+# 2) Write Foundry CI hardening plan
+cat <<'EOD' > docs/dev/DEV9_Foundry_CI_Plan.md
+# DEV-9 Foundry CI Hardening Plan
+
+This document outlines DEV-9's proposal for hardening the Foundry-based
+CI workflows in the 1kUSD project. It is *planning only* and does not
+change any CI workflows by itself.
+
+All changes described here are proposals and MUST be approved by the
+Architect before any workflow YAML is modified.
+
+## Context
+
+The 1kUSD project uses Foundry for Solidity testing and tooling. Multiple
+GitHub Actions workflows exist that interact with Foundry (e.g. format,
+tests, combined CI).
+
+DEV-9's responsibility is to improve stability and reproducibility of
+these workflows, without touching the Solidity contracts or economic
+layer logic.
+
+## Goals
+
+- Make CI runs more deterministic (less dependent on "whatever Foundry
+  version is current" at runtime).
+- Reduce flaky behavior caused by toolchain updates or cache changes.
+- Keep job definitions readable and maintainable.
+- Avoid changes to protocol logic or test semantics.
+
+Non-goals:
+
+- No changes to contracts/ or protocol logic.
+- No changes to the underlying economic layer or parameters.
+- No addition of new, complex infra (self-hosted runners, external
+  services) without a separate design and approval.
+
+## Proposed Hardening Steps (High-level)
+
+1. **Foundry Version Pinning**
+
+   - Introduce explicit version pinning for the Foundry toolchain in
+     Foundry-related workflows (e.g. foundry-test.yml, forge-ci.yml,
+     foundry.yml).
+   - Prefer a stable, tagged Foundry release over an unpinned nightly.
+   - Make the pinned version visible and easy to update (e.g. single
+     env variable or single action configuration).
+
+2. **Caching Strategy**
+
+   - Use GitHub Actions caching for:
+     - Foundry toolchain artifacts (if not handled by the selected
+       Foundry action).
+     - Relevant build/test artifacts where it materially speeds up CI.
+   - Keep cache keys simple and tied to:
+     - Foundry version
+     - OS / job matrix entries
+     - Optionally, lockfile hashes (for dependencies) where appropriate.
+   - Avoid overly aggressive cache reuse that might hide issues.
+
+3. **Job Structure & Separation**
+
+   - Ensure that formatting (fmt), unit tests, and possibly lint/static
+     analysis are clearly separated jobs or steps, so a failure is easy
+     to attribute.
+   - Make sure Foundry-related jobs:
+     - Run on a consistent OS image (e.g. ubuntu-latest).
+     - Share a consistent strategy for setting up Foundry.
+
+4. **Error Reporting & Logs**
+
+   - Ensure that Foundry commands are invoked with useful flags for CI
+     (e.g. verbose where needed, but without excessive noise).
+   - Consider capturing artifacts in case of failure (e.g. junit-style
+     reports) if the project already uses such patterns.
+
+## Implementation Approach (Proposal)
+
+DEV-9 proposes the following sequence for implementing CI hardening:
+
+1. **Inventory & Documentation**
+   - DONE: DEV9_Workflows_Inventory.md lists all workflows.
+   - This document (DEV9_Foundry_CI_Plan.md) captures the plan.
+
+2. **Minimal Version Pinning in One Workflow**
+   - Select one Foundry-related workflow (e.g. foundry-test.yml) as the
+     initial candidate.
+   - Introduce a minimal, explicit Foundry version pin (e.g. via a
+     standard Foundry setup action and a version input).
+   - Verify that CI runs remain green.
+
+3. **Rollout to Additional Workflows**
+   - Apply the same pinning pattern to other Foundry-related workflows,
+     if they exist and are active.
+   - Keep the version definition centralized as much as possible.
+
+4. **Introduce/Refine Caching**
+   - Add caches for Foundry artifacts where this clearly improves CI
+     runtime without harming determinism.
+   - Monitor for issues and adjust cache keys as needed.
+
+5. **Optional Enhancements**
+   - If the Architect approves, additional small improvements can be
+     made, such as:
+     - More structured test reporting.
+     - Clearer matrix definitions.
+     - Better separation of formatting vs testing steps.
+
+## Coordination & Approval
+
+- DEV-9 will not modify any CI workflows in a breaking way without a
+  dedicated patch and clear communication.
+- Each workflow change will be encapsulated in its own dev9_XX patch
+  script and referenced in logs/project.log.
+- If at any point a workflow becomes flaky or unstable after a change,
+  DEV-9 will propose a rollback or adjustment in coordination with the
+  Architect.
+EOD
+
+# 3) Log message
+LOG_FILE="logs/project.log"
+timestamp="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+echo "[DEV-9 05] ${timestamp} Added DEV9_Foundry_CI_Plan.md" >> "$LOG_FILE"
+
+echo "== DEV-9 05 done =="

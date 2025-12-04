@@ -17,4 +17,4 @@ It ensures deterministic routing and executes via the Peg Stability Module (PSM)
 
 [View Full Spec on GitHub →](https://github.com/NeaBouli/1kUSD/blob/main/docs/converter/AUTOCONVERTER_ROUTER.md)
 
-Back to [Home](../index.md)
+Back to [Home](../INDEX.md)

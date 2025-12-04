@@ -878,3 +878,45 @@ For a high-level map of the PSM, Oracle stack, Guardian and BuybackVault modules
   is still deployed via:
   - \`mkdocs gh-deploy --force --no-history\`
 \n
+---
+
+## Integrations & Developer Guides (DEV-10)
+
+The 1kUSD Economic Core now ships with dedicated documentation for external
+integrators. If you are building wallets, dApps, indexers or monitoring
+around 1kUSD, start here:
+
+- **Integrations index**  
+  High-level entry point into all integration guides.  
+  See: \`docs/integrations/index.md\`
+
+- **Core guides**  
+  - PSM Integration Guide  
+  - Oracle Aggregator Integration Guide  
+  - Guardian & Safety Events Guide  
+  - BuybackVault Observer Guide  
+
+For infra / CI details supporting these docs, see the DEV-9 infra status and
+backlog under \`docs/dev/\`.
+
+---
+
+## Developer Quickstart (for contributors)
+
+If you plan to work directly on the 1kUSD repository (CI, docs, tests, or
+future dev tickets), there are two recommended entry points:
+
+- **Developer Quickstart**
+  Short, opinionated overview of how to:
+  - set up your local environment,
+  - run tests,
+  - use the patch-based workflow.
+  See: \`docs/dev/DEV_Developer_Quickstart.md\`
+
+- **DEV Roles Index**
+  Map of the main DEV roles (DEV-7, DEV-8, DEV-9, DEV-10) and their key
+  documents.
+  See: \`docs/dev/DEV_Roles_Index.md\`
+
+These pages are meant to keep contributor onboarding consistent without
+changing any Economic Layer or contract behaviour.

@@ -1,75 +1,93 @@
-!!! success "Latest: DEV-40 — OracleWatcher & Interface Recovery"
-    - [Release Report](reports/DEV40_RELEASE_REPORT.md)
-    - [Phase 2 Report](reports/DEV40_PHASE2_REPORT.md)
-    - [Architect Handoff](reports/DEV40_ARCHITECT_HANDOFF.md)
+# 1kUSD Documentation
 
+Welcome to the 1kUSD documentation.
 
-# 🪙 1kUSD Stablecoin Protocol
+This site describes the architecture, economic layer, security model,
+risk framework, governance processes and infrastructure/CI setup of
+the 1kUSD stablecoin project.
 
-Welcome to the **1kUSD Documentation Portal**.
+## High-level structure
 
-This site provides:
-- 📘 Technical specifications (`specs/`)
-- ⚙️ Smart contract architecture (`contracts/core/`)
-- 🧠 Governance and safety modules (`safety/`)
-- 💡 Integration guides and testing notes (`integrations/`, `testing/`)
+The documentation is roughly organized into:
 
-For the full GitHub repository, visit:
-👉 [NeaBouli/1kUSD](https://github.com/NeaBouli/1kUSD)
+- Architecture and design documents
+- Economic layer and protocol behavior (READ-ONLY for DEV-9)
+- Security and risk documentation
+- Governance and strategy reports
+- Infrastructure, CI, and tooling documentation
+- Project status and release reports
 
+DEV-9 AAAAAAAA is responsible for infrastructure-related aspects only
+(CI, Docker, Docs build, Pages hardening, monitoring preparation) and
+must not modify the Solidity contracts or economic layer logic.
 
----
-
-## DEV-41 — Oracle Regression Stability
-
-- **Report:** `docs/reports/DEV41_ORACLE_REGRESSION.md`  
-- Scope: OracleWatcher regression, OracleAggregator wiring, ZERO_ADDRESS root-cause analysis, refreshState behavior alignment, all oracle-related tests green.
-
+For more detailed dev-specific information, see the DEV-9 documents in
+`docs/dev/` (especially DEV9_Onboarding.md and DEV9_InfrastructurePlan.md).
 
 ---
 
-## 🔵 DEV-42 — Oracle Aggregation Consolidation
-**Goal:** Finalize Oracle module separation, cleanup, consolidation, and regression safety.
+## Infrastructure & CI (DEV-9 snapshot)
 
-### Completed:
-- Removed obsolete *.bak Solidity sources
-- Unified IOracleAggregator struct bindings
-- Confirmed single-source-of-truth for getPrice()
-- Rebuilt OracleWatcher interaction model
-- Ran targeted suites:
-  - OracleRegression_Watcher (pass)
-  - OracleRegression_Base (pass)
-  - Guardian_OraclePropagation (pass)
-  - Guardian_Integration (pass)
+This section summarizes the current infra / CI helpers maintained by DEV-9:
 
-System is stable and fully aligned with v0.42 architecture.
+- **DEV-9 Infra Status (r2)**  
+  High-level overview of what DEV-9 changed and which areas are in scope.  
+  See: \`dev/DEV9_Status_Infra_r2.md\`
 
----
+- **DEV-9 Backlog**  
+  Living backlog for infra/CI work, including Zone A/B/C separation and future blocks.  
+  See: \`dev/DEV9_Backlog.md\`
 
-## 🔵 DEV-43 — PSM Consolidation & Safety Wiring
+- **DEV-9 Operator Guide**  
+  How to run the manual workflows and tools introduced by DEV-9  
+  (docker baseline build, docs linkcheck, CI checks).  
+  See: \`dev/DEV9_Operator_Guide.md\`
 
-**Ziel:** Den Peg Stability Module (PSM) von einer losen Sammlung von Komponenten zu einer klar definierten, audit-fähigen Fassade zu konsolidieren.
-
-**Kernpunkte:**
-- `PegStabilityModule` als kanonischer IPSM-Entry-Point, der PSMSwapCore, PSMLimits, SafetyAutomata und Oracle bündelt.
-- Verpflichtendes Safety-Gate (`MODULE_PSM`) für alle Swap-Einstiegspunkte.
-- Limits-Enforcement über `PSMLimits.checkAndUpdate(...)` im PSM-Swap-Pfad.
-- Umstellung von FeeRouter-V2-Zugriff auf IFeeRouterV2 Interface (keine low-level calls mehr).
-- Oracle-Health-Stubs im PSM (Preislogik folgt in DEV-44/45).
-- Neue PSM-Regression-Skelette zur Vorbereitung erweiterter Tests.
-
-Systemstatus: **stabil**, alle relevanten Tests grün, PSM-Schicht architektonisch konsolidiert und bereit für ökonomische Logik in den nächsten DEV-Schritten.
+The goal is to keep infra/CI changes transparent and reproducible without touching
+the core Economic Layer contracts.
 
 ---
 
-## 🔵 DEV-44 — PSM Price Normalization & Limits Math
+## Integrations & Developer Guides (DEV-10)
 
-**Status:** Price-Math-Schicht abgeschlossen, Asset-Flows folgen in DEV-45.
+This section is maintained by DEV-10 and focuses on how external builders
+integrate with the 1kUSD Economic Core.
 
-**Kurzfassung:**
-- PSM-Swaps und Quotes laufen über preis-normalisierte 1kUSD-Notionals (18 Decimals).
-- PSMLimits werden auf diesen stabilen Notional-Beträgen durchgesetzt.
-- Oracle wird über `IOracleAggregator` eingebunden; Health-Gates und einfache Fallback-Logik sind vorhanden.
-- Asset-Flows (Vault, echte ERC-20 Transfers, 1kUSD Mint/Burn) bleiben bewusst deaktiviert und werden in DEV-45 implementiert.
+- **Integrations index**  
+  High-level entry point for all integration-focused documentation.  
+  See: `integrations/index.md`
 
-Für Details siehe: `docs/reports/DEV44_PSM_PRICE_NORMALIZATION.md`.
+- **Planned guides**  
+  - PSM Integration Guide  
+  - Oracle Aggregator Integration Guide  
+  - Guardian & Safety Events Guide  
+  - BuybackVault Observer Guide
+
+---
+
+## Reports & Status Index
+
+For an overview of the main status, governance and sync reports, see:
+
+- `reports/REPORTS_INDEX.md`
+
+---
+
+## Developer Quickstart
+
+If you are new to the 1kUSD repository and want a concise overview of how to
+set up your environment, run tests and follow the patch-based workflow, see:
+
+- \`dev/DEV_Developer_Quickstart.md\`
+
+This page complements the DEV-9 and DEV-10 documents and is intended as a
+first stop for new contributors.
+
+---
+
+## DEV Roles Index
+
+For an overview of the main DEV roles (DEV-7, DEV-8, DEV-9, DEV-10) and their
+key documents, see:
+
+- `dev/DEV_Roles_Index.md`
