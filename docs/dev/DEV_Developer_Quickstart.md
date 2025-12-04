@@ -253,6 +253,18 @@ onboarding docs under `docs/dev/`.
 
 ---
 
+
+---
+
+
+---
+
+
+---
+
+
+---
+
 ## Dev CI smoketest (optional)
 
 If you want to run a small local healthcheck that mirrors parts of the CI,
@@ -262,11 +274,11 @@ you can use the helper script:
 patches/dev9_34_dev_ci_smoketest.sh
 This script will, if available:
 
-run `forge test`,
+run forge test,
 
-run `mkdocs build`,
+run mkdocs build,
 
-execute `scripts/check_release_status.sh`.
+execute scripts/check_release_status.sh.
 
 It does not change contracts or configuration; it is only a convenience
 helper for contributors before pushing patches.
