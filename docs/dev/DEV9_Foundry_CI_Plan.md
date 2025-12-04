@@ -112,3 +112,36 @@ DEV-9 proposes the following sequence for implementing CI hardening:
 - If at any point a workflow becomes flaky or unstable after a change,
   DEV-9 will propose a rollback or adjustment in coordination with the
   Architect.
+
+---
+
+## DEV-9 30 – Foundry version rollout
+
+To keep Foundry CI behaviour consistent across workflows, DEV-9 30 introduced
+a canonical Foundry toolchain version and rolled it out to all relevant
+workflows.
+
+**Canonical source:**
+
+- `.github/workflows/foundry.yml`
+  - The version configured here is treated as the single source of truth.
+
+**Rollout targets:**
+
+- `.github/workflows/buybackvault-strategy-guard.yml`
+- `.github/workflows/forge-ci.yml`
+- `.github/workflows/foundry-test.yml`
+
+A helper script (`patches/dev9_30_foundry_version_rollout.sh`) synchronises
+the `version:` field in any workflow that uses `foundry-rs/foundry-toolchain`
+with the canonical value from `foundry.yml`.
+
+### Operational notes
+
+- When changing the Foundry version, update **only** `foundry.yml` first.
+- Then re-run the rollout script to propagate the version to other workflows.
+- This keeps CI deterministic and avoids drift between different Foundry-based
+  jobs.
+
+Future hardening (e.g. cache tuning, matrix cleanups) should build on this
+canonical version model rather than introducing ad-hoc pins.

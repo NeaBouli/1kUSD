@@ -424,3 +424,4 @@
 [DEV-10 13] 2025-12-04T21:13:05Z Linked Developer Quickstart from docs/index.md
 [DEV-10 14] 2025-12-04T21:15:19Z Added DEV_Roles_Index.md and linked it from docs/index.md
 [DEV-9 30] 2025-12-04T21:19:34Z Rolled out canonical Foundry version from .github/workflows/foundry.yml to other workflows
+[DEV-9 31] 2025-12-04T21:22:49Z Documented Foundry version rollout in DEV9_Foundry_CI_Plan.md and DEV9_Backlog.md

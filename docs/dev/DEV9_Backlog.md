@@ -190,3 +190,9 @@ Architect.
   - Relaxed \`mkdocs build --strict\` to \`mkdocs build\` in docs workflows.
   - Prevents CI failures due to non-nav/legacy pages while keeping content intact.
 
+
+- **DEV-9 30 – Foundry version rollout**
+  - Introduced a canonical Foundry toolchain version in `.github/workflows/foundry.yml`.
+  - Rolled this version out to other Foundry-based workflows
+    (`buybackvault-strategy-guard.yml`, `forge-ci.yml`, `foundry-test.yml`)
+    via `patches/dev9_30_foundry_version_rollout.sh`.
