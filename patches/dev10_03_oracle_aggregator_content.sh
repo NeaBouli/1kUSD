@@ -1,3 +1,16 @@
+#!/bin/bash
+set -e
+
+echo "== DEV-10 03: enrich Oracle Aggregator Integration Guide content =="
+
+GUIDE="docs/integrations/oracle_aggregator_guide.md"
+
+if [ ! -f "$GUIDE" ]; then
+  echo "File $GUIDE not found, aborting."
+  exit 1
+fi
+
+cat <<'EOD' > "$GUIDE"
 # Oracle Aggregator Integration Guide
 
 > Status: DEV-10 – integration-focused documentation, no contract changes implied.  
@@ -343,3 +356,11 @@ As the protocol evolves, this guide may be extended with:
 - code snippets for common client libraries,
 - recommended patterns for specific environments (e.g. EVM SDKs, indexer
   frameworks).
+EOD
+
+# 2) Log entry
+LOG_FILE="logs/project.log"
+timestamp="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+echo "[DEV-10 03] ${timestamp} Enriched Oracle Aggregator integration guide for external integrators" >> "$LOG_FILE"
+
+echo "== DEV-10 03 done =="
