@@ -1,3 +1,11 @@
+#!/bin/bash
+set -e
+
+echo "== DEV-9 23: add DEV9_Status_Infra_r2.md =="
+
+mkdir -p docs/reports
+
+cat <<'MD' > docs/reports/DEV9_Status_Infra_r2.md
 # DEV-9 Status Report – Infra & CI (r2)
 
 This is a follow-up status report for DEV-9 on the 1kUSD project.
@@ -160,3 +168,10 @@ For future infra / CI devs (DEV-10, DEV-11, ...):
 
 All of the above should be done in new DEV blocks with explicit
 Architect approval, following the same patch+log model.
+MD
+
+LOG_FILE="logs/project.log"
+timestamp="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+echo "[DEV-9 23] ${timestamp} Added DEV9_Status_Infra_r2.md" >> "$LOG_FILE"
+
+echo "== DEV-9 23 done =="
