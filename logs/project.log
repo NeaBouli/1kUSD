@@ -405,3 +405,4 @@
 [DEV-9 22] 2025-12-04T18:30:46Z Added DEV9_Status_Infra_r2.md
 [DEV-9 23] 2025-12-04T18:33:23Z Added tooling/LINKCHECK_CONFIG.json for docs linkcheck
 [DEV-9 24] 2025-12-04T18:37:40Z Updated docs-linkcheck workflow to use LINKCHECK_CONFIG
+[DEV-9 25] 2025-12-04T18:41:51Z Relaxed mkdocs strict mode in docs-build workflow
