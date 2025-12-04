@@ -20,7 +20,7 @@ jobs:
 
       - name: Install OpenZeppelin
         run: |
-          forge install openzeppelin/openzeppelin-contracts@v5.0.2 --no-commit
+          forge install openzeppelin/openzeppelin-contracts@v5.0.2
           echo "✅ OpenZeppelin installed"
 
       - name: Build & Test
