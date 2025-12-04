@@ -1,3 +1,16 @@
+#!/bin/bash
+set -e
+
+echo "== DEV-10 02: enrich PSM Integration Guide content =="
+
+PSM_GUIDE="docs/integrations/psm_integration_guide.md"
+
+if [ ! -f "$PSM_GUIDE" ]; then
+  echo "File $PSM_GUIDE not found, aborting."
+  exit 1
+fi
+
+cat <<'EOD' > "$PSM_GUIDE"
 # PSM Integration Guide
 
 > Status: DEV-10 – integration-focused documentation, no contract changes implied.  
@@ -340,3 +353,11 @@ Before going live with a PSM integration, ensure you have:
 As the protocol evolves, this guide may be extended with concrete function
 signatures, example transactions and SDK snippets. Integrators should always
 refer to the latest version of this document and the underlying specs.
+EOD
+
+# 2) Log entry
+LOG_FILE="logs/project.log"
+timestamp="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+echo "[DEV-10 02] ${timestamp} Enriched PSM integration guide content for external integrators" >> "$LOG_FILE"
+
+echo "== DEV-10 02 done =="
