@@ -1,3 +1,13 @@
+#!/bin/bash
+set -e
+
+echo "== DEV-10 11: enrich integrations index content =="
+
+FILE="docs/integrations/index.md"
+
+mkdir -p "$(dirname "$FILE")"
+
+cat <<'EOD' > "$FILE"
 # Integrations & Developer Guides
 
 This section is maintained by **DEV-10** and is intended for external
@@ -115,3 +125,11 @@ to may be extended with:
 - concrete function and event signatures,
 - code snippets for common client stacks,
 - example dashboards, queries and alerting rules.
+EOD
+
+# Log entry
+LOG_FILE="logs/project.log"
+timestamp="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+echo "[DEV-10 11] ${timestamp} Enriched docs/integrations/index.md for integrators" >> "$LOG_FILE"
+
+echo "== DEV-10 11 done =="
