@@ -1,0 +1,16 @@
+name: Docker baseline build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-baseline:
+    name: Build baseline Docker image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build docker/Dockerfile.baseline image
+        run: docker build -f docker/Dockerfile.baseline -t 1kusd-dev:baseline .
