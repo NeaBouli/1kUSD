@@ -403,3 +403,4 @@
 [DEV-9 23] 2025-12-04T18:16:05Z Added DEV9_Status_Infra_r2.md
 [DEV-9 21] 2025-12-04T18:23:28Z Removed deprecated --no-commit flag from forge install in workflows
 [DEV-9 22] 2025-12-04T18:30:46Z Added DEV9_Status_Infra_r2.md
+[DEV-9 23] 2025-12-04T18:33:23Z Added tooling/LINKCHECK_CONFIG.json for docs linkcheck
