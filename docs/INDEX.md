@@ -97,3 +97,7 @@ key documents, see:
 - [DEV94_ReleaseFlow_Plan_r2](dev/DEV94_ReleaseFlow_Plan_r2.md) – Current & target release flow and DEV-94 backlog (docs-only, no CI changes).
 
 - [DEV94_How_to_cut_a_release_tag_v051](dev/DEV94_How_to_cut_a_release_tag_v051.md) – Step-by-step guide for maintainers cutting v0.51.x tags.
+
+## Economic Layer – Future / Advanced (DEV-11)
+
+- [DEV11_BuybackVault_EconomicAdvanced_Plan_r1](dev/DEV11_BuybackVault_EconomicAdvanced_Plan_r1.md) – Planning document for advanced buyback and economic layer features beyond v0.51/v0.52 (docs-only).

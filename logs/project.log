@@ -434,3 +434,4 @@
 [DEV-94 01] 2025-12-05T08:11:17Z Added DEV94_ReleaseFlow_Plan_r2 skeleton (release flow current/target/backlog)
 [DEV-94 02] 2025-12-05T08:22:33Z Linked DEV94_ReleaseFlow_Plan_r2 from docs/INDEX.md
 [DEV-94 03] 2025-12-05T19:10:10Z Added DEV94_How_to_cut_a_release_tag_v051 guide links (INDEX + DEV94 plan)
+[DEV-11 01] 2025-12-05T19:25:36Z Added DEV11_BuybackVault_EconomicAdvanced_Plan_r1 planning doc (no contract changes)
