@@ -101,3 +101,4 @@ key documents, see:
 ## Economic Layer – Future / Advanced (DEV-11)
 
 - [DEV11_BuybackVault_EconomicAdvanced_Plan_r1](dev/DEV11_BuybackVault_EconomicAdvanced_Plan_r1.md) – Planning document for advanced buyback and economic layer features beyond v0.51/v0.52 (docs-only).
+- [buybackvault_strategy_phaseA_advanced](architecture/buybackvault_strategy_phaseA_advanced.md) – StrategyEnforcement Phase A advanced spec (DEV-11, docs-only, no contract changes).
