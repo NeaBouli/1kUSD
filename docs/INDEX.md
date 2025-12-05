@@ -91,3 +91,7 @@ For an overview of the main DEV roles (DEV-7, DEV-8, DEV-9, DEV-10) and their
 key documents, see:
 
 - `dev/DEV_Roles_Index.md`
+
+## Release flow (DEV-94)
+
+- [DEV94_ReleaseFlow_Plan_r2](dev/DEV94_ReleaseFlow_Plan_r2.md) – Current & target release flow and DEV-94 backlog (docs-only, no CI changes).
