@@ -132,3 +132,10 @@ Dependencies:
 This Plan r1 is a starting point. It should be refined in collaboration
 with architects and economic reviewers before any implementation work
 begins.
+
+## Phase A – StrategyEnforcement advanced spec
+
+The detailed architecture for StrategyEnforcement Phase A is described in
+`docs/architecture/buybackvault_strategy_phaseA_advanced.md`. DEV-11 uses
+this document as the reference for future implementation tickets and
+economic review, without changing any contracts in the v0.51/v0.52 line.
