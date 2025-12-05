@@ -243,3 +243,8 @@ Vorschlag für saubere, kleine Tickets:
 
 Dieses Dokument dient als Referenz für den Architekten / Lead-Dev und kann
 vor dem eigentlichen v0.52.x-Implementierungsschritt noch geschärft werden.
+
+---
+
+_For planned advanced phases beyond StrategyEnforcement v0.52, see  
+`docs/dev/DEV11_BuybackVault_EconomicAdvanced_Plan_r1.md` (DEV-11 planning document, docs-only, no contract changes)._
