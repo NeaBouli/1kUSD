@@ -433,3 +433,4 @@
 [DEV-9 41] 2025-12-05T08:02:55Z Linked BLOCK_DEV9_DEV10_Infra_Integrations_r1 from REPORTS_INDEX and added log entry
 [DEV-94 01] 2025-12-05T08:11:17Z Added DEV94_ReleaseFlow_Plan_r2 skeleton (release flow current/target/backlog)
 [DEV-94 02] 2025-12-05T08:22:33Z Linked DEV94_ReleaseFlow_Plan_r2 from docs/INDEX.md
+[DEV-94 03] 2025-12-05T19:10:10Z Added DEV94_How_to_cut_a_release_tag_v051 guide links (INDEX + DEV94 plan)
