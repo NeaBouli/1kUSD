@@ -103,3 +103,5 @@ These reports bridge infra/CI work (DEV-9) and integration docs (DEV-10):
 
 This page is intentionally high-level and should be kept up to date whenever
 new major reports or status documents are added.
+
+- **BLOCK_DEV9_DEV10_Infra_Integrations_r1** – Infra & Integrations block report (DEV-9 / DEV-10, r1)
