@@ -102,3 +102,4 @@ key documents, see:
 
 - [DEV11_BuybackVault_EconomicAdvanced_Plan_r1](dev/DEV11_BuybackVault_EconomicAdvanced_Plan_r1.md) – Planning document for advanced buyback and economic layer features beyond v0.51/v0.52 (docs-only).
 - [buybackvault_strategy_phaseA_advanced](architecture/buybackvault_strategy_phaseA_advanced.md) – StrategyEnforcement Phase A advanced spec (DEV-11, docs-only, no contract changes).
+- [DEV11_Telemetry_Events_Outline_r1](dev/DEV11_Telemetry_Events_Outline_r1.md) – Telemetry and events outline for advanced buyback / StrategyEnforcement (DEV-11, docs-only).
