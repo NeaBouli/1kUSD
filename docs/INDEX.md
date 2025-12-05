@@ -105,3 +105,5 @@ key documents, see:
 - [DEV11_Telemetry_Events_Outline_r1](dev/DEV11_Telemetry_Events_Outline_r1.md) – Telemetry and events outline for advanced buyback / StrategyEnforcement (DEV-11, docs-only).
 
 - [DEV11_Implementation_Backlog_SolidityTrack_r1](dev/DEV11_Implementation_Backlog_SolidityTrack_r1.md) – High-level backlog for a future Solidity implementation track based on DEV-11 planning docs.
+
+- [DEV11_Architect_Handoff_BuybackAdvanced_r1](dev/DEV11_Architect_Handoff_BuybackAdvanced_r1.md) – Summary & handoff for BuybackVault/Economic Advanced (DEV-11 docs-only).
