@@ -190,3 +190,21 @@ planning documents are refined.
 - Implemented `maxBuybackSharePerOpBps` in `BuybackVault` (Phase A, per-operation treasury cap).
 - Behaviour: when the cap is set > 0, any single buyback that would consume more than this share of the dedicated treasury reverts.
 - Tests: to be added in a follow-up DEV-11 A01 tests task.
+
+## DEV-11 A02 – Oracle/Health gate for buybacks (Phase A)
+
+Status: planned
+
+Summary:
+- Enforce that buyback execution is only allowed when oracle health is "good" and guardian/safety flags allow buybacks.
+- Integrate with existing oracle health/guardian signals without changing v0.51 baseline behaviour unless explicitly enabled.
+
+Implementation hints:
+- Introduce a dedicated check function in BuybackVault that is called from executeBuyback paths.
+- Emit explicit events and/or use reason codes for blocked buybacks (oracle_stale, oracle_diff_too_large, guardian_block).
+
+Expected deliverables:
+- Solidity implementation in BuybackVault (or dedicated StrategyEnforcement helper).
+- Foundry tests covering happy-path and blocked buybacks (oracle unhealthy, guardian stop).
+- Telemetry entries wired into DEV11_Telemetry_Events_Outline_r1.md.
+
