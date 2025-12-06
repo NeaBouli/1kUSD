@@ -184,3 +184,9 @@ After implementation, each ticket should:
 
 This backlog is intentionally conservative and should evolve as DEV-11
 planning documents are refined.
+
+## Progress – DEV-11 A01 (per-operation treasury cap)
+
+- Implemented `maxBuybackSharePerOpBps` in `BuybackVault` (Phase A, per-operation treasury cap).
+- Behaviour: when the cap is set > 0, any single buyback that would consume more than this share of the dedicated treasury reverts.
+- Tests: to be added in a follow-up DEV-11 A01 tests task.
