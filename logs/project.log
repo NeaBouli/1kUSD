@@ -442,3 +442,4 @@
 [DEV-11 A01] 2025-12-06T19:30:13Z Add per-operation buyback treasury cap (Phase A, code-only, no tests yet)
 [DEV-11 A01] 2025-12-06T19:46:57Z Recorded progress note for per-op treasury cap (code merged, tests pending)
 2025-12-06T20:07:01Z DEV-11 A01: add tests for per-operation treasury cap
+2025-12-06T21:17:19Z dev11-A02: add backlog skeleton for oracle/health gate
