@@ -55,6 +55,7 @@ error INSUFFICIENT_BALANCE();
 error INVALID_STRATEGY();
 error NO_STRATEGY_CONFIGURED();
 error NO_ENABLED_STRATEGY_FOR_ASSET();
+error BUYBACK_TREASURY_CAP_EXCEEDED();
 
     IERC20 public immutable stable;
     IERC20 public immutable asset;
@@ -62,6 +63,14 @@ error NO_ENABLED_STRATEGY_FOR_ASSET();
     ISafetyAutomata public immutable safety;
     IPegStabilityModuleLike public immutable psm;
     bytes32 public immutable moduleId;
+
+    /// @notice Maximum share of the vault's stable balance that can be spent
+    ///         in a single buyback operation (in basis points, 1% = 100 bps).
+    /// @dev A value of 0 disables the per-operation cap check.
+    uint16 public maxBuybackSharePerOpBps;
+
+    event BuybackTreasuryCapUpdated(uint16 oldCapBps, uint16 newCapBps);
+
 
     event FundStable(uint256 amount);
     event WithdrawStable(address indexed to, uint256 amount);
@@ -145,6 +154,7 @@ error NO_ENABLED_STRATEGY_FOR_ASSET();
     ) external onlyDAO notPaused returns (uint256 amountAssetOut) {
         if (recipient == address(0)) revert ZERO_ADDRESS();
         if (amount1k == 0) revert ZERO_AMOUNT();
+        _checkPerOpTreasuryCap(amount1k);
 
         // Vault genehmigt dem PSM, 1kUSD zu ziehen
         stable.safeIncreaseAllowance(address(psm), amount1k);
@@ -161,9 +171,36 @@ error NO_ENABLED_STRATEGY_FOR_ASSET();
         emit BuybackExecuted(amount1k, amountAssetOut, recipient);
     }
 
+        function _checkPerOpTreasuryCap(uint256 amountStable) internal view {
+        uint16 capBps = maxBuybackSharePerOpBps;
+        if (capBps == 0) {
+            return;
+        }
+        uint256 bal = stable.balanceOf(address(this));
+        uint256 cap = (bal * capBps) / 10_000;
+        if (amountStable > cap) {
+            revert BUYBACK_TREASURY_CAP_EXCEEDED();
+        }
+    }
+
     // --- Views ---
 
+
         // --- Strategy config ---
+
+    /// @notice Set the maximum share of the vault's stable balance that can be
+    ///         spent in a single buyback operation.
+    /// @dev Value is expressed in basis points (1% = 100 bps). A value of 0
+    ///      disables the check.
+    /// @param newCapBps New per-operation cap in basis points.
+    function setMaxBuybackSharePerOpBps(uint16 newCapBps) external onlyDAO {
+        if (newCapBps > 10_000) revert INVALID_AMOUNT();
+        uint16 oldCap = maxBuybackSharePerOpBps;
+        maxBuybackSharePerOpBps = newCapBps;
+        emit BuybackTreasuryCapUpdated(oldCap, newCapBps);
+    }
+
+
 
     function strategyCount() external view returns (uint256) {
         return strategies.length;
@@ -234,6 +271,7 @@ function stableBalance() external view returns (uint256) {
 
         uint256 bal = stable.balanceOf(address(this));
         if (bal < amountStable) revert INSUFFICIENT_BALANCE();
+        _checkPerOpTreasuryCap(amountStable);
 
         if (strategiesEnforced) {
             if (strategies.length == 0) revert NO_STRATEGY_CONFIGURED();
