@@ -154,7 +154,7 @@ error BUYBACK_TREASURY_CAP_EXCEEDED();
     ) external onlyDAO notPaused returns (uint256 amountAssetOut) {
         if (recipient == address(0)) revert ZERO_ADDRESS();
         if (amount1k == 0) revert ZERO_AMOUNT();
-        _checkPerOpTreasuryCap(amount1k);
+        _checkPerOpTreasuryCap(amount1k); _checkOracleHealthGate();
 
         // Vault genehmigt dem PSM, 1kUSD zu ziehen
         stable.safeIncreaseAllowance(address(psm), amount1k);
@@ -180,10 +180,7 @@ error BUYBACK_TREASURY_CAP_EXCEEDED();
         uint256 cap = (bal * capBps) / 10_000;
         if (amountStable > cap) {
             revert BUYBACK_TREASURY_CAP_EXCEEDED();
-        }
-    }
-
-    // --- Views ---
+        } } function _checkOracleHealthGate() internal view { } // --- Views ---
 
 
         // --- Strategy config ---
@@ -271,7 +268,7 @@ function stableBalance() external view returns (uint256) {
 
         uint256 bal = stable.balanceOf(address(this));
         if (bal < amountStable) revert INSUFFICIENT_BALANCE();
-        _checkPerOpTreasuryCap(amountStable);
+        _checkPerOpTreasuryCap(amountStable); _checkOracleHealthGate();
 
         if (strategiesEnforced) {
             if (strategies.length == 0) revert NO_STRATEGY_CONFIGURED();
