@@ -450,3 +450,4 @@
 2025-12-07T20:23:24Z DEV-11 A02 oracle_enforce: wire oracle health gate enforcement into BuybackVault
 2025-12-07T20:46:27Z DEV-11 A02 backlog: document oracle/health gate enforcement status
 2025-12-07T21:07:59Z DEV-11 A03 window_storage: add rolling window storage and config in BuybackVault
+2025-12-07T22:29:38Z DEV-11 A03 backlog_enforce: document rolling window enforcement in backlog + telemetry
