@@ -71,6 +71,18 @@ error BUYBACK_TREASURY_CAP_EXCEEDED();
     ///         in a single buyback operation (in basis points, 1% = 100 bps).
     /// @dev A value of 0 disables the per-operation cap check.
     uint16 public maxBuybackSharePerOpBps; address public oracleHealthModule; bool public oracleHealthGateEnforced;
+    uint16 public maxBuybackSharePerWindowBps;
+    uint64 public buybackWindowDuration;
+    uint64 public buybackWindowStart;
+    uint128 public buybackWindowAccumulatedBps;
+
+    event BuybackWindowConfigUpdated(
+        uint64 oldDuration,
+        uint64 newDuration,
+        uint16 oldCapBps,
+        uint16 newCapBps
+    );
+
 
     event BuybackTreasuryCapUpdated(uint16 oldCapBps, uint16 newCapBps); event BuybackOracleHealthGateUpdated(address indexed oldModule, address indexed newModule, bool oldEnforced, bool newEnforced);
 
@@ -198,7 +210,21 @@ error BUYBACK_TREASURY_CAP_EXCEEDED();
         uint16 oldCap = maxBuybackSharePerOpBps;
         maxBuybackSharePerOpBps = newCapBps;
         emit BuybackTreasuryCapUpdated(oldCap, newCapBps);
-    } function setOracleHealthGateConfig(address newModule, bool newEnforced) external onlyDAO { address oldModule = oracleHealthModule; bool oldEnforced = oracleHealthGateEnforced; if (newEnforced && newModule == address(0)) { revert ZERO_ADDRESS(); } oracleHealthModule = newModule; oracleHealthGateEnforced = newEnforced; emit BuybackOracleHealthGateUpdated(oldModule, newModule, oldEnforced, newEnforced); }
+    }
+    /// @notice Configure the rolling buyback window.
+    /// @dev A zero cap disables the window; duration is in seconds.
+    function setBuybackWindowConfig(uint64 newDuration, uint16 newCapBps) external onlyDAO {
+        require(newCapBps <= 10_000, "WINDOW_CAP_BPS_TOO_HIGH");
+        uint64 oldDuration = buybackWindowDuration;
+        uint16 oldCapBps = maxBuybackSharePerWindowBps;
+        buybackWindowDuration = newDuration;
+        maxBuybackSharePerWindowBps = newCapBps;
+        // Reset window accounting; a later DEV-11 A03 patch will implement enforcement logic.
+        buybackWindowStart = 0;
+        buybackWindowAccumulatedBps = 0;
+        emit BuybackWindowConfigUpdated(oldDuration, newDuration, oldCapBps, newCapBps);
+    }
+ function setOracleHealthGateConfig(address newModule, bool newEnforced) external onlyDAO { address oldModule = oracleHealthModule; bool oldEnforced = oracleHealthGateEnforced; if (newEnforced && newModule == address(0)) { revert ZERO_ADDRESS(); } oracleHealthModule = newModule; oracleHealthGateEnforced = newEnforced; emit BuybackOracleHealthGateUpdated(oldModule, newModule, oldEnforced, newEnforced); }
 
 
 
