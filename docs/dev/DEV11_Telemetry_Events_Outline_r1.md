@@ -204,3 +204,11 @@ Notes:
 - DEV-11 A02 wiring will connect buyback execution paths with existing oracle
   health and guardian/safety state. This section defines the telemetry vocabulary
   so indexers and dashboards can prepare before the code changes land.
+
+### DEV-11 A02 – Oracle / Health gate enforcement usage
+
+- The BuybackVault oracle/health gate now actively drives control flow when `oracleHealthGateEnforced == true`.
+- On unhealthy oracle state, buybacks revert with the `BUYBACK_ORACLE_UNHEALTHY` reason.
+- On guardian stop / global buyback halt, buybacks revert with the `BUYBACK_GUARDIAN_STOP` reason.
+- When `oracleHealthGateEnforced == false`, these codes remain dormant and v0.51 behaviour is preserved.
+
