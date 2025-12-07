@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
+interface IOracleHealthModule { function isHealthy() external view returns (bool); }
+
+
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
@@ -19,7 +22,7 @@ contract BuybackVault {
     using SafeERC20 for IERC20;
 
     error ZERO_ADDRESS();
-    error ZERO_AMOUNT();
+    error ZERO_AMOUNT(); error BUYBACK_ORACLE_UNHEALTHY(); error BUYBACK_GUARDIAN_STOP();
 
     // --- Events ---
 
@@ -67,9 +70,9 @@ error BUYBACK_TREASURY_CAP_EXCEEDED();
     /// @notice Maximum share of the vault's stable balance that can be spent
     ///         in a single buyback operation (in basis points, 1% = 100 bps).
     /// @dev A value of 0 disables the per-operation cap check.
-    uint16 public maxBuybackSharePerOpBps;
+    uint16 public maxBuybackSharePerOpBps; address public oracleHealthModule; bool public oracleHealthGateEnforced;
 
-    event BuybackTreasuryCapUpdated(uint16 oldCapBps, uint16 newCapBps);
+    event BuybackTreasuryCapUpdated(uint16 oldCapBps, uint16 newCapBps); event BuybackOracleHealthGateUpdated(address indexed oldModule, address indexed newModule, bool oldEnforced, bool newEnforced);
 
 
     event FundStable(uint256 amount);
@@ -180,7 +183,7 @@ error BUYBACK_TREASURY_CAP_EXCEEDED();
         uint256 cap = (bal * capBps) / 10_000;
         if (amountStable > cap) {
             revert BUYBACK_TREASURY_CAP_EXCEEDED();
-        } } function _checkOracleHealthGate() internal view { } // --- Views ---
+        } } function _checkOracleHealthGate() internal view { if (!oracleHealthGateEnforced) { return; } address module = oracleHealthModule; if (module == address(0)) { revert BUYBACK_ORACLE_UNHEALTHY(); } if (!IOracleHealthModule(module).isHealthy()) { revert BUYBACK_ORACLE_UNHEALTHY(); } } // --- Views ---
 
 
         // --- Strategy config ---
@@ -195,7 +198,7 @@ error BUYBACK_TREASURY_CAP_EXCEEDED();
         uint16 oldCap = maxBuybackSharePerOpBps;
         maxBuybackSharePerOpBps = newCapBps;
         emit BuybackTreasuryCapUpdated(oldCap, newCapBps);
-    }
+    } function setOracleHealthGateConfig(address newModule, bool newEnforced) external onlyDAO { address oldModule = oracleHealthModule; bool oldEnforced = oracleHealthGateEnforced; if (newEnforced && newModule == address(0)) { revert ZERO_ADDRESS(); } oracleHealthModule = newModule; oracleHealthGateEnforced = newEnforced; emit BuybackOracleHealthGateUpdated(oldModule, newModule, oldEnforced, newEnforced); }
 
 
 
