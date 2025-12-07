@@ -245,3 +245,15 @@ to prevent aggressive drain of the buyback treasury even if single-transaction c
 
 
 - [x] DEV-11 A02 – oracle/health gate stub wired into BuybackVault (hook called from buyback execution paths; enforcement logic still TBD).
+
+#### DEV-11 A02 – Enforcement wiring status (Phase A)
+
+- [x] BuybackVault is now wired to an external oracle health module via:
+  - `oracleHealthModule` (address) and `oracleHealthGateEnforced` (bool) state.
+  - `setOracleHealthGateConfig(address newModule, bool newEnforced)` (DAO-only) with a ZERO_ADDRESS guard when enabling enforcement.
+- [x] `_checkOracleHealthGate()` now:
+  - short-circuits when `oracleHealthGateEnforced == false` (v0.51 behaviour preserved),
+  - otherwise queries the external module and reverts with typed errors mirroring
+    `BUYBACK_ORACLE_UNHEALTHY` and `BUYBACK_GUARDIAN_STOP` semantics.
+- [ ] Dedicated BuybackVault tests for all enforcement modes (disabled / healthy / unhealthy / guardian-stop) – to be added in a follow-up DEV-11 A02 patch.
+
