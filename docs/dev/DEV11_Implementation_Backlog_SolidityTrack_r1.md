@@ -257,3 +257,16 @@ to prevent aggressive drain of the buyback treasury even if single-transaction c
     `BUYBACK_ORACLE_UNHEALTHY` and `BUYBACK_GUARDIAN_STOP` semantics.
 - [ ] Dedicated BuybackVault tests for all enforcement modes (disabled / healthy / unhealthy / guardian-stop) – to be added in a follow-up DEV-11 A02 patch.
 
+
+## DEV-11 A03 – Rolling Window Cap Enforcement (Status Update)
+
+Status: **implemented in BuybackVault (Phase A)**
+
+The BuybackVault now tracks cumulative buyback volume over a configurable rolling window
+(`rollingWindowDuration` + `rollingWindowCapBps`) and enforces the cap in both
+`executeBuyback` and `executeBuybackPSM`. When the cap would be exceeded, the call
+reverts and the window accumulator is advanced to the current timestamp.
+
+This keeps the per-operation cap (A01) and the oracle/health gate (A02) in place, while
+adding a second dimension of protection against repeated buybacks in a short period of
+time.
