@@ -243,3 +243,5 @@ to prevent aggressive drain of the buyback treasury even if single-transaction c
   - No changes to core PSM logic.
   - No changes to oracle aggregation or guardian rules beyond using already exposed health / status signals.
 
+
+- [x] DEV-11 A02 – oracle/health gate stub wired into BuybackVault (hook called from buyback execution paths; enforcement logic still TBD).
