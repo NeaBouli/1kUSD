@@ -270,3 +270,25 @@ reverts and the window accumulator is advanced to the current timestamp.
 This keeps the per-operation cap (A01) and the oracle/health gate (A02) in place, while
 adding a second dimension of protection against repeated buybacks in a short period of
 time.
+
+---
+
+## DEV-11 Phase B – Telemetry & Test Expansion (Planning Only)
+
+**Scope:**  
+Phase B focuses on refining telemetry and test coverage for the existing safety layers A01–A03 in `BuybackVault` without introducing new contract features.
+
+**Reference:**  
+See `docs/dev/DEV11_PhaseB_Telemetry_TestPlan_r1.md` for details.
+
+**Planned milestones:**
+
+- **B01 – Telemetry Audit & Alignment**
+  - Align Reason Codes and events with integrations and indexer docs.
+- **B02 – Parameter Boundary Tests**
+  - Expand tests around boundary values and governance profiles.
+- **B03 – Scenario & Regression Tests**
+  - Add multi-step scenario tests combining health gate and cap settings.
+
+This section is intentionally planning-only and does not imply any active work beyond documentation until explicitly scheduled by the architect.
+
