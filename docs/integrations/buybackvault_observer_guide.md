@@ -425,3 +425,309 @@ As the protocol evolves, this guide may be extended with:
 - concrete event signatures and field layouts,
 - recommended schemas and example SQL queries,
 - example Grafana dashboards and alerting rules.
+
+---
+
+## Phase A – Safety Events & Reason Codes
+
+Phase A führt zusätzliche **Safety-Layer** für Buybacks ein (A01–A03).  
+Für Integratoren ist entscheidend, die entsprechenden Events / Reason Codes korrekt auszuwerten.
+
+### Übersicht der relevanten Situationen
+
+Die folgenden Situationen können dazu führen, dass ein Buyback entweder
+- **erfolgreich**, aber mit Safety-Begleitinformation ausgeführt wird, oder
+- **abgelehnt** wird (Revert mit spezifischem Reason Code).
+
+> Hinweis: Die exakten Event- und Fehlernamen sind in den Solidity-Contracts und  
+> im Dokument `docs/dev/DEV11_Telemetry_Events_Outline_r1.md` detailliert aufgeführt.  
+> Dieser Abschnitt bietet eine Integrations-Perspektive.
+
+### 1. A01 – Per-Operation Treasury Cap
+
+**Situation:** Einzelne Buyback-Operation überschreitet den konfigurierten Anteil am Treasury.
+
+- **Layer:** A01 (Per-Op Cap)
+- **Typischer Reason Code (Beispiel):** `BUYBACK_TREASURY_CAP_SINGLE`
+- **Bedeutung:**  
+  Die angefragte Buyback-Größe liegt über dem per Operation erlaubten Anteil am Treasury.
+- **Empfohlene Reaktion (Frontend / Integrator):**
+  - Dem Operator / User anzeigen, dass die Operation „zu groß“ ist.
+  - Optional vorschlagen, den Buyback in mehrere kleinere Operationen aufzuteilen.
+  - Keine automatischen Retries ohne Anpassung der Parameter.
+
+### 2. A03 – Rolling Window Cap
+
+**Situation:** Die Summe aller Buybacks im aktuellen Zeitfenster überschreitet den konfigurierten Window-Cap.
+
+- **Layer:** A03 (Rolling Window Cap)
+- **Typischer Reason Code (Beispiel):** `BUYBACK_TREASURY_CAP_WINDOW`
+- **Bedeutung:**  
+  Das **kumulative** Volumen im betrachteten Zeitfenster ist bereits zu hoch; weitere Buybacks wären aus Treasury-Risiko-Sicht nicht zulässig.
+- **Empfohlene Reaktion:**
+  - Im UI kenntlich machen, dass das Treasury-Budget für dieses Zeitfenster ausgeschöpft ist.
+  - Optional den erwarteten Zeitpunkt nennen, wann sich das Fenster zurücksetzt (falls Information verfügbar).
+  - Für Monitoring / Alerts:
+    - Alarm, wenn das Fenster regelmäßig „voll“ läuft (Hinweis auf zu aggressive Strategien).
+
+### 3. A02 – Oracle / Health Gate: Oracle ungesund
+
+**Situation:** Das Health-Gate stellt fest, dass die zugrunde liegenden Oracle-Daten nicht vertrauenswürdig sind.
+
+- **Layer:** A02 (Oracle / Health Gate)
+- **Typischer Reason Code (Beispiel):** `BUYBACK_ORACLE_UNHEALTHY`
+- **Bedeutung:**  
+  Ein oder mehrere Health-Kriterien (z. B. „Preis zu alt“, „Diff zu groß“) sind verletzt; Buybacks werden deshalb geblockt.
+- **Empfohlene Reaktion:**
+  - Im UI klar darauf hinweisen, dass es sich um ein **Oracle-/Infrastrukturproblem** handelt.
+  - Keine Automatik, die „einfach erneut versucht“, solange der Status ungesund ist.
+  - Integrations-/Ops-Teams sollten:
+    - Status der Oracle-Feeds prüfen,
+    - ggf. Failover-Mechanismen aktivieren.
+
+### 4. A02 – Oracle / Health Gate: Guardian Stop
+
+**Situation:** Ein Guardian-Signal blockiert Buybacks global oder für eine bestimmte Konfiguration.
+
+- **Layer:** A02 (Guardian / Notbremse)
+- **Typischer Reason Code (Beispiel):** `BUYBACK_GUARDIAN_STOP`
+- **Bedeutung:**  
+  Governance / Guardian hat einen Stop-Hebel aktiviert; Buybacks sind bis auf weiteres ausgesetzt.
+- **Empfohlene Reaktion:**
+  - Im UI klar kommunizieren: „Buybacks wurden durch Guardian/DAO pausiert.“
+  - Keine automatischen Retries.
+  - Optional Link auf ein Governance- oder Status-Panel anbieten (Begründung / Proposal).
+
+### 5. Kombinationen & Prioritäten
+
+In der Praxis können mehrere Backstops gleichzeitig relevant sein.  
+Implementierungen sollten folgende Prioritäten berücksichtigen:
+
+1. **Guardian-Stop (A02 / Notbremse)** – höchste Priorität, globaler Stopp.
+2. **Oracle-Unhealthy (A02)** – keine Buybacks auf Basis schlechter Preisdaten.
+3. **Window-Cap (A03)** – zeitbasierte Budget-Grenze.
+4. **Per-Op Cap (A01)** – Limit pro Einzeloperation.
+
+Wenn mehrere Gründe gleichzeitig zutreffen, sollte:
+
+- der „stärkste“ Grund (z. B. Guardian-Stop) im Frontend dominieren,
+- zusätzliche Details (z. B. nahezu ausgeschöpftes Window-Cap) optional angezeigt werden.
+
+---
+
+### Integrations-Checkliste für Phase A
+
+Bei der Integration von BuybackVault sollten Clients / Services:
+
+1. **Events & Reason Codes abonnieren**, die mit A01–A03 verknüpft sind.
+2. **Fehlergründe im Frontend differenziert darstellen**, statt nur generische „Transaction failed“-Meldungen zu zeigen.
+3. **Alarm-/Monitoring-Regeln definieren**, z. B.:
+   - Häufige `BUYBACK_ORACLE_UNHEALTHY` → Oracle-Infra prüfen.
+   - Häufige `BUYBACK_GUARDIAN_STOP` → Governance-Entscheidung prüfen.
+   - Häufig ausgelastete Window-Caps → Treasury-Strategie überprüfen.
+4. Die detaillierte Telemetry-Spezifikation aus  
+   `docs/dev/DEV11_Telemetry_Events_Outline_r1.md` berücksichtigen.
+
+---
+
+## Phase A – Safety Events & Reason Codes
+
+Phase A führt zusätzliche **Safety-Layer** für Buybacks ein (A01–A03).  
+Für Integratoren ist entscheidend, die entsprechenden Events / Reason Codes korrekt auszuwerten.
+
+### Übersicht der relevanten Situationen
+
+Die folgenden Situationen können dazu führen, dass ein Buyback entweder
+- **erfolgreich**, aber mit Safety-Begleitinformation ausgeführt wird, oder
+- **abgelehnt** wird (Revert mit spezifischem Reason Code).
+
+> Hinweis: Die exakten Event- und Fehlernamen sind in den Solidity-Contracts und  
+> im Dokument `docs/dev/DEV11_Telemetry_Events_Outline_r1.md` detailliert aufgeführt.  
+> Dieser Abschnitt bietet eine Integrations-Perspektive.
+
+### 1. A01 – Per-Operation Treasury Cap
+
+**Situation:** Einzelne Buyback-Operation überschreitet den konfigurierten Anteil am Treasury.
+
+- **Layer:** A01 (Per-Op Cap)
+- **Typischer Reason Code (Beispiel):** `BUYBACK_TREASURY_CAP_SINGLE`
+- **Bedeutung:**  
+  Die angefragte Buyback-Größe liegt über dem per Operation erlaubten Anteil am Treasury.
+- **Empfohlene Reaktion (Frontend / Integrator):**
+  - Dem Operator / User anzeigen, dass die Operation „zu groß“ ist.
+  - Optional vorschlagen, den Buyback in mehrere kleinere Operationen aufzuteilen.
+  - Keine automatischen Retries ohne Anpassung der Parameter.
+
+### 2. A03 – Rolling Window Cap
+
+**Situation:** Die Summe aller Buybacks im aktuellen Zeitfenster überschreitet den konfigurierten Window-Cap.
+
+- **Layer:** A03 (Rolling Window Cap)
+- **Typischer Reason Code (Beispiel):** `BUYBACK_TREASURY_CAP_WINDOW`
+- **Bedeutung:**  
+  Das **kumulative** Volumen im betrachteten Zeitfenster ist bereits zu hoch; weitere Buybacks wären aus Treasury-Risiko-Sicht nicht zulässig.
+- **Empfohlene Reaktion:**
+  - Im UI kenntlich machen, dass das Treasury-Budget für dieses Zeitfenster ausgeschöpft ist.
+  - Optional den erwarteten Zeitpunkt nennen, wann sich das Fenster zurücksetzt (falls Information verfügbar).
+  - Für Monitoring / Alerts:
+    - Alarm, wenn das Fenster regelmäßig „voll“ läuft (Hinweis auf zu aggressive Strategien).
+
+### 3. A02 – Oracle / Health Gate: Oracle ungesund
+
+**Situation:** Das Health-Gate stellt fest, dass die zugrunde liegenden Oracle-Daten nicht vertrauenswürdig sind.
+
+- **Layer:** A02 (Oracle / Health Gate)
+- **Typischer Reason Code (Beispiel):** `BUYBACK_ORACLE_UNHEALTHY`
+- **Bedeutung:**  
+  Ein oder mehrere Health-Kriterien (z. B. „Preis zu alt“, „Diff zu groß“) sind verletzt; Buybacks werden deshalb geblockt.
+- **Empfohlene Reaktion:**
+  - Im UI klar darauf hinweisen, dass es sich um ein **Oracle-/Infrastrukturproblem** handelt.
+  - Keine Automatik, die „einfach erneut versucht“, solange der Status ungesund ist.
+  - Integrations-/Ops-Teams sollten:
+    - Status der Oracle-Feeds prüfen,
+    - ggf. Failover-Mechanismen aktivieren.
+
+### 4. A02 – Oracle / Health Gate: Guardian Stop
+
+**Situation:** Ein Guardian-Signal blockiert Buybacks global oder für eine bestimmte Konfiguration.
+
+- **Layer:** A02 (Guardian / Notbremse)
+- **Typischer Reason Code (Beispiel):** `BUYBACK_GUARDIAN_STOP`
+- **Bedeutung:**  
+  Governance / Guardian hat einen Stop-Hebel aktiviert; Buybacks sind bis auf weiteres ausgesetzt.
+- **Empfohlene Reaktion:**
+  - Im UI klar kommunizieren: „Buybacks wurden durch Guardian/DAO pausiert.“
+  - Keine automatischen Retries.
+  - Optional Link auf ein Governance- oder Status-Panel anbieten (Begründung / Proposal).
+
+### 5. Kombinationen & Prioritäten
+
+In der Praxis können mehrere Backstops gleichzeitig relevant sein.  
+Implementierungen sollten folgende Prioritäten berücksichtigen:
+
+1. **Guardian-Stop (A02 / Notbremse)** – höchste Priorität, globaler Stopp.
+2. **Oracle-Unhealthy (A02)** – keine Buybacks auf Basis schlechter Preisdaten.
+3. **Window-Cap (A03)** – zeitbasierte Budget-Grenze.
+4. **Per-Op Cap (A01)** – Limit pro Einzeloperation.
+
+Wenn mehrere Gründe gleichzeitig zutreffen, sollte:
+
+- der „stärkste“ Grund (z. B. Guardian-Stop) im Frontend dominieren,
+- zusätzliche Details (z. B. nahezu ausgeschöpftes Window-Cap) optional angezeigt werden.
+
+---
+
+### Integrations-Checkliste für Phase A
+
+Bei der Integration von BuybackVault sollten Clients / Services:
+
+1. **Events & Reason Codes abonnieren**, die mit A01–A03 verknüpft sind.
+2. **Fehlergründe im Frontend differenziert darstellen**, statt nur generische „Transaction failed“-Meldungen zu zeigen.
+3. **Alarm-/Monitoring-Regeln definieren**, z. B.:
+   - Häufige `BUYBACK_ORACLE_UNHEALTHY` → Oracle-Infra prüfen.
+   - Häufige `BUYBACK_GUARDIAN_STOP` → Governance-Entscheidung prüfen.
+   - Häufig ausgelastete Window-Caps → Treasury-Strategie überprüfen.
+4. Die detaillierte Telemetry-Spezifikation aus  
+   `docs/dev/DEV11_Telemetry_Events_Outline_r1.md` berücksichtigen.
+
+---
+
+## Phase A – Safety Events & Reason Codes
+
+Phase A führt zusätzliche **Safety-Layer** für Buybacks ein (A01–A03).  
+Für Integratoren ist entscheidend, die entsprechenden Events / Reason Codes korrekt auszuwerten.
+
+### Übersicht der relevanten Situationen
+
+Die folgenden Situationen können dazu führen, dass ein Buyback entweder
+- **erfolgreich**, aber mit Safety-Begleitinformation ausgeführt wird, oder
+- **abgelehnt** wird (Revert mit spezifischem Reason Code).
+
+> Hinweis: Die exakten Event- und Fehlernamen sind in den Solidity-Contracts und  
+> im Dokument `docs/dev/DEV11_Telemetry_Events_Outline_r1.md` detailliert aufgeführt.  
+> Dieser Abschnitt bietet eine Integrations-Perspektive.
+
+### 1. A01 – Per-Operation Treasury Cap
+
+**Situation:** Einzelne Buyback-Operation überschreitet den konfigurierten Anteil am Treasury.
+
+- **Layer:** A01 (Per-Op Cap)
+- **Typischer Reason Code (Beispiel):** `BUYBACK_TREASURY_CAP_SINGLE`
+- **Bedeutung:**  
+  Die angefragte Buyback-Größe liegt über dem per Operation erlaubten Anteil am Treasury.
+- **Empfohlene Reaktion (Frontend / Integrator):**
+  - Dem Operator / User anzeigen, dass die Operation „zu groß“ ist.
+  - Optional vorschlagen, den Buyback in mehrere kleinere Operationen aufzuteilen.
+  - Keine automatischen Retries ohne Anpassung der Parameter.
+
+### 2. A03 – Rolling Window Cap
+
+**Situation:** Die Summe aller Buybacks im aktuellen Zeitfenster überschreitet den konfigurierten Window-Cap.
+
+- **Layer:** A03 (Rolling Window Cap)
+- **Typischer Reason Code (Beispiel):** `BUYBACK_TREASURY_CAP_WINDOW`
+- **Bedeutung:**  
+  Das **kumulative** Volumen im betrachteten Zeitfenster ist bereits zu hoch; weitere Buybacks wären aus Treasury-Risiko-Sicht nicht zulässig.
+- **Empfohlene Reaktion:**
+  - Im UI kenntlich machen, dass das Treasury-Budget für dieses Zeitfenster ausgeschöpft ist.
+  - Optional den erwarteten Zeitpunkt nennen, wann sich das Fenster zurücksetzt (falls Information verfügbar).
+  - Für Monitoring / Alerts:
+    - Alarm, wenn das Fenster regelmäßig „voll“ läuft (Hinweis auf zu aggressive Strategien).
+
+### 3. A02 – Oracle / Health Gate: Oracle ungesund
+
+**Situation:** Das Health-Gate stellt fest, dass die zugrunde liegenden Oracle-Daten nicht vertrauenswürdig sind.
+
+- **Layer:** A02 (Oracle / Health Gate)
+- **Typischer Reason Code (Beispiel):** `BUYBACK_ORACLE_UNHEALTHY`
+- **Bedeutung:**  
+  Ein oder mehrere Health-Kriterien (z. B. „Preis zu alt“, „Diff zu groß“) sind verletzt; Buybacks werden deshalb geblockt.
+- **Empfohlene Reaktion:**
+  - Im UI klar darauf hinweisen, dass es sich um ein **Oracle-/Infrastrukturproblem** handelt.
+  - Keine Automatik, die „einfach erneut versucht“, solange der Status ungesund ist.
+  - Integrations-/Ops-Teams sollten:
+    - Status der Oracle-Feeds prüfen,
+    - ggf. Failover-Mechanismen aktivieren.
+
+### 4. A02 – Oracle / Health Gate: Guardian Stop
+
+**Situation:** Ein Guardian-Signal blockiert Buybacks global oder für eine bestimmte Konfiguration.
+
+- **Layer:** A02 (Guardian / Notbremse)
+- **Typischer Reason Code (Beispiel):** `BUYBACK_GUARDIAN_STOP`
+- **Bedeutung:**  
+  Governance / Guardian hat einen Stop-Hebel aktiviert; Buybacks sind bis auf weiteres ausgesetzt.
+- **Empfohlene Reaktion:**
+  - Im UI klar kommunizieren: „Buybacks wurden durch Guardian/DAO pausiert.“
+  - Keine automatischen Retries.
+  - Optional Link auf ein Governance- oder Status-Panel anbieten (Begründung / Proposal).
+
+### 5. Kombinationen & Prioritäten
+
+In der Praxis können mehrere Backstops gleichzeitig relevant sein.  
+Implementierungen sollten folgende Prioritäten berücksichtigen:
+
+1. **Guardian-Stop (A02 / Notbremse)** – höchste Priorität, globaler Stopp.
+2. **Oracle-Unhealthy (A02)** – keine Buybacks auf Basis schlechter Preisdaten.
+3. **Window-Cap (A03)** – zeitbasierte Budget-Grenze.
+4. **Per-Op Cap (A01)** – Limit pro Einzeloperation.
+
+Wenn mehrere Gründe gleichzeitig zutreffen, sollte:
+
+- der „stärkste“ Grund (z. B. Guardian-Stop) im Frontend dominieren,
+- zusätzliche Details (z. B. nahezu ausgeschöpftes Window-Cap) optional angezeigt werden.
+
+---
+
+### Integrations-Checkliste für Phase A
+
+Bei der Integration von BuybackVault sollten Clients / Services:
+
+1. **Events & Reason Codes abonnieren**, die mit A01–A03 verknüpft sind.
+2. **Fehlergründe im Frontend differenziert darstellen**, statt nur generische „Transaction failed“-Meldungen zu zeigen.
+3. **Alarm-/Monitoring-Regeln definieren**, z. B.:
+   - Häufige `BUYBACK_ORACLE_UNHEALTHY` → Oracle-Infra prüfen.
+   - Häufige `BUYBACK_GUARDIAN_STOP` → Governance-Entscheidung prüfen.
+   - Häufig ausgelastete Window-Caps → Treasury-Strategie überprüfen.
+4. Die detaillierte Telemetry-Spezifikation aus  
+   `docs/dev/DEV11_Telemetry_Events_Outline_r1.md` berücksichtigen.
