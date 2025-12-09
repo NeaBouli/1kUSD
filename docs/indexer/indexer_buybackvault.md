@@ -263,3 +263,339 @@ Versioning guidelines:
 - Expose an explicit `schema_version` field in DTOs or metadata.
 - Maintain migration scripts or procedures for dashboards and external consumers when schema changes.
 
+
+---
+
+## Phase A – Safety Reason Codes & Indexing-Strategie
+
+Mit Phase A führt der BuybackVault zusätzliche Reason Codes ein, die für Indexer
+und Monitoring-Systeme von hoher Bedeutung sind.
+
+### 1. Ziel
+
+Dieser Abschnitt beschreibt, wie Indexer:
+
+- relevante Events / Reason Codes erkennen,
+- sie strukturiert abspeichern,
+- und daraus sinnvolle Alerts / Dashboards bauen können.
+
+### 2. Kern-Reason-Codes (Beispiele)
+
+> Konkrete Namen / Enums sind in  
+> `docs/dev/DEV11_Telemetry_Events_Outline_r1.md` beschrieben.  
+> Die folgende Tabelle zeigt eine integratorische Sicht.
+
+| Layer | Beispiel-Code                    | Kategorie          | Beschreibung                                                  |
+|-------|----------------------------------|--------------------|---------------------------------------------------------------|
+| A01   | `BUYBACK_TREASURY_CAP_SINGLE`    | Treasury / Limits  | Per-Operation Cap überschritten                              |
+| A03   | `BUYBACK_TREASURY_CAP_WINDOW`    | Treasury / Limits  | Rolling Window Cap überschritten                             |
+| A02   | `BUYBACK_ORACLE_UNHEALTHY`       | Oracle / Health    | Oracle-/Health-Gate meldet ungesunde Daten                   |
+| A02   | `BUYBACK_GUARDIAN_STOP`          | Governance / Guard | Guardian-/DAO-Stop blockiert Buybacks                        |
+
+Indexern wird empfohlen, Reason Codes mindestens mit folgenden Feldern zu persistieren:
+
+- `tx_hash`
+- `block_number` / `timestamp`
+- `asset` (falls vorhanden)
+- `amount` (falls relevant)
+- `reason_code` (String / Enum)
+- `layer` (A01/A02/A03)
+- optional: `mode` / Konfigurationsprofil (falls aus anderen Events ableitbar)
+
+### 3. Abgeleitete Metriken & Alerts
+
+Aus den oben genannten Daten lassen sich u. a. folgende Metriken ableiten:
+
+- **Cap-Auslastung pro Zeitfenster**:
+
+  - Anteil der Zeit, in der `BUYBACK_TREASURY_CAP_WINDOW` auftritt.
+  - Cumulative Volumes vs. Window-Cap.
+
+- **Fehler-Rate pro Layer**:
+
+  - Anteil der Buyback-Versuche, die durch A01, A02 oder A03 geblockt werden.
+
+- **Health-Gate-Stabilität**:
+
+  - Anzahl / Dauer der Perioden mit `BUYBACK_ORACLE_UNHEALTHY`.
+  - Korrelation mit Oracle-Infrastruktur-Incidents.
+
+- **Guardian-Stop-Episoden**:
+
+  - Episoden-Liste von `BUYBACK_GUARDIAN_STOP` inkl. Start/Ende.
+  - Verknüpfung mit Governance-Entscheidungen (z. B. Proposals).
+
+### 4. Empfohlene Index-Struktur
+
+In einer typischen Indexer-DB (z. B. PostgreSQL, ClickHouse, Elastic) empfiehlt sich:
+
+- Eine Tabelle / Collection `buyback_events` mit:
+
+  - Primärschlüssel basierend auf `(tx_hash, log_index)`
+  - Index auf `timestamp`, `asset`, `reason_code`, `layer`.
+
+- Optional eine separate Tabelle `buyback_safety_incidents` für aggregierte Sicht:
+
+  - `incident_id`
+  - `layer`
+  - `reason_code`
+  - `start_timestamp`
+  - `end_timestamp` (falls episodenbasiert)
+  - `affected_volume`
+  - `metadata` (JSON für zusätzliche Felder)
+
+### 5. Verbindung zu anderen Dokumenten
+
+Indexer sollten neben diesem Dokument insbesondere berücksichtigen:
+
+- `docs/dev/DEV11_Telemetry_Events_Outline_r1.md`  
+  (detaillierte Definition der Reason Codes, Event-Schemata)
+- `docs/integrations/buybackvault_observer_guide.md`  
+  (Integrationsperspektive / empfohlene Reaktionen)
+- `docs/reports/DEV11_PhaseA_BuybackSafety_Status_r1.md`  
+  (High-Level-Status von Phase A)
+- `docs/governance/buybackvault_parameter_playbook_phaseA.md`  
+  (Governance-Profile und Parameter-Kontext)
+
+---
+
+### 6. Checkliste für Indexer-Implementierungen
+
+1. **Reason Codes parsen & normalisieren** (z. B. in ein internes Enum).
+2. **Layer-Tagging** (A01/A02/A03) für jede Safety-bezogene Meldung.
+3. **Dashboards**:
+
+   - Zeitreihe der geblockten vs. erfolgreichen Buybacks.
+   - Heatmaps für Reason Codes über die Zeit.
+   - Fenster-Visualisierung für Treasury-Cap-Auslastung.
+
+4. **Alerts** definieren:
+
+   - Hohe Dichte von `BUYBACK_ORACLE_UNHEALTHY` innerhalb kurzer Zeit.
+   - Wiederholte `BUYBACK_GUARDIAN_STOP` ohne klare Governance-Kommunikation.
+   - Window-Cap nahezu permanent ausgelastet.
+
+
+---
+
+## Phase A – Safety Reason Codes & Indexing-Strategie
+
+Mit Phase A führt der BuybackVault zusätzliche Reason Codes ein, die für Indexer
+und Monitoring-Systeme von hoher Bedeutung sind.
+
+### 1. Ziel
+
+Dieser Abschnitt beschreibt, wie Indexer:
+
+- relevante Events / Reason Codes erkennen,
+- sie strukturiert abspeichern,
+- und daraus sinnvolle Alerts / Dashboards bauen können.
+
+### 2. Kern-Reason-Codes (Beispiele)
+
+> Konkrete Namen / Enums sind in  
+> `docs/dev/DEV11_Telemetry_Events_Outline_r1.md` beschrieben.  
+> Die folgende Tabelle zeigt eine integratorische Sicht.
+
+| Layer | Beispiel-Code                    | Kategorie          | Beschreibung                                                  |
+|-------|----------------------------------|--------------------|---------------------------------------------------------------|
+| A01   | `BUYBACK_TREASURY_CAP_SINGLE`    | Treasury / Limits  | Per-Operation Cap überschritten                              |
+| A03   | `BUYBACK_TREASURY_CAP_WINDOW`    | Treasury / Limits  | Rolling Window Cap überschritten                             |
+| A02   | `BUYBACK_ORACLE_UNHEALTHY`       | Oracle / Health    | Oracle-/Health-Gate meldet ungesunde Daten                   |
+| A02   | `BUYBACK_GUARDIAN_STOP`          | Governance / Guard | Guardian-/DAO-Stop blockiert Buybacks                        |
+
+Indexern wird empfohlen, Reason Codes mindestens mit folgenden Feldern zu persistieren:
+
+- `tx_hash`
+- `block_number` / `timestamp`
+- `asset` (falls vorhanden)
+- `amount` (falls relevant)
+- `reason_code` (String / Enum)
+- `layer` (A01/A02/A03)
+- optional: `mode` / Konfigurationsprofil (falls aus anderen Events ableitbar)
+
+### 3. Abgeleitete Metriken & Alerts
+
+Aus den oben genannten Daten lassen sich u. a. folgende Metriken ableiten:
+
+- **Cap-Auslastung pro Zeitfenster**:
+
+  - Anteil der Zeit, in der `BUYBACK_TREASURY_CAP_WINDOW` auftritt.
+  - Cumulative Volumes vs. Window-Cap.
+
+- **Fehler-Rate pro Layer**:
+
+  - Anteil der Buyback-Versuche, die durch A01, A02 oder A03 geblockt werden.
+
+- **Health-Gate-Stabilität**:
+
+  - Anzahl / Dauer der Perioden mit `BUYBACK_ORACLE_UNHEALTHY`.
+  - Korrelation mit Oracle-Infrastruktur-Incidents.
+
+- **Guardian-Stop-Episoden**:
+
+  - Episoden-Liste von `BUYBACK_GUARDIAN_STOP` inkl. Start/Ende.
+  - Verknüpfung mit Governance-Entscheidungen (z. B. Proposals).
+
+### 4. Empfohlene Index-Struktur
+
+In einer typischen Indexer-DB (z. B. PostgreSQL, ClickHouse, Elastic) empfiehlt sich:
+
+- Eine Tabelle / Collection `buyback_events` mit:
+
+  - Primärschlüssel basierend auf `(tx_hash, log_index)`
+  - Index auf `timestamp`, `asset`, `reason_code`, `layer`.
+
+- Optional eine separate Tabelle `buyback_safety_incidents` für aggregierte Sicht:
+
+  - `incident_id`
+  - `layer`
+  - `reason_code`
+  - `start_timestamp`
+  - `end_timestamp` (falls episodenbasiert)
+  - `affected_volume`
+  - `metadata` (JSON für zusätzliche Felder)
+
+### 5. Verbindung zu anderen Dokumenten
+
+Indexer sollten neben diesem Dokument insbesondere berücksichtigen:
+
+- `docs/dev/DEV11_Telemetry_Events_Outline_r1.md`  
+  (detaillierte Definition der Reason Codes, Event-Schemata)
+- `docs/integrations/buybackvault_observer_guide.md`  
+  (Integrationsperspektive / empfohlene Reaktionen)
+- `docs/reports/DEV11_PhaseA_BuybackSafety_Status_r1.md`  
+  (High-Level-Status von Phase A)
+- `docs/governance/buybackvault_parameter_playbook_phaseA.md`  
+  (Governance-Profile und Parameter-Kontext)
+
+---
+
+### 6. Checkliste für Indexer-Implementierungen
+
+1. **Reason Codes parsen & normalisieren** (z. B. in ein internes Enum).
+2. **Layer-Tagging** (A01/A02/A03) für jede Safety-bezogene Meldung.
+3. **Dashboards**:
+
+   - Zeitreihe der geblockten vs. erfolgreichen Buybacks.
+   - Heatmaps für Reason Codes über die Zeit.
+   - Fenster-Visualisierung für Treasury-Cap-Auslastung.
+
+4. **Alerts** definieren:
+
+   - Hohe Dichte von `BUYBACK_ORACLE_UNHEALTHY` innerhalb kurzer Zeit.
+   - Wiederholte `BUYBACK_GUARDIAN_STOP` ohne klare Governance-Kommunikation.
+   - Window-Cap nahezu permanent ausgelastet.
+
+
+---
+
+## Phase A – Safety Reason Codes & Indexing-Strategie
+
+Mit Phase A führt der BuybackVault zusätzliche Reason Codes ein, die für Indexer
+und Monitoring-Systeme von hoher Bedeutung sind.
+
+### 1. Ziel
+
+Dieser Abschnitt beschreibt, wie Indexer:
+
+- relevante Events / Reason Codes erkennen,
+- sie strukturiert abspeichern,
+- und daraus sinnvolle Alerts / Dashboards bauen können.
+
+### 2. Kern-Reason-Codes (Beispiele)
+
+> Konkrete Namen / Enums sind in  
+> `docs/dev/DEV11_Telemetry_Events_Outline_r1.md` beschrieben.  
+> Die folgende Tabelle zeigt eine integratorische Sicht.
+
+| Layer | Beispiel-Code                    | Kategorie          | Beschreibung                                                  |
+|-------|----------------------------------|--------------------|---------------------------------------------------------------|
+| A01   | `BUYBACK_TREASURY_CAP_SINGLE`    | Treasury / Limits  | Per-Operation Cap überschritten                              |
+| A03   | `BUYBACK_TREASURY_CAP_WINDOW`    | Treasury / Limits  | Rolling Window Cap überschritten                             |
+| A02   | `BUYBACK_ORACLE_UNHEALTHY`       | Oracle / Health    | Oracle-/Health-Gate meldet ungesunde Daten                   |
+| A02   | `BUYBACK_GUARDIAN_STOP`          | Governance / Guard | Guardian-/DAO-Stop blockiert Buybacks                        |
+
+Indexern wird empfohlen, Reason Codes mindestens mit folgenden Feldern zu persistieren:
+
+- `tx_hash`
+- `block_number` / `timestamp`
+- `asset` (falls vorhanden)
+- `amount` (falls relevant)
+- `reason_code` (String / Enum)
+- `layer` (A01/A02/A03)
+- optional: `mode` / Konfigurationsprofil (falls aus anderen Events ableitbar)
+
+### 3. Abgeleitete Metriken & Alerts
+
+Aus den oben genannten Daten lassen sich u. a. folgende Metriken ableiten:
+
+- **Cap-Auslastung pro Zeitfenster**:
+
+  - Anteil der Zeit, in der `BUYBACK_TREASURY_CAP_WINDOW` auftritt.
+  - Cumulative Volumes vs. Window-Cap.
+
+- **Fehler-Rate pro Layer**:
+
+  - Anteil der Buyback-Versuche, die durch A01, A02 oder A03 geblockt werden.
+
+- **Health-Gate-Stabilität**:
+
+  - Anzahl / Dauer der Perioden mit `BUYBACK_ORACLE_UNHEALTHY`.
+  - Korrelation mit Oracle-Infrastruktur-Incidents.
+
+- **Guardian-Stop-Episoden**:
+
+  - Episoden-Liste von `BUYBACK_GUARDIAN_STOP` inkl. Start/Ende.
+  - Verknüpfung mit Governance-Entscheidungen (z. B. Proposals).
+
+### 4. Empfohlene Index-Struktur
+
+In einer typischen Indexer-DB (z. B. PostgreSQL, ClickHouse, Elastic) empfiehlt sich:
+
+- Eine Tabelle / Collection `buyback_events` mit:
+
+  - Primärschlüssel basierend auf `(tx_hash, log_index)`
+  - Index auf `timestamp`, `asset`, `reason_code`, `layer`.
+
+- Optional eine separate Tabelle `buyback_safety_incidents` für aggregierte Sicht:
+
+  - `incident_id`
+  - `layer`
+  - `reason_code`
+  - `start_timestamp`
+  - `end_timestamp` (falls episodenbasiert)
+  - `affected_volume`
+  - `metadata` (JSON für zusätzliche Felder)
+
+### 5. Verbindung zu anderen Dokumenten
+
+Indexer sollten neben diesem Dokument insbesondere berücksichtigen:
+
+- `docs/dev/DEV11_Telemetry_Events_Outline_r1.md`  
+  (detaillierte Definition der Reason Codes, Event-Schemata)
+- `docs/integrations/buybackvault_observer_guide.md`  
+  (Integrationsperspektive / empfohlene Reaktionen)
+- `docs/reports/DEV11_PhaseA_BuybackSafety_Status_r1.md`  
+  (High-Level-Status von Phase A)
+- `docs/governance/buybackvault_parameter_playbook_phaseA.md`  
+  (Governance-Profile und Parameter-Kontext)
+
+---
+
+### 6. Checkliste für Indexer-Implementierungen
+
+1. **Reason Codes parsen & normalisieren** (z. B. in ein internes Enum).
+2. **Layer-Tagging** (A01/A02/A03) für jede Safety-bezogene Meldung.
+3. **Dashboards**:
+
+   - Zeitreihe der geblockten vs. erfolgreichen Buybacks.
+   - Heatmaps für Reason Codes über die Zeit.
+   - Fenster-Visualisierung für Treasury-Cap-Auslastung.
+
+4. **Alerts** definieren:
+
+   - Hohe Dichte von `BUYBACK_ORACLE_UNHEALTHY` innerhalb kurzer Zeit.
+   - Wiederholte `BUYBACK_GUARDIAN_STOP` ohne klare Governance-Kommunikation.
+   - Window-Cap nahezu permanent ausgelastet.
+
