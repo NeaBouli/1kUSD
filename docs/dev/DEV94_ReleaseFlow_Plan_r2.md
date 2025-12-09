@@ -145,3 +145,19 @@ should be handled in separate DEV-blocks:
 This document is deliberately descriptive and conservative. It captures the
 current state and the intended direction for the release flow without
 introducing new CI complexity or protocol changes.
+
+## Release messaging guardrails – Oracle & safety stack
+
+To avoid misaligned external expectations, every release that touches
+the economic layer or BuybackVault MUST verify:
+
+- Documentation and public messaging do **not** describe 1kUSD as
+  "oracle-free". The protocol is explicitly oracle-secured.
+- The three safety layers (per-op cap A01, oracle/health gate A02,
+  rolling window cap A03) are described as the **canonical** buyback
+  safety stack, not as optional extras.
+- StrategyEnforcement previews are clearly separated from the Phase A
+  safety stack and are not marketed as a replacement for it.
+
+These checks are part of the human review steps and complement the
+technical `check_release_status.sh` gate.

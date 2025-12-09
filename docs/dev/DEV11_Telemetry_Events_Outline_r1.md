@@ -212,3 +212,22 @@ Notes:
 - On guardian stop / global buyback halt, buybacks revert with the `BUYBACK_GUARDIAN_STOP` reason.
 - When `oracleHealthGateEnforced == false`, these codes remain dormant and v0.51 behaviour is preserved.
 
+
+## Additional reason codes – Oracle & PSM dependencies (Dec 2025)
+
+These codes formalise the fact that oracles are **required** for safe
+operation of PSM and BuybackVault in strict modes.
+
+- `BUYBACK_ORACLE_REQUIRED`  
+  Emitted or implied when a buyback operation depends on oracle-sourced
+  health information, but no valid oracle/health module is configured.
+  In strict configurations this should cause a revert or a hard block.
+
+- `PSM_ORACLE_MISSING`  
+  Emitted or implied when the PegStabilityModule is asked to operate
+  without a valid price feed for the relevant asset pair. This situation
+  must be treated as a configuration failure and is not supported as a
+  "no-oracle" operating mode.
+
+Indexers and dashboards should treat these codes as **hard safety
+signals**, not as soft warnings.

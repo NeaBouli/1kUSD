@@ -332,3 +332,27 @@ Future work (beyond v0.51.0):
 - Extended Guardian rules for selective module and asset-level pauses.
 - Additional regression suites for complex buyback policies.
 
+
+## Oracle dependencies – architecture clarification (Dec 2025)
+
+> Internal architect note  
+> This section clarifies that 1kUSD is deliberately **oracle-secured**.  
+> It corrects external summaries that suggested an "oracle-free" target.
+
+- 1kUSD is **not** oracle-free. Price feeds are a fundamental part of the
+  economic design and are required by:
+  - the PegStabilityModule (PSM) for pricing and limits,
+  - the BuybackVault safety layer (A02) for health checks,
+  - the guardian/safety stack for stress signalling.
+
+- Disabling stale/diff checks for a given oracle **does not** mean
+  the PSM can operate without a price feed. A PSM without a valid price
+  feed is considered **economically broken** and must be treated as a
+  configuration error.
+
+- Any future "Kaspa-native" deployments must therefore still assume
+  oracle-secured behaviour at the protocol layer. Reducing oracle
+  surface area is a valid goal; removing oracles entirely is not.
+
+This clarification is normative for future economic, integration and
+governance documents.
