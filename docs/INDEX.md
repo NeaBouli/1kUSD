@@ -107,3 +107,7 @@ key documents, see:
 - [DEV11_Implementation_Backlog_SolidityTrack_r1](dev/DEV11_Implementation_Backlog_SolidityTrack_r1.md) – High-level backlog for a future Solidity implementation track based on DEV-11 planning docs.
 
 - [DEV11_Architect_Handoff_BuybackAdvanced_r1](dev/DEV11_Architect_Handoff_BuybackAdvanced_r1.md) – Summary & handoff for BuybackVault/Economic Advanced (DEV-11 docs-only).
+
+- [DEV9_Architecture_Sync_OracleClarifications_r1](dev/DEV9_Architecture_Sync_OracleClarifications_r1.md) – DEV-9 architecture sync on oracle & safety clarifications (Dec 2025).
+
+- [ARCHITECT_BULLETIN_Oracle_Safety_Clarifications_2025-12](reports/ARCHITECT_BULLETIN_Oracle_Safety_Clarifications_2025-12.md) – Architect bulletin on oracle dependency & buyback safety stack (Dec 2025).
