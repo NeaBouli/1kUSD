@@ -731,3 +731,22 @@ Bei der Integration von BuybackVault sollten Clients / Services:
    - Häufig ausgelastete Window-Caps → Treasury-Strategie überprüfen.
 4. Die detaillierte Telemetry-Spezifikation aus  
    `docs/dev/DEV11_Telemetry_Events_Outline_r1.md` berücksichtigen.
+
+## OracleGate scope clarification (Dec 2025)
+
+The BuybackVault Oracle/Health gate (DEV-11 A02) is a **buyback-specific**
+safety layer. It does not replace or duplicate PSM pricefeed logic.
+
+- The OracleGate governs whether a **buyback** is allowed to proceed,
+  based on oracle/health signals and guardian-configured policies.
+- The PSM still relies on its own oracle-driven pricing logic as defined
+  in the economic layer docs.
+
+Observers and indexers should distinguish clearly between:
+
+- PSM price-oracle failures (`PSM_ORACLE_MISSING` and related signals),
+- BuybackVault health-gate rejections (`BUYBACK_ORACLE_UNHEALTHY`,
+  `BUYBACK_ORACLE_REQUIRED`).
+
+This separation is intentional and must be preserved in future
+integrations.
