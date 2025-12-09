@@ -22,7 +22,8 @@ contract BuybackVault {
     using SafeERC20 for IERC20;
 
     error ZERO_ADDRESS();
-    error ZERO_AMOUNT(); error BUYBACK_ORACLE_UNHEALTHY(); error BUYBACK_GUARDIAN_STOP();
+    error ZERO_AMOUNT();
+    error BUYBACK_ORACLE_REQUIRED(); error BUYBACK_ORACLE_UNHEALTHY(); error BUYBACK_GUARDIAN_STOP();
 
     // --- Events ---
 
@@ -195,7 +196,19 @@ error BUYBACK_TREASURY_CAP_EXCEEDED();
         uint256 cap = (bal * capBps) / 10_000;
         if (amountStable > cap) {
             revert BUYBACK_TREASURY_CAP_EXCEEDED();
-        } } function _checkOracleHealthGate() internal view { if (!oracleHealthGateEnforced) { return; } address module = oracleHealthModule; if (module == address(0)) { revert BUYBACK_ORACLE_UNHEALTHY(); } if (!IOracleHealthModule(module).isHealthy()) { revert BUYBACK_ORACLE_UNHEALTHY(); } } // --- Views ---
+        } }     function _checkOracleHealthGate() internal view {
+        if (!oracleHealthGateEnforced) {
+            return;
+        }
+        address module = oracleHealthModule;
+        if (module == address(0)) {
+            revert BUYBACK_ORACLE_REQUIRED();
+        }
+        if (!IOracleHealthModule(module).isHealthy()) {
+            revert BUYBACK_ORACLE_UNHEALTHY();
+        }
+    }
+ // --- Views ---
 
 
         // --- Strategy config ---
