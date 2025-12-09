@@ -43,7 +43,7 @@ contract PSMRegression_Spreads is Test {
     MockMintableToken internal oneKUSD;
     MockOracleAggregator internal oracle;
 
-    address internal dao = address(0xDA0);
+    address internal dao;
     address internal user = address(0xBEEF);
 
     // --- Spread keys (must mirror PegStabilityModule constants) ---
@@ -51,6 +51,7 @@ contract PSMRegression_Spreads is Test {
     bytes32 private constant KEY_REDEEM_SPREAD_BPS = keccak256("psm:redeemSpreadBps");
 
     function setUp() public {
+        dao = address(this);
         registry = new ParameterRegistry(dao);
         safety = new SafetyAutomata(dao, 0);
         vault = new MockVault();
@@ -73,7 +74,6 @@ contract PSMRegression_Spreads is Test {
         psm.setOracle(address(oracle));
 
         // Default: keine Fees, keine Spreads über Storage
-        vm.prank(dao);
         psm.setFees(0, 0);
     }
 
