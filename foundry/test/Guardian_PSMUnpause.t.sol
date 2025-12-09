@@ -2,6 +2,7 @@
 pragma solidity ^0.8.30;
 
 import "forge-std/Test.sol";
+import {MockOracleAggregator} from "./mocks/MockOracleAggregator.sol";
 import "../../contracts/core/SafetyAutomata.sol";
 import "../../contracts/core/PegStabilityModule.sol";
 import "../../contracts/security/Guardian.sol";
@@ -56,7 +57,9 @@ contract Guardian_PSMUnpauseTest is Test {
         vm.prank(dao);
         safety.pauseModule(keccak256("PSM"));
         assertTrue(safety.isPaused(keccak256("PSM")));
-    }
+    
+        _wireOracleForPSM();
+}
 
     function testUnpauseRestoresPSMOperation() public {
         bytes32 MODULE_PSM = keccak256("PSM");
@@ -72,4 +75,13 @@ contract Guardian_PSMUnpauseTest is Test {
         // should NOT revert now
         psm.swapTo1kUSD(address(token), 1000e18, address(this), 0, 18);
     }
+
+
+    function _wireOracleForPSM() internal {
+        MockOracleAggregator oracle = new MockOracleAggregator();
+        oracle.setPrice(int256(1e18), 18, true);
+        vm.prank(dao);
+        psm.setOracle(address(oracle));
+    }
+
 }

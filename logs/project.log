@@ -477,3 +477,5 @@
 [DEV-49] 2025-12-09T21:41:08Z fix PSMRegression_Spreads to call setOracle as dao (ADMIN_ROLE)
 [DEV-49] 2025-12-09T21:51:49Z fix PSMRegression_Spreads: call setOracle as dao (ADMIN_ROLE holder)
 [DEV-49] 2025-12-09T22:01:16Z adjust PSMRegression_Spreads: use dao = address(this) and remove vm.prank in setUp
+[DEV-49] 2025-12-09T22:23:29Z wire oracle into Guardian_PSMUnpause PSM to satisfy PSM_ORACLE_MISSING invariant
+[DEV-49] 2025-12-09T22:58:51Z Guardian_PSMUnpause: call setOracle as dao via vm.prank(dao)
