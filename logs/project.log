@@ -452,6 +452,10 @@
 2025-12-07T21:07:59Z DEV-11 A03 window_storage: add rolling window storage and config in BuybackVault
 2025-12-07T22:29:38Z DEV-11 A03 backlog_enforce: document rolling window enforcement in backlog + telemetry
 <<<<<<< HEAD
+[DEV-11 PhaseB] 2025-12-08T20:24:57Z add oracle health gate telemetry tests for BuybackVault
+[DEV-11 PhaseB] 2025-12-08T20:37:46Z adjust oracle health gate tests to config semantics
+=======
+<<<<<<< HEAD
 2025-12-08T19:03:41Z DEV-11 PhaseB telemetry_plan: add Phase B telemetry/test plan and backlog entry
 =======
 <<<<<<< HEAD
@@ -463,6 +467,7 @@
 2025-12-08T09:20:25Z DEV-11 PhaseA: add governance playbook for BuybackVault safety parameters
 =======
 2025-12-08T08:34:08Z DEV-11 PhaseA: add buyback safety status report
+>>>>>>> origin/main
 >>>>>>> origin/main
 >>>>>>> origin/main
 >>>>>>> origin/main

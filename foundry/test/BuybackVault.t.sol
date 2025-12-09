@@ -61,6 +61,19 @@ contract PSMStub is IPegStabilityModuleLike {
     }
 }
 
+
+contract OracleHealthStub {
+    bool public healthy;
+
+    function setHealthy(bool value) external {
+        healthy = value;
+    }
+
+    function isHealthy() external view returns (bool) {
+        return healthy;
+    }
+}
+
 contract BuybackVaultTest is Test {
     // Mirror BuybackVault events for vm.expectEmit
     event StableFunded(address indexed from, uint256 amount);
@@ -456,6 +469,49 @@ contract BuybackVaultTest is Test {
             amount1k,
             "user asset balance mismatch"
         );
+    }
+
+
+    // --- Phase B: Oracle health gate telemetry tests ---
+
+    function _configureOracleGate(address module, bool enforced) internal {
+        vm.prank(dao);
+        vault.setOracleHealthGateConfig(module, enforced);
+    }
+
+    function _fundAndPrepareOracleGate(uint256 amount, address module, bool enforced) internal {
+        _fundStableAsDao(amount);
+        _configureOracleGate(module, enforced);
+    }
+
+    function testSetOracleHealthGateConfig_EnforcedWithZeroModuleReverts() public {
+        vm.prank(dao);
+        vm.expectRevert(BuybackVault.ZERO_ADDRESS.selector);
+        vault.setOracleHealthGateConfig(address(0), true);
+    }
+
+    function testExecuteBuybackPSM_OracleGate_HealthyModuleAllowsBuyback() public {
+        uint256 amount = 1e18;
+        OracleHealthStub health = new OracleHealthStub();
+        health.setHealthy(true);
+
+        _fundAndPrepareOracleGate(amount, address(health), true);
+
+        vm.prank(dao);
+        uint256 outAmount = vault.executeBuybackPSM(amount / 2, user, 0, block.timestamp + 1 days);
+        assertGt(outAmount, 0);
+    }
+
+    function testExecuteBuybackPSM_OracleGate_UnhealthyModuleReverts() public {
+        uint256 amount = 1e18;
+        OracleHealthStub health = new OracleHealthStub();
+        health.setHealthy(false);
+
+        _fundAndPrepareOracleGate(amount, address(health), true);
+
+        vm.prank(dao);
+        vm.expectRevert(BuybackVault.BUYBACK_ORACLE_UNHEALTHY.selector);
+        vault.executeBuybackPSM(amount / 2, user, 0, block.timestamp + 1 days);
     }
 
 }
