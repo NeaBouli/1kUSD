@@ -7,6 +7,7 @@ import "../../../contracts/core/PegStabilityModule.sol";
 import "../../../contracts/core/ParameterRegistry.sol";
 import "../../../contracts/core/SafetyAutomata.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "../mocks/MockOracleAggregator.sol";
 
 /// @dev Minimal mint/burn ERC20 used as collateral + 1kUSD stand-in.
 contract MockMintableToken is ERC20 {
@@ -40,6 +41,7 @@ contract PSMRegression_Spreads is Test {
     MockVault internal vault;
     MockMintableToken internal collateralToken;
     MockMintableToken internal oneKUSD;
+    MockOracleAggregator internal oracle;
 
     address internal dao = address(0xDA0);
     address internal user = address(0xBEEF);
@@ -55,7 +57,7 @@ contract PSMRegression_Spreads is Test {
         oneKUSD = new MockMintableToken("1kUSD", "1KUSD");
         collateralToken = new MockMintableToken("COL", "COL");
 
-        // PSM mit Registry + Safety + Vault, Oracle bleibt auf Fallback (1e18, 18 Decimals)
+        // PSM mit Registry + Safety + Vault, Oracle explizit auf 1:1 gesetzt (1e18, 18 Decimals)
         psm = new PegStabilityModule(
             dao,
             address(oneKUSD),
@@ -63,6 +65,12 @@ contract PSMRegression_Spreads is Test {
             address(safety),
             address(registry)
         );
+
+        oracle = new MockOracleAggregator();
+        oracle.setPrice(int256(1e18), 18, true);
+
+        vm.prank(dao);
+        psm.setOracle(address(oracle));
 
         // Default: keine Fees, keine Spreads über Storage
         vm.prank(dao);
