@@ -107,3 +107,5 @@ new major reports or status documents are added.
 - **BLOCK_DEV9_DEV10_Infra_Integrations_r1** – Infra & Integrations block report (DEV-9 / DEV-10, r1)
 
 - [DEV-11 Phase A – Buyback Safety Status](DEV11_PhaseA_BuybackSafety_Status_r1.md)
+
+- [DEV11_PhaseA_PhaseB_Status_Architect_r1](DEV11_PhaseA_PhaseB_Status_Architect_r1.md) – Architect status report for BuybackVault Advanced Safety (Phase A + Phase B start)
