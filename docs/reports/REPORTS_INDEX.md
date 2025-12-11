@@ -109,3 +109,7 @@ new major reports or status documents are added.
 - [DEV-11 Phase A – Buyback Safety Status](DEV11_PhaseA_BuybackSafety_Status_r1.md)
 
 - [ARCHITECT_BULLETIN_Oracle_Safety_Clarifications_2025-12](ARCHITECT_BULLETIN_Oracle_Safety_Clarifications_2025-12.md) – Oracle & buyback safety clarifications (architect bulletin, Dec 2025).
+
+## Architect Bulletins
+
+- [ARCHITECT_BULLETIN_OracleRequired_Impact_v2](ARCHITECT_BULLETIN_OracleRequired_Impact_v2.md)
