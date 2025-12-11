@@ -483,3 +483,4 @@
 [DEV-49] 2025-12-11T08:47:34Z link OracleRequired architect bulletin in REPORTS_INDEX
 [DEV-11] 2025-12-11T09:11:39Z add OracleRequired handshake report for DEV-11 and index it in REPORTS_INDEX
 [DEV-11] 2025-12-11T09:36:58Z extend DEV11 PhaseA status with OracleRequired alignment note
+[DEV-11] 2025-12-11T09:57:57Z extend DEV11 implementation backlog with OracleRequired follow-ups (post-DEV-49)

@@ -292,3 +292,20 @@ See `docs/dev/DEV11_PhaseB_Telemetry_TestPlan_r1.md` for details.
 
 This section is intentionally planning-only and does not imply any active work beyond documentation until explicitly scheduled by the architect.
 
+## OracleRequired follow-ups (post-DEV-49)
+
+Diese Punkte bauen explizit auf DEV-49 (OracleRequired) und den Handshake-Report
+DEV11_OracleRequired_Handshake_r1 auf. Sie sind für alle weiteren DEV-11-Phasen
+(A02 Enforcement, A03 Window-Caps, Phase B/C Strategy) verbindlicher Rahmen.
+
+- [x] Handshake-Report DEV11_OracleRequired_Handshake_r1 erstellt und im REPORTS_INDEX verlinkt.
+- [x] PhaseA-Status-Report mit OracleRequired-Precondition ergänzt (BuybackVault + PSM).
+- [ ] A02-Testmatrix erweitern: explizite Coverage für BUYBACK_ORACLE_REQUIRED als harte Precondition
+      vor jeder Buyback-Operation (inkl. Negativfälle „kein Oracle“ / „Gate enforced ohne Modul“).
+- [ ] A03-Rolling-Window-Tests vorbereiten: zusätzliche Szenarien unter OracleRequired (Window voll,
+      Oracle unhealthy, Oracle fehlend) – zunächst als „Nice-to-have“ markiert, siehe Park-Notiz.
+- [ ] StrategyEnforcement-Phase(n) im Plan nachziehen: OracleRequired als Root-Check verankern
+      (keine „oraclefreien“ Degradationsmodi, kein Fallback auf magische 1.0-Preise).
+- [ ] Telemetry-/Monitoring-Backlog prüfen: Reason-Codes BUYBACK_ORACLE_REQUIRED und PSM_ORACLE_MISSING
+      als erstklassige Signale in zukünftigen Dashboards/Alerts einplanen.
+
