@@ -481,3 +481,4 @@
 [DEV-49] 2025-12-09T22:58:51Z Guardian_PSMUnpause: call setOracle as dao via vm.prank(dao)
 [DEV-49] 2025-12-10T20:51:18Z add ARCHITECT_BULLETIN_OracleRequired_Impact_v2.md (OracleRequired as root safety layer)
 [DEV-49] 2025-12-11T08:47:34Z link OracleRequired architect bulletin in REPORTS_INDEX
+[DEV-11] 2025-12-11T09:11:39Z add OracleRequired handshake report for DEV-11 and index it in REPORTS_INDEX
