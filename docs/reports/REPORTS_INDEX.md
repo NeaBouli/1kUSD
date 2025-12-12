@@ -96,6 +96,7 @@ These reports bridge infra/CI work (DEV-9) and integration docs (DEV-10):
   - *Which Economic Layer version is live?*
   - *Which reports must exist for a given release?*
   - *How infra/CI and integrations work together?*
+
 - Use the linked reports as anchors and then drill into:
   - `docs/architecture/`
   - `docs/security/` and `docs/risk/`
@@ -104,16 +105,23 @@ These reports bridge infra/CI work (DEV-9) and integration docs (DEV-10):
 This page is intentionally high-level and should be kept up to date whenever
 new major reports or status documents are added.
 
-- **BLOCK_DEV9_DEV10_Infra_Integrations_r1** – Infra & Integrations block report (DEV-9 / DEV-10, r1)
+---
 
-- [DEV-11 Phase A – Buyback Safety Status](DEV11_PhaseA_BuybackSafety_Status_r1.md)
+## 6. Block & architect reports (selected)
 
-- [ARCHITECT_BULLETIN_Oracle_Safety_Clarifications_2025-12](ARCHITECT_BULLETIN_Oracle_Safety_Clarifications_2025-12.md) – Oracle & buyback safety clarifications (architect bulletin, Dec 2025).
+- **BLOCK_DEV9_DEV10_Infra_Integrations_r1** – Infra & Integrations block report (DEV-9 / DEV-10, r1).
 
-## Architect Bulletins
+- **BLOCK_DEV49_DEV11_OracleRequired_Block_r1** – Cross-block report tying together DEV-49 (OracleRequired),
+  DEV-11 (Buyback/PSM safety & telemetry) and DEV-87 (Governance handover).
 
-- [ARCHITECT_BULLETIN_OracleRequired_Impact_v2](ARCHITECT_BULLETIN_OracleRequired_Impact_v2.md)
+- [DEV11_PhaseA_BuybackSafety_Status_r1](DEV11_PhaseA_BuybackSafety_Status_r1.md) – Status report for
+  BuybackVault Phase A safety (caps, pause behavior, oracle preconditions).
 
-## DEV-11
+- [ARCHITECT_BULLETIN_Oracle_Safety_Clarifications_2025-12](ARCHITECT_BULLETIN_Oracle_Safety_Clarifications_2025-12.md) –
+  Architect bulletin on oracle safety rules and clarification of responsibilities.
 
-- [DEV11_OracleRequired_Handshake_r1](DEV11_OracleRequired_Handshake_r1.md)
+- [ARCHITECT_BULLETIN_OracleRequired_Impact_v2](ARCHITECT_BULLETIN_OracleRequired_Impact_v2.md) – Architect bulletin
+  describing OracleRequired as a root safety layer and its impact on PSM, BuybackVault and Guardian flows.
+
+- [DEV11_OracleRequired_Handshake_r1](DEV11_OracleRequired_Handshake_r1.md) – DEV-11 handshake report,
+  aligning BuybackVault / PSM / telemetry docs with OracleRequired semantics.
