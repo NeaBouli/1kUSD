@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
+interface IOracleHealthModule { function isHealthy() external view returns (bool); }
+
+
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
@@ -19,7 +22,7 @@ contract BuybackVault {
     using SafeERC20 for IERC20;
 
     error ZERO_ADDRESS();
-    error ZERO_AMOUNT();
+    error ZERO_AMOUNT(); error BUYBACK_ORACLE_UNHEALTHY(); error BUYBACK_GUARDIAN_STOP();
 
     // --- Events ---
 
@@ -55,6 +58,7 @@ error INSUFFICIENT_BALANCE();
 error INVALID_STRATEGY();
 error NO_STRATEGY_CONFIGURED();
 error NO_ENABLED_STRATEGY_FOR_ASSET();
+error BUYBACK_TREASURY_CAP_EXCEEDED();
 
     IERC20 public immutable stable;
     IERC20 public immutable asset;
@@ -62,6 +66,26 @@ error NO_ENABLED_STRATEGY_FOR_ASSET();
     ISafetyAutomata public immutable safety;
     IPegStabilityModuleLike public immutable psm;
     bytes32 public immutable moduleId;
+
+    /// @notice Maximum share of the vault's stable balance that can be spent
+    ///         in a single buyback operation (in basis points, 1% = 100 bps).
+    /// @dev A value of 0 disables the per-operation cap check.
+    uint16 public maxBuybackSharePerOpBps; address public oracleHealthModule; bool public oracleHealthGateEnforced;
+    uint16 public maxBuybackSharePerWindowBps;
+    uint64 public buybackWindowDuration;
+    uint64 public buybackWindowStart;
+    uint128 public buybackWindowAccumulatedBps;
+
+    event BuybackWindowConfigUpdated(
+        uint64 oldDuration,
+        uint64 newDuration,
+        uint16 oldCapBps,
+        uint16 newCapBps
+    );
+
+
+    event BuybackTreasuryCapUpdated(uint16 oldCapBps, uint16 newCapBps); event BuybackOracleHealthGateUpdated(address indexed oldModule, address indexed newModule, bool oldEnforced, bool newEnforced);
+
 
     event FundStable(uint256 amount);
     event WithdrawStable(address indexed to, uint256 amount);
@@ -145,6 +169,7 @@ error NO_ENABLED_STRATEGY_FOR_ASSET();
     ) external onlyDAO notPaused returns (uint256 amountAssetOut) {
         if (recipient == address(0)) revert ZERO_ADDRESS();
         if (amount1k == 0) revert ZERO_AMOUNT();
+        _checkPerOpTreasuryCap(amount1k); _checkOracleHealthGate();
 
         // Vault genehmigt dem PSM, 1kUSD zu ziehen
         stable.safeIncreaseAllowance(address(psm), amount1k);
@@ -161,9 +186,47 @@ error NO_ENABLED_STRATEGY_FOR_ASSET();
         emit BuybackExecuted(amount1k, amountAssetOut, recipient);
     }
 
-    // --- Views ---
+        function _checkPerOpTreasuryCap(uint256 amountStable) internal view {
+        uint16 capBps = maxBuybackSharePerOpBps;
+        if (capBps == 0) {
+            return;
+        }
+        uint256 bal = stable.balanceOf(address(this));
+        uint256 cap = (bal * capBps) / 10_000;
+        if (amountStable > cap) {
+            revert BUYBACK_TREASURY_CAP_EXCEEDED();
+        } } function _checkOracleHealthGate() internal view { if (!oracleHealthGateEnforced) { return; } address module = oracleHealthModule; if (module == address(0)) { revert BUYBACK_ORACLE_UNHEALTHY(); } if (!IOracleHealthModule(module).isHealthy()) { revert BUYBACK_ORACLE_UNHEALTHY(); } } // --- Views ---
+
 
         // --- Strategy config ---
+
+    /// @notice Set the maximum share of the vault's stable balance that can be
+    ///         spent in a single buyback operation.
+    /// @dev Value is expressed in basis points (1% = 100 bps). A value of 0
+    ///      disables the check.
+    /// @param newCapBps New per-operation cap in basis points.
+    function setMaxBuybackSharePerOpBps(uint16 newCapBps) external onlyDAO {
+        if (newCapBps > 10_000) revert INVALID_AMOUNT();
+        uint16 oldCap = maxBuybackSharePerOpBps;
+        maxBuybackSharePerOpBps = newCapBps;
+        emit BuybackTreasuryCapUpdated(oldCap, newCapBps);
+    }
+    /// @notice Configure the rolling buyback window.
+    /// @dev A zero cap disables the window; duration is in seconds.
+    function setBuybackWindowConfig(uint64 newDuration, uint16 newCapBps) external onlyDAO {
+        require(newCapBps <= 10_000, "WINDOW_CAP_BPS_TOO_HIGH");
+        uint64 oldDuration = buybackWindowDuration;
+        uint16 oldCapBps = maxBuybackSharePerWindowBps;
+        buybackWindowDuration = newDuration;
+        maxBuybackSharePerWindowBps = newCapBps;
+        // Reset window accounting; a later DEV-11 A03 patch will implement enforcement logic.
+        buybackWindowStart = 0;
+        buybackWindowAccumulatedBps = 0;
+        emit BuybackWindowConfigUpdated(oldDuration, newDuration, oldCapBps, newCapBps);
+    }
+ function setOracleHealthGateConfig(address newModule, bool newEnforced) external onlyDAO { address oldModule = oracleHealthModule; bool oldEnforced = oracleHealthGateEnforced; if (newEnforced && newModule == address(0)) { revert ZERO_ADDRESS(); } oracleHealthModule = newModule; oracleHealthGateEnforced = newEnforced; emit BuybackOracleHealthGateUpdated(oldModule, newModule, oldEnforced, newEnforced); }
+
+
 
     function strategyCount() external view returns (uint256) {
         return strategies.length;
@@ -234,6 +297,7 @@ function stableBalance() external view returns (uint256) {
 
         uint256 bal = stable.balanceOf(address(this));
         if (bal < amountStable) revert INSUFFICIENT_BALANCE();
+        _checkPerOpTreasuryCap(amountStable); _checkOracleHealthGate();
 
         if (strategiesEnforced) {
             if (strategies.length == 0) revert NO_STRATEGY_CONFIGURED();

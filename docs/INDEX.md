@@ -91,3 +91,23 @@ For an overview of the main DEV roles (DEV-7, DEV-8, DEV-9, DEV-10) and their
 key documents, see:
 
 - `dev/DEV_Roles_Index.md`
+
+## Release flow (DEV-94)
+
+- [DEV94_ReleaseFlow_Plan_r2](dev/DEV94_ReleaseFlow_Plan_r2.md) – Current & target release flow and DEV-94 backlog (docs-only, no CI changes).
+
+- [DEV94_How_to_cut_a_release_tag_v051](dev/DEV94_How_to_cut_a_release_tag_v051.md) – Step-by-step guide for maintainers cutting v0.51.x tags.
+
+## Economic Layer – Future / Advanced (DEV-11)
+
+- [DEV11_BuybackVault_EconomicAdvanced_Plan_r1](dev/DEV11_BuybackVault_EconomicAdvanced_Plan_r1.md) – Planning document for advanced buyback and economic layer features beyond v0.51/v0.52 (docs-only).
+- [buybackvault_strategy_phaseA_advanced](architecture/buybackvault_strategy_phaseA_advanced.md) – StrategyEnforcement Phase A advanced spec (DEV-11, docs-only, no contract changes).
+- [DEV11_Telemetry_Events_Outline_r1](dev/DEV11_Telemetry_Events_Outline_r1.md) – Telemetry and events outline for advanced buyback / StrategyEnforcement (DEV-11, docs-only).
+
+- [DEV11_Implementation_Backlog_SolidityTrack_r1](dev/DEV11_Implementation_Backlog_SolidityTrack_r1.md) – High-level backlog for a future Solidity implementation track based on DEV-11 planning docs.
+
+- [DEV11_Architect_Handoff_BuybackAdvanced_r1](dev/DEV11_Architect_Handoff_BuybackAdvanced_r1.md) – Summary & handoff for BuybackVault/Economic Advanced (DEV-11 docs-only).
+
+- [DEV9_Architecture_Sync_OracleClarifications_r1](dev/DEV9_Architecture_Sync_OracleClarifications_r1.md) – DEV-9 architecture sync on oracle & safety clarifications (Dec 2025).
+
+- [ARCHITECT_BULLETIN_Oracle_Safety_Clarifications_2025-12](reports/ARCHITECT_BULLETIN_Oracle_Safety_Clarifications_2025-12.md) – Architect bulletin on oracle dependency & buyback safety stack (Dec 2025).

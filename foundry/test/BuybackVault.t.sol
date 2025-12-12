@@ -61,6 +61,19 @@ contract PSMStub is IPegStabilityModuleLike {
     }
 }
 
+
+contract OracleHealthStub {
+    bool public healthy;
+
+    function setHealthy(bool value) external {
+        healthy = value;
+    }
+
+    function isHealthy() external view returns (bool) {
+        return healthy;
+    }
+}
+
 contract BuybackVaultTest is Test {
     // Mirror BuybackVault events for vm.expectEmit
     event StableFunded(address indexed from, uint256 amount);
@@ -393,4 +406,112 @@ contract BuybackVaultTest is Test {
         assertEq(vault.stableBalance(), 11e18, "stableBalance mismatch");
         assertEq(vault.assetBalance(), 22e18, "assetBalance mismatch");
     }
+
+    // --- Phase A: per-operation treasury cap ---
+
+    function testSetMaxBuybackSharePerOpBpsOnlyDao() public {
+        vm.prank(user);
+        vm.expectRevert(BuybackVault.NOT_DAO.selector);
+        vault.setMaxBuybackSharePerOpBps(5000);
+    }
+
+    function testSetMaxBuybackSharePerOpBpsBounds() public {
+        vm.prank(dao);
+        vault.setMaxBuybackSharePerOpBps(0);
+        assertEq(vault.maxBuybackSharePerOpBps(), 0, "cap should be zero");
+
+        vm.prank(dao);
+        vault.setMaxBuybackSharePerOpBps(10_000);
+        assertEq(vault.maxBuybackSharePerOpBps(), 10_000, "cap should be 100%");
+
+        vm.prank(dao);
+        vm.expectRevert(BuybackVault.INVALID_AMOUNT.selector);
+        vault.setMaxBuybackSharePerOpBps(10_001);
+    }
+
+    function testExecuteBuybackPSMRespectsPerOpTreasuryCap() public {
+        _fundStableAsDao(10e18);
+
+        vm.prank(dao);
+        vault.setMaxBuybackSharePerOpBps(5000); // 50%
+
+        vm.prank(dao);
+        vm.expectRevert(BuybackVault.BUYBACK_TREASURY_CAP_EXCEEDED.selector);
+        vault.executeBuybackPSM(6e18, user, 0, block.timestamp + 1 days);
+    }
+
+    function testExecuteBuybackPSMWithinPerOpCapSucceeds() public {
+        _fundStableAsDao(10e18);
+
+        vm.prank(dao);
+        vault.setMaxBuybackSharePerOpBps(5000); // 50%
+
+        uint256 amount1k = 4e18;
+        uint256 vaultStableBefore = stable.balanceOf(address(vault));
+        uint256 userAssetBefore = asset.balanceOf(user);
+
+        vm.prank(dao);
+        uint256 out = vault.executeBuybackPSM(
+            amount1k,
+            user,
+            0,
+            block.timestamp + 1 days
+        );
+
+        assertEq(out, amount1k, "buyback out should be 1:1 in stub");
+        assertEq(
+            stable.balanceOf(address(vault)),
+            vaultStableBefore - amount1k,
+            "vault stable balance mismatch"
+        );
+        assertEq(
+            asset.balanceOf(user) - userAssetBefore,
+            amount1k,
+            "user asset balance mismatch"
+        );
+    }
+
+
+    // --- Phase B: Oracle health gate telemetry tests ---
+
+    function _configureOracleGate(address module, bool enforced) internal {
+        vm.prank(dao);
+        vault.setOracleHealthGateConfig(module, enforced);
+    }
+
+    function _fundAndPrepareOracleGate(uint256 amount, address module, bool enforced) internal {
+        _fundStableAsDao(amount);
+        _configureOracleGate(module, enforced);
+    }
+
+    function testSetOracleHealthGateConfig_EnforcedWithZeroModuleReverts() public {
+        vm.prank(dao);
+        vm.expectRevert(BuybackVault.ZERO_ADDRESS.selector);
+        vault.setOracleHealthGateConfig(address(0), true);
+    }
+
+    function testExecuteBuybackPSM_OracleGate_HealthyModuleAllowsBuyback() public {
+        uint256 amount = 1e18;
+        OracleHealthStub health = new OracleHealthStub();
+        health.setHealthy(true);
+
+        _fundAndPrepareOracleGate(amount, address(health), true);
+
+        vm.prank(dao);
+        uint256 outAmount = vault.executeBuybackPSM(amount / 2, user, 0, block.timestamp + 1 days);
+        assertGt(outAmount, 0);
+    }
+
+    function testExecuteBuybackPSM_OracleGate_UnhealthyModuleReverts() public {
+        uint256 amount = 1e18;
+        OracleHealthStub health = new OracleHealthStub();
+        health.setHealthy(false);
+
+        _fundAndPrepareOracleGate(amount, address(health), true);
+
+        vm.prank(dao);
+        vm.expectRevert(BuybackVault.BUYBACK_ORACLE_UNHEALTHY.selector);
+        vault.executeBuybackPSM(amount / 2, user, 0, block.timestamp + 1 days);
+    }
+
 }
