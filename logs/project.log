@@ -473,3 +473,11 @@
 >>>>>>> origin/main
 [DEV-9 40] 2025-12-09T19:25:39Z Added oracle & safety architecture clarifications (docs-only)
 [DEV-9 41] 2025-12-09T19:38:19Z Added DEV-9 architecture sync and architect bulletin docs (docs-only)
+[DEV-49] 2025-12-09T21:33:11Z add PSM_ORACLE_MISSING to PegStabilityModule and wire oracle into PSM regression tests
+[DEV-49] 2025-12-09T21:41:08Z fix PSMRegression_Spreads to call setOracle as dao (ADMIN_ROLE)
+[DEV-49] 2025-12-09T21:51:49Z fix PSMRegression_Spreads: call setOracle as dao (ADMIN_ROLE holder)
+[DEV-49] 2025-12-09T22:01:16Z adjust PSMRegression_Spreads: use dao = address(this) and remove vm.prank in setUp
+[DEV-49] 2025-12-09T22:23:29Z wire oracle into Guardian_PSMUnpause PSM to satisfy PSM_ORACLE_MISSING invariant
+[DEV-49] 2025-12-09T22:58:51Z Guardian_PSMUnpause: call setOracle as dao via vm.prank(dao)
+[DEV-49] 2025-12-10T20:51:18Z add ARCHITECT_BULLETIN_OracleRequired_Impact_v2.md (OracleRequired as root safety layer)
+[DEV-49] 2025-12-11T08:47:34Z link OracleRequired architect bulletin in REPORTS_INDEX

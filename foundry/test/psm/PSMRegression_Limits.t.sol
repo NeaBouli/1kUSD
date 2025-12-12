@@ -20,6 +20,7 @@ contract PSMRegression_Limits is Test {
     MockERC20 public collateralToken;
     MockCollateralVault public vault;
     ParameterRegistry public reg;
+    MockOracleAggregator public oracle;
     address public dao = address(this);
 
     address public user = address(0xBEEF);
@@ -40,6 +41,11 @@ contract PSMRegression_Limits is Test {
             address(0),
             address(reg)
         );
+
+        // 2b) Oracle 1:1 price (required from DEV-49 onwards)
+        oracle = new MockOracleAggregator();
+        oracle.setPrice(int256(1e18), 18, true);
+        psm.setOracle(address(oracle));
 
         // 3) Allow PSM to mint/burn 1kUSD
         vm.prank(dao);
