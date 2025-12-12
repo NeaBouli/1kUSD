@@ -487,3 +487,4 @@
 [DEV-11] 2025-12-11T19:13:39Z extend PhaseB telemetry test plan with OracleRequired signals and invariants
 [DEV-11] "2025-12-11T19:22:35Z" add OracleRequired governance constraints note to DEV87 handover
 [DEV-9] 2025-12-12T09:20:20Z add OracleRequired block report across DEV-49 and DEV-11 (BLOCK_DEV49_DEV11_OracleRequired_Block_r1)
+[DEV-12] 2025-12-12T20:36:23Z add governance docs plan and link from governance index

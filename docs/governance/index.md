@@ -125,3 +125,7 @@ Corner-Cases stehen jeweils in den verlinkten Spezial-Dokumenten.
 ## BuybackVault Safety – Phase A
 
 - [BuybackVault Phase A safety parameter playbook](buybackvault_parameter_playbook_phaseA.md)
+
+## DEV-12
+
+- [DEV-12 – Governance documentation plan](DEV12_Governance_Docs_Plan_r1.md)
