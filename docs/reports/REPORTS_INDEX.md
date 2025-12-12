@@ -113,3 +113,7 @@ new major reports or status documents are added.
 ## Architect Bulletins
 
 - [ARCHITECT_BULLETIN_OracleRequired_Impact_v2](ARCHITECT_BULLETIN_OracleRequired_Impact_v2.md)
+
+## DEV-11
+
+- [DEV11_OracleRequired_Handshake_r1](DEV11_OracleRequired_Handshake_r1.md)
