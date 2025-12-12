@@ -41,6 +41,7 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
 
     error PausedError();
     error InsufficientOut();
+    error PSM_ORACLE_MISSING();
 
     modifier whenNotPaused() {
         if (
@@ -86,11 +87,12 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
     // 🔧 Internal helpers — oracle & limits
     // -------------------------------------------------------------
 
-    /// @dev Light health gate: ensures oracle is operational if configured.
+    /// @dev Light health gate: ensures oracle is operational and present.
+    ///      From DEV-49 onward, operating the PSM without a configured oracle
+    ///      is treated as a configuration error and will revert.
     function _requireOracleHealthy(address /*token*/) internal view {
         if (address(oracle) == address(0)) {
-            // No oracle configured → do not block swaps (bootstrap/dev mode).
-            return;
+            revert PSM_ORACLE_MISSING();
         }
         require(oracle.isOperational(), "PSM: oracle not operational");
     }
@@ -131,10 +133,10 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
 
     /// @notice Fetch price for an asset from the oracle.
     /// @dev Returns (price, decimals) where `price` is scaled by `decimals`.
+    ///      From DEV-49 onward, a missing oracle is treated as a hard error.
     function _getPrice(address asset) internal view returns (uint256 price, uint8 priceDecimals) {
         if (address(oracle) == address(0)) {
-            // Fallback: 1.0 * 10^18 (1 token == 1 1kUSD) for tests/bootstrap.
-            return (1e18, 18);
+            revert PSM_ORACLE_MISSING();
         }
 
         IOracleAggregator.Price memory p = oracle.getPrice(asset);

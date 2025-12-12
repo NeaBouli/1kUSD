@@ -431,8 +431,6 @@
 [DEV-9 34] 2025-12-04T21:38:13Z Ran local dev CI smoketest (forge test, mkdocs build, release status where available)
 [DEV-10 16] 2025-12-04T21:41:03Z Added Dev CI smoketest hint to Developer Quickstart
 [DEV-9 41] 2025-12-05T08:02:55Z Linked BLOCK_DEV9_DEV10_Infra_Integrations_r1 from REPORTS_INDEX and added log entry
-HEAD
-[DEV-9] 2025-12-12T07:22:04Z add OracleRequired cross-block report (DEV-49/DEV-11/DEV-87/DEV-94) and index it
 [DEV-94 01] 2025-12-05T08:11:17Z Added DEV94_ReleaseFlow_Plan_r2 skeleton (release flow current/target/backlog)
 [DEV-94 02] 2025-12-05T08:22:33Z Linked DEV94_ReleaseFlow_Plan_r2 from docs/INDEX.md
 [DEV-94 03] 2025-12-05T19:10:10Z Added DEV94_How_to_cut_a_release_tag_v051 guide links (INDEX + DEV94 plan)
@@ -453,22 +451,39 @@ HEAD
 2025-12-07T20:46:27Z DEV-11 A02 backlog: document oracle/health gate enforcement status
 2025-12-07T21:07:59Z DEV-11 A03 window_storage: add rolling window storage and config in BuybackVault
 2025-12-07T22:29:38Z DEV-11 A03 backlog_enforce: document rolling window enforcement in backlog + telemetry
-HEAD
+<<<<<<< HEAD
 [DEV-11 PhaseB] 2025-12-08T20:24:57Z add oracle health gate telemetry tests for BuybackVault
 [DEV-11 PhaseB] 2025-12-08T20:37:46Z adjust oracle health gate tests to config semantics
-HEAD
+=======
+<<<<<<< HEAD
 2025-12-08T19:03:41Z DEV-11 PhaseB telemetry_plan: add Phase B telemetry/test plan and backlog entry
-HEAD
+=======
+<<<<<<< HEAD
 2025-12-08T18:40:49Z DEV-10 PhaseA: sync buybackvault telemetry and indexer docs for A01-A03
 2025-12-08T18:41:18Z DEV-10 PhaseA: sync buybackvault telemetry and indexer docs for A01-A03
 2025-12-08T18:41:43Z DEV-10 PhaseA: sync buybackvault telemetry and indexer docs for A01-A03
-HEAD
+=======
+<<<<<<< HEAD
 2025-12-08T09:20:25Z DEV-11 PhaseA: add governance playbook for BuybackVault safety parameters
+=======
 2025-12-08T08:34:08Z DEV-11 PhaseA: add buyback safety status report
-origin/main
-origin/main
-origin/main
-origin/main
+>>>>>>> origin/main
+>>>>>>> origin/main
+>>>>>>> origin/main
+>>>>>>> origin/main
 [DEV-9 40] 2025-12-09T19:25:39Z Added oracle & safety architecture clarifications (docs-only)
 [DEV-9 41] 2025-12-09T19:38:19Z Added DEV-9 architecture sync and architect bulletin docs (docs-only)
-origin/main
+[DEV-49] 2025-12-09T21:33:11Z add PSM_ORACLE_MISSING to PegStabilityModule and wire oracle into PSM regression tests
+[DEV-49] 2025-12-09T21:41:08Z fix PSMRegression_Spreads to call setOracle as dao (ADMIN_ROLE)
+[DEV-49] 2025-12-09T21:51:49Z fix PSMRegression_Spreads: call setOracle as dao (ADMIN_ROLE holder)
+[DEV-49] 2025-12-09T22:01:16Z adjust PSMRegression_Spreads: use dao = address(this) and remove vm.prank in setUp
+[DEV-49] 2025-12-09T22:23:29Z wire oracle into Guardian_PSMUnpause PSM to satisfy PSM_ORACLE_MISSING invariant
+[DEV-49] 2025-12-09T22:58:51Z Guardian_PSMUnpause: call setOracle as dao via vm.prank(dao)
+[DEV-49] 2025-12-10T20:51:18Z add ARCHITECT_BULLETIN_OracleRequired_Impact_v2.md (OracleRequired as root safety layer)
+[DEV-49] 2025-12-11T08:47:34Z link OracleRequired architect bulletin in REPORTS_INDEX
+[DEV-11] 2025-12-11T09:11:39Z add OracleRequired handshake report for DEV-11 and index it in REPORTS_INDEX
+[DEV-11] 2025-12-11T09:36:58Z extend DEV11 PhaseA status with OracleRequired alignment note
+[DEV-11] 2025-12-11T09:57:57Z extend DEV11 implementation backlog with OracleRequired follow-ups (post-DEV-49)
+[DEV-11] 2025-12-11T19:13:39Z extend PhaseB telemetry test plan with OracleRequired signals and invariants
+[DEV-11] "2025-12-11T19:22:35Z" add OracleRequired governance constraints note to DEV87 handover
+[DEV-9] 2025-12-12T09:20:20Z add OracleRequired block report across DEV-49 and DEV-11 (BLOCK_DEV49_DEV11_OracleRequired_Block_r1)

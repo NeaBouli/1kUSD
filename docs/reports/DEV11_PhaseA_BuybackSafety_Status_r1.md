@@ -179,3 +179,15 @@ maintained in:
 
 - Governance playbooks (for concrete parameter profiles).
 - Integration and indexer guides (for event/telemetry handling).
+
+## OracleRequired – Handshake mit DEV-49
+
+Kurzfassung:
+
+- DEV-49 hebt das Oracle-Thema von „optional/nice to have“ auf eine harte Systeminvariante.
+- DEV-11 Phase A/B baut ab jetzt explizit auf dieser Bedingung auf (BuybackVault A02/A03, PSM-Flows).
+- OracleRequired ist damit fester Teil der Sicherheitsannahmen von Phase A (A01–A03) und der folgenden Phasen.
+- Details siehe:
+  - ARCHITECT_BULLETIN_OracleRequired_Impact_v2
+  - DEV11_OracleRequired_Handshake_r1
+

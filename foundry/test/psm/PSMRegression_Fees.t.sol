@@ -8,6 +8,7 @@ import {OneKUSD} from "../../../contracts/core/OneKUSD.sol";
 import {ParameterRegistry} from "../../../contracts/core/ParameterRegistry.sol";
 import {MockERC20} from "../mocks/MockERC20.sol";
 import {MockCollateralVault} from "../mocks/MockCollateralVault.sol";
+import {MockOracleAggregator} from "../mocks/MockOracleAggregator.sol";
 
 /// @title PSMRegression_Fees
 /// @notice DEV-48: Verifiziert Fee-Bps Konfiguration über ParameterRegistry (global + per-Token)
@@ -18,6 +19,7 @@ contract PSMRegression_Fees is Test {
     ParameterRegistry internal registry;
     MockERC20 internal collateralToken;
     MockCollateralVault internal vault;
+    MockOracleAggregator internal oracle;
 
     address internal dao = address(this);
     address internal user = address(0xBEEF);
@@ -36,7 +38,7 @@ contract PSMRegression_Fees is Test {
         collateralToken = new MockERC20("COL", "COL");
         vault = new MockCollateralVault();
 
-        // PSM mit echtem Vault + Registry, aber ohne Safety/Oracle (Fallback-Preis 1.0)
+        // PSM mit echtem Vault + Registry, Oracle wird explizit auf 1:1 gesetzt.
         psm = new PegStabilityModule(
             dao,
             address(oneKUSD),
@@ -44,6 +46,10 @@ contract PSMRegression_Fees is Test {
             address(0),
             address(registry)
         );
+
+        oracle = new MockOracleAggregator();
+        oracle.setPrice(int256(1e18), 18, true);
+        psm.setOracle(address(oracle));
 
         // PSM darf 1kUSD minten/burnen
         vm.prank(dao);
