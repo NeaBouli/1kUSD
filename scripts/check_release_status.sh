@@ -1,4 +1,33 @@
-#!/usr/bin/env bash
+
+# OracleRequired release gate (r1)
+# DEV-94: v0.51+ releases MUST have the OracleRequired docs bundle present
+# This gate is intentionally text-only and does not perform on-chain checks.
+
+ORACLE_REQUIRED_REPORTS="
+docs/reports/ARCHITECT_OracleRequired_OperationsBundle_v051_r1.md
+docs/reports/DEV94_Release_Status_Workflow_Report.md
+docs/reports/BLOCK_DEV49_DEV11_OracleRequired_Block_r1.md
+docs/reports/DEV11_OracleRequired_Handshake_r1.md
+docs/governance/GOV_Oracle_PSM_Governance_v051_r1.md
+"
+
+missing_oracle_reports=0
+
+for path in $ORACLE_REQUIRED_REPORTS; do
+  if [ ! -s "$path" ]; then
+    echo "[ERROR] OracleRequired release gate: missing or empty report: $path" >&2
+    missing_oracle_reports=1
+  else:
+    echo "[OK] OracleRequired release gate: report present: $path"
+  fi
+done
+
+if [ "$missing_oracle_reports" -ne 0 ]; then
+  echo "[ERROR] OracleRequired release gate failed." >&2
+  exit 1
+fi
+
+\n#!/usr/bin/env bash
 set -euo pipefail
 
 # Simple local helper to verify that key status/report files exist
@@ -49,31 +78,3 @@ else
 fi
 
 exit "$STATUS"
-# OracleRequired release gate (r1)
-# DEV-94: v0.51+ releases MUST have the OracleRequired docs bundle present
-# This gate is intentionally text-only and does not perform on-chain checks.
-
-ORACLE_REQUIRED_REPORTS="
-docs/reports/ARCHITECT_OracleRequired_OperationsBundle_v051_r1.md
-docs/reports/DEV94_Release_Status_Workflow_Report.md
-docs/reports/BLOCK_DEV49_DEV11_OracleRequired_Block_r1.md
-docs/reports/DEV11_OracleRequired_Handshake_r1.md
-docs/governance/GOV_Oracle_PSM_Governance_v051_r1.md
-"
-
-missing_oracle_reports=0
-
-for path in $ORACLE_REQUIRED_REPORTS; do
-  if [ ! -s "$path" ]; then
-    echo "[ERROR] OracleRequired release gate: missing or empty report: $path" >&2
-    missing_oracle_reports=1
-  else
-    echo "[OK] OracleRequired release gate: report present: $path"
-  fi
-done
-
-if [ "$missing_oracle_reports" -ne 0 ]; then
-  echo "[ERROR] OracleRequired release gate failed." >&2
-  exit 1
-fi
-
