@@ -343,3 +343,25 @@ As the protocol evolves, this guide may be extended with:
 - code snippets for common client libraries,
 - recommended patterns for specific environments (e.g. EVM SDKs, indexer
   frameworks).
+
+### OracleRequired & health propagation (v0.51+)
+
+From v0.51 onwards, the OracleAggregator and its health / watcher layer
+are part of the **OracleRequired operations bundle**:
+
+- If the aggregator or watcher configuration makes it impossible to
+  compute a healthy price, downstream components MUST be allowed to:
+  - revert with \`PSM_ORACLE_MISSING()\` (PSM side), or
+  - revert with \`BUYBACK_ORACLE_REQUIRED()\` / \`BUYBACK_ORACLE_UNHEALTHY()\`
+    (BuybackVault side).
+
+- Integrations SHOULD treat these reason codes as **critical signals**:
+  - do *not* retry blindly on-chain;
+  - surface them to monitoring / incident response;
+  - coordinate with Guardian / governance flows to restore a healthy
+    oracle configuration.
+
+See also:
+- \`ARCHITECT_OracleRequired_OperationsBundle_v051_r1.md\`
+- \`DEV11_PhaseB_Telemetry_Concept_r1.md\`
+
