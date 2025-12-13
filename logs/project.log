@@ -494,3 +494,4 @@
 [DEV-11] 2025-12-13T19:56:13Z define OracleRequired Operations Bundle v0.51 (architect report)
 [DEV-11] 2025-12-13T20:17:37Z add PhaseB telemetry & indexer concept doc (OracleRequired focus, r1)
 [DEV-11] 2025-12-13T20:25:44Z add PhaseB indexer notes for OracleRequired signals (v0.51+)
+[DEV-94] 2025-12-13T21:01:57Z add OracleRequired release gate (r1) plan to DEV94 ReleaseFlow
