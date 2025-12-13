@@ -492,3 +492,4 @@
 [DEV-12] 2025-12-13T08:52:49Z add Oracle & PSM governance doc (v0.51) and link from governance index
 [DEV-94] 2025-12-13T11:04:58Z document OracleRequired release gating in DEV94 workflow report
 [DEV-11] 2025-12-13T19:56:13Z define OracleRequired Operations Bundle v0.51 (architect report)
+[DEV-11] 2025-12-13T20:17:37Z add PhaseB telemetry & indexer concept doc (OracleRequired focus, r1)
