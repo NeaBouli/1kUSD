@@ -120,7 +120,10 @@ new major reports or status documents are added.
 - [ARCHITECT_BULLETIN_Oracle_Safety_Clarifications_2025-12](ARCHITECT_BULLETIN_Oracle_Safety_Clarifications_2025-12.md) –
   Architect bulletin on oracle safety rules and clarification of responsibilities.
 
-- [ARCHITECT_BULLETIN_OracleRequired_Impact_v2](ARCHITECT_BULLETIN_OracleRequired_Impact_v2.md) – Architect bulletin
+- [ARCHITECT_BULLETIN_OracleRequired_Impact_v2](ARCHITECT_BULLETIN_OracleRequired_Impact_v2.md) – Architect bulletin describing OracleRequired as root safety layer and its impact on PSM/BuybackVault.
+
+- [ARCHITECT_OracleRequired_OperationsBundle_v051_r1](ARCHITECT_OracleRequired_OperationsBundle_v051_r1.md) – OracleRequired Operations Bundle (code, tests, governance, release, telemetry/indexer).
+ – Architect bulletin
   describing OracleRequired as a root safety layer and its impact on PSM, BuybackVault and Guardian flows.
 
 - [DEV11_OracleRequired_Handshake_r1](DEV11_OracleRequired_Handshake_r1.md) – DEV-11 handshake report,

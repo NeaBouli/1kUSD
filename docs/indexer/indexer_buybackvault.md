@@ -599,3 +599,41 @@ Indexer sollten neben diesem Dokument insbesondere berücksichtigen:
    - Wiederholte `BUYBACK_GUARDIAN_STOP` ohne klare Governance-Kommunikation.
    - Window-Cap nahezu permanent ausgelastet.
 
+
+## OracleRequired telemetry signals (v0.51+)
+
+For v0.51+ the BuybackVault indexer must treat **OracleRequired** as a
+first-class operational axis:
+
+- **Revert reasons (BuybackVault)**
+  - \`BUYBACK_ORACLE_REQUIRED()\` – strict-mode BuybackVault was called
+    without a configured oracle health module or with enforcement active
+    but no module set.
+  - \`BUYBACK_ORACLE_UNHEALTHY()\` – the configured oracle health module
+    reported an unhealthy state for the relevant asset pair.
+
+- **Revert reason (PSM)**
+  - \`PSM_ORACLE_MISSING()\` – PegStabilityModule was called without a
+    configured oracle for the asset/stable pair.
+
+Indexers SHOULD:
+
+- decode these reason codes as structured fields (e.g. \`reason_code\`,
+  \`severity = "critical"\`);
+- surface them in dashboards and logs as **OracleRequired violations**;
+- wire alerts so that any occurrence in production is treated as a
+  hard incident (e.g. pager / on-call notification);
+- correlate occurrences with:
+  - Guardian pause / unpause events for PSM and BuybackVault,
+  - OracleAggregator health changes and config updates.
+
+This is the operational face of the OracleRequired invariant – a build
+that passes tests but hides these reason codes from monitoring is **not**
+acceptable.
+
+**Related documents**
+
+- \`ARCHITECT_OracleRequired_OperationsBundle_v051_r1.md\`
+- \`DEV11_PhaseB_Telemetry_Concept_r1.md\`
+- \`GOV_Oracle_PSM_Governance_v051_r1.md\`
+
