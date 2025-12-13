@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# DEV-94 gate step04: rewrite check_release_status.sh with OracleRequired gate
+cd "$(dirname "$0")/.."
+
+cat << 'SH' > scripts/check_release_status.sh
+#!/usr/bin/env bash
+set -euo pipefail
+
 echo "== 1kUSD Release Status Check =="
 
 # Base status / report files that MUST exist for v0.51.x
@@ -64,3 +71,10 @@ fi
 
 echo
 echo "You can safely proceed to create a v0.51+ release tag from this perspective (status + OracleRequired docs)."
+SH
+
+chmod +x scripts/check_release_status.sh
+
+echo "[DEV-94] $(date -u +"%Y-%m-%dT%H:%M:%SZ") rewrite check_release_status.sh with OracleRequired gate (r1)" >> logs/project.log
+
+echo "== DEV-94 gate step04: check_release_status.sh rewritten with OracleRequired gate =="
