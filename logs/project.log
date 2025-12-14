@@ -498,3 +498,4 @@
 [DEV-94] 2025-12-13T21:27:38Z add OracleRequired gate block to check_release_status.sh (r1)
 [DEV-94] 2025-12-13T21:38:40Z reposition OracleRequired gate block before success message
 [DEV-94] 2025-12-13T21:46:52Z rewrite check_release_status.sh with OracleRequired gate (r1)
+[DEV-11] 2025-12-14T18:24:06Z add PhaseB telemetry test plan r1
