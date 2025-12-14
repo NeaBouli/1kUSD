@@ -173,3 +173,18 @@ docs for that tag into a versioned docs space.
 
 These remain out of scope for the current v0.51.x baseline and should
 be implemented as small, separate Infra tasks when needed.
+## OracleRequired docs gate (v0.51+)
+
+For all v0.51+ release tags, the release manager MUST:
+
+1. Run `./scripts/check_release_status.sh` and ensure it exits with code 0.
+2. Verify that the output contains the OracleRequired docs gate summary:
+   - `ARCHITECT_OracleRequired_OperationsBundle_v051_r1.md`
+   - `DEV94_Release_Status_Workflow_Report.md`
+   - `BLOCK_DEV49_DEV11_OracleRequired_Block_r1.md`
+   - `DEV11_OracleRequired_Handshake_r1.md`
+   - `GOV_Oracle_PSM_Governance_v051_r1.md`
+3. Treat a non-zero exit code or any `[ERROR] OracleRequired release gate` line as a **hard block** for tagging. The underlying reports MUST be fixed before the tag is cut.
+
+This gate is intentionally docs-only and does not perform on-chain checks. It complements the economic/test status checks but does not replace them.
+
