@@ -187,3 +187,21 @@ Use this quick checklist when cutting a release tag for the v0.51.x line:
  CI for the tag is green (tests/docs/release-status as applicable)
 
  Optional: release announcement prepared with references to reports
+## OracleRequired docs gate (v0.51+)
+
+For all v0.51+ release tags, the release manager MUST:
+
+1. Run `./scripts/check_release_status.sh` and ensure it exits with code 0.
+2. Check that the output includes the OracleRequired docs gate summary lines:
+   - `ARCHITECT_OracleRequired_OperationsBundle_v051_r1.md`
+   - `DEV94_Release_Status_Workflow_Report.md`
+   - `BLOCK_DEV49_DEV11_OracleRequired_Block_r1.md`
+   - `DEV11_OracleRequired_Handshake_r1.md`
+   - `GOV_Oracle_PSM_Governance_v051_r1.md`
+3. Treat any non-zero exit code or `[ERROR] OracleRequired release gate` output
+   as a **hard block** for cutting a v0.51+ tag. Fix the underlying reports
+   before proceeding.
+
+This OracleRequired docs gate complements the economic/test status checks
+but does not replace them.
+
