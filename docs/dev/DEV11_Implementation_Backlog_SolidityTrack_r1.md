@@ -309,3 +309,13 @@ DEV11_OracleRequired_Handshake_r1 auf. Sie sind für alle weiteren DEV-11-Phasen
 - [ ] Telemetry-/Monitoring-Backlog prüfen: Reason-Codes BUYBACK_ORACLE_REQUIRED und PSM_ORACLE_MISSING
       als erstklassige Signale in zukünftigen Dashboards/Alerts einplanen.
 
+## Phase B – Telemetry tests (OracleRequired)
+
+- Align Solidity/Foundry coverage with `DEV11_PhaseB_Telemetry_TestPlan_r1.md`.
+- Treat oracle-related reason codes (e.g. `PSM_ORACLE_MISSING`,
+  `BUYBACK_ORACLE_REQUIRED`, `BUYBACK_ORACLE_UNHEALTHY`) as
+  first-class observability signals, not as business logic.
+- Keep A03 rolling-window boundary tests **explicitly parked**
+  for a later hardening wave (DEV-11 Phase C or similar), as
+  agreed with the architect.
+
