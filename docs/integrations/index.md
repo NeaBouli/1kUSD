@@ -115,3 +115,23 @@ to may be extended with:
 - concrete function and event signatures,
 - code snippets for common client stacks,
 - example dashboards, queries and alerting rules.
+\n
+## OracleRequired telemetry (Phase B preview)
+
+For indexer / integration work related to OracleRequired safety:
+
+- Treat oracle-related reason codes as **first-class observability signals**:
+  - `PSM_ORACLE_MISSING`
+  - `BUYBACK_ORACLE_REQUIRED`
+  - `BUYBACK_ORACLE_UNHEALTHY`
+- Align dashboards, alerts and incident playbooks with:
+  - `docs/dev/DEV11_PhaseB_Telemetry_TestPlan_r1.md`
+  - `docs/dev/DEV11_Implementation_Backlog_SolidityTrack_r1.md`
+  - the Architect OracleRequired bundle:
+    - `docs/reports/ARCHITECT_OracleRequired_OperationsBundle_v051_r1.md`
+    - `docs/reports/ARCHITECT_BULLETIN_Oracle_Safety_Clarifications_2025-12.md`
+
+Phase B focuses on **signals and visibility**; actual indexer
+implementations can evolve independently, as long as they expose
+these reason codes and events in a consistent way.
+\n
