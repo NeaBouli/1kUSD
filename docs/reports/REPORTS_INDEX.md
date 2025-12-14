@@ -128,3 +128,11 @@ new major reports or status documents are added.
 
 - [DEV11_OracleRequired_Handshake_r1](DEV11_OracleRequired_Handshake_r1.md) – DEV-11 handshake report,
   aligning BuybackVault / PSM / telemetry docs with OracleRequired semantics.
+### Release tagging – OracleRequired docs gate (v0.51+)
+
+- `docs/logs/RELEASE_TAGGING_GUIDE_v0.51.x.md` – release tagging guide for v0.51+, including
+  the OracleRequired docs gate. This guide is the human companion to:
+
+  - the Architect's OracleRequired bundle
+  - `scripts/check_release_status.sh` (status + OracleRequired docs gate)
+
