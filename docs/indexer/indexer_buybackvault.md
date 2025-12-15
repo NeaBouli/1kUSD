@@ -637,3 +637,25 @@ acceptable.
 - \`DEV11_PhaseB_Telemetry_Concept_r1.md\`
 - \`GOV_Oracle_PSM_Governance_v051_r1.md\`
 
+\n
+## OracleRequired telemetry (Phase B preview)
+
+Indexers that track the BuybackVault SHOULD treat oracle-related
+reason codes as first-class observability signals:
+
+- `PSM_ORACLE_MISSING`
+- `BUYBACK_ORACLE_REQUIRED`
+- `BUYBACK_ORACLE_UNHEALTHY`
+
+At minimum, indexer pipelines SHOULD:
+- store these reason codes explicitly alongside the transaction/event,
+- derive a boolean flag such as `oracle_required_blocked = true`
+  whenever a buyback is rejected due to an OracleRequired condition,
+- expose this flag and the underlying reason code to monitoring /
+  dashboards and reporting.
+
+This guidance is a Phase B preview and is aligned with:
+- `docs/dev/DEV11_PhaseB_Telemetry_TestPlan_r1.md`
+- `docs/integrations/index.md` (OracleRequired telemetry section)
+- the Architect's OracleRequired Operations Bundle.
+\n

@@ -503,3 +503,4 @@
 [DEV-94] "2025-12-14T20:49:44Z" link RELEASE_TAGGING_GUIDE_v0.51.x into REPORTS_INDEX.md (OracleRequired gate)
 [DEV-94] 2025-12-14T21:09:24Z document OracleRequired docs gate in DEV94 How-to release guide (r1)\n[DEV-11] 2025-12-14T21:34:21Z add PhaseB telemetry backlog note (r1)
 [DEV-11] 2025-12-14T21:50:32Z add OracleRequired telemetry section to integrations index (PhaseB preview)
+[DEV-11] 2025-12-15T06:49:43Z add OracleRequired telemetry note to indexer buybackvault doc (PhaseB preview)
