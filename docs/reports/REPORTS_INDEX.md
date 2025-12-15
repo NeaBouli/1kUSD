@@ -136,3 +136,12 @@ new major reports or status documents are added.
   - the Architect's OracleRequired bundle
   - `scripts/check_release_status.sh` (status + OracleRequired docs gate)
 
+### OracleRequired – Incident handling (v0.51.x)
+
+- GOV_OracleRequired_Incident_Runbook_v051_r1.md – Governance/operations runbook
+  for handling OracleRequired-related incidents (PSM_ORACLE_MISSING,
+  BUYBACK_ORACLE_REQUIRED, BUYBACK_ORACLE_UNHEALTHY). Aligned with:
+  - ARCHITECT_OracleRequired_OperationsBundle_v051_r1.md
+  - ARCHITECT_OracleRequired_Telemetry_Status_v051_r1.md
+  - GOV_Oracle_PSM_Governance_v051_r1.md
+
