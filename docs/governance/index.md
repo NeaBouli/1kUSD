@@ -141,3 +141,18 @@ Corner-Cases stehen jeweils in den verlinkten Spezial-Dokumenten.
   - `ARCHITECT_OracleRequired_Telemetry_Status_v051_r1.md`
   - `GOV_Oracle_PSM_Governance_v051_r1.md`
 \n
+
+## OracleRequired – Runtime configuration checklist (v0.51.x)
+
+- **GOV_OracleRequired_Runtime_Config_Checklist_v051_r1.md** – runtime
+  configuration checklist for OracleRequired in v0.51.x. To be used:
+  - vor Deployments / größeren Upgrades,
+  - vor/nach wichtigen Governance-Entscheidungen,
+  - nach Änderungen an Oracle-/Health-Config.
+  Stellt sicher, dass:
+  - der PSM nie ohne gültigen Oracle-Pricefeed betrieben wird
+    (`PSM_ORACLE_MISSING` bleibt ein expliziter Fail-Mode, kein Normalzustand),
+  - BuybackVault-Strict-Mode-Buybacks nur mit konfiguriertem und gesundem
+    Health-Modul laufen (`BUYBACK_ORACLE_REQUIRED` /
+    `BUYBACK_ORACLE_UNHEALTHY` als Schutz, nicht als Dauerzustand).
+\n
