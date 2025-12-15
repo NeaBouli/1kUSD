@@ -130,3 +130,14 @@ Corner-Cases stehen jeweils in den verlinkten Spezial-Dokumenten.
 
 - [DEV-12 – Governance documentation plan](DEV12_Governance_Docs_Plan_r1.md)
 - [GOV: Oracle & PSM governance (v0.51)](GOV_Oracle_PSM_Governance_v051_r1.md)
+
+## OracleRequired – Incident Handling (v0.51.x)
+
+- **GOV_OracleRequired_Incident_Runbook_v051_r1.md** – operational runbook for
+  handling OracleRequired-related incidents (`PSM_ORACLE_MISSING`,
+  `BUYBACK_ORACLE_REQUIRED`, `BUYBACK_ORACLE_UNHEALTHY`), aligned with:
+  - `ARCHITECT_OracleRequired_OperationsBundle_v051_r1.md`
+  - `ARCHITECT_OracleRequired_Telemetry_Status_v051_r1.md`
+  - `ARCHITECT_OracleRequired_Telemetry_Status_v051_r1.md`
+  - `GOV_Oracle_PSM_Governance_v051_r1.md`
+\n
