@@ -507,3 +507,4 @@
 [ARCHITECT] 2025-12-15T06:57:30Z add ARCHITECT OracleRequired Telemetry Status v051 report
 [DEV-12] 2025-12-15T08:03:42Z add OracleRequired incident runbook v051 r1
 [DEV-12] 2025-12-15T09:18:03Z link OracleRequired incident runbook from governance index (v0.51)
+[DEV-12] 2025-12-15T18:19:43Z link OracleRequired incident runbook from REPORTS_INDEX (v0.51)
