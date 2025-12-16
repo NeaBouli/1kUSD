@@ -145,3 +145,17 @@ new major reports or status documents are added.
   - ARCHITECT_OracleRequired_Telemetry_Status_v051_r1.md
   - GOV_Oracle_PSM_Governance_v051_r1.md
 
+\n
+### DEV-12 – Oracle governance toolkit status (v0.51.x)
+
+- DEV12_Oracle_Governance_Toolkit_Status_v051_r1.md – status report for the
+  OracleRequired governance & operations toolkit in v0.51.x. Summarizes how:
+  - ARCHITECT_OracleRequired_OperationsBundle_v051_r1.md
+  - ARCHITECT_OracleRequired_Telemetry_Status_v051_r1.md
+  - GOV_Oracle_PSM_Governance_v051_r1.md
+  - GOV_OracleRequired_Incident_Runbook_v051_r1.md
+  - GOV_OracleRequired_Runtime_Config_Checklist_v051_r1.md
+  - RELEASE_TAGGING_GUIDE_v0.51.x.md
+  - the OracleRequired docs gate in scripts/check_release_status.sh
+  fit together as one coherent governance toolkit.
+\n
