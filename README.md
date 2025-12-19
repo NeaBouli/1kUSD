@@ -920,3 +920,21 @@ future dev tickets), there are two recommended entry points:
 
 These pages are meant to keep contributor onboarding consistent without
 changing any Economic Layer or contract behaviour.
+\n
+## OracleRequired governance & telemetry toolkit (v0.51.x)
+
+For the oracle-dependent design of 1kUSD (Economic Layer v0.51.x), there is a
+dedicated OracleRequired governance & operations toolkit. It is documented in:
+
+- Governance & runbooks: see \`docs/governance/index.md\`
+- Status & reports: see \`docs/reports/REPORTS_INDEX.md\`
+
+This toolkit covers, among others:
+
+- OracleRequired operations bundle and the docs gate
+  (checked via \`./scripts/check_release_status.sh\`),
+- incident handling for oracle-related failures
+  (\`PSM_ORACLE_MISSING\`, \`BUYBACK_ORACLE_REQUIRED\`,
+  \`BUYBACK_ORACLE_UNHEALTHY\`),
+- runtime configuration checklist and status reports for v0.51.x.
+\n
