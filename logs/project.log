@@ -515,3 +515,4 @@
 [DEV-11] 2025-12-17T21:35:44Z add OracleRequired telemetry section to indexer_psm (PhaseB preview)
 [DEV-12] 2025-12-19T09:02:52Z add OracleRequired governance & telemetry toolkit hint to README (v0.51)
 [DEV-11] 2025-12-19T22:38:54Z add DEV-11 Phase C telemetry implementation plan v0.51 (r1)
+2026-02-05T19:37:36Z DEV-11 A03: enforce BuybackVault rolling window cap + add tests (local)
