@@ -10,8 +10,18 @@ contract PSMLimits {
     uint256 public lastUpdatedDay;
     uint256 public dailyVolume;
 
+    /// @notice Authorized callers that may invoke checkAndUpdate (e.g. the PSM).
+    mapping(address => bool) public authorizedCallers;
+
+    error NOT_AUTHORIZED();
+
     modifier onlyDAO() {
         require(msg.sender == dao, "not DAO");
+        _;
+    }
+
+    modifier onlyAuthorized() {
+        if (!authorizedCallers[msg.sender] && msg.sender != dao) revert NOT_AUTHORIZED();
         _;
     }
 
@@ -27,7 +37,12 @@ contract PSMLimits {
         singleTxCap = _single;
     }
 
-    function checkAndUpdate(uint256 amount) public {
+    /// @notice Grant or revoke checkAndUpdate access for a caller (e.g. PSM contract).
+    function setAuthorizedCaller(address caller, bool enabled) external onlyDAO {
+        authorizedCallers[caller] = enabled;
+    }
+
+    function checkAndUpdate(uint256 amount) public onlyAuthorized {
         uint256 day = block.timestamp / 1 days;
         if (day > lastUpdatedDay) {
             dailyVolume = 0;

@@ -1,14 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0
 pragma solidity ^0.8.24;
 
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {IVault} from "../interfaces/IVault.sol";
 import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
 import {IParameterRegistry} from "../interfaces/IParameterRegistry.sol";
 
-/// @title CollateralVault — minimal skeleton (+ batch getter)
-/// @notice DEV41: Admin/Wiring/Guards + Events as before. New: `areAssetsSupported(...)`.
-///         No asset transfers/accounting; balanceOf() stays a dummy (0).
+/// @title CollateralVault — collateral custody with accounting
+/// @notice Holds external ERC-20 assets deposited via PSM. Tracks balances per asset.
+///         Only authorized callers (e.g. PSM) may call deposit/withdraw.
 contract CollateralVault is IVault {
+    using SafeERC20 for IERC20;
     // --- Module IDs ---
     bytes32 public constant MODULE_ID = keccak256("VAULT");
 
@@ -19,8 +22,14 @@ contract CollateralVault is IVault {
     // --- Admin ---
     address public admin; // Timelock placeholder
 
-    // --- Supported Assets (toggle only; no amounts logic) ---
+    // --- Supported Assets ---
     mapping(address => bool) private _isSupported;
+
+    // --- Accounting ---
+    mapping(address => uint256) private _balances;
+
+    // --- Authorized callers (e.g. PSM) ---
+    mapping(address => bool) public authorizedCallers;
 
     // --- Events ---
     event AdminChanged(address indexed oldAdmin, address indexed newAdmin);
@@ -31,12 +40,15 @@ contract CollateralVault is IVault {
     event Deposit(address indexed asset, address indexed from, uint256 amount);
     event Withdraw(address indexed asset, address indexed to, uint256 amount, bytes32 reason);
 
+    event AuthorizedCallerSet(address indexed caller, bool enabled);
+
     // --- Errors ---
     error ACCESS_DENIED();
     error PAUSED();
     error ZERO_ADDRESS();
     error ASSET_NOT_SUPPORTED();
-    error NOT_IMPLEMENTED();
+    error NOT_AUTHORIZED();
+    error INSUFFICIENT_VAULT_BALANCE();
 
     // --- Ctor ---
     constructor(address _admin, ISafetyAutomata _safety, IParameterRegistry _registry) {
@@ -68,6 +80,11 @@ contract CollateralVault is IVault {
         _;
     }
 
+    modifier onlyAuthorized() {
+        if (!authorizedCallers[msg.sender] && msg.sender != admin) revert NOT_AUTHORIZED();
+        _;
+    }
+
     // --- Admin: roles/config ---
     function setAdmin(address newAdmin) external onlyAdmin {
         if (newAdmin == address(0)) revert ZERO_ADDRESS();
@@ -87,45 +104,48 @@ contract CollateralVault is IVault {
         emit AssetSupportSet(asset, supported);
     }
 
-    // --- IVault: surface (stubs) ---
+    function setAuthorizedCaller(address caller, bool enabled) external onlyAdmin {
+        if (caller == address(0)) revert ZERO_ADDRESS();
+        authorizedCallers[caller] = enabled;
+        emit AuthorizedCallerSet(caller, enabled);
+    }
+
+    // --- IVault: deposit/withdraw ---
+
+    /// @notice Record a deposit. Tokens must already have been transferred to this vault.
     function deposit(address asset, address from, uint256 amount)
         external
         override
         notPaused
         onlySupported(asset)
+        onlyAuthorized
     {
-        // DEV41: no transfers/accounting — stub only.
-        asset;
-        from;
-        amount;
-        revert NOT_IMPLEMENTED();
+        _balances[asset] += amount;
+        emit Deposit(asset, from, amount);
     }
 
+    /// @notice Withdraw tokens from the vault to a recipient.
     function withdraw(address asset, address to, uint256 amount, bytes32 reason)
         external
         override
         notPaused
         onlySupported(asset)
+        onlyAuthorized
     {
-        // DEV41: stub — real logic to be added later.
-        asset;
-        to;
-        amount;
-        reason;
-        revert NOT_IMPLEMENTED();
+        if (_balances[asset] < amount) revert INSUFFICIENT_VAULT_BALANCE();
+        _balances[asset] -= amount;
+        IERC20(asset).safeTransfer(to, amount);
+        emit Withdraw(asset, to, amount, reason);
     }
 
     // --- Views ---
-    function balanceOf(
-        address /*asset*/
-    )
+    function balanceOf(address asset)
         external
-        pure
+        view
         override
         returns (uint256)
     {
-        // DEV41: dummy 0 until accounting is implemented.
-        return 0;
+        return _balances[asset];
     }
 
     function isAssetSupported(address asset) external view override returns (bool) {

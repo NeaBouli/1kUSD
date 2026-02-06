@@ -42,6 +42,8 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
     error PausedError();
     error InsufficientOut();
     error PSM_ORACLE_MISSING();
+    error PSM_DEADLINE_EXPIRED();
+    error PSM_UNSUPPORTED_ASSET();
 
     modifier whenNotPaused() {
         if (
@@ -104,6 +106,12 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
             return;
         }
         limits.checkAndUpdate(notional1k);
+    }
+
+    /// @dev Verify the collateral token is supported by the vault.
+    function _requireAssetSupported(address token) internal view {
+        if (address(vault) == address(0)) return;
+        if (!vault.isAssetSupported(token)) revert PSM_UNSUPPORTED_ASSET();
     }
 
     // -------------------------------------------------------------
@@ -313,7 +321,7 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         uint256 amountIn,
         address to,
         uint256 minOut,
-        uint256 /*deadline*/
+        uint256 deadline
     )
         external
         override
@@ -321,7 +329,9 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         nonReentrant
         returns (uint256 netOut)
     {
+        if (deadline != 0 && block.timestamp > deadline) revert PSM_DEADLINE_EXPIRED();
         require(amountIn > 0, "PSM: amountIn=0");
+        _requireAssetSupported(tokenIn);
         _requireOracleHealthy(tokenIn);
 
         // For DEV-44 we assume 18 decimals for tokenIn until registry wiring is added.
@@ -359,7 +369,7 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         uint256 amountIn1k,
         address to,
         uint256 minOut,
-        uint256 /*deadline*/
+        uint256 deadline
     )
         external
         override
@@ -367,7 +377,9 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         nonReentrant
         returns (uint256 netOut)
     {
+        if (deadline != 0 && block.timestamp > deadline) revert PSM_DEADLINE_EXPIRED();
         require(amountIn1k > 0, "PSM: amountIn=0");
+        _requireAssetSupported(tokenOut);
         _requireOracleHealthy(tokenOut);
 
         // For DEV-44 we assume 18 decimals for 1kUSD and derive tokenOut via oracle.

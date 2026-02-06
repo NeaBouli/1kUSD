@@ -4,7 +4,7 @@ pragma solidity ^0.8.20;
 /// @title IBuybackStrategy
 /// @notice Interface for external strategy modules that compute buyback targets
 ///         for BuybackVault. This is forward-looking for v0.52+ and is not yet
-///         wired into BuybackVault.executeBuyback().
+///         wired into BuybackVault.executeBuybackPSM().
 interface IBuybackStrategy {
     /// @notice Describes a single buyback leg for a given asset.
     /// @dev weightBps is expressed in basis points (1e4 = 100%).

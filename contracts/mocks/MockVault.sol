@@ -3,4 +3,7 @@ pragma solidity ^0.8.24;
 
 contract MockVault {
     // minimal mock
+    function isAssetSupported(address) external pure returns (bool) {
+        return true;
+    }
 }

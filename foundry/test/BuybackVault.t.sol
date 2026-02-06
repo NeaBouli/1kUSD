@@ -348,11 +348,10 @@ contract BuybackVaultTest is Test {
         stable.mint(address(vault), amount);
 
         vm.prank(dao);
-        // Wir prüfen Signatur + Empfänger, ignorieren assetOut im Daten-Payload
-        vm.expectEmit(true, true, false, false);
+        vm.expectEmit(true, false, false, false);
         emit BuybackExecuted(user, amount, 0);
 
-        vault.executeBuyback(user, amount, 0, block.timestamp + 1 days);
+        vault.executeBuybackPSM(amount, user, 0, block.timestamp + 1 days);
     }
 
 

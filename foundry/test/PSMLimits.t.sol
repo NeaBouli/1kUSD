@@ -11,7 +11,9 @@ contract PSMLimitsTest is Test {
 
     function setUp() public {
         limits = new PSMLimits(address(this), 10_000, 5_000);
+        limits.setAuthorizedCaller(address(this), true);
         harness = new LimitsHarness(address(this));
+        harness.setAuthorizedCaller(address(harness), true);
     }
 
     function testOnlyDAOCanSetLimits() public {

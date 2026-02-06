@@ -8,6 +8,8 @@ import { IOracleWatcher } from "../interfaces/IOracleWatcher.sol";
 /// @notice Monitors Oracle and SafetyAutomata health state and reports operational status.
 contract OracleWatcher is IOracleWatcher {
 
+    bytes32 public constant ORACLE_MODULE = keccak256("ORACLE");
+
     IOracleAggregator public oracle;
     ISafetyAutomata public safetyAutomata;
 
@@ -38,12 +40,9 @@ contract OracleWatcher is IOracleWatcher {
             operational = ok;
         } catch {}
 
-        (bool success, bytes memory data) = address(safetyAutomata).staticcall(
-            abi.encodeWithSignature("isPaused(uint8)", 1)
-        );
-        if (success && data.length >= 32) {
-            paused = abi.decode(data, (bool));
-        }
+        try safetyAutomata.isPaused(ORACLE_MODULE) returns (bool p) {
+            paused = p;
+        } catch {}
 
         if (paused) {
             _health.status = Status.Paused;

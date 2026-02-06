@@ -18,6 +18,7 @@ contract MockToken is ERC20 {
 contract MockVault {
     function deposit(address, address, uint256) external {}
     function withdraw(address, address, uint256, bytes32) external {}
+    function isAssetSupported(address) external pure returns (bool) { return true; }
 }
 
 contract MockRegistry {

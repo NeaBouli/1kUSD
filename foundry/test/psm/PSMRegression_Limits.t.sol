@@ -61,6 +61,7 @@ contract PSMRegression_Limits is Test {
 
         // 5) Limits: dailyCap = 1000, singleTxCap = 500
         limits = new PSMLimits(address(this), 1000, 500);
+        limits.setAuthorizedCaller(address(psm), true);
         psm.setLimits(address(limits));
 
         // 6) No fees — isolate limit behaviour

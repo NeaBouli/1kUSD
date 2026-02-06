@@ -21,10 +21,11 @@ contract OracleRegression_Watcher is OracleRegression_Base {
     }
     /// @notice Verify paused propagation from SafetyAutomata
     function testPausePropagation() public {
-        // Simulate SafetyAutomata returning paused
+        // Simulate SafetyAutomata returning paused for ORACLE module
+        bytes32 oracleModule = keccak256("ORACLE");
         vm.mockCall(
             address(safety),
-            abi.encodeWithSignature("isPaused(uint8)", 1),
+            abi.encodeWithSelector(ISafetyAutomata.isPaused.selector, oracleModule),
             abi.encode(true)
         );
         vm.expectEmit(true, true, false, true);
