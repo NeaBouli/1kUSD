@@ -21,8 +21,4 @@ contract MockCollateralVault {
         balances[asset] -= amount;
         IERC20(asset).transfer(to, amount);
     }
-
-    function isAssetSupported(address) external pure returns (bool) {
-        return true;
-    }
 }

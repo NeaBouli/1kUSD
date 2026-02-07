@@ -17,8 +17,4 @@ contract MockVault {
         balances[asset] -= amount;
         MockERC20(asset).transfer(to, amount);
     }
-
-    function isAssetSupported(address) external pure returns (bool) {
-        return true;
-    }
 }
