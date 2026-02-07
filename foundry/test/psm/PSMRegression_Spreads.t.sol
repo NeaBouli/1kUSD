@@ -31,10 +31,6 @@ contract MockVault {
     function withdraw(address asset, address to, uint256 amount, bytes32) external {
         ERC20(asset).transfer(to, amount);
     }
-
-    function isAssetSupported(address) external pure returns (bool) {
-        return true;
-    }
 }
 
 contract PSMRegression_Spreads is Test {

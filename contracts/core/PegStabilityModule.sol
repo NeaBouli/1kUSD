@@ -43,7 +43,6 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
     error InsufficientOut();
     error PSM_ORACLE_MISSING();
     error PSM_DEADLINE_EXPIRED();
-    error PSM_UNSUPPORTED_ASSET();
 
     modifier whenNotPaused() {
         if (
@@ -106,12 +105,6 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
             return;
         }
         limits.checkAndUpdate(notional1k);
-    }
-
-    /// @dev Verify the collateral token is supported by the vault.
-    function _requireAssetSupported(address token) internal view {
-        if (address(vault) == address(0)) return;
-        if (!vault.isAssetSupported(token)) revert PSM_UNSUPPORTED_ASSET();
     }
 
     // -------------------------------------------------------------
@@ -331,7 +324,6 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
     {
         if (deadline != 0 && block.timestamp > deadline) revert PSM_DEADLINE_EXPIRED();
         require(amountIn > 0, "PSM: amountIn=0");
-        _requireAssetSupported(tokenIn);
         _requireOracleHealthy(tokenIn);
 
         // For DEV-44 we assume 18 decimals for tokenIn until registry wiring is added.
@@ -379,7 +371,6 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
     {
         if (deadline != 0 && block.timestamp > deadline) revert PSM_DEADLINE_EXPIRED();
         require(amountIn1k > 0, "PSM: amountIn=0");
-        _requireAssetSupported(tokenOut);
         _requireOracleHealthy(tokenOut);
 
         // For DEV-44 we assume 18 decimals for 1kUSD and derive tokenOut via oracle.
@@ -461,62 +452,12 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         external
         onlyRole(ADMIN_ROLE)
     {
+        require(mintFee <= 10_000, "PSM: mintFee too high");
+        require(redeemFee <= 10_000, "PSM: redeemFee too high");
         mintFeeBps = mintFee;
         redeemFeeBps = redeemFee;
         emit FeesUpdated(mintFee, redeemFee);
     }
-    // -------------------------------------------------------------
-    // 💧 DEV-45: Asset flow & fee routing scaffold (stubs only)
-    // -------------------------------------------------------------
-
-    /// @dev DEV-45: pull collateral from user into vault (stub, no-op for now)
-    /// @dev DEV-45: pull collateral from user into CollateralVault
-    function _pullCollateral(address tokenIn, address from, uint256 amountIn) internal {
-        if (amountIn == 0) return;
-        // Transfer Token vom Nutzer in den Vault und registrieren
-        IERC20(tokenIn).safeTransferFrom(from, address(vault), amountIn);
-        vault.deposit(tokenIn, from, amountIn);
-    }
-
-
-    /// @dev DEV-45: push collateral from vault to user (stub, no-op for now)
-    /// @dev DEV-45: push collateral from CollateralVault to user
-    function _pushCollateral(address tokenOut, address to, uint256 amountOut) internal {
-        if (amountOut == 0) return;
-        // Reason-Tag für Audits / Off-Chain-Tools
-        bytes32 reason = keccak256("PSM_REDEEM");
-        vault.withdraw(tokenOut, to, amountOut, reason);
-    }
-
-
-    /// @dev DEV-45: mint 1kUSD to recipient (stub, no-op for now)
-    /// @dev DEV-45: mint 1kUSD to recipient
-    function _mint1kUSD(address to, uint256 amount1k) internal {
-        if (amount1k == 0) return;
-        oneKUSD.mint(to, amount1k);
-    }
-
-
-    /// @dev DEV-45: burn 1kUSD from sender (stub, no-op for now)
-    /// @dev DEV-45: burn 1kUSD from sender
-    function _burn1kUSD(address from, uint256 amount1k) internal {
-        if (amount1k == 0) return;
-        oneKUSD.burn(from, amount1k);
-    }
-
-
-    /// @dev DEV-45: route fee in 1kUSD-notional to fee router (stub, no-op for now)
-    /// @dev DEV-45: route fee on 1kUSD-notional basis via FeeRouterV2
-    function _routeFee(address asset, uint256 feeAmount1k) internal {
-        if (feeAmount1k == 0) return;
-        if (address(feeRouter) == address(0)) return;
-        // "asset" = Collateral-Identifikator (für Routing-Accounting),
-        // "feeAmount1k" = 1kUSD-notional Betrag
-        feeRouter.route(MODULE_PSM, asset, feeAmount1k);
-    }
-
-
-
     // -------------------------------------------------------------
     // 🔧 DEV-52: registry-driven directional spread helpers (basis points)
     // -------------------------------------------------------------
