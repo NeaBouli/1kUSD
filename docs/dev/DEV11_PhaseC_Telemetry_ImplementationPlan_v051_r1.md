@@ -53,7 +53,6 @@ Bereits umgesetzt (Stand v0.51.x):
     - Guidance für BuybackVault-Events & OracleRequired-Fehler.
   - `docs/indexer/indexer_psm.md`
     - OracleRequired-Telemetrie für `PSM_ORACLE_MISSING`
-    - Revert-Tracking für `PSM_DEADLINE_EXPIRED` **(v0.51.x normative)**
     - Empfehlung, Reason Codes explizit zu speichern und Flags abzuleiten.
 
 - OracleRequired Governance & Runtime Toolkit:
@@ -78,44 +77,17 @@ Signale technisch konsumieren und operationalisieren soll.
 **On-Chain (bereits vorhanden, read-only):**
 
 - Events & Reverts der Economic Layer Contracts:
-  - PSM, BuybackVault, CollateralVault, PSMLimits, FeeRouter,
-    ggf. TreasuryVault / SafetyNet.
-- Reason Codes in Reverts **(v0.51.x normative)**:
-  - PSM:
-    - `PSM_ORACLE_MISSING`
-    - `PSM_DEADLINE_EXPIRED`
-    - `PausedError`
-    - `InsufficientOut`
-  - BuybackVault:
-    - `BUYBACK_ORACLE_REQUIRED`
-    - `BUYBACK_ORACLE_UNHEALTHY`
-    - `BUYBACK_TREASURY_CAP_EXCEEDED`
-    - `BUYBACK_TREASURY_WINDOW_CAP_EXCEEDED`
-  - CollateralVault:
-    - `NOT_AUTHORIZED`
-    - `ASSET_NOT_SUPPORTED`
-    - `INSUFFICIENT_VAULT_BALANCE`
-    - `PAUSED`
-  - PSMLimits:
-    - `NOT_AUTHORIZED`
-    - `"swap too large"`
-  - FeeRouter:
-    - `NotAuthorized`
-    - `ZeroAddress`
-    - `ZeroAmount`
-- Events (on-chain, read-only) **(v0.51.x normative)**:
-  - `OracleWatcher.HealthUpdated(Status, uint256)` — emitted on each
-    `updateHealth()`/`refreshState()` call.
-    - `Status.Healthy` (0) — oracle operational and not paused.
-    - `Status.Paused` (1) — `safetyAutomata.isPaused(ORACLE_MODULE)` returned true.
-    - `Status.Stale` (2) — `oracle.isOperational()` returned false.
+  - PSM, BuybackVault, ggf. TreasuryVault / SafetyNet / FeeRouter.
+- Reason Codes in Reverts:
+  - `PSM_ORACLE_MISSING`
+  - `BUYBACK_ORACLE_REQUIRED`
+  - `BUYBACK_ORACLE_UNHEALTHY`
 
 **Off-Chain (neu, Phase C Implementierung):**
 
 1. **Ingestion Layer**
    - Listener / Indexer für:
-     - EVM Logs (Events), insbesondere:
-       - `OracleWatcher.HealthUpdated(Status, uint256)` **(v0.51.x normative)**
+     - EVM Logs (Events),
      - Tx-Reverts und Reason Strings (via Trace / RPC, wo verfügbar).
    - Verantwortung:
      - Normalisierung von Raw-Chain-Daten in ein einheitliches Rohformat.
@@ -163,14 +135,12 @@ Pflichtfelder:
 - `tx_hash`
 - `block_number`
 - `timestamp`
-- `contract` (enum/string: PSM, BUYBACK_VAULT, COLLATERAL_VAULT, PSM_LIMITS, FEE_ROUTER, ORACLE_WATCHER, ...)
-- `action_type` (z. B. `PSM_MINT`, `PSM_REDEEM`, `BUYBACK_EXECUTE`, `VAULT_DEPOSIT`, `VAULT_WITHDRAW`, `FEE_ROUTE`, `HEALTH_UPDATE`)
+- `contract` (enum/string: PSM, BUYBACK_VAULT, ...)
+- `action_type` (z. B. `PSM_MINT`, `PSM_REDEEM`, `BUYBACK_EXECUTE`)
 - `success` (bool)
-- `reason_code` (nullable string, z. B. `"PSM_ORACLE_MISSING"`, `"PSM_DEADLINE_EXPIRED"`)
+- `reason_code` (nullable string, z. B. `"PSM_ORACLE_MISSING"`)
 - `oracle_required_blocked` (bool)
 - `oracle_unhealthy_flag` (bool)
-- `deadline_expired_flag` (bool)
-- `auth_blocked_flag` (bool)
 - `meta` (optional JSON für zus. Infos)
 
 Regeln:
@@ -182,11 +152,6 @@ Regeln:
 - `oracle_unhealthy_flag = true` **iff** Reason Code:
   - `BUYBACK_ORACLE_UNHEALTHY`
   - (später evtl. weitere Health-bezogene Codes).
-- `deadline_expired_flag = true` **iff** Reason Code: **(v0.51.x normative)**
-  - `PSM_DEADLINE_EXPIRED`
-- `auth_blocked_flag = true` **iff** Reason Code in: **(v0.51.x normative)**
-  - `NOT_AUTHORIZED` (CollateralVault, PSMLimits)
-  - `NotAuthorized` (FeeRouter)
 
 ### 4.2 Konfigurations-Änderungen
 
@@ -224,20 +189,11 @@ Ziel:
   2. Mappen der On-Chain Calls:
      - PSM: `mint`, `redeem` (oder entsprechend benannte Funktionen).
      - BuybackVault: `executeBuyback` / `performBuyback` etc.
-     - CollateralVault: `deposit`, `withdraw`.
-     - PSMLimits: `recordSwap` / limit-check calls.
-     - FeeRouter: `routeToTreasury`.
   3. Implementieren der Reason-Code-Extraktion:
      - Standardisierte Behandlung von Solidity-Revert-Reasons.
-     - Alle v0.51.x normative Reason Codes (siehe Abschnitt 3.1).
   4. Mapping auf `reason_code` + Flags:
      - `oracle_required_blocked`,
-     - `oracle_unhealthy_flag`,
-     - `deadline_expired_flag`, **(v0.51.x normative)**
-     - `auth_blocked_flag`. **(v0.51.x normative)**
-  5. Ingestion von Events (zusätzlich zu Reverts): **(v0.51.x normative)**
-     - `OracleWatcher.HealthUpdated(Status, uint256)` – Status-Wechsel
-       des Oracle Health Moduls als eigenständige Zeitreihe erfassen.
+     - `oracle_unhealthy_flag`.
 
 ### Phase C.2 – Aggregation & erste Metriken
 
@@ -248,9 +204,6 @@ Ziel:
 
 - Beispiele:
   - `oracle_required_failures_total{contract=..., action_type=..., reason_code=...}`
-  - `psm_deadline_expired_total{caller=..., chain=...}` **(v0.51.x normative)**
-  - `auth_blocked_total{contract=..., reason_code=..., chain=...}` **(v0.51.x normative)**
-  - `oracle_watcher_status{status=..., chain=...}` (gauge from `HealthUpdated` events) **(v0.51.x normative)**
   - Zeitbasierte Rollups (Tag/Woche/Monat).
   - Anteil OracleRequired-Fehler an allen Operationen.
 
@@ -260,11 +213,8 @@ Ziel:
   - Welche Panels braucht Governance?
   - Welche Alerts sind „kritisch“ vs „informativ“?
 - Beispiele:
-  - „PSM über 10 Minuten durchgängig `PSM_ORACLE_MISSING` → SEV-1 Alert".
-  - „BuybackVault mit > 5 `BUYBACK_ORACLE_UNHEALTHY` in 1 Stunde → SEV-2".
-  - „Anstieg von `PSM_DEADLINE_EXPIRED` > N in 10 Minuten → SEV-2 (mögliche Chain-Congestion)". **(v0.51.x normative)**
-  - „`OracleWatcher.HealthUpdated` wechselt auf `Status.Stale` oder `Status.Paused` → SEV-1". **(v0.51.x normative)**
-  - „CollateralVault `NOT_AUTHORIZED` Spike → SEV-2 (Misconfiguration-Signal)". **(v0.51.x normative)**
+  - „PSM über 10 Minuten durchgängig `PSM_ORACLE_MISSING` → SEV-1 Alert“.
+  - „BuybackVault mit > 5 `BUYBACK_ORACLE_UNHEALTHY` in 1 Stunde → SEV-2“.
 
 ---
 
@@ -310,10 +260,8 @@ Empfohlene logische Reihenfolge:
 2. **DEV-11 Phase D – Dashboards & Alerting**
    - Fertigstellung der Visualisierung + Alert-Logik.
 3. Optional:
-   - Erweiterung der Telemetrie auf weitere Module (TreasuryVault, SafetyNet),
-     falls OracleRequired dort zukünftig relevant wird.
-   - Note: CollateralVault, PSMLimits, FeeRouter, and OracleWatcher are now
-     covered in v0.51.x scope (see section 3.1).
+   - Erweiterung der Telemetrie auf weitere Module (TreasuryVault, SafetyNet,
+     FeeRouter), falls OracleRequired dort zukünftig relevant wird.
 
 Dieses Dokument dient als verbindliche Architektur-Basis, bevor
 konkrete Telemetry-Code-Änderungen in weiteren DEV-Wellen geplant
