@@ -1,9 +1,12 @@
 # OracleRequired Telemetry Data Model (v0.51.x) — Skeleton
 
+**Updated:** 2026-02-07 (P1 remediation — Rule C compliance, added PSM/Vault/Limits/FeeRouter reason codes + OracleWatcher event)
+
 ## Purpose
 
 This document defines a **vendor-agnostic**, **revert-first** data model for observing
-OracleRequired-related failures in v0.51.x **without any on-chain changes**.
+OracleRequired-related failures and authorization/configuration failures in v0.51.x
+**without any on-chain changes**.
 
 Design goals:
 
@@ -23,11 +26,40 @@ Non-goals (v0.51.x):
 ### PSM
 
 - **PSM_ORACLE_MISSING** — PSM operation blocked due to missing oracle pricefeed.
+- **PSM_DEADLINE_EXPIRED** — PSM swap blocked because `block.timestamp > deadline`. Opt-out with `deadline=0`. **(v0.51.x normative)**
+- **PausedError** — PSM module paused by SafetyAutomata. **(v0.51.x normative)**
+- **InsufficientOut** — net output below caller's `minOut` slippage guard. **(v0.51.x normative)**
 
 ### BuybackVault (strict mode)
 
 - **BUYBACK_ORACLE_REQUIRED** — buyback blocked because oracle/health module is not configured.
 - **BUYBACK_ORACLE_UNHEALTHY** — buyback blocked because configured health module reports unhealthy state.
+- **BUYBACK_TREASURY_CAP_EXCEEDED** — per-operation cap exceeded. **(v0.51.x normative)**
+- **BUYBACK_TREASURY_WINDOW_CAP_EXCEEDED** — rolling window cap exceeded. **(v0.51.x normative)**
+
+### CollateralVault
+
+- **NOT_AUTHORIZED** — caller not in `authorizedCallers` and not admin. Indicates missing `setAuthorizedCaller()` config. **(v0.51.x normative)**
+- **ASSET_NOT_SUPPORTED** — asset not enabled via `setAssetSupported()`. **(v0.51.x normative)**
+- **INSUFFICIENT_VAULT_BALANCE** — withdraw amount exceeds recorded vault balance. **(v0.51.x normative)**
+- **PAUSED** — VAULT module paused by SafetyAutomata. **(v0.51.x normative)**
+
+### PSMLimits
+
+- **NOT_AUTHORIZED** — caller not in `authorizedCallers` and not DAO. Indicates missing `setAuthorizedCaller()` config. **(v0.51.x normative)**
+
+### FeeRouter
+
+- **NotAuthorized** — caller not in `authorizedCallers`. Indicates missing `setAuthorizedCaller()` config. **(v0.51.x normative)**
+- **ZeroAddress** — zero address passed to admin function. **(v0.51.x normative)**
+- **ZeroAmount** — zero amount passed to `routeToTreasury`. **(v0.51.x normative)**
+
+### OracleWatcher (event-based, not revert-based)
+
+- **HealthUpdated(Status, uint256)** — emitted on each `updateHealth()`/`refreshState()` call. **(v0.51.x normative)**
+  - `Status.Healthy` (0) — oracle operational and not paused.
+  - `Status.Paused` (1) — `safetyAutomata.isPaused(ORACLE_MODULE)` returned true.
+  - `Status.Stale` (2) — `oracle.isOperational()` returned false.
 
 ## Observation taxonomy
 
