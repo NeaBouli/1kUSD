@@ -193,4 +193,26 @@ contract PSM_Config is Test {
         vm.expectRevert("PSM: redeemFee too high");
         psm.setFees(0, 10_001);
     }
+
+    // -----------------------------------------------------------------
+    // FeeRouter config tests
+    // -----------------------------------------------------------------
+
+    function testSetFeeRouter_NonAdmin_Reverts() public {
+        vm.prank(unauthorizedCaller);
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                IAccessControl.AccessControlUnauthorizedAccount.selector,
+                unauthorizedCaller,
+                adminRole
+            )
+        );
+        psm.setFeeRouter(address(0x1234));
+    }
+
+    function testSetFeeRouter_Admin_Succeeds() public {
+        address newRouter = address(0x1234);
+        psm.setFeeRouter(newRouter);
+        assertEq(address(psm.feeRouter()), newRouter);
+    }
 }
