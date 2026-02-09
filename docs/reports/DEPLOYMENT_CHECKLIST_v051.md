@@ -1,8 +1,8 @@
 # Deployment Checklist — v0.51.x
 
 **Source:** Security Audit v0.51.x (February 2026)
-**Baseline:** commit `1f045a7` (post-PR #84)
-**Tests:** 76/76 passing
+**Baseline:** commit `db95a31` (post-PR #86, Sprint 1 Task 1)
+**Tests:** 159/159 passing across 29 suites
 
 ---
 
@@ -17,7 +17,9 @@ Deploy in this exact order. Each contract's constructor parameters reference onl
 | 3 | `OracleAggregator` | `admin`, `safetyAutomata`, `parameterRegistry` |
 | 4 | `CollateralVault` | `admin`, `safetyAutomata`, `parameterRegistry` |
 | 5 | `OneKUSD` | `admin` |
-| 6 | `PegStabilityModule` | `admin`, `oneKUSD`, `collateralVault`, `safetyAutomata`, `parameterRegistry` |
+| 6 | `PSMLimits` | `dao`, `dailyCap`, `singleTxCap` |
+| 7 | `FeeRouter` | `admin` |
+| 8 | `PegStabilityModule` | `admin`, `oneKUSD`, `collateralVault`, `safetyAutomata`, `parameterRegistry` |
 
 ### Phase 1 Validation
 
@@ -27,6 +29,8 @@ ParameterRegistry.admin() == admin
 OracleAggregator.admin() == admin
 CollateralVault.admin() == admin
 OneKUSD.admin() == admin
+PSMLimits.dao() == dao
+FeeRouter.admin() == admin
 PegStabilityModule.hasRole(ADMIN_ROLE, admin) == true
 ```
 
@@ -56,13 +60,17 @@ Repeat `setAssetSupported` for **each** collateral token the PSM will accept.
 
 | Call | Why | Reverts Without |
 |------|-----|-----------------|
-| `limits.setAuthorizedCaller(psm, true)` | PSM must call `checkAndUpdate` | Unauthorized revert |
+| `limits.setAuthorizedCaller(psm, true)` | PSM must call `checkAndUpdate` | `NOT_AUTHORIZED()` |
 
-### 2.4 FeeRouter — Caller Authorization (if deployed)
+Note: `setAuthorizedCaller` on PSMLimits is `onlyDAO` — must be called by the DAO address.
+
+### 2.4 FeeRouter — Caller Authorization (if IFeeRouterV2 deployed)
 
 | Call | Why | Reverts Without |
 |------|-----|-----------------|
-| `feeRouter.setAuthorizedCaller(psm, true)` | PSM must call `routeToTreasury` | `NotAuthorized()` |
+| `feeRouterV2.setAuthorizedCaller(psm, true)` | PSM fee routing via `IFeeRouterV2.route()` | `NotAuthorized()` |
+
+**v0.52+ Note:** The PSM uses `IFeeRouterV2.route(moduleId, token, amount)` interface, not the v1 `IFeeRouter.routeToTreasury(token, treasury, amount, tag)`. The current `FeeRouter.sol` implements v1 only. A compatible `IFeeRouterV2` implementation is required before fee routing can be enabled. Until then, `psm.feeRouter()` remains `address(0)` (safe no-op).
 
 ### Phase 2 Validation
 
@@ -72,7 +80,6 @@ oneKUSD.isBurner(psm) == true
 vault.authorizedCallers(psm) == true
 vault.isAssetSupported(token) == true        // per token
 limits.authorizedCallers(psm) == true        // if limits deployed
-feeRouter.authorizedCallers(psm) == true     // if feeRouter deployed
 ```
 
 ---
@@ -129,7 +136,15 @@ oracle.getPrice(token) returns (price > 0, decimals, healthy == true)
 
 If not set, `address(limits) == address(0)` and `_enforceLimits` is a no-op — unlimited swaps.
 
-### 4.3 Token Decimals (via ParameterRegistry)
+### 4.3 Fee Router (optional — requires IFeeRouterV2 implementation)
+
+| Call | Why |
+|------|-----|
+| `psm.setFeeRouter(feeRouterV2Address)` | Routes mint fees to treasury via `IFeeRouterV2` |
+
+If not set, `address(feeRouter) == address(0)` and fee routing is a no-op — fees are computed but not routed. **Requires a contract implementing `IFeeRouterV2.route()` (v0.52+ item).**
+
+### 4.4 Token Decimals (via ParameterRegistry)
 
 | Call | Key | Default |
 |------|-----|---------|
@@ -137,7 +152,7 @@ If not set, `address(limits) == address(0)` and `_enforceLimits` is a no-op — 
 
 Set this for every non-18-decimal token (e.g., USDC = 6).
 
-### 4.4 Spreads (via ParameterRegistry, optional)
+### 4.5 Spreads (via ParameterRegistry, optional)
 
 | Call | Key | Default |
 |------|-----|---------|
@@ -149,7 +164,8 @@ Set this for every non-18-decimal token (e.g., USDC = 6).
 ```
 psm.mintFeeBps() == expectedMintFee
 psm.redeemFeeBps() == expectedRedeemFee
-psm.limits() == expectedLimitsAddress  // or address(0) if none
+psm.limits() == expectedLimitsAddress    // or address(0) if none
+psm.feeRouter() == expectedFeeRouter     // or address(0) if none
 ```
 
 ---
@@ -285,7 +301,7 @@ assert(oneKUSD.totalSupply() == supplyBefore);  // only if fees == 0
 cd foundry && forge test --summary
 ```
 
-Expected: **76/76 tests passing** across 22 suites.
+Expected: **159/159 tests passing** across 29 suites.
 
 ---
 
@@ -298,10 +314,10 @@ Expected: **76/76 tests passing** across 22 suites.
 | `oneKUSD.setBurner(psm)` | `swapFrom1kUSD` reverts | `ACCESS_DENIED()` |
 | `vault.setAuthorizedCaller(psm)` | All swaps revert at vault | `NOT_AUTHORIZED()` |
 | `vault.setAssetSupported(token)` | Swaps for that token revert | `ASSET_NOT_SUPPORTED()` |
-| `limits.setAuthorizedCaller(psm)` | All swaps revert at limits | Unauthorized revert |
+| `limits.setAuthorizedCaller(psm)` | All swaps revert at limits | `NOT_AUTHORIZED()` |
 | `oracleAggregator.setPriceMock()` | Oracle returns unhealthy | `"PSM: oracle not operational"` |
 | Token decimals not set for 6-decimal token | Wrong mint/redeem amounts | Silent — 1e12 scaling error |
 
 ---
 
-*Checklist generated: 2026-02-07. Based on commit `1f045a7` with all PR #84 fixes applied.*
+*Checklist updated: 2026-02-09. Based on commit `db95a31` with Sprint 1 Task 1 applied.*
