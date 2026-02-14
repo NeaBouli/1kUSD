@@ -84,6 +84,11 @@ contract PegStabilityModule is IPSM, IPSMEvents, AccessControl, ReentrancyGuard 
         oracle = IOracleAggregator(_oracle);
     }
 
+    /// @notice Admin setter for FeeRouterV2 used for PSM fee routing.
+    function setFeeRouter(address _feeRouter) external onlyRole(ADMIN_ROLE) {
+        feeRouter = IFeeRouterV2(_feeRouter);
+    }
+
     // -------------------------------------------------------------
     // 🔧 Internal helpers — oracle & limits
     // -------------------------------------------------------------
