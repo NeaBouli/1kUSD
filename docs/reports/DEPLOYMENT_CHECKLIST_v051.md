@@ -2,7 +2,7 @@
 
 **Source:** Security Audit v0.51.x (February 2026)
 **Baseline:** commit `db95a31` (post-PR #86, Sprint 1 Task 1)
-**Tests:** 159/159 passing across 29 suites
+**Tests:** 168/168 passing across 30 suites
 
 ---
 
@@ -301,7 +301,7 @@ assert(oneKUSD.totalSupply() == supplyBefore);  // only if fees == 0
 cd foundry && forge test --summary
 ```
 
-Expected: **159/159 tests passing** across 29 suites.
+Expected: **168/168 tests passing** across 30 suites.
 
 ---
 
@@ -320,4 +320,4 @@ Expected: **159/159 tests passing** across 29 suites.
 
 ---
 
-*Checklist updated: 2026-02-09. Based on commit `db95a31` with Sprint 1 Task 1 applied.*
+*Checklist updated: 2026-02-14. Sprint 1 Task 3: Phase 7 smoke test + negative tests added (PSM_SmokeTest.t.sol).*
