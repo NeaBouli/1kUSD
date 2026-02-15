@@ -320,4 +320,4 @@ Expected: **181/181 tests passing** across 33 suites.
 
 ---
 
-*Checklist updated: 2026-02-14. Sprint 2 Task 1: Invariant + fuzz suite added (BuybackVault, PSMLimits, SafetyAutomata).*
+*Checklist updated: 2026-02-15. Sprint 2 Task 2: Gas/DoS review complete (see GAS_DOS_REVIEW_v051.md). BuybackVault balanceOf caching applied. G1 (unbounded strategies loop) and G2 (CEI pattern) escalated for core-dev decision.*
