@@ -7,6 +7,10 @@ coverage/
 .env.*
 .DS_Store
 
+# Foundry
+out/
+cache/
+
 # Logs & reports
 logs/*.tmp
 reports/*.tmp
