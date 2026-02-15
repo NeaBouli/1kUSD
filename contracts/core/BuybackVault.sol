@@ -175,8 +175,8 @@ contract BuybackVault {
         uint256 bal = stable.balanceOf(address(this));
         if (bal < amount1k) revert INSUFFICIENT_BALANCE();
 
-        _checkPerOpTreasuryCap(amount1k);
-        _checkBuybackWindowCap(amount1k);
+        _checkPerOpTreasuryCap(amount1k, bal);
+        _checkBuybackWindowCap(amount1k, bal);
         _checkOracleHealthGate();
         _checkStrategyEnforcement();
 
@@ -197,16 +197,15 @@ contract BuybackVault {
     // Internal guards
     // -------------------------------------------------------------
 
-    function _checkPerOpTreasuryCap(uint256 amountStable) internal view {
+    function _checkPerOpTreasuryCap(uint256 amountStable, uint256 bal) internal view {
         uint16 capBps = maxBuybackSharePerOpBps;
         if (capBps == 0) return;
-        uint256 bal = stable.balanceOf(address(this));
         uint256 cap = (bal * capBps) / 10_000;
         if (amountStable > cap) revert BUYBACK_TREASURY_CAP_EXCEEDED();
     }
 
     /// @dev Rolling window cap expressed in BPS of a snapshot treasury basis.
-    function _checkBuybackWindowCap(uint256 amountStable) internal {
+    function _checkBuybackWindowCap(uint256 amountStable, uint256 bal) internal {
         uint64 dur = buybackWindowDuration;
         uint16 capBps = maxBuybackSharePerWindowBps;
         if (dur == 0 || capBps == 0) return;
@@ -215,7 +214,7 @@ contract BuybackVault {
         if (start == 0 || block.timestamp >= uint256(start) + uint256(dur)) {
             buybackWindowStart = uint64(block.timestamp);
             buybackWindowAccumulatedBps = 0;
-            buybackWindowStartStableBalance = stable.balanceOf(address(this));
+            buybackWindowStartStableBalance = bal;
         }
 
         uint256 basis = buybackWindowStartStableBalance;
