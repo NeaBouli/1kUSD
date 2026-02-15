@@ -1,7 +1,15 @@
+<p align="center">
+  <img src="docs/assets/1kusd-logo.jpg" alt="1kUSD Logo" width="200">
+</p>
+
+<p align="center">
+
 [![CI](https://img.shields.io/github/actions/workflow/status/NeaBouli/1kUSD/ci.yml?branch=main&label=CI)](https://github.com/NeaBouli/1kUSD/actions/workflows/ci.yml)
 [![Foundry Tests](https://img.shields.io/github/actions/workflow/status/NeaBouli/1kUSD/foundry-test.yml?branch=main&label=Foundry%20Tests)](https://github.com/NeaBouli/1kUSD/actions/workflows/foundry-test.yml)
 [![Tests](https://img.shields.io/badge/tests-183%2F183%20passing-brightgreen)]()
 ![License](https://img.shields.io/github/license/NeaBouli/1kUSD)
+
+</p>
 
 # 1kUSD — Decentralized Stablecoin Protocol
 
