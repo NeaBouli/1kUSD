@@ -19,3 +19,7 @@ remappings = [
     "forge-std/=lib/forge-std/src/",
     "@openzeppelin/=lib/openzeppelin-contracts/"
 ]
+
+[invariant]
+runs = 256
+depth = 64
