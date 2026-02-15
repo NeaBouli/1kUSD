@@ -20,7 +20,7 @@
 
 ## Findings
 
-### G1: Unbounded `strategies[]` loop -- ESCALATION REQUIRED
+### G1: Unbounded `strategies[]` loop -- FIXED
 
 **Severity:** Medium-DoS
 **Location:** `BuybackVault.sol:237-250` -- `_checkStrategyEnforcement()`
@@ -39,11 +39,11 @@ for (uint256 i = 0; i < strategies.length; i++) {
 
 **Mitigation in place:** `onlyDAO` restricts both `setStrategy` and `executeBuybackPSM` -- the DAO would be DoS'ing itself. In v0.51.x with a single buyback asset, `strategies.length` is typically 1.
 
-**Recommended fix:** Add `MAX_STRATEGIES` constant (e.g., 16) and `require(strategies.length < MAX_STRATEGIES)` in `setStrategy` when `id == strategies.length`. **This adds a new revert path (behavior change) -- requires core-dev approval.**
+**Fix applied:** Added `MAX_STRATEGIES = 16` constant and `MAX_STRATEGIES_REACHED()` revert in `setStrategy` when pushing beyond the cap. Misconfig test + happy-path test added.
 
 ---
 
-### G2: State write before external call -- ESCALATION REQUIRED
+### G2: State write before external call -- ACCEPTED RISK
 
 **Severity:** Low (mitigated by `onlyDAO`)
 **Location:** `BuybackVault.sol:166-194` -- `executeBuybackPSM()`
@@ -52,7 +52,7 @@ for (uint256 i = 0; i < strategies.length; i++) {
 
 **Mitigation in place:** `onlyDAO` modifier ensures only the DAO multisig can invoke this function. Reentrancy from an untrusted caller is impossible. The PSM itself uses `nonReentrant` on its swap functions.
 
-**Recommended fix:** Add `nonReentrant` modifier (from OpenZeppelin's `ReentrancyGuard`) to `executeBuybackPSM` as defense-in-depth. **This changes the modifier chain and adds a storage slot for the reentrancy guard -- requires core-dev approval.**
+**Decision:** Accepted risk. `onlyDAO` is sufficient mitigation for v0.51.x. Adding `nonReentrant` would cost ~5,000 gas per call for a theoretical attack requiring DAO key compromise + malicious PSM. Revisit if BuybackVault gains permissionless callers.
 
 ---
 
@@ -130,8 +130,8 @@ This is architectural -- the ParameterRegistry design enables DAO governance ove
 
 | Finding | Severity | Status |
 |---------|----------|--------|
-| G1: Unbounded strategies loop | Medium-DoS | Escalated -- awaiting approval |
-| G2: CEI pattern concern | Low | Escalated -- awaiting approval |
+| G1: Unbounded strategies loop | Medium-DoS | Fixed -- `MAX_STRATEGIES = 16` cap added |
+| G2: CEI pattern concern | Low | Accepted risk -- mitigated by `onlyDAO` |
 | G3: Redundant balanceOf calls | Info | Fixed (micro-optimization) |
 | G4: Storage layout | Info | Already optimal |
 | G5: Auth gate cost | Info | Already optimal |
@@ -141,6 +141,6 @@ This is architectural -- the ParameterRegistry design enables DAO governance ove
 
 **Gas optimization applied:** ~400 gas saved per `executeBuybackPSM` call via `balanceOf` caching.
 
-**Escalation items for core-dev decision:**
-1. G1: Add `MAX_STRATEGIES` cap to `setStrategy` (new revert path)
-2. G2: Add `nonReentrant` to `executeBuybackPSM` (new modifier, new storage slot)
+**Escalation resolution:**
+1. G1: Fixed -- `MAX_STRATEGIES = 16` constant + `MAX_STRATEGIES_REACHED()` revert in `setStrategy`
+2. G2: Accepted risk -- `onlyDAO` modifier is sufficient mitigation for v0.51.x; revisit if BuybackVault gains permissionless callers
