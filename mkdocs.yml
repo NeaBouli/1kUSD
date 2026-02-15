@@ -3,6 +3,8 @@ site_url: https://neabouli.github.io/1kUSD/
 theme:
   name: material
   language: en
+  logo: assets/1kusd-logo.jpg
+  favicon: assets/1kusd-logo.jpg
   features:
     - navigation.instant
     - navigation.expand

@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/1kusd-banner.jpg" alt="1kUSD Kaspa Stablecoin" width="480">
+</p>
+
 # 1kUSD Documentation Index
 
 This index organizes the documentation for the 1kUSD stablecoin protocol (v0.51.x).
