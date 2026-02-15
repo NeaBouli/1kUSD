@@ -398,6 +398,32 @@ contract BuybackVaultTest is Test {
         vault.getStrategy(0);
     }
 
+    function testSetStrategyMaxCapReverts() public {
+        uint256 max = vault.MAX_STRATEGIES();
+        vm.startPrank(dao);
+        for (uint256 i = 0; i < max; i++) {
+            vault.setStrategy(i, address(asset), 1000, true);
+        }
+        assertEq(vault.strategyCount(), max);
+        vm.expectRevert(BuybackVault.MAX_STRATEGIES_REACHED.selector);
+        vault.setStrategy(max, address(asset), 1000, true);
+        vm.stopPrank();
+    }
+
+    function testSetStrategyMaxCapAllowsUpdate() public {
+        vm.startPrank(dao);
+        for (uint256 i = 0; i < vault.MAX_STRATEGIES(); i++) {
+            vault.setStrategy(i, address(asset), 1000, true);
+        }
+        // Updating an existing strategy at max capacity should succeed
+        vault.setStrategy(0, address(asset), 5000, false);
+        vm.stopPrank();
+
+        BuybackVault.StrategyConfig memory cfg = vault.getStrategy(0);
+        assertEq(cfg.weightBps, 5000, "updated weight mismatch");
+        assertFalse(cfg.enabled, "updated enabled mismatch");
+    }
+
     function testBalanceViewsReflectHoldings() public {
         stable.mint(address(vault), 11e18);
         asset.mint(address(vault), 22e18);
