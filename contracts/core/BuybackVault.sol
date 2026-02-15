@@ -38,6 +38,7 @@ contract BuybackVault {
     error BUYBACK_TREASURY_CAP_EXCEEDED();
     error BUYBACK_TREASURY_WINDOW_CAP_EXCEEDED();
     error BUYBACK_ORACLE_UNHEALTHY();
+    error MAX_STRATEGIES_REACHED();
 
     // --- Events ---
     event StableFunded(address indexed from, uint256 amount);
@@ -66,6 +67,8 @@ contract BuybackVault {
         uint16 weightBps;
         bool enabled;
     }
+
+    uint256 public constant MAX_STRATEGIES = 16;
 
     StrategyConfig[] private strategies;
     bool public strategiesEnforced;
@@ -304,6 +307,7 @@ contract BuybackVault {
         });
 
         if (id == strategies.length) {
+            if (strategies.length >= MAX_STRATEGIES) revert MAX_STRATEGIES_REACHED();
             strategies.push(cfg);
         } else if (id < strategies.length) {
             strategies[id] = cfg;
