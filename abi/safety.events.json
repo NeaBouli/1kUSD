@@ -1,0 +1,20 @@
+[
+  {
+    "type": "event",
+    "name": "Paused",
+    "inputs": [
+      { "name": "moduleId", "type": "bytes32", "indexed": true },
+      { "name": "by", "type": "address", "indexed": true }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Resumed",
+    "inputs": [
+      { "name": "moduleId", "type": "bytes32", "indexed": true },
+      { "name": "by", "type": "address", "indexed": true }
+    ],
+    "anonymous": false
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "type": "event",
+    "name": "AdminChanged",
+    "inputs": [
+      { "name": "oldAdmin", "type": "address", "indexed": true },
+      { "name": "newAdmin", "type": "address", "indexed": true }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "UintSet",
+    "inputs": [
+      { "name": "key", "type": "bytes32", "indexed": true },
+      { "name": "value", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "AddressSet",
+    "inputs": [
+      { "name": "key", "type": "bytes32", "indexed": true },
+      { "name": "value", "type": "address", "indexed": false }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "BoolSet",
+    "inputs": [
+      { "name": "key", "type": "bytes32", "indexed": true },
+      { "name": "value", "type": "bool", "indexed": false }
+    ],
+    "anonymous": false
+  }
+]

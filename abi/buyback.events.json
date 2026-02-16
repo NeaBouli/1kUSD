@@ -1,0 +1,89 @@
+[
+  {
+    "type": "event",
+    "name": "StableFunded",
+    "inputs": [
+      { "name": "from", "type": "address", "indexed": true },
+      { "name": "amount", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "StableWithdrawn",
+    "inputs": [
+      { "name": "to", "type": "address", "indexed": true },
+      { "name": "amount", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "AssetWithdrawn",
+    "inputs": [
+      { "name": "to", "type": "address", "indexed": true },
+      { "name": "amount", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "BuybackExecuted",
+    "inputs": [
+      { "name": "recipient", "type": "address", "indexed": true },
+      { "name": "stableIn", "type": "uint256", "indexed": false },
+      { "name": "assetOut", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "StrategyEnforcementUpdated",
+    "inputs": [
+      { "name": "enforced", "type": "bool", "indexed": false }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "StrategyUpdated",
+    "inputs": [
+      { "name": "id", "type": "uint256", "indexed": true },
+      { "name": "asset", "type": "address", "indexed": false },
+      { "name": "weightBps", "type": "uint16", "indexed": false },
+      { "name": "enabled", "type": "bool", "indexed": false }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "BuybackTreasuryCapUpdated",
+    "inputs": [
+      { "name": "oldCapBps", "type": "uint16", "indexed": false },
+      { "name": "newCapBps", "type": "uint16", "indexed": false }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "BuybackOracleHealthGateUpdated",
+    "inputs": [
+      { "name": "oldModule", "type": "address", "indexed": true },
+      { "name": "newModule", "type": "address", "indexed": true },
+      { "name": "oldEnforced", "type": "bool", "indexed": false },
+      { "name": "newEnforced", "type": "bool", "indexed": false }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "BuybackWindowConfigUpdated",
+    "inputs": [
+      { "name": "oldDuration", "type": "uint64", "indexed": false },
+      { "name": "newDuration", "type": "uint64", "indexed": false },
+      { "name": "oldCapBps", "type": "uint16", "indexed": false },
+      { "name": "newCapBps", "type": "uint16", "indexed": false }
+    ],
+    "anonymous": false
+  }
+]
