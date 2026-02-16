@@ -10,6 +10,7 @@ coverage/
 # Foundry
 out/
 cache/
+broadcast/
 
 # Logs & reports
 logs/*.tmp
