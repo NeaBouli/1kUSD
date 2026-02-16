@@ -1,0 +1,31 @@
+[
+  {
+    "type": "event",
+    "name": "AdminChanged",
+    "inputs": [
+      { "name": "oldAdmin", "type": "address", "indexed": true },
+      { "name": "newAdmin", "type": "address", "indexed": true }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "RegistryUpdated",
+    "inputs": [
+      { "name": "oldRegistry", "type": "address", "indexed": true },
+      { "name": "newRegistry", "type": "address", "indexed": true }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "OracleUpdated",
+    "inputs": [
+      { "name": "asset", "type": "address", "indexed": true },
+      { "name": "price", "type": "int256", "indexed": false },
+      { "name": "decimals", "type": "uint8", "indexed": false },
+      { "name": "healthy", "type": "bool", "indexed": false }
+    ],
+    "anonymous": false
+  }
+]
