@@ -23,3 +23,7 @@ remappings = [
 [invariant]
 runs = 256
 depth = 64
+
+[rpc_endpoints]
+localhost = "http://localhost:8545"
+sepolia = "${SEPOLIA_RPC_URL}"
