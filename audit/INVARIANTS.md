@@ -113,6 +113,38 @@ If the oracle is unhealthy, `executeBuybackPSM` reverts with `BUYBACK_ORACLE_UNH
 
 Source: `foundry/test/*_Invariant.t.sol` | Config: 256 runs, 64 depth
 
+### PSM (5 invariants)
+
+**F14: `invariant_supplyConservation`**
+```
+oneKUSD.totalSupply() == ghost_totalMinted - ghost_totalBurned
+```
+Verifies E1 under arbitrary sequences of `swapTo1kUSD`, `swapFrom1kUSD`, fee changes [0-5000 bps], and daily resets. Handler tracks ghost cumulative mints (net1k) and burns (full amountIn1k).
+
+**F15: `invariant_collateralBacking`**
+```
+vault.balanceOf(usdc) == ghost_collateralIn - ghost_collateralOut
+```
+Verifies E2. Ghost tracks cumulative collateral deposited (amountIn) and withdrawn (netTokenOut).
+
+**F16: `invariant_vaultSolvent`**
+```
+IERC20(usdc).balanceOf(vault) >= vault.balanceOf(usdc)
+```
+Actual token balance always >= accounting balance. Catches fee-on-transfer discrepancies.
+
+**F17: `invariant_feeNeverExceedsInput`**
+```
+ghost_totalMinted <= ghost_totalCollateralIn
+```
+Verifies E3: net minted 1kUSD can never exceed total collateral deposited. Fees only subtract.
+
+**F18: `invariant_supplyNonNegative`**
+```
+oneKUSD.totalSupply() >= 0
+```
+Trivially true for uint256 but validates no underflow panic occurs in the fuzz sequence.
+
 ### BuybackVault (5 invariants)
 
 **F1: `invariant_windowAccumulatedBpsNeverExceedsCap`**
@@ -255,28 +287,49 @@ Parameter changes only via `ParameterRegistry` (admin/DAO controlled). Runtime p
 
 ## Invariant Coverage Matrix
 
-| Invariant | Specified | Fuzz Tested | Test ID |
-|-----------|-----------|-------------|---------|
-| Supply conservation | E1, P2, P3 | -- | (verified via regression tests) |
-| Collateral backing | E2, P1 | -- | (verified via regression tests) |
-| Fee bounds | E3 | -- | PSM_Config tests |
-| Daily volume cap | E4 | Yes | F6, F9 |
-| Single-tx cap | E5 | Yes | F7 |
-| Buyback per-op cap | E6 | Yes | F4 |
-| Buyback window cap | E7 | Yes | F1, F5 |
-| Balance accounting | -- | Yes | F2, F3 |
-| Pause blocks state | S1 | -- | SafetyAutomata_Config tests |
-| Guardian sunset | S2 | Yes | F12 |
-| No reentrancy | S3 | -- | (structural: nonReentrant modifier) |
-| Authorized callers | S4 | -- | Auth test suites |
-| Oracle health gate | S5 | -- | BuybackVault unit tests |
-| Pause/enabled complementary | -- | Yes | F10, F13 |
-| Ghost state consistency | -- | Yes | F11 |
-| Event conservation | P5, P6 | -- | Regression tests |
-| Rounding direction | P7 | -- | PSMRegression_Fees tests |
-| CEI compliance | P8 | -- | (structural review) |
-| No direct vault withdrawal | P9 | -- | CollateralVault_Auth tests |
-| Parameter governance | P10 | -- | ParameterRegistry_Config tests |
+| Invariant | Specified | Fuzz Tested | Econ Sim | Test ID |
+|-----------|-----------|-------------|----------|---------|
+| Supply conservation | E1, P2, P3 | Yes | Yes | F14; EconSim #1,3,4,5,10 |
+| Collateral backing | E2, P1 | Yes | Yes | F15, F16; EconSim #1,2,3,5,10 |
+| Fee bounds | E3 | Yes | Yes | F17; EconSim #5,8 |
+| Daily volume cap | E4 | Yes | Yes | F6, F9; EconSim #7,9 |
+| Single-tx cap | E5 | Yes | -- | F7 |
+| Buyback per-op cap | E6 | Yes | -- | F4 |
+| Buyback window cap | E7 | Yes | -- | F1, F5 |
+| Balance accounting | -- | Yes | -- | F2, F3 |
+| Pause blocks state | S1 | -- | -- | SafetyAutomata_Config tests |
+| Guardian sunset | S2 | Yes | -- | F12 |
+| No reentrancy | S3 | -- | -- | (structural: nonReentrant modifier) |
+| Authorized callers | S4 | -- | -- | Auth test suites |
+| Oracle health gate | S5 | -- | Yes | BuybackVault unit tests; EconSim #6 |
+| Pause/enabled complementary | -- | Yes | -- | F10, F13 |
+| Ghost state consistency | -- | Yes | -- | F11 |
+| Event conservation | P5, P6 | -- | -- | Regression tests |
+| Rounding direction | P7 | -- | Yes | PSMRegression_Fees; EconSim #1,4,10 |
+| CEI compliance | P8 | -- | -- | (structural review) |
+| No direct vault withdrawal | P9 | -- | -- | CollateralVault_Auth tests |
+| Parameter governance | P10 | -- | -- | ParameterRegistry_Config tests |
+
+---
+
+## Economic Simulation Tests (EconSim #1--#10)
+
+Source: `foundry/test/PSM_EconSim.t.sol` | Deterministic multi-step scenarios with console.log audit trail
+
+| # | Scenario | Invariants | Key Assertion |
+|---|----------|------------|---------------|
+| 1 | FeeAccrual_30Days | E1, E2, E7 | Collateral ratio increases monotonically over 30 days at 50 bps |
+| 2 | DepegStress_OracleDrop | E2 | Oracle at 0.95: mint yields 950k/1M; clean exit after recovery |
+| 3 | BankRun_MassRedemption | E1, E2 | Mint 10M, redeem 100%: zero supply, zero vault, no stuck collateral |
+| 4 | WorstCase_ZeroFees | E7, WC#1 | 10 roundtrips at 0 fees: exact 1:1, zero dust |
+| 5 | WorstCase_MaxFees | E1-E3 | 50%+50% fees: user gets 25% back, protocol keeps 75% |
+| 6 | WorstCase_OracleDown | S5, WC#2 | Unhealthy oracle: swaps revert, zero state change, recovery |
+| 7 | WorstCase_LimitsZero | E4, WC#5 | Limits=0: swaps blocked, recovery after re-enable |
+| 8 | SpreadAndFeeInteraction | E3 | fee(100) + spread(50) = 150 bps additive deduction |
+| 9 | DailyCapExhaustion | E4 | Fill daily cap, verify block, warp day, verify reset |
+| 10 | CollateralSurplus_FeeRetention | E1, E2, E7 | Proves surplus = mint fees + redeem surplus exactly |
+
+Covers `ECONOMIC_MODEL.md` worst cases WC#1 (zero fees), WC#2 (oracle down), WC#5 (limits zero).
 
 ---
 
@@ -284,6 +337,7 @@ Parameter changes only via `ParameterRegistry` (admin/DAO controlled). Runtime p
 
 1. **F6 and F9 are intentionally duplicated** -- defense-in-depth against fuzz harness bugs.
 2. **F10 and F13 test the same property** from different angles (negation vs implication).
-3. **E1 (supply conservation) is not fuzz-tested** due to the complexity of wiring a full PSM + Vault + Token setup in an invariant handler. It is verified by 19 regression tests covering mint/redeem flows.
-4. **Oracle invariants (staleness, deviation)** are tested in `OracleRegression_Health.t.sol` but not in invariant/fuzz tests. The mock oracle in v0.51.x does not support fuzz-driven price feeds.
+3. **E1, E2, E3 are now fully fuzz-tested** via F14-F17 (`PSM_Invariant.t.sol`). The handler wires the full real PSM + Vault + Limits + Oracle stack with randomized fees [0-5000 bps] and daily resets. Additionally covered by 10 deterministic economic simulation scenarios (`PSM_EconSim.t.sol`).
+4. **Oracle invariants (staleness, deviation)** are tested in `OracleRegression_Health.t.sol` but not in invariant/fuzz tests. The mock oracle in v0.51.x does not support fuzz-driven price feeds. Oracle depeg behavior is covered by EconSim #2 and #6.
 5. **The BuybackVault CEI exception (P8)** is documented in KNOWN_LIMITATIONS.md L1. The `onlyDAO` modifier makes the non-CEI pattern unexploitable without admin key compromise.
+6. **EconSim tests produce console.log output** visible via `forge test --match-contract PSM_EconSim -vv`. Run with `-vv` flag to see the audit trail including daily metrics, collateral ratios, and surplus accounting.
