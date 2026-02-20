@@ -2,7 +2,7 @@
 
 **Protocol:** 1kUSD (collateral-backed stablecoin, 1:1 USD peg)
 **Solidity:** 0.8.19 -- 0.8.30 | **EVM:** Paris | **Framework:** Foundry
-**Tag:** v0.51.2 | **Tests:** 183/183 passing across 33 suites
+**Tag:** audit-final-v0.51.5 | **Tests:** 198/198 passing across 35 suites
 
 ---
 

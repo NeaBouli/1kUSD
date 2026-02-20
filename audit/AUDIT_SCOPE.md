@@ -7,10 +7,10 @@
 | Field | Value |
 |-------|-------|
 | **Protocol** | 1kUSD -- Decentralized Stablecoin |
-| **Version** | v0.51.4 |
-| **Tag** | `v0.51.4` |
-| **Commit** | `46cc33ccf30bec9138874517f0b3dac45a0f728f` |
-| **Freeze Date** | 2026-02-16 |
+| **Version** | v0.51.5 |
+| **Tag** | `audit-final-v0.51.5` |
+| **Commit** | `dad9409da555d5903540684e4521120f0d1f5d80` |
+| **Freeze Date** | 2026-02-20 |
 | **Repository** | https://github.com/NeaBouli/1kUSD |
 | **Compiler** | solc 0.8.30 |
 | **EVM Target** | Paris |
@@ -23,7 +23,7 @@
 ```bash
 # Clone at freeze tag
 git clone https://github.com/NeaBouli/1kUSD.git && cd 1kUSD
-git checkout v0.51.4
+git checkout audit-final-v0.51.5
 
 # Install dependencies (forge-std v1.11.0, OpenZeppelin v4.8.0)
 forge install
@@ -31,11 +31,14 @@ forge install
 # Build (expect 0 errors, 0 warnings on production contracts)
 forge build
 
-# Run full test suite (expect 183/183 passing)
+# Run full test suite (expect 198/198 passing across 35 suites)
 forge test
 
-# Run invariant tests only (256 runs x 64 depth)
+# Run invariant/fuzz tests only (256 runs x 64 depth)
 forge test --match-contract Invariant
+
+# Run economic simulation tests only
+forge test --match-contract EconSim
 
 # Run with verbosity for failure traces
 forge test -vvv
@@ -121,7 +124,7 @@ These are the production contracts that comprise the v0.51.x protocol.
 
 ## Test Suite Summary
 
-**183 tests across 33 suites -- all passing.**
+**198 tests across 35 suites -- all passing.**
 
 ### By Category
 
@@ -132,7 +135,8 @@ These are the production contracts that comprise the v0.51.x protocol.
 | Regression | 19 | 6 | PSMRegression_Flows (3), PSMRegression_Limits (3), PSMRegression_Fees (3), PSMRegression_Spreads (2), OracleRegression_Health (4), OracleRegression_Watcher (3), PSMRegression_Base (1) |
 | Integration | 7 | 4 | Guardian_OraclePropagation (3), Guardian_PSMUnpause (1), Guardian_Integration (1), Guardian_Advanced (1), Guardian_PSMEnforcement (1), Guardian_PSMPropagation (1) |
 | Smoke | 9 | 1 | PSM_SmokeTest (9) -- Phase 7 post-deployment verification |
-| Invariant/Fuzz | 13 | 3 | BuybackVault_Invariant (5), PSMLimits_Invariant (4), SafetyAutomata_Invariant (4) |
+| Invariant/Fuzz | 18 | 4 | BuybackVault_Invariant (5), PSMLimits_Invariant (4), SafetyAutomata_Invariant (4), PSM_Invariant (5: F14-F18 supply conservation, collateral backing, vault solvency, fee bounds, supply non-negative) |
+| Economic Sim | 10 | 1 | PSM_EconSim (10: fee accrual, depeg stress, bank run, worst cases WC#1/2/5, spread+fee interaction, daily cap exhaustion, surplus proof) |
 | Misc | 4 | 2 | FeeRouter (1), TestGuardianMonitor (1), TestSafetyNet (1) |
 
 ### Invariant Configuration
@@ -203,7 +207,8 @@ The codebase uses mixed pragma versions. All files compile under solc 0.8.30 (co
 
 The following are explicitly out of scope for v0.51.x audit:
 
-- **Deployment scripts** (`script/`) -- not present in v0.51.x
+- **Deployment scripts** (`foundry/script/`) -- present but not deployed to mainnet; Sepolia-only
+- **Monitoring scripts** (`foundry/script/Monitor.s.sol`) -- read-only health checks, not deployed
 - **Frontend / DApp** (`dapp/`) -- documentation only
 - **Indexer** (`indexer/`) -- documentation only
 - **Test mocks** (`foundry/test/mocks/`, `contracts/mocks/`) -- not deployed
