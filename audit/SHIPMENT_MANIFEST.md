@@ -2,7 +2,7 @@
 
 **Protocol:** 1kUSD -- Decentralized Stablecoin
 **Tag:** `audit-final-v0.51.5`
-**Commit:** `dad9409da555d5903540684e4521120f0d1f5d80`
+**Commit:** `fb3849b6c155350652755eade7ea9970ef5cc5c5`
 **Freeze Date:** 2026-02-20
 **Compiler:** solc 0.8.30 | Forge 1.5.0-stable
 **EVM Target:** Paris | Optimizer: 200 runs
@@ -174,7 +174,7 @@ To verify file integrity after checkout:
 git checkout audit-final-v0.51.5
 # Verify commit hash
 git rev-parse HEAD
-# Expected: dad9409da555d5903540684e4521120f0d1f5d80
+# Expected: fb3849b6c155350652755eade7ea9970ef5cc5c5
 
 # Verify checksums (compare against this manifest)
 find contracts/core contracts/oracle contracts/security contracts/psm \

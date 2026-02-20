@@ -9,7 +9,7 @@
 | **Protocol** | 1kUSD -- Decentralized Stablecoin |
 | **Version** | v0.51.5 |
 | **Tag** | `audit-final-v0.51.5` |
-| **Commit** | `dad9409da555d5903540684e4521120f0d1f5d80` |
+| **Commit** | `fb3849b6c155350652755eade7ea9970ef5cc5c5` |
 | **Freeze Date** | 2026-02-20 |
 | **Repository** | https://github.com/NeaBouli/1kUSD |
 | **Compiler** | solc 0.8.30 |
