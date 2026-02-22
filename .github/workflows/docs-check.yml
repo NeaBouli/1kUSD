@@ -21,17 +21,14 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
       - name: Install MkDocs + Plugins
-        run: |
-          pip install mkdocs mkdocs-material mkdocs-git-revision-date-localized-plugin
+        run: pip install mkdocs-material mkdocs-git-revision-date-localized-plugin mkdocs-redirects mkdocs-get-deps
 
-      - name: Build documentation (tolerant)
+      - name: Build documentation
         id: build
-        run: |
-          echo "⚙️ Building MkDocs site..."
-          mkdocs build --clean || true
+        run: mkdocs build --clean
 
       - name: Verify critical routes
         id: verify

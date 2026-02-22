@@ -3,28 +3,24 @@ name: Solidity CI
 on:
   pull_request:
   push:
-    branches: [ main, dev* ]
+    branches: [main, dev*]
 
 jobs:
   build:
+    name: Forge Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
         with:
-          node-version: 20
+          submodules: recursive
 
-      - name: Install Hardhat + deps
-        run: |
-          npm install --global hardhat
-          mkdir -p hardhat_tmp && cd hardhat_tmp
-          npm init -y >/dev/null
-          npm install hardhat @openzeppelin/contracts
-          npx hardhat compile || true
+      - name: Setup Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
 
-      - name: Solidity sanity check
-        run: |
-          echo "✅ Solidity syntax OK – contracts compiled."
+      - name: Build contracts
+        run: forge build
+
+      - name: Check contract sizes
+        run: forge build --sizes

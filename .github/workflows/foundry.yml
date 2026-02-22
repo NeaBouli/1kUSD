@@ -2,37 +2,29 @@ name: Foundry Tests CI
 
 on:
   push:
-    branches: [ main, dev* ]
+    branches: [main, dev*]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  build-and-test:
-    name: Run Foundry Tests
+  test:
+    name: Forge Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Setup Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
           version: nightly
 
-      - name: Install OpenZeppelin
-        run: |
-          forge install openzeppelin/openzeppelin-contracts@v5.0.2
-          echo "✅ OpenZeppelin installed"
+      - name: Build
+        run: forge build
 
-      - name: Build & Test
-        run: |
-          forge build
-          forge test -vvv
+      - name: Run tests
+        run: forge test -vvv
 
-      - name: Install MkDocs (Material)
-        run: |
-          pip install mkdocs-material
-          mkdocs --version
-
-      - name: Docs build (non-strict)
-        run: |
-          mkdocs build --clean --verbose || true
+      - name: Run invariant tests
+        run: forge test --match-contract Invariant -vvv
