@@ -1,4 +1,4 @@
-site_name: 1kUSD – Kaspa Stablecoin
+site_name: 1kUSD - The Kaspa Stablecoin
 site_url: https://neabouli.github.io/1kUSD/
 theme:
   name: material
@@ -7,100 +7,30 @@ theme:
   favicon: assets/1kUSD.png
   features:
     - navigation.instant
-    - navigation.expand
+    - navigation.tabs
+    - navigation.sections
     - content.tabs.link
     - search.highlight
-    - content.code.copy
   palette:
     primary: teal
     accent: lime
 
+extra:
+  social:
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/Kaspa_USD
+    - icon: fontawesome/brands/github
+      link: https://github.com/NeaBouli/1kUSD
+
 nav:
   - Home: INDEX.md
+  - What is 1kUSD?: what-is-1kusd.md
+  - Why 1kUSD?: why-1kusd.md
+  - How It Works: how-it-works.md
+  - Use Cases: use-cases.md
+  - Security: security.md
+  - Roadmap: roadmap.md
   - Whitepaper:
       - English: whitepaper/WHITEPAPER_1kUSD_EN.md
       - Deutsch: whitepaper/WHITEPAPER_1kUSD_DE.md
-  - FAQ: FAQ.md
-  - Architecture:
-      - System Overview: ARCHITECTURE.md
-      - Module IDs: MODULE_IDS.md
-      - Bootstrap Quickstart: BOOTSTRAP_QUICKSTART.md
-      - Build Tooling: BUILD_TOOLING.md
-      - API Specs: API_SPECS.md
-      - Kaspa Integration Notes: KASPA_INTEGRATION_NOTES.md
-      - SDK Wiring Guide: SDK_WIRING_GUIDE.md
-  - Governance:
-      - Governance Overview: GOVERNANCE.md
-      - Governance Ops: GOVERNANCE_OPS.md
-      - Parameter Writes: GOVERNANCE_PARAM_WRITES.md
-      - Guardian Sunset Hooks: GUARDIAN_SUNSET_HOOKS.md
-      - Guardian Sunset Runbook: GUARDIAN_SUNSET_RUNBOOK.md
-      - Project Log: logs/project.md
-  - Audit Package:
-      - Audit Scope: audit/AUDIT_SCOPE.md
-      - Shipment Manifest: audit/SHIPMENT_MANIFEST.md
-      - Architecture Overview: audit/ARCHITECTURE_OVERVIEW.md
-      - Invariants: audit/INVARIANTS.md
-      - Economic Model: audit/ECONOMIC_MODEL.md
-      - Economic Risk Scenarios: audit/ECONOMIC_RISK_SCENARIOS.md
-      - Threat Model: audit/THREAT_MODEL.md
-      - Trust Model: audit/TRUST_MODEL.md
-      - Role Matrix: audit/ROLE_MATRIX.md
-      - Telemetry Model: audit/TELEMETRY_MODEL.md
-      - Known Limitations: audit/KNOWN_LIMITATIONS.md
-  - Security & Safety:
-      - Security Pre-Audit Readme: SECURITY_PREAUDIT_README.md
-      - Threat Model: THREAT_MODEL.md
-      - Safety Guardian Checklist: SAFETY_GUARDIAN_CHECKLIST.md
-      - Safety Guards Testplan: SAFETY_GUARDS_TESTPLAN.md
-      - Safety Pause Matrix: SAFETY_PAUSE_MATRIX.md
-      - Safety Rate Limiter: SAFETY_RATE_LIMITER.md
-      - Safety Rate Limiter Test Guide: SAFETY_RATE_LIMITER_TEST_GUIDE.md
-      - Token Pause Semantics: TOKEN_PAUSE_SEMANTICS.md
-      - Token Permit Spec: TOKEN_PERMIT_SPEC.md
-      - Token Permit Test Guide: TOKEN_PERMIT_TEST_GUIDE.md
-      - Audit Plan: security/audit_plan.md
-      - Bug Bounty: security/bug_bounty.md
-      - Collateral Risk Profile: risk/collateral_risk_profile.md
-      - Emergency Depeg Runbook: risk/emergency_depeg_runbook.md
-      - Proof of Reserves: risk/proof_of_reserves_spec.md
-      - Stress Test Suite: testing/stress_test_suite_plan.md
-  - PSM & Quotes:
-      - Quote Math: PSM_QUOTE_MATH.md
-      - Quote Semantics: PSM_QUOTE_SEMANTICS.md
-      - Quote Test Vectors: PSM_QUOTE_TEST_VECTORS.md
-      - Quote Exec Alignment: PSM_QUOTE_EXEC_ALIGNMENT.md
-      - PSM Reverts: PSM_REVERTS.md
-      - PSM vs CDP: PSM_VS_CDP.md
-      - Rounding Rules: ROUNDING_RULES.md
-      - Treasury Fee Routing: specs/TREASURY_FEE_ROUTING.md
-  - Vaults & Accounting:
-      - Vault Accounting: VAULT_ACCOUNTING.md
-      - Vault Accounting – Edge Cases: VAULT_ACCOUNTING_EDGE_CASES.md
-      - Vault Test Guide: VAULT_TEST_GUIDE.md
-  - Parameters:
-      - Parameter Keys: PARAMETER_KEYS.md
-      - Parameter Registry: PARAMETER_REGISTRY.md
-      - Param Keys Canon: PARAM_KEYS_CANON.md
-      - Param Keys Catalog: PARAM_KEYS_CATALOG.md
-      - JSON Validation: JSON_VALIDATION.md
-  - Developer Docs:
-      - Developer Onboarding: DEVELOPER_ONBOARDING.md
-      - CI Gates: CI_GATES.md
-      - CI Security Gate: CI_SECURITY_GATE.md
-      - SDK Event Decoders: SDK_EVENT_DECODERS.md
-      - Fee Accrual: FEE_ACCRUAL.md
-      - Collateral Registry: COLLATERAL_REGISTRY.md
-  - Integrations:
-      - Converter Router: converter/AUTOCONVERTER_ROUTER.md
-  - DApp:
-      - DApp Readme: dapp/README.md
-      - Routes: dapp/ROUTES.md
-  - Indexer:
-      - Indexing Telemetry: indexer/INDEXING_TELEMETRY.md
-  - Analysis & Notes:
-      - Analysis: ANALYSIS_KASPA_STABLECOINS.md
-      - Notes – Token Permit: NOTES_TOKEN_PERMIT.md
-  - Status: STATUS.md
-  - Changelog: CHANGELOG.md
-  - Error Catalog: ERROR_CATALOG.md
+  - Community: community.md
