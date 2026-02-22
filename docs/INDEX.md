@@ -1,113 +1,56 @@
 # 1kUSD Documentation
 
-Welcome to the 1kUSD documentation.
+Welcome to the documentation for **1kUSD** — a security-first stablecoin protocol pegged 1:1 to USD.
 
-This site describes the architecture, economic layer, security model,
-risk framework, governance processes and infrastructure/CI setup of
-the 1kUSD stablecoin project.
-
-## High-level structure
-
-The documentation is roughly organized into:
-
-- Architecture and design documents
-- Economic layer and protocol behavior (READ-ONLY for DEV-9)
-- Security and risk documentation
-- Governance and strategy reports
-- Infrastructure, CI, and tooling documentation
-- Project status and release reports
-
-DEV-9 AAAAAAAA is responsible for infrastructure-related aspects only
-(CI, Docker, Docs build, Pages hardening, monitoring preparation) and
-must not modify the Solidity contracts or economic layer logic.
-
-For more detailed dev-specific information, see the DEV-9 documents in
-`docs/dev/` (especially DEV9_Onboarding.md and DEV9_InfrastructurePlan.md).
+Built on Ethereum today. Designed for native KASPA when the layer supports it.
 
 ---
 
-## Infrastructure & CI (DEV-9 snapshot)
+## Getting Started
 
-This section summarizes the current infra / CI helpers maintained by DEV-9:
+- [Architecture Overview](ARCHITECTURE.md) — core module map and system design
+- [Bootstrap Quickstart](BOOTSTRAP_QUICKSTART.md) — build, test, deploy
+- [Developer Onboarding](DEVELOPER_ONBOARDING.md) — setup and workflow guide
+- [FAQ](FAQ.md)
 
-- **DEV-9 Infra Status (r2)**  
-  High-level overview of what DEV-9 changed and which areas are in scope.  
-  See: \`dev/DEV9_Status_Infra_r2.md\`
+## Protocol Specifications
 
-- **DEV-9 Backlog**  
-  Living backlog for infra/CI work, including Zone A/B/C separation and future blocks.  
-  See: \`dev/DEV9_Backlog.md\`
+- [PSM Quote Math](PSM_QUOTE_MATH.md) — decimals, fees, rounding
+- [PSM Revert Reasons](PSM_REVERTS.md) — error codes and conditions
+- [Vault Accounting](VAULT_ACCOUNTING.md) — collateral tracking and settlement
+- [Parameter Registry](PARAMETER_REGISTRY.md) — on-chain parameter store
+- [Rounding Rules](ROUNDING_RULES.md) — protocol-wide rounding policy
 
-- **DEV-9 Operator Guide**  
-  How to run the manual workflows and tools introduced by DEV-9  
-  (docker baseline build, docs linkcheck, CI checks).  
-  See: \`dev/DEV9_Operator_Guide.md\`
+## Security & Safety
 
-The goal is to keep infra/CI changes transparent and reproducible without touching
-the core Economic Layer contracts.
+- [Safety Pause Matrix](SAFETY_PAUSE_MATRIX.md) — per-module pause controls
+- [Threat Model](THREAT_MODEL.md) — attack classes and mitigations
+- [Security Pre-Audit Readme](SECURITY_PREAUDIT_README.md) — security posture
+- [Error Catalog](ERROR_CATALOG.md) — complete error code reference
 
----
+## Audit Package
 
-## Integrations & Developer Guides (DEV-10)
+The protocol ships with a comprehensive audit documentation package:
 
-This section is maintained by DEV-10 and focuses on how external builders
-integrate with the 1kUSD Economic Core.
+- [Audit Scope](audit/AUDIT_SCOPE.md) — scope, file manifest, build instructions
+- [Shipment Manifest](audit/SHIPMENT_MANIFEST.md) — SHA-256 checksums, build verification
+- [Invariants](audit/INVARIANTS.md) — 35 protocol invariants with coverage matrix
+- [Economic Risk Scenarios](audit/ECONOMIC_RISK_SCENARIOS.md) — 5 risk scenarios with mitigations
+- [Known Limitations](audit/KNOWN_LIMITATIONS.md) — 12 accepted limitations
 
-- **Integrations index**  
-  High-level entry point for all integration-focused documentation.  
-  See: `integrations/index.md`
+See the full [Audit Package](audit/AUDIT_SCOPE.md) section in the sidebar for all 11 documents.
 
-- **Planned guides**  
-  - PSM Integration Guide  
-  - Oracle Aggregator Integration Guide  
-  - Guardian & Safety Events Guide  
-  - BuybackVault Observer Guide
+## Governance
 
----
+- [Governance Overview](GOVERNANCE.md) — parameter governance via DAO Timelock
+- [Parameter Keys Catalog](PARAM_KEYS_CATALOG.md) — complete parameter reference
+- [Guardian Sunset Runbook](GUARDIAN_SUNSET_RUNBOOK.md) — guardian phase-out process
 
-## Reports & Status Index
+## Status
 
-For an overview of the main status, governance and sync reports, see:
-
-- `reports/REPORTS_INDEX.md`
-
----
-
-## Developer Quickstart
-
-If you are new to the 1kUSD repository and want a concise overview of how to
-set up your environment, run tests and follow the patch-based workflow, see:
-
-- \`dev/DEV_Developer_Quickstart.md\`
-
-This page complements the DEV-9 and DEV-10 documents and is intended as a
-first stop for new contributors.
+- [Changelog](CHANGELOG.md)
+- [Project Status](STATUS.md)
 
 ---
 
-## DEV Roles Index
-
-For an overview of the main DEV roles (DEV-7, DEV-8, DEV-9, DEV-10) and their
-key documents, see:
-
-- `dev/DEV_Roles_Index.md`
-
-## Release flow (DEV-94)
-
-- [DEV94_ReleaseFlow_Plan_r2](dev/DEV94_ReleaseFlow_Plan_r2.md) – Current & target release flow and DEV-94 backlog (docs-only, no CI changes).
-
-- [DEV94_How_to_cut_a_release_tag_v051](dev/DEV94_How_to_cut_a_release_tag_v051.md) – Step-by-step guide for maintainers cutting v0.51.x tags.
-
-## Economic Layer – Future / Advanced (DEV-11)
-
-- [DEV11_BuybackVault_EconomicAdvanced_Plan_r1](dev/DEV11_BuybackVault_EconomicAdvanced_Plan_r1.md) – Planning document for advanced buyback and economic layer features beyond v0.51/v0.52 (docs-only).
-- [buybackvault_strategy_phaseA_advanced](architecture/buybackvault_strategy_phaseA_advanced.md) – StrategyEnforcement Phase A advanced spec (DEV-11, docs-only, no contract changes).
-- [DEV11_Telemetry_Events_Outline_r1](dev/DEV11_Telemetry_Events_Outline_r1.md) – Telemetry and events outline for advanced buyback / StrategyEnforcement (DEV-11, docs-only).
-
-- [DEV11_Implementation_Backlog_SolidityTrack_r1](dev/DEV11_Implementation_Backlog_SolidityTrack_r1.md) – High-level backlog for a future Solidity implementation track based on DEV-11 planning docs.
-
-- [DEV11_Architect_Handoff_BuybackAdvanced_r1](dev/DEV11_Architect_Handoff_BuybackAdvanced_r1.md) – Summary & handoff for BuybackVault/Economic Advanced (DEV-11 docs-only).
-
-- [DEV9_Architecture_Sync_OracleClarifications_r1](dev/DEV9_Architecture_Sync_OracleClarifications_r1.md) – DEV-9 architecture sync on oracle & safety clarifications (Dec 2025).
-
-- [ARCHITECT_BULLETIN_Oracle_Safety_Clarifications_2025-12](reports/ARCHITECT_BULLETIN_Oracle_Safety_Clarifications_2025-12.md) – Architect bulletin on oracle dependency & buyback safety stack (Dec 2025).
+**Follow development:** [@Kaspa_USD on X](https://x.com/Kaspa_USD) | [GitHub](https://github.com/NeaBouli/1kUSD)

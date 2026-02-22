@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="assets/1kusd-banner.jpg" alt="1kUSD Kaspa Stablecoin" width="480">
+  <img src="assets/1kUSD.png" alt="1kUSD Kaspa Stablecoin" width="200">
 </p>
 
 # 1kUSD Documentation Index
 
 This index organizes the documentation for the 1kUSD stablecoin protocol (v0.51.x).
-For quick start and project overview, see the root [`README.md`](../README.md).
+For quick start and project overview, see the [README on GitHub](https://github.com/NeaBouli/1kUSD).
 
 ---
 

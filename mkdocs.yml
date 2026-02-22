@@ -21,30 +21,33 @@ nav:
       - English: whitepaper/WHITEPAPER_1kUSD_EN.md
       - Deutsch: whitepaper/WHITEPAPER_1kUSD_DE.md
   - FAQ: FAQ.md
-  - Governance & Logs:
-      - Governance Overview: GOVERNANCE.md
-      - Governance Ops: GOVERNANCE_OPS.md
-      - Parameter Writes: GOVERNANCE_PARAM_WRITES.md
-      - Guardian Sunset Hooks: GUARDIAN_SUNSET_HOOKS.md
-      - Guardian Sunset Runbook: GUARDIAN_SUNSET_RUNBOOK.md
-      - Project Log: logs/project.md
   - Architecture:
       - System Overview: ARCHITECTURE.md
-      - Architektur (DE): ARCHITEKTUR.md
       - Module IDs: MODULE_IDS.md
       - Bootstrap Quickstart: BOOTSTRAP_QUICKSTART.md
       - Build Tooling: BUILD_TOOLING.md
       - API Specs: API_SPECS.md
       - Kaspa Integration Notes: KASPA_INTEGRATION_NOTES.md
       - SDK Wiring Guide: SDK_WIRING_GUIDE.md
-  - Specs:
-      - Token Spec: specs/TOKEN_SPEC.md
-      - PSM Spec: specs/PSM_SPEC.md
-      - Collateral Vault Spec: specs/COLLATERAL_VAULT_SPEC.md
-      - Oracle Aggregator Spec: specs/ORACLE_AGGREGATOR_SPEC.md
-      - Proof of Reserves Spec: specs/PROOF_OF_RESERVES_SPEC.md
-      - Safety Automata Spec: specs/SAFETY_AUTOMATA_SPEC.md
-      - Treasury Fee Routing: specs/TREASURY_FEE_ROUTING.md
+  - Governance:
+      - Governance Overview: GOVERNANCE.md
+      - Governance Ops: GOVERNANCE_OPS.md
+      - Parameter Writes: GOVERNANCE_PARAM_WRITES.md
+      - Guardian Sunset Hooks: GUARDIAN_SUNSET_HOOKS.md
+      - Guardian Sunset Runbook: GUARDIAN_SUNSET_RUNBOOK.md
+      - Project Log: logs/project.md
+  - Audit Package:
+      - Audit Scope: audit/AUDIT_SCOPE.md
+      - Shipment Manifest: audit/SHIPMENT_MANIFEST.md
+      - Architecture Overview: audit/ARCHITECTURE_OVERVIEW.md
+      - Invariants: audit/INVARIANTS.md
+      - Economic Model: audit/ECONOMIC_MODEL.md
+      - Economic Risk Scenarios: audit/ECONOMIC_RISK_SCENARIOS.md
+      - Threat Model: audit/THREAT_MODEL.md
+      - Trust Model: audit/TRUST_MODEL.md
+      - Role Matrix: audit/ROLE_MATRIX.md
+      - Telemetry Model: audit/TELEMETRY_MODEL.md
+      - Known Limitations: audit/KNOWN_LIMITATIONS.md
   - Security & Safety:
       - Security Pre-Audit Readme: SECURITY_PREAUDIT_README.md
       - Threat Model: THREAT_MODEL.md
@@ -56,14 +59,12 @@ nav:
       - Token Pause Semantics: TOKEN_PAUSE_SEMANTICS.md
       - Token Permit Spec: TOKEN_PERMIT_SPEC.md
       - Token Permit Test Guide: TOKEN_PERMIT_TEST_GUIDE.md
-      - Security Analysis: testing/SECURITY_ANALYSIS.md
-  - Vaults & Accounting:
-      - Vault Accounting: VAULT_ACCOUNTING.md
-      - Vault Accounting – Edge Cases: VAULT_ACCOUNTING_EDGE_CASES.md
-      - Vault Accounting Plan: VAULT_ACCOUNTING_PLAN.md
-      - Vault Test Guide: VAULT_TEST_GUIDE.md
-      - Notes – Vault Minimal: NOTES_VAULT_MINIMAL.md
-      - Notes – Vault Accounting: NOTES_VAULT_ACCOUNTING.md
+      - Audit Plan: security/audit_plan.md
+      - Bug Bounty: security/bug_bounty.md
+      - Collateral Risk Profile: risk/collateral_risk_profile.md
+      - Emergency Depeg Runbook: risk/emergency_depeg_runbook.md
+      - Proof of Reserves: risk/proof_of_reserves_spec.md
+      - Stress Test Suite: testing/stress_test_suite_plan.md
   - PSM & Quotes:
       - Quote Math: PSM_QUOTE_MATH.md
       - Quote Semantics: PSM_QUOTE_SEMANTICS.md
@@ -72,8 +73,11 @@ nav:
       - PSM Reverts: PSM_REVERTS.md
       - PSM vs CDP: PSM_VS_CDP.md
       - Rounding Rules: ROUNDING_RULES.md
-      - Notes – PSM Execution: NOTES_PSM_EXECUTION.md
-      - Notes – PSM Minimal: NOTES_PSM_MINIMAL.md
+      - Treasury Fee Routing: specs/TREASURY_FEE_ROUTING.md
+  - Vaults & Accounting:
+      - Vault Accounting: VAULT_ACCOUNTING.md
+      - Vault Accounting – Edge Cases: VAULT_ACCOUNTING_EDGE_CASES.md
+      - Vault Test Guide: VAULT_TEST_GUIDE.md
   - Parameters:
       - Parameter Keys: PARAMETER_KEYS.md
       - Parameter Registry: PARAMETER_REGISTRY.md
@@ -87,29 +91,16 @@ nav:
       - SDK Event Decoders: SDK_EVENT_DECODERS.md
       - Fee Accrual: FEE_ACCRUAL.md
       - Collateral Registry: COLLATERAL_REGISTRY.md
-      - DEV9 Assignment: DEV9_ASSIGNMENT.md
   - Integrations:
-      - DEX Integration: integrations/DEX_INTEGRATION.md
       - Converter Router: converter/AUTOCONVERTER_ROUTER.md
   - DApp:
       - DApp Readme: dapp/README.md
       - Routes: dapp/ROUTES.md
   - Indexer:
       - Indexing Telemetry: indexer/INDEXING_TELEMETRY.md
-  - Testing:
-      - Testplan: testing/TESTPLAN.md
-      - Formal Invariants Map: testing/FORMAL_INVARIANTS_MAP.md
   - Analysis & Notes:
       - Analysis: ANALYSIS_KASPA_STABLECOINS.md
       - Notes – Token Permit: NOTES_TOKEN_PERMIT.md
   - Status: STATUS.md
   - Changelog: CHANGELOG.md
   - Error Catalog: ERROR_CATALOG.md
-
-  - Security & Risk:
-      - Security audit plan: security/audit_plan.md
-      - Bug bounty: security/bug_bounty.md
-      - Proof of reserves: risk/proof_of_reserves_spec.md
-      - Collateral risk profile: risk/collateral_risk_profile.md
-      - Emergency depeg runbook: risk/emergency_depeg_runbook.md
-      - Stress test suite plan: testing/stress_test_suite_plan.md
