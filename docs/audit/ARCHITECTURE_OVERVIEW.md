@@ -1,1 +1,0 @@
-../../audit/ARCHITECTURE_OVERVIEW.md

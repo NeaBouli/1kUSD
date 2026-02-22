@@ -1,1 +1,0 @@
-../../audit/THREAT_MODEL.md
