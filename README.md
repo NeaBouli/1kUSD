@@ -21,7 +21,8 @@
 
 <p align="center">
   <a href="https://x.com/Kaspa_USD">Follow @Kaspa_USD on X</a> |
-  <a href="https://neabouli.github.io/1kUSD/">Documentation</a> |
+  <a href="https://neabouli.github.io/1kUSD/">Website</a> |
+  <a href="https://github.com/NeaBouli/1kUSD/wiki">Technical Wiki</a> |
   <a href="audit/AUDIT_SCOPE.md">Audit Package</a>
 </p>
 
@@ -71,7 +72,8 @@ contracts/           Solidity source (core/, psm/, oracle/, interfaces/)
 foundry/test/        Foundry test suites (unit, regression, invariant, econ sim)
 foundry/script/      Deployment & monitoring scripts
 audit/               Audit documentation package (11 docs)
-docs/                Architecture, specs, governance, reports
+docs/                Marketing site (GitHub Pages via MkDocs)
+docs-internal/       Technical documentation (architecture, specs, governance)
 lib/                 Dependencies (forge-std, OpenZeppelin)
 .github/workflows/   CI pipelines
 ```
@@ -115,17 +117,17 @@ The protocol ships with a comprehensive audit documentation package in [`audit/`
 
 - [Audit scope & freeze](audit/AUDIT_SCOPE.md) — 34 in-scope Solidity files
 - [Economic risk scenarios](audit/ECONOMIC_RISK_SCENARIOS.md) — depeg, oracle failure, key compromise, bank run, fee sustainability
-- [Gas/DoS review](docs/reports/GAS_DOS_REVIEW_v051.md) — 8 findings, all resolved
-- [Deployment checklist](docs/reports/DEPLOYMENT_CHECKLIST_v051.md) — Phase 1-7 verification
-- [Error catalog](docs/ERROR_CATALOG.md) — complete error code mapping
+- [Gas/DoS review](docs-internal/reports/GAS_DOS_REVIEW_v051.md) — 8 findings, all resolved
+- [Deployment checklist](docs-internal/reports/DEPLOYMENT_CHECKLIST_v051.md) — Phase 1-7 verification
+- [Error catalog](docs-internal/core/ERROR_CATALOG.md) — complete error code mapping
 
 ## Governance
 
 Parameter governance via `ParameterRegistry` + DAO Timelock:
 
-- [Governance overview](docs/GOVERNANCE.md)
-- [Parameter keys catalog](docs/PARAM_KEYS_CATALOG.md)
-- [Guardian sunset runbook](docs/GUARDIAN_SUNSET_RUNBOOK.md)
+- [Governance overview](docs-internal/core/GOVERNANCE.md)
+- [Parameter keys catalog](docs-internal/core/PARAM_KEYS_CATALOG.md)
+- [Guardian sunset runbook](docs-internal/core/GUARDIAN_SUNSET_RUNBOOK.md)
 
 ## KASPA Roadmap
 
@@ -140,7 +142,7 @@ Follow development: [@Kaspa_USD](https://x.com/Kaspa_USD)
 
 ## Contributing
 
-See [`docs/DEVELOPER_ONBOARDING.md`](docs/DEVELOPER_ONBOARDING.md) for setup and workflow.
+See [`docs-internal/core/DEVELOPER_ONBOARDING.md`](docs-internal/core/DEVELOPER_ONBOARDING.md) for setup and workflow.
 
 ## License
 
