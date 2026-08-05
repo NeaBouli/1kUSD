@@ -1,7 +1,7 @@
 # Kimi K3 Review
 
-Review date: **2026-08-05**  
-Mode: **read-only independent final review**  
+Review date: **2026-08-05**
+Mode: **read-only independent final review**
 Result: **no P0; two P1 findings; four P2 findings**
 
 The audit also included earlier read-only repository/security and Kaspa Toccata

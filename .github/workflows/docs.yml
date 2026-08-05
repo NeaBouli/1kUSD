@@ -30,11 +30,13 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: |
-          pip install mkdocs-material mkdocs-git-revision-date-localized-plugin mkdocs-redirects mkdocs-get-deps
+        run: pip install mkdocs-material==9.6.20
 
       - name: Build site
-        run: mkdocs build --clean --verbose
+        run: mkdocs build --clean --strict
+
+      - name: Verify Pages root
+        run: test -f site/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

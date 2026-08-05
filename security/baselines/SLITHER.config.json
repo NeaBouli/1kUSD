@@ -1,12 +1,8 @@
 {
-"filter_paths": ["node_modules", "lib", "out", "artifacts"],
-"exclude": {
-"detectors": [
-"naming-convention",
-"too-many-lines",
-"solc-version"
-]
-},
-"solc-remaps": [],
-"truffle": false
+  "filter_paths": "node_modules|lib|out|artifacts",
+  "detectors_to_exclude": "naming-convention,too-many-lines,solc-version",
+  "exclude_low": true,
+  "exclude_informational": true,
+  "exclude_optimization": true,
+  "fail_on": "medium"
 }

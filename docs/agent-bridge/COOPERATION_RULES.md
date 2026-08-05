@@ -1,7 +1,7 @@
 # Cooperation Rules
 
-Project: **1kUSD**  
-Repository: `NeaBouli/1kUSD`  
+Project: **1kUSD**
+Repository: `NeaBouli/1kUSD`
 Risk class: **High — smart contracts, governance, stablecoin economics**
 
 ## Authority

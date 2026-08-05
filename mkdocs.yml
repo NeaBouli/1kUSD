@@ -1,5 +1,8 @@
-site_name: 1kUSD - The Kaspa Stablecoin
+site_name: 1kUSD Stablecoin Protocol
+site_description: Collateralized stablecoin research and testnet implementation
 site_url: https://neabouli.github.io/1kUSD/
+exclude_docs: |
+  agent-bridge/
 theme:
   name: material
   language: en
@@ -23,7 +26,7 @@ extra:
       link: https://github.com/NeaBouli/1kUSD
 
 nav:
-  - Home: INDEX.md
+  - Home: index.md
   - What is 1kUSD?: what-is-1kusd.md
   - Why 1kUSD?: why-1kusd.md
   - How It Works: how-it-works.md

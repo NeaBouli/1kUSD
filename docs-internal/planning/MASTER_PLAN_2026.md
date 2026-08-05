@@ -1,8 +1,8 @@
 # 1kUSD Master Plan — Functional Stablecoin Program
 
-Status: **Proposed; execution requires ticket-by-ticket approval**  
-Last updated: **2026-08-05**  
-Accountable lead: **Codex Sol**  
+Status: **Proposed; execution requires ticket-by-ticket approval**
+Last updated: **2026-08-05**
+Accountable lead: **Codex Sol**
 Product authority: **Gio**
 
 ## 1. Objective
