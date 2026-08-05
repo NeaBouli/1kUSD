@@ -38,9 +38,12 @@ The product goal is a fully collateralized USD-targeting asset with:
 
 ## Kaspa direction
 
-Kaspa Toccata is live, but it uses a UTXO/covenant model rather than EVM accounts.
-The Solidity code is an economic reference; the Kaspa implementation requires a
-new covenant/based-app architecture and an isolated testnet proof of concept.
+Kaspa Toccata is the approved primary product track. Its programmability stack is
+still a testnet/pre-mainnet dependency under active development and uses a
+UTXO/covenant model rather than EVM accounts. The Solidity code is an executable
+economic reference; the Kaspa implementation requires a separately approved
+covenant, based-app, or hybrid architecture and an isolated testnet proof of
+concept.
 
 [Project status](what-is-1kusd.md) · [Mechanism](how-it-works.md) ·
 [Security](security.md) · [Roadmap](roadmap.md) ·

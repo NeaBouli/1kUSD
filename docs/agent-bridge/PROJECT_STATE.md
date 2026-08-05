@@ -14,15 +14,19 @@ Last reviewed: **2026-08-05**
 - The oracle is admin-set mock infrastructure, the DAO timelock is a stub, and
   fee routing is incomplete.
 - No production deployment or proof-of-reserves system is documented.
-- Kaspa Toccata is live, but the EVM implementation is not directly portable to
-  its UTXO/covenant model.
+- Kaspa Toccata programmability remains a testnet/pre-mainnet dependency under
+  active development; the EVM implementation is not directly portable to its
+  UTXO/covenant model.
+- `ADR-041` approves Kaspa Toccata as the primary product track. EVM remains an
+  executable reference without a current production commitment.
 
 ## Current phase
 
-`remediation_planning`
+`product_scope_approved`
 
 No contract or governance change is approved merely by inclusion in the master
-plan. The next executable ticket must be explicitly selected by Gio.
+plan. `1K-P1-012` / #112 is the next candidate task, but remains proposed until
+Gio explicitly marks it `approved_for_execution`.
 
 ## Release status
 

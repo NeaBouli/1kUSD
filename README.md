@@ -22,6 +22,11 @@
 > external audit. The current EVM code contains test-only and stub components.
 > Do not deploy it with real funds.
 
+**Approved product direction:** Kaspa Toccata is the primary target. The EVM
+implementation remains an executable reference and test model with no current
+production commitment. See
+[`ADR-041`](docs-internal/adr/ADR-041-kaspa-primary-product-track.md).
+
 ## Current verified baseline
 
 | Area | Verified state (2026-08-05) |

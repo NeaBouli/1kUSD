@@ -1,6 +1,6 @@
 # 1kUSD Master Plan — Functional Stablecoin Program
 
-Status: **Proposed; execution requires ticket-by-ticket approval**
+Status: **Kaspa-primary direction approved; execution remains ticket-gated**
 Last updated: **2026-08-05**
 Accountable lead: **Codex Sol**
 Product authority: **Gio**
@@ -8,7 +8,7 @@ Product authority: **Gio**
 ## 1. Objective
 
 Turn the existing research/testnet prototype into a fully functional,
-collateralized stablecoin while preserving the project's core ideas:
+Kaspa-native collateralized stablecoin while preserving the project's core ideas:
 
 - one unit targets one US dollar of redeemable collateral value;
 - two-way conversion through a Peg Stability Module;
@@ -18,10 +18,15 @@ collateralized stablecoin while preserving the project's core ideas:
 - time-limited emergency pause authority without fund custody;
 - timelocked, multisig-backed governance;
 - deterministic fee and treasury accounting;
-- an eventual Kaspa-native implementation built for Toccata rather than copied
-  from the EVM account model.
+- a Kaspa-primary implementation built for Toccata rather than copied from the
+  EVM account model.
 
 This document is a program plan, not permission to change contract semantics.
+
+The product-track decision is accepted in
+[`ADR-041`](../adr/ADR-041-kaspa-primary-product-track.md): Kaspa Toccata is the
+primary target; EVM remains an executable reference without a current production
+commitment.
 
 ## 2. Baseline
 
@@ -56,7 +61,12 @@ this planning change.
 10. **Observable operation:** reserve, supply, price, pause, limit, and governance
     state can be independently monitored.
 
-## 4. Target architecture — EVM track
+## 4. Reference architecture — EVM track
+
+The EVM implementation supplies testable economic behavior, invariants, and
+failure cases. It is not the primary production target. Each EVM ticket must be
+reclassified after the Kaspa ADR as portable specification work, reference-only
+maintenance, or unnecessary.
 
 ### Token
 
@@ -103,7 +113,7 @@ Reproducible deployment, address manifest, verified source, role matrix,
 monitoring, alerting, incident response, reserve attestation, bug bounty, and
 release rollback/containment procedures.
 
-## 5. Kaspa Toccata track
+## 5. Primary architecture — Kaspa Toccata track
 
 The EVM implementation is an executable specification, not port source.
 
@@ -119,22 +129,24 @@ Kaspa design begins with an ADR covering:
 - proof/settlement assumptions;
 - experimental Silverscript/vProgs version pinning.
 
-The first implementation is an isolated, value-capped testnet-10 vault/issuance
-proof of concept. It must not hold production funds or dictate the full design.
+The first implementation is an isolated, value-capped testnet vault/issuance
+proof of concept. The exact supported Toccata test network must be selected from
+current official tooling evidence in #112. It must not hold production funds or
+dictate the full design.
 
 ## 6. Program phases
 
 | Phase | Goal | Exit criteria |
 |---|---|---|
 | 0 — Truth and hygiene | Honest status, Bridge, plan, issues, Pages/README, active-tree cleanup | `1K-P1-013` merged with green checks |
-| 1 — Safety correctness | Resolve sunset and Guardian lifecycle | Focused + full tests; threat model/review complete |
-| 2 — Governance foundation | Functional timelock/multisig and role handoff | No deployer privilege; delayed execution E2E |
-| 3 — Economic core | Collateral, decimals, limits, rounding, fee accounting | Solvency and conservation invariants pass |
-| 4 — Production oracle | Approved real feeds and incident behavior | Stale/deviation/quorum/fallback tests and monitoring |
-| 5 — Deployment and operations | Reproducible testnet release | Clean-room deploy, verified manifest, role and swap E2E |
-| 6 — Assurance | Coverage, Slither, fuzz/invariant, economic simulations | No open High/Medium; agreed coverage floors |
+| 1 — Product boundary | Accept Kaspa-primary scope and invariants | `ADR-041`; `1K-P0-001` complete |
+| 2 — Kaspa architecture | Compare covenant, based-app, and hybrid designs | `1K-P1-012` ADR approved; trust and state model explicit |
+| 3 — Isolated Kaspa PoC | Value-capped vault/issuance experiment | Separate approved task; reproducible testnet evidence |
+| 4 — Protocol hardening | Resolve safety, governance, collateral, fee, and oracle specifications | Threat models and portable invariants approved |
+| 5 — Deployment and operations | Reproducible Kaspa testnet candidate | Clean-room deploy, manifest, monitoring, and role E2E |
+| 6 — Assurance | Coverage, static analysis, fuzz/invariant, economic simulations | No open High/Medium; agreed quality floors |
 | 7 — External review | New freeze, professional audit, bug bounty | Findings remediated and re-audited |
-| 8 — Kaspa validation | Toccata ADR and isolated PoC | Testnet evidence; no production claim |
+| 8 — Production readiness | Legal, reserve, redemption, and incident gates | All mainnet gates evidenced; explicit launch approval |
 
 ## 7. Mainnet release gates
 

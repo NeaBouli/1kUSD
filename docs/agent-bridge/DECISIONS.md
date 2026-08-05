@@ -2,7 +2,7 @@
 
 | ID | Decision required | Options | Owner | Status |
 |---|---|---|---|---|
-| `DEC-001` | Product track | EVM production first / Kaspa first / dual track | Gio | Open |
+| `DEC-001` | Product track | Kaspa primary; EVM executable reference only | Gio | Approved 2026-08-05 (`ADR-041`) |
 | `DEC-002` | Post-sunset pause authority | DAO only / multisig + DAO / other | Gio | Open |
 | `DEC-003` | Guardian resume path | Direct DAO call / role-bearing Guardian contract | Gio | Open |
 | `DEC-004` | Fee destination | Reserve overcollateralization / treasury / split | Gio | Open |

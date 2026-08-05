@@ -53,8 +53,9 @@ validieren, native Asset-Ausgabe definieren, heißen PSM-Zustand sharden,
 Oraclereports prüfen und Indexer-/Reorg-Recovery unterstützen. Solidity liefert
 ökonomische Spezifikation und Invarianten, keinen direkt portierbaren Runtimecode.
 
-Der erste Meilenstein ist ein gepinnter, wertbegrenzter Testnet-10-Prototyp nach
-einem Architecture Decision Record. Es wird kein Kaspa-Mainnet-Datum zugesagt.
+Der erste Meilenstein ist ein gepinnter, wertbegrenzter Prototyp im dann aktuell
+unterstützten Toccata-Testnetz nach einem Architecture Decision Record. Es wird
+kein Kaspa-Mainnet-Datum zugesagt.
 
 ## Releasevoraussetzungen
 

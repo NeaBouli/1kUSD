@@ -50,8 +50,9 @@ define native-asset issuance, shard hot PSM state, verify oracle reports, and
 support indexer/reorg recovery. The Solidity contracts provide economic
 specification and invariants, not portable runtime code.
 
-The first milestone is a pinned, value-capped testnet-10 proof of concept after an
-architecture decision record. No Kaspa mainnet date is claimed.
+The first milestone is a pinned, value-capped proof of concept on the then-current
+supported Toccata test network after an architecture decision record. No Kaspa
+mainnet date is claimed.
 
 ## Release requirements
 
