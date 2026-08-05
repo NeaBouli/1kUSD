@@ -1,52 +1,59 @@
 # Contributing to 1kUSD
 
-**Repository language: English.**  
-Whitepaper is available in German and English (see `docs/whitepaper/`).
+Repository language is English. The project is a high-risk smart-contract and
+stablecoin system, so changes are intentionally small and evidence-driven.
 
-## Roles & workflow
-- **Main Architect:** owns architecture & task assignment (issues/prompts).  
-- **Developers:** deliver **EOF-closed files** (here-doc style) and minimal shell snippets.  
-- **Middleman:** runs copy-paste commands locally (no secrets shared).
+## Before starting
 
-## Branching & commits
-- Default branch: `main`.  
-- Prefer small, reviewable PRs.  
-- Commit messages: `type(scope): short summary`  
-  - Examples: `docs(whitepaper): add EN version`, `ci: enable tests`, `chore: bump deps`
+1. Read [PROJECT_STATE.md](docs/agent-bridge/PROJECT_STATE.md).
+2. Select an approved GitHub issue from the
+   [ticket list](docs/agent-bridge/TICKET_LIST.md).
+3. Confirm scope, excluded files, dependencies, risk, owner, reviewer,
+   acceptance criteria, and required tests.
+4. For contracts, governance, oracle, collateral, fees, or deployments, include a
+   threat-model and invariant delta before implementation.
 
 ## Pull requests
-1. Reference the task/prompt in the PR description.  
-2. Include what changed, why, and how it was tested.  
-3. Ensure CI passes; add/adjust tests if needed.  
-4. Do **not** include secrets; use placeholders and .env.example if relevant.
 
-## EOF-based deliverables (required)
-- All artifacts must be provided as **here-doc** payloads ending with `EOF`.  
-- Shell snippets must be **idempotent** (safe to re-run).  
-- Include any new or updated file paths explicitly.
+- One bounded concern per PR.
+- Branch from current `main`; do not work directly on `main`.
+- Do not mix dependency upgrades, workflow changes, formatting, and protocol logic.
+- Never include secrets, local environments, generated `out/` or `cache/`, wallet
+  files, broadcasts, or production configuration.
+- Explain what changed, why, user/security impact, checks, remaining risk, and
+  rollback/containment.
 
-## Coding standards (to be detailed later)
-- Solidity/TS formatting via project tooling (to be defined).  
-- Prefer clear interfaces first (IDL/ABI/API specs), then implementation.
+## Required verification
 
-## Tests & quality gates
-- Unit + integration tests required for core logic (VM/PSM/Vault/Oracle).  
-- Fuzz/property tests for parsers/financial invariants.  
-- Lint + static analysis (Slither/Mythril/ESLint) in CI.  
-- No merge to `main` with failing CI.
+For Solidity changes, at minimum:
 
-## Security
-- Follow `SECURITY.md`. Use GitHub Security Advisories for sensitive reports.  
-- Ownerless/Timelock patterns; no EOAs controlling funds.  
-- Never commit private keys, tokens, or credentials.  
-- SBOM & signed releases prior to mainnet.
+```bash
+forge build
+forge test -vv
+forge test --match-contract Invariant -vv
+forge lint
+```
 
-## Documentation
-- Update `docs/CHANGELOG.md` for user-facing or protocol-level changes.  
-- Keep `interfaces/` and `docs/API_SPECS.md` aligned with contract/SDK changes.
+Run focused regression tests first, then the full relevant suite. New semantics
+require tests that fail before the fix and pass after it. A placeholder or static
+test-count badge is not verification.
 
-## How to run tasks locally (middleman)
-- Copy-paste the provided here-doc blocks into the terminal at repo root.  
-- Verify with `git status`, then commit/push as instructed in the snippet.
+For documentation changes:
 
-Thanks for contributing to 1kUSD!
+```bash
+mkdocs build --clean --strict
+```
+
+## Review and merge
+
+- CI must pass and all review conversations must be resolved.
+- Contract/security/economic changes require independent review.
+- Authors do not self-approve delegated work.
+- Only the accountable lead publishes or integrates agent-generated changes.
+- Mainnet deployment and release require explicit Gio approval and all master-plan
+  release gates.
+
+## Licensing
+
+License metadata is currently being reconciled. Preserve existing file SPDX
+identifiers and do not mass-change license headers without an approved legal task.

@@ -1,105 +1,66 @@
-# 📘 1kUSD Whitepaper (Deutsch)
-*Version 1.0 – Oktober 2025*  
-*Lizenz: AGPL-3.0*
+# 1kUSD Konzept- und Implementierungsspezifikation
 
-## 1. Abstract
+Version: Remediation-Entwurf, 2026-08-05
 
-## Oracle Regression Stability — DEV-41
+> Dieses Dokument beschreibt Produktziel und Architektur. Es ist kein Nachweis
+> für Produktivbetrieb, Audit-Zertifizierung, Reserven, Liquidität oder einen
+> garantierten Peg.
 
-This release consolidates the stability of the OracleWatcher, OracleAggregator,
-and Oracle propagation paths. It resolves ZERO_ADDRESS initialization issues,
-restores correct inheritance chains, and ensures refreshState() behaves consistently.
+## Zusammenfassung
 
-Full report: **docs/reports/DEV41_ORACLE_REGRESSION.md**
+1kUSD soll ein vollständig besicherter, USD-orientierter Token mit beidseitiger
+Konvertierung über ein Peg Stability Module werden. Das Modell vermeidet
+Nutzer-CDP-Schulden und Liquidationspositionen. Seine Sicherheit hängt von
+Collateralqualität, Accounting, Oracles, Limits, Governance, Liquidität, Betrieb
+und unabhängig geprüfter Software ab.
 
-**1kUSD** ist ein vollständig dezentraler, on-chain besicherter und algorithmisch stabilisierter Stablecoin (EVM-Start, Kasplex/Kaspa-Pfad). Ziel: **1:1 USD-Peg** ohne zentrale Verwahrung – mit **Vault (Stablecoins)**, **PSM (1:1-Swap)**, **AutoConverter** (volatile → stable), **Oracle-Median**, **Safety-Automata** (Rate-Limiter, Circuit-Breaker), **DAO/Timelock** (Governance).
+## Kernmechanismus
 
-## 2. Problem
-Zentrale Stablecoins (USDT/USDC) dominieren, sind custodial und einfrierbar. Kaspa-Ökosystem fehlt ein **nativ dezentraler** USD-Peg mit **on-chain Proof-of-Reserves**.
+Freigegebenes Collateral gelangt in einen Vault. Nach Asset-, Preis-, Limit-,
+Gebühren-, Deadline- und Pauseprüfungen mintet das PSM den Nettobetrag 1kUSD. Bei
+der Rückgabe werden 1kUSD verbrannt und Nettocollateral freigegeben. Gebühren
+folgen einer ausdrücklich freigegebenen Reserve-/Treasury-Policy.
 
-## 3. Lösung (Überblick)
-- **On-Chain Module:** Token, CollateralVault, AutoConverter, PSM, OracleAggregator, Safety-Automata, DAO/Timelock, Treasury, Bridge-Anker (Vorbereitung).
-- **Peg-Mechanik:** PSM erlaubt 1kUSD ↔ Stablecoins (nahe 1:1, geringe Fee). Arbitrage hält Marktpreis bei ≈1 USD.  
-- **Deckung:** Vault hält überwiegend **USDT/USDC/DAI**; optional konvertierte volatile Assets via AutoConverter.  
-- **Transparenz:** On-chain Proof-of-Reserves, Indexer/Explorer.
+Erforderliche Invarianten umfassen Supply Conservation, Reservendeckung, atomare
+Swaps, begrenzte Ausgabe, deterministisches Runden sowie Gebühren- und
+Assetabgleich.
 
-## 4. Architektur
-**Textschema:**  
-Benutzer/Wallet → RPC/SDK → PSM / AutoConverter → **CollateralVault** ↔ **1kUSD Token** ↔ DEX/AMM  
-CollateralVault ← OracleAggregator (Health/Median) ← Safety-Automata (Policies)  
-DAO/Timelock → Parameter (PSM-Fee, Caps, Oracles, Limits)  
-Bridge-Anker (später) ↔ Kasplex/Kaspa
+## Governance und Sicherheit
 
-**Kernmodule (Funktionen):**
-- **1kUSD Token:** ERC-20, mint/burn ausschließlich durch Protokoll-Module.  
-- **CollateralVault:** Verwahrt Stablecoins, nur Protokollpfade für Ein/Ausgänge, Exposure-Caps.  
-- **AutoConverter:** Nimmt volatile Assets an, routet best-execution zu Stablecoins → Vault.  
-- **PSM:** 1:1-Swap 1kUSD↔Stablecoin (Fee ~0,1%), Rate-Limiter, Caps, Pause-fähig.  
-- **OracleAggregator:** Multi-Feed Median (Chainlink/Pyth/TWAP), Deviation/Staleness-Guards.  
-- **Safety-Automata:** Pausieren/Wiederaufnehmen, Caps, Rate-Limits, kein Asset-Zugriff.  
-- **DAO/Timelock:** Param-Updates mit Verzögerung; Phase-2 optional Governance-Token.  
-- **Treasury:** Gebührensenke; Ausgaben nur via DAO.  
-- **Bridge-Anker (Prep):** Message/Proof-Spec für Kasplex/Kaspa.
+Das Produktionsziel verwendet Timelock-Multisig-Governance, begrenzte Parameter,
+zweistufige Rollenübertragung und einen zeitlich begrenzten Guardian. Dieser darf
+definierte Module pausieren, aber keine Gelder bewegen. Resume und Autorität nach
+dem Sunset müssen einer einzigen geprüften Rollenmatrix folgen.
 
-## 5. Mechanismen
-### 5.1 CollateralVault
-- Akzeptiert Stablecoins (USDT/USDC/DAI).  
-- Proof-of-Reserves: on-chain Views/Events.  
-- Exposure-Caps pro Asset; pausierbar.
+## Oracle
 
-### 5.2 AutoConverter
-- Unterstützt eingehende **volatile Assets** (über Wrapper/Bridges).  
-- Best-Execution via DEX/Aggregator-Adapter (Slippage-Limits).  
-- Output **immer** Stablecoin → Vault.
+Produktionspreise benötigen unabhängige reale Feeds oder ein anderes ausdrücklich
+freigegebenes Trust Model mit Freshness, Deviation, Quorum, Fallback, Monitoring
+und Incident-Regeln. Der aktuelle Admin-Mock ist ausschließlich für Tests.
 
-### 5.3 Peg-Stability-Module (PSM)
-- 1:1-Swap 1kUSD ↔ Stablecoin; geringe Fee; Rate-Limiter; Caps.  
-- Oracle-Deviation-Guard (bei Anomalien pausieren).
+## Aktueller Implementierungsstand
 
-### 5.4 OracleAggregator
-- Median über mehrere Feeds; Stale- und Deviation-Checks.  
-- Finality-aware (Reorg-Sicherheit).
+Der EVM-Prototyp baut und besitzt eine substanzielle Foundry-Suite. Er enthält
+jedoch zehn Platzhaltertests, unvollständige Branch-Coverage, Mock-Oracle,
+Timelock-/Fee-Stubs, offene Rollenbefunde und Testnet-/Demo-Deployment. Er ist kein
+Produktionssystem.
 
-### 5.5 Safety-Automata
-- Setzt Caps/Rate-Limits; pausiert Module; **keine** Asset-Kontrolle.  
-- Optionaler Guardian-Multisig mit **Sunset**; primär Timelock-gesteuert.
+## Kaspa Toccata
 
-## 6. Ökonomie & Stabilität
-- **Deckung:** \(\sum_i C_i \cdot P_i\) ≥ zirkulierende 1kUSD.  
-- **Arbitrage:**  
-  - 1kUSD < 1 USD → Kauf am Markt → PSM-Redeem zu 1 USD.  
-  - 1kUSD > 1 USD → PSM-Mint → Verkauf >1 USD.  
-- **Formel (Wertuntergrenze):**  
-  \( V_{1kUSD} = \min\left(1,\; \frac{\sum_i C_i \cdot P_i}{S}\right) \)  
-  mit \(C_i\) Collateral-Mengen, \(P_i\) USD-Preis, \(S\) Supply.
+Kaspa Toccata ist UTXO-/Covenant-nativ. Ein Kaspa-1kUSD muss Zustand als
+Covenant-UTXOs oder freigegebenen Based-App-State modellieren, Nachfolgeroutputs
+validieren, native Asset-Ausgabe definieren, heißen PSM-Zustand sharden,
+Oraclereports prüfen und Indexer-/Reorg-Recovery unterstützen. Solidity liefert
+ökonomische Spezifikation und Invarianten, keinen direkt portierbaren Runtimecode.
 
-## 7. Sicherheit
-- Ownerless/Timelock-Kontrolle; **keine EOA-Owner**.  
-- Invarianten: Supply ≤ Reserves; Pause-aware Funktionen.  
-- Audits: Static-Analysis, Fuzzing, externe Audits; Responsible Disclosure.  
-- Monitoring/Alerts: Peg-Drift, Oracle-Stale, Cap-Nutzung, Pausenstatus.
+Der erste Meilenstein ist ein gepinnter, wertbegrenzter Testnet-10-Prototyp nach
+einem Architecture Decision Record. Es wird kein Kaspa-Mainnet-Datum zugesagt.
 
-## 8. Governance
-- **Phase 1:** DAO ohne Token (Stimmrechte an definierte Adressen/1kUSD-Halter), Timelock 48–96h.  
-- **Phase 2 (optional):** Governance-Token (z. B. KASDAO) mit klaren Zuständigkeiten, unverändert on-chain.
+## Releasevoraussetzungen
 
-## 9. Rechtliches (Kurz)
-- Dezentral, open-source, non-custodial, keine Renditeversprechen → geringere Regulierungslast.  
-- Orientierung an DAI-Prinzipien, weitergehend mit **Safety-Automata** & **Ownerless-Design**.
+Kein Mainnetrelease ohne produktive Oracle-/Governance-/Fee-/Monitoring-Systeme,
+vollständigen Deployment-E2E, freigegebene Coverage-/Static-Analysis-Gates, keine
+offenen High/Medium-Findings, Legal-/Reservefreigabe, externes Audit und Bug Bounty.
 
-## 10. Implementierungs-Bauplan
-**Ordner:** `contracts/` (Module), `interfaces/` (IDL/ABIs), `docs/`, `arch/`, `tasks/`, `patches/`, `reports/`, `logs/`.  
-**Schnittstellen (Beispiele):**  
-- PSM: `swapTo1kUSD(tokenIn, amountIn)` / `swapFrom1kUSD(tokenOut, amountIn)`  
-- Oracle: `getPrice(asset)`, `isHealthy(asset)`, `lastUpdate(asset)`  
-- Safety: `pause(module)`, `resume(module)`, `setCap(asset, cap)`
-
-## 11. Roadmap
-1) **EVM-Start** (Testnet → Mainnet)  
-2) **DAO-Upgrade** (Phase-2 optional)  
-3) **Kasplex-Bridge** (Prep → Test → Prod)  
-4) **Kaspa L1** (bei VM-Verfügbarkeit)  
-5) **Ökosystem-Ausbau** (DEX/AMM, Lending, Integrationen)
-
-## 12. Schluss
-**1kUSD** vereint Stabilität, Dezentralität und Transparenz mit klaren Sicherheits- und Governance-Mechanismen als Grundlage eines Kaspa-kompatiblen DeFi-Stacks.
+Der [Masterplan](https://github.com/NeaBouli/1kUSD/blob/main/docs-internal/planning/MASTER_PLAN_2026.md)
+definiert das ausführbare Programm.

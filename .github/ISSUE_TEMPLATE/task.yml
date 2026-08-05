@@ -1,0 +1,50 @@
+name: Implementation task
+description: Propose one bounded, testable 1kUSD work item.
+title: "[TASK] "
+labels:
+  - enhancement
+body:
+  - type: input
+    id: ticket
+    attributes:
+      label: Ticket ID
+      placeholder: 1K-P1-000
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective and scope
+      description: State the exact outcome, included files, and excluded areas.
+    validations:
+      required: true
+  - type: textarea
+    id: threat_model
+    attributes:
+      label: Threat-model delta
+      description: Required for contracts, governance, oracle, collateral, fees, or deployment.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: "- [ ] ..."
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Required tests and verification
+    validations:
+      required: true
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk
+      options:
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
