@@ -32,6 +32,8 @@ jobs:
       - name: Verify critical routes
         run: |
           test -f site/index.html
+          test -f site/assets/stylesheets/extra.css
+          test -f site/assets/1kusd-social-card.png
           test -f site/security/index.html
           test -f site/roadmap/index.html
           test -f site/whitepaper/WHITEPAPER_1kUSD_EN/index.html

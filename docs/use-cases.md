@@ -1,4 +1,4 @@
-# Potential use cases
+# Potential uses
 
 These are product goals, not currently available production services.
 
@@ -23,7 +23,8 @@ risk independently.
 
 A native Kaspa design could support BlockDAG-native payments and applications.
 That design has not been completed. It must use Toccata covenant semantics rather
-than assume EVM contracts or a bridge are sufficient.
+than assume EVM contracts or a bridge are sufficient. A bridge is not part of the
+accepted core issuance model.
 
 No statement on this page is financial advice or a guarantee of price,
 redeemability, liquidity, or launch.

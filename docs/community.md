@@ -1,4 +1,7 @@
-# Community and project links
+# Community and project resources
+
+1kUSD is developed in public. Issues and pull requests are the canonical place
+for technical proposals; sensitive security reports use the private channel.
 
 | Resource | Link |
 |---|---|

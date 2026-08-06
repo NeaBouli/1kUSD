@@ -1,4 +1,8 @@
-# How the mechanism is intended to work
+# How 1kUSD is intended to work
+
+1kUSD targets stable value through collateral-backed creation and redemption,
+not through an algorithmic supply promise. The flow below is the accepted
+economic model; it is not evidence of a live Kaspa implementation.
 
 ## Mint
 

@@ -1,5 +1,8 @@
 # What is 1kUSD?
 
+> **Current status:** open-source research and testnet program. There is no live
+> token, production reserve, completed external audit, or guaranteed peg.
+
 1kUSD is an open-source stablecoin protocol under development. Its intended
 design is a token redeemable against approved on-chain collateral through a Peg
 Stability Module (PSM).
@@ -27,10 +30,11 @@ timelock is not implemented, the oracle is a mock, and the Guardian role flow ha
 open findings. Therefore it must not be described as ownerless or fully
 decentralized today.
 
-## Kaspa
+## Why the Kaspa implementation is different
 
-Kaspa Toccata now supports covenant programmability. A Kaspa-native 1kUSD remains
-a design project: token balances, global PSM state, oracles, roles, and pause
-semantics cannot be copied directly from the EVM account model.
+Kaspa Toccata programmability remains a testnet/pre-mainnet dependency under
+active development. A Kaspa-native 1kUSD remains a design project: token
+balances, global PSM state, oracles, roles, and pause semantics cannot be copied
+directly from the EVM account model.
 
 [How it works](how-it-works.md) · [Security](security.md) · [Roadmap](roadmap.md)

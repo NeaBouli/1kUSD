@@ -36,7 +36,10 @@ jobs:
         run: mkdocs build --clean --strict
 
       - name: Verify Pages root
-        run: test -f site/index.html
+        run: |
+          test -f site/index.html
+          test -f site/assets/stylesheets/extra.css
+          test -f site/assets/1kusd-social-card.png
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

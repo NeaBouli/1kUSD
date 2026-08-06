@@ -1,4 +1,7 @@
-# Security
+# Security and verified limits
+
+Security claims on this site follow evidence, not roadmap intent. The current
+prototype must not custody real funds.
 
 ## Verified baseline
 

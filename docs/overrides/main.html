@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  <meta name="theme-color" content="#07100f">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="1kUSD">
+  <meta property="og:title" content="1kUSD — Stable value, built for Kaspa">
+  <meta property="og:description" content="A Kaspa-primary research program for a fully collateralized, USD-targeting stablecoin.">
+  <meta property="og:url" content="https://neabouli.github.io/1kUSD/">
+  <meta property="og:image" content="https://neabouli.github.io/1kUSD/assets/1kusd-social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="1kUSD — Stable value, built for Kaspa">
+  <meta name="twitter:description" content="Open-source stablecoin research and testnet program. Not production-ready.">
+  <meta name="twitter:image" content="https://neabouli.github.io/1kUSD/assets/1kusd-social-card.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ResearchProject",
+    "name": "1kUSD",
+    "description": "Kaspa-primary collateralized stablecoin research and testnet program",
+    "url": "https://neabouli.github.io/1kUSD/",
+    "codeRepository": "https://github.com/NeaBouli/1kUSD",
+    "sameAs": ["https://x.com/Kaspa_USD"]
+  }
+  </script>
+{% endblock %}

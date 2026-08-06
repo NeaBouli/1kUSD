@@ -1,4 +1,4 @@
-# Roadmap
+# Readiness-gated roadmap
 
 The roadmap is release-gated, not date-driven. No phase starts automatically.
 

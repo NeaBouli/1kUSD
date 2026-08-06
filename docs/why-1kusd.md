@@ -13,7 +13,8 @@ explicit and independently verifiable.
 - fail-closed oracle and asset configuration;
 - limited emergency authority and delayed governance;
 - open implementation, tests, threat model, and release evidence;
-- separate EVM and Kaspa implementations sharing economic invariants.
+- a Kaspa-primary implementation informed by portable invariants and failure
+  cases from the executable EVM reference.
 
 ## What is not true yet
 
@@ -23,9 +24,10 @@ completed an external audit. These are roadmap outcomes, not current features.
 
 ## Why Kaspa?
 
-Toccata makes native covenant applications possible on Kaspa. Its UTXO model may
-support explicit reserve and issuance transitions, but global PSM state, limits,
-oracles, governance, and indexing require a new architecture. The project will
-validate that design on testnet before making a native-launch claim.
+Toccata's evolving covenant stack makes native application research possible on
+Kaspa. Its UTXO model may support explicit reserve and issuance transitions, but
+global PSM state, limits, oracles, governance, and indexing require a new
+architecture. The project will validate that design on a currently supported
+test network before making any native-launch claim.
 
 [Project status](what-is-1kusd.md) · [Roadmap](roadmap.md) · [Home](index.md)
