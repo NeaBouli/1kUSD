@@ -10,7 +10,7 @@
   --kusd-mint-dark: #1ba88a;
   --kusd-silver: #d7e1df;
   --kusd-muted: #8ca09c;
-  --kusd-dim: #5f7470;
+  --kusd-dim: #718681;
   --kusd-alert: #f0b56a;
   --kusd-danger: #ef8b7b;
   --kusd-display: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
@@ -399,7 +399,7 @@ body:has(.kusd-home) .md-content__inner::before {
 .kusd-hero-facts span {
   color: var(--kusd-dim);
   display: block;
-  font-size: 0.69rem;
+  font-size: 0.74rem;
   margin-top: 0.22rem;
 }
 
@@ -583,7 +583,7 @@ body:has(.kusd-home) .md-content__inner::before {
 .kusd-card-label {
   color: var(--kusd-mint) !important;
   font-family: var(--kusd-mono);
-  font-size: 0.58rem;
+  font-size: 0.64rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -753,7 +753,7 @@ body:has(.kusd-home) .md-content__inner::before {
 .kusd-roadmap p {
   color: var(--kusd-dim);
   font-family: var(--kusd-mono);
-  font-size: 0.58rem;
+  font-size: 0.64rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -770,7 +770,7 @@ body:has(.kusd-home) .md-content__inner::before {
   border: 1px solid var(--kusd-line);
   color: var(--kusd-dim);
   font-family: var(--kusd-mono);
-  font-size: 0.55rem;
+  font-size: 0.62rem;
   letter-spacing: 0.08em;
   padding: 0.35rem 0.55rem;
   text-transform: uppercase;
@@ -827,7 +827,7 @@ body:has(.kusd-home) .md-content__inner::before {
 
 .kusd-resource-grid small {
   color: var(--kusd-dim);
-  font-size: 0.68rem;
+  font-size: 0.74rem;
 }
 
 .kusd-resource-grid a:hover strong {
@@ -918,7 +918,7 @@ body:has(.kusd-home) .md-content__inner::before {
 
 @media (max-width: 520px) {
   .kusd-status-pill {
-    font-size: 0.52rem;
+    font-size: 0.58rem;
   }
 
   .kusd-hero-facts {

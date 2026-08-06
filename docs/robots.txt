@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://neabouli.github.io/1kUSD/sitemap.xml

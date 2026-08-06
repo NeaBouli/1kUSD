@@ -6,13 +6,13 @@
   <meta name="robots" content="index, follow">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="1kUSD">
-  <meta property="og:title" content="1kUSD — Stable value, built for Kaspa">
-  <meta property="og:description" content="A Kaspa-primary research program for a fully collateralized, USD-targeting stablecoin.">
-  <meta property="og:url" content="https://neabouli.github.io/1kUSD/">
+  <meta property="og:title" content="{{ page.meta.title if page and page.meta.title else page.title if page else config.site_name }}">
+  <meta property="og:description" content="{{ page.meta.description if page and page.meta.description else config.site_description }}">
+  <meta property="og:url" content="{{ page.canonical_url if page else config.site_url }}">
   <meta property="og:image" content="https://neabouli.github.io/1kUSD/assets/1kusd-social-card.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="1kUSD — Stable value, built for Kaspa">
-  <meta name="twitter:description" content="Open-source stablecoin research and testnet program. Not production-ready.">
+  <meta name="twitter:title" content="{{ page.meta.title if page and page.meta.title else page.title if page else config.site_name }}">
+  <meta name="twitter:description" content="{{ page.meta.description if page and page.meta.description else config.site_description }}">
   <meta name="twitter:image" content="https://neabouli.github.io/1kUSD/assets/1kusd-social-card.png">
   <script type="application/ld+json">
   {

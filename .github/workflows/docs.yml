@@ -38,6 +38,7 @@ jobs:
       - name: Verify Pages root
         run: |
           test -f site/index.html
+          test -f site/robots.txt
           test -f site/assets/stylesheets/extra.css
           test -f site/assets/1kusd-social-card.png
 
