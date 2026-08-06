@@ -12,7 +12,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  # Use a fresh stable key to recover from GitHub's orphaned `pages` lock.
+  group: "pages-deploy"
   cancel-in-progress: true
 
 jobs:
