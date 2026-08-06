@@ -1,149 +1,148 @@
 <p align="center">
-  <img src="docs/assets/1kUSD.png" alt="1kUSD Logo" width="200">
+  <img src="docs/assets/1kUSD.png" alt="1kUSD logo" width="180">
 </p>
 
-<h1 align="center">1kUSD — Decentralized Stablecoin Protocol</h1>
+<h1 align="center">1kUSD Stablecoin Protocol</h1>
 
 <p align="center">
-  <strong>Security-first stablecoin pegged 1:1 to USD</strong><br>
-  Built on Ethereum today. Designed for native KASPA when the layer supports it.
+  <strong>Collateralized stablecoin research and testnet implementation.</strong><br>
+  EVM reference today; Kaspa Toccata architecture under design.
 </p>
 
 <p align="center">
 
 [![Foundry CI](https://img.shields.io/github/actions/workflow/status/NeaBouli/1kUSD/foundry.yml?branch=main&label=Foundry%20CI)](https://github.com/NeaBouli/1kUSD/actions/workflows/foundry.yml)
-[![Solidity CI](https://img.shields.io/github/actions/workflow/status/NeaBouli/1kUSD/ci.yml?branch=main&label=Solidity%20CI)](https://github.com/NeaBouli/1kUSD/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/tests-198%2F198%20passing-brightgreen)]()
+[![Docs](https://img.shields.io/github/actions/workflow/status/NeaBouli/1kUSD/docs.yml?branch=main&label=Docs)](https://github.com/NeaBouli/1kUSD/actions/workflows/docs.yml)
 [![Solidity](https://img.shields.io/badge/solidity-0.8.30-blue)]()
-![License](https://img.shields.io/github/license/NeaBouli/1kUSD)
 
 </p>
 
-<p align="center">
-  <a href="https://x.com/Kaspa_USD">Follow @Kaspa_USD on X</a> |
-  <a href="https://neabouli.github.io/1kUSD/">Website</a> |
-  <a href="https://github.com/NeaBouli/1kUSD/wiki">Technical Wiki</a> |
-  <a href="audit/AUDIT_SCOPE.md">Audit Package</a>
-</p>
+> **Status — remediation planning.** This repository is not a production
+> stablecoin, has no mainnet deployment, and has not completed an independent
+> external audit. The current EVM code contains test-only and stub components.
+> Do not deploy it with real funds.
 
----
+**Approved product direction:** Kaspa Toccata is the primary target. The EVM
+implementation remains an executable reference and test model with no current
+production commitment. See
+[`ADR-041`](docs-internal/adr/ADR-041-kaspa-primary-product-track.md).
 
-## Vision
+## Current verified baseline
 
-1kUSD is a collateralized stablecoin protocol with on-chain reserves, a Peg Stability Module (PSM), oracle aggregation, and safety automata.
+| Area | Verified state (2026-08-05) |
+|---|---|
+| Foundry tests | 198 passed, 0 failed, 0 skipped across 35 suites |
+| Test quality | 10 counted tests are placeholders |
+| Coverage | 78.92% lines / 57.63% branches (default report) |
+| Oracle | Admin-set mock prices; not a production feed system |
+| Governance | DAO timelock is a non-functional stub |
+| Fee routing | Incomplete; two incompatible router paths coexist |
+| Deployment | Testnet/demo wiring with MockERC20; no production role handoff |
+| External audit | Not completed |
+| Kaspa | Toccata design and isolated proof of concept are planned |
 
-**Today:** ERC-20 on Ethereum (v0.51.x) — audit-ready, fully tested, Sepolia deployment pipeline complete.
+The historical `audit-final-v0.51.5` tag is preserved as evidence, but its
+metadata and dependency labels contain known inconsistencies. It is not a
+production certification.
 
-**Tomorrow:** Native stablecoin on the KASPA network. When KASPA's smart contract layer (or equivalent) enables programmable token issuance, 1kUSD will migrate to a native KASPA implementation — bringing the same security guarantees to KASPA's high-throughput, GHOSTDAG-powered BlockDAG.
+## Product objective
 
-The protocol architecture is chain-agnostic by design: the PSM, oracle, and safety layers are modular abstractions that can be re-implemented on any EVM-compatible or KASPA-native runtime.
+1kUSD is intended to become a fully collateralized stablecoin with:
 
-## Quick Start
+- one-to-one redeemable collateral accounting;
+- two-way mint/redeem through a Peg Stability Module (PSM);
+- no CDP debt or liquidation engine;
+- bounded issuance and redemption limits;
+- fail-closed price, asset, and configuration checks;
+- time-limited emergency pause authority;
+- timelocked multisig governance;
+- transparent fee, reserve, and treasury accounting;
+- independent monitoring, audit, and release evidence.
+
+The implementation program and release gates are defined in the
+[master plan](docs-internal/planning/MASTER_PLAN_2026.md). Work is tracked in the
+[Agent Bridge](docs/agent-bridge/README.md) and GitHub Issues.
+
+## EVM architecture
+
+| Module | Current contract | Current status |
+|---|---|---|
+| Token | `OneKUSD` | Implemented; further production hardening required |
+| PSM | `PegStabilityModule` | Implemented prototype; config/economic hardening required |
+| Vault | `CollateralVault` | Implemented prototype; accounting hardening required |
+| Oracle | `OracleAggregator` | Mock/admin-set, not multi-feed production infrastructure |
+| Safety | `SafetyAutomata` | Implemented with an open sunset-role blocker |
+| Guardian | `Guardian` | Implemented with an open registration/resume blocker |
+| Limits | `PSMLimits` | Implemented; events/fail-closed configuration required |
+| Governance | `DAO_Timelock` | Stub; execution is not implemented |
+| Fees | `FeeRouter` / `FeeRouterV2` | Incomplete and not unified |
+| Buyback | `BuybackVault` | Prototype with documented limitations |
+
+Detailed source evidence is in the [audit follow-up](docs-internal/reports/AUDIT_REVIEW_2026-08-05.md).
+
+## Kaspa Toccata direction
+
+Kaspa's Toccata programmability stack is live and is **UTXO/covenant-native**,
+not EVM account-native. 1kUSD will not translate Solidity contracts line by line.
+
+The EVM contracts remain an executable economic reference. A separate Kaspa
+design must define covenant state, successor validation, native-asset policy,
+PSM state sharding, oracle reports, governance spend paths, indexing, and
+transaction-v1 budgets. Silverscript and vProgs are still evolving, so the first
+step is a pinned, value-capped testnet proof of concept—not a launch.
+
+See [Kaspa Toccata Agent Brief](https://docs.kaspa.org/toccata/agent-brief) and the
+[Kaspa track in the master plan](docs-internal/planning/MASTER_PLAN_2026.md#5-kaspa-toccata-track).
+
+## Build and test
+
+Requirements: Foundry with Solidity `0.8.30` support.
 
 ```bash
-git clone https://github.com/NeaBouli/1kUSD.git && cd 1kUSD
-forge install
+git clone --recurse-submodules https://github.com/NeaBouli/1kUSD.git
+cd 1kUSD
 forge build
-forge test          # 198/198 expected
+forge test -vv
+forge test --match-contract Invariant -vv
 ```
 
-**Requirements:** [Foundry](https://book.getfoundry.sh/getting-started/installation) (Solidity 0.8.30, Paris EVM).
+Do not treat a green count alone as a release gate. Production-scope branch
+coverage, placeholder removal, static analysis, and deployment E2E remain open.
 
-## Architecture
+## Repository map
 
-| Module | Contract | Purpose |
-|--------|----------|---------|
-| **Token** | `OneKUSD` | ERC-20 with restricted mint/burn, EIP-2612 permit |
-| **PSM** | `PegStabilityModule` | Swap collateral <-> 1kUSD with fees, spreads, oracle pricing |
-| **Vault** | `CollateralVault` | Hold collateral assets; PSM-authorized withdrawals only |
-| **Oracle** | `OracleAggregator` | Multi-feed aggregation with staleness/deviation health gates |
-| **Safety** | `SafetyAutomata` | Per-module pause/resume, guardian sunset, DAO override |
-| **Limits** | `PSMLimits` | Daily + per-tx volume caps on PSM swaps |
-| **Buyback** | `BuybackVault` | DAO treasury buyback via PSM, per-op + rolling window caps |
-| **Registry** | `ParameterRegistry` | DAO-governed on-chain parameter store |
-| **Fees** | `FeeRouter` | Route mint/redeem fees to treasury |
-
-See [`audit/ARCHITECTURE_OVERVIEW.md`](audit/ARCHITECTURE_OVERVIEW.md) for detailed system diagrams and critical call paths.
-
-## Repository Layout
-
-```
-contracts/           Solidity source (core/, psm/, oracle/, interfaces/)
-foundry/test/        Foundry test suites (unit, regression, invariant, econ sim)
-foundry/script/      Deployment & monitoring scripts
-audit/               Audit documentation package (11 docs)
-docs/                Marketing site (GitHub Pages via MkDocs)
-docs-internal/       Technical documentation (architecture, specs, governance)
-lib/                 Dependencies (forge-std, OpenZeppelin)
-.github/workflows/   CI pipelines
+```text
+contracts/             Solidity source; includes explicit legacy/stub modules
+foundry/test/          Foundry unit, regression, invariant, and economic tests
+foundry/script/        Current testnet/demo deployment scripts
+audit/                 Historical v0.51.x audit package
+docs/                  Public GitHub Pages content
+docs-internal/         Architecture, reports, planning, and runbooks
+docs/agent-bridge/     Canonical multi-agent state and ticket index
+archive/               Preserved non-active backups, outputs, and workflow drafts
 ```
 
-## Test Suite
+## Security and contributing
 
-**198 tests across 35 suites — all passing.**
+- Report vulnerabilities privately through
+  [GitHub Security Advisories](https://github.com/NeaBouli/1kUSD/security/advisories/new).
+- Read [SECURITY.md](SECURITY.md) before testing or reporting a vulnerability.
+- Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing changes.
+- Contract/governance/economic changes require a threat-model delta and focused
+  plus full-suite verification.
 
-| Category | Tests | Suites | Description |
-|----------|-------|--------|-------------|
-| Unit | 52 | 10 | BuybackVault, PSMLimits, PSM deadline, DAO Timelock, PSMSwapCore |
-| Config & Auth | 79 | 7 | PSM, OneKUSD, CollateralVault, SafetyAutomata, Registry, FeeRouter, Limits |
-| Regression | 19 | 6 | PSM flows, limits, fees, spreads, oracle health, oracle watcher |
-| Integration | 7 | 4 | Guardian pause propagation, PSM enforcement, unpause |
-| Smoke | 9 | 1 | Phase 7 post-deployment verification |
-| Invariant/Fuzz | 18 | 4 | Supply conservation, collateral backing, vault solvency, fee bounds (256 runs x 64 depth) |
-| Economic Sim | 10 | 1 | Fee accrual, depeg stress, bank run, worst cases, cap exhaustion |
-| Misc | 4 | 2 | Guardian monitor, safety net |
+## Documentation
 
-## Audit Package
+- [Public site](https://neabouli.github.io/1kUSD/)
+- [Master plan](docs-internal/planning/MASTER_PLAN_2026.md)
+- [Ticket list](docs/agent-bridge/TICKET_LIST.md)
+- [Architecture overview](audit/ARCHITECTURE_OVERVIEW.md)
+- [Known limitations](audit/KNOWN_LIMITATIONS.md)
+- [Audit follow-up](docs-internal/reports/AUDIT_REVIEW_2026-08-05.md)
 
-The protocol ships with a comprehensive audit documentation package in [`audit/`](audit/):
+## License status
 
-| Document | Content |
-|----------|---------|
-| [`AUDIT_SCOPE.md`](audit/AUDIT_SCOPE.md) | Scope, file manifest, build instructions |
-| [`SHIPMENT_MANIFEST.md`](audit/SHIPMENT_MANIFEST.md) | SHA-256 checksums, build verification |
-| [`ARCHITECTURE_OVERVIEW.md`](audit/ARCHITECTURE_OVERVIEW.md) | System diagram, critical call paths |
-| [`INVARIANTS.md`](audit/INVARIANTS.md) | 35 protocol invariants, coverage matrix |
-| [`ECONOMIC_RISK_SCENARIOS.md`](audit/ECONOMIC_RISK_SCENARIOS.md) | 5 risk scenarios (depeg, feed pause, key compromise, bank run, fees) |
-| [`THREAT_MODEL.md`](audit/THREAT_MODEL.md) | 10 attack classes with mitigations |
-| [`TRUST_MODEL.md`](audit/TRUST_MODEL.md) | Trusted/untrusted entities |
-| [`ECONOMIC_MODEL.md`](audit/ECONOMIC_MODEL.md) | Fee math, limits, buyback caps |
-| [`ROLE_MATRIX.md`](audit/ROLE_MATRIX.md) | Function-level access control |
-| [`TELEMETRY_MODEL.md`](audit/TELEMETRY_MODEL.md) | Event catalog, monitoring |
-| [`KNOWN_LIMITATIONS.md`](audit/KNOWN_LIMITATIONS.md) | 12 accepted limitations |
-
-**Freeze tag:** `audit-final-v0.51.5` | **Tests:** 198/198 | **Compiler:** solc 0.8.30
-
-## Security
-
-- [Audit scope & freeze](audit/AUDIT_SCOPE.md) — 34 in-scope Solidity files
-- [Economic risk scenarios](audit/ECONOMIC_RISK_SCENARIOS.md) — depeg, oracle failure, key compromise, bank run, fee sustainability
-- [Gas/DoS review](docs-internal/reports/GAS_DOS_REVIEW_v051.md) — 8 findings, all resolved
-- [Deployment checklist](docs-internal/reports/DEPLOYMENT_CHECKLIST_v051.md) — Phase 1-7 verification
-- [Error catalog](docs-internal/core/ERROR_CATALOG.md) — complete error code mapping
-
-## Governance
-
-Parameter governance via `ParameterRegistry` + DAO Timelock:
-
-- [Governance overview](docs-internal/core/GOVERNANCE.md)
-- [Parameter keys catalog](docs-internal/core/PARAM_KEYS_CATALOG.md)
-- [Guardian sunset runbook](docs-internal/core/GUARDIAN_SUNSET_RUNBOOK.md)
-
-## KASPA Roadmap
-
-| Phase | Status | Description |
-|-------|--------|-------------|
-| **v0.51.x** | Current | ERC-20 on Ethereum — audit-ready, 198 tests, Sepolia deployment |
-| **v0.52.x** | Planned | Functional DAO Timelock, Chainlink oracle, FeeRouter v2, multisig |
-| **v0.6x** | Research | KASPA smart contract layer evaluation, bridge architecture |
-| **v1.0** | Vision | Native 1kUSD on KASPA BlockDAG with full PSM + oracle stack |
-
-Follow development: [@Kaspa_USD](https://x.com/Kaspa_USD)
-
-## Contributing
-
-See [`docs-internal/core/DEVELOPER_ONBOARDING.md`](docs-internal/core/DEVELOPER_ONBOARDING.md) for setup and workflow.
-
-## License
-
-[AGPL-3.0](LICENSE)
+License metadata is under reconciliation. The root `LICENSE` currently contains
+GPL-3.0 text, while package metadata and per-file SPDX identifiers are not fully
+consistent. Review the root license and each file's SPDX identifier; do not rely
+on the previous AGPL-only README claim until the license decision is completed.

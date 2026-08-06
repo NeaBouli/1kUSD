@@ -1,59 +1,32 @@
-# Roadmap
+# Readiness-gated roadmap
 
-1kUSD is on a path from ERC-20 stablecoin to **native KASPA stablecoin**.
+The roadmap is release-gated, not date-driven. No phase starts automatically.
 
----
+| Phase | Goal | Current state |
+|---|---|---|
+| 0 — Project truth | Honest status, Bridge, issues, Pages, README, archive | In progress |
+| 1 — Product boundary | Kaspa-primary scope; EVM reference role | Approved in `ADR-041` |
+| 2 — Kaspa architecture | Covenant, based-app, and hybrid ADR | Proposed; awaiting #112 approval |
+| 3 — Isolated Kaspa PoC | Value-capped testnet vault/issuance experiment | Blocked by phase 2 |
+| 4 — Protocol hardening | Safety, governance, collateral, fees, and oracle | Proposed |
+| 5 — Deployment | Reproducible Kaspa testnet candidate and monitoring | Blocked by 2–4 |
+| 6 — Assurance | Coverage, static analysis, fuzz/invariant/economic gates | Ongoing / incomplete |
+| 7 — External review | New freeze, audit, remediation, bug bounty | Blocked by 1–6 |
+| 8 — Production readiness | Legal, reserve, redemption, and incident gates | Blocked |
 
-## Phase 1: ERC-20 on Ethereum (Current)
-**Version: v0.51.x**
+## Mainnet gate
 
-- Full protocol implementation on Ethereum
-- 198 automated tests (unit, fuzz, invariant, economic simulation)
-- 35 protocol invariants verified
-- Complete audit documentation package (11 documents)
-- Sepolia testnet deployment pipeline
-- Monitoring and health check infrastructure
+Mainnet is not scheduled. It requires all release blockers closed, no open
+High/Medium audit findings, production oracle/governance/fee/monitoring systems,
+reproducible deployment, legal and reserve decisions, independent audit, and bug
+bounty evidence.
 
-**Status:** Audit-ready. All systems tested and documented.
+## Kaspa gate
 
----
+Kaspa is the approved primary product track. Work starts with an architecture
+decision record and only then a separately approved, value-capped testnet proof
+of concept. Silverscript and vProgs are evolving; no production timeline is
+claimed.
 
-## Phase 2: Mainnet Launch
-**Version: v0.52.x (Planned)**
-
-- Functional DAO Timelock with full governance
-- Chainlink oracle integration (production feeds)
-- FeeRouter v2 with enhanced fee distribution
-- Multisig deployment and admin controls
-- Bug bounty program activation
-- DEX liquidity provisioning
-
----
-
-## Phase 3: KASPA Exploration
-**Version: v0.6x (Research)**
-
-- KASPA smart contract layer evaluation
-- Bridge architecture design
-- Cross-chain asset transfer protocol
-- Indexer finality watermark adaptation
-- Community governance for migration parameters
-
----
-
-## Phase 4: Native KASPA
-**Version: v1.0 (Vision)**
-
-- **Native 1kUSD on KASPA BlockDAG**
-- Full PSM + Oracle + Safety stack on KASPA
-- KASPA-native proof of reserves
-- High-throughput settlement leveraging GHOSTDAG
-- Ecosystem integration (KASPA DEXs, wallets, dApps)
-
----
-
-The protocol architecture is **chain-agnostic by design**. The PSM, oracle, and safety layers are modular abstractions that can be re-implemented on any EVM-compatible or KASPA-native runtime.
-
----
-
-Follow progress: **[@Kaspa_USD on X](https://x.com/Kaspa_USD)** | [GitHub](https://github.com/NeaBouli/1kUSD)
+See the full [master plan on GitHub](https://github.com/NeaBouli/1kUSD/blob/main/docs-internal/planning/MASTER_PLAN_2026.md)
+and the [ticket list](https://github.com/NeaBouli/1kUSD/blob/main/docs/agent-bridge/TICKET_LIST.md).

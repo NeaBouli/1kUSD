@@ -1,21 +1,39 @@
-site_name: 1kUSD - The Kaspa Stablecoin
+site_name: 1kUSD
+site_description: Kaspa-primary collateralized stablecoin research and testnet program
 site_url: https://neabouli.github.io/1kUSD/
+repo_name: NeaBouli/1kUSD
+repo_url: https://github.com/NeaBouli/1kUSD
+edit_uri: ""
+exclude_docs: |
+  agent-bridge/
 theme:
   name: material
+  custom_dir: docs/overrides
   language: en
   logo: assets/1kUSD.png
   favicon: assets/1kUSD.png
   features:
     - navigation.instant
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
+    - navigation.top
     - content.tabs.link
     - search.highlight
+    - search.suggest
   palette:
-    primary: teal
-    accent: lime
+    scheme: slate
+    primary: black
+    accent: teal
+
+plugins:
+  - search
+
+extra_css:
+  - stylesheets/extra.css
 
 extra:
+  status: research-and-testnet
   social:
     - icon: fontawesome/brands/x-twitter
       link: https://x.com/Kaspa_USD
@@ -23,14 +41,18 @@ extra:
       link: https://github.com/NeaBouli/1kUSD
 
 nav:
-  - Home: INDEX.md
-  - What is 1kUSD?: what-is-1kusd.md
-  - Why 1kUSD?: why-1kusd.md
-  - How It Works: how-it-works.md
-  - Use Cases: use-cases.md
-  - Security: security.md
-  - Roadmap: roadmap.md
+  - Home: index.md
+  - Protocol:
+      - Overview: what-is-1kusd.md
+      - Why 1kUSD?: why-1kusd.md
+      - How It Works: how-it-works.md
+      - Potential Uses: use-cases.md
+  - Trust & Progress:
+      - Security & Limits: security.md
+      - Roadmap: roadmap.md
   - Whitepaper:
       - English: whitepaper/WHITEPAPER_1kUSD_EN.md
       - Deutsch: whitepaper/WHITEPAPER_1kUSD_DE.md
   - Community: community.md
+
+copyright: 1kUSD is an open-source research program. No production deployment, reserves, or guaranteed peg.

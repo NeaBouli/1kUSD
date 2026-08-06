@@ -1,51 +1,28 @@
-# Community
+# Community and project resources
 
-## Follow 1kUSD
-
-<div align="center">
-
-### [@Kaspa_USD on X](https://x.com/Kaspa_USD)
-
-Follow for development updates, milestones, and KASPA ecosystem news.
-
-</div>
-
----
-
-## Links
+1kUSD is developed in public. Issues and pull requests are the canonical place
+for technical proposals; sensitive security reports use the private channel.
 
 | Resource | Link |
-|----------|------|
-| **X (Twitter)** | [@Kaspa_USD](https://x.com/Kaspa_USD) |
-| **GitHub** | [github.com/NeaBouli/1kUSD](https://github.com/NeaBouli/1kUSD) |
-| **Technical Wiki** | [Developer Documentation](https://github.com/NeaBouli/1kUSD/wiki) |
-| **Whitepaper (EN)** | [Read the Whitepaper](whitepaper/WHITEPAPER_1kUSD_EN.md) |
-| **Whitepaper (DE)** | [Whitepaper auf Deutsch](whitepaper/WHITEPAPER_1kUSD_DE.md) |
+|---|---|
+| GitHub repository | [NeaBouli/1kUSD](https://github.com/NeaBouli/1kUSD) |
+| Development status | [Agent Bridge](https://github.com/NeaBouli/1kUSD/tree/main/docs/agent-bridge) |
+| Master plan | [MASTER_PLAN_2026.md](https://github.com/NeaBouli/1kUSD/blob/main/docs-internal/planning/MASTER_PLAN_2026.md) |
+| Issues | [GitHub Issues](https://github.com/NeaBouli/1kUSD/issues) |
+| Security reports | [Private vulnerability reporting](https://github.com/NeaBouli/1kUSD/security/advisories/new) |
+| X | [@Kaspa_USD](https://x.com/Kaspa_USD) |
 
-## For Developers
-
-All technical documentation lives on the [GitHub Wiki](https://github.com/NeaBouli/1kUSD/wiki):
-
-- [Developer Onboarding](https://github.com/NeaBouli/1kUSD/wiki/Developer-Onboarding) — setup, build, test
-- [Architecture Overview](https://github.com/NeaBouli/1kUSD/wiki/Architecture-Overview) — system design
-- [Integration Guides](https://github.com/NeaBouli/1kUSD/wiki/Integrations) — build with 1kUSD
-- [Audit Package](https://github.com/NeaBouli/1kUSD/wiki/Audit-AUDIT-SCOPE) — security documentation
+The previous GitHub Wiki link was removed because the repository Wiki is not
+enabled. Technical documentation lives in the repository and is versioned with
+the code.
 
 ## Contributing
 
-1kUSD is open source (AGPL-3.0). Contributions are welcome.
+Read [CONTRIBUTING.md](https://github.com/NeaBouli/1kUSD/blob/main/CONTRIBUTING.md).
+Protocol changes require an approved ticket, threat-model/invariant delta, tests,
+and independent review.
 
-1. Fork the repository
-2. Create a feature branch
-3. Submit a PR with green CI (unit + invariant + static + docs)
-4. For protocol changes, include spec deltas and updated invariants
+## License notice
 
-See the [Developer Onboarding Guide](https://github.com/NeaBouli/1kUSD/wiki/Developer-Onboarding) for setup instructions.
-
-## License
-
-Code: [AGPL-3.0](https://github.com/NeaBouli/1kUSD/blob/main/LICENSE)
-
----
-
-[Back to Home](INDEX.md)
+License metadata is being reconciled. Review the repository's root `LICENSE` and
+per-file SPDX identifiers before reuse.

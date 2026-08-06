@@ -1,28 +1,30 @@
-# Use Cases
+# Potential uses
 
-## Stable Value in the KASPA Ecosystem
+These are product goals, not currently available production services.
 
-Every blockchain ecosystem needs a stable unit of account. 1kUSD provides that foundation for KASPA.
+## Payments and accounting
 
-### Payments & Commerce
-Accept payments denominated in a stable USD value. No more worrying about price swings between the time of sale and settlement.
+A reliably redeemable USD-targeting asset could provide a stable denomination for
+commerce and protocol accounting.
 
-### DeFi Building Block
-1kUSD is designed to be a composable DeFi primitive:
+## Market and DeFi settlement
 
-- **Liquidity pools** — pair 1kUSD with other tokens for low-volatility LP positions
-- **Lending** — use 1kUSD as collateral or borrow against it
-- **Yield** — earn fees from providing 1kUSD liquidity
+After production deployment, audit, liquidity, and integration review, 1kUSD could
+serve as a quoted asset or settlement primitive. Lending, yield, or bridge use is
+outside the current implementation and introduces separate risks.
 
-### Safe Harbor
-During market volatility, move into 1kUSD without leaving the on-chain ecosystem. Your funds stay decentralized and redeemable — no need to trust a centralized exchange.
+## Protocol and DAO treasury
 
-### Cross-Chain Value Transfer
-Move stable USD value between chains. As 1kUSD migrates to native KASPA, it will serve as a bridge currency between the Ethereum and KASPA ecosystems.
+A treasury may value transparent reserve accounting and governed redemption, but
+must assess collateral, oracle, governance, smart-contract, liquidity, and legal
+risk independently.
 
-### Treasury Management
-DAOs and protocols can hold treasury reserves in 1kUSD — decentralized, transparent, and always redeemable at $1.
+## Kaspa ecosystem
 
----
+A native Kaspa design could support BlockDAG-native payments and applications.
+That design has not been completed. It must use Toccata covenant semantics rather
+than assume EVM contracts or a bridge are sufficient. A bridge is not part of the
+accepted core issuance model.
 
-[What is 1kUSD?](what-is-1kusd.md) | [How It Works](how-it-works.md) | [Back to Home](INDEX.md)
+No statement on this page is financial advice or a guarantee of price,
+redeemability, liquidity, or launch.

@@ -1,61 +1,46 @@
-# Security
+# Security and verified limits
 
-1kUSD is built with a **security-first** philosophy. Every component is designed to fail safely.
+Security claims on this site follow evidence, not roadmap intent. The current
+prototype must not custody real funds.
 
-## Battle-Tested Before Launch
+## Verified baseline
 
-| Metric | Value |
-|--------|-------|
-| Automated tests | **198** |
-| Test suites | **35** |
-| Protocol invariants | **35** |
-| Fuzz test runs | **256 runs x 64 depth** |
-| Economic simulations | **10 scenarios** |
-| Audit documents | **11** |
+| Metric | Result (2026-08-05) |
+|---|---|
+| Foundry tests | 198 passed / 0 failed / 0 skipped |
+| Placeholder tests | 10 |
+| Line coverage | 78.92% |
+| Branch coverage | 57.63% |
+| External audit | Not completed |
 
-## Defense in Depth
+A passing suite is useful evidence, not certification.
 
-### Oracle Guards
-The protocol reads prices from multiple oracle feeds. If feeds go stale or disagree beyond acceptable limits, the system automatically pauses — no user funds are at risk from manipulated prices.
+## Open release blockers
 
-### Rate Limits
-Every swap through the PSM is subject to:
+- Admin/Guardian role precedence prevents the default admin from pausing after
+  Guardian sunset.
+- Guardian self-registration and resume do not follow the documented role flow.
+- Oracle prices are admin-set mocks, not production feeds.
+- DAO timelock execution is not implemented.
+- Fee routing and production deployment/role handoff are incomplete.
+- Audit freeze, dependency, Slither, and license metadata need reconciliation.
 
-- **Daily volume cap** — limits total daily minting/redeeming
-- **Per-transaction cap** — prevents single large exploits
+## Intended defenses
 
-### Circuit Breakers
-The Safety Automata can instantly pause any module if anomalies are detected. This is a last line of defense that prevents cascading failures.
+The target design includes mandatory limits, slippage/deadline checks, stale and
+deviation-aware pricing, per-module pause, delayed governance, multisig execution,
+reserve/supply monitoring, and reproducible releases.
 
-### Guardian Sunset
-An emergency Guardian can pause the system to protect users, but it:
+These controls are considered delivered only after their focused tests, full
+suite, static analysis, deployment E2E, and independent review pass.
 
-- **Cannot move any funds**
-- **Automatically expires** after a set period
-- **Can be overridden** by the DAO
+## Report privately
 
-### DAO Timelock
-All parameter changes go through a timelock — users always have advance notice before any protocol change takes effect.
+Use [GitHub Private Vulnerability Reporting](https://github.com/NeaBouli/1kUSD/security/advisories/new).
+Do not publish exploit details in issues.
 
-## Audit Package
+Technical references:
 
-The complete audit documentation is publicly available:
-
-- Audit Scope and file manifest
-- 35 protocol invariants with coverage matrix
-- 5 economic risk scenarios with mitigations
-- Threat model (10 attack classes)
-- Trust model and role matrix
-- Known limitations (12 documented)
-
-For full technical details, see the [Technical Wiki](https://github.com/NeaBouli/1kUSD/wiki).
-
-## Open Source
-
-Every line of code is open source under AGPL-3.0. Anyone can review, audit, or fork the protocol.
-
-Repository: [github.com/NeaBouli/1kUSD](https://github.com/NeaBouli/1kUSD)
-
----
-
-[How It Works](how-it-works.md) | [Roadmap](roadmap.md) | [Back to Home](INDEX.md)
+- [Known limitations](https://github.com/NeaBouli/1kUSD/blob/main/audit/KNOWN_LIMITATIONS.md)
+- [Audit follow-up](https://github.com/NeaBouli/1kUSD/blob/main/docs-internal/reports/AUDIT_REVIEW_2026-08-05.md)
+- [Master plan](https://github.com/NeaBouli/1kUSD/blob/main/docs-internal/planning/MASTER_PLAN_2026.md)
