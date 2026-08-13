@@ -23,17 +23,18 @@ Trigger pause(moduleId) via Guardian → expect success, events emitted.
 
 Unpause via DAO path (Timelock) → expect success.
 
-After sunset:
+After sunset (using an account that holds only the Guardian role):
 
 Attempt pause(moduleId) via Guardian → expect revert GUARDIAN_EXPIRED.
 
-DAO can still pause/resume via Timelock.
+DAO/Timelock can still pause/resume, even if its executor also holds the
+Guardian role.
 
 Log all tx hashes; attach to release notes.
 
 Exit Criteria
 
-Guardian cannot pause after sunset
+Guardian-only account cannot pause after sunset
 
 DAO pause/resume unaffected
 
