@@ -5,9 +5,12 @@
 - A private VLABS operator audit records unresolved deployment-safety,
   dependency and contract-review work for this repository. No live secret
   compromise was confirmed by the covered current-checkout review.
-- Release and mainnet remain gated until the operator supplies bounded,
-  no-secrets acceptance criteria and confirms their evidence. Never publish
-  key material, finding details or raw scanner evidence here.
+- Release and mainnet remain gated by the existing independent security review,
+  explicit Gio approval, and all master-plan release gates. The operator's
+  bounded, no-secrets acceptance criteria and evidence confirmation supplement
+  these gates. Public finding IDs, severities, and non-exploitable short
+  summaries may remain; never publish key material, detailed finding evidence,
+  or raw scanner evidence here.
 
 Source: repository/GitHub/Kaspa audit performed 2026-08-05 with an independent
 Kimi K3 review.
