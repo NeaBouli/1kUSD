@@ -1,5 +1,14 @@
 # Codex Findings
 
+## 2026-08-13 — Public security audit handoff — RELEASE GATE
+
+- A private VLABS operator audit records unresolved deployment-safety,
+  dependency and contract-review work for this repository. No live secret
+  compromise was confirmed by the covered current-checkout review.
+- Release and mainnet remain gated until the operator supplies bounded,
+  no-secrets acceptance criteria and confirms their evidence. Never publish
+  key material, finding details or raw scanner evidence here.
+
 Source: repository/GitHub/Kaspa audit performed 2026-08-05 with an independent
 Kimi K3 review.
 
