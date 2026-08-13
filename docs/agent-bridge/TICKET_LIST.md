@@ -6,7 +6,7 @@ index. `approved_for_execution` must be set explicitly before implementation.
 | ID | Priority | Track | Title | Depends on | Status | GitHub |
 |---|---|---|---|---|---|---|
 | `1K-P0-001` | P0 | Program | Approve Kaspa-primary product scope and EVM reference role | — | done | [#101](https://github.com/NeaBouli/1kUSD/issues/101) |
-| `1K-P0-002` | P0 | Safety | Correct SafetyAutomata sunset role precedence | 001 | in_progress | [#102](https://github.com/NeaBouli/1kUSD/issues/102) |
+| `1K-P0-002` | P0 | Safety | Correct SafetyAutomata sunset role precedence | 001 | done | [#102](https://github.com/NeaBouli/1kUSD/issues/102) |
 | `1K-P0-003` | P0 | Safety | Define and repair Guardian registration/resume lifecycle | 001 | proposed | [#103](https://github.com/NeaBouli/1kUSD/issues/103) |
 | `1K-P0-004` | P0 | Release | Reconcile freeze, dependencies, license, and SBOM | 001 | proposed | [#104](https://github.com/NeaBouli/1kUSD/issues/104) |
 | `1K-P0-005` | P0 | Quality | Triage Slither Mediums, replace placeholders, enforce production quality gates | 002–004 | proposed | [#105](https://github.com/NeaBouli/1kUSD/issues/105) |
