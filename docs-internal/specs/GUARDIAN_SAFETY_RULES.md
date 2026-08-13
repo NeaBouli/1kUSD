@@ -4,12 +4,15 @@
 
 ## Roles
 - `GUARDIAN_ROLE` → temporary emergency authority (time-limited)
-- `DAO_ROLE` → permanent governance owner
+- `ADMIN_ROLE` / `DAO_ROLE` → permanent DAO/Timelock authority
 
 ## Core Rules
-- Guardian may call `pause()` and `unpause()` on any Pausable module.
-- Guardian authority expires automatically after sunset block (set by DAO).
-- DAO may always override or renew Guardian.
+- Guardian may call `pause()` before the configured sunset timestamp.
+- Guardian cannot resume modules, either before or after sunset.
+- Guardian authority expires at `block.timestamp >= guardianSunset`.
+- DAO/Timelock may always pause or resume modules.
+- If an account has both a permanent role and `GUARDIAN_ROLE`, its permanent
+  authority takes precedence and remains valid after sunset.
 
 ## Security
 - Each pause/unpause emits `SystemPaused` or `SystemResumed`.

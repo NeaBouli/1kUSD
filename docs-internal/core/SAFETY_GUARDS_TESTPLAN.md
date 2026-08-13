@@ -9,7 +9,8 @@ Rate-limit (sliding window) across modules and global scope
 
 Pause/Resume semantics per module via SafetyAutomata
 
-Guardian sunset: guardian can pause until sunsetTs; after that only DAO may pause
+Guardian sunset: Guardian-only can pause until sunsetTs; at/after sunset only
+permanent ADMIN/DAO authority may pause
 
 Pass Criteria
 

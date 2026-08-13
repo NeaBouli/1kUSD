@@ -16,9 +16,13 @@
 - **Modules**: PSM, Vault, AutoConverter, Oracle, Treasury read safety state.
 
 AuthZ model:
-- `ROLE_PAUSE`: Guardian (+ DAO executor).  
+- `ROLE_PAUSE`: Guardian before sunset; DAO/Timelock authority permanently.
 - `ROLE_PARAMS`: DAO executor only.  
 - `ROLE_RESUME`: DAO executor only (Guardian cannot resume).  
+
+If a caller holds both a permanent governance role and the temporary Guardian
+role, the permanent role takes precedence. The Guardian sunset must never
+shadow valid DAO/Timelock authority.
 
 ## 3. State & Parameters
 - `paused[moduleId: bytes32] -> bool`
@@ -46,7 +50,14 @@ AuthZ model:
 Per `moduleId`: `Active` ↔ `Paused`.
 - **Pause:** Guardian or DAO can pause; emits `ModulePaused(moduleId, actor, reason, ts)`.
 - **Resume:** only DAO executor; emits `ModuleResumed(moduleId, actor, ts)`.
-- **Guardian Sunset:** if `block.timestamp >= guardianSunsetTs`, `pause()` from Guardian reverts `GUARDIAN_EXPIRED`.
+- **Guardian Sunset:** if `block.timestamp >= guardianSunsetTs`, `pause()` from a Guardian-only caller reverts `GUARDIAN_EXPIRED`. DAO/Timelock authority remains valid, including for callers that also hold the Guardian role.
+
+| Caller roles | Before sunset: pause | At/after sunset: pause | Resume |
+|--------------|----------------------|------------------------|--------|
+| Guardian only | Allowed | `GUARDIAN_EXPIRED` | Denied |
+| DAO/Timelock (`ADMIN_ROLE` or `DAO_ROLE`) only | Allowed | Allowed | Allowed |
+| DAO/Timelock (`ADMIN_ROLE` or `DAO_ROLE`) + Guardian | Allowed | Allowed | Allowed |
+| No authorized role | Denied | Denied | Denied |
 
 ## 6. Policy Tables (Examples)
 | Policy                      | Target       | Set By   | Enforced In     |

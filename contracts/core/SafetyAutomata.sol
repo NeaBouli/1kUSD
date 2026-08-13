@@ -32,13 +32,11 @@ contract SafetyAutomata is AccessControl, ISafetyAutomata {
     }
 
     function pauseModule(bytes32 moduleId) external override {
-        if (hasRole(GUARDIAN_ROLE, msg.sender)) {
+        bool isPermanentAuthority = hasRole(ADMIN_ROLE, msg.sender) || hasRole(DAO_ROLE, msg.sender);
+
+        if (!isPermanentAuthority) {
+            require(hasRole(GUARDIAN_ROLE, msg.sender), "ACCESS_DENIED");
             if (block.timestamp >= guardianSunset) revert GuardianExpired();
-        } else {
-            require(
-                hasRole(ADMIN_ROLE, msg.sender) || hasRole(DAO_ROLE, msg.sender),
-                "ACCESS_DENIED"
-            );
         }
         _paused[moduleId] = true;
         emit Paused(moduleId, msg.sender);

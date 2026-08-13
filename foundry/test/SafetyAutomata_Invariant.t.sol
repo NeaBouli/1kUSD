@@ -20,6 +20,7 @@ contract SafetyAutomataHandler is Test {
     uint256 public ghost_pauseCount;
     uint256 public ghost_resumeCount;
     uint256 public ghost_guardianPausedAfterSunset;
+    uint256 public ghost_privilegedPauseFailures;
 
     constructor(
         SafetyAutomata _safety,
@@ -40,9 +41,25 @@ contract SafetyAutomataHandler is Test {
         moduleIdx = bound(moduleIdx, 0, moduleIds.length - 1);
         bytes32 modId = moduleIds[moduleIdx];
         vm.prank(admin);
-        safety.pauseModule(modId);
-        ghost_paused[modId] = true;
-        ghost_pauseCount += 1;
+        try safety.pauseModule(modId) {
+            ghost_paused[modId] = true;
+            ghost_pauseCount += 1;
+        } catch {
+            ghost_privilegedPauseFailures += 1;
+        }
+    }
+
+    /// @notice DAO pauses a random module, including after guardian sunset.
+    function daoPause(uint256 moduleIdx) public {
+        moduleIdx = bound(moduleIdx, 0, moduleIds.length - 1);
+        bytes32 modId = moduleIds[moduleIdx];
+        vm.prank(daoRole);
+        try safety.pauseModule(modId) {
+            ghost_paused[modId] = true;
+            ghost_pauseCount += 1;
+        } catch {
+            ghost_privilegedPauseFailures += 1;
+        }
     }
 
     /// @notice Guardian attempts to pause a random module (may fail after sunset).
@@ -111,9 +128,7 @@ contract SafetyAutomata_Invariant is Test {
         safety = new SafetyAutomata(admin, sunsetTimestamp);
         safety.grantGuardian(guardianAddr);
         safety.grantRole(safety.DAO_ROLE(), daoAddr);
-        // Revoke GUARDIAN_ROLE from admin so admin pauses don't fail via
-        // the guardian sunset path (admin has both ADMIN + GUARDIAN from constructor)
-        safety.revokeRole(safety.GUARDIAN_ROLE(), admin);
+        safety.grantGuardian(daoAddr);
 
         bytes32[] memory mods = new bytes32[](3);
         mods[0] = MOD_A;
@@ -161,8 +176,18 @@ contract SafetyAutomata_Invariant is Test {
 
     /// @notice Guardian can never successfully pause after sunset.
     function invariant_noGuardianPauseAfterSunset() public view {
-        assertEq(handler.ghost_guardianPausedAfterSunset(), 0,
-            "INV: guardian paused a module after sunset");
+        assertEq(
+            handler.ghost_guardianPausedAfterSunset(),
+            0,
+            "INV: guardian paused a module after sunset"
+        );
+    }
+
+    /// @notice Permanent governance roles are never shadowed by Guardian expiry.
+    function invariant_privilegedPauseNeverFails() public view {
+        assertEq(
+            handler.ghost_privilegedPauseFailures(), 0, "INV: permanent governance pause failed"
+        );
     }
 
     /// @notice Unpaused modules always report isModuleEnabled == true.

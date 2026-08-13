@@ -9,7 +9,8 @@ Make the guardian strictly temporary and auditable. After sunset:
 ## Mechanisms (options)
 1. **Timestamp gate** in SafetyAutomata:
    - `guardianSunsetTs` immutable (or set-once).
-   - `if (msg.sender == guardian && block.timestamp >= guardianSunsetTs) revert GUARDIAN_EXPIRED();`
+   - Permanent DAO/Timelock roles are evaluated before the temporary Guardian role.
+   - A Guardian-only caller reverts when `block.timestamp >= guardianSunsetTs`.
 2. **Role drop via Timelock**:
    - Timelock executes `setGuardian(address(0))` at sunset.
 3. **Circuit preference**:

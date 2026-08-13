@@ -13,10 +13,14 @@ contract SafetyAutomata_Config is Test {
 
     address internal admin = address(this);
     address internal guardianAddr = address(0xCAFE);
+    address internal daoAddr = address(0xDA0);
     address internal unauthorizedCaller = address(0xDEAD);
 
     bytes32 internal constant MODULE_ID = keccak256("TEST_MODULE");
     uint256 internal sunsetTimestamp;
+
+    event Paused(bytes32 indexed moduleId, address indexed by);
+    event Resumed(bytes32 indexed moduleId, address indexed by);
 
     function setUp() public {
         vm.warp(1_700_000_000);
@@ -35,12 +39,37 @@ contract SafetyAutomata_Config is Test {
         assertTrue(safety.isPaused(MODULE_ID));
     }
 
-    function testPauseModule_GuardianAfterSunset_Reverts() public {
+    function testPauseModule_GuardianAtSunset_Reverts() public {
         vm.warp(sunsetTimestamp);
 
         vm.prank(guardianAddr);
         vm.expectRevert(SafetyAutomata.GuardianExpired.selector);
         safety.pauseModule(MODULE_ID);
+    }
+
+    function testPauseModule_GuardianAfterSunset_Reverts() public {
+        vm.warp(sunsetTimestamp + 1);
+
+        vm.prank(guardianAddr);
+        vm.expectRevert(SafetyAutomata.GuardianExpired.selector);
+        safety.pauseModule(MODULE_ID);
+    }
+
+    function testResumeModule_GuardianBeforeSunset_Reverts() public {
+        safety.pauseModule(MODULE_ID);
+
+        vm.prank(guardianAddr);
+        vm.expectRevert("ACCESS_DENIED");
+        safety.resumeModule(MODULE_ID);
+    }
+
+    function testResumeModule_GuardianAfterSunset_Reverts() public {
+        safety.pauseModule(MODULE_ID);
+        vm.warp(sunsetTimestamp + 1);
+
+        vm.prank(guardianAddr);
+        vm.expectRevert("ACCESS_DENIED");
+        safety.resumeModule(MODULE_ID);
     }
 
     // -----------------------------------------------------------------
@@ -76,6 +105,59 @@ contract SafetyAutomata_Config is Test {
         assertTrue(safety.isPaused(MODULE_ID));
 
         safety.resumeModule(MODULE_ID);
+        assertFalse(safety.isPaused(MODULE_ID));
+    }
+
+    function testPauseModule_AdminWithGuardianRole_AtSunset_Succeeds() public {
+        vm.warp(sunsetTimestamp);
+
+        vm.expectEmit(true, true, false, true, address(safety));
+        emit Paused(MODULE_ID, admin);
+        safety.pauseModule(MODULE_ID);
+
+        assertTrue(safety.isPaused(MODULE_ID));
+    }
+
+    function testPauseModule_AdminWithGuardianRole_AfterSunset_Succeeds() public {
+        vm.warp(sunsetTimestamp + 1);
+
+        safety.pauseModule(MODULE_ID);
+
+        assertTrue(safety.isPaused(MODULE_ID));
+    }
+
+    function testPauseModule_DaoOnly_AfterSunset_Succeeds() public {
+        safety.grantRole(safety.DAO_ROLE(), daoAddr);
+        vm.warp(sunsetTimestamp + 1);
+
+        vm.prank(daoAddr);
+        safety.pauseModule(MODULE_ID);
+
+        assertTrue(safety.isPaused(MODULE_ID));
+    }
+
+    function testPauseModule_DaoWithGuardianRole_AfterSunset_Succeeds() public {
+        safety.grantRole(safety.DAO_ROLE(), daoAddr);
+        safety.grantGuardian(daoAddr);
+        vm.warp(sunsetTimestamp + 1);
+
+        vm.prank(daoAddr);
+        safety.pauseModule(MODULE_ID);
+
+        assertTrue(safety.isPaused(MODULE_ID));
+    }
+
+    function testResumeModule_DaoWithGuardianRole_AfterSunset_Succeeds() public {
+        safety.grantRole(safety.DAO_ROLE(), daoAddr);
+        safety.grantGuardian(daoAddr);
+        safety.pauseModule(MODULE_ID);
+        vm.warp(sunsetTimestamp + 1);
+
+        vm.expectEmit(true, true, false, true, address(safety));
+        emit Resumed(MODULE_ID, daoAddr);
+        vm.prank(daoAddr);
+        safety.resumeModule(MODULE_ID);
+
         assertFalse(safety.isPaused(MODULE_ID));
     }
 
