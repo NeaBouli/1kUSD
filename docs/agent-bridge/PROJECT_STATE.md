@@ -1,6 +1,6 @@
 # Project State
 
-Last reviewed: **2026-08-13**
+Last reviewed: **2026-08-16**
 
 ## Current truth
 
@@ -20,14 +20,18 @@ Last reviewed: **2026-08-13**
 - The EVM implementation is not directly portable to the UTXO/covenant model.
 - `ADR-041` approves Kaspa Toccata as the primary product track. EVM remains an
   executable reference without a current production commitment.
+- `ADR-042` is accepted: the first separately approved Testnet-10 PoC will use
+  a singleton control/reserve L1 covenant family. Production sharding requires
+  a later ADR.
 
 ## Current phase
 
-`kaspa_architecture_in_progress`
+`kaspa_architecture_accepted`
 
-`1K-P1-012` / #112 is `approved_for_execution` and limited to ADR-042, a
-Kaspa-native threat model, and a separately gated PoC acceptance plan. No code,
-deployment, wallet, real funds, or production claim is authorized.
+`1K-P1-012` / #112 remains `in_progress` until accepted ADR-042 is published
+through PR #122 and the issue is closed. No PoC code, deployment, wallet, real
+funds, or production claim is authorized; implementation requires a separate
+approved ticket.
 
 ## Release status
 

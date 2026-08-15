@@ -85,3 +85,16 @@
   clean at commit time.
 - ADR-042 remains `Proposed` and DEC-006 remains `Open`; publication requests
   Gio's accept/reject decision and does not authorize PoC code or deployment.
+
+## 2026-08-16 — ADR-042 / DEC-006 accepted by Gio
+
+- Gio explicitly accepted the singleton control/reserve L1 covenant-family
+  architecture for a future Testnet-10 PoC.
+- Production sharding remains deferred to a later ADR.
+- ADR-042 advanced from `Proposed` to `Accepted`; DEC-006 advanced from `Open`
+  to `Approved`.
+- This architecture decision does not approve PoC code, deployment, wallets,
+  real funds, token economics, or production use. A separate execution ticket
+  remains mandatory.
+- PR #122 must proceed through normal checks and review requirements; no
+  protection or review gate is bypassed.

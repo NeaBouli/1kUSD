@@ -1,6 +1,6 @@
 # Kaspa Testnet PoC Acceptance Plan
 
-Status: **Proposed — execution requires a separate approved ticket**
+Status: **Accepted as the future PoC gate — execution requires a separate approved ticket**
 Date: **2026-08-13**
 Parent decision: [`ADR-042`](../adr/ADR-042-kaspa-toccata-execution-architecture.md)
 

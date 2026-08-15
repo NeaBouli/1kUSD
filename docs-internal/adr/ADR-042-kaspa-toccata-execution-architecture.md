@@ -1,8 +1,9 @@
 # ADR-042: Kaspa Toccata Execution Architecture
 
-Status: **Proposed — Gio decision required**
+Status: **Accepted**
 Date: **2026-08-13**
 Decision owner: **Gio**
+Accepted by: **Gio, 2026-08-16**
 Recorded by: **Codex Sol**
 Independent review: **Kimi K3, 2026-08-16 (`APPROVE` after publication-consistency corrections)**
 Tracking issue: [1K-P1-012 / #112](https://github.com/NeaBouli/1kUSD/issues/112)

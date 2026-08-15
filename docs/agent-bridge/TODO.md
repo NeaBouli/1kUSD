@@ -2,10 +2,12 @@
 
 ## Active
 
-- [ ] `1K-P1-012`: complete and review the Kaspa Toccata execution ADR,
+- [x] `1K-P1-012`: complete and review the Kaspa Toccata execution ADR,
   Kaspa-native threat model, and separately gated PoC acceptance plan.
-- [ ] Resolve `DEC-006` through explicit Gio acceptance or rejection of ADR-042.
-- [ ] Verify primary-source links, strict docs build, and Git diff.
+- [x] Resolve `DEC-006` through explicit Gio acceptance of ADR-042.
+- [x] Verify primary-source links, strict docs build, and Git diff.
+- [ ] Publish the accepted decision through PR #122 and close #112 only after
+  normal checks and review requirements pass.
 
 ## Next — requires separate Gio approval
 

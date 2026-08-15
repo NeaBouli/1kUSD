@@ -39,7 +39,7 @@ production commitment. See
 | Fee routing | Incomplete; two incompatible router paths coexist |
 | Deployment | Testnet/demo wiring with MockERC20; no production role handoff |
 | External audit | Not completed |
-| Kaspa | ADR-042 proposed; any Testnet-10 PoC remains separately gated |
+| Kaspa | ADR-042 accepted; any Testnet-10 PoC remains separately gated |
 
 The historical `audit-final-v0.51.5` tag is preserved as evidence, but its
 metadata and dependency labels contain known inconsistencies. It is not a

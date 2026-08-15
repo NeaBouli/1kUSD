@@ -1,7 +1,7 @@
 # 1kUSD Master Plan — Functional Stablecoin Program
 
-Status: **Kaspa-primary direction approved; ADR-042 in progress; execution remains ticket-gated**
-Last updated: **2026-08-13**
+Status: **Kaspa-primary direction and ADR-042 approved; execution remains ticket-gated**
+Last updated: **2026-08-16**
 Accountable lead: **Codex Sol**
 Product authority: **Gio**
 
@@ -142,7 +142,7 @@ See [`ADR-042`](../adr/ADR-042-kaspa-toccata-execution-architecture.md), the
 authorize PoC implementation or deployment.
 
 The first implementation is an isolated, value-capped testnet vault/issuance
-proof of concept. ADR-042 proposes Testnet-10 from current official tooling
+proof of concept. ADR-042 selects Testnet-10 from current official tooling
 evidence; that selection must be revalidated before any separately approved PoC
 execution. It must not hold production funds or dictate the full design.
 
