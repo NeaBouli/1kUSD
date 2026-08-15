@@ -4,9 +4,9 @@ The roadmap is release-gated, not date-driven. No phase starts automatically.
 
 | Phase | Goal | Current state |
 |---|---|---|
-| 0 — Project truth | Honest status, Bridge, issues, Pages, README, archive | In progress |
+| 0 — Project truth | Honest status, Bridge, issues, Pages, README, archive | Completed in #113 |
 | 1 — Product boundary | Kaspa-primary scope; EVM reference role | Approved in `ADR-041` |
-| 2 — Kaspa architecture | Covenant, based-app, and hybrid ADR | Proposed; awaiting #112 approval |
+| 2 — Kaspa architecture | Covenant, based-app, and hybrid ADR | In progress in #112; ADR-042 proposed |
 | 3 — Isolated Kaspa PoC | Value-capped testnet vault/issuance experiment | Blocked by phase 2 |
 | 4 — Protocol hardening | Safety, governance, collateral, fees, and oracle | Proposed |
 | 5 — Deployment | Reproducible Kaspa testnet candidate and monitoring | Blocked by 2–4 |

@@ -32,9 +32,10 @@ decentralized today.
 
 ## Why the Kaspa implementation is different
 
-Kaspa Toccata programmability remains a testnet/pre-mainnet dependency under
-active development. A Kaspa-native 1kUSD remains a design project: token
-balances, global PSM state, oracles, roles, and pause semantics cannot be copied
-directly from the EVM account model.
+Kaspa Toccata is active on mainnet, but Silverscript and vProgs remain
+experimental application tooling. Consensus activation is not 1kUSD production
+readiness. A Kaspa-native 1kUSD remains a design project: token balances, global
+PSM state, oracles, roles, and pause semantics cannot be copied directly from
+the EVM account model.
 
 [How it works](how-it-works.md) · [Security](security.md) · [Roadmap](roadmap.md)

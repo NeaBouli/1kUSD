@@ -8,6 +8,9 @@
 5. What legal entity, jurisdiction, reserve attestation, and redemption
    obligations apply before any public stablecoin launch?
 6. What is the required testnet duration and value-at-risk ceiling?
+7. Does Gio accept ADR-042's singleton control/reserve L1 covenant-family PoC
+   recommendation for `DEC-006`, or require revision before a PoC ticket is
+   created?
 
 ## Resolved
 

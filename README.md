@@ -29,17 +29,17 @@ production commitment. See
 
 ## Current verified baseline
 
-| Area | Verified state (2026-08-05) |
+| Area | Verified state / evidence date |
 |---|---|
-| Foundry tests | 198 passed, 0 failed, 0 skipped across 35 suites |
-| Test quality | 10 counted tests are placeholders |
-| Coverage | 78.92% lines / 57.63% branches (default report) |
+| Foundry tests | 207 passed, 0 failed, 0 skipped across 35 suites (#120, 2026-08-13) |
+| Test quality | 10 counted tests are placeholders (2026-08-05) |
+| Coverage | 78.92% lines / 57.63% branches (default report, 2026-08-05) |
 | Oracle | Admin-set mock prices; not a production feed system |
 | Governance | DAO timelock is a non-functional stub |
 | Fee routing | Incomplete; two incompatible router paths coexist |
 | Deployment | Testnet/demo wiring with MockERC20; no production role handoff |
 | External audit | Not completed |
-| Kaspa | Toccata design and isolated proof of concept are planned |
+| Kaspa | ADR-042 proposed; any Testnet-10 PoC remains separately gated |
 
 The historical `audit-final-v0.51.5` tag is preserved as evidence, but its
 metadata and dependency labels contain known inconsistencies. It is not a

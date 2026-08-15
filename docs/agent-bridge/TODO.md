@@ -2,18 +2,19 @@
 
 ## Active
 
-- [ ] `1K-P1-013`: publish the project-truth, Bridge, master-plan, Pages, and
-  reversible hygiene pull request.
-- [ ] Create and link GitHub issues for every ticket in `TICKET_LIST.md`.
-- [ ] Verify docs build, full Foundry suite, links, and Git diff.
+- [ ] `1K-P1-012`: complete and review the Kaspa Toccata execution ADR,
+  Kaspa-native threat model, and separately gated PoC acceptance plan.
+- [ ] Resolve `DEC-006` through explicit Gio acceptance or rejection of ADR-042.
+- [ ] Verify primary-source links, strict docs build, and Git diff.
 
-## Next — requires Gio selection
+## Next — requires separate Gio approval
 
-- [ ] Select exactly one P0 ticket as `approved_for_execution`.
-- [ ] Resolve `DEC-001` through `DEC-006` in `DECISIONS.md` where required.
-- [ ] Write the selected ticket's threat-model delta before modifying contracts.
+- [ ] Create the value-capped Testnet-10 PoC execution ticket only after ADR-042
+  is accepted.
+- [ ] Select `1K-P0-003` or `1K-P0-004`; do not start either automatically.
 
 ## Not authorized in the current task
 
-- Contract, governance, oracle, fee, collateral, or token-economics changes.
+- PoC implementation or contract, governance, oracle, fee, collateral, or
+  token-economics changes.
 - Mainnet/testnet deployment, wallet actions, release, or tag rewriting.
