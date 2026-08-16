@@ -98,3 +98,17 @@
   remains mandatory.
 - PR #122 must proceed through normal checks and review requirements; no
   protection or review gate is bypassed.
+
+## 2026-08-16 — 1K-P1-012 merged and closed
+
+- CodeRabbit's actionable DEC-006 execution-gate finding was corrected in
+  `b8e8249`; the UTC/EEST date finding was answered with timezone evidence.
+- All review threads were resolved and Forge Build, Forge Test, docs-check, and
+  CodeRabbit completed successfully on the final PR head.
+- PR #122 was merged with the normal squash operation at
+  `036eb6223d474f5782273d39b5d494cf28da9a64`; no admin-override flag,
+  protection-setting change, force push, or forced merge was used.
+- Issue #112 closed automatically and `1K-P1-012` advanced from `in_progress`
+  to `done`.
+- ADR-042 approval remains architecture-only. PoC implementation, deployment,
+  wallet use, and real funds require a separate approved execution ticket.

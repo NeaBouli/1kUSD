@@ -6,7 +6,7 @@
   Kaspa-native threat model, and separately gated PoC acceptance plan.
 - [x] Resolve `DEC-006` through explicit Gio acceptance of ADR-042.
 - [x] Verify primary-source links, strict docs build, and Git diff.
-- [ ] Publish the accepted decision through PR #122 and close #112 only after
+- [x] Publish the accepted decision through PR #122 and close #112 only after
   normal checks and review requirements pass.
 
 ## Next — requires separate Gio approval
