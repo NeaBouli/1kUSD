@@ -23,19 +23,36 @@ Last reviewed: **2026-08-16**
 - `ADR-042` is accepted: the first separately approved Testnet-10 PoC will use
   a singleton control/reserve L1 covenant family. Production sharding requires
   a later ADR.
+- Public status documentation is aligned through merged PR #126 (`12c189f`).
+- `ADR-043` is accepted under documentation ticket `1K-P1-016` / #127:
+  immutable value logic, bounded timelocked governance, progressive privilege
+  removal, and an expiring pause-only Guardian. No implementation is authorized.
 
 ## Current phase
 
-`target_stop_1k_p0_003_complete`
+`architecture_1k_p1_016_control_minimization`
 
-`1K-P0-003` / #103 is `done`. PR #124 merged at `b5a2bc9` with 229 passing
-tests, targeted Slither with zero findings on both changed contracts, strict
-docs success, resolved CodeRabbit findings, and an independent Kimi `APPROVE`
-verdict. Issue #103 closed as `completed`. No deployment, wallet,
-token-economics, Kaspa PoC, or production action was performed.
+`1K-P1-016` / #127 is `in_progress` under Gio's explicit approval. Scope is
+limited to ADR-043, a governance/control threat-model delta, a staged
+bootstrap-to-community transition plan, and necessary planning/Bridge updates.
+Kimi K3 completed the independent architecture analysis and returned final
+`APPROVE` on the complete draft diff. Claude Code was attempted but unavailable
+because it was not authenticated; no Claude review credit is claimed. No
+contract, role, DAO, deployment, wallet, token-economics, PoC, or production
+action is authorized.
+
+Gio accepted ADR-043 / DEC-007 on 2026-08-16. Draft PR #128 now records the
+accepted architecture and remains under normal review. Issue #127 remains open
+until the documentation PR is reviewed and merged.
+
+`1K-P0-003` / #103 remains `done`; its canonical merged baseline is 229 passing
+tests across 35 suites with eight remaining placeholders.
 
 `1K-P1-012` / #112 remains `done`: accepted ADR-042 was published through
 merged PR #122. PoC implementation still requires a separate approved ticket.
+
+`1K-P1-007` / #107 remains blocked pending respecification against ADR-043 and a
+later, separate execution approval.
 
 ## Release status
 
