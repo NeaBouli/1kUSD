@@ -181,3 +181,19 @@
   `ADMIN_ROLE` emergency/rotation procedure.
 - No contract behavior or authorized scope changed. Strict docs, documentation
   watchdog, and diff validation are required again on the corrected head.
+
+## 2026-08-16 — 1K-P0-003 merged and closed
+
+- All three CodeRabbit documentation threads were resolved on the corrected
+  head. Forge Build, Forge Test, docs-check, and the configured CodeRabbit
+  status completed successfully.
+- Repository owner `NeaBouli` personally used the configured owner override in
+  the GitHub UI and squash-merged PR #124 at
+  `b5a2bc9aecd1dc316262a9dcdb38ba0d8158208a`. Codex did not execute the
+  override, change protection settings, or force the merge.
+- Issue #103 closed automatically with reason `completed`; `1K-P0-003`
+  advanced from `in_progress` to `done`, and `AUD-M01` is remediated.
+- The canonical merged baseline is 229 passing Foundry tests across 35 suites;
+  targeted Slither reported zero findings for both changed contracts.
+- No deployment, wallet, token-economics, PoC, IAM, secret, or production
+  action was performed. Target stop is active.
