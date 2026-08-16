@@ -16,8 +16,8 @@
 
 ## Next — requires separate Gio approval after target stop
 
-- [ ] Create the value-capped Testnet-10 PoC execution ticket only after ADR-042
-  is accepted.
+- [ ] Create the value-capped Testnet-10 PoC execution ticket only under a
+  separate Gio approval; ADR-042 is accepted, but execution is not authorized.
 - [ ] Select `1K-P0-004` or another queued ticket; do not start automatically.
 
 ## Not authorized in the current task

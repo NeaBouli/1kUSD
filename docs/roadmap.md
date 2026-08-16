@@ -8,7 +8,7 @@ The roadmap is release-gated, not date-driven. No phase starts automatically.
 | 1 — Product boundary | Kaspa-primary scope; EVM reference role | Approved in `ADR-041` |
 | 2 — Kaspa architecture | Covenant, based-app, and hybrid ADR | Accepted in `ADR-042`; PoC separately gated |
 | 3 — Isolated Kaspa PoC | Value-capped testnet vault/issuance experiment | Awaiting a separate approved execution ticket |
-| 4 — Protocol hardening | Safety, governance, collateral, fees, and oracle | Proposed |
+| 4 — Protocol hardening | Safety, governance, collateral, fees, and oracle | In progress; Safety lifecycle fixes merged in #120 and #124 |
 | 5 — Deployment | Reproducible Kaspa testnet candidate and monitoring | Blocked by 2–4 |
 | 6 — Assurance | Coverage, static analysis, fuzz/invariant/economic gates | Ongoing / incomplete |
 | 7 — External review | New freeze, audit, remediation, bug bounty | Blocked by 1–6 |

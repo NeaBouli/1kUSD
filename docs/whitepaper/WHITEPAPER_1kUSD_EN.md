@@ -1,6 +1,6 @@
 # 1kUSD Concept and Implementation Specification
 
-Version: remediation draft, 2026-08-05
+Version: remediation draft, 2026-08-16
 
 > This is a product and architecture specification, not evidence of production
 > deployment, audit certification, reserves, liquidity, or a guaranteed peg.
@@ -37,10 +37,11 @@ rules. The current admin-set mock is test-only.
 
 ## Current implementation status
 
-The EVM prototype builds and has a meaningful Foundry suite, but contains ten
+The EVM prototype builds and has a meaningful Foundry suite, but contains eight
 placeholder tests, incomplete branch coverage, a mock oracle, timelock and fee
-stubs, role-flow findings, and testnet/demo deployment wiring. It is not a
-production system.
+stubs, and testnet/demo deployment wiring. The Safety/Guardian lifecycle is
+test-hardened, but production role handoff and deployment E2E remain gated. It
+is not a production system.
 
 ## Kaspa Toccata
 
@@ -50,9 +51,9 @@ define native-asset issuance, shard hot PSM state, verify oracle reports, and
 support indexer/reorg recovery. The Solidity contracts provide economic
 specification and invariants, not portable runtime code.
 
-The first milestone is a pinned, value-capped proof of concept on the then-current
-supported Toccata test network after an architecture decision record. No Kaspa
-mainnet date is claimed.
+The first milestone is a pinned, value-capped proof of concept on Testnet-10
+under a separate approved execution ticket. The architecture is accepted in
+ADR-042; no Kaspa mainnet date is claimed.
 
 ## Release requirements
 

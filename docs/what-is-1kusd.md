@@ -26,9 +26,10 @@ solvency, governance, and operational availability.
 ## Current control model
 
 The prototype still has powerful admin-controlled components. The real governance
-timelock is not implemented, the oracle is a mock, and the Guardian role flow has
-open findings. Therefore it must not be described as ownerless or fully
-decentralized today.
+timelock is not implemented and the oracle is a mock. The Guardian lifecycle is
+test-hardened, but its production deployment role handoff is not verified.
+Therefore the prototype must not be described as ownerless or fully decentralized
+today.
 
 ## Why the Kaspa implementation is different
 

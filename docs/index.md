@@ -30,7 +30,7 @@ hide:
       <strong>1 1kUSD ≈ 1 USD</strong>
     </div>
     <div class="kusd-hero-facts" aria-label="Verified project facts">
-      <div><strong>198</strong><span>Foundry tests passing</span></div>
+      <div><strong>229</strong><span>Foundry tests passing</span></div>
       <div><strong>0</strong><span>production deployments</span></div>
       <div><strong>Kaspa</strong><span>approved primary track</span></div>
       <div><strong>EVM</strong><span>executable reference</span></div>
@@ -79,7 +79,7 @@ hide:
       <header class="kusd-section-head">
         <p class="kusd-eyebrow">Kaspa-native architecture</p>
         <h2 id="architecture-title">Designed for UTXOs.<br>Not copied from Ethereum.</h2>
-        <p>The accepted product direction targets Kaspa Toccata. The exact covenant, based-app, or hybrid execution topology remains an explicit architecture decision.</p>
+        <p>The accepted product direction targets Kaspa Toccata. ADR-042 selects a singleton control/reserve L1 covenant family for the value-capped Testnet-10 proof; production sharding remains deferred.</p>
       </header>
       <div class="kusd-layers">
         <article>
@@ -154,8 +154,8 @@ hide:
           <p class="kusd-card-label">Verified now</p>
           <ul>
             <li><strong>Build:</strong> Solidity reference compiles</li>
-            <li><strong>Tests:</strong> 198 passing, 0 failing</li>
-            <li><strong>Mechanism:</strong> PSM, vault, limits, pause scaffolding</li>
+            <li><strong>Tests:</strong> 229 passing, 0 failing</li>
+            <li><strong>Mechanism:</strong> PSM, vault, limits, module pause lifecycle</li>
             <li><strong>Direction:</strong> Kaspa-primary scope accepted</li>
             <li><strong>Program:</strong> tracked master plan and issue queue</li>
           </ul>
@@ -165,8 +165,8 @@ hide:
           <ul>
             <li><strong>Oracle:</strong> admin-set mock only</li>
             <li><strong>Governance:</strong> timelock execution is a stub</li>
-            <li><strong>Safety:</strong> open Guardian and sunset-role findings</li>
-            <li><strong>Assurance:</strong> 10 placeholder tests; audit incomplete</li>
+            <li><strong>Safety:</strong> lifecycle fixes merged; deployment role handoff still gated</li>
+            <li><strong>Assurance:</strong> 8 placeholder tests; audit incomplete</li>
             <li><strong>Operations:</strong> no live reserves or production deployment</li>
           </ul>
         </article>
@@ -185,9 +185,9 @@ hide:
     </header>
     <div class="kusd-roadmap">
       <article class="is-complete"><span>01</span><div><p>Product boundary</p><strong>Kaspa primary · EVM reference</strong></div><small>Accepted</small></article>
-      <article class="is-next"><span>02</span><div><p>Execution architecture</p><strong>Covenant vs based app vs hybrid</strong></div><small>Proposed</small></article>
-      <article><span>03</span><div><p>Isolated testnet proof</p><strong>Value-capped vault and issuance</strong></div><small>Blocked</small></article>
-      <article><span>04</span><div><p>Protocol hardening</p><strong>Oracle, governance, accounting, safety</strong></div><small>Blocked</small></article>
+      <article class="is-complete"><span>02</span><div><p>Execution architecture</p><strong>Singleton control/reserve covenant family</strong></div><small>Accepted</small></article>
+      <article><span>03</span><div><p>Isolated Testnet-10 proof</p><strong>Value-capped vault and issuance</strong></div><small>Approval required</small></article>
+      <article class="is-next"><span>04</span><div><p>Protocol hardening</p><strong>Oracle, governance, accounting, safety</strong></div><small>In progress</small></article>
       <article><span>05</span><div><p>Independent assurance</p><strong>Deployment evidence, audit, bounty</strong></div><small>Blocked</small></article>
       <article><span>06</span><div><p>Production readiness</p><strong>Legal, reserve, redemption, operations</strong></div><small>Blocked</small></article>
     </div>
