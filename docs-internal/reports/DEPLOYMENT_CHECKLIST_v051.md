@@ -184,18 +184,25 @@ psm.feeRouter() == expectedFeeRouter     // or address(0) if none
 | Step | Call | Why |
 |------|------|-----|
 | 1 | `guardian.setSafetyAutomata(safetyAutomata)` | Links guardian to pause system |
-| 2 | `guardian.selfRegister()` | Calls `safetyAutomata.grantGuardian(address(this))` |
-| 3 | `guardian.setOperator(operatorAddress)` | Delegates `pauseOracle()` to operator (optional) |
+| 2 | `safetyAutomata.grantGuardian(address(guardian))` | Safety administrator directly grants only the temporary pause role |
+| 3 | `guardian.selfRegister()` from `daoAddress` | Optional compatibility assertion that direct registration exists; grants no role. Skip when the DAO caller is unavailable. |
+| 4 | `guardian.setOperator(operatorAddress)` | Delegates `pauseOracle()` to operator (optional) |
 
 ### Phase 5 Validation
 
-```
+```text
 safetyAutomata.hasRole(DAO_ROLE, dao) == true
 safetyAutomata.hasRole(GUARDIAN_ROLE, guardian) == true   // if guardian deployed
+safetyAutomata.hasRole(DAO_ROLE, guardian) == false
+safetyAutomata.hasRole(ADMIN_ROLE, guardian) == false
 safetyAutomata.isPaused(keccak256("PSM")) == false
 safetyAutomata.isPaused(keccak256("VAULT")) == false
 safetyAutomata.isPaused(keccak256("ORACLE")) == false
 ```
+
+Resume is never relayed through the Guardian contract. DAO/Timelock calls
+`safetyAutomata.resumeModule(moduleId)` directly. Emergency revocation uses
+`safetyAutomata.revokeGuardian(address(guardian))` from `ADMIN_ROLE`.
 
 ---
 

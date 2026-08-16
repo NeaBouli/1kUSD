@@ -10,7 +10,7 @@ Kimi K3 review.
 | `AUD-H01` | High | Published code is not a complete production stablecoin | Open |
 | `AUD-H02` | High | Kaspa requires a new UTXO/covenant architecture, not a direct port | Open |
 | `AUD-H03` | High | Default admin cannot pause after guardian sunset | Open |
-| `AUD-M01` | Medium | Guardian self-registration/resume role flow is not executable as documented | Open |
+| `AUD-M01` | Medium | Guardian self-registration/resume role flow is not executable as documented | In remediation (`1K-P0-003` / #103) |
 | `AUD-M02` | Medium | Freeze commit, dependency version, and Slither metadata are inconsistent | Open |
 | `AUD-M03` | Medium | Root license, package metadata, and SPDX identifiers conflict | Open |
 | `AUD-M04` | Medium | Test count includes ten placeholders; branch coverage is insufficient | Open |

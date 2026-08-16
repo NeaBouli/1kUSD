@@ -16,7 +16,7 @@
 - Set any parameter in ParameterRegistry (fees, spreads, decimals, oracle thresholds) with no range validation
 - Whitelist assets and callers on CollateralVault
 - Whitelist callers on FeeRouter
-- Grant GUARDIAN_ROLE on SafetyAutomata
+- Grant/revoke GUARDIAN_ROLE on SafetyAutomata
 - Pause/resume any module via SafetyAutomata
 - Transfer admin to any address (single-step, no confirmation)
 
@@ -32,7 +32,8 @@
 - Set daily/single-tx caps on PSMLimits
 - Whitelist callers on PSMLimits
 - Set oracle prices and heartbeat on OracleAdapter
-- Configure Guardian (set operator, safety automata, self-register)
+- Configure Guardian (set operator and safety automata) and validate its direct
+  administrator registration
 - Pause/resume modules if DAO_ROLE granted on SafetyAutomata
 
 **Trust level:** Economic authority. DAO can drain BuybackVault but cannot directly mint/burn 1kUSD or access CollateralVault.
@@ -207,6 +208,10 @@ The guardian sunset is a time-lock on guardian emergency powers:
 3. At/after sunset: `pauseModule()` reverts with `GuardianExpired()` for guardian callers
 4. After sunset: only ADMIN_ROLE or DAO_ROLE can pause modules
 5. Guardian can NEVER resume modules (regardless of sunset)
+6. Registration and revocation are direct Safety administrator actions; the
+   Guardian contract cannot self-escalate
+7. DAO/Timelock resumes through `SafetyAutomata.resumeModule()` directly; the
+   Guardian contract never receives permanent ADMIN/DAO authority
 
 **Design rationale:** Initial deployment uses guardians for rapid incident response. Once the protocol is mature, guardian powers expire and all emergency actions require DAO governance.
 

@@ -17,6 +17,9 @@ contract Guardian {
     error ZeroAddress();
     error SafetyNotSet();
     error GuardianExpired();
+    error GuardianNotRegistered();
+    error DirectResumeRequired();
+    error SunsetMismatch();
 
     constructor(address dao_, uint256 guardianSunset_) {
         if (dao_ == address(0)) revert ZeroAddress();
@@ -36,6 +39,7 @@ contract Guardian {
 
     function setSafetyAutomata(ISafetyAutomata newSafety) external onlyDAO {
         if (address(newSafety) == address(0)) revert ZeroAddress();
+        if (newSafety.guardianSunset() != guardianSunset) revert SunsetMismatch();
         safety = newSafety;
         emit SafetyAutomataSet(address(newSafety));
     }
@@ -46,9 +50,13 @@ contract Guardian {
         operator = newOperator;
     }
 
-    function selfRegister() external onlyDAO {
+    /// @notice Compatibility check for the legacy self-registration entrypoint.
+    /// @dev Registration must be performed directly by the SafetyAutomata
+    ///      administrator through grantGuardian(address). This function never
+    ///      grants a role and therefore cannot self-escalate.
+    function selfRegister() external view onlyDAO {
         if (address(safety) == address(0)) revert SafetyNotSet();
-        safety.grantGuardian(address(this));
+        if (!safety.hasGuardianRole(address(this))) revert GuardianNotRegistered();
     }
 
     function pauseOracle() external onlyOperator {
@@ -57,8 +65,11 @@ contract Guardian {
         safety.pauseModule(ORACLE_MODULE);
     }
 
-    function resumeOracle() external onlyDAO {
+    /// @notice Disabled compatibility entrypoint for the legacy resume relay.
+    /// @dev DAO/Timelock must call SafetyAutomata.resumeModule directly. The
+    ///      Guardian contract must never receive permanent ADMIN/DAO authority.
+    function resumeOracle() external view onlyDAO {
         if (address(safety) == address(0)) revert SafetyNotSet();
-        safety.resumeModule(ORACLE_MODULE);
+        revert DirectResumeRequired();
     }
 }

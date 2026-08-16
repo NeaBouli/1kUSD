@@ -21,6 +21,7 @@ contract SafetyAutomata_Config is Test {
 
     event Paused(bytes32 indexed moduleId, address indexed by);
     event Resumed(bytes32 indexed moduleId, address indexed by);
+    event RoleRevoked(bytes32 indexed role, address indexed account, address indexed sender);
 
     function setUp() public {
         vm.warp(1_700_000_000);
@@ -36,6 +37,15 @@ contract SafetyAutomata_Config is Test {
     function testPauseModule_GuardianBeforeSunset_Succeeds() public {
         vm.prank(guardianAddr);
         safety.pauseModule(MODULE_ID);
+        assertTrue(safety.isPaused(MODULE_ID));
+    }
+
+    function testPauseModule_GuardianOneSecondBeforeSunset_Succeeds() public {
+        vm.warp(sunsetTimestamp - 1);
+
+        vm.prank(guardianAddr);
+        safety.pauseModule(MODULE_ID);
+
         assertTrue(safety.isPaused(MODULE_ID));
     }
 
@@ -170,9 +180,7 @@ contract SafetyAutomata_Config is Test {
         vm.prank(unauthorizedCaller);
         vm.expectRevert(
             abi.encodeWithSelector(
-                IAccessControl.AccessControlUnauthorizedAccount.selector,
-                unauthorizedCaller,
-                role
+                IAccessControl.AccessControlUnauthorizedAccount.selector, unauthorizedCaller, role
             )
         );
         safety.grantGuardian(address(0x1234));
@@ -182,10 +190,60 @@ contract SafetyAutomata_Config is Test {
         address newGuardian = address(0x1234);
         safety.grantGuardian(newGuardian);
 
+        assertTrue(safety.hasGuardianRole(newGuardian));
+
         // New guardian can pause
         vm.prank(newGuardian);
         safety.pauseModule(MODULE_ID);
         assertTrue(safety.isPaused(MODULE_ID));
+    }
+
+    function testGrantGuardian_ZeroAddress_Reverts() public {
+        vm.expectRevert(SafetyAutomata.ZeroAddress.selector);
+        safety.grantGuardian(address(0));
+    }
+
+    function testGrantGuardian_DaoOnly_Reverts() public {
+        safety.grantRole(safety.DAO_ROLE(), daoAddr);
+        bytes32 adminRole = safety.ADMIN_ROLE();
+
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                IAccessControl.AccessControlUnauthorizedAccount.selector, daoAddr, adminRole
+            )
+        );
+        vm.prank(daoAddr);
+        safety.grantGuardian(address(0x1234));
+    }
+
+    function testRevokeGuardian_Admin_SucceedsImmediately() public {
+        vm.expectEmit(true, true, true, true, address(safety));
+        emit RoleRevoked(safety.GUARDIAN_ROLE(), guardianAddr, admin);
+        safety.revokeGuardian(guardianAddr);
+
+        assertFalse(safety.hasGuardianRole(guardianAddr));
+
+        vm.prank(guardianAddr);
+        vm.expectRevert("ACCESS_DENIED");
+        safety.pauseModule(MODULE_ID);
+    }
+
+    function testRevokeGuardian_NonAdmin_Reverts() public {
+        bytes32 adminRole = safety.ADMIN_ROLE();
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                IAccessControl.AccessControlUnauthorizedAccount.selector,
+                unauthorizedCaller,
+                adminRole
+            )
+        );
+        vm.prank(unauthorizedCaller);
+        safety.revokeGuardian(guardianAddr);
+    }
+
+    function testRevokeGuardian_ZeroAddress_Reverts() public {
+        vm.expectRevert(SafetyAutomata.ZeroAddress.selector);
+        safety.revokeGuardian(address(0));
     }
 
     // -----------------------------------------------------------------

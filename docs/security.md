@@ -17,9 +17,8 @@ A passing suite is useful evidence, not certification.
 
 ## Open release blockers
 
-- Admin/Guardian role precedence prevents the default admin from pausing after
-  Guardian sunset.
-- Guardian self-registration and resume do not follow the documented role flow.
+- Guardian registration/revocation and the direct DAO resume lifecycle require
+  merge and deployment-role verification before release.
 - Oracle prices are admin-set mocks, not production feeds.
 - DAO timelock execution is not implemented.
 - Fee routing and production deployment/role handoff are incomplete.

@@ -20,7 +20,9 @@ contract SafetyAutomataHandler is Test {
     uint256 public ghost_pauseCount;
     uint256 public ghost_resumeCount;
     uint256 public ghost_guardianPausedAfterSunset;
+    uint256 public ghost_revokedGuardianPauseSuccess;
     uint256 public ghost_privilegedPauseFailures;
+    bool public ghost_guardianAssigned = true;
 
     constructor(
         SafetyAutomata _safety,
@@ -71,12 +73,29 @@ contract SafetyAutomataHandler is Test {
         try safety.pauseModule(modId) {
             ghost_paused[modId] = true;
             ghost_pauseCount += 1;
+            if (!ghost_guardianAssigned) {
+                ghost_revokedGuardianPauseSuccess += 1;
+            }
             if (block.timestamp >= safety.guardianSunset()) {
                 ghost_guardianPausedAfterSunset += 1;
             }
         } catch {
             // Expected: GuardianExpired after sunset
         }
+    }
+
+    /// @notice Admin revokes the temporary Guardian role.
+    function adminRevokeGuardian() public {
+        vm.prank(admin);
+        safety.revokeGuardian(guardian);
+        ghost_guardianAssigned = false;
+    }
+
+    /// @notice Admin may explicitly re-register the Guardian.
+    function adminGrantGuardian() public {
+        vm.prank(admin);
+        safety.grantGuardian(guardian);
+        ghost_guardianAssigned = true;
     }
 
     /// @notice Admin resumes a random module.
@@ -135,9 +154,7 @@ contract SafetyAutomata_Invariant is Test {
         mods[1] = MOD_B;
         mods[2] = MOD_C;
 
-        handler = new SafetyAutomataHandler(
-            safety, admin, guardianAddr, daoAddr, mods
-        );
+        handler = new SafetyAutomataHandler(safety, admin, guardianAddr, daoAddr, mods);
 
         targetContract(address(handler));
     }
@@ -145,33 +162,21 @@ contract SafetyAutomata_Invariant is Test {
     /// @notice isPaused and isModuleEnabled are always complementary.
     function invariant_pausedAndEnabledComplementary() public view {
         assertTrue(
-            safety.isPaused(MOD_A) != safety.isModuleEnabled(MOD_A),
-            "INV: not complementary MOD_A"
+            safety.isPaused(MOD_A) != safety.isModuleEnabled(MOD_A), "INV: not complementary MOD_A"
         );
         assertTrue(
-            safety.isPaused(MOD_B) != safety.isModuleEnabled(MOD_B),
-            "INV: not complementary MOD_B"
+            safety.isPaused(MOD_B) != safety.isModuleEnabled(MOD_B), "INV: not complementary MOD_B"
         );
         assertTrue(
-            safety.isPaused(MOD_C) != safety.isModuleEnabled(MOD_C),
-            "INV: not complementary MOD_C"
+            safety.isPaused(MOD_C) != safety.isModuleEnabled(MOD_C), "INV: not complementary MOD_C"
         );
     }
 
     /// @notice Ghost pause state matches on-chain state for all modules.
     function invariant_ghostMatchesOnChain() public view {
-        assertEq(
-            safety.isPaused(MOD_A), handler.ghost_paused(MOD_A),
-            "INV: ghost mismatch MOD_A"
-        );
-        assertEq(
-            safety.isPaused(MOD_B), handler.ghost_paused(MOD_B),
-            "INV: ghost mismatch MOD_B"
-        );
-        assertEq(
-            safety.isPaused(MOD_C), handler.ghost_paused(MOD_C),
-            "INV: ghost mismatch MOD_C"
-        );
+        assertEq(safety.isPaused(MOD_A), handler.ghost_paused(MOD_A), "INV: ghost mismatch MOD_A");
+        assertEq(safety.isPaused(MOD_B), handler.ghost_paused(MOD_B), "INV: ghost mismatch MOD_B");
+        assertEq(safety.isPaused(MOD_C), handler.ghost_paused(MOD_C), "INV: ghost mismatch MOD_C");
     }
 
     /// @notice Guardian can never successfully pause after sunset.
@@ -180,6 +185,13 @@ contract SafetyAutomata_Invariant is Test {
             handler.ghost_guardianPausedAfterSunset(),
             0,
             "INV: guardian paused a module after sunset"
+        );
+    }
+
+    /// @notice A revoked Guardian cannot pause until explicitly re-registered.
+    function invariant_revokedGuardianCannotPause() public view {
+        assertEq(
+            handler.ghost_revokedGuardianPauseSuccess(), 0, "INV: revoked guardian paused a module"
         );
     }
 

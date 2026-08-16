@@ -44,7 +44,7 @@ contract Guardian_PSMUnpauseTest is Test {
     address internal dao = address(0xdead);
 
     function setUp() public {
-        guardian = new Guardian(dao, block.number + 100_000);
+        guardian = new Guardian(dao, block.timestamp + 100_000);
         safety = new SafetyAutomata(dao, block.timestamp + 10000);
         vault = new MockVault();
         oneKUSD = new MockMintableToken("1kUSD", "1KUSD");
@@ -75,7 +75,6 @@ contract Guardian_PSMUnpauseTest is Test {
         // should NOT revert now
         psm.swapTo1kUSD(address(token), 1000e18, address(this), 0, 18);
     }
-
 
     function _wireOracleForPSM() internal {
         MockOracleAggregator oracle = new MockOracleAggregator();

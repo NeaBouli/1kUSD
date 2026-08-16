@@ -96,6 +96,8 @@ ADMIN (highest authority)
 | `pauseModule(moduleId)` | GUARDIAN / ADMIN / DAO | Guardian: `block.timestamp < guardianSunset`; else: `ADMIN_ROLE \|\| DAO_ROLE` |
 | `resumeModule(moduleId)` | ADMIN / DAO | `ADMIN_ROLE \|\| DAO_ROLE` |
 | `grantGuardian(address)` | ADMIN_ROLE | `onlyRole(ADMIN_ROLE)` |
+| `revokeGuardian(address)` | ADMIN_ROLE | `onlyRole(ADMIN_ROLE)` |
+| `hasGuardianRole(address)` | Public | view; reports assignment, not unexpired authority |
 
 ### OracleAggregator (`contracts/core/OracleAggregator.sol`)
 
@@ -168,9 +170,9 @@ ADMIN (highest authority)
 |----------|--------|----------------|
 | `setSafetyAutomata(ISafetyAutomata)` | DAO | `onlyDAO` |
 | `setOperator(address)` | DAO | `onlyDAO` |
-| `selfRegister()` | DAO | `onlyDAO` |
+| `selfRegister()` | DAO | Compatibility check only; cannot grant roles |
 | `pauseOracle()` | Operator | `onlyOperator`, requires `block.timestamp < guardianSunset` |
-| `resumeOracle()` | DAO | `onlyDAO` |
+| `resumeOracle()` | DAO | Disabled compatibility entrypoint; direct Safety call required |
 
 ### OracleWatcher (`contracts/oracle/OracleWatcher.sol`)
 
@@ -206,7 +208,7 @@ ADMIN (highest authority)
 |------|---------------|-----------------|
 | ADMIN_ROLE (SafetyAutomata) | DEFAULT_ADMIN_ROLE holder | Any address |
 | DAO_ROLE (SafetyAutomata) | DEFAULT_ADMIN_ROLE holder | Any address |
-| GUARDIAN_ROLE (SafetyAutomata) | ADMIN_ROLE via `grantGuardian()` | Any address |
+| GUARDIAN_ROLE (SafetyAutomata) | ADMIN_ROLE via `grantGuardian()`; revoked via `revokeGuardian()` | Any non-zero address |
 | admin (CollateralVault) | Current admin via `setAdmin()` | Any address |
 | admin (OracleAggregator) | Current admin via `setAdmin()` | Any address |
 | admin (ParameterRegistry) | Current admin via `setAdmin()` | Any address |
@@ -231,6 +233,6 @@ ADMIN (highest authority)
 | Pause any module | GUARDIAN_ROLE, ADMIN_ROLE, DAO_ROLE | Guardian: only before sunset |
 | Resume any module | ADMIN_ROLE, DAO_ROLE | No time constraint |
 | Pause oracle (via Guardian) | Operator | Before sunset; requires `safety` to be set |
-| Resume oracle (via Guardian) | DAO | Requires `safety` to be set |
+| Resume oracle | ADMIN_ROLE or DAO_ROLE | Direct `SafetyAutomata.resumeModule(ORACLE_MODULE)` call; never relayed by Guardian |
 | Pause OneKUSD mint/burn | Admin | Direct `pause()` call |
 | Unpause OneKUSD mint/burn | Admin | Direct `unpause()` call |

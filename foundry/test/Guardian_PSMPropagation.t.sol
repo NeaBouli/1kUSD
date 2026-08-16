@@ -18,7 +18,7 @@ contract Guardian_PSMPropagationTest is Test {
 
     function setUp() public {
         safety = new SafetyAutomata(dao, block.timestamp + 10000);
-        guardian = new Guardian(dao, block.number + 100_000);
+        guardian = new Guardian(dao, block.timestamp + 100_000);
         psm = new PegStabilityModule(dao, oneKUSD, vault, address(safety), reg);
     }
 
