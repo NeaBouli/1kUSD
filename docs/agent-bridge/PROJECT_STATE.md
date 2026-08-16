@@ -41,6 +41,10 @@ because it was not authenticated; no Claude review credit is claimed. No
 contract, role, DAO, deployment, wallet, token-economics, PoC, or production
 action is authorized.
 
+Draft PR #128 publishes the decision-ready proposal. The PR remains under
+normal review; Issue #127 remains open and DEC-007 remains proposed pending
+Gio's explicit accept/reject decision.
+
 `1K-P0-003` / #103 remains `done`; its canonical merged baseline is 229 passing
 tests across 35 suites with eight remaining placeholders.
 

@@ -11,7 +11,7 @@
 - [x] Obtain Kimi K3 final `APPROVE` on the complete diff and incorporate all
   Low/Info observations.
 - [x] Pass strict docs, watchdog, internal/external link, and diff validation.
-- [ ] Publish the decision-ready proposal through a normal pull request.
+- [x] Publish the decision-ready proposal through normal draft PR #128.
 - [ ] Obtain Gio's explicit ADR-043 accept/reject decision; do not infer it from
   approval to draft the ADR.
 

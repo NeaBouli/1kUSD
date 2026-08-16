@@ -253,3 +253,12 @@
   directly on that merged PR #126 baseline.
 - Publication through a normal pull request and Gio's explicit ADR-043 decision
   remain pending. No implementation or production permission was inferred.
+
+## 2026-08-16 — ADR-043 proposal published for review
+
+- Commit `4e0e938` was pushed on
+  `agent/1k-p1-016-autonomous-governance`.
+- Draft PR #128 publishes the decision-ready ADR-043 package through the normal
+  review path. It tracks #127 without closing it.
+- The task remains `in_progress` and DEC-007 remains proposed until Gio records
+  an explicit accept/reject decision. #107 remains blocked and unapproved.
