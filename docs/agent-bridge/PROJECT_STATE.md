@@ -24,7 +24,7 @@ Last reviewed: **2026-08-16**
   a singleton control/reserve L1 covenant family. Production sharding requires
   a later ADR.
 - Public status documentation is aligned through merged PR #126 (`12c189f`).
-- `ADR-043` is proposed under approved documentation ticket `1K-P1-016` / #127:
+- `ADR-043` is accepted under documentation ticket `1K-P1-016` / #127:
   immutable value logic, bounded timelocked governance, progressive privilege
   removal, and an expiring pause-only Guardian. No implementation is authorized.
 
@@ -41,9 +41,9 @@ because it was not authenticated; no Claude review credit is claimed. No
 contract, role, DAO, deployment, wallet, token-economics, PoC, or production
 action is authorized.
 
-Draft PR #128 publishes the decision-ready proposal. The PR remains under
-normal review; Issue #127 remains open and DEC-007 remains proposed pending
-Gio's explicit accept/reject decision.
+Gio accepted ADR-043 / DEC-007 on 2026-08-16. Draft PR #128 now records the
+accepted architecture and remains under normal review. Issue #127 remains open
+until the documentation PR is reviewed and merged.
 
 `1K-P0-003` / #103 remains `done`; its canonical merged baseline is 229 passing
 tests across 35 suites with eight remaining placeholders.
@@ -51,8 +51,8 @@ tests across 35 suites with eight remaining placeholders.
 `1K-P1-012` / #112 remains `done`: accepted ADR-042 was published through
 merged PR #122. PoC implementation still requires a separate approved ticket.
 
-`1K-P1-007` / #107 remains `proposed` and is blocked by the ADR-043 decision and
-a later, separate execution approval.
+`1K-P1-007` / #107 remains blocked pending respecification against ADR-043 and a
+later, separate execution approval.
 
 ## Release status
 

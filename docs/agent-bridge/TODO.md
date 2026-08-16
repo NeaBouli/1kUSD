@@ -12,8 +12,9 @@
   Low/Info observations.
 - [x] Pass strict docs, watchdog, internal/external link, and diff validation.
 - [x] Publish the decision-ready proposal through normal draft PR #128.
-- [ ] Obtain Gio's explicit ADR-043 accept/reject decision; do not infer it from
-  approval to draft the ADR.
+- [x] Record Gio's explicit acceptance of ADR-043 / DEC-007 as architecture
+  approval only.
+- [ ] Complete normal review and merge of PR #128 before closing #127.
 
 ## Next — requires separate Gio approval after target stop
 

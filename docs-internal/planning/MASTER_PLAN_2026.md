@@ -1,6 +1,6 @@
 # 1kUSD Master Plan — Functional Stablecoin Program
 
-Status: **Kaspa-primary direction and ADR-042 approved; ADR-043 control model proposed**
+Status: **Kaspa-primary direction, ADR-042, and ADR-043 approved**
 Last updated: **2026-08-16**
 Accountable lead: **Codex Sol**
 Product authority: **Gio**
@@ -16,9 +16,8 @@ Kaspa-native collateralized stablecoin while preserving the project's core ideas
 - transparent on-chain reserves and liabilities;
 - fail-closed oracle, asset, and volume controls;
 - time-limited emergency pause authority without fund custody;
-- subject to ADR-043 acceptance, immutable value logic with bounded,
-  timelocked community governance and progressive removal of deployer and
-  bootstrap control;
+- immutable value logic with bounded, timelocked community governance and
+  progressive removal of deployer and bootstrap control;
 - deterministic fee and treasury accounting;
 - a Kaspa-primary implementation built for Toccata rather than copied from the
   EVM account model.

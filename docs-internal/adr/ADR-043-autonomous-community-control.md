@@ -1,6 +1,6 @@
 # ADR-043: Autonomous Community Control and Privilege Minimization
 
-Status: **Proposed — decision requested from Gio**
+Status: **Accepted — architecture only**
 Date: **2026-08-16**
 Decision owner: **Gio**
 Recorded by: **Codex Sol**
@@ -10,7 +10,7 @@ Blocks implementation issue: [1K-P1-007 / #107](https://github.com/NeaBouli/1kUS
 
 ## Decision boundary
 
-This ADR proposes a control architecture. It does not authorize contract or
+This ADR establishes a control architecture. It does not authorize contract or
 Silverscript implementation, role transfers, multisig setup, a DAO launch,
 voting-token design, deployment, wallets, real funds, or production use.
 
@@ -356,17 +356,17 @@ These references are release-gate inputs, not legal conclusions in this ADR.
 
 - 1kUSD gains a concrete autonomy target without pretending that all governance
   can safely disappear immediately.
-- #107 remains blocked until Gio accepts or rejects this proposal and separately
-  approves implementation under revised acceptance criteria.
+- #107 remains blocked until it is respecified against this ADR and separately
+  approved for implementation under revised acceptance criteria.
 - A separate ADR is required for the community-mandate mechanism.
 - A separate legal/compliance decision is required before any production or
   public-offer action.
 - Irreversible privilege removal occurs only after the transition plan's
   evidence gates pass.
 
-## Decision requested from Gio
+## Accepted decision
 
-Accept or reject the following package:
+Gio accepted the following package on 2026-08-16:
 
 1. immutable economic core with no in-place upgrade path;
 2. bounded, range-validated, timelocked governance for an explicit parameter
@@ -377,8 +377,9 @@ Accept or reject the following package:
 6. separate future decision for the community-mandate mechanism;
 7. independent legal/compliance launch gate and no regulatory-immunity claim.
 
-Acceptance approves the architecture only. It does not approve #107 execution,
-deployment, multisig setup, voting-token design, wallets, real funds, or release.
+This acceptance approves the architecture only. It does not approve #107
+execution, deployment, multisig setup, voting-token design, wallets, real funds,
+or release.
 
 ## Sources
 

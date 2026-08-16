@@ -262,3 +262,15 @@
   review path. It tracks #127 without closing it.
 - The task remains `in_progress` and DEC-007 remains proposed until Gio records
   an explicit accept/reject decision. #107 remains blocked and unapproved.
+
+## 2026-08-16 — ADR-043 / DEC-007 accepted by Gio
+
+- After reviewing the recommendation and the purpose of the temporary bootstrap
+  multisig, Gio explicitly accepted the ADR-043 package.
+- Acceptance is architecture-only: immutable economic core, bounded timelocked
+  governance, progressive privilege removal, expiring pause-only Guardian, and
+  a separately decided community mandate.
+- No #107 implementation, multisig setup, role transfer, voting mechanism,
+  deployment, wallet, real-funds, PoC, or production action is approved.
+- PR #128 may advance to normal review. #107 remains blocked until it is
+  respecified and separately approved.
