@@ -5,16 +5,17 @@ import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {ISafetyAutomata} from "../interfaces/ISafetyAutomata.sol";
 
 contract SafetyAutomata is AccessControl, ISafetyAutomata {
-    bytes32 public constant ADMIN_ROLE    = keccak256("ADMIN_ROLE");
+    bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
     bytes32 public constant GUARDIAN_ROLE = keccak256("GUARDIAN_ROLE");
-    bytes32 public constant DAO_ROLE      = keccak256("DAO_ROLE");
+    bytes32 public constant DAO_ROLE = keccak256("DAO_ROLE");
 
-    uint256 public immutable guardianSunset;
+    uint256 public immutable override guardianSunset;
     mapping(bytes32 => bool) private _paused;
 
     event Paused(bytes32 indexed moduleId, address indexed by);
     event Resumed(bytes32 indexed moduleId, address indexed by);
     error GuardianExpired();
+    error ZeroAddress();
 
     constructor(address admin, uint256 guardianSunsetTimestamp) {
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
@@ -43,15 +44,25 @@ contract SafetyAutomata is AccessControl, ISafetyAutomata {
     }
 
     function resumeModule(bytes32 moduleId) external override {
-        require(
-            hasRole(ADMIN_ROLE, msg.sender) || hasRole(DAO_ROLE, msg.sender),
-            "ACCESS_DENIED"
-        );
+        require(hasRole(ADMIN_ROLE, msg.sender) || hasRole(DAO_ROLE, msg.sender), "ACCESS_DENIED");
         _paused[moduleId] = false;
         emit Resumed(moduleId, msg.sender);
     }
 
+    /// @inheritdoc ISafetyAutomata
     function grantGuardian(address guardian) external override onlyRole(ADMIN_ROLE) {
+        if (guardian == address(0)) revert ZeroAddress();
         _grantRole(GUARDIAN_ROLE, guardian);
+    }
+
+    /// @inheritdoc ISafetyAutomata
+    function revokeGuardian(address guardian) external override onlyRole(ADMIN_ROLE) {
+        if (guardian == address(0)) revert ZeroAddress();
+        _revokeRole(GUARDIAN_ROLE, guardian);
+    }
+
+    /// @inheritdoc ISafetyAutomata
+    function hasGuardianRole(address account) external view override returns (bool) {
+        return hasRole(GUARDIAN_ROLE, account);
     }
 }

@@ -81,10 +81,16 @@ When `SafetyAutomata.isPaused(moduleId) == true`, no state-changing operations s
 ### S2: Guardian Sunset Enforcement
 
 ```
-block.timestamp > guardianSunset => guardian cannot call pauseModule()
+block.timestamp >= guardianSunset => guardian cannot call pauseModule()
 ```
 
 After the sunset timestamp, `SafetyAutomata.pauseModule()` reverts with `GuardianExpired()` when called by the guardian. Admin/DAO retain pause authority indefinitely.
+
+### S2a: Guardian Revocation Enforcement
+
+After `revokeGuardian(account)`, that account cannot pause any module until an
+`ADMIN_ROLE` holder explicitly grants the Guardian role again. Revocation does
+not affect permanent ADMIN/DAO pause or resume authority.
 
 ### S3: No Reentrancy on PSM Swaps
 

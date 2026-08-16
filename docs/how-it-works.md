@@ -35,8 +35,8 @@ user 1kUSD
 | `CollateralVault` | Reserve custody and accounting | Non-standard asset accounting needs policy/fix |
 | `OracleAggregator` | Price interface and health | Current prices are admin-set mocks |
 | `PSMLimits` | Per-operation and daily limits | Production configuration must be mandatory |
-| `SafetyAutomata` | Module pause state | Sunset role precedence has an open blocker |
-| `Guardian` | Time-limited pause operator | Registration/resume flow has an open blocker |
+| `SafetyAutomata` | Module pause state | Production role handoff remains deployment-gated |
+| `Guardian` | Time-limited, revocable pause operator | Resume is a direct DAO/Timelock Safety call |
 | `DAO_Timelock` | Delayed governance | Stub; execution is not implemented |
 | Fee router / treasury | Fee accounting and destination | Interfaces and wiring are incomplete |
 

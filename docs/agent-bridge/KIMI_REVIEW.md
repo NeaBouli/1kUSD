@@ -1,5 +1,21 @@
 # Kimi K3 Review
 
+## 2026-08-16 — 1K-P0-003 final security review
+
+- Mode: secret-free, read-only independent review of the complete Issue #103
+  working-tree diff against `origin/main`.
+- Verdict: **APPROVE**; no blocking findings.
+- Confirmed: direct administrator registration/revocation, no permanent
+  ADMIN/DAO role on the Guardian relay, direct governance resume, exact sunset
+  boundary, sunset equality on wiring, disabled legacy resume relay, and
+  stateful revocation coverage.
+- Kimi changed no files and ran no state-mutating command.
+- Informational, pre-existing items remain outside this ticket: constructor
+  input hardening and the Safety event-schema documentation drift.
+- Kimi statically counted 229 repository test/invariant functions and found no
+  stale code or off-chain callers of the legacy Guardian entrypoints. Codex Sol
+  remains responsible for the reported runtime checks and final integration.
+
 Review date: **2026-08-05**
 Mode: **read-only independent final review**
 Result: **no P0; two P1 findings; four P2 findings**

@@ -200,8 +200,12 @@ These calls MUST be executed after deployment or the system will revert on first
 |---|---|
 | Grant guardian role | `safetyAutomata.grantGuardian(guardianAddress)` |
 | Wire Guardian contract | `guardian.setSafetyAutomata(safetyAutomata)` |
-| Self-register guardian | `guardian.selfRegister()` — calls `safetyAutomata.grantGuardian(guardian)` |
+| Validate direct Guardian registration | `guardian.selfRegister()` — compatibility check only; grants no role |
+| Revoke guardian role | `safetyAutomata.revokeGuardian(guardianAddress)` |
 | Grant DAO role | `safetyAutomata.grantRole(keccak256("DAO_ROLE"), daoAddress)` |
+
+DAO/Timelock resumes modules by calling `safetyAutomata.resumeModule(moduleId)`
+directly. The Guardian contract must not receive `DAO_ROLE` or `ADMIN_ROLE`.
 
 ### 3.6 BuybackVault Configuration (if deployed)
 

@@ -2,21 +2,24 @@
 
 ## Active
 
-- [x] `1K-P1-012`: complete and review the Kaspa Toccata execution ADR,
-  Kaspa-native threat model, and separately gated PoC acceptance plan.
-- [x] Resolve `DEC-006` through explicit Gio acceptance of ADR-042.
-- [x] Verify primary-source links, strict docs build, and Git diff.
-- [x] Publish the accepted decision through PR #122 and close #112 only after
-  normal checks and review requirements pass.
+- [x] Implement the approved `1K-P0-003` Guardian registration, revocation, resume,
+  and sunset lifecycle under the approved Issue #103 scope.
+- [x] Record the threat-model delta and explicit role truth table.
+- [x] Add focused authorization, boundary, registration, revocation, and
+  mixed-role tests; run the full Foundry suite and Slither.
+- [x] Obtain Kimi K3 `APPROVE`; attempt the targeted Claude Code review and
+  record its OAuth-based unavailability without claiming review credit.
+- [ ] Publish through a normal pull request; close #103 only after required
+  checks and review complete.
 
-## Next — requires separate Gio approval
+## Next — requires separate Gio approval after target stop
 
 - [ ] Create the value-capped Testnet-10 PoC execution ticket only after ADR-042
   is accepted.
-- [ ] Select `1K-P0-003` or `1K-P0-004`; do not start either automatically.
+- [ ] Select `1K-P0-004` or another queued ticket; do not start automatically.
 
 ## Not authorized in the current task
 
-- PoC implementation or contract, governance, oracle, fee, collateral, or
+- PoC implementation or unrelated governance, oracle, fee, collateral, or
   token-economics changes.
 - Mainnet/testnet deployment, wallet actions, release, or tag rewriting.

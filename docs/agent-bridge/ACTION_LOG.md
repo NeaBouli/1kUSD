@@ -1,5 +1,49 @@
 # Action Log
 
+## 2026-08-16 — 1K-P0-003 approved and started
+
+- Gio explicitly approved `1K-P0-003` / Issue #103 for execution.
+- Scope: Guardian registration and resume lifecycle, `SafetyAutomata`, its
+  interface, focused/full tests, and necessary documentation.
+- Excluded: deployments, wallets, token economics, the Kaspa PoC, and unrelated
+  governance changes.
+- Threat-model baseline: Guardian/operator authority is pause-only, bounded by
+  the exact sunset boundary, cannot move funds or self-escalate, and must not
+  receive permanent DAO/Timelock authority merely to relay resume calls.
+- Codex Sol owns all file changes, integration, verification, Git operations,
+  and final security decision. Kimi K3 is assigned a read-only architecture and
+  security analysis plus final review; Claude Code is assigned a later bounded,
+  read-only specialist review. Neither specialist may publish changes.
+- Worktree: `fix/1k-p0-003-guardian-lifecycle` from `origin/main` at `6a54206`.
+- No deployment, wallet, token, governance-provider, or production action was
+  performed.
+
+## 2026-08-16 — 1K-P0-003 implementation and local gates
+
+- Replaced the broken self-escalating registration attempt with direct
+  administrator grant/revoke operations and a non-mutating compatibility
+  assertion.
+- Disabled the legacy Guardian resume relay. Permanent ADMIN/DAO callers resume
+  directly through `SafetyAutomata`; the Guardian relay holds only the
+  temporary Guardian role.
+- Added zero-address guards, explicit revocation, role-assignment inspection,
+  exact sunset matching during Guardian/Safety wiring, and stateful revocation
+  invariants.
+- Replaced two Guardian placeholder tests and corrected three timestamp tests
+  that incorrectly used block numbers as timestamps.
+- Focused Guardian/Safety verification: 53 passed, 0 failed.
+- Full Foundry verification: 229 passed, 0 failed, 0 skipped across 35 suites.
+- Targeted Slither 0.11.5: `SafetyAutomata.sol` — 0 findings;
+  `Guardian.sol` — 0 findings.
+- `mkdocs build --clean --strict` and `git diff --check` passed. The MkDocs 2.0
+  compatibility notice is an upstream warning, not a build failure.
+- Kimi K3 final read-only security verdict: `APPROVE`, no blocking findings.
+- Claude Code produced no review because its OAuth token was expired; status is
+  recorded as `unavailable`, and no Claude review credit is claimed.
+- Status remains `in_progress` until the normal pull-request checks and required
+  review complete. No deployment, wallet, token-economics, PoC, or production
+  action was performed.
+
 ## 2026-08-05 — Codex Sol
 
 - Completed full repository, GitHub, and Kaspa/Toccata audit.

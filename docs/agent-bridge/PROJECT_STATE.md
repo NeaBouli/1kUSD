@@ -26,12 +26,19 @@ Last reviewed: **2026-08-16**
 
 ## Current phase
 
-`kaspa_architecture_accepted`
+`protocol_hardening_guardian_lifecycle`
 
-`1K-P1-012` / #112 is `done`: accepted ADR-042 was published through merged PR #122
-and the issue closed automatically. No PoC code, deployment, wallet, real
-funds, or production claim is authorized; implementation requires a separate
-approved ticket.
+`1K-P0-003` / #103 is `in_progress` under explicit Gio approval. The active
+scope is the EVM-reference Guardian registration, revocation, direct-governance
+resume, and sunset lifecycle. No deployment execution, wallet, token-economics,
+Kaspa PoC, or production action is authorized. The last merged test baseline
+remains 207; branch-local verification is recorded in the Action Log and does
+not become canonical until normal review and merge complete. The current branch
+has 229 passing tests, targeted Slither with zero findings on both changed
+contracts, strict docs success, and an independent Kimi `APPROVE` verdict.
+
+`1K-P1-012` / #112 remains `done`: accepted ADR-042 was published through
+merged PR #122. PoC implementation still requires a separate approved ticket.
 
 ## Release status
 

@@ -19,6 +19,8 @@ AuthZ model:
 - `ROLE_PAUSE`: Guardian before sunset; DAO/Timelock authority permanently.
 - `ROLE_PARAMS`: DAO executor only.  
 - `ROLE_RESUME`: DAO executor only (Guardian cannot resume).  
+- `GUARDIAN_ROLE` assignment and revocation: Safety `ADMIN_ROLE` only. The
+  Guardian contract cannot register itself.
 
 If a caller holds both a permanent governance role and the temporary Guardian
 role, the permanent role takes precedence. The Guardian sunset must never
@@ -34,6 +36,10 @@ shadow valid DAO/Timelock authority.
 ## 4. Interfaces
 - `pause(moduleId: bytes32, reason: string)` — requires `ROLE_PAUSE`. Idempotent.
 - `resume(moduleId: bytes32)` — requires `ROLE_RESUME`.
+- `grantGuardian(guardian: address)` — direct `ADMIN_ROLE` registration.
+- `revokeGuardian(guardian: address)` — direct `ADMIN_ROLE` revocation.
+- `hasGuardianRole(account: address) -> bool` — role assignment only; sunset
+  remains an independent capability boundary.
 - `setCap(target: bytes32, key: bytes32, value: uint256)` — requires `ROLE_PARAMS`.
 - `setRateLimit(target: bytes32, windowSec: uint256, maxAmount: uint256)` — requires `ROLE_PARAMS`.
 - `setOracleGuards(asset: address, maxDeviationBps: uint256, maxAgeSec: uint256)` — requires `ROLE_PARAMS`.
@@ -50,6 +56,9 @@ shadow valid DAO/Timelock authority.
 Per `moduleId`: `Active` ↔ `Paused`.
 - **Pause:** Guardian or DAO can pause; emits `ModulePaused(moduleId, actor, reason, ts)`.
 - **Resume:** only DAO executor; emits `ModuleResumed(moduleId, actor, ts)`.
+- **Registration/revocation:** the Safety administrator directly grants or
+  revokes the Guardian contract. Revocation takes effect immediately because
+  every pause checks the role again.
 - **Guardian Sunset:** if `block.timestamp >= guardianSunsetTs`, `pause()` from a Guardian-only caller reverts `GUARDIAN_EXPIRED`. DAO/Timelock authority remains valid, including for callers that also hold the Guardian role.
 
 | Caller roles | Before sunset: pause | At/after sunset: pause | Resume |
@@ -58,6 +67,9 @@ Per `moduleId`: `Active` ↔ `Paused`.
 | DAO/Timelock (`ADMIN_ROLE` or `DAO_ROLE`) only | Allowed | Allowed | Allowed |
 | DAO/Timelock (`ADMIN_ROLE` or `DAO_ROLE`) + Guardian | Allowed | Allowed | Allowed |
 | No authorized role | Denied | Denied | Denied |
+
+The Guardian relay never receives `ADMIN_ROLE` or `DAO_ROLE`. DAO/Timelock
+resumes by calling `SafetyAutomata.resumeModule(moduleId)` directly.
 
 ## 6. Policy Tables (Examples)
 | Policy                      | Target       | Set By   | Enforced In     |

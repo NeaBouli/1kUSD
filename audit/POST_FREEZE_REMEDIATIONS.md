@@ -35,3 +35,32 @@ rewritten by post-freeze fixes. This file records changes made after that tag.
 
 No deployment, wallet action, token-economics change, or unrelated governance
 change is part of this remediation.
+
+## 2026-08-16 — 1K-P0-003 / Issue #103
+
+### Approved lifecycle
+
+- Safety `ADMIN_ROLE` directly grants and revokes the temporary Guardian role.
+- The Guardian contract cannot register itself or receive permanent ADMIN/DAO
+  authority merely to relay resume calls.
+- DAO/Timelock resumes modules by calling `SafetyAutomata.resumeModule()`
+  directly.
+- Revocation is immediate; Guardian-only authority also expires at the exact
+  `block.timestamp >= guardianSunset` boundary.
+- Guardian and Safety sunset timestamps must match when they are wired.
+
+### Implementation and verification
+
+- Legacy `selfRegister()` is retained only as a non-mutating registration
+  assertion; legacy `resumeOracle()` fails explicitly with
+  `DirectResumeRequired`.
+- Focused Guardian/Safety tests: 53 passed. Full Foundry suite: 229 passed
+  across 35 suites. Two Guardian placeholders were replaced with real tests.
+- Stateful revocation and re-registration invariant coverage passed with 256
+  runs and depth 64.
+- Targeted Slither: 0 findings for `SafetyAutomata.sol` and `Guardian.sol`.
+- Independent Kimi K3 final review: `APPROVE`. Claude Code was unavailable due
+  to expired OAuth and produced no review output.
+
+This remains post-freeze, pre-merge evidence. No deployment, wallet action,
+token-economics change, Kaspa PoC, or production action is part of this work.
