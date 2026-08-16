@@ -5,12 +5,12 @@ prototype must not custody real funds.
 
 ## Verified baseline
 
-| Metric | Result (2026-08-05) |
+| Metric | Result / evidence date |
 |---|---|
-| Foundry tests | 198 passed / 0 failed / 0 skipped |
-| Placeholder tests | 10 |
-| Line coverage | 78.92% |
-| Branch coverage | 57.63% |
+| Foundry tests | 207 passed / 0 failed / 0 skipped (#120, 2026-08-13) |
+| Placeholder tests | 10 (2026-08-05) |
+| Line coverage | 78.92% (2026-08-05) |
+| Branch coverage | 57.63% (2026-08-05) |
 | External audit | Not completed |
 
 A passing suite is useful evidence, not certification.

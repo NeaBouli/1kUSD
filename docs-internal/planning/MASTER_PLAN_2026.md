@@ -1,7 +1,7 @@
 # 1kUSD Master Plan — Functional Stablecoin Program
 
-Status: **Kaspa-primary direction approved; execution remains ticket-gated**
-Last updated: **2026-08-05**
+Status: **Kaspa-primary direction and ADR-042 approved; execution remains ticket-gated**
+Last updated: **2026-08-16**
 Accountable lead: **Codex Sol**
 Product authority: **Gio**
 
@@ -30,7 +30,8 @@ commitment.
 
 ## 2. Baseline
 
-The EVM code compiles and 198 tests pass, but ten tests are placeholders. The
+The EVM code compiles and the last merged security task verified 207 passing
+tests, but ten counted tests are placeholders. The
 current implementation contains an admin-set mock oracle, a timelock stub,
 incomplete fee routing, role-flow inconsistencies, and an incomplete deployment
 path. It is not a production stablecoin and must not be marketed or deployed as
@@ -117,7 +118,13 @@ release rollback/containment procedures.
 
 The EVM implementation is an executable specification, not port source.
 
-Kaspa design begins with an ADR covering:
+Toccata is active on Kaspa mainnet, but its application tooling remains early.
+Mainnet consensus activation does not make 1kUSD production-ready. ADR-042
+compares the execution models and proposes an L1 covenant family with one
+singleton control/reserve state for the first separately approved,
+Testnet-10-only experiment. Production sharding is deferred.
+
+Kaspa design requires:
 
 - covenant-state topology and successor validation;
 - covenant IDs and transaction-v1 compute/storage mass;
@@ -129,10 +136,15 @@ Kaspa design begins with an ADR covering:
 - proof/settlement assumptions;
 - experimental Silverscript/vProgs version pinning.
 
+See [`ADR-042`](../adr/ADR-042-kaspa-toccata-execution-architecture.md), the
+[`Kaspa threat model`](../core/KASPA_THREAT_MODEL.md), and the
+[`PoC acceptance plan`](KASPA_POC_ACCEPTANCE_PLAN.md). ADR acceptance does not
+authorize PoC implementation or deployment.
+
 The first implementation is an isolated, value-capped testnet vault/issuance
-proof of concept. The exact supported Toccata test network must be selected from
-current official tooling evidence in #112. It must not hold production funds or
-dictate the full design.
+proof of concept. ADR-042 selects Testnet-10 from current official tooling
+evidence; that selection must be revalidated before any separately approved PoC
+execution. It must not hold production funds or dictate the full design.
 
 ## 6. Program phases
 

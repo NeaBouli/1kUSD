@@ -42,3 +42,59 @@
 - `1K-P0-002` advanced from `in_progress` to `done`.
 - No review rule, branch protection, deployment gate, or release gate was
   bypassed.
+
+## 2026-08-13 — 1K-P1-012 architecture work started
+
+- Gio approved `1K-P1-012` / Issue #112 for execution.
+- Scope is limited to current official Kaspa/Toccata research, ADR-042, a
+  Kaspa-native threat model, and a separately gated PoC acceptance plan.
+- Kimi K3 was assigned a secret-free, read-only independent architecture and
+  security analysis. Kimi confirmed the stale pre-mainnet status during initial
+  reading but then became `token_limited`; no complete Kimi verdict exists.
+  Codex Sol retains integration and approval responsibility and applies the
+  operator-mandated specialist-review fallback.
+- No code, PoC, deployment, wallet, productive funds, token economics, or
+  production state is included.
+- Architecture decision requested: Gio acceptance or rejection of ADR-042 and
+  the proposed singleton control/reserve L1 covenant-family PoC; production
+  sharding remains deferred.
+
+## 2026-08-16 — 1K-P1-012 independent review retry
+
+- Kimi K3 completed a secret-free, read-only review of the full architecture
+  diff and returned `REQUEST_CHANGES` on four publication-consistency findings;
+  the ADR, threat model, and PoC gates themselves were assessed as technically
+  accurate and decision-ready.
+- Corrections cover the public Toccata status, the dated 207-test baseline, the
+  review-process wording, and the ADR's review record. Closely related
+  Testnet-10 and pause-semantics wording was clarified.
+- Claude Code was `unavailable` in the active shell (`command not found`); no
+  Claude verdict is claimed. Codex Sol performed the bounded status check.
+- Kimi re-review, strict docs build, full Foundry suite, link verification, and
+  Git diff validation remain required before publication.
+
+## 2026-08-16 — 1K-P1-012 publication gates passed
+
+- Kimi K3 re-reviewed the corrected complete architecture diff read-only and
+  returned `APPROVE`; no required findings remain.
+- `forge test --summary`: 207 passed, 0 failed, 0 skipped across 35 suites.
+- `mkdocs build --clean --strict`: passed. The Material/MkDocs 2.0 notice is an
+  upstream compatibility warning, not a build failure.
+- Primary-source and publication-link check: 27 checked, 0 failed.
+- `git diff --check`: passed before final publication review and must remain
+  clean at commit time.
+- ADR-042 remains `Proposed` and DEC-006 remains `Open`; publication requests
+  Gio's accept/reject decision and does not authorize PoC code or deployment.
+
+## 2026-08-16 — ADR-042 / DEC-006 accepted by Gio
+
+- Gio explicitly accepted the singleton control/reserve L1 covenant-family
+  architecture for a future Testnet-10 PoC.
+- Production sharding remains deferred to a later ADR.
+- ADR-042 advanced from `Proposed` to `Accepted`; DEC-006 advanced from `Open`
+  to `Approved`.
+- This architecture decision does not approve PoC code, deployment, wallets,
+  real funds, token economics, or production use. A separate execution ticket
+  remains mandatory.
+- PR #122 must proceed through normal checks and review requirements; no
+  protection or review gate is bypassed.

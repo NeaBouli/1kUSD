@@ -1,32 +1,37 @@
 # Project State
 
-Last reviewed: **2026-08-05**
+Last reviewed: **2026-08-16**
 
 ## Current truth
 
 - The repository is an **EVM research/testnet prototype**, not a production or
   mainnet-ready stablecoin.
 - Solidity compiler target: `0.8.30`; Foundry is the canonical test tool.
-- Last verified local result: **198 passed, 0 failed, 0 skipped across 35 suites**.
+- Last verified result for merged #120: **207 passed, 0 failed**.
 - Ten counted tests are placeholders.
 - Default coverage: **78.92% lines / 57.63% branches**.
 - Slither 0.11.5 currently blocks on eight Medium results requiring triage.
 - The oracle is admin-set mock infrastructure, the DAO timelock is a stub, and
   fee routing is incomplete.
 - No production deployment or proof-of-reserves system is documented.
-- Kaspa Toccata programmability remains a testnet/pre-mainnet dependency under
-  active development; the EVM implementation is not directly portable to its
-  UTXO/covenant model.
+- Toccata activated on Kaspa mainnet at DAA score `474,165,565`. Its covenant
+  and ZK consensus primitives are active, but Silverscript and vProgs remain
+  experimental; mainnet activation is not application production readiness.
+- The EVM implementation is not directly portable to the UTXO/covenant model.
 - `ADR-041` approves Kaspa Toccata as the primary product track. EVM remains an
   executable reference without a current production commitment.
+- `ADR-042` is accepted: the first separately approved Testnet-10 PoC will use
+  a singleton control/reserve L1 covenant family. Production sharding requires
+  a later ADR.
 
 ## Current phase
 
-`product_scope_approved`
+`kaspa_architecture_accepted`
 
-No contract or governance change is approved merely by inclusion in the master
-plan. `1K-P1-012` / #112 is the next candidate task, but remains proposed until
-Gio explicitly marks it `approved_for_execution`.
+`1K-P1-012` / #112 remains `in_progress` until accepted ADR-042 is published
+through PR #122 and the issue is closed. No PoC code, deployment, wallet, real
+funds, or production claim is authorized; implementation requires a separate
+approved ticket.
 
 ## Release status
 
