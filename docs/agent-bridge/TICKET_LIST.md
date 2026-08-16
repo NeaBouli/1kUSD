@@ -16,7 +16,7 @@ index. `approved_for_execution` must be set explicitly before implementation.
 | `1K-P1-009` | P1 | Collateral | Fail-closed asset decimals, limits, and vault accounting | 001 | proposed | [#109](https://github.com/NeaBouli/1kUSD/issues/109) |
 | `1K-P1-010` | P1 | Deployment | Build production deployment and post-deploy verification | 006–009 | proposed | [#110](https://github.com/NeaBouli/1kUSD/issues/110) |
 | `1K-P1-011` | P1 | Operations | Implement reserve, oracle, pause, and solvency monitoring | 006–010 | proposed | [#111](https://github.com/NeaBouli/1kUSD/issues/111) |
-| `1K-P1-012` | P1 | Kaspa | Write Toccata execution architecture ADR | 001 | in_progress | [#112](https://github.com/NeaBouli/1kUSD/issues/112) |
+| `1K-P1-012` | P1 | Kaspa | Write Toccata execution architecture ADR | 001 | done | [#112](https://github.com/NeaBouli/1kUSD/issues/112) |
 | `1K-P1-013` | P1 | GitHub | Repair Pages, CI gates, repository metadata, and active-tree hygiene | — | done | [#113](https://github.com/NeaBouli/1kUSD/issues/113) |
 | `1K-P2-014` | P2 | Audit | Create reproducible freeze, external audit package, and bug bounty | 002–011 | blocked | [#114](https://github.com/NeaBouli/1kUSD/issues/114) |
 | `1K-P2-015` | P2 | Archive | Migrate referenced legacy patches/logs with link validation | 013 | proposed | [#115](https://github.com/NeaBouli/1kUSD/issues/115) |

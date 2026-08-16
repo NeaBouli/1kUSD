@@ -28,8 +28,8 @@ Last reviewed: **2026-08-16**
 
 `kaspa_architecture_accepted`
 
-`1K-P1-012` / #112 remains `in_progress` until accepted ADR-042 is published
-through PR #122 and the issue is closed. No PoC code, deployment, wallet, real
+`1K-P1-012` / #112 is `done`: accepted ADR-042 was published through merged PR #122
+and the issue closed automatically. No PoC code, deployment, wallet, real
 funds, or production claim is authorized; implementation requires a separate
 approved ticket.
 
