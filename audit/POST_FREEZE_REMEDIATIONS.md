@@ -64,3 +64,14 @@ change is part of this remediation.
 
 This remains post-freeze, pre-merge evidence. No deployment, wallet action,
 token-economics change, Kaspa PoC, or production action is part of this work.
+
+### Merge confirmation
+
+- PR #124 merged at `b5a2bc9aecd1dc316262a9dcdb38ba0d8158208a`.
+- Issue #103 closed with reason `completed`.
+- The final GitHub head passed Forge Build, Forge Test, docs-check, and the
+  configured CodeRabbit status; all three actionable review threads were
+  resolved before merge.
+- This confirmation does not alter the historical freeze or authorize a
+  deployment, wallet action, token-economics change, Kaspa PoC, or production
+  action.

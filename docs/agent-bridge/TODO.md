@@ -11,8 +11,8 @@
   record its OAuth-based unavailability without claiming review credit.
 - [x] Publish through normal PR #124 and pass Forge Build, Forge Test,
   docs-check, and configured CodeRabbit status checks.
-- [ ] Obtain the required independent GitHub approval and close #103 only after
-  normal merge; do not bypass the active review gate.
+- [x] Merge PR #124 and close #103. The repository owner performed the
+  configured owner override personally; Codex did not execute the override.
 
 ## Next — requires separate Gio approval after target stop
 
