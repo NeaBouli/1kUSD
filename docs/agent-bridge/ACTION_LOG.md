@@ -156,3 +156,17 @@
   to `done`.
 - ADR-042 approval remains architecture-only. PoC implementation, deployment,
   wallet use, and real funds require a separate approved execution ticket.
+
+## 2026-08-16 — 1K-P0-003 published for required review
+
+- The validated Guardian registration and resume-lifecycle patch was committed
+  as `3ec2c40` and published through normal PR #124.
+- Forge Build, Forge Test, docs-check, and the configured CodeRabbit status
+  completed successfully on the published head.
+- PR #124 is ready for review and remains `BLOCKED` by the repository's required
+  independent-review gate. No approval, protection rule, or merge requirement
+  was bypassed.
+- Issue #103 and `1K-P0-003` remain open / `in_progress` until the required
+  review and normal merge complete.
+- No deployment, wallet, token-economics, PoC, IAM, secret, or production action
+  was performed.

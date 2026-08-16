@@ -36,6 +36,8 @@ remains 207; branch-local verification is recorded in the Action Log and does
 not become canonical until normal review and merge complete. The current branch
 has 229 passing tests, targeted Slither with zero findings on both changed
 contracts, strict docs success, and an independent Kimi `APPROVE` verdict.
+The implementation is published in PR #124. Its CI checks are green, but the PR
+remains blocked pending the repository-required independent GitHub approval.
 
 `1K-P1-012` / #112 remains `done`: accepted ADR-042 was published through
 merged PR #122. PoC implementation still requires a separate approved ticket.
