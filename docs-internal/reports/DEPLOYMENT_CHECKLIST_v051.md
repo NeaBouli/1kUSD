@@ -185,12 +185,12 @@ psm.feeRouter() == expectedFeeRouter     // or address(0) if none
 |------|------|-----|
 | 1 | `guardian.setSafetyAutomata(safetyAutomata)` | Links guardian to pause system |
 | 2 | `safetyAutomata.grantGuardian(address(guardian))` | Safety administrator directly grants only the temporary pause role |
-| 3 | `guardian.selfRegister()` | Optional compatibility assertion that direct registration exists; grants no role |
+| 3 | `guardian.selfRegister()` from `daoAddress` | Optional compatibility assertion that direct registration exists; grants no role. Skip when the DAO caller is unavailable. |
 | 4 | `guardian.setOperator(operatorAddress)` | Delegates `pauseOracle()` to operator (optional) |
 
 ### Phase 5 Validation
 
-```
+```text
 safetyAutomata.hasRole(DAO_ROLE, dao) == true
 safetyAutomata.hasRole(GUARDIAN_ROLE, guardian) == true   // if guardian deployed
 safetyAutomata.hasRole(DAO_ROLE, guardian) == false

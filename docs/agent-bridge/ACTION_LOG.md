@@ -170,3 +170,14 @@
   review and normal merge complete.
 - No deployment, wallet, token-economics, PoC, IAM, secret, or production action
   was performed.
+
+## 2026-08-16 — 1K-P0-003 review documentation corrections
+
+- CodeRabbit reported three valid documentation findings on PR #124: identify
+  the DAO caller for the optional registration assertion, add the validation
+  fence language, and separate Guardian revocation from initial wiring.
+- The deployment checklist now identifies `daoAddress` as the caller (or says
+  to skip the optional assertion), and the audit report places revocation in an
+  `ADMIN_ROLE` emergency/rotation procedure.
+- No contract behavior or authorized scope changed. Strict docs, documentation
+  watchdog, and diff validation are required again on the corrected head.
