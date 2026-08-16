@@ -30,12 +30,12 @@ commitment.
 
 ## 2. Baseline
 
-The EVM code compiles and the last merged security task verified 207 passing
-tests, but ten counted tests are placeholders. The
-current implementation contains an admin-set mock oracle, a timelock stub,
-incomplete fee routing, role-flow inconsistencies, and an incomplete deployment
-path. It is not a production stablecoin and must not be marketed or deployed as
-one.
+The EVM code compiles and the last merged security task verified 229 passing
+tests, but eight counted tests are placeholders. Safety/Guardian lifecycle
+remediations #120 and #124 are merged. The current implementation still contains
+an admin-set mock oracle, a timelock stub, incomplete fee routing, an unverified
+production role handoff, and an incomplete deployment path. It is not a
+production stablecoin and must not be marketed or deployed as one.
 
 The historical `audit-final-v0.51.5` tag remains immutable evidence. A future
 audit candidate receives a new version and freeze.

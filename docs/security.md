@@ -7,8 +7,8 @@ prototype must not custody real funds.
 
 | Metric | Result / evidence date |
 |---|---|
-| Foundry tests | 207 passed / 0 failed / 0 skipped (#120, 2026-08-13) |
-| Placeholder tests | 10 (2026-08-05) |
+| Foundry tests | 229 passed / 0 failed / 0 skipped (#124, 2026-08-16) |
+| Placeholder tests | 8 (#124, 2026-08-16) |
 | Line coverage | 78.92% (2026-08-05) |
 | Branch coverage | 57.63% (2026-08-05) |
 | External audit | Not completed |
@@ -17,8 +17,9 @@ A passing suite is useful evidence, not certification.
 
 ## Open release blockers
 
-- Guardian registration/revocation and the direct DAO resume lifecycle require
-  merge and deployment-role verification before release.
+- Guardian registration/revocation and the direct DAO resume lifecycle are
+  merged and test-verified; deployment role wiring and E2E handoff verification
+  remain required before release.
 - Oracle prices are admin-set mocks, not production feeds.
 - DAO timelock execution is not implemented.
 - Fee routing and production deployment/role handoff are incomplete.

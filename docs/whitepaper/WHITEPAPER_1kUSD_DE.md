@@ -1,6 +1,6 @@
 # 1kUSD Konzept- und Implementierungsspezifikation
 
-Version: Remediation-Entwurf, 2026-08-05
+Version: Remediation-Entwurf, 2026-08-16
 
 > Dieses Dokument beschreibt Produktziel und Architektur. Es ist kein Nachweis
 > für Produktivbetrieb, Audit-Zertifizierung, Reserven, Liquidität oder einen
@@ -41,9 +41,10 @@ und Incident-Regeln. Der aktuelle Admin-Mock ist ausschließlich für Tests.
 ## Aktueller Implementierungsstand
 
 Der EVM-Prototyp baut und besitzt eine substanzielle Foundry-Suite. Er enthält
-jedoch zehn Platzhaltertests, unvollständige Branch-Coverage, Mock-Oracle,
-Timelock-/Fee-Stubs, offene Rollenbefunde und Testnet-/Demo-Deployment. Er ist kein
-Produktionssystem.
+jedoch acht Platzhaltertests, unvollständige Branch-Coverage, Mock-Oracle,
+Timelock-/Fee-Stubs und Testnet-/Demo-Deployment. Der Safety-/Guardian-Lifecycle
+ist testgehärtet; produktive Rollenübergabe und Deployment-E2E bleiben gegated.
+Er ist kein Produktionssystem.
 
 ## Kaspa Toccata
 
@@ -53,9 +54,9 @@ validieren, native Asset-Ausgabe definieren, heißen PSM-Zustand sharden,
 Oraclereports prüfen und Indexer-/Reorg-Recovery unterstützen. Solidity liefert
 ökonomische Spezifikation und Invarianten, keinen direkt portierbaren Runtimecode.
 
-Der erste Meilenstein ist ein gepinnter, wertbegrenzter Prototyp im dann aktuell
-unterstützten Toccata-Testnetz nach einem Architecture Decision Record. Es wird
-kein Kaspa-Mainnet-Datum zugesagt.
+Der erste Meilenstein ist ein gepinnter, wertbegrenzter Prototyp auf Testnet-10
+unter einem separat freigegebenen Ausführungsticket. Die Architektur ist in
+ADR-042 akzeptiert; es wird kein Kaspa-Mainnet-Datum zugesagt.
 
 ## Releasevoraussetzungen
 

@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Collateralized stablecoin research and testnet implementation.</strong><br>
-  EVM reference today; Kaspa Toccata architecture under design.
+  EVM reference today; accepted Kaspa Toccata Testnet-10 PoC architecture.
 </p>
 
 <p align="center">
@@ -17,7 +17,7 @@
 
 </p>
 
-> **Status — remediation planning.** This repository is not a production
+> **Status — active remediation.** This repository is not a production
 > stablecoin, has no mainnet deployment, and has not completed an independent
 > external audit. The current EVM code contains test-only and stub components.
 > Do not deploy it with real funds.
@@ -31,8 +31,8 @@ production commitment. See
 
 | Area | Verified state / evidence date |
 |---|---|
-| Foundry tests | 207 passed, 0 failed, 0 skipped across 35 suites (#120, 2026-08-13) |
-| Test quality | 10 counted tests are placeholders (2026-08-05) |
+| Foundry tests | 229 passed, 0 failed, 0 skipped across 35 suites (#124, 2026-08-16) |
+| Test quality | 8 counted tests are placeholders (#124, 2026-08-16) |
 | Coverage | 78.92% lines / 57.63% branches (default report, 2026-08-05) |
 | Oracle | Admin-set mock prices; not a production feed system |
 | Governance | DAO timelock is a non-functional stub |
@@ -71,8 +71,8 @@ The implementation program and release gates are defined in the
 | PSM | `PegStabilityModule` | Implemented prototype; config/economic hardening required |
 | Vault | `CollateralVault` | Implemented prototype; accounting hardening required |
 | Oracle | `OracleAggregator` | Mock/admin-set, not multi-feed production infrastructure |
-| Safety | `SafetyAutomata` | Implemented with an open sunset-role blocker |
-| Guardian | `Guardian` | Implemented with an open registration/resume blocker |
+| Safety | `SafetyAutomata` | Sunset role precedence hardened; production role handoff remains gated |
+| Guardian | `Guardian` | Direct registration/revocation and DAO resume lifecycle implemented; deployment E2E remains gated |
 | Limits | `PSMLimits` | Implemented; events/fail-closed configuration required |
 | Governance | `DAO_Timelock` | Stub; execution is not implemented |
 | Fees | `FeeRouter` / `FeeRouterV2` | Incomplete and not unified |
@@ -92,7 +92,7 @@ transaction-v1 budgets. Silverscript and vProgs are still evolving, so the first
 step is a pinned, value-capped testnet proof of concept—not a launch.
 
 See [Kaspa Toccata Agent Brief](https://docs.kaspa.org/toccata/agent-brief) and the
-[Kaspa track in the master plan](docs-internal/planning/MASTER_PLAN_2026.md#5-kaspa-toccata-track).
+[Kaspa track in the master plan](docs-internal/planning/MASTER_PLAN_2026.md).
 
 ## Build and test
 

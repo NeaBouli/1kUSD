@@ -197,3 +197,21 @@
   targeted Slither reported zero findings for both changed contracts.
 - No deployment, wallet, token-economics, PoC, IAM, secret, or production
   action was performed. Target stop is active.
+
+## 2026-08-16 — 1K-P0-003 public documentation consistency follow-up
+
+- Post-merge review of PR #125 found that the live README and GitHub Pages
+  mixed the historical 198/207-test baselines with the merged 229-test baseline
+  and still described the remediated Guardian/sunset lifecycle findings as open.
+- Current public sources were aligned to 229 passing tests, eight remaining
+  placeholder tests, remediated Safety/Guardian lifecycle findings, and the
+  still-open deployment role-handoff and E2E gates.
+- `AUD-H03` was aligned with completed `1K-P0-002` / #120 / #102; `AUD-M01`
+  remains recorded as remediated by `1K-P0-003` / #124 / #103.
+- Historical freeze manifests and dated audit evidence retain their original
+  198/207 counts. They were not rewritten as if the later results existed at
+  freeze time.
+- Conservative readiness statements remain unchanged: the repository is an EVM
+  research/testnet prototype with no production deployment, live reserves,
+  completed external audit, production oracle, or functional governance
+  timelock.
