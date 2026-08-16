@@ -2,26 +2,29 @@
 
 ## Active
 
-- [x] Implement the approved `1K-P0-003` Guardian registration, revocation, resume,
-  and sunset lifecycle under the approved Issue #103 scope.
-- [x] Record the threat-model delta and explicit role truth table.
-- [x] Add focused authorization, boundary, registration, revocation, and
-  mixed-role tests; run the full Foundry suite and Slither.
-- [x] Obtain Kimi K3 `APPROVE`; attempt the targeted Claude Code review and
-  record its OAuth-based unavailability without claiming review credit.
-- [x] Publish through normal PR #124 and pass Forge Build, Forge Test,
-  docs-check, and configured CodeRabbit status checks.
-- [x] Merge PR #124 and close #103. The repository owner performed the
-  configured owner override personally; Codex did not execute the override.
+- [x] Create approved `1K-P1-016` / Issue #127 and record its decision-only scope.
+- [x] Draft ADR-043, the governance/control threat model, staged transition
+  plan, authority matrix, and non-evasion boundary.
+- [x] Obtain Kimi K3's independent architecture analysis.
+- [x] Attempt targeted Claude Code security/control review and record its
+  authentication-based unavailability without claiming review credit.
+- [x] Obtain Kimi K3 final `APPROVE` on the complete diff and incorporate all
+  Low/Info observations.
+- [x] Pass strict docs, watchdog, internal/external link, and diff validation.
+- [ ] Publish the decision-ready proposal through a normal pull request.
+- [ ] Obtain Gio's explicit ADR-043 accept/reject decision; do not infer it from
+  approval to draft the ADR.
 
 ## Next — requires separate Gio approval after target stop
 
 - [ ] Create the value-capped Testnet-10 PoC execution ticket only under a
   separate Gio approval; ADR-042 is accepted, but execution is not authorized.
-- [ ] Select `1K-P0-004` or another queued ticket; do not start automatically.
+- [ ] After ADR-043 is resolved, respecify #107 and request separate execution
+  approval; do not start implementation automatically.
 
 ## Not authorized in the current task
 
-- PoC implementation or unrelated governance, oracle, fee, collateral, or
-  token-economics changes.
+- Contract/Silverscript implementation, role transfer, multisig/DAO setup,
+  voting-token design, parameter writes, or unrelated governance changes.
+- PoC implementation or oracle, fee, collateral, or token-economics changes.
 - Mainnet/testnet deployment, wallet actions, release, or tag rewriting.

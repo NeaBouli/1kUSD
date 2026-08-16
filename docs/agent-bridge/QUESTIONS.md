@@ -8,6 +8,16 @@
 5. What legal entity, jurisdiction, reserve attestation, and redemption
    obligations apply before any public stablecoin launch?
 6. What is the required testnet duration and value-at-risk ceiling?
+7. Which bootstrap signer set and threshold are acceptable?
+8. Which minimum governance delays apply to fees/limits, collateral/oracle
+   policy, and governance self-administration?
+9. Which future community-mandate model avoids unacceptable plutocracy, Sybil,
+   delegation, bribery, and inactivity risk?
+10. Is the EVM governance path permanently reference-only, or may it become a
+    separately approved production candidate?
+11. Which maintainer/release quorum and artifact-provenance policy define a
+    community-maintained release without a single publisher?
+
 ## Resolved
 
 - Product track: Kaspa Toccata is primary; EVM remains an executable reference

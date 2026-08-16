@@ -1,6 +1,6 @@
 # 1kUSD Master Plan — Functional Stablecoin Program
 
-Status: **Kaspa-primary direction and ADR-042 approved; execution remains ticket-gated**
+Status: **Kaspa-primary direction and ADR-042 approved; ADR-043 control model proposed**
 Last updated: **2026-08-16**
 Accountable lead: **Codex Sol**
 Product authority: **Gio**
@@ -16,7 +16,9 @@ Kaspa-native collateralized stablecoin while preserving the project's core ideas
 - transparent on-chain reserves and liabilities;
 - fail-closed oracle, asset, and volume controls;
 - time-limited emergency pause authority without fund custody;
-- timelocked, multisig-backed governance;
+- subject to ADR-043 acceptance, immutable value logic with bounded,
+  timelocked community governance and progressive removal of deployer and
+  bootstrap control;
 - deterministic fee and treasury accounting;
 - a Kaspa-primary implementation built for Toccata rather than copied from the
   EVM account model.
@@ -99,9 +101,19 @@ DAO/multisig-controlled resume, and deploy-time role assertions.
 
 ### Governance
 
-A reviewed timelock plus multisig execution authority, staged role transfer,
+A reviewed timelock plus distributed bootstrap proposer, staged role transfer,
 parameter bounds, emergency procedures, and no residual deployer privileges.
-The exact implementation is a decision gate, not fixed by this plan.
+[`ADR-043`](../adr/ADR-043-autonomous-community-control.md) proposes an
+immutable economic core, a bounded governance allowlist, progressive control
+minimization, and a permanently expiring pause-only Guardian. The community
+mandate mechanism remains a later decision; no DAO or voting-token design is
+authorized by this plan.
+
+See the
+[`governance/control threat model`](../core/GOVERNANCE_CONTROL_THREAT_MODEL.md)
+and
+[`transition plan`](GOVERNANCE_TRANSITION_PLAN.md). Issue #107 remains blocked
+until ADR-043 is accepted and implementation is separately approved.
 
 ### Fees and treasury
 
@@ -154,7 +166,7 @@ execution. It must not hold production funds or dictate the full design.
 | 1 — Product boundary | Accept Kaspa-primary scope and invariants | `ADR-041`; `1K-P0-001` complete |
 | 2 — Kaspa architecture | Compare covenant, based-app, and hybrid designs | `1K-P1-012` ADR approved; trust and state model explicit |
 | 3 — Isolated Kaspa PoC | Value-capped vault/issuance experiment | Separate approved task; reproducible testnet evidence |
-| 4 — Protocol hardening | Resolve safety, governance, collateral, fee, and oracle specifications | Threat models and portable invariants approved |
+| 4 — Protocol hardening | Resolve safety, governance, collateral, fee, and oracle specifications | Threat models and portable invariants approved; ADR-043 control decision resolved |
 | 5 — Deployment and operations | Reproducible Kaspa testnet candidate | Clean-room deploy, manifest, monitoring, and role E2E |
 | 6 — Assurance | Coverage, static analysis, fuzz/invariant, economic simulations | No open High/Medium; agreed quality floors |
 | 7 — External review | New freeze, professional audit, bug bounty | Findings remediated and re-audited |
@@ -169,6 +181,9 @@ Mainnet is blocked until all are true:
 - production-scope tests contain no placeholders;
 - approved coverage and mutation-testing thresholds pass;
 - real oracle, timelock, multisig, fee router, limits, and monitoring operate;
+- no residual deployer authority, hidden upgrade path, or arbitrary reserve
+  movement exists;
+- every governable parameter is allowlisted, range-bounded, and delayed;
 - clean-room deployment and role handoff are reproducible;
 - reserve, redemption, legal, operational, and incident obligations are approved;
 - external audit and public bug bounty are complete;

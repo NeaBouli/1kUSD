@@ -21,7 +21,9 @@ For quick start and project overview, see the [README on GitHub](https://github.
 - [BuybackVault strategy RFC](architecture/buybackvault_strategy_rfc.md)
 - [ADR-041: Kaspa-primary product track](../adr/ADR-041-kaspa-primary-product-track.md)
 - [ADR-042: Kaspa Toccata execution architecture](../adr/ADR-042-kaspa-toccata-execution-architecture.md)
+- [ADR-043: autonomous community control](../adr/ADR-043-autonomous-community-control.md)
 - [Kaspa testnet PoC acceptance plan](../planning/KASPA_POC_ACCEPTANCE_PLAN.md)
+- [Governance transition plan](../planning/GOVERNANCE_TRANSITION_PLAN.md)
 
 ## Security & Audit Reports
 
@@ -30,6 +32,7 @@ For quick start and project overview, see the [README on GitHub](https://github.
 - [Deployment checklist (Phase 1-7)](reports/DEPLOYMENT_CHECKLIST_v051.md)
 - [Threat model](THREAT_MODEL.md)
 - [Kaspa-native threat model](KASPA_THREAT_MODEL.md)
+- [Governance/control threat model](GOVERNANCE_CONTROL_THREAT_MODEL.md)
 - [Emergency pause audit](audits/EMERGENCY_PAUSE_AUDIT_REPORT.md)
 
 ## Protocol Specifications

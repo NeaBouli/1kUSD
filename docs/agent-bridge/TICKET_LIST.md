@@ -11,13 +11,14 @@ index. `approved_for_execution` must be set explicitly before implementation.
 | `1K-P0-004` | P0 | Release | Reconcile freeze, dependencies, license, and SBOM | 001 | proposed | [#104](https://github.com/NeaBouli/1kUSD/issues/104) |
 | `1K-P0-005` | P0 | Quality | Triage Slither Mediums, replace placeholders, enforce production quality gates | 002–004 | proposed | [#105](https://github.com/NeaBouli/1kUSD/issues/105) |
 | `1K-P1-006` | P1 | Oracle | Specify and integrate production oracle trust model | 001 | proposed | [#106](https://github.com/NeaBouli/1kUSD/issues/106) |
-| `1K-P1-007` | P1 | Governance | Implement timelocked multisig governance and role handoff | 001–003 | proposed | [#107](https://github.com/NeaBouli/1kUSD/issues/107) |
+| `1K-P1-007` | P1 | Governance | Implement timelocked multisig governance and role handoff | 001–003, 016 | blocked | [#107](https://github.com/NeaBouli/1kUSD/issues/107) |
 | `1K-P1-008` | P1 | Economics | Unify FeeRouter, treasury accounting, and fee policy | 001 | proposed | [#108](https://github.com/NeaBouli/1kUSD/issues/108) |
 | `1K-P1-009` | P1 | Collateral | Fail-closed asset decimals, limits, and vault accounting | 001 | proposed | [#109](https://github.com/NeaBouli/1kUSD/issues/109) |
 | `1K-P1-010` | P1 | Deployment | Build production deployment and post-deploy verification | 006–009 | proposed | [#110](https://github.com/NeaBouli/1kUSD/issues/110) |
 | `1K-P1-011` | P1 | Operations | Implement reserve, oracle, pause, and solvency monitoring | 006–010 | proposed | [#111](https://github.com/NeaBouli/1kUSD/issues/111) |
 | `1K-P1-012` | P1 | Kaspa | Write Toccata execution architecture ADR | 001 | done | [#112](https://github.com/NeaBouli/1kUSD/issues/112) |
 | `1K-P1-013` | P1 | GitHub | Repair Pages, CI gates, repository metadata, and active-tree hygiene | — | done | [#113](https://github.com/NeaBouli/1kUSD/issues/113) |
+| `1K-P1-016` | P1 | Governance | Define autonomous community control and privilege-minimization architecture | 001–003, 012 | in_progress | [#127](https://github.com/NeaBouli/1kUSD/issues/127) |
 | `1K-P2-014` | P2 | Audit | Create reproducible freeze, external audit package, and bug bounty | 002–011 | blocked | [#114](https://github.com/NeaBouli/1kUSD/issues/114) |
 | `1K-P2-015` | P2 | Archive | Migrate referenced legacy patches/logs with link validation | 013 | proposed | [#115](https://github.com/NeaBouli/1kUSD/issues/115) |
 

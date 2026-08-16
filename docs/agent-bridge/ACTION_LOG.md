@@ -215,3 +215,41 @@
   research/testnet prototype with no production deployment, live reserves,
   completed external audit, production oracle, or functional governance
   timelock.
+
+## 2026-08-16 — 1K-P1-016 approved and architecture drafting started
+
+- Gio approved the recommendation to create a dedicated autonomy/community
+  control ADR with a threat model, transition plan, and explicit approval gates.
+- Issue #127 was created as `approved_for_execution`. Scope is documentation and
+  decision architecture only; DEC-007 remains proposed until Gio explicitly
+  accepts or rejects the completed ADR.
+- Threat-model baseline: no person, deployer, maintainer, interface, indexer, or
+  hidden recovery path may unilaterally mint, release backing, set prices,
+  upgrade the value path, bypass delay, or retain permanent emergency power.
+- The project explicitly rejects regulatory-evasion and immunity claims. Legal
+  and compliance readiness remains an independent production gate.
+- Codex Sol owns all files, integration, verification, Git, and final decision
+  presentation. Kimi K3 completed a read-only architecture analysis and changed
+  no files. Claude Code is assigned a later bounded read-only review.
+- Draft artifacts: ADR-043, governance/control threat model, staged privilege-
+  minimization plan, authority matrix, Master Plan, and Agent Bridge.
+- #107 is recorded as blocked until ADR-043 is accepted and implementation is
+  separately approved.
+- No contract, Silverscript, role, multisig/DAO, parameter, deployment, wallet,
+  token-economics, PoC, real-funds, or production action was performed.
+
+## 2026-08-16 — 1K-P1-016 review and validation complete
+
+- Issue #107 was updated on GitHub to depend on #127/ADR-043 and remain blocked
+  until respecification and separate execution approval.
+- Claude Code was attempted in the required non-interactive, read-only mode but
+  was not authenticated. It changed no files and receives no review credit.
+- Kimi K3 returned final **APPROVE** on the complete documentation diff with no
+  blocking finding. Codex Sol incorporated all six Low/Info observations.
+- Passed: `mkdocs build --clean --strict`, `sh docs/scripts/scan_docs.sh`,
+  `git diff --check`, internal target checks, and HTTP 200 checks for all six
+  newly cited primary sources.
+- `origin/main` was refreshed and remains `12c189f`; the task branch is based
+  directly on that merged PR #126 baseline.
+- Publication through a normal pull request and Gio's explicit ADR-043 decision
+  remain pending. No implementation or production permission was inferred.
