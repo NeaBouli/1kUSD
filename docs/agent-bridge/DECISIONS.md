@@ -8,6 +8,7 @@
 | `DEC-004` | Fee destination | Reserve overcollateralization / treasury / split | Gio | Open |
 | `DEC-005` | License | GPL-3.0 / AGPL-3.0 / documented per-file model | Gio + legal review | Open |
 | `DEC-006` | Kaspa execution model | Singleton control/reserve L1 covenant family for the Testnet-10 PoC; production sharding deferred | Gio | Architecture approved 2026-08-16 (`ADR-042`); PoC implementation, deployment, wallet use, and real funds require a separate approved execution ticket |
+| `DEC-007` | Autonomous control model | Immutable economic core + bounded timelocked governance + progressive privilege removal + expiring pause-only Guardian; community mandate deferred | Gio | Architecture approved 2026-08-16 (`ADR-043` / #127); #107 implementation, multisig setup, community mandate, deployment, wallets, real funds, production use, and public offers require separate approval; legal/compliance release remains an independent gate |
 
 Decision records must include rationale, security impact, compatibility impact,
 date, and approving person. Open decisions must not be silently encoded in code.
