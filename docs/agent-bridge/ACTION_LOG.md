@@ -274,3 +274,23 @@
   deployment, wallet, real-funds, PoC, or production action is approved.
 - PR #128 may advance to normal review. #107 remains blocked until it is
   respecified and separately approved.
+
+## 2026-09-01 — 1K-P1-016-R1 approved and started
+
+- Gio approved a bounded closeout of the five unresolved CodeRabbit findings on
+  PR #128 and requested full Kimi K3 support.
+- Codex Sol and Kimi independently verified all five findings against the
+  current `252fa93` head. Four are substantive architecture/specification
+  clarifications and one is a Markdown rendering correction.
+- Scope is limited to ADR-043, the governance transition plan, DEC-007, and the
+  necessary append-only Bridge state. Accepted ADR-043 semantics are preserved.
+- No numeric multisig threshold or signer set is selected. The architecture now
+  requires non-governable launch-proof floors whose values remain an explicit
+  later decision.
+- No contract, test, dependency, wallet, key, PoC, deployment, token-economics,
+  production, public-offer, or legal action is authorized or performed.
+- Codex applied all five bounded corrections. Local verification passed:
+  229/229 Foundry tests, strict MkDocs build, Docs Watchdog, and diff checks.
+- Kimi K3 performed a final read-only review of the complete six-file delta and
+  returned **APPROVE** with no Medium/High or blocking finding. Kimi changed no
+  files and performed no external action.

@@ -14,7 +14,13 @@
 - [x] Publish the decision-ready proposal through normal draft PR #128.
 - [x] Record Gio's explicit acceptance of ADR-043 / DEC-007 as architecture
   approval only.
-- [ ] Complete normal review and merge of PR #128 before closing #127.
+- [x] Validate all five CodeRabbit findings against the current PR #128 head.
+- [x] Apply the five bounded `1K-P1-016-R1` documentation corrections.
+- [x] Pass local validation and obtain Kimi K3 final `APPROVE` on the complete
+  delta.
+- [ ] Push the closeout commit and pass all GitHub checks on the new head.
+- [ ] Resolve the five review threads and merge PR #128 normally before closing
+  #127.
 
 ## Next — requires separate Gio approval after target stop
 

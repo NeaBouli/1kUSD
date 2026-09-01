@@ -72,6 +72,9 @@ Exit evidence:
 - every privileged function is mapped to immutable, removed, bounded-timelock,
   or time-bounded-emergency classification;
 - malicious unallowlisted target/function/key calls fail;
+- the launch proof or deployment manifest commits the non-governable minimum
+  signer-set size and authorization threshold, and tests prove governance cannot
+  reduce either floor;
 - two-step role transfers and post-handoff assertions pass;
 - signer loss/rotation and cancellation rehearsals pass;
 - full suite and static analysis pass with no untriaged High/Medium finding in
@@ -215,6 +218,17 @@ Required evidence for each transaction:
 - post-state authority snapshot proving the intended reduction;
 - append-only Bridge and release-manifest record.
 
+For Kaspa/Toccata, `script delta` is not a textual or mutable-state patch. It is
+a hash commitment to a versioned canonical byte encoding that the separately
+approved PoC execution ticket must pin before first use. The committed fields
+must include the domain tag, network/genesis identifier, covenant-family and
+template identifiers, consumed control/reserve state commitments, current epoch
+and nonce, queued operation id, canonically ordered parameter delta, exact
+successor script and amount commitments, earliest execution point, and expiry.
+Execution must rebuild this encoding from the actual consumed and created state
+and require byte-for-byte encoding and commitment equality. An unspecified or
+ambiguous encoding blocks the transition.
+
 Abort criteria:
 
 - pre-state differs from the reviewed snapshot;
@@ -285,7 +299,8 @@ is omitted as an authorization shortcut.
 
 ## Open decisions for Gio
 
-1. Bootstrap signer set and threshold.
+1. Bootstrap signer set, threshold, and the non-governable minimum signer-count
+   and authorization-threshold floors committed in the launch proof.
 2. Minimum delay tiers and cancellation authority.
 3. Whether EVM governance remains reference-only or may ever become a separate
    production candidate.

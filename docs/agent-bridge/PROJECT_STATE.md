@@ -1,6 +1,6 @@
 # Project State
 
-Last reviewed: **2026-08-16**
+Last reviewed: **2026-09-01**
 
 ## Current truth
 
@@ -44,6 +44,15 @@ action is authorized.
 Gio accepted ADR-043 / DEC-007 on 2026-08-16. Draft PR #128 now records the
 accepted architecture and remains under normal review. Issue #127 remains open
 until the documentation PR is reviewed and merged.
+
+`1K-P1-016-R1` is `in_progress` under Gio's 2026-09-01 approval. It is limited
+to the five validated CodeRabbit documentation findings on PR #128: immutable
+per-collateral decimals commitments, protocol-level governance signer floors,
+canonical Kaspa script-delta commitment requirements, Markdown correction, and
+the independent production/public-offer legal gate. No implementation scope is
+added. Local validation passed with 229/229 Foundry tests, strict MkDocs,
+Docs Watchdog, and diff checks. Kimi K3 returned final `APPROVE` on the complete
+R1 delta with no blocking finding; GitHub checks and thread resolution remain.
 
 `1K-P0-003` / #103 remains `done`; its canonical merged baseline is 229 passing
 tests across 35 suites with eight remaining placeholders.

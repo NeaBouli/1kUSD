@@ -198,6 +198,9 @@ Governance must never be able to change or bypass:
 - authorization of the exact successor state and covenant lineage;
 - single-use governance operation identity and configuration-epoch monotonicity;
 - the minimum governance-delay floor;
+- the launch-proof-committed minimum proposer/signer-set size and authorization
+  threshold; governance may rotate members but cannot reduce either
+  non-governable floor;
 - the Guardian sunset and pause-only boundary;
 - the prohibition on arbitrary collateral sweeps and arbitrary mint/burn;
 - the absence of an in-place upgrade path for the value system.
@@ -214,19 +217,26 @@ an assigned delay tier:
 
 - issuance and rolling-volume caps;
 - fee and spread values within immutable maxima;
-- approved collateral identifiers, decimals commitments, haircuts, and
-  per-asset exposure caps;
+- approved collateral identifiers, with each per-asset decimals commitment fixed
+  immutably at onboarding; haircuts and per-asset exposure caps;
 - oracle signer set, threshold, freshness, deviation, and outage policy within
   immutable safety floors;
 - pause/resume state through the approved authority paths;
 - governance proposer membership, threshold, and delays without crossing
-  immutable decentralization and delay floors;
+  the launch-proof-committed signer-count, authorization-threshold, and delay
+  floors;
 - treasury/buyback policy only for assets explicitly designated as surplus,
   never user redemption collateral.
 
 Every parameter key not present in the allowlist fails closed. Adding a new
 parameter family changes the constitutional surface and requires a new ADR,
 security review, and user-visible migration or replacement design.
+
+Governance cannot change the decimals commitment of an existing approved
+collateral. A different decimals interpretation requires disabling the old
+identifier, onboarding a distinct replacement with a new immutable commitment,
+and following a separately reviewed migration path that preserves accounting
+for existing liabilities and collateral.
 
 ### Prohibited powers
 
@@ -250,8 +260,9 @@ DEC-003 describes the current pre-timelock reference lifecycle: direct
 ADMIN/DAO resume with no Guardian resume authority. The target state preserves
 governance-only resume but places it behind the approved timelock.
 
-#107 must replace the current timelock stub with a real queue/execute/cancel
-lifecycle, bind execution to the exact committed target/value/calldata/salt,
+Issue `#107` must replace the current timelock stub with a real
+queue/execute/cancel lifecycle. It must bind execution to the exact committed
+target/value/calldata/salt,
 enforce delay and expiry, and prove replay resistance. It must add two-step role
 handoff and post-deploy assertions showing that the deployer holds no residual
 admin, minter, burner, DAO, Guardian, treasury, oracle, registry, vault, limits,
@@ -289,7 +300,7 @@ by this ADR.
 | Pause | Bounded emergency or delayed community authority | Guardian before sunset; governance through its delayed path |
 | Resume | Delayed community authority | Governance only |
 | Upgrade value-path logic | Prohibited | No proxy or replacement hook |
-| Change governance delay/threshold | Longest-delay community authority | Self-administered path with immutable floors |
+| Change governance delay/threshold | Longest-delay community authority | Self-administered path above immutable delay and signer-count/threshold floors |
 | Treasury/buyback surplus | Delayed and capped | Explicit surplus policy; never backing reserves |
 | Publish code or operate an interface | Permissionless | No protocol authority follows from publication |
 | Release canonical artifacts | No single maintainer | Reproducible build plus independent verification |
