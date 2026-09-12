@@ -18,9 +18,11 @@
 - [x] Apply the five bounded `1K-P1-016-R1` documentation corrections.
 - [x] Pass local validation and obtain Kimi K3 final `APPROVE` on the complete
   delta.
-- [ ] Push the closeout commit and pass all GitHub checks on the new head.
-- [ ] Resolve the five review threads and merge PR #128 normally before closing
-  #127.
+- [x] Push closeout commit `c6ef0c1`; Forge Build, Forge Test, and docs-check
+  passed on the final PR head.
+- [x] Resolve all five review threads. Repository owner `NeaBouli` merged PR
+  #128 on 2026-09-01 and Issue #127 was closed. GitHub retained
+  `REVIEW_REQUIRED` at merge time; Codex did not bypass or alter protection.
 
 ## Next — requires separate Gio approval after target stop
 
