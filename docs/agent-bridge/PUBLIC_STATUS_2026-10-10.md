@@ -29,8 +29,8 @@ deployment, or release. Canonical rules remain in
 | [PR #130](https://github.com/NeaBouli/1kUSD/pull/130) | Documentation correction `df0d798` published after a separate Claude source/document review plus two wording fixes. Forge and docs checks green at observation; CodeRabbit pending at that time. This was not a full technical re-audit. Not merged. |
 | [Issue #131](https://github.com/NeaBouli/1kUSD/issues/131) | Created for `1K-P1-017` documentation revalidation. Evidence is still draft; independent review pending. No G3 or PoC approval. |
 | [Issue #114](https://github.com/NeaBouli/1kUSD/issues/114) | Open (external assurance). |
-| [Issue #118](https://github.com/NeaBouli/1kUSD/issues/118) | Open. |
-| [Issue #119](https://github.com/NeaBouli/1kUSD/issues/119) | Open. Holds the unique private-operator gate; it is distinct from the Codex Security gate below. Details are intentionally not published. |
+| [PR #118](https://github.com/NeaBouli/1kUSD/pull/118) | Open. |
+| [PR #119](https://github.com/NeaBouli/1kUSD/pull/119) | Open. Holds the unique private-operator gate; it is distinct from the Codex Security gate below. Details are intentionally not published. |
 
 ## Working model (owner decision, 2026-10-10)
 
