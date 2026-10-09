@@ -101,3 +101,45 @@ Stop and return to architecture review if:
 - compiler artifacts are not reproducible;
 - testnet/toolchain behavior diverges from the pinned implementation;
 - a safe route requires based-app or hybrid assumptions not approved by ADR-042.
+
+## Addendum — 2026-10-10 revalidation checks (append-only, `1K-P1-017`)
+
+The boundaries, gates, exit criteria, and stop conditions above stay unchanged.
+That includes the ≥20% mass headroom, two-machine reproduction, two independent
+indexer replays, and real-node validation. The following checks are **added**
+from
+[`KASPA_ADR042_REVALIDATION_2026-10-10.md`](KASPA_ADR042_REVALIDATION_2026-10-10.md).
+None has been executed.
+
+- **Manifest:** exact compiler commit, its node-dependency revision, node release
+  commit, exact Rust toolchain (not only the MSRV), builder/SDK, and
+  network/genesis. Each is entered only after an owner pin decision. Until then
+  the candidates stay non-adopted.
+- **Compiler/node skew and advisory:** record any version skew between the
+  compiler's node dependency and the executing node. Before execution, verify
+  the upstream advisory fix mapping against the adopted compiler pin. If it is
+  unverified, execution stops.
+- **ABI and hashes:** artifacts follow the v1 portable ABI schema. Record the
+  `check_consistency` result. The template hash, dispatch tag, and covenant ID
+  are recomputed independently by compiler and indexer, and they match on two
+  clean machines.
+- **Singleton continuation:** the control/reserve state uses strict singleton
+  continuation without termination. Negatives: zero successors, two successors,
+  foreign template, wrong dispatch tag, and termination attempt. Bearer boxes:
+  N:M conservation vectors.
+- **Genesis/limits:** the initial state is fully compile-time determined, and a
+  limit-violating variant is rejected by the compiler.
+- **Undefined behaviour:** every conservation, cap, rounding, and overflow guard
+  is an explicit check with its own negative test. No guard may rely on
+  UB-induced failure.
+- **Arithmetic:** rounding and decimals vectors at each boundary, with no
+  implicit integer/byte conversion.
+- **Script units and resources:** each accepted route is measured for script
+  units, compute budget, and compute/storage mass on the adopted node. Compiler
+  or debugger estimates do not count.
+- **Oracle encoding:** freshness-window boundary tests and signature/hash
+  negatives are defined only after the owner decides the report hash, signature
+  builtin, and time domain.
+- **Network:** Testnet-10 is grounded only in node parameters. Liveness,
+  genesis, and node version are checked immediately before execution under a
+  separately permitted ticket.

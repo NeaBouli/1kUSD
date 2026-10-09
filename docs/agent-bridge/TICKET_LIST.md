@@ -18,9 +18,18 @@ index. `approved_for_execution` must be set explicitly before implementation.
 | `1K-P1-011` | P1 | Operations | Implement reserve, oracle, pause, and solvency monitoring | 006–010 | proposed | [#111](https://github.com/NeaBouli/1kUSD/issues/111) |
 | `1K-P1-012` | P1 | Kaspa | Write Toccata execution architecture ADR | 001 | done | [#112](https://github.com/NeaBouli/1kUSD/issues/112) |
 | `1K-P1-013` | P1 | GitHub | Repair Pages, CI gates, repository metadata, and active-tree hygiene | — | done | [#113](https://github.com/NeaBouli/1kUSD/issues/113) |
-| `1K-P1-016` | P1 | Governance | Define autonomous community control and privilege-minimization architecture | 001–003, 012 | in_progress | [#127](https://github.com/NeaBouli/1kUSD/issues/127) |
+| `1K-P1-016` | P1 | Governance | Define autonomous community control and privilege-minimization architecture | 001–003, 012 | done | [#127](https://github.com/NeaBouli/1kUSD/issues/127) |
 | `1K-P2-014` | P2 | Audit | Create reproducible freeze, external audit package, and bug bounty | 002–011 | blocked | [#114](https://github.com/NeaBouli/1kUSD/issues/114) |
 | `1K-P2-015` | P2 | Archive | Migrate referenced legacy patches/logs with link validation | 013 | proposed | [#115](https://github.com/NeaBouli/1kUSD/issues/115) |
 
 No issue may close merely because code was written. Validation and review are
 part of every ticket's definition of done.
+
+## Addendum — 2026-10-10
+
+| ID | Priority | Track | Title | Depends on | Status | GitHub |
+|---|---|---|---|---|---|---|
+| `1K-P1-017` | P1 | Kaspa | Revalidate ADR-042 and the PoC gate against SilverScript v1 and rusty-kaspa v2.1.0 (documentation only) | 012 | in review — docs prepared; G3 open | [#131](https://github.com/NeaBouli/1kUSD/issues/131) |
+
+A possible follow-up offline compile-proof ticket is only a queued proposal. It
+is not listed as approved and is not authorized.

@@ -262,6 +262,10 @@
   review path. It tracks #127 without closing it.
 - The task remains `in_progress` and DEC-007 remains proposed until Gio records
   an explicit accept/reject decision. #107 remains blocked and unapproved.
+- Post-merge annotation (PR #129 closeout): PR #128 was later merged on
+  2026-09-01 by repository owner `NeaBouli`, who authorized and personally
+  performed the merge as a recorded owner exception to the Codex-only merge
+  rule. Codex did not merge PR #128 or bypass branch protection.
 
 ## 2026-08-16 — ADR-043 / DEC-007 accepted by Gio
 
@@ -294,3 +298,67 @@
 - Kimi K3 performed a final read-only review of the complete six-file delta and
   returned **APPROVE** with no Medium/High or blocking finding. Kimi changed no
   files and performed no external action.
+- Post-merge annotation (PR #129 closeout): after this review, repository owner
+  `NeaBouli` authorized and personally performed the PR #128 merge on
+  2026-09-01 through the normal GitHub flow, as a recorded owner exception to
+  the Codex-only merge rule. Codex did not merge PR #128 or bypass branch
+  protection.
+
+## 2026-09-13 — 1K-P1-016 / R1 final status reconciled
+
+- GitHub was rechecked read-only: PR #128 was merged by repository owner
+  `NeaBouli` on 2026-09-01 as
+  `2a5ec38ecef51bff1beb745173e7229a603458b6`, and Issue #127 is closed.
+- `NeaBouli` authorized and personally performed this merge through the normal
+  GitHub flow as an owner exception to the Codex-only merge rule in
+  `COOPERATION_RULES.md`; the exception is recorded here. Codex did not execute
+  the merge.
+- The final PR head contained review-fix commit `c6ef0c1`; all five CodeRabbit
+  threads were answered and resolved.
+- GitHub Forge Build, Forge Test, and docs-check completed successfully. The
+  local validation recorded for the final review delta was 229/229 Foundry
+  tests, strict MkDocs, Docs Watchdog, and clean diff checks.
+- Closeout revalidation on 2026-09-13 passed: `forge test --summary` reported
+  229 passed, 0 failed, 0 skipped across 35 suites; `mkdocs build --clean
+  --strict`, `sh docs/scripts/scan_docs.sh`, and `git diff --check` also passed.
+- GitHub retained `REVIEW_REQUIRED` as the review decision at merge time. Codex
+  did not use an admin merge flag, change branch protection, force push, or
+  otherwise bypass repository controls.
+- `1K-P1-016` and `1K-P1-016-R1` are now `done`; target stop is active. No new
+  execution ticket was started.
+- No contract, governance implementation, role transfer, wallet, deployment,
+  PoC, token-economics, production, public-offer, Guardian-service, operator,
+  network, database, secret, or infrastructure action was performed.
+
+## 2026-10-10 — Public status and work plan recorded
+
+- Added [`PUBLIC_STATUS_2026-10-10.md`](PUBLIC_STATUS_2026-10-10.md): a
+  generic, public-safe status, modular work queue, worker model, and protected
+  gates, based only on already-published history (`4a1617a`, base `main`
+  `2a5ec38`).
+- Records PR #129, PR #130, and Issue #131 as observed; nothing was merged,
+  closed, or approved. Production remains NO-GO.
+- A local planning stack remains on HOLD for a public confidentiality review
+  and was not published.
+- No product code, ADR revalidation, scan, audit, CI/server, economic, license,
+  governance, deployment, wallet, key, or network action was performed.
+
+## 2026-10-10 — 1K-P1-017 / Issue #131 documentation prepared
+
+- Added
+  [`KASPA_ADR042_REVALIDATION_2026-10-10.md`](../../docs-internal/planning/KASPA_ADR042_REVALIDATION_2026-10-10.md).
+  It contains a non-adopted candidate toolchain manifest, a D1–D15 disposition
+  for every row, the Testnet-10 rationale, acceptance-check deltas, and pending
+  owner decisions.
+- Append-only notes were added to ADR-042, the Kaspa PoC acceptance plan, the
+  Kaspa threat model (generic delta), and the ticket list. ADR-042 stays
+  Accepted. It was not rewritten or re-approved.
+- Basis: existing dated evidence plus one public GitHub API read to resolve the
+  node release tag commit. No research rerun.
+- Test scope: documentation checks only (headings, D-row coverage, relative
+  links, append-only diff, docs watchdog, strict MkDocs, diff check). No Forge,
+  Slither, scanner, build, runtime, or network action.
+- Codex Security NOT RUN (N/A for docs). G3 remains open; Issue #131 was not
+  closed. Independent review is required before the lead accepts.
+- No code, PoC, dependency adoption, key, wallet, transaction, deployment,
+  governance, oracle, fee, collateral, license, or economic decision.
