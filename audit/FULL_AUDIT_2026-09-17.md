@@ -7,7 +7,7 @@
 | Repository baseline | `main` at `2a5ec38` |
 | Nature | Documentation correction of an internal, AI-assisted review. **Not an external or professional security audit.** |
 | Codex Security | **NOT RUN** |
-| Independent review of this correction | **Pending** — required before publication or merge |
+| Independent review of this correction | Separate Claude document/source review of `038ad89` completed (T-012); two requested wording corrections applied. Not a new code audit or merge approval. |
 | Production verdict | **NO-GO** for production, mainnet, public issuance, and real reserves |
 
 ---
@@ -32,7 +32,7 @@ original text is still available unchanged in Git history at commit `6d3145e`.
 | Layer | State |
 |---|---|
 | EVM reference (Solidity 0.8.30, Foundry, Paris EVM) | Research/testnet prototype. It is useful for economic rules and negative tests. It is not a production stablecoin (`AUD-H01`). |
-| Kaspa Toccata architecture | Design accepted (UTXO/covenant-native, not a Solidity port; `AUD-H02`). |
+| Kaspa Toccata architecture | Design accepted, not execution-approved (UTXO/covenant-native, not a Solidity port; `AUD-H02`). |
 | Kaspa implementation | **Not built.** The repository contains no covenant scripts, Rust workspace, transaction builder, indexer, or Testnet-10 deploy path. |
 
 Oracle, timelock, fee routing, monitoring and deployment verification are
@@ -61,7 +61,7 @@ This correction did not run new tests, scans or coverage measurements.
 | `AUD-H03` — default admin vs. guardian sunset precedence (original M-02) | `1K-P0-002`, [#102](https://github.com/NeaBouli/1kUSD/issues/102) / PR #120 |
 | `AUD-M01` — guardian registration/resume lifecycle | `1K-P0-003`, [#103](https://github.com/NeaBouli/1kUSD/issues/103) / PR #124 |
 
-The guardian/role-lifecycle issues are fixed. The remaining role and
+These two items are recorded as remediated (historical evidence, not re-verified in this correction). Remediation is not an audit sign-off. The remaining role and
 governance work is a production blocker under #107, not a reopened finding.
 
 ## 5. Remaining Production Blockers
@@ -79,7 +79,8 @@ Each item maps to an existing ticket or AUD ID. No new tickets are proposed.
 | Deployment | Production deploy with constructor validation, fail-closed key configuration, post-deploy wiring and role verification | #110, `AUD-M05` |
 | Operations | Reserve, oracle, pause and solvency monitoring, plus watcher initial-state validation | #111 |
 | External assurance | New reproducible freeze, professional external audit, bug bounty | #114 |
-| Repository hygiene | Legacy patch/archive migration, stub and WIP contracts out of the release scope | #115 |
+| Repository hygiene | Legacy patch/archive migration | #115 |
+| Release-scope exclusions | Stub and WIP contracts excluded from release scope; no dedicated ticket | [AUDIT_SCOPE](AUDIT_SCOPE.md) |
 
 ## 6. Disposition of the Original Findings
 
@@ -126,8 +127,7 @@ nothing in it implies that any live secret has been compromised.
   infrastructure addresses or private audit locations.
 - The original findings were not reproduced in full. Only the symbols marked †
   were re-checked.
-- Codex Security has not been run. Independent review of this correction is
-  pending.
+- Codex Security has not been run. T-012 reviewed document/source fidelity at `038ad89`; its two requested corrections were applied. The full technical classification matrix was not independently re-verified.
 - The historical freeze `audit-final-v0.51.5` must not be rewritten. A new
   external-audit candidate needs a new reproducible freeze (#114).
 
