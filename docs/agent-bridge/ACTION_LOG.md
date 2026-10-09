@@ -342,3 +342,23 @@
   and was not published.
 - No product code, ADR revalidation, scan, audit, CI/server, economic, license,
   governance, deployment, wallet, key, or network action was performed.
+
+## 2026-10-10 — 1K-P1-017 / Issue #131 documentation prepared
+
+- Added
+  [`KASPA_ADR042_REVALIDATION_2026-10-10.md`](../../docs-internal/planning/KASPA_ADR042_REVALIDATION_2026-10-10.md).
+  It contains a non-adopted candidate toolchain manifest, a D1–D15 disposition
+  for every row, the Testnet-10 rationale, acceptance-check deltas, and pending
+  owner decisions.
+- Append-only notes were added to ADR-042, the Kaspa PoC acceptance plan, the
+  Kaspa threat model (generic delta), and the ticket list. ADR-042 stays
+  Accepted. It was not rewritten or re-approved.
+- Basis: existing dated evidence plus one public GitHub API read to resolve the
+  node release tag commit. No research rerun.
+- Test scope: documentation checks only (headings, D-row coverage, relative
+  links, append-only diff, docs watchdog, strict MkDocs, diff check). No Forge,
+  Slither, scanner, build, runtime, or network action.
+- Codex Security NOT RUN (N/A for docs). G3 remains open; Issue #131 was not
+  closed. Independent review is required before the lead accepts.
+- No code, PoC, dependency adoption, key, wallet, transaction, deployment,
+  governance, oracle, fee, collateral, license, or economic decision.

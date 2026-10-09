@@ -331,3 +331,28 @@ configuration-epoch migration, mixed-epoch behavior, and a pause protocol whose
 completeness is independently derivable from genesis and accepted history. An
 indexer may demonstrate that history; it may not be the authority that makes the
 history complete.
+
+## Revalidation note — 2026-10-10 (append-only, `1K-P1-017`)
+
+This note is appended. It does not change the decision above, its acceptance
+record, or its review history. ADR-042 stays **Accepted** with Option A, the
+singleton control/reserve state. This note is neither a re-approval nor a
+replacement.
+
+- A dated revalidation against SilverScript `v1.0.0` and `rusty-kaspa`
+  `v2.1.0` evidence is recorded in
+  [`KASPA_ADR042_REVALIDATION_2026-10-10.md`](../planning/KASPA_ADR042_REVALIDATION_2026-10-10.md).
+  No verified fact invalidates the singleton design. The reconsideration
+  trigger on SilverScript/covenant semantics is met and is answered by
+  revalidation and added acceptance checks, not by a new architecture.
+- **Wording delta (D1):** the "Use Testnet-10 because the current Silverscript
+  repository explicitly recommends it" rationale is stale. SilverScript v1.0.0
+  names no network. The remaining documentary basis is the node `v2.1.0`
+  Testnet-10 parameter set. That is not a compiler recommendation and not proof
+  of liveness. The pre-execution revalidation rule still applies.
+- **Wording delta (D14):** the `docs.kaspa.org` Toccata pages listed under
+  Sources predate SilverScript v1. Treat them as background only. The adopted
+  repository tag is authoritative.
+- The toolchain identities in that note are **non-adopted candidates**. Pin,
+  oracle hash/signature/time-domain, bearer-box format, and license questions
+  remain owner decisions. G3 is not closed by this note.

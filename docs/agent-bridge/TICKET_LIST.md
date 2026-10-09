@@ -24,3 +24,12 @@ index. `approved_for_execution` must be set explicitly before implementation.
 
 No issue may close merely because code was written. Validation and review are
 part of every ticket's definition of done.
+
+## Addendum — 2026-10-10
+
+| ID | Priority | Track | Title | Depends on | Status | GitHub |
+|---|---|---|---|---|---|---|
+| `1K-P1-017` | P1 | Kaspa | Revalidate ADR-042 and the PoC gate against SilverScript v1 and rusty-kaspa v2.1.0 (documentation only) | 012 | in review — docs prepared; G3 open | [#131](https://github.com/NeaBouli/1kUSD/issues/131) |
+
+A possible follow-up offline compile-proof ticket is only a queued proposal. It
+is not listed as approved and is not authorized.

@@ -85,3 +85,19 @@ payload/manifest schema; those records must not be part of consensus authority.
 - The final oracle, collateral, fee, legal redemption, signer, and monitoring
   policies remain separate decisions.
 - This threat model has not been validated by a deployed PoC or external audit.
+
+## Delta — 2026-10-10 (append-only, `1K-P1-017`)
+
+The generic threats below are added from
+[`KASPA_ADR042_REVALIDATION_2026-10-10.md`](../planning/KASPA_ADR042_REVALIDATION_2026-10-10.md).
+Existing rows and invariants stay unchanged. These additions have not been
+validated by a PoC, scan, or audit.
+
+| Threat | Failure | Required control |
+|---|---|---|
+| Undefined-behaviour reliance | a guard that "fails" only through compiler-level undefined behaviour is optimized away or does not fail | every value-relevant guard is an explicit check with a negative test |
+| Pin/advisory drift | adopted compiler revision lacks a later upstream security fix, or support ends for that revision | owner-approved pin and advisory-tracking policy; fix mapping verified before execution |
+| Compiler/node version skew | compiler built against a different node revision than the executing node; artifact or resource behaviour diverges | skew recorded in manifest; on-node measurement authoritative; stop on divergence |
+| Stale reference documentation | design follows pre-v1 docs syntax or semantics | pinned repository tag authoritative; docs used as background only |
+| Unverified third-party tooling | code or snippets of unknown source, version, or license enter the build | exact provenance, version, and license before any reuse; unadopted by default |
+| Network premise drift | target testnet unavailable or parameters change | node-parameter grounding plus pre-execution liveness/genesis check |
