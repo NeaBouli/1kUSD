@@ -23,8 +23,8 @@ transaction, or spending action was performed.
 
 | Source | Date / window | Scope | Status |
 |---|---|---|---|
-| T-008 evidence report `KASPA_REVALIDATION_2026-10-10.md` (finalized at `ab2fdb6`; published separately through the dependent planning PR) | upstream reads 2026-10-09 21:27–21:55Z | read-only GitHub releases, tagged files, API compare, `docs.kaspa.org` | worker evidence; full matrix not independently re-verified |
-| T-015 independent source review | 2026-10-09 22:20–22:30Z | five central source propositions | 4 PASS; 1 MSRV wording correction applied |
+| Unpublished local worker evidence (not part of this repository or the dependent planning PR) | upstream reads 2026-10-09 21:27–21:55Z | dated primary GitHub releases, tagged files, API compare, `docs.kaspa.org` | worker evidence; full matrix not independently re-verified |
+| Separate independent source review | 2026-10-09 22:20–22:30Z | five central source propositions | 4 PASS; 1 MSRV wording correction applied |
 | Node tag resolution for this note | 2026-10-09T23:20Z, one GitHub API GET | `refs/tags/v2.1.0` of `kaspanet/rusty-kaspa` | lightweight tag → commit (below) |
 
 This note did not repeat the research. Any fact not in these sources is marked
@@ -83,8 +83,8 @@ whether they are acceptable as a 1kUSD project pin.
 
 Status enum: `unchanged` · `wording-delta` · `acceptance-check` · `owner-decision`.
 Each row has exactly one disposition. "Blocked proof" names the execution
-evidence that does not exist yet. The basis column refers to the evidence report
-§2–§4 (window 2026-10-09 21:27–21:55Z) unless stated otherwise.
+evidence that does not exist yet. The basis column names dated primary upstream
+sources per row (window 2026-10-09 21:27–21:55Z) unless stated otherwise.
 
 | # | Topic | Disposition | Dated source basis | Blocked execution proof |
 |---|---|---|---|---|
