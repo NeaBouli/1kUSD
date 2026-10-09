@@ -262,6 +262,10 @@
   review path. It tracks #127 without closing it.
 - The task remains `in_progress` and DEC-007 remains proposed until Gio records
   an explicit accept/reject decision. #107 remains blocked and unapproved.
+- Post-merge annotation (PR #129 closeout): PR #128 was later merged on
+  2026-09-01 by repository owner `NeaBouli`, who authorized and personally
+  performed the merge as a recorded owner exception to the Codex-only merge
+  rule. Codex did not merge PR #128 or bypass branch protection.
 
 ## 2026-08-16 — ADR-043 / DEC-007 accepted by Gio
 
@@ -294,3 +298,34 @@
 - Kimi K3 performed a final read-only review of the complete six-file delta and
   returned **APPROVE** with no Medium/High or blocking finding. Kimi changed no
   files and performed no external action.
+- Post-merge annotation (PR #129 closeout): after this review, repository owner
+  `NeaBouli` authorized and personally performed the PR #128 merge on
+  2026-09-01 through the normal GitHub flow, as a recorded owner exception to
+  the Codex-only merge rule. Codex did not merge PR #128 or bypass branch
+  protection.
+
+## 2026-09-13 — 1K-P1-016 / R1 final status reconciled
+
+- GitHub was rechecked read-only: PR #128 was merged by repository owner
+  `NeaBouli` on 2026-09-01 as
+  `2a5ec38ecef51bff1beb745173e7229a603458b6`, and Issue #127 is closed.
+- `NeaBouli` authorized and personally performed this merge through the normal
+  GitHub flow as an owner exception to the Codex-only merge rule in
+  `COOPERATION_RULES.md`; the exception is recorded here. Codex did not execute
+  the merge.
+- The final PR head contained review-fix commit `c6ef0c1`; all five CodeRabbit
+  threads were answered and resolved.
+- GitHub Forge Build, Forge Test, and docs-check completed successfully. The
+  local validation recorded for the final review delta was 229/229 Foundry
+  tests, strict MkDocs, Docs Watchdog, and clean diff checks.
+- Closeout revalidation on 2026-09-13 passed: `forge test --summary` reported
+  229 passed, 0 failed, 0 skipped across 35 suites; `mkdocs build --clean
+  --strict`, `sh docs/scripts/scan_docs.sh`, and `git diff --check` also passed.
+- GitHub retained `REVIEW_REQUIRED` as the review decision at merge time. Codex
+  did not use an admin merge flag, change branch protection, force push, or
+  otherwise bypass repository controls.
+- `1K-P1-016` and `1K-P1-016-R1` are now `done`; target stop is active. No new
+  execution ticket was started.
+- No contract, governance implementation, role transfer, wallet, deployment,
+  PoC, token-economics, production, public-offer, Guardian-service, operator,
+  network, database, secret, or infrastructure action was performed.
