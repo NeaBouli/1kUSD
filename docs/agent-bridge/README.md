@@ -19,3 +19,7 @@ Canonical planning documents:
 
 No secrets, private keys, RPC credentials, wallet material, or production
 addresses belong in this bridge.
+
+Public status snapshot (2026-10-10, append-only):
+
+- [Public status and work plan](PUBLIC_STATUS_2026-10-10.md)
