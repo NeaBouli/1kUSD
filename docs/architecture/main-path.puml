@@ -1,0 +1,20 @@
+@startuml
+title Visitor path — README to dated status and next steps
+actor Visitor
+participant "README.md" as README
+participant "mkdocs.yml" as Config
+participant "Material + main.html" as Theme
+participant "docs/index.md" as Landing
+participant "extra.css" as Styles
+participant "security.md / roadmap.md" as Trust
+
+Visitor -> README : open repository
+README -> Landing : Documentation link (site URL)
+Config -> Landing : nav.Home resolves index.md
+Theme -> Landing : render with extrahead metadata
+Styles -> Landing : .kusd-home layout
+Landing -> Visitor : status, mechanism, Kaspa/EVM boundary
+Visitor -> Landing : activate CTA
+Landing -> Trust : security limits / readiness-gated roadmap
+Trust -> Visitor : dated evidence and private reporting channel
+@enduml
