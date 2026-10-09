@@ -1,6 +1,6 @@
 # Project State
 
-Last reviewed: **2026-09-01**
+Last reviewed: **2026-09-13**
 
 ## Current truth
 
@@ -23,36 +23,31 @@ Last reviewed: **2026-09-01**
 - `ADR-042` is accepted: the first separately approved Testnet-10 PoC will use
   a singleton control/reserve L1 covenant family. Production sharding requires
   a later ADR.
-- Public status documentation is aligned through merged PR #126 (`12c189f`).
+- Public status documentation is aligned through merged PR #128 (`2a5ec38`).
 - `ADR-043` is accepted under documentation ticket `1K-P1-016` / #127:
   immutable value logic, bounded timelocked governance, progressive privilege
   removal, and an expiring pause-only Guardian. No implementation is authorized.
 
 ## Current phase
 
-`architecture_1k_p1_016_control_minimization`
+`target_stop_1k_p1_016_complete`
 
-`1K-P1-016` / #127 is `in_progress` under Gio's explicit approval. Scope is
-limited to ADR-043, a governance/control threat-model delta, a staged
-bootstrap-to-community transition plan, and necessary planning/Bridge updates.
-Kimi K3 completed the independent architecture analysis and returned final
-`APPROVE` on the complete draft diff. Claude Code was attempted but unavailable
-because it was not authenticated; no Claude review credit is claimed. No
-contract, role, DAO, deployment, wallet, token-economics, PoC, or production
-action is authorized.
+`1K-P1-016` / #127 and bounded review follow-up `1K-P1-016-R1` are `done`.
+Gio accepted ADR-043 / DEC-007 on 2026-08-16. The five validated CodeRabbit
+documentation findings were corrected in `c6ef0c1`, all five review threads
+were resolved, and Kimi K3 returned final `APPROVE` with no blocking finding.
+Local validation passed with 229/229 Foundry tests, strict MkDocs, Docs
+Watchdog, and diff checks.
 
-Gio accepted ADR-043 / DEC-007 on 2026-08-16. Draft PR #128 now records the
-accepted architecture and remains under normal review. Issue #127 remains open
-until the documentation PR is reviewed and merged.
+PR #128 was merged by repository owner `NeaBouli` on 2026-09-01 as
+`2a5ec38ecef51bff1beb745173e7229a603458b6`; Forge Build, Forge Test, and
+docs-check were successful. GitHub retained `REVIEW_REQUIRED` as the review
+decision at merge time. Codex did not use an admin flag, change protection
+settings, or force the merge. Issue #127 was closed after the merge.
 
-`1K-P1-016-R1` is `in_progress` under Gio's 2026-09-01 approval. It is limited
-to the five validated CodeRabbit documentation findings on PR #128: immutable
-per-collateral decimals commitments, protocol-level governance signer floors,
-canonical Kaspa script-delta commitment requirements, Markdown correction, and
-the independent production/public-offer legal gate. No implementation scope is
-added. Local validation passed with 229/229 Foundry tests, strict MkDocs,
-Docs Watchdog, and diff checks. Kimi K3 returned final `APPROVE` on the complete
-R1 delta with no blocking finding; GitHub checks and thread resolution remain.
+The accepted scope remains architecture/documentation only. No contract, role,
+DAO, deployment, wallet, token-economics, PoC, production, or public-offer
+action is authorized by this completion.
 
 `1K-P0-003` / #103 remains `done`; its canonical merged baseline is 229 passing
 tests across 35 suites with eight remaining placeholders.

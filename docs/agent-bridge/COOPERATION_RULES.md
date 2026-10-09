@@ -39,6 +39,14 @@ fee flows, collateral rules, deployments, wallets, or secrets require:
 - Preserve historical evidence under `archive/` when cleanup is required.
 - No direct push to `main`; use small pull requests and required checks.
 - Only Codex Sol may integrate, commit, push, merge, or deploy agent work.
+  Codex Sol remains the default integrator.
+- Owner exception: the repository owner (`NeaBouli`, Gio) may personally
+  perform a specifically authorized merge of a named pull request through the
+  normal GitHub flow. Each such exception must be recorded in `ACTION_LOG.md`
+  with the pull request, merge commit, and who authorized and executed it.
+  The exception never permits Codex Sol or any agent to use admin merge
+  flags, change branch protection, force push, or otherwise bypass repository
+  controls. Recorded instances: PR #124 and PR #128.
 
 ## Handoff contract
 
