@@ -39,3 +39,7 @@ is tracked under the sole active issue
 [#131](https://github.com/NeaBouli/1kUSD/issues/131) as documentation work.
 It is implemented on a worker branch and awaits lead review. It is not merged,
 not deployed and creates no new ticket.
+
+## 2026-10-10 — M5 review checkpoint
+
+`1K-P1-017` / #131 remains **in_review — documentation only**, not closed. The public-entrypoint and decision/provenance delivery has bounded local lead acceptance and is ready for its dependent draft; actual latest UI-tested candidate is `10503130`. Support tasks T-018 through T-023 are not new active product tickets. Existing mobile keyboard/release limitations stay OPEN. Next bounded proposal: read-only candidate advisory/fix and compiler-node compatibility mapping before pin adoption or PoC execution; protected decisions remain reserved.
