@@ -106,3 +106,5 @@ rendered. The Mermaid mind map above is the renderable fallback.
   the dApp, the whitepapers, the mechanism pages, and every ADR.
 
 2026-10-10 integration follow-up: the prior untouched-override statement applies to the initial refresh only. The existing Theme → Landing hop now includes `main.html::header` → `index.md::kusd-hero-title`, adding a Home-only keyboard skip link and focus target; no new module, runtime, deployment or protocol scope.
+
+2026-10-10 T-023 correction: the `main.html::header` anchor sat outside Material's `[data-md-component=skip]`, which instant navigation replaces while the header stays, so it went stale on Home→other pages and was missing on other→Home. Same Theme → Landing hop, now `main.html::scripts` → native skip container → `index.md::kusd-hero-title`: one idempotent `document$` subscriber adds a constant link only when the Home H1 exists and the native container has no skip link. Non-Home native skip behavior unchanged.

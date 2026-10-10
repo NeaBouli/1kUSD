@@ -1,8 +1,4 @@
 {% extends "base.html" %}
-{% block header %}
-  {% if page and page.is_homepage %}<a href="#kusd-hero-title" class="md-skip">Skip to content</a>{% endif %}
-  {{ super() }}
-{% endblock %}
 
 {% block extrahead %}
   {{ super() }}
@@ -28,5 +24,23 @@
     "codeRepository": "https://github.com/NeaBouli/1kUSD",
     "sameAs": ["https://x.com/Kaspa_USD"]
   }
+  </script>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    // Home has no TOC, so Material renders an empty native skip container.
+    // Instant navigation replaces that container on every page, so fill it
+    // (once per render) only when the Home hero target is present.
+    document$.subscribe(function () {
+      var skip = document.querySelector("[data-md-component=skip]")
+      if (!skip || skip.querySelector(".md-skip") || !document.getElementById("kusd-hero-title")) return
+      var link = document.createElement("a")
+      link.href = "#kusd-hero-title"
+      link.className = "md-skip"
+      link.textContent = "Skip to content"
+      skip.appendChild(link)
+    })
   </script>
 {% endblock %}

@@ -12,7 +12,7 @@ Visitor -> README : open repository
 README -> Landing : Documentation link (site URL)
 Config -> Landing : nav.Home resolves index.md
 Theme -> Landing : render with extrahead metadata
-Theme -> Landing : header skip link focuses Home H1 (bounded accessibility fix)
+Theme -> Landing : native skip container gets Home H1 link via document$ (bounded accessibility fix)
 Styles -> Landing : .kusd-home layout
 Landing -> Visitor : status, mechanism, Kaspa/EVM boundary
 Visitor -> Landing : activate CTA
