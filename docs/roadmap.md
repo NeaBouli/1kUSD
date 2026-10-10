@@ -16,8 +16,8 @@ Nothing listed here is deployed or live.
 | 2 — Kaspa architecture | Covenant execution architecture | Accepted · `ADR-042`, 2026-08-16 (#112). Revalidation against SilverScript v1 and node v2.1.0 prepared 2026-10-10 and **in review**; gate G3 open (#131) |
 | 3 — Isolated Kaspa PoC | Value-capped Testnet-10 singleton experiment with synthetic collateral | **Not approved.** Needs G3, a separate execution ticket and owner approval. A smaller offline compile proof is only a queued proposal |
 | 4 — Protocol hardening | Safety, governance, collateral, fees, oracle | Partly started. Safety fixes merged in #120 (2026-08-13) and #124 (2026-08-16). Governance architecture `ADR-043` accepted as design only (2026-08-16). Oracle, fee and collateral choices wait on owner decisions (#106–#109) |
-| 5 — Release hygiene and quality | License decision, reproducible freeze, static-analysis triage, placeholder replacement | Proposed (#104, #105) |
-| 6 — Deployment and monitoring | Reproducible testnet candidate, post-deploy checks, reserve and solvency monitoring | Blocked by 2–5 (#110, #111) |
+| 5 — Deployment and operations | Reproducible testnet candidate, post-deploy checks, reserve and solvency monitoring | Blocked by 2–4 (#110, #111); release prerequisites remain open |
+| 6 — Assurance | Coverage, static analysis, fuzz/invariant/economic-simulation gates, placeholder replacement and reproducible freeze | Ongoing / incomplete (#104, #105); license decision remains open |
 | 7 — External review | New freeze, external audit, remediation, bug bounty | Blocked by 1–6 (#114) |
 | 8 — Production readiness | Legal, reserve, redemption and incident gates | Blocked |
 

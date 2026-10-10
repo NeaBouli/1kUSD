@@ -390,3 +390,8 @@
   live. Local preview is not live verification. No Forge, scanner, research
   rerun, GitHub write, deployment, wallet, key or network action. Codex
   Security: N/A for documentation.
+
+### 2026-10-10 — public entrypoint evidence qualification
+
+- The preceding author's strict-build/watchdog/link claims are author-reported; their execution logs were not retained by the timed-out dispatch and are not verified PASS results. Saved local browser artifacts support only their recorded cases, not full accessibility or release acceptance. Public read-only HTTP checks did occur; no on-chain transaction or deployment occurred. Codex Security remains NOT RUN (docs applicability N/A).
+- The bounded Zelcore follow-up found a candidate Kaspa primitives library, with identity/license/modern compatibility still qualified or unknown. No reuse/adoption. The public roadmap's deployment and assurance phases are aligned back to the unchanged master plan, including fuzz/invariant/economic gates.
