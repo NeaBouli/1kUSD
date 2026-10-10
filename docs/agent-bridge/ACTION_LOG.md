@@ -362,3 +362,45 @@
   closed. Independent review is required before the lead accepts.
 - No code, PoC, dependency adoption, key, wallet, transaction, deployment,
   governance, oracle, fee, collateral, license, or economic decision.
+
+## 2026-10-10 — Public landing and README refresh prepared (issue #131 scope)
+
+- Authoring scope (owner-requested landing/README overhaul): `README.md`,
+  `docs/index.md`, `docs/roadmap.md`, `docs/security.md`,
+  `docs/stylesheets/extra.css`, and new `docs/architecture/MAP.md`,
+  `map.puml`, `main-path.puml` for the public documentation path only.
+  `mkdocs.yml`, workflows, contracts, ADRs, whitepapers and other pages are
+  unchanged.
+- Content: the status is dated 2026-10-10. The 229/0 test result and the eight
+  placeholders are labelled as historical (#124, 2026-08-16). The page separates
+  the intended mechanism from the EVM implementation and the Kaspa target from
+  the EVM reference. ADR-042 revalidation is shown as in review with G3 open.
+  The Testnet-10 PoC is shown as not approved. Candidate toolchain versions are
+  non-adopted, and their compatibility and runtime are not verified. KCC20,
+  vProgs and Zelcore are not adopted. The site makes no claim about Kaspa
+  network activation. The README no longer describes the Toccata stack as
+  live.
+- Checks run: strict MkDocs build to a temporary directory, docs watchdog,
+  `git diff --check`, and a link check. README relative links resolve, and every
+  GitHub `blob/main` target exists on `main`. A local headless Chromium preview
+  under `/1kUSD/` was tested at 1440×900 and 390×844 for navigation, CTA
+  targets, overflow, focus, reduced motion and instant navigation. Local
+  evidence is not committed.
+- State: **implemented** on a worker branch only. Not merged, not deployed, not
+  live. Local preview is not live verification. No Forge, scanner, research
+  rerun, GitHub write, deployment, wallet, key or network action. Codex
+  Security: N/A for documentation.
+
+### 2026-10-10 — public entrypoint evidence qualification
+
+- The preceding author's strict-build/watchdog/link claims are author-reported; their execution logs were not retained by the timed-out dispatch and are not verified PASS results. Saved local browser artifacts support only their recorded cases, not full accessibility or release acceptance. Public read-only HTTP checks did occur; no on-chain transaction or deployment occurred. Codex Security remains NOT RUN (docs applicability N/A).
+- The bounded Zelcore follow-up found a candidate Kaspa primitives library, with identity/license/modern compatibility still qualified or unknown. No reuse/adoption. The public roadmap's deployment and assurance phases are aligned back to the unchanged master plan, including fuzz/invariant/economic gates.
+
+### 2026-10-10 — M5 bounded documentation acceptance
+
+- Claude delivered disjoint decision/provenance and public-entrypoint work; the timed-out authoring work was preserved, not reimplemented. Its missing formal report and original unbound/author-reported evidence remain qualified. An independent exact-candidate review requested two text corrections; the lead applied only the bounded corrections.
+- Retained execution evidence now supports strict MkDocs, docs watchdog, diff/hash checks and targeted desktop/narrow Chromium layout, CTA/focus/hover, sampled text contrast and reduced-motion checks. The later Home skip-link regression was corrected on `10503130bc332c590d6e5fd386220d9efb37d3f1` using the existing native Material lifecycle. A retained strict build/diff check and 22 navigation/history states showed one valid skip link; measured Home keyboard cases focused the H1. Unprobed history keyboard cases are not claimed as passed.
+- CSS, Home content and MkDocs configuration did not change in that last correction, so their prior targeted evidence is reused. The mobile drawer keyboard limitation remains OPEN; previews used fallback fonts. Other engines, zoom/forced colors, full accessibility, external-link rechecks and production/live verification remain unexecuted. This is bounded local documentation acceptance, not full UI release acceptance.
+- The dated Kaspa delta packet observed no new release change within its bounded read window; six product/toolchain/oracle/license decisions remain proposals only. The qualified Zelcore fork candidate has unknown license terms and modern compatibility; no code reuse or stack adoption.
+- Only fresh public-safe ancestry from `1f86400` is eligible for the dependent draft; held local history and raw local artifacts are excluded. Issue #131 remains OPEN/in review. Release gate **BLOCKED**; G3, runtime, private-operator, specialist and approval gates remain separate. Codex Security **NOT RUN** (docs/presentation applicability N/A); no merge, policy bypass, deployment, wallet, transaction, installation or new spending.
+- Parent #133's three executed CI jobs passed. The dependent draft's Forge Test is expected NOT RUN due to its main-only trigger; normal main-base integration must satisfy that gate later. No Actions quota failure, CI switch or rerun is inferred.

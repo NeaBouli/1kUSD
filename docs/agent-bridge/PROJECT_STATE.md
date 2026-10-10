@@ -64,3 +64,17 @@ later, separate execution approval.
 - The tag must not be rewritten.
 - A new external-audit candidate requires a new reproducible freeze after all P0
   and required P1 tickets pass.
+
+## Addendum — 2026-10-10 public entrypoint refresh
+
+A refresh of the public landing page, README, roadmap and security page is
+**implemented on a worker branch only**: not merged, not deployed, not live.
+The public copy now dates every status claim and labels the 229-test result as
+historical. It keeps the ADR-042 revalidation in review (G3 open) and the
+Testnet-10 PoC not approved. It makes no claim about Kaspa network activation.
+The public documentation path is mapped in `docs/architecture/MAP.md`. No
+product, governance, economic, license or deployment state changed.
+
+## 2026-10-10 — M5 local documentation acceptance
+
+Landing, README, roadmap, security page, public-docs map and bounded decision/provenance ledgers are accepted for a normal dependent documentation draft. Exact latest UI-tested candidate: `10503130bc332c590d6e5fd386220d9efb37d3f1`; subsequent Bridge-only metadata is not another UI-tested commit. Actual retained targeted checks are recorded in ACTION_LOG; incomplete accessibility/live cases remain OPEN or NOT RUN. Not merged, deployed or live verified. Release gate BLOCKED; G3, required approvals, reserved decisions and private-operator/runtime/specialist gates remain active. Codex Security NOT RUN. No protocol/toolchain/license adoption.

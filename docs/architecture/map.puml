@@ -1,0 +1,43 @@
+@startmindmap
+* 1kUSD public research entrypoint
+** README
+*** built: README.md::Documentation
+** Site config
+*** built: mkdocs.yml::nav.Home
+*** built: mkdocs.yml::extra_css
+** Theme override
+*** built: docs/overrides/main.html::extrahead
+*** built: docs/overrides/main.html::scripts -> native skip -> Home H1 (instant-nav safe)
+** Landing
+*** built: docs/index.md::.kusd-home
+*** gap: status copy not tied to dated evidence
+** Styles
+*** built: docs/stylesheets/extra.css
+** Trust pages
+*** built: docs/security.md
+*** built: docs/roadmap.md
+** Status record
+*** built: docs/agent-bridge/ (excluded from site)
+** Build and deploy
+*** built: .github/workflows/docs.yml::build
+@endmindmap
+
+@startuml
+title 1kUSD public documentation path
+component "README.md" as README
+component "mkdocs.yml" as Config
+component "docs/overrides/main.html" as Theme
+component "docs/index.md" as Landing
+component "docs/stylesheets/extra.css" as Styles
+component "security.md / roadmap.md" as Trust
+component "how-it-works.md / whitepaper / community.md" as Pages
+component ".github/workflows/docs.yml" as Deploy
+
+README --> Landing : Documentation (site URL)
+Config --> Landing : nav.Home
+Config --> Theme : theme.custom_dir
+Config --> Styles : extra_css
+Landing --> Trust : CTA links
+Landing --> Pages : CTA links
+Deploy --> Config : mkdocs build --strict
+@enduml
