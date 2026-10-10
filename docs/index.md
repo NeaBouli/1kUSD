@@ -12,7 +12,7 @@ hide:
     <div class="kusd-hero-copy">
       <p class="kusd-status-pill"><span aria-hidden="true"></span> Research project · status as of 2026-10-10</p>
       <p class="kusd-eyebrow">Open stablecoin research</p>
-      <h1 id="kusd-hero-title">Stable value,<br><strong>designed for Kaspa.</strong></h1>
+      <h1 id="kusd-hero-title" tabindex="-1">Stable value,<br><strong>designed for Kaspa.</strong></h1>
       <p class="kusd-hero-lead">
         1kUSD is an open research program for a fully collateralized,
         USD-targeting stablecoin with two-way mint and redemption through a Peg

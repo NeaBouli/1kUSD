@@ -7,6 +7,7 @@
 *** built: mkdocs.yml::extra_css
 ** Theme override
 *** built: docs/overrides/main.html::extrahead
+*** planned: docs/overrides/main.html::header -> Home H1 keyboard skip target
 ** Landing
 *** built: docs/index.md::.kusd-home
 *** gap: status copy not tied to dated evidence

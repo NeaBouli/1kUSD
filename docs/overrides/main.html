@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% block header %}
+  {% if page and page.is_homepage %}<a href="#kusd-hero-title" class="md-skip">Skip to content</a>{% endif %}
+  {{ super() }}
+{% endblock %}
 
 {% block extrahead %}
   {{ super() }}

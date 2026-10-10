@@ -104,3 +104,5 @@ rendered. The Mermaid mind map above is the renderable fallback.
   `mkdocs.yml` title/navigation.
 - **Untouched:** `docs/overrides/main.html`, `.github/workflows/*`, contracts,
   the dApp, the whitepapers, the mechanism pages, and every ADR.
+
+2026-10-10 integration follow-up: the prior untouched-override statement applies to the initial refresh only. The existing Theme → Landing hop now includes `main.html::header` → `index.md::kusd-hero-title`, adding a Home-only keyboard skip link and focus target; no new module, runtime, deployment or protocol scope.
