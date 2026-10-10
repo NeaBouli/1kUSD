@@ -64,3 +64,36 @@ surfaced an announcement saying Zelcore *supports* Kaspa as a wallet asset.
 Ask Gio for the exact link, repository or screenshot where the "Zelcore Kaspa
 snippets" were seen. Then run one bounded check of that artifact: its org
 identity, commit/tag and declared license. No reuse decision until then.
+
+## 7. Addendum 2026-10-10 — follow-up (append-only, base `26bd5bb`)
+
+Added scope: close the two blind spots from section 5 (org pages 2+ and the
+verified domain). Budget: 4 public read-only GETs via `gh`; 3 were used. No
+new search queries, no clone, download, install or execution. The license
+body and source files were not read.
+
+| # | Read (2026-10-10) | Result |
+|---|---|---|
+| F1 | GitHub API `orgs/zelcore-io/repos?per_page=100` | All 58 public repos listed. Exactly one Kaspa match: `kaspa-core-lib`. |
+| F2 | GitHub GraphQL metadata for `ZelCore-io/kaspa-core-lib` | Fork of [OneKeyHQ/kaspa-core-lib](https://github.com/OneKeyHQ/kaspa-core-lib). Not archived; created 2024-12-04; default branch `master`; no tags. Owner `isVerified: true`, `websiteUrl: https://zelcore.io`. |
+| F3 | GitHub API `repos/ZelCore-io/kaspa-core-lib/license` | A `LICENSE` file exists; GitHub classifies it as `NOASSERTION` ("Other"). The upstream is also `NOASSERTION`. |
+
+**Correction to section 2/4:** a Kaspa artifact in the probable official org
+**was found**. The earlier NOT FOUND applied only to the 10 repos then visible.
+
+| Field | Value |
+|---|---|
+| Repository | [github.com/ZelCore-io/kaspa-core-lib](https://github.com/ZelCore-io/kaspa-core-lib) (fork; not original Zelcore work) |
+| Candidate commit | `master` @ `d8ca8fd5be156fe2ea7dc62a022d9754742e9e8f` (2024-12-11, "Merge pull request #1 from ZelCore-io/dev"); last push 2025-02-13; tags: none |
+| Declared license reference | [`LICENSE`](https://github.com/ZelCore-io/kaspa-core-lib/blob/master/LICENSE) blob `e2aeb89`; SPDX `NOASSERTION`. Terms **UNKNOWN** (not read, no opinion) |
+| Intended function | Repo description: "Data structure primitives for Kaspa network (based on Bitcore-lib)". This is a **client-side library** (address/tx data structures) of the kind wallets use. It is not a wallet UI, and nothing shows it to be a covenant compiler or SilverScript tool. |
+| Relevance to singleton Testnet10 PoC | At most a possible reference for tx/address primitives. Covenant, Toccata, Testnet10 and current rusty-kaspa compatibility: **NOT VERIFIED** |
+| Org identity | GitHub API shows the org verified, with website `zelcore.io`. The verified-domain string itself is not exposed by public reads, so identity stays **probable official**, not proven. |
+
+Still not checked: `zelcore-docs` contents, the actual license terms, upstream
+history, non-default branches, and non-GitHub or closed-app code. This
+addendum is bounded and non-exhaustive.
+
+Proposed next step: Gio confirms whether `ZelCore-io/kaspa-core-lib` is the
+snippet Gio meant. If yes, run one bounded check of the LICENSE terms and the
+fork-vs-upstream diff. Reuse and DEC005 stay reserved.
