@@ -33,3 +33,9 @@ part of every ticket's definition of done.
 
 A possible follow-up offline compile-proof ticket is only a queued proposal. It
 is not listed as approved and is not authorized.
+
+Public entrypoint refresh (landing, README, roadmap, security, docs-path map)
+is tracked under the sole active issue
+[#131](https://github.com/NeaBouli/1kUSD/issues/131) as documentation work.
+It is implemented on a worker branch and awaits lead review. It is not merged,
+not deployed and creates no new ticket.

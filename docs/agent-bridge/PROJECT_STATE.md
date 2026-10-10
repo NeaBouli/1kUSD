@@ -64,3 +64,13 @@ later, separate execution approval.
 - The tag must not be rewritten.
 - A new external-audit candidate requires a new reproducible freeze after all P0
   and required P1 tickets pass.
+
+## Addendum — 2026-10-10 public entrypoint refresh
+
+A refresh of the public landing page, README, roadmap and security page is
+**implemented on a worker branch only**: not merged, not deployed, not live.
+The public copy now dates every status claim and labels the 229-test result as
+historical. It keeps the ADR-042 revalidation in review (G3 open) and the
+Testnet-10 PoC not approved. It makes no claim about Kaspa network activation.
+The public documentation path is mapped in `docs/architecture/MAP.md`. No
+product, governance, economic, license or deployment state changed.

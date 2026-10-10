@@ -1,43 +1,64 @@
 # Security and verified limits
 
-Security claims on this site follow evidence, not roadmap intent. The current
-prototype must not custody real funds.
+Status as of **2026-10-10**. Security claims on this site follow evidence, not
+roadmap intent. The prototype must not hold real funds. There is no mainnet
+deployment, no live reserve, no completed external audit and no guaranteed
+peg.
 
-## Verified baseline
+## Verified baseline (EVM reference)
 
-| Metric | Result / evidence date |
+Each number below is a historical result with its evidence date. None is a
+live counter.
+
+| Metric | Result · evidence |
 |---|---|
-| Foundry tests | 229 passed / 0 failed / 0 skipped (#124, 2026-08-16) |
-| Placeholder tests | 8 (#124, 2026-08-16) |
-| Line coverage | 78.92% (2026-08-05) |
-| Branch coverage | 57.63% (2026-08-05) |
+| Foundry tests | 229 passed / 0 failed / 0 skipped · #124, 2026-08-16 |
+| Placeholder tests | 8 of the 229 · #124, 2026-08-16 |
+| Line coverage | 78.92% · 2026-08-05 |
+| Branch coverage | 57.63% · 2026-08-05 |
 | External audit | Not completed |
+| Production deployment | None |
 
-A passing suite is useful evidence, not certification.
+A passing suite is useful evidence, not certification. The historical
+`audit-final-v0.51.5` tag is not a production certification.
 
 ## Open release blockers
 
-- Guardian registration/revocation and the direct DAO resume lifecycle are
-  merged and test-verified; deployment role wiring and E2E handoff verification
-  remain required before release.
 - Oracle prices are admin-set mocks, not production feeds.
 - DAO timelock execution is not implemented.
-- Fee routing and production deployment/role handoff are incomplete.
-- Audit freeze, dependency, Slither, and license metadata need reconciliation.
+- Fee routing and the production deployment role handoff are incomplete.
+- The Guardian lifecycle fixes are merged and covered by tests. Deployment
+  role wiring and end-to-end handoff checks are still required.
+- Audit freeze, dependency, static-analysis and license metadata still need
+  reconciliation.
+
+## Kaspa track
+
+No Kaspa code has been executed for 1kUSD. The `ADR-042` revalidation is in
+review (#131), and gate G3 is open. Candidate toolchain versions are
+non-adopted, and their compatibility and runtime behaviour are not verified.
+Until then, no security property of a Kaspa implementation is claimed.
 
 ## Intended defenses
 
-The target design includes mandatory limits, slippage/deadline checks, stale and
-deviation-aware pricing, per-module pause, delayed governance, multisig execution,
-reserve/supply monitoring, and reproducible releases.
+The target design includes:
 
-These controls are considered delivered only after their focused tests, full
-suite, static analysis, deployment E2E, and independent review pass.
+- mandatory limits and slippage/deadline checks;
+- stale- and deviation-aware pricing;
+- per-module pause;
+- delayed governance and multisig execution;
+- reserve and supply monitoring;
+- reproducible releases.
+
+A control counts as delivered only after its focused tests, the full suite,
+static analysis, deployment end-to-end checks and independent review all pass.
 
 ## Report privately
 
 Use [GitHub Private Vulnerability Reporting](https://github.com/NeaBouli/1kUSD/security/advisories/new).
-Do not publish exploit details in issues.
+Do not publish exploit details in issues. Read
+[SECURITY.md](https://github.com/NeaBouli/1kUSD/blob/main/SECURITY.md) before
+testing.
 
 Technical references:
 

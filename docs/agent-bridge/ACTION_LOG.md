@@ -362,3 +362,31 @@
   closed. Independent review is required before the lead accepts.
 - No code, PoC, dependency adoption, key, wallet, transaction, deployment,
   governance, oracle, fee, collateral, license, or economic decision.
+
+## 2026-10-10 — Public landing and README refresh prepared (issue #131 scope)
+
+- Authoring scope (owner-requested landing/README overhaul): `README.md`,
+  `docs/index.md`, `docs/roadmap.md`, `docs/security.md`,
+  `docs/stylesheets/extra.css`, and new `docs/architecture/MAP.md`,
+  `map.puml`, `main-path.puml` for the public documentation path only.
+  `mkdocs.yml`, workflows, contracts, ADRs, whitepapers and other pages are
+  unchanged.
+- Content: the status is dated 2026-10-10. The 229/0 test result and the eight
+  placeholders are labelled as historical (#124, 2026-08-16). The page separates
+  the intended mechanism from the EVM implementation and the Kaspa target from
+  the EVM reference. ADR-042 revalidation is shown as in review with G3 open.
+  The Testnet-10 PoC is shown as not approved. Candidate toolchain versions are
+  non-adopted, and their compatibility and runtime are not verified. KCC20,
+  vProgs and Zelcore are not adopted. The site makes no claim about Kaspa
+  network activation. The README no longer describes the Toccata stack as
+  live.
+- Checks run: strict MkDocs build to a temporary directory, docs watchdog,
+  `git diff --check`, and a link check. README relative links resolve, and every
+  GitHub `blob/main` target exists on `main`. A local headless Chromium preview
+  under `/1kUSD/` was tested at 1440×900 and 390×844 for navigation, CTA
+  targets, overflow, focus, reduced motion and instant navigation. Local
+  evidence is not committed.
+- State: **implemented** on a worker branch only. Not merged, not deployed, not
+  live. Local preview is not live verification. No Forge, scanner, research
+  rerun, GitHub write, deployment, wallet, key or network action. Codex
+  Security: N/A for documentation.
